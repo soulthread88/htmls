@@ -1,0 +1,2564 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Project Portfolio | UNO SYSTEM Co., Ltd." data-ko="프로젝트 실적 | 유노시스템㈜ UNO SYSTEM">Project Portfolio | UNO SYSTEM Co., Ltd.</title>
+<meta content="유노시스템㈜ 프로젝트 실적 — 한국전력·LH공사·서울메트로·LG전자·KT 등 주요 납품 및 수주 프로젝트." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;family=Fraunces:opsz,wght@9..144,400..700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+<style>
+/* ════════════════════════ CSS VARIABLES ════════════════════════ */
+:root{
+  --bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;
+  --border:rgba(30,120,220,.18);--border2:rgba(0,210,240,.18);
+  --blue:#1a6fd4;--cyan:#00d2f0;--gold:#e8b84b;
+  --text:#f0f6ff;--muted:#c8daf0;--dim:#6a85a8;
+  --fkr:"Noto Sans KR","Pretendard",sans-serif;
+  --fmono:"Noto Sans KR",sans-serif;
+  --fdis:"Bebas Neue",sans-serif;
+  --hdr:72px;
+  --font-title:20px;--font-body:16px;--font-small:13px;--font-xsmall:11px;--font-mono:12px;--font-body-sm:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fkr);font-size:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;word-break:keep-all;line-height:1.78}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,212,.03)1px,transparent 1px),linear-gradient(90deg,rgba(26,111,212,.03)1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+
+/* ════════════════════════ HEADER ════════════════════════ */
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(22px);display:flex;align-items:center;justify-content:space-between;padding:0 36px 0 5mm;z-index:700;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0}
+/* ── 로고 이미지: 클릭하여 교체 가능 ── */
+.logo-img-wrap{position:relative;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;border-radius:6px;overflow:hidden}
+.logo-img{height:40px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:3px 6px;transition:opacity .2s;display:block}
+.logo-img-wrap:hover .logo-img{opacity:.85}
+.logo-img-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);border-radius:9px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:var(--fkr);font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.3;padding:4px}
+.logo-img-wrap:hover .logo-img-hint{opacity:1}
+.logo-ko{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:16px;color:var(--text);line-height:1.15;display:flex;flex-direction:column}
+.logo-ko-en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.btn-dl{background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;color:var(--cyan);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.btn-dl:hover{background:rgba(0,210,240,.22);border-color:var(--cyan)}
+
+/* ════════════════════════ NAV ════════════════════════ */
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+
+/* Top-level button — 밑줄 없음 */
+.nb{background:transparent;border:none;color:var(--muted);font-family:var(--fkr);font-size:14px;font-weight:700;padding:10px 10px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .15s;height:auto}
+.nb:hover,.ni:hover>.nb{color:#fff}
+.nb.active-menu{color:var(--cyan)}
+.nb .caret{font-size:11px;transition:transform .22s;display:inline-block}
+.ni:hover>.nb .caret{transform:rotate(180deg)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:10px 20px;border-radius:6px;margin-left:10px}
+.nb.cta-nav:hover{opacity:.86}
+.nb.cta-nav .caret{display:none}
+
+/* ── L1 Dropdown: hover로 열림 ── */
+.dropdown{
+  display:none;position:absolute;top:100%;left:0;min-width:200px;
+  background:rgba(10,18,34,.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);
+  border-radius:0 0 10px 10px;box-shadow:0 16px 48px rgba(0,0,0,.75);
+  z-index:680;padding:6px 0 8px;
+}
+.ni:hover>.dropdown{display:block;animation:ddIn .18s ease forwards}
+@keyframes ddIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:8px 18px 6px;font-family:var(--fmono);font-size:11px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:4px}
+
+/* Dropdown items */
+.di{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;font-size:14px;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;white-space:nowrap;border-left:2px solid transparent;transition:all .12s;position:relative}
+.di:hover{background:rgba(0,210,240,.09);border-left-color:var(--cyan);color:var(--cyan)}
+.di.active{background:rgba(0,210,240,.14);border-left-color:var(--cyan);color:var(--cyan)}
+.arr{font-size:12px;color:var(--dim);margin-left:8px;flex-shrink:0}
+.di:hover .arr{color:var(--cyan)}
+.dd-sep{height:1px;background:rgba(255,255,255,.06);margin:6px 0}
+
+/* ── L2 Sub-dropdown ── */
+.has-sub{position:relative}
+.sub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:290px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:690;padding:6px 0 8px}
+.has-sub:hover>.sub-dropdown,.has-sub.open>.sub-dropdown{display:block;animation:subIn .14s ease forwards}
+@keyframes subIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+
+/* ── L3 Sub-sub-dropdown ── */
+.has-sub2{position:relative}
+.subsub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:240px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid rgba(0,210,240,.5);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:700;padding:6px 0 8px}
+.has-sub2:hover>.subsub-dropdown{display:block;animation:subIn .12s ease forwards}
+
+/* ════════════════════════ IMAGE / VIDEO BOX ════════════════════════
+   대원칙: 한 번 삽입 → 영구 저장 (base64 src에 직접 내장)
+═══════════════════════════════════════════════════════════════════ */
+.img-box{
+  position:relative;cursor:pointer;
+  background:var(--surface);border:2px dashed rgba(0,210,240,.3);border-radius:10px;
+  overflow:hidden;min-height:150px;transition:border-color .25s,box-shadow .25s;
+  display:flex;flex-direction:column;
+}
+.img-box:hover{border-color:var(--cyan);border-style:solid;box-shadow:0 0 18px rgba(0,210,240,.12)}
+.box-media-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:120px}
+.box-img{width:100%;height:100%;object-fit:contain}
+.box-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);padding:24px;text-align:center;width:100%}
+.box-placeholder.hidden{display:none}
+.box-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.5);transition:all .2s}
+.img-box:hover .box-plus{border-color:var(--cyan);color:var(--cyan);transform:scale(1.1)}
+.box-hint{font-size:var(--font-small);opacity:.7;line-height:1.5}
+.box-label{text-align:center;padding:8px 12px;font-family:var(--fkr);font-size:13px;font-weight:700;color:var(--text)!important;border-top:1px solid rgba(0,210,240,.2);background:rgba(0,0,0,.3);letter-spacing:-.02em;min-height:36px;display:flex;align-items:center;justify-content:center}
+
+/* Hidden controls (hover to reveal) */
+.box-controls{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:5px;z-index:20}
+.img-box:hover .box-controls{display:flex}
+.box-ctrl-btn{background:rgba(8,13,24,.92);border:1px solid var(--border2);color:var(--text);font-size:12px;font-family:var(--fkr);font-weight:700;padding:5px 11px;border-radius:5px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.box-ctrl-btn.replace{border-color:rgba(0,210,240,.4);color:var(--cyan)}
+.box-ctrl-btn.replace:hover{background:rgba(0,210,240,.15)}
+.box-ctrl-btn.delete{border-color:rgba(255,80,80,.4);color:#ff6060}
+.box-ctrl-btn.delete:hover{background:rgba(255,80,80,.12)}
+
+/* ════════════════════════ HERO IMAGE BOX ════════════════════════ */
+.iaea-hero-wrap{margin-top:var(--hdr);position:relative;cursor:pointer;overflow:hidden;background:#111;width:100%;min-height:200px}
+#hero-main-img{width:100%;height:520px;object-fit:cover;object-position:center;display:block;transition:transform .4s ease}
+.iaea-hero-wrap:hover #hero-main-img{transform:scale(1.02)}
+.hero-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);pointer-events:none}
+.hero-empty .he-plus{width:72px;height:72px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(0,210,240,.5)}
+.hero-empty.hidden{display:none}
+.hero-change-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .28s;pointer-events:none}
+.iaea-hero-wrap:hover .hero-change-hint{opacity:1}
+.hero-change-hint span{background:rgba(0,210,240,.82);padding:13px 26px;border-radius:8px;font-family:var(--fkr);font-size:17px;font-weight:700}
+.hero-controls{position:absolute;top:12px;right:12px;display:none;flex-direction:column;gap:6px;z-index:30}
+.iaea-hero-wrap:hover .hero-controls{display:flex}
+.iaea-source{background:#03060d;padding:9px 36px 9px 5mm;font-family:var(--fmono);font-size:13pt;color:var(--muted);letter-spacing:.04em;border-bottom:1px solid var(--border);text-align:right;font-style:italic}
+
+/* ════════════════════════ PAGE SECTIONS ════════════════════════ */
+.page-hero{position:relative;height:220px;overflow:hidden;display:flex;align-items:center;padding-left:0}
+.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.3) saturate(.6)}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,24,.92),rgba(8,13,24,.45))}
+.page-hero-content{position:relative;z-index:2;padding:0}
+.page-hero-tag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;display:block}
+.page-hero-title{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.page-hero-sub{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.08em}
+.pg{position:relative;z-index:1;padding:64px 60px 64px 5mm}
+.pg.alt{background:var(--bg2);padding:64px 60px 64px 0}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);position:relative;z-index:1}
+.shdr{display:flex;align-items:center;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.shdr-left{display:flex;flex-direction:column;gap:4px}
+.shdr-hr{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent);min-width:60px;align-self:center}
+.stag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;display:block;white-space:nowrap;margin-bottom:2px}
+.stitle{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.1;letter-spacing:-.02em;display:block}
+.stitle .hl{color:var(--cyan)}
+
+/* OVERVIEW */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.kv-list{display:flex;flex-direction:column;gap:10px}
+.kv{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:8px;transition:border-color .2s}
+.kv:hover{border-color:rgba(0,210,240,.2)}
+.kv-ic{width:36px;height:36px;border-radius:7px;background:rgba(0,210,240,.08);border:1px solid rgba(0,210,240,.18);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.kv-lb{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.1em;margin-bottom:3px;text-transform:uppercase}
+.kv-val{font-size:var(--font-body);font-weight:400;line-height:1.5}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.12);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.sc{background:var(--surface);padding:24px 10px;text-align:center;transition:background .2s}
+.sc:hover{background:var(--surface2)}
+.sc-n{font-family:var(--fdis);font-size:54px;line-height:1;color:var(--cyan);margin-bottom:4px}
+.sc-l{font-size:var(--font-small);color:var(--muted);line-height:1.4}
+.cert-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cert{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(0,210,240,.05);border:1px solid rgba(0,210,240,.15);border-radius:7px}
+.cert-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.cert-tx{font-size:var(--font-small);font-weight:600;line-height:1.35}
+
+/* HISTORY */
+.hist-grid{display:grid;grid-template-columns:3fr 2fr;gap:48px;align-items:stretch}
+.tl{position:relative;padding-left:44px}
+.tl::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--cyan),var(--blue),transparent)}
+.tl-item{position:relative;margin-bottom:34px}
+.tl-dot{position:absolute;left:-44px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg2);border:2px solid var(--cyan);box-shadow:0 0 10px rgba(0,210,240,.4)}
+.tl-dot.M{background:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.7)}
+.tl-yr{font-family:var(--fdis);font-size:32px;color:var(--cyan);margin-bottom:4px}
+.tl-ev{font-size:var(--font-body);font-weight:800;margin-bottom:6px;line-height:1.35}
+.tl-dt{font-size:var(--font-small);color:var(--muted);line-height:1.8}
+.tl-bd{display:inline-flex;align-items:center;gap:5px;background:#ffffff;border:1.5px solid var(--gold);border-radius:4px;padding:5px 14px;font-family:"Noto Sans KR",sans-serif;font-size:var(--font-small);font-weight:700;color:var(--gold);margin-top:6px;letter-spacing:.02em}
+.award-g{display:flex;flex-direction:column;gap:14px}
+.award{display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award-info{flex:1}
+.award-img-box{width:160px;flex-shrink:0;min-height:180px;background:rgba(0,0,0,.2);border:2px dashed rgba(232,184,75,.3);border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:border-color .2s}
+.award-img-box:hover{border-color:var(--gold)}
+.award-img-box .aw-img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.award-img-box .aw-img.active{display:block}
+.award-img-ph{display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(232,184,75,.5);font-size:11px;text-align:center;padding:8px;pointer-events:none}
+.award-img-ph .aw-plus{font-size:22px}
+.award-img-ph.hidden{display:none}
+.award-img-ctrl{position:absolute;top:4px;right:4px;display:none;flex-direction:column;gap:3px;z-index:10}
+.award-img-box:hover .award-img-ctrl{display:flex}
+.award{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:18px;transition:border-color .2s;display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award:hover{border-color:rgba(232,184,75,.3)}
+.award-yr{font-family:var(--fdis);font-size:32px;color:var(--gold);line-height:1;margin-bottom:6px}
+.award-title{font-size:var(--font-body);font-weight:800;margin-bottom:4px;line-height:1.3}
+.award-sub{font-size:var(--font-small);color:var(--muted)}
+
+/* BUSINESS */
+.biz-g{display:grid;grid-template-columns:1fr;gap:20px}
+.biz-item{display:grid;grid-template-columns:1fr 1fr;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);transition:border-color .25s,transform .25s;min-height:200px}
+.biz-item:hover{border-color:rgba(0,210,240,.3);transform:translateY(-4px)}
+.biz-img-box{position:relative;cursor:pointer;background:#f0f4f8;width:100%;min-height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-left:1px solid rgba(255,255,255,.07)}
+/* biz-box-img: 마스터 CSS에서 처리 */
+
+.biz-img-ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);padding:20px;pointer-events:none}
+.biz-img-ph .bp-plus{width:40px;height:40px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,210,240,.45)}
+.biz-img-ph.hidden{display:none}
+.biz-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s;pointer-events:none}
+.biz-img-box:hover .biz-img-overlay{opacity:1}
+.biz-img-overlay span{background:rgba(0,210,240,.8);padding:8px 16px;border-radius:6px;font-size:var(--font-small);font-family:var(--fkr);font-weight:700;color:#000}
+.biz-img-ctrl{position:absolute;top:6px;right:6px;display:none;flex-direction:column;gap:4px;z-index:10}
+.biz-img-box:hover .biz-img-ctrl{display:flex}
+.biz-card{height:100%;box-sizing:border-box;background:var(--surface);padding:28px;text-decoration:none;display:flex;flex-direction:column;justify-content:center}
+.biz-card:hover{background:var(--surface2)}
+.biz-num{font-family:var(--fmono);font-size:var(--font-small);color:var(--cyan);letter-spacing:.2em;margin-bottom:10px}
+.biz-title{font-size:var(--font-body);font-weight:800;margin-bottom:10px;color:var(--text)}
+.biz-desc{font-size:var(--font-small);color:var(--muted);line-height:1.8}
+
+/* CLIENTS */
+.cli-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cli-g .img-box{background:#ffffff;border-color:rgba(0,0,0,.12)}
+.cli-g .img-box:hover{border-color:var(--cyan)}
+.cli-g .box-label{background:rgba(0,0,0,.06);color:#333;border-top:1px solid rgba(0,0,0,.08);font-family:"Noto Sans KR",sans-serif;font-weight:500;font-size:13px}
+
+/* CTA & FOOTER */
+.cta-wrap{background:linear-gradient(135deg,#0a1525,#0d1e35);border-top:1px solid var(--border2);padding:70px 60px 70px 0;position:relative;z-index:1}
+.cta-inner{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+.cta-lb{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px}
+.cta-hd{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);letter-spacing:-.02em;margin-bottom:18px;line-height:1.1}
+.cta-hd span{color:var(--cyan)}
+.cta-info{display:flex;flex-direction:column;gap:10px}
+.cta-row{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted)}
+.cta-row strong{color:var(--text)}
+.cta-ri{width:30px;height:30px;border-radius:5px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.cta-btns{display:flex;flex-direction:column;gap:12px;min-width:200px}
+.btn-p{background:var(--cyan);color:#000;font-family:var(--fkr);font-weight:900;font-size:var(--font-body);padding:16px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s}
+.btn-p:hover{opacity:.88}
+.btn-s{background:transparent;border:1px solid var(--border2);color:var(--text);font-family:var(--fkr);font-weight:700;font-size:var(--font-body);padding:15px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,210,240,.05)}
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:0}
+/* ── Footer two-column layout ── */
+.foot-inner{display:grid;grid-template-columns:25% 75%;min-height:180px;align-items:stretch}
+/* Left col: 1:1 image box */
+.foot-img-col{position:relative;cursor:pointer;background:var(--surface);border-right:1px solid rgba(255,255,255,.07);overflow:hidden;display:flex;align-items:center;justify-content:center;width:100%;height:100%;align-self:stretch;padding:8mm 0 8mm 8mm;box-sizing:border-box}
+.foot-img-col img.foot-col-img{width:100%;height:100%;object-fit:contain;display:none;position:relative;border-radius:6px}
+.foot-img-col img.foot-col-img.active{display:block}
+.foot-img-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);padding:20px;text-align:center;pointer-events:none}
+.foot-img-ph .fi-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.45)}
+.foot-img-ph.hidden{display:none}
+.foot-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;pointer-events:none}
+.foot-img-col:hover .foot-img-overlay{opacity:1}
+.foot-img-overlay span{background:rgba(0,210,240,.82);padding:8px 16px;border-radius:6px;font-family:var(--fkr);font-size:13px;font-weight:700;color:#000}
+.foot-img-ctrl{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:4px;z-index:10}
+.foot-img-col:hover .foot-img-ctrl{display:flex}
+/* Right col */
+.foot-right-col{display:flex;flex-direction:row;align-items:stretch;padding:24px 28px;gap:20px}
+.foot-info-area{display:flex;flex-direction:column;justify-content:center;gap:6px;flex:1}
+.foot-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.foot-logo-img-wrap{position:relative;cursor:pointer;display:inline-flex;border-radius:7px;overflow:hidden;flex-shrink:0}
+.foot-logo-img{height:40px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:3px 6px;display:block;transition:opacity .2s}
+.foot-logo-img-wrap:hover .foot-logo-img{opacity:.82}
+.foot-logo-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);border-radius:7px;opacity:0;transition:opacity .2s;pointer-events:none;font-size:10px;font-weight:700;color:#fff;text-align:center;line-height:1.3}
+.foot-logo-img-wrap:hover .foot-logo-hint{opacity:1}
+.foot-logo-text{display:flex;flex-direction:column;line-height:1.2}
+.foot-logo-kr{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:16px;color:var(--text)}
+.foot-logo-en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.foot-addr{font-family:var(--fmono);font-size:15px;color:var(--muted);line-height:1.6}
+.foot-contact{font-family:var(--fmono);font-size:15px;color:var(--muted);line-height:1.6}
+.foot-copy{font-family:var(--fmono);font-size:13px;color:var(--muted);margin-top:4px}
+.foot-inquiry-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:rgba(0,210,240,.07);border:2px solid rgba(0,210,240,.25);border-radius:10px;cursor:pointer;text-decoration:none;transition:all .2s;min-width:140px;align-self:center;flex-shrink:0}
+.foot-inquiry-box:hover{background:rgba(0,210,240,.16);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.15)}
+.foot-inquiry-icon{font-size:32px;line-height:1}
+.foot-inquiry-label{font-family:var(--fkr);font-size:var(--font-small);font-weight:700;color:var(--cyan);text-align:center;line-height:1.4}
+.foot-inquiry-sub{font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);text-align:center}
+.fu{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+.fu.vis{opacity:1;transform:translateY(0)}
+@media(max-width:1200px){.cli-g{grid-template-columns:repeat(3,1fr)}}
+
+
+
+/* CTA 이미지 박스 꽉 채움 */
+#box-cta-img { min-height: 220px; }
+#box-cta-img .box-media-wrap { flex: 1; overflow: hidden; min-height: 0; position:relative; }
+
+
+
+/* ─── 회사소개 인트로 이미지 박스 꽉 채움 ─── */
+
+/* ─── 연혁 이미지 박스 ─── */
+
+/* ─── tl-bd: Noto Sans KR, 흰색 바탕, 노란색 텍스트 ─── */
+.tl-bd { font-family: 'Noto Sans KR', sans-serif !important; }
+
+/* ─── 고객사 box-label ─── */
+.cli-g .box-label { font-family: 'Noto Sans KR', sans-serif !important; font-weight: 500; }
+
+/* 인증서 이미지 박스: 16:9 꽉 채움 */
+.cert-img-grid .img-box { position: relative; }
+.cert-img-grid .box-media-wrap { position: absolute; inset: 0; }
+.cert-img-grid .box-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cert-img-grid .box-img.active { display: block; }
+
+/* ═══ 이미지 active 표시 강화 ═══ */
+.aw-img.active { display: block !important; }
+
+.aw-img[src^="data:image"] { display: block !important; }
+.foot-col-img[src^="data:image"] { display: block !important; }
+
+/* ═══════════════════════════════════════════════════════
+   이미지 대원칙 CSS — 단일 규칙, 충돌 없음 v5
+═══════════════════════════════════════════════════════ */
+
+/* ── 전역: base64 src 있으면 무조건 표시 ── */
+img[src^="data:image"], img[src^="data:video"] {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ══ .img-box (인증서·고객사·회사소개·CTA) ══ */
+.img-box { position:relative; overflow:hidden; cursor:pointer; }
+.img-box .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; display:block;
+  pointer-events:none;
+}
+.img-box .box-img:not([src]), .img-box .box-img[src=""] { display:none !important; }
+.img-box .box-placeholder {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px;
+  pointer-events:none;
+}
+.img-box:has(.box-img[src^="data:image"]) .box-placeholder,
+.img-box:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+.img-box .box-controls { pointer-events:auto; }
+.img-box:hover .box-controls { display:flex; }
+/* 고객사 로고: contain */
+.cli-g .img-box .box-img { object-fit:contain; background:#fff; }
+
+/* ══ #box-intro-img (회사소개) ══ */
+#box-intro-img { position:relative; overflow:hidden; cursor:pointer; }
+#box-intro-img .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; display:block; pointer-events:none;
+}
+#box-intro-img .box-img:not([src]), #box-intro-img .box-img[src=""] { display:none !important; }
+#box-intro-img .box-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; pointer-events:none; }
+#box-intro-img:has(.box-img[src^="data:image"]) .box-placeholder,
+#box-intro-img:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+
+/* ══ #box-cta-img (제품상담) ══ */
+#box-cta-img {
+  position:relative; overflow:hidden; cursor:pointer;
+  display:flex; flex-direction:column;
+}
+#box-cta-img .box-media-wrap { position:relative; flex:1; min-height:0; overflow:hidden; }
+#box-cta-img .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; display:block; pointer-events:none;
+}
+#box-cta-img .box-img:not([src]), #box-cta-img .box-img[src=""] { display:none !important; }
+#box-cta-img .box-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; pointer-events:none; }
+#box-cta-img:has(.box-img[src^="data:image"]) .box-placeholder,
+#box-cta-img:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+
+/* ══ 인증서 ══ */
+.cert-img-grid .img-box { overflow:hidden; }
+.cert-img-grid .box-media-wrap { position:absolute; inset:0; }
+.cert-img-grid .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; display:block; pointer-events:none;
+}
+.cert-img-grid .box-img:not([src]), .cert-img-grid .box-img[src=""] { display:none !important; }
+
+/* ══ .biz-img-box (사업부문) ══ */
+.biz-img-box {
+  position:relative;
+  overflow:hidden;
+  min-height:200px;
+}
+.biz-img-box .biz-box-img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:0;
+  background:#f0f4f8;
+  display:block;
+  pointer-events:none;
+}
+/* 빈 src일 때만 숨김 */
+.biz-img-box .biz-box-img:not([src]),
+.biz-img-box .biz-box-img[src=""] {
+  display:none !important;
+}
+.biz-img-ph {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  pointer-events:none;
+}
+.biz-img-ph.hidden,
+.biz-img-box:has(.biz-box-img[src^="data:image"]) .biz-img-ph,
+.biz-img-box:has(.biz-box-img[src^="data:video"]) .biz-img-ph {
+  display:none !important;
+}
+.biz-img-ctrl { pointer-events:auto; }
+.biz-img-box:hover .biz-img-ctrl { display:flex; }
+
+/* ══ .hist-img-box (연혁) ══ */
+.hist-img-box { position:relative; overflow:hidden; }
+.hist-img-box .hist-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; background:rgba(0,0,0,.08);
+  display:block; pointer-events:none;
+}
+.hist-img-box .hist-img:not([src]), .hist-img-box .hist-img[src=""] { display:none !important; }
+.hist-img-ph {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:8px;
+  pointer-events:none;
+}
+.hist-img-ph.hidden,
+.hist-img-box:has(.hist-img[src^="data:image"]) .hist-img-ph,
+.hist-img-box:has(.hist-img[src^="data:video"]) .hist-img-ph { display:none !important; }
+.hist-img-box .box-controls { pointer-events:auto; }
+.hist-img-box:hover .box-controls { display:flex; }
+
+/* ══ .award-img-box (표창장) ══ */
+.award-img-box { position:relative; overflow:hidden; }
+.award-img-box .aw-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; display:block; pointer-events:none;
+}
+.award-img-box .aw-img:not([src]), .award-img-box .aw-img[src=""] { display:none !important; }
+.award-img-ph.hidden,
+.award-img-box:has(.aw-img[src^="data:image"]) .award-img-ph { display:none !important; }
+.award-img-ctrl { pointer-events:auto; }
+.award-img-box:hover .award-img-ctrl { display:flex; }
+
+/* ══ Footer ══ */
+.foot-col-img { display:block; }
+.foot-col-img:not([src]), .foot-col-img[src=""] { display:none; }
+
+
+/* ── Light / Dark mode ── */
+[data-theme=light]{--bg:#f0f4fb;--bg2:#e4ecf7;--surface:#d9e4f4;--surface2:#c8d8ef;--border:#1a6fd430;--border2:#0097aa33;--text:#06101e;--muted:#1a3352;--dim:#4a6888;--blue:#1a6fd4;--cyan:#007a8f;--gold:#8a6010}
+[data-theme=light] body:before{background-image:linear-gradient(#1a6fd410 1px,transparent 1px),linear-gradient(90deg,#1a6fd410 1px,transparent 1px)}
+[data-theme=light] header{background:#f0f4fbf7}
+[data-theme=light] .dropdown,[data-theme=light] .sub-dropdown,[data-theme=light] .subsub-dropdown{background:#e8f0fafc}
+[data-theme=light] .nb{color:#3a5575}
+[data-theme=light] .nb:hover,[data-theme=light] .ni:hover>.nb{color:#0d1a2e}
+[data-theme=light] .di{color:#0d1a2e}
+[data-theme=light] .logo-img{background:transparent}
+#theme-toggle{background:transparent;border:1px solid var(--border2);color:var(--muted);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 10px;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:all .2s}
+#theme-toggle:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* ── 본문 왼쪽 5mm 여백 ── */
+.pg,.pg.alt{padding-left:5mm}
+.ov-grid,.hist-grid,.biz-g,.cli-g,.cta-inner{margin-left:max(5mm,0px)}
+
+/* ── Stats boxes ── */
+.stats-row{gap:2mm!important}
+.sc{border:1px solid rgba(0,210,240,.25);border-radius:8px;padding:12px 8px}
+
+/* ── Business: text left, image right ── */
+.biz-g{grid-template-columns:1fr!important}
+.biz-item{grid-template-columns:1fr 1fr!important;align-items:stretch;gap:0}
+.biz-card{height:100%;box-sizing:border-box;order:1;padding:24px 20px;display:flex;flex-direction:column;justify-content:center}
+.biz-img-box{order:2;aspect-ratio:16/9;height:auto!important;min-height:unset!important;width:100%}
+.biz-img-box .biz-box-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.biz-img-box{position:relative;overflow:hidden}
+
+/* ── 고객사 로고: 전체 표시 + 중앙 정렬 ── */
+.cli-g .img-box{background:var(--surface2)}
+.cli-g .box-media-wrap{padding:12px;background:var(--surface);border-radius:8px}
+.cli-g .box-img{object-fit:contain!important;width:100%;height:100%;padding:4px}
+
+[data-theme=light] .box-label{color:var(--text)!important;background:rgba(255,255,255,.6)}
+
+/* ── Light 모드 전용 색상 보정 ── */
+/* page-hero: 오버레이 색 조정 */
+[data-theme=light] .page-hero-overlay{background:linear-gradient(90deg,rgba(240,244,251,.92),rgba(240,244,251,.55))}
+[data-theme=light] .page-hero-tag{color:var(--cyan)}
+[data-theme=light] .page-hero-title{color:var(--text)}
+[data-theme=light] .page-hero-sub{color:var(--muted)}
+[data-theme=light] .breadcrumb{color:var(--muted)}
+[data-theme=light] .breadcrumb a{color:var(--cyan)}
+
+/* iaea-source: 고정 검정 배경 → 테마 배경 */
+[data-theme=light] .iaea-source{background:var(--bg2);color:var(--muted);border-bottom-color:var(--border)}
+
+/* cta-wrap: 고정 다크 배경 → 테마 배경 */
+[data-theme=light] .cta-wrap{background:linear-gradient(135deg,var(--bg2),var(--surface))}
+[data-theme=light] .cta-hd{color:var(--text)}
+[data-theme=light] .cta-hd span{color:var(--cyan)}
+[data-theme=light] .cta-lb{color:var(--cyan)}
+[data-theme=light] .cta-row{color:var(--muted)}
+[data-theme=light] .cta-row strong{color:var(--text)}
+
+/* footer: 고정 검정 배경 → 테마 배경 */
+[data-theme=light] footer{background:var(--bg2);border-top-color:rgba(0,0,0,.1)}
+[data-theme=light] .foot-img-col{background:var(--surface);border-right-color:rgba(0,0,0,.08)}
+[data-theme=light] .foot-logo-kr{color:var(--text)}
+[data-theme=light] .foot-logo-en{color:var(--muted)}
+[data-theme=light] .foot-addr,[data-theme=light] .foot-contact,[data-theme=light] .foot-copy{color:var(--muted)}
+
+/* prod-card: 텍스트 가시성 */
+[data-theme=light] .prod-card{background:var(--surface);border-color:rgba(0,0,0,.08)}
+[data-theme=light] .prod-card:hover{border-color:var(--cyan)}
+[data-theme=light] .prod-title{color:var(--text)}
+[data-theme=light] .prod-desc,[data-theme=light] .prod-bullets{color:var(--muted)}
+[data-theme=light] .prod-bullets li::before{color:var(--cyan)}
+[data-theme=light] .ptag{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:var(--muted)}
+[data-theme=light] .ptag.em{background:rgba(0,151,170,.08);border-color:rgba(0,151,170,.3);color:var(--cyan)}
+[data-theme=light] .prod-upbox{background:#dce8f4}
+[data-theme=light] .pbox-ph{background:linear-gradient(135deg,#c8d8ef,#d9e4f4)}
+
+/* ── Business image boxes: full image display ── */
+.biz-img-box{position:relative;overflow:hidden}
+.biz-box-img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:contain!important;background:var(--surface)}
+.biz-img-box{aspect-ratio:16/9}
+
+.biz-bullet{font-size:13px;color:var(--muted);padding:3px 0;line-height:1.6;display:flex;gap:6px}
+.biz-bullet:before{content:"";flex-shrink:0}
+
+/* ════════════════════════ PRODUCTS PAGE ════════════════════════ */
+.prod-g{display:grid;grid-template-columns:1fr;gap:24px}
+.prod-card{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;text-decoration:none;display:grid;grid-template-columns:1fr 400px;align-items:stretch}
+.prod-card:hover{transform:translateY(-4px);border-color:rgba(0,210,240,.3);box-shadow:0 16px 48px rgba(0,210,240,.07)}
+.prod-body{padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:10px;font-size:19px}
+.prod-num{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:14px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase}
+.prod-title{font-size:19px;font-weight:800;line-height:1.35;color:var(--text)}
+.prod-desc{font-size:17px;color:var(--muted);line-height:1.75}
+.prod-bullets{font-size:17px;color:var(--muted);line-height:1.75;padding-left:1.4em;margin:0;list-style:none}
+.prod-bullets li{position:relative;padding-left:.3em;margin-bottom:4px}
+.prod-bullets li::before{content:"▸";color:var(--cyan);position:absolute;left:-1.1em;font-size:14px}
+.prod-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.ptag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:4px 12px;font-size:14px;color:var(--muted)}
+.ptag.em{background:rgba(0,210,240,.08);border-color:rgba(0,210,240,.3);color:var(--cyan);font-size:14px}
+
+/* prod-upbox */
+.prod-upbox{position:relative;width:100%;height:100%;min-height:260px;cursor:pointer;overflow:hidden;background:#0a0f1e;display:flex;align-items:center;justify-content:center}
+.prod-upbox .pbox-img{display:none;width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.prod-upbox.has-img .pbox-img{display:block}
+.prod-upbox .pbox-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#091520,#0f2030);pointer-events:none}
+.prod-upbox.has-img .pbox-ph{display:none}
+.prod-upbox .pbox-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;gap:8px;z-index:5}
+.prod-upbox:hover .pbox-overlay{opacity:1}
+.pbox-btn{background:rgba(0,210,240,.9);color:#000;border:none;border-radius:5px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer}
+.pbox-btn.del{background:rgba(200,50,50,.9);color:#fff}
+@media(max-width:1024px){.prod-card{grid-template-columns:1fr 320px}}
+@media(max-width:768px){.prod-card{grid-template-columns:1fr}.prod-upbox{min-height:200px}}
+
+/* 브레드크럼 */
+.breadcrumb{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:12px;color:var(--muted);letter-spacing:.08em;margin-bottom:10px}
+.breadcrumb a{color:var(--cyan);text-decoration:none}
+
+/* ═══════════════════════════════════════════════════════
+   PROJECTS PAGE — 전면 리디자인 CSS
+═══════════════════════════════════════════════════════ */
+
+/* ── KPI 스트립 ── */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(0,210,240,.18);border-radius:12px;overflow:hidden;margin-bottom:0}
+.kpi-item{padding:28px 20px;text-align:center;background:var(--surface);position:relative;transition:background .2s}
+.kpi-item:hover{background:var(--surface2)}
+.kpi-n{font-family:"Bebas Neue",var(--fdis);font-size:56px;line-height:1;color:var(--cyan);display:inline-flex;align-items:baseline;gap:4px}
+.kpi-unit{font-family:var(--fkr);font-size:22px;font-weight:900;color:var(--cyan);margin-left:2px}
+.kpi-l{font-size:15px;font-weight:700;color:var(--text);margin-top:6px;line-height:1.5}
+.kpi-div{display:none}
+
+/* ── 사업실적 ref-grid (magazine layout) ── */
+.ref-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ref-grid .ref-card--hero{grid-column:span 2;grid-row:span 2}
+
+.ref-card{position:relative;border-radius:10px;overflow:hidden;background:var(--surface);border:1px solid rgba(255,255,255,.07);cursor:pointer;transition:transform .28s,box-shadow .28s,border-color .28s;display:flex;flex-direction:column}
+.ref-card:hover{transform:translateY(-4px);border-color:rgba(0,210,240,.35);box-shadow:0 12px 40px rgba(0,210,240,.08)}
+
+.ref-img-wrap{position:relative;overflow:hidden;flex:1;min-height:160px}
+.ref-card--hero .ref-img-wrap{min-height:340px}
+.ref-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;transition:transform .4s ease}
+.ref-img:not([src]),.ref-img[src=""]{display:none}
+.ref-card:hover .ref-img{transform:scale(1.04)}
+.ref-img-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);background:var(--surface);pointer-events:none}
+.ref-img-ph span{font-size:36px;color:rgba(0,210,240,.4);line-height:1}
+.ref-img-ph small{font-size:12px}
+.ref-card:has(.ref-img[src^="data:image"]) .ref-img-ph,
+.ref-card:has(.ref-img[src^="data:"]) .ref-img-ph{display:none}
+
+.ref-overlay{position:absolute;inset:0;background:rgba(0,0,0,.38);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;pointer-events:none}
+.ref-card:hover .ref-overlay{opacity:1}
+.ref-overlay span{background:rgba(0,210,240,.85);padding:7px 16px;border-radius:6px;font-size:13px;font-family:var(--fkr);font-weight:700;color:#000}
+
+.ref-ctrls{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:4px;z-index:20}
+.ref-card:hover .ref-ctrls,.pt-img-box:hover .ref-ctrls,.hcard:hover .ref-ctrls,.cli-logo-img-wrap:hover .ref-ctrls{display:flex}
+
+.ref-body{padding:14px 16px;display:flex;flex-direction:column;gap:6px;background:var(--surface);border-top:1px solid rgba(0,210,240,.1)}
+.ref-card--hero .ref-body{padding:18px 20px}
+.ref-client-tag{display:inline-flex;align-items:center;font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:12px;font-weight:900;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;background:rgba(0,210,240,.15);border:1.5px solid rgba(0,210,240,.5);border-radius:20px;padding:4px 12px;align-self:flex-start}
+.ref-title{font-size:15px;font-weight:800;color:var(--text);line-height:1.45}
+.ref-card--hero .ref-title{font-size:19px;font-weight:900}
+.ref-badge{display:inline-flex;align-items:center;font-size:13px;font-weight:900;color:#000;background:var(--cyan);border-radius:20px;padding:4px 12px;align-self:flex-start;letter-spacing:.04em}
+.ref-badge--gold{background:var(--gold);color:#000}
+
+/* ── KEPCO 인트로 배너 ── */
+.kepco-banner{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,210,240,.15);border-radius:10px;overflow:hidden;margin-bottom:32px}
+.kepco-banner-stat{background:var(--bg2);padding:24px 28px;display:flex;flex-direction:column;gap:4px}
+.kb-n{font-family:"Bebas Neue",var(--fdis);font-size:48px;color:var(--cyan);line-height:1;text-shadow:0 0 18px rgba(0,210,240,.35)}
+.kb-u{font-size:18px;font-weight:900;color:var(--cyan);margin-left:4px}
+.kb-l{font-size:17px;font-weight:800;color:var(--text);margin-top:6px}
+
+/* ── 전력구 프로젝트 테이블 ── */
+.proj-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid rgba(0,210,240,.15)}
+.proj-table{width:100%;border-collapse:collapse;font-size:19px}
+.proj-table thead th{background:rgba(0,210,240,.1);color:var(--cyan);font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:16px;letter-spacing:.08em;text-transform:uppercase;padding:16px 20px;text-align:left;border-bottom:2px solid rgba(0,210,240,.3);white-space:nowrap;font-weight:800}
+.proj-table tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s}
+.proj-table tbody tr:hover{background:rgba(0,210,240,.04)}
+.proj-table tbody tr:last-child{border-bottom:none}
+.proj-table td{padding:14px 20px;vertical-align:middle}
+.pt-num{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:17px;font-weight:700;color:var(--muted);width:48px}
+.pt-client{font-size:17px;font-weight:900;color:var(--cyan);white-space:nowrap;width:90px}
+.pt-name{color:var(--text);font-weight:700;line-height:1.5;font-size:19px}
+.pt-qty{width:60px;text-align:center}
+.qty-badge{display:inline-flex;align-items:center;justify-content:center;background:rgba(0,210,240,.15);border:1.5px solid rgba(0,210,240,.5);color:var(--cyan);font-size:16px;font-weight:900;border-radius:20px;padding:4px 14px;white-space:nowrap}
+.pt-img-cell{width:72px;padding:6px 12px}
+.pt-img-box{position:relative;width:64px;height:48px;border-radius:6px;overflow:hidden;background:var(--surface2);cursor:pointer;flex-shrink:0}
+.pt-img-box .ref-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.pt-img-box .ref-img:not([src]),.pt-img-box .ref-img[src=""]{display:none}
+.pt-img-box .ref-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(0,210,240,.4)}
+.pt-img-box:has(.ref-img[src^="data:"]) .ref-img-ph{display:none}
+.pt-img-box .ref-overlay{display:none}
+.pt-img-box:hover .ref-overlay{display:flex;opacity:1}
+.pt-img-box .ref-overlay span{font-size:11px;padding:4px 8px}
+[data-theme=light] .proj-table thead th{background:rgba(0,151,170,.08)}
+[data-theme=light] .proj-table tbody tr:hover{background:rgba(0,151,170,.04)}
+
+/* ── 공동구·발전소 가로 카드 ── */
+.hcard-list{display:grid;grid-template-columns:1fr;gap:20px}
+.hcard{display:grid;grid-template-columns:1fr 1fr;min-height:280px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:var(--surface);cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s}
+.hcard:hover{transform:translateY(-3px);border-color:rgba(0,210,240,.3);box-shadow:0 10px 32px rgba(0,210,240,.07)}
+.hcard-img-wrap{position:relative;overflow:hidden}
+.hcard-img-wrap .ref-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;transition:transform .35s}
+.hcard:hover .hcard-img-wrap .ref-img{transform:scale(1.06)}
+.hcard-img-wrap .ref-img:not([src]),.hcard-img-wrap .ref-img[src=""]{display:none}
+.hcard-img-wrap .ref-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:6px;flex-direction:column;font-size:24px;color:rgba(0,210,240,.4)}
+.hcard:has(.ref-img[src^="data:"]) .ref-img-ph{display:none}
+.hcard-img-wrap .ref-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.hcard:hover .hcard-img-wrap .ref-overlay{opacity:1}
+.hcard-img-wrap .ref-overlay span{background:rgba(0,210,240,.85);padding:5px 12px;border-radius:5px;font-size:12px;font-family:var(--fkr);font-weight:700;color:#000}
+.hcard-body{padding:36px 44px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.hcard-title{font-size:20px;font-weight:800;color:var(--text);line-height:1.45}
+
+/* ── 고객사 로고 그리드 ── */
+.client-logo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.cli-logo-card{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:var(--surface);cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+.cli-logo-card:hover{transform:translateY(-4px);border-color:rgba(0,210,240,.3);box-shadow:0 10px 30px rgba(0,210,240,.08)}
+.cli-logo-img-wrap{position:relative;aspect-ratio:4/3;overflow:hidden;background:#fff}
+.cli-logo-img-wrap .ref-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12px;display:block}
+.cli-logo-img-wrap .ref-img:not([src]),.cli-logo-img-wrap .ref-img[src=""]{display:none}
+.cli-logo-img-wrap .ref-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--muted);background:var(--surface)}
+.cli-logo-card:has(.ref-img[src^="data:"]) .ref-img-ph{display:none}
+.cli-logo-img-wrap .ref-overlay{position:absolute;inset:0;background:rgba(0,0,0,.32);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.cli-logo-card:hover .cli-logo-img-wrap .ref-overlay{opacity:1}
+.cli-logo-img-wrap .ref-overlay span{background:rgba(0,210,240,.85);padding:5px 12px;border-radius:5px;font-size:12px;font-family:var(--fkr);font-weight:700;color:#000}
+.cli-logo-name{padding:10px 12px;font-size:15px;font-weight:800;color:var(--text);text-align:center;border-top:1px solid rgba(0,210,240,.1)}
+
+/* ── light 모드 조정 ── */
+[data-theme=light] .ref-card,[data-theme=light] .hcard,[data-theme=light] .cli-logo-card{background:var(--surface);border-color:rgba(0,0,0,.07)}
+[data-theme=light] .ref-card:hover,[data-theme=light] .hcard:hover,[data-theme=light] .cli-logo-card:hover{border-color:var(--cyan)}
+[data-theme=light] .ref-body{background:var(--surface)}
+[data-theme=light] .ref-title,[data-theme=light] .hcard-title,[data-theme=light] .cli-logo-name{color:var(--text)}[data-theme=light] .kb-l{color:var(--text)}[data-theme=light] .kpi-l{color:var(--text)}[data-theme=light] .pt-name{color:var(--text)}[data-theme=light] .pt-client{color:var(--cyan)}[data-theme=light] .qty-badge{color:var(--cyan)}[data-theme=light] .ref-client-tag{color:var(--cyan)}
+[data-theme=light] .kpi-item{background:var(--surface)}
+[data-theme=light] .kepco-banner-stat{background:var(--bg2)}
+[data-theme=light] .cli-logo-img-wrap{background:#f8f8f8}
+[data-theme=light] .cli-logo-img-wrap .ref-img-ph{background:var(--surface)}
+
+/* ── 스크롤 애니메이션 ── */
+.fu{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+
+/* ── 02 KEPCO: 텍스트 왼쪽 · 이미지 오른쪽 ── */
+.hcard-list--kepco{display:grid;grid-template-columns:1fr;gap:20px}
+.hcard--kepco{display:grid;grid-template-columns:1fr 1fr;min-height:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);background:var(--surface);cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s}
+.hcard--kepco:hover{transform:translateY(-3px);border-color:rgba(0,210,240,.35);box-shadow:0 10px 32px rgba(0,210,240,.08)}
+.hcard--kepco .hcard-body{padding:36px 44px;display:flex;flex-direction:column;gap:14px;justify-content:center;order:1}
+.hcard--kepco .hcard-img-wrap{position:relative;overflow:hidden;aspect-ratio:16/9;order:2}
+.hcard--kepco .hcard-img-wrap .ref-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;transition:transform .35s}
+.hcard--kepco:hover .hcard-img-wrap .ref-img{transform:scale(1.04)}
+.hcard--kepco .hcard-img-wrap .ref-img:not([src]),.hcard--kepco .hcard-img-wrap .ref-img[src=""]{display:none}
+.hcard--kepco .hcard-img-wrap .ref-img-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:28px;color:rgba(0,210,240,.4);background:var(--surface2)}
+.hcard--kepco:has(.ref-img[src^="data:"]) .ref-img-ph,
+.hcard--kepco:has(.ref-img[src^="images/"]) .ref-img-ph{display:none}
+.hcard--kepco .hcard-img-wrap .ref-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.hcard--kepco:hover .hcard-img-wrap .ref-overlay{opacity:1}
+.hcard--kepco .hcard-img-wrap .ref-overlay span{background:rgba(0,210,240,.85);padding:7px 16px;border-radius:6px;font-size:14px;font-family:var(--fkr);font-weight:700;color:#000}
+.hcard-num{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:13px;font-weight:700;color:var(--dim);letter-spacing:.15em}
+[data-theme=light] .hcard--kepco{background:var(--surface);border-color:rgba(0,0,0,.07)}
+[data-theme=light] .hcard--kepco:hover{border-color:var(--cyan)}
+
+
+/* ── 사업 실적 1행 2칼럼 레이아웃 (.srow) ── */
+.srow-list{display:grid;grid-template-columns:1fr;gap:20px}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.srow-text{background:var(--surface);padding:30px 38px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.srow-text .ref-client-tag{align-self:flex-start}
+.srow-title{font-size:20px;font-weight:900;color:var(--text);line-height:1.3;margin:0}
+.srow-desc{font-size:14px;color:var(--muted);line-height:1.85;margin:0}
+.srow-badge{align-self:flex-start;font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:12px;font-weight:700;color:var(--cyan);background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;padding:3px 10px}
+.srow>.ref-card{aspect-ratio:16/9;border:none;border-radius:0;min-height:unset;border-left:1px solid rgba(255,255,255,.07)}
+.srow>.ref-card:hover{transform:none}
+.srow>.ref-card .ref-img{object-fit:cover}
+[data-theme=light] .srow{border-color:rgba(0,0,0,.08)}
+[data-theme=light] .srow>.ref-card{border-left-color:rgba(0,0,0,.08)}
+[data-theme=light] .srow-title{color:var(--text)}
+/* ── 전력구/공동구 해설 ── */
+.hcard-desc{font-size:14px;color:var(--muted);line-height:1.8;margin:2px 0 0}
+@media (max-width:760px){.srow{grid-template-columns:1fr}.srow>.ref-card{aspect-ratio:16/9}}
+
+/* ── Kor | Eng 언어 토글 ── */
+#lang-toggle{background:transparent;border:1px solid var(--border2);color:var(--muted);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 12px;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:7px;transition:all .2s}
+#lang-toggle:hover{border-color:var(--cyan)}
+#lang-toggle .lang-sep{color:var(--dim)}
+#lang-toggle .lang-opt{transition:color .15s}
+#lang-toggle .lang-opt.active{color:var(--cyan)}
+
+/* ════ 영어판 전용 폰트 (헤드라인=Fraunces, 본문=Inter) — [data-lang=en]에서만 적용 ════ */
+[data-lang=en] body{font-family:"Inter","Noto Sans KR",sans-serif;letter-spacing:.002em}
+[data-lang=en] .stitle,
+[data-lang=en] .page-hero-title,
+[data-lang=en] .cta-hd{font-family:"Fraunces","Playfair Display",Georgia,serif !important;font-weight:600;letter-spacing:-.01em}
+[data-lang=en] .srow-title{font-family:"Inter","Noto Sans KR",sans-serif;font-weight:700;letter-spacing:-.005em}
+[data-lang=en] .hcard-title{font-family:"Inter","Noto Sans KR",sans-serif;font-weight:700}
+[data-lang=en] .srow-desc,
+[data-lang=en] .hcard-desc,
+[data-lang=en] .page-hero-sub{font-family:"Inter","Noto Sans KR",sans-serif}
+[data-lang=en] .nb,
+[data-lang=en] .di{font-family:"Inter",sans-serif}
+[data-lang=en] .foot-addr,
+[data-lang=en] .foot-contact,
+[data-lang=en] .cta-row{font-family:"Inter","Noto Sans KR",sans-serif}
+[data-lang=en] .logo-ko-en{font-size:16px;font-weight:900;color:var(--text);letter-spacing:.02em}
+</style>
+<style>
+/* ════ 대원칙 4 · 모바일 반응형(≤900px) — 햄버거 내비 + 2단→1단 ════ */
+.nav-toggle{display:none;margin-left:auto;background:transparent;border:1px solid var(--border2);color:var(--text);font-size:22px;line-height:1;padding:5px 12px;border-radius:6px;cursor:pointer;flex-shrink:0}
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  header{padding-left:16px;padding-right:12px;gap:8px}
+  .logo-ko{display:none}
+  .main-nav{position:fixed;top:var(--hdr);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#0a1222fa;backdrop-filter:blur(22px);border-bottom:1px solid var(--border2);max-height:calc(100vh - var(--hdr));overflow-y:auto;display:none;padding:6px 0 12px;z-index:680}
+  .main-nav.open{display:flex}
+  .ni{flex-direction:column;align-items:stretch;width:100%;position:static}
+  .nb{width:100%;justify-content:space-between;padding:14px 22px;font-size:16px!important}
+  .nb.cta-nav{margin:10px 22px;justify-content:center}
+  .dropdown{position:static;display:block;width:100%;min-width:0;border:none;border-top:1px solid #ffffff12;border-radius:0;box-shadow:none;background:transparent;padding:0 0 4px;animation:none!important}
+  .di{padding:11px 22px 11px 40px}
+  .sub-dropdown,.subsub-dropdown{display:none!important}
+  .ov-grid,.hist-grid,.biz-g,.two-col,.spec-columns,.features-grid,.cli-g{grid-template-columns:1fr!important}
+  .ov-grid>*,.hist-grid>*,.biz-g>*,.two-col>*,.ti-row>*,.cta-inner>*,.comp-row>*,.syscfg-row>*{min-width:0}
+  [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns: 1fr 1fr"],[style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  .foot-inner{grid-template-columns:1fr}
+  .foot-right-col{flex-direction:column;align-items:stretch;gap:14px}
+}
+</style><style>
+/* ════ 대원칙 6 · 브레드크럼 명도 ════ */
+.breadcrumb-nav{background:var(--bg2)!important}
+.breadcrumb-nav a{color:var(--muted)!important;text-decoration:none}
+.breadcrumb-nav a:hover{color:var(--cyan)!important}
+.breadcrumb-nav span{color:var(--text)}
+.breadcrumb-nav+.iaea-hero-wrap,.breadcrumb-nav+.full-hero-wrap,.breadcrumb-nav+.page-hero,.breadcrumb-nav+.product-hero{margin-top:0!important}
+#box-full-hero:first-of-type{margin-top:0}
+</style><style>
+/* ════ 대원칙 5 · 섹션 키워드 칩 ════ */
+.sec-keywords{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:40px;padding-top:20px;border-top:1px dashed var(--border2)}
+.kw-label{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-right:4px}
+.sec-kw{font-size:var(--font-small);color:var(--muted);background:#00d2f00d;border:1px solid #00d2f026;border-radius:16px;padding:4px 12px}
+</style><style>
+/* 대원칙 5 · 제목 줄바꿈 balance */
+.stitle,.page-hero-title,.product-name,.cta-hd,.ti-title,.syscfg-name,.feature-name,.biz-title,.award-title{text-wrap:balance}
+.img-align-shift{transition:margin-top .15s}
+</style><style>
+.lang-switch{display:inline-flex;align-items:center;border:1px solid var(--border2,#00d2f02e);border-radius:6px;overflow:hidden;flex-shrink:0;margin-left:8px}
+.lang-btn{background:transparent;border:none;color:var(--muted,#9ab5d0);font-family:var(--fkr,"Noto Sans KR",sans-serif);font-size:13px;font-weight:700;padding:7px 10px;cursor:pointer;transition:all .2s}
+.lang-btn:hover{color:var(--cyan,#00d2f0)}
+.lang-btn.on{background:var(--cyan,#00d2f0);color:#000}
+.lang-sep{color:var(--dim,#3a4d6a);font-size:12px}
+</style></head>
+<body id="artifacts-component-root-html">
+<header>
+<!-- ── 로고 영역 ── -->
+<div class="logo-wrap">
+<div class="logo-img-wrap" id="logo-img-wrap" title="클릭하여 로고 교체">
+<img alt="UNO SYSTEM 로고" class="logo-img" id="logo-img" src=""/>
+<div class="logo-img-hint" data-en="📷&lt;br/&gt;Replace logo" data-ko="📷&lt;br/&gt;로고 교체">📷<br/>Replace logo</div>
+</div>
+<div class="logo-ko" contenteditable="true" data-en='UNO SYSTEM&lt;span class="logo-ko-en"&gt;CO., LTD.&lt;/span&gt;' data-ko='유노시스템㈜&lt;span class="logo-ko-en"&gt;UNO SYSTEM&lt;/span&gt;'>UNO SYSTEM<span class="logo-ko-en">CO., LTD.</span></div>
+</div>
+<nav class="main-nav" id="mainNav">
+<div class="ni"><a class="nb" data-en="Home" data-ko="홈" href="index.html">Home</a></div>
+<div class="ni" id="ni-company">
+<a class="nb" data-en='About Us &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ko='회사 소개 &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ni="ni-company" href="company.html">About Us <span class="caret">▾</span></a>
+<div class="dropdown" id="dd-company">
+<a class="di" data-en="Company Overview" data-ko="회사 개요" href="company.html#overview">Company Overview</a>
+<a class="di" data-en="History" data-ko="회사 연혁" href="company.html#history">History</a>
+<a class="di" data-en="Business Areas" data-ko="사업 부문" href="company.html#business">Business Areas</a>
+<a class="di" data-en="Key Clients" data-ko="주요 고객사" href="company.html#clients">Key Clients</a>
+</div>
+</div>
+<div class="ni" id="ni-prod">
+<a class="nb" data-en='Products &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ko='제품 &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ni="ni-prod" href="products.html">Products <span class="caret">▾</span></a>
+<div class="dropdown" id="dd-prod">
+<div class="di has-sub"><span class="i18n" data-en="Fire Alarm Control Panels" data-ko="화재수신기">Fire Alarm Control Panels</span><span class="arr">›</span>
+<div class="sub-dropdown">
+<a class="di" data-en="R-Type DTS Integrated FACP" data-ko="R형 DTS 통합형 수신기" href="제품/수신기/R형 DTS 통합형 수신기/r-type dts-integrated facp.html">R-Type DTS Integrated FACP</a>
+<div class="di has-sub2"><span class="i18n" data-en="P-Type Composite FACP" data-ko="P형 복합식 수신기">P-Type Composite FACP</span><span class="arr">›</span>
+<div class="subsub-dropdown">
+<a class="di" data-en="6-Circuit P-Type FACP (Su25-2)" data-ko="6회로 P형 수신기 (수25-2)" href="제품/수신기/P형 복합식 수신기/6 회로 P형 복합식 수신기(수25-2)/">6-Circuit P-Type FACP (Su25-2)</a>
+<a class="di" data-en="30-Circuit P-Type FACP (Su26-28)" data-ko="30회로 P형 수신기 (수26-28)" href="제품/수신기/P형 복합식 수신기/30 회로 P형 복합식 수신기(수26-28)/">30-Circuit P-Type FACP (Su26-28)</a>
+</div>
+</div>
+<div class="di has-sub2"><span class="i18n" data-en="Other FACPs" data-ko="기타 수신기">Other FACPs</span><span class="arr">›</span>
+<div class="subsub-dropdown">
+<a class="di" data-en="DTS Integrated R-Type (Su24-14)" data-ko="DTS 통합 R형 (수24-14)" href="제품/수신기/기타 수신기/r-type dts-integrated facp (facp24-14)/">DTS Integrated R-Type (Su24-14)</a>
+<a class="di" data-en="P-Type Composite (Su13-6)" data-ko="P형 복합식 (수13-6)" href="제품/수신기/기타 수신기/p-type facp (facp13-6)/">P-Type Composite (Su13-6)</a>
+<a class="di" data-en="P-Type Composite (Su17-47)" data-ko="P형 복합식 (수17-47)" href="제품/수신기/기타 수신기/p-type facp (facp17-47)/">P-Type Composite (Su17-47)</a>
+<a class="di" data-en="P-Type Composite (Su24-14)" data-ko="P형 복합식 (수24-14)" href="제품/수신기/기타 수신기/p-type facp (facp24-14)/">P-Type Composite (Su24-14)</a>
+</div>
+</div>
+</div>
+</div>
+<div class="di has-sub"><span class="i18n" data-en="Detectors" data-ko="감지기">Detectors</span><span class="arr">›</span>
+<div class="sub-dropdown">
+<a class="di" data-en="Rate-of-Rise Fiber-Optic Cable Type (Gam24-74)" data-ko="차동식분포형 광케이블식 (감24-74)" href="제품/감지기/광케이블식 감지기(감24-74)/fiber optic cable ror detector (detector24-74).html">Rate-of-Rise Fiber-Optic Cable Type (Gam24-74)</a>
+<a class="di" data-en="Rate-of-Rise Fiber-Optic Cable Type (Gam26-9)" data-ko="차동식분포형 광케이블식 (감26-9)" href="제품/감지기/광케이블식 감지기(감26-9)/fiber optic cable ror detector (detector26-9).html">Rate-of-Rise Fiber-Optic Cable Type (Gam26-9)</a>
+</div>
+</div>
+<div class="dd-sep"></div>
+<a class="di" data-en="Integrated Fire Monitoring System" data-ko="소방통합감시설비" href="sofire.html">Integrated Fire Monitoring System</a>
+<a class="di" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="network.html">Network-Based Solutions</a>
+<a class="di" data-en="Construction Management" data-ko="건설시공 관리" href="construction.html">Construction Management</a>
+</div>
+</div>
+<div class="ni" id="ni-proj">
+<a class="nb active-menu" data-en='Projects &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ko='프로젝트 &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ni="ni-proj" href="projects.html">Projects <span class="caret">▾</span></a>
+<div class="dropdown">
+<a class="di" data-en="Construction Projects" data-ko="건설 프로젝트" href="company.html#clients">Construction Projects</a>
+<a class="di" data-en="Case Studies" data-ko="Case Studies" href="company.html#clients">Case Studies</a>
+</div>
+</div>
+<div class="ni" id="ni-data">
+<a class="nb" data-en='Resources &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ko='자료 &lt;span class="caret"&gt;▾&lt;/span&gt;' data-ni="ni-data" href="resources.html">Resources <span class="caret">▾</span></a>
+<div class="dropdown">
+<a class="di" data-en="Product Catalog" data-ko="제품 카탈로그" href="#">Product Catalog</a>
+<a class="di" data-en="Datasheets" data-ko="데이터시트" href="#">Datasheets</a>
+<a class="di" data-en="Installation Manuals" data-ko="설치 매뉴얼" href="#">Installation Manuals</a>
+<a class="di" data-en="Certifications" data-ko="인증 서류" href="#">Certifications</a>
+</div>
+</div>
+<div class="ni"><a class="nb" data-en="Partners" data-ko="파트너" href="partners.html">Partners</a></div>
+<div class="ni"><a class="nb cta-nav" href="contact.html">CONTACT</a></div>
+</nav><button aria-label="메뉴" class="nav-toggle" onclick="toggleNav()" title="메뉴" type="button">☰</button>
+<button id="lang-toggle" onclick="toggleLang()" title="한국어 / English"><span class="lang-opt" data-l="ko">Kor</span><span class="lang-sep">|</span><span class="lang-opt" data-l="en">Eng</span></button><div class="lang-switch"><button class="lang-btn" id="lang-ko" onclick="setLang('ko')" title="한국어" type="button">KOR</button><span class="lang-sep">|</span><button class="lang-btn on" id="lang-en" onclick="setLang('en')" title="English" type="button">ENG</button></div><button id="theme-toggle" onclick="toggleTheme()" title="라이트/다크 모드 전환"><span id="th-icon">🌙</span><span id="th-label">Dark</span></button>
+</header><nav class="breadcrumb-nav" style="z-index:10;border-bottom:1px solid var(--border);font-size:var(--font-small);color:var(--muted);margin-top:var(--hdr);background:var(--bg2);align-items:center;gap:8px;padding:12px 60px 12px 5mm;display:flex;position:relative"><a data-en="Projects" data-ko="프로젝트" href="projects.html" style="color:var(--muted);text-decoration:none">Projects</a><span style="color:var(--cyan);opacity:.6;font-size:10px">▶</span><span data-en="Construction Projects" data-ko="건설 프로젝트" style="color:var(--text)">Construction Projects</span></nav>
+<div class="iaea-hero-wrap" id="hero-wrap">
+<div class="hero-empty hidden" id="hero-empty">
+<div class="he-plus">+</div>
+<div data-en="Click to insert a flagship project image" data-ko="클릭하여 대표 현장 이미지 삽입" style="font-size:18px;font-weight:700">Click to insert a flagship project image</div>
+<div data-en="Recommended: landscape photo, 1920×440px or larger" data-ko="권장: 1920×440px 이상 가로형 사진" style="font-size:13px;opacity:.6">Recommended: landscape photo, 1920×440px or larger</div>
+</div>
+<img alt="UNO SYSTEM 프로젝트 현장" id="hero-main-img" src="images/01-UNO_SYSTEM________.jpg" style="display: block;"/>
+<div class="hero-change-hint"><span data-en="📷 Click to replace the image" data-ko="📷 클릭하여 이미지 교체">📷 Click to replace the image</span></div>
+<div class="hero-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();heroReplace()">🔄 Replace</button>
+<button class="box-ctrl-btn del" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();heroDelete()">🗑 Delete</button>
+</div>
+</div>
+<div class="iaea-source" contenteditable="true" data-en="Source: UNO SYSTEM — Project References" data-ko="출처: UNO SYSTEM — Project References">Source: UNO SYSTEM — Project References</div>
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero">
+<div class="page-hero-bg" style="background-image:url('../bmp/kepco.jpg')"></div>
+<div class="page-hero-overlay"></div>
+<div class="page-hero-content" style="padding:0 60px 0 5mm">
+<div class="breadcrumb" data-en="Projects" data-ko='&lt;span style="color:var(--text)"&gt;프로젝트&lt;/span&gt;'>Projects</div>
+<span class="page-hero-tag">Project References</span>
+<h1 class="page-hero-title" data-en="Project Achievements" data-ko="프로젝트 실적">Project Achievements</h1>
+<div class="page-hero-sub" data-en="KEPCO · LH · Seoul Metro · LG Electronics · KT · Tajikistan AMI" data-ko="한국전력 · LH공사 · 서울메트로 · LG전자 · KT · 타지키스탄 AMI">KEPCO · LH · Seoul Metro · LG Electronics · KT · Tajikistan AMI</div>
+</div>
+</section>
+<div class="div-line"></div>
+<!-- ═══ 01 KPI + 사업 실적 ═══ -->
+<section class="pg" id="past">
+<!-- KPI 카운터 스트립 -->
+<div class="kpi-strip fu vis">
+<div class="kpi-item">
+<div class="kpi-n">620<span class="kpi-unit" data-en="units" data-ko="대">units</span></div>
+<div class="kpi-l" data-en="KEPCO" data-ko="한국전력">KEPCO</div>
+</div>
+<div class="kpi-div"></div>
+<div class="kpi-item">
+<div class="kpi-n">640<span class="kpi-unit" data-en="units" data-ko="대">units</span></div>
+<div class="kpi-l" data-en="Seoul Metro" data-ko="서울메트로">Seoul Metro</div>
+</div>
+<div class="kpi-div"></div>
+<div class="kpi-item">
+<div class="kpi-n">450<span class="kpi-unit" data-en="units" data-ko="대">units</span></div>
+<div class="kpi-l" data-en="LH" data-ko="LH공사">LH</div>
+</div>
+<div class="kpi-div"></div>
+<div class="kpi-item">
+<div class="kpi-n">4K<span class="kpi-unit" data-en="households" data-ko="세대">households</span></div>
+<div class="kpi-l" data-en="Tajikistan AMI" data-ko="타지키스탄 AMI">Tajikistan AMI</div>
+</div>
+</div>
+<div class="shdr fu vis" style="margin-top:52px">
+<div class="shdr-left">
+<span class="stag">01 · Project History</span>
+<h2 class="stitle" data-en='Business &lt;span class="hl"&gt;Achievements&lt;/span&gt;' data-ko='사업 &lt;span class="hl"&gt;실적&lt;/span&gt;'>Business <span class="hl">Achievements</span></h2>
+</div>
+<div class="shdr-hr"></div>
+</div>
+<!-- 매거진 그리드: 첫 카드 대형, 나머지 4열 -->
+<div class="srow-list fu vis">
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="KEPCO" data-ko="한국전력">KEPCO</span>
+<h3 class="srow-title" contenteditable="true" data-en="Remote Metering System (AMR)" data-ko="원격검침 시스템 (AMR)">Remote Metering System (AMR)</h3>
+<p class="srow-desc" contenteditable="true" data-en="A remote metering (AMR) system that automatically collects meter readings over a network without on-site visits. It replaces mechanical meters with electronic ones and sends data to a central server, cutting the labor, cost and errors of monthly manual reading. It provided a stable data-collection base aligned with KEPCO's large-scale metering-infrastructure modernization." data-ko="전력량계 사용량을 사람이 방문하지 않고 통신망으로 자동 수집하는 원격검침(AMR) 시스템입니다. 기계식 계량기를 전자식으로 대체하고 검침 데이터를 중앙 서버로 전송해, 월 1회 수동 검침에 따르는 인력·비용과 오류를 줄입니다. 한국전력의 대규모 계량 인프라 현대화 흐름에 맞춰 안정적인 데이터 수집 기반을 제공했습니다.">A remote metering (AMR) system that automatically collects meter readings over a network without on-site visits. It replaces mechanical meters with electronic ones and sends data to a central server, cutting the labor, cost and errors of monthly manual reading. It provided a stable data-collection base aligned with KEPCO's large-scale metering-infrastructure modernization.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm1" id="pm-1">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/02-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-1')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-1')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="Sambo Computer" data-ko="삼보컴퓨터">Sambo Computer</span>
+<h3 class="srow-title" contenteditable="true" data-en="Contactless Charging Module" data-ko="무접점충전 모듈">Contactless Charging Module</h3>
+<p class="srow-desc" contenteditable="true" data-en="A contactless (wireless) charging module that transfers power by electromagnetic induction without physical terminal contact. It eliminates connector wear, poor contacts and shock risk, and its waterproof/dustproof design suits mobile devices and home appliances. The transmit/receive coil design and power-conversion circuitry were optimized for charging efficiency and thermal stability." data-ko="전원 단자의 물리적 접촉 없이 전자기 유도 방식으로 전력을 전달하는 무접점(무선) 충전 모듈입니다. 커넥터 마모·접점 불량·감전 위험을 없애고 방수·방진 설계가 용이해 휴대기기와 생활가전에 폭넓게 적용됩니다. 송·수신 코일 설계와 전력 변환 회로를 최적화해 충전 효율과 발열 안정성을 확보했습니다.">A contactless (wireless) charging module that transfers power by electromagnetic induction without physical terminal contact. It eliminates connector wear, poor contacts and shock risk, and its waterproof/dustproof design suits mobile devices and home appliances. The transmit/receive coil design and power-conversion circuitry were optimized for charging efficiency and thermal stability.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm2" id="pm-2">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/03-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-2')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-2')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="KT" data-ko="KT">KT</span>
+<h3 class="srow-title" contenteditable="true" data-en="External Smart Tag" data-ko="외장형 스마트태그">External Smart Tag</h3>
+<p class="srow-desc" contenteditable="true" data-en="An external smart tag that wirelessly identifies and tracks the location and status of objects. Used for asset management and IoT services, its compact, low-power design enables long-term operation. 800 units were supplied to the Jeju testbed, validating field applicability and communication reliability." data-ko="사물의 위치·상태 정보를 무선으로 식별·추적하는 외장형 스마트태그입니다. 자산 관리와 IoT 서비스에 활용되며, 소형·저전력 설계로 장기간 운용이 가능합니다. 제주 실증단지에 800대를 공급해 현장 적용성과 통신 신뢰성을 검증했습니다.">An external smart tag that wirelessly identifies and tracks the location and status of objects. Used for asset management and IoT services, its compact, low-power design enables long-term operation. 800 units were supplied to the Jeju testbed, validating field applicability and communication reliability.</p>
+<span class="srow-badge" contenteditable="true" data-en="800 units · Jeju Testbed" data-ko="800대 · 제주 실증단지">800 units · Jeju Testbed</span>
+</div>
+<div class="ref-card srow-img" data-key="pm3" id="pm-3">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/04-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-3')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-3')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="LG Electronics" data-ko="LG전자">LG Electronics</span>
+<h3 class="srow-title" contenteditable="true" data-en="Smart Appliance Comm. Board (Zigbee/PLC)" data-ko="스마트가전 통신보드 (Zigbee/PLC)">Smart Appliance Comm. Board (Zigbee/PLC)</h3>
+<p class="srow-desc" contenteditable="true" data-en="A communication board based on Zigbee wireless and power-line communication (PLC) that connects smart appliances to the home network. Without extra wiring, it exchanges data between appliances over existing power lines or low-power short-range wireless, supporting remote control and energy management. Communication modules were supplied for LG Electronics' smart-appliance lineup." data-ko="스마트가전을 홈 네트워크에 연결하는 Zigbee 무선 및 전력선통신(PLC) 기반 통신보드입니다. 별도 배선 없이 기존 전력선이나 저전력 근거리 무선으로 가전 간 데이터를 주고받아 원격 제어와 에너지 관리를 지원합니다. LG전자 스마트가전 라인업에 통신 모듈을 공급했습니다.">A communication board based on Zigbee wireless and power-line communication (PLC) that connects smart appliances to the home network. Without extra wiring, it exchanges data between appliances over existing power lines or low-power short-range wireless, supporting remote control and energy management. Communication modules were supplied for LG Electronics' smart-appliance lineup.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm4" id="pm-4">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/05-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-4')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-4')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="LG Electronics" data-ko="LG전자">LG Electronics</span>
+<h3 class="srow-title" contenteditable="true" data-en="Smart Appliance Comm. Board (Zigbee/Wi-Fi)" data-ko="스마트가전 통신보드 (Zigbee/WiFi)">Smart Appliance Comm. Board (Zigbee/Wi-Fi)</h3>
+<p class="srow-desc" contenteditable="true" data-en="A smart-appliance communication board supporting both Zigbee and Wi-Fi. It combines a low-power sensor network (Zigbee) with high-bandwidth internet connectivity (Wi-Fi) to broadly enable remote monitoring/control and cloud-service integration. Multiple communication standards were consolidated onto a single board to improve product scalability." data-ko="Zigbee와 Wi‑Fi를 함께 지원하는 스마트가전용 통신보드입니다. 저전력 센서 네트워크(Zigbee)와 고대역 인터넷 연결(Wi‑Fi)을 결합해 가전의 원격 모니터링·제어와 클라우드 서비스 연동을 폭넓게 구현합니다. 다양한 통신 규격을 하나의 보드로 통합해 제품 확장성을 높였습니다.">A smart-appliance communication board supporting both Zigbee and Wi-Fi. It combines a low-power sensor network (Zigbee) with high-bandwidth internet connectivity (Wi-Fi) to broadly enable remote monitoring/control and cloud-service integration. Multiple communication standards were consolidated onto a single board to improve product scalability.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm5" id="pm-5">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/06-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-5')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-5')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="LG CNS" data-ko="LG CNS">LG CNS</span>
+<h3 class="srow-title" contenteditable="true" data-en="Smart Place Data Collection Server" data-ko="Smart Place 데이터 수집서버">Smart Place Data Collection Server</h3>
+<p class="srow-desc" contenteditable="true" data-en="A collection server that gathers the metering and energy data of the Smart Grid intelligent-consumer (Smart Place) program. It reliably aggregates data arriving from many smart meters and gateways and forwards it to the upper management system. We built the server software handling high-volume collection and transmission." data-ko="스마트그리드 지능형 소비자(Smart Place) 사업의 검침·에너지 데이터를 모으는 수집서버입니다. 다수의 스마트미터·게이트웨이에서 올라오는 데이터를 안정적으로 취합해 상위 관리 시스템으로 전달합니다. 대용량 수집·전송 처리를 담당하는 서버 소프트웨어를 구축했습니다.">A collection server that gathers the metering and energy data of the Smart Grid intelligent-consumer (Smart Place) program. It reliably aggregates data arriving from many smart meters and gateways and forwards it to the upper management system. We built the server software handling high-volume collection and transmission.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm6" id="pm-6">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src=""/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-6')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-6')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="Seoul Metro" data-ko="서울메트로">Seoul Metro</span>
+<h3 class="srow-title" contenteditable="true" data-en="Line 2 Subway PA Speakers" data-ko="지하철 2호선 횡파스피커">Line 2 Subway PA Speakers</h3>
+<p class="srow-desc" contenteditable="true" data-en="Speakers for platform and tunnel announcements and emergency alerts in the subway. Designed for clear voice delivery even in noisy underground environments, they are used for passenger guidance and disaster-response broadcasting. 640 units were supplied to Seoul Subway Line 2." data-ko="지하철 승강장·터널 구간의 안내방송과 비상경보를 위한 스피커입니다. 소음이 큰 지하 환경에서도 명료한 음성 전달이 가능하도록 설계되어 승객 안내와 재난 대응 방송에 사용됩니다. 서울 지하철 2호선에 640대를 공급했습니다.">Speakers for platform and tunnel announcements and emergency alerts in the subway. Designed for clear voice delivery even in noisy underground environments, they are used for passenger guidance and disaster-response broadcasting. 640 units were supplied to Seoul Subway Line 2.</p>
+<span class="srow-badge" contenteditable="true" data-en="640 units" data-ko="640대">640 units</span>
+</div>
+<div class="ref-card srow-img" data-key="pm7" id="pm-7">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/07-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-7')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-7')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="LG Electronics" data-ko="LG전자">LG Electronics</span>
+<h3 class="srow-title" contenteditable="true" data-en="Wireless Power Tx/Rx Module for Washers" data-ko="세탁기용 무선전력 송수신모듈">Wireless Power Tx/Rx Module for Washers</h3>
+<p class="srow-desc" contenteditable="true" data-en="A wireless power transmit/receive module that delivers power without wires to appliances with rotating or moving parts, such as washing machines. Removing contacts and cables improves waterproof reliability and durability, enabling stable power transfer between the drum and the control unit. The coils and power-conversion circuitry were optimized for the appliance structure." data-ko="세탁기처럼 회전·이동부가 있는 가전에 유선 없이 전력을 전달하는 무선전력 송수신모듈입니다. 접점·케이블을 제거해 방수 신뢰성과 내구성을 높이고, 세탁조와 제어부 간 전력 전달을 안정적으로 구현합니다. 송·수신 코일과 전력 변환 회로를 가전 구조에 맞춰 최적화했습니다.">A wireless power transmit/receive module that delivers power without wires to appliances with rotating or moving parts, such as washing machines. Removing contacts and cables improves waterproof reliability and durability, enabling stable power transfer between the drum and the control unit. The coils and power-conversion circuitry were optimized for the appliance structure.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm8" id="pm-8">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/08-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-8')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-8')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="Tajikistan Power Authority" data-ko="타지키스탄 전력청">Tajikistan Power Authority</span>
+<h3 class="srow-title" contenteditable="true" data-en="Dangara PLC Remote-Metering AMI Pilot" data-ko="당가라시 PLC 원격검침 AMI 시범사업">Dangara PLC Remote-Metering AMI Pilot</h3>
+<p class="srow-desc" contenteditable="true" data-en="A power-line-communication (PLC) based two-way advanced metering (AMI) pilot built in the Dangara region of Tajikistan. Through smart meters and a data concentrator unit (DCU), it collects time-of-use consumption and supports remote control, improving metering efficiency and management transparency. It is an AMI demonstration and export case for an overseas power authority." data-ko="타지키스탄 당가라 지역에 구축한 전력선통신(PLC) 기반 양방향 원격검침(AMI) 시범사업입니다. 스마트미터와 데이터집중장치(DCU)를 통해 시간대별 사용량을 수집하고 원격 제어를 지원해, 검침 효율과 전력 관리 투명성을 높입니다. 해외 전력청을 대상으로 한 AMI 실증·수출 사례입니다.">A power-line-communication (PLC) based two-way advanced metering (AMI) pilot built in the Dangara region of Tajikistan. Through smart meters and a data concentrator unit (DCU), it collects time-of-use consumption and supports remote control, improving metering efficiency and management transparency. It is an AMI demonstration and export case for an overseas power authority.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm9" id="pm-9">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/09-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-9')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-9')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="KEPCO" data-ko="한국전력">KEPCO</span>
+<h3 class="srow-title" contenteditable="true" data-en="Nationwide Rollout of Power-Tunnel FACPs" data-ko="전력구 맞춤형 화재수신반 전국 확대">Nationwide Rollout of Power-Tunnel FACPs</h3>
+<p class="srow-desc" contenteditable="true" data-en="A project that rolled out fire alarm control panels optimized for underground power cable tunnels to sites nationwide. Because power cable tunnels packed with high-voltage cables spread fire fast and emit toxic gases, early warning that detects abnormal heat before ignition is essential. Over 620 units are in operation, establishing a standardized monitoring framework." data-ko="지하 전력구 환경에 최적화한 화재수신반을 전국 사업소로 확대 적용한 사업입니다. 고압 케이블이 밀집된 전력구는 화재 시 확산이 빠르고 유독가스가 발생하므로, 발화 이전의 이상 고온까지 감지하는 조기 경보가 핵심입니다. 전국 620여 대를 운영하며 표준화된 감시 체계를 구축했습니다.">A project that rolled out fire alarm control panels optimized for underground power cable tunnels to sites nationwide. Because power cable tunnels packed with high-voltage cables spread fire fast and emit toxic gases, early warning that detects abnormal heat before ignition is essential. Over 620 units are in operation, establishing a standardized monitoring framework.</p>
+<span class="srow-badge" contenteditable="true" data-en="620 units in service" data-ko="620대 운영 중">620 units in service</span>
+</div>
+<div class="ref-card srow-img" data-key="pm10" id="pm-10">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/10-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-10')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-10')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="KEPCO" data-ko="한국전력">KEPCO</span>
+<h3 class="srow-title" contenteditable="true" data-en="KEPCO Patent Expo — Power-Tunnel FACP" data-ko="한전 특허대전 「전력구 맞춤형 화재수신반」">KEPCO Patent Expo — Power-Tunnel FACP</h3>
+<p class="srow-desc" contenteditable="true" data-en="A power-tunnel-optimized fire alarm control panel featured at the KEPCO Patent Expo. It was recognized for using fiber-optic Distributed Temperature Sensing (DTS) to continuously monitor temperature along the cable and for operating reliably in underground, humid environments free of electromagnetic interference. It publicly demonstrated technical competitiveness in power-infrastructure fire safety." data-ko="한국전력 특허대전에 선보인 전력구 맞춤형 화재수신반입니다. 광섬유 분포온도센싱(DTS)을 활용해 케이블을 따라 온도를 연속 감시하고, 전자기 간섭 없이 지하·습윤 환경에서도 안정적으로 동작하는 기술력을 인정받았습니다. 전력 인프라 화재 안전 분야의 기술 경쟁력을 대외적으로 입증했습니다.">A power-tunnel-optimized fire alarm control panel featured at the KEPCO Patent Expo. It was recognized for using fiber-optic Distributed Temperature Sensing (DTS) to continuously monitor temperature along the cable and for operating reliably in underground, humid environments free of electromagnetic interference. It publicly demonstrated technical competitiveness in power-infrastructure fire safety.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm11" id="pm-11">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/11-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-11')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-11')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="NEMA (Korea)" data-ko="소방방재청">NEMA (Korea)</span>
+<h3 class="srow-title" contenteditable="true" data-en="Fire Industry Grand Prize" data-ko="소방산업대상 수상">Fire Industry Grand Prize</h3>
+<p class="srow-desc" contenteditable="true" data-en="An achievement recognized with the Fire Industry Grand Prize for excellence in fire-safety technology. The maturity and industry contribution of the fiber-optic-based fire detection and integrated monitoring technology were evaluated. It is a case of officially verified product reliability and technology in the public sector." data-ko="소방 안전 기술의 우수성을 인정받아 소방산업대상을 수상한 실적입니다. 광케이블 기반 화재 감지·통합 감시 기술의 완성도와 산업 기여도를 평가받았습니다. 공공 부문에서 제품 신뢰성과 기술력을 공식적으로 검증받은 사례입니다.">An achievement recognized with the Fire Industry Grand Prize for excellence in fire-safety technology. The maturity and industry contribution of the fiber-optic-based fire detection and integrated monitoring technology were evaluated. It is a case of officially verified product reliability and technology in the public sector.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm12" id="pm-12">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/12-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-12')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-12')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="Korea Land &amp; Housing Corp. (LH)" data-ko="한국토지주택공사">Korea Land &amp; Housing Corp. (LH)</span>
+<h3 class="srow-title" contenteditable="true" data-en="Smart Construction Blackbox" data-ko="스마트 건설 블랙박스">Smart Construction Blackbox</h3>
+<p class="srow-desc" contenteditable="true" data-en="A smart construction blackbox that continuously records the construction process on video. It serves as evidence for preventing defective construction and clarifying causes when accidents occur, aligning with the construction-video record management and serious-accident response promoted by LH, Seoul and others. 450 units were supplied to Korea Land &amp; Housing Corp." data-ko="건설현장의 시공 과정을 영상으로 상시 기록하는 스마트 건설 블랙박스입니다. 부실시공 예방과 사고 발생 시 원인 규명을 위한 근거 자료로 활용되며, LH·서울시 등이 추진하는 건설공사 동영상 기록관리와 중대재해 대응 흐름에 부합합니다. 한국토지주택공사에 450대를 공급했습니다.">A smart construction blackbox that continuously records the construction process on video. It serves as evidence for preventing defective construction and clarifying causes when accidents occur, aligning with the construction-video record management and serious-accident response promoted by LH, Seoul and others. 450 units were supplied to Korea Land &amp; Housing Corp.</p>
+<span class="srow-badge" contenteditable="true" data-en="450 units" data-ko="450대">450 units</span>
+</div>
+<div class="ref-card srow-img" data-key="pm13" id="pm-13">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/13-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-13')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-13')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="srow fu vis">
+<div class="srow-text">
+<span class="ref-client-tag" contenteditable="true" data-en="KEPCO" data-ko="한국전력">KEPCO</span>
+<h3 class="srow-title" contenteditable="true" data-en="Remote Diagnosis &amp; Control System for Power-Tunnel Fire Equipment" data-ko="전력구 소방설비 원격 진단 제어 시스템">Remote Diagnosis &amp; Control System for Power-Tunnel Fire Equipment</h3>
+<p class="srow-desc" contenteditable="true" data-en="An integrated management system that remotely diagnoses and controls the fire-protection equipment installed in power cable tunnels. It checks the operating status and faults of fire alarm control panels and detection equipment from a central location in real time, and enables inspection/control without on-site dispatch, greatly improving maintenance efficiency. It realizes an intelligent power-tunnel fire-safety management framework." data-ko="전력구에 설치된 소방설비의 상태를 원격으로 진단하고 제어하는 통합 관리 시스템입니다. 화재수신반·감지 설비의 동작 상태와 이상 유무를 중앙에서 실시간 확인하고, 현장 출동 없이 점검·제어가 가능해 유지관리 효율을 크게 높입니다. 지능형 전력구 화재 안전 관리 체계를 구현했습니다.">An integrated management system that remotely diagnoses and controls the fire-protection equipment installed in power cable tunnels. It checks the operating status and faults of fire alarm control panels and detection equipment from a central location in real time, and enables inspection/control without on-site dispatch, greatly improving maintenance efficiency. It realizes an intelligent power-tunnel fire-safety management framework.</p>
+</div>
+<div class="ref-card srow-img" data-key="pm14" id="pm-14">
+<div class="ref-img-wrap">
+<img alt="" class="ref-img" src="images/14-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls">
+<button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pm-14')">🔄</button>
+<button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pm-14')">🗑</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#DeliveryRecord" data-ko="#납품실적">#DeliveryRecord</span><span class="sec-kw" contenteditable="true" data-en="#InstallationRecord" data-ko="#시공실적">#InstallationRecord</span><span class="sec-kw" contenteditable="true" data-en="#PublicProjects" data-ko="#공공프로젝트">#PublicProjects</span><span class="sec-kw" contenteditable="true" data-en="#References" data-ko="#레퍼런스">#References</span></div></section>
+<div class="div-line"></div>
+<!-- ═══ 02 한국전력 전력구 — 테이블 레이아웃 ═══ -->
+<section class="pg alt" id="kepco">
+<div class="shdr fu vis">
+<div class="shdr-left">
+<span class="stag">02 · KEPCO Power Cable Tunnel Projects</span>
+<h2 class="stitle" data-en='KEPCO &lt;span class="hl"&gt;Power Cable Tunnels&lt;/span&gt;' data-ko='한국전력 &lt;span class="hl"&gt;전력구&lt;/span&gt;'>KEPCO <span class="hl">Power Cable Tunnels</span></h2>
+</div>
+<div class="shdr-hr"></div>
+</div>
+<!-- 인트로 배너 -->
+<div class="kepco-banner fu vis">
+<div class="kepco-banner-stat"><span class="kb-n">620<span class="kb-u" data-en="units" data-ko="대">units</span></span><div class="kb-l" data-en="Nationwide Cumulative Supply" data-ko="전국 누적 납품">Nationwide Cumulative Supply</div></div>
+<div class="kepco-banner-stat"><span class="kb-n">154 · 345 · 500<span class="kb-u">kV</span></span><div class="kb-l" data-en="Extra-High-Voltage Tunnel Ready" data-ko="초고압 전력구 대응">Extra-High-Voltage Tunnel Ready</div></div>
+<div class="kepco-banner-stat"><span class="kb-n">6<span class="kb-u">kV</span></span><div class="kb-l" data-en="Built-in Surge Protection" data-ko="서지 보호 기본 탑재">Built-in Surge Protection</div></div>
+</div>
+<!-- 프로젝트 테이블 -->
+<div class="hcard-list hcard-list--kepco fu vis">
+<div class="hcard hcard--kepco" data-key="pk1" id="pk-1">
+<div class="hcard-body">
+<div class="hcard-num">01</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="345kV Huigok Transmission-Line Power Cable Tunnel" data-ko="345kV 희곡 송전선로 전력구">345kV Huigok Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 345kV transmission line. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition." data-ko="345kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 광섬유 분포온도센싱(DTS)으로 케이블 전 구간의 온도를 연속 감시해 발화 이전의 이상 고온을 조기에 포착합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 345kV transmission line. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/15-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-1')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-1')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk2" id="pk-2">
+<div class="hcard-body">
+<div class="hcard-num">02</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Sanha Substation Power Cable Tunnel" data-ko="154kV 산하 변전소 전력구">154kV Sanha Substation Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system." data-ko="154kV 변전소로 이어지는 인입 전력구에 화재 감시 설비를 적용한 현장입니다. 케이블이 밀집된 지하 구조물 특성상 화재 확산이 빠른 만큼, 실시간 온도 감시로 조기 경보 체계를 마련했습니다.">This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/16-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-2')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-2')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk3" id="pk-3">
+<div class="hcard-body">
+<div class="hcard-num">03</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Yangsan-Seokgye Substation Power Cable Tunnel" data-ko="154kV 양산석계 변전소 전력구">154kV Yangsan-Seokgye Substation Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments." data-ko="154kV 변전소로 이어지는 인입 전력구에 화재 감시 설비를 적용한 현장입니다. 전자기 간섭에 영향받지 않는 광센서 방식으로 지하·습윤 환경에서도 안정적으로 상시 감시합니다.">This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/17-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-3')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-3')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk4" id="pk-4">
+<div class="hcard-body">
+<div class="hcard-num">04</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="North Busan–Sinulsan Transmission-Line Power Cable Tunnel" data-ko="북부산-신울산 송전선로 전력구">North Busan–Sinulsan Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a transmission line. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system." data-ko="송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 링 네트워크 기반 광케이블 통신으로 장거리 구간을 단일 시스템에서 통합 감시합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a transmission line. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/18-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-4')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-4')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk5" id="pk-5">
+<div class="hcard-body">
+<div class="hcard-num">05</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="Sinbupyeong HVDC Transmission-Line Power Cable Tunnel" data-ko="신부평 HVDC 송전선로 전력구">Sinbupyeong HVDC Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel of a extra-high-voltage HVDC transmission section. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities." data-ko="초고압 직류 송전 구간의 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 이상 고온 발생 시 즉시 경보를 발생시켜 전력 설비의 화재 피해를 최소화합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel of a extra-high-voltage HVDC transmission section. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/19-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-5')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-5')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk6" id="pk-6">
+<div class="hcard-body">
+<div class="hcard-num">06</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="345kV Sinchungju Transmission-Line Power Cable Tunnel" data-ko="345kV 신충주 송전선로 전력구">345kV Sinchungju Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 345kV transmission line. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system." data-ko="345kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 발화 전 발열 단계부터 감지해 화재를 예방하고, 상위 통합 감시 시스템과 연동됩니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 345kV transmission line. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/20-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-6')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-6')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk7" id="pk-7">
+<div class="hcard-body">
+<div class="hcard-num">07</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Gwacheon (Donganyang) Substation Power Cable Tunnel" data-ko="154kV 과천(동안양) 변전소 전력구">154kV Gwacheon (Donganyang) Substation Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition." data-ko="154kV 변전소로 이어지는 인입 전력구에 화재 감시 설비를 적용한 현장입니다. 광섬유 분포온도센싱(DTS)으로 케이블 전 구간의 온도를 연속 감시해 발화 이전의 이상 고온을 조기에 포착합니다.">This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/21-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-7')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-7')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk8" id="pk-8">
+<div class="hcard-body">
+<div class="hcard-num">08</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Haenam-Yeongsin Substation Power Cable Tunnel" data-ko="154kV 해남영신 변전소 전력구">154kV Haenam-Yeongsin Substation Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system." data-ko="154kV 변전소로 이어지는 인입 전력구에 화재 감시 설비를 적용한 현장입니다. 케이블이 밀집된 지하 구조물 특성상 화재 확산이 빠른 만큼, 실시간 온도 감시로 조기 경보 체계를 마련했습니다.">This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/22-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-8')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-8')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk9" id="pk-9">
+<div class="hcard-body">
+<div class="hcard-num">09</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Pyeongtaek–Bukhyeondeok Transmission-Line Power Cable Tunnel" data-ko="154kV 평택-북현덕 송전선로 전력구">154kV Pyeongtaek–Bukhyeondeok Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 전자기 간섭에 영향받지 않는 광센서 방식으로 지하·습윤 환경에서도 안정적으로 상시 감시합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/23-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-9')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-9')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk10" id="pk-10">
+<div class="hcard-body">
+<div class="hcard-num">10</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Buk-Asan Transmission-Line Power Cable Tunnel" data-ko="154kV 북아산 송전선로 전력구">154kV Buk-Asan Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 링 네트워크 기반 광케이블 통신으로 장거리 구간을 단일 시스템에서 통합 감시합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/24-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-10')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-10')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk11" id="pk-11">
+<div class="hcard-body">
+<div class="hcard-num">11</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Gwangyang Port Transmission-Line Power Cable Tunnel" data-ko="154kV 광양항 송전선로 전력구">154kV Gwangyang Port Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 이상 고온 발생 시 즉시 경보를 발생시켜 전력 설비의 화재 피해를 최소화합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/25-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-11')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-11')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk12" id="pk-12">
+<div class="hcard-body">
+<div class="hcard-num">12</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Sejong–Wolsan Transmission-Line Power Cable Tunnel" data-ko="154kV 세종-월산 송전선로 전력구">154kV Sejong–Wolsan Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 발화 전 발열 단계부터 감지해 화재를 예방하고, 상위 통합 감시 시스템과 연동됩니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/26-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-12')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-12')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk13" id="pk-13">
+<div class="hcard-body">
+<div class="hcard-num">13</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="500kV Dongseoul HVDC Power Cable Tunnel" data-ko="500kV 동서울 HVDC 전력구">500kV Dongseoul HVDC Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel of a 500kV extra-high-voltage HVDC transmission section. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition." data-ko="500kV 초고압 직류 송전 구간의 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 광섬유 분포온도센싱(DTS)으로 케이블 전 구간의 온도를 연속 감시해 발화 이전의 이상 고온을 조기에 포착합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel of a 500kV extra-high-voltage HVDC transmission section. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/27-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-13')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-13')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk14" id="pk-14">
+<div class="hcard-body">
+<div class="hcard-num">14</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Namgwangju Utility Tunnel" data-ko="154kV 남광주 공동구">154kV Namgwangju Utility Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system." data-ko="전력·통신 등 주요 설비가 함께 수용된 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 케이블이 밀집된 지하 구조물 특성상 화재 확산이 빠른 만큼, 실시간 온도 감시로 조기 경보 체계를 마련했습니다.">This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/28-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-14')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-14')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk15" id="pk-15">
+<div class="hcard-body">
+<div class="hcard-num">15</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Yangsan–Gimhae Transmission-Line Power Cable Tunnel" data-ko="154kV 양산-김해 송전선로 전력구">154kV Yangsan–Gimhae Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 전자기 간섭에 영향받지 않는 광센서 방식으로 지하·습윤 환경에서도 안정적으로 상시 감시합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/29-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-15')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-15')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk16" id="pk-16">
+<div class="hcard-body">
+<div class="hcard-num">16</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Osan–Pyeongtaek Transmission-Line Power Cable Tunnel" data-ko="154kV 오산-평택 송전선로 전력구">154kV Osan–Pyeongtaek Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 링 네트워크 기반 광케이블 통신으로 장거리 구간을 단일 시스템에서 통합 감시합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/30-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-16')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-16')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk17" id="pk-17">
+<div class="hcard-body">
+<div class="hcard-num">17</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Sian Substation Power Cable Tunnel" data-ko="154kV 시안 변전소 전력구">154kV Sian Substation Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities." data-ko="154kV 변전소로 이어지는 인입 전력구에 화재 감시 설비를 적용한 현장입니다. 이상 고온 발생 시 즉시 경보를 발생시켜 전력 설비의 화재 피해를 최소화합니다.">This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/31-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-17')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-17')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk18" id="pk-18">
+<div class="hcard-body">
+<div class="hcard-num">18</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Sojeong Substation Power Cable Tunnel" data-ko="154kV 소정 변전소 전력구">154kV Sojeong Substation Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system." data-ko="154kV 변전소로 이어지는 인입 전력구에 화재 감시 설비를 적용한 현장입니다. 발화 전 발열 단계부터 감지해 화재를 예방하고, 상위 통합 감시 시스템과 연동됩니다.">This site applies fire-monitoring equipment to the incoming power cable tunnel leading to a 154kV substation. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/32-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-18')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-18')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk19" id="pk-19">
+<div class="hcard-body">
+<div class="hcard-num">19</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Jungdongtan Transmission-Line Power Cable Tunnel" data-ko="154kV 중동탄 송전선로 전력구">154kV Jungdongtan Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 광섬유 분포온도센싱(DTS)으로 케이블 전 구간의 온도를 연속 감시해 발화 이전의 이상 고온을 조기에 포착합니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/33-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-19')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-19')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="hcard hcard--kepco" data-key="pk20" id="pk-20">
+<div class="hcard-body">
+<div class="hcard-num">20</div>
+<span class="ref-client-tag" data-en="KEPCO" data-ko="KEPCO">KEPCO</span>
+<div class="hcard-title" data-en="154kV Buk-Ansan Transmission-Line Power Cable Tunnel" data-ko="154kV 북안산 송전선로 전력구">154kV Buk-Ansan Transmission-Line Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system." data-ko="154kV 송전선로가 지나는 지하 전력구에 화재 감시 설비를 구축한 현장입니다. 케이블이 밀집된 지하 구조물 특성상 화재 확산이 빠른 만큼, 실시간 온도 감시로 조기 경보 체계를 마련했습니다.">This site installs fire-monitoring equipment in the underground power cable tunnel carrying a 154kV transmission line. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system.</p>
+</div>
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/34-image.jpg"/>
+<div class="ref-img-ph"><span>+</span><small data-en="Insert an image" data-ko="이미지 삽입">Insert an image</small></div>
+<div class="ref-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pk-20')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pk-20')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="hcard-list fu vis">
+<div class="hcard" data-key="pu1" id="pu-1">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/35-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-1')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-1')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="Power Plant" data-ko="발전소">Power Plant</span>
+<div class="hcard-title" data-en="Gwangyang Biomass Power Plant Utility Tunnel" data-ko="광양 바이오매스 발전소 공동구">Gwangyang Biomass Power Plant Utility Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments." data-ko="전력·통신 등 주요 설비가 함께 수용된 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 전자기 간섭에 영향받지 않는 광센서 방식으로 지하·습윤 환경에서도 안정적으로 상시 감시합니다.">This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments.</p></div>
+</div>
+<div class="hcard" data-key="pu2" id="pu-2">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/36-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-2')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-2')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="Korea Expressway Corp." data-ko="한국도로공사">Korea Expressway Corp.</span>
+<div class="hcard-title" data-en="Expressway Tunnel Utility Conduit" data-ko="고속도로 터널 공동구">Expressway Tunnel Utility Conduit</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in the underground utility tunnel of an expressway tunnel section. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system." data-ko="고속도로 터널 구간의 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 링 네트워크 기반 광케이블 통신으로 장거리 구간을 단일 시스템에서 통합 감시합니다.">This site installs fire-monitoring equipment in the underground utility tunnel of an expressway tunnel section. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system.</p></div>
+</div>
+<div class="hcard" data-key="pu3" id="pu-3">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/37-image.webp"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-3')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-3')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="NICE Energy" data-ko="나이스에너지">NICE Energy</span>
+<div class="hcard-title" data-en="Korea Maritime University (Busan) Utility Tunnel" data-ko="부산 한국해양대학교 공동구">Korea Maritime University (Busan) Utility Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities." data-ko="전력·통신 등 주요 설비가 함께 수용된 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 이상 고온 발생 시 즉시 경보를 발생시켜 전력 설비의 화재 피해를 최소화합니다.">This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. It raises an immediate alarm on abnormal heat, minimizing fire damage to power facilities.</p></div>
+</div>
+<div class="hcard" data-key="pu4" id="pu-4">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/38-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-4')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-4')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="POSCO" data-ko="POSCO">POSCO</span>
+<div class="hcard-title" data-en="Pohang Water-Intake Expansion Power Cable Tunnel" data-ko="포항 취수시설 확장 전력구">Pohang Water-Intake Expansion Power Cable Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in a underground power cable tunnel. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system." data-ko="지하 전력구에 화재 감시 설비를 구축한 현장입니다. 발화 전 발열 단계부터 감지해 화재를 예방하고, 상위 통합 감시 시스템과 연동됩니다.">This site installs fire-monitoring equipment in a underground power cable tunnel. It detects the pre-ignition heating stage to prevent fire and links with the upper-level integrated monitoring system.</p></div>
+</div>
+<div class="hcard" data-key="pu5" id="pu-5">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/39-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-5')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-5')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="Andong Facilities Corp." data-ko="안동시시설공단">Andong Facilities Corp.</span>
+<div class="hcard-title" data-en="Andong Sewage Treatment Plant Utility Tunnel" data-ko="안동시 하수처리장 공동구">Andong Sewage Treatment Plant Utility Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition." data-ko="전력·통신 등 주요 설비가 함께 수용된 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 광섬유 분포온도센싱(DTS)으로 케이블 전 구간의 온도를 연속 감시해 발화 이전의 이상 고온을 조기에 포착합니다.">This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Fiber-optic Distributed Temperature Sensing (DTS) continuously monitors temperature along the entire cable run, catching abnormal heat before ignition.</p></div>
+</div>
+<div class="hcard" data-key="pu6" id="pu-6">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/40-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-6')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-6')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="Gumi Facilities Corp." data-ko="구미시시설공단">Gumi Facilities Corp.</span>
+<div class="hcard-title" data-en="Gumi Facilities Corp. Utility Tunnel" data-ko="구미시 시설공단 공동구">Gumi Facilities Corp. Utility Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system." data-ko="전력·통신 등 주요 설비가 함께 수용된 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 케이블이 밀집된 지하 구조물 특성상 화재 확산이 빠른 만큼, 실시간 온도 감시로 조기 경보 체계를 마련했습니다.">This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Because fire spreads quickly in cable-dense underground structures, real-time temperature monitoring provides an early-warning system.</p></div>
+</div>
+<div class="hcard" data-key="pu7" id="pu-7">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/41-image.webp"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-7')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-7')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="Daegu Nat'l Univ. of Education" data-ko="대구교육대학교">Daegu Nat'l Univ. of Education</span>
+<div class="hcard-title" data-en="Daegu National University of Education Utility Tunnel" data-ko="대구교육대학교 공동구">Daegu National University of Education Utility Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments." data-ko="전력·통신 등 주요 설비가 함께 수용된 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 전자기 간섭에 영향받지 않는 광센서 방식으로 지하·습윤 환경에서도 안정적으로 상시 감시합니다.">This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. An EMI-immune optical-sensor method delivers stable, round-the-clock monitoring even in underground, humid environments.</p></div>
+</div>
+<div class="hcard" data-key="pu8" id="pu-8">
+<div class="hcard-img-wrap">
+<img alt="" class="ref-img" src="images/42-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('pu-8')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('pu-8')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="hcard-body">
+<span class="ref-client-tag" data-en="Busan Facilities Corp." data-ko="부산시설공단">Busan Facilities Corp.</span>
+<div class="hcard-title" data-en="Busan Environmental Service Center Utility Tunnel" data-ko="부산 생활환경 사업소 공동구">Busan Environmental Service Center Utility Tunnel</div>
+<p class="hcard-desc" contenteditable="true" data-en="This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system." data-ko="전력·통신 등 주요 설비가 함께 수용된 지하 공동구에 화재 감시 설비를 구축한 현장입니다. 링 네트워크 기반 광케이블 통신으로 장거리 구간을 단일 시스템에서 통합 감시합니다.">This site installs fire-monitoring equipment in an underground utility tunnel that houses power, telecom and other key infrastructure. Ring-network fiber-optic communication integrates monitoring of long-distance sections within a single system.</p>
+</div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#UtilityTunnel" data-ko="#전력구">#UtilityTunnel</span><span class="sec-kw" contenteditable="true" data-en="#FireAlarmControlPanel" data-ko="#화재수신기">#FireAlarmControlPanel</span><span class="sec-kw" contenteditable="true" data-en="#620UnitsDelivered" data-ko="#620대납품">#620UnitsDelivered</span><span class="sec-kw" contenteditable="true">#KEPCO</span></div></section>
+<div class="div-line"></div>
+<!-- ═══ 04 주요 고객사 ═══ -->
+<section class="pg alt" id="clients">
+<div class="shdr fu vis">
+<div class="shdr-left">
+<span class="stag">04 · Our Clients</span>
+<h2 class="stitle" data-en='Key &lt;span class="hl"&gt;Clients&lt;/span&gt;' data-ko='주요 &lt;span class="hl"&gt;고객사&lt;/span&gt;'>Key <span class="hl">Clients</span></h2>
+</div>
+<div class="shdr-hr"></div>
+</div>
+<div class="client-logo-grid fu vis">
+<div class="cli-logo-card" data-key="cl1" id="cl-1">
+<div class="cli-logo-img-wrap">
+<img alt="한국전력공사" class="ref-img" src="images/44-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-1')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-1')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="Korea Electric Power Corp. (KEPCO)" data-ko="한국전력공사">Korea Electric Power Corp. (KEPCO)</div>
+</div>
+<div class="cli-logo-card" data-key="cl2" id="cl-2">
+<div class="cli-logo-img-wrap">
+<img alt="한국토지주택공사" class="ref-img" src="images/45-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-2')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-2')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="Korea Land &amp; Housing Corp. (LH)" data-ko="한국토지주택공사 LH">Korea Land &amp; Housing Corp. (LH)</div>
+</div>
+<div class="cli-logo-card" data-key="cl3" id="cl-3">
+<div class="cli-logo-img-wrap">
+<img alt="서울교통공사" class="ref-img" src="images/46-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-3')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-3')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="Seoul Metro" data-ko="서울교통공사">Seoul Metro</div>
+</div>
+<div class="cli-logo-card" data-key="cl4" id="cl-4">
+<div class="cli-logo-img-wrap">
+<img alt="KT" class="ref-img" src="images/47-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-4')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-4')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="KT" data-ko="KT">KT</div>
+</div>
+<div class="cli-logo-card" data-key="cl5" id="cl-5">
+<div class="cli-logo-img-wrap">
+<img alt="LG전자" class="ref-img" src="images/48-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-5')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-5')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="LG Electronics" data-ko="LG전자">LG Electronics</div>
+</div>
+<div class="cli-logo-card" data-key="cl6" id="cl-6">
+<div class="cli-logo-img-wrap">
+<img alt="LG CNS" class="ref-img" src="images/49-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-6')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-6')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="LG CNS" data-ko="LG CNS">LG CNS</div>
+</div>
+<div class="cli-logo-card" data-key="cl7" id="cl-7">
+<div class="cli-logo-img-wrap">
+<img alt="삼보컴퓨터" class="ref-img" src="images/50-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-7')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-7')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="Sambo Computer" data-ko="삼보컴퓨터">Sambo Computer</div>
+</div>
+<div class="cli-logo-card" data-key="cl8" id="cl-8">
+<div class="cli-logo-img-wrap">
+<img alt="타지키스탄 전력청" class="ref-img" src="images/51-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-8')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-8')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="Tajikistan Power Authority" data-ko="타지키스탄 전력청">Tajikistan Power Authority</div>
+</div>
+<div class="cli-logo-card" data-key="cl9" id="cl-9">
+<div class="cli-logo-img-wrap">
+<img alt="POSCO" class="ref-img" src="images/52-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-9')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-9')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="POSCO" data-ko="POSCO">POSCO</div>
+</div>
+<div class="cli-logo-card" data-key="cl10" id="cl-10">
+<div class="cli-logo-img-wrap">
+<img alt="한국도로공사" class="ref-img" src="images/53-image.jpg"/>
+<div class="ref-img-ph"><span>+</span></div>
+<div class="ref-overlay"><span>📷</span></div>
+<div class="ref-ctrls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();pmReplace('cl-10')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();pmDelete('cl-10')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="cli-logo-name" data-en="Korea Expressway Corp." data-ko="한국도로공사">Korea Expressway Corp.</div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#KEPCO" data-ko="#한국전력">#KEPCO</span><span class="sec-kw" contenteditable="true" data-en="#LH" data-ko="#LH공사">#LH</span><span class="sec-kw" contenteditable="true" data-en="#SeoulMetro" data-ko="#서울교통공사">#SeoulMetro</span><span class="sec-kw" contenteditable="true" data-en="#Tajikistan" data-ko="#타지키스탄">#Tajikistan</span></div></section>
+<div class="div-line"></div>
+<section class="cta-wrap" id="contact">
+<div class="cta-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch">
+<div>
+<div class="cta-lb">// Contact Us</div>
+<h2 class="cta-hd" data-en="Product &amp; &lt;span&gt;Quotation Inquiries&lt;/span&gt;" data-ko="제품 및 &lt;span&gt;견적 문의&lt;/span&gt;">Product &amp; <span>Quotation Inquiries</span></h2>
+<div class="cta-info">
+<div class="cta-row"><div class="cta-ri">📍</div><div contenteditable="true" data-en="178 Digital-ro, Geumcheon-gu, Seoul (08513)&lt;br&gt;Gasan Public Bldg. B, 11F, Unit 1116" data-ko="(08513) 서울시 금천구 디지털로 178&lt;br/&gt;가산퍼블릭 B동 11층 1116호">178 Digital-ro, Geumcheon-gu, Seoul (08513)<br/>Gasan Public Bldg. B, 11F, Unit 1116</div></div>
+<div class="cta-row"><div class="cta-ri">📞</div><div contenteditable="true">Tel: 02-6095-0520  |  Fax: 02-6095-0522</div></div>
+<div class="cta-row"><div class="cta-ri">✉️</div><div contenteditable="true">Email: info@uno-system.com</div></div>
+<div class="cta-row"><div class="cta-ri">🌐</div><div contenteditable="true">Website: <a href="https://www.uno-system.com" style="color:var(--cyan)">https://www.uno-system.com</a></div></div>
+<div class="cta-row"><div class="cta-ri">🕐</div><div contenteditable="true" data-en="Mon–Fri 09:00–18:00 (excl. public holidays)" data-ko="월–금 09:00–18:00 (공휴일 제외)">Mon–Fri 09:00–18:00 (excl. public holidays)</div></div>
+</div>
+</div>
+<div class="img-box" data-key="cta-img" id="box-cta-img" style="cursor:pointer;aspect-ratio:16/9">
+<div class="box-media-wrap">
+<img alt="문의 이미지" class="box-img" src="" style="object-fit:contain"/>
+<div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">Click to<br/>insert image/video</div></div>
+</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();boxReplace('box-cta-img')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();boxDelete('box-cta-img')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</section>
+<footer id="footer">
+<div class="foot-inner">
+<!-- 왼쪽: 이미지/영상 박스 (페이지 너비의 25%) -->
+<div class="foot-img-col" data-key="foot-img" id="foot-img-col" title="클릭하여 이미지/영상 삽입">
+<img alt="푸터 이미지" class="foot-col-img active" id="foot-col-img" src=""/>
+<div class="foot-img-ph hidden" id="foot-img-ph">
+<div class="fi-plus">+</div>
+<div data-en="Click to&lt;br/&gt;insert an image" data-ko="클릭하여&lt;br/&gt;이미지 삽입" style="font-size:var(--font-small)">Click to<br/>insert an image</div>
+</div>
+<div class="foot-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="foot-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();footImgReplace()">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();footImgDelete()">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" id="foot-img-input" style="display:none" type="file"/>
+</div>
+<!-- 오른쪽: 로고 + 주소 + 이메일 문의 -->
+<div class="foot-right-col">
+<div class="foot-info-area">
+<div class="foot-logo-row">
+<div class="foot-logo-img-wrap" id="foot-logo-wrap" title="클릭하여 로고 교체">
+<img alt="UNO SYSTEM 로고" class="foot-logo-img" id="foot-logo-img" src=""/>
+<div class="foot-logo-hint" data-en="📷&lt;br/&gt;Replace" data-ko="📷&lt;br/&gt;교체">📷<br/>Replace</div>
+</div>
+<div class="foot-logo-text">
+<span class="foot-logo-kr" contenteditable="true" data-en="UNO SYSTEM" data-ko="유노시스템㈜">UNO SYSTEM</span>
+<span class="foot-logo-en" data-en="Co., Ltd." data-ko="UNO SYSTEM">Co., Ltd.</span>
+</div>
+</div>
+<div class="foot-addr" data-en="178 Digital-ro, Geumcheon-gu, Seoul (08513)&lt;br&gt;Gasan Public Bldg. B, 11F, Unit 1116" data-ko="(08513) 서울시 금천구 디지털로 178&lt;br/&gt;가산퍼블릭 B동 11층 1116호">178 Digital-ro, Geumcheon-gu, Seoul (08513)<br/>Gasan Public Bldg. B, 11F, Unit 1116</div>
+<div class="foot-contact">Tel: (02) 6095-0520  |  Fax: (02) 6095-0522</div>
+<div class="foot-contact" contenteditable="true">Email: info@uno-system.com</div>
+<div class="foot-contact">Website: <a href="https://www.uno-system.com" style="color:var(--cyan);text-decoration:none">https://www.uno-system.com</a></div>
+<div class="foot-copy">© 2026 UNO SYSTEM CO., LTD. All rights reserved.</div>
+</div>
+<a class="foot-inquiry-box" href="mailto:info@uno-system.com?subject=유노시스템㈜%20문의&amp;body=안녕하세요%2C%20유노시스템㈜%20문의드립니다." title="이메일 문의하기">
+<div class="foot-inquiry-icon">✉️</div>
+<div class="foot-inquiry-label" data-en="Email Inquiry" data-ko="이메일 문의하기">Email Inquiry</div>
+<div aria-hidden="true" style="font-size:11px;color:var(--muted);opacity:0;height:0;overflow:hidden;user-select:none">info@uno-system.com</div>
+</a>
+</div>
+</div>
+</footer>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   UNO SYSTEM 이미지 시스템 — 영구 저장 확정판 v4
+   
+   대원칙: 이미지 선택 → base64 → img.src 직접 내장 (HTML에 저장)
+   CSS:    src^="data:image" 선택자로 JS 없이도 즉시 표시
+   JS:     show() 함수로 active 클래스 + display:block 동시 적용
+   저장:   [다운로드] → 현재 HTML(base64 포함) 파일로 저장 → 영구
+═══════════════════════════════════════════════════════════════ */
+
+/* ── IndexedDB 보조 ── */
+var UNO = (function(){
+  var DB_NAME='uno3db', STORE='imgs', NS='uno3_';
+  var _db=null;
+  function openDB(cb){
+    if(_db){ cb(_db); return; }
+    var req=indexedDB.open(DB_NAME,1);
+    req.onupgradeneeded=function(e){ e.target.result.createObjectStore(STORE); };
+    req.onsuccess=function(e){ _db=e.target.result; cb(_db); };
+    req.onerror=function(){ cb(null); };
+  }
+  function save(k,v){
+    openDB(function(db){
+      if(!db) return;
+      var tx=db.transaction(STORE,'readwrite');
+      tx.objectStore(STORE).put(v,NS+k);
+    });
+  }
+  function load(k,cb){
+    openDB(function(db){
+      if(!db){ cb(null); return; }
+      var tx=db.transaction(STORE,'readonly');
+      var req=tx.objectStore(STORE).get(NS+k);
+      req.onsuccess=function(){ cb(req.result||null); };
+      req.onerror=function(){ cb(null); };
+    });
+  }
+  function del(k){
+    openDB(function(db){
+      if(!db) return;
+      var tx=db.transaction(STORE,'readwrite');
+      tx.objectStore(STORE).delete(NS+k);
+    });
+  }
+  return { save:save, load:load, del:del };
+})();
+
+/* ── base64 변환 ── */
+function toB64(file, cb){
+  var fr = new FileReader();
+  fr.onload = function(e){ cb(e.target.result); };
+  fr.onerror = function(){};
+  fr.readAsDataURL(file);
+}
+
+/* ── 파일 피커 ── */
+var _picking = new WeakSet();
+function pickFile(inp){
+  if(_picking.has(inp)) return;
+  _picking.add(inp); inp.value=''; inp.click();
+  setTimeout(function(){ _picking.delete(inp); }, 2000);
+}
+
+/* ── src 유효성 ── */
+function validSrc(src){
+  return !!(src && (src.indexOf('data:image')===0 || src.indexOf('data:video')===0));
+}
+
+/* ── 이미지 표시 ── */
+function showImage(img, phs, url){
+  if(!img) return;
+  img.src = url;
+  /* display만 변경 — object-fit은 CSS가 결정 */
+  img.style.setProperty('display','block','important');
+  img.style.setProperty('opacity','1','important');
+  img.style.setProperty('visibility','visible','important');
+  img.classList.add('active');
+  if(phs) phs.forEach(function(ph){
+    if(ph){ ph.style.display='none'; ph.classList.add('hidden'); }
+  });
+  /* 부모 높이 보장 */
+  var par = img.parentElement;
+  if(par && par.offsetHeight < 10){
+    par.style.minHeight = '200px';
+    par.style.position = 'relative';
+  }
+}
+
+/* ── 이미지 숨기기 ── */
+function hideImage(img, phs){
+  if(!img) return;
+  img.removeAttribute('src');
+  img.style.display='none';
+  img.classList.remove('active');
+  if(phs) phs.forEach(function(ph){
+    if(ph){ ph.style.display=''; ph.classList.remove('hidden'); }
+  });
+}
+
+/* ── 박스 초기화 공통 함수 ── */
+function initBox(box, imgSel, phSels, KEY, accept){
+  if(box._u4) return; box._u4 = true;
+  var img = box.querySelector(imgSel);
+  var phs = (phSels||[]).map(function(s){ return box.querySelector(s); }).filter(Boolean);
+
+  /* input 생성 */
+  var inp = box.querySelector('input[type="file"]');
+  if(!inp){
+    inp = document.createElement('input');
+    inp.type='file'; inp.accept=accept||'image/*,video/*'; inp.style.display='none';
+    box.appendChild(inp);
+  }
+
+  /* 복원: ① HTML src(base64) ② IndexedDB */
+  if(img && validSrc(img.src)){
+    showImage(img, phs, img.src);
+    UNO.save(KEY, img.src);
+  } else {
+    UNO.load(KEY, function(saved){ if(saved && img) showImage(img, phs, saved); });
+  }
+
+  /* 파일 선택 */
+  inp.addEventListener('change', function(){
+    var f = this.files[0]; if(!f) return;
+    toB64(f, function(url){ showImage(img, phs, url); UNO.save(KEY, url); });
+  });
+
+  /* 클릭 */
+  box.style.cursor='pointer';
+  box.addEventListener('click', function(e){
+    if(e.target.closest('button,input')) return;
+    e.stopPropagation(); pickFile(inp);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   각 박스 타입별 초기화
+══════════════════════════════════════════════ */
+function initAllBoxes(){
+
+  /* 1. Hero */
+  document.querySelectorAll('.iaea-hero-wrap').forEach(function(wrap){
+    if(wrap._u4) return; wrap._u4=true;
+    var img   = wrap.querySelector('img');
+    var empty = wrap.querySelector('.hero-empty, #hero-empty');
+    var KEY   = wrap.dataset.key || wrap.id || 'hero';
+    var inp   = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    document.body.appendChild(inp);
+    if(img && validSrc(img.src)){
+      img.style.setProperty('display','block','important');
+      if(empty) empty.classList.add('hidden');
+      var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='none';
+      UNO.save(KEY, img.src);
+    } else {
+      UNO.load(KEY, function(s){
+        if(s&&img){ img.src=s; img.style.setProperty('display','block','important'); if(empty) empty.classList.add('hidden');
+          var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='none';
+        }
+      });
+    }
+    inp.addEventListener('change', function(){
+      var f=this.files[0]; if(!f) return;
+      toB64(f, function(url){
+        if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+        if(empty) empty.classList.add('hidden');
+        var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='none';
+        UNO.save(KEY, url);
+      });
+    });
+    wrap.style.cursor='pointer';
+    wrap.addEventListener('click', function(e){
+      if(e.target.closest('button,input')) return; e.stopPropagation(); pickFile(inp);
+    });
+    window.heroReplace = function(){ pickFile(inp); };
+    window.heroDelete  = function(){
+      if(!confirm('Hero 이미지 삭제?')) return;
+      if(img){ img.removeAttribute('src'); img.style.display='none'; }
+      if(empty) empty.classList.remove('hidden');
+      var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='';
+      UNO.del(KEY);
+    };
+  });
+
+  /* 2. .img-box */
+  document.querySelectorAll('.img-box').forEach(function(box){
+    initBox(box, '.box-img', ['.box-placeholder'], box.dataset.key||box.id, 'image/*,video/*');
+  });
+
+  /* 3. .biz-img-box */
+  document.querySelectorAll('.biz-img-box').forEach(function(bib){
+    initBox(bib, '.biz-box-img', ['.biz-img-ph'], bib.dataset.key||bib.id, 'image/*,video/*');
+  });
+
+  /* 4. .hist-img-box */
+  document.querySelectorAll('.hist-img-box').forEach(function(box){
+    initBox(box, '.hist-img', ['.hist-img-ph'], box.dataset.key||box.id, 'image/*,video/*');
+  });
+
+  /* 5. .award-img-box */
+  document.querySelectorAll('.award-img-box').forEach(function(awb){
+    initBox(awb, '.aw-img', ['.award-img-ph'], awb.dataset.key||awb.id, 'image/*');
+  });
+
+  /* 6. Footer 이미지 */
+  (function(){
+    var col = document.getElementById('foot-img-col'); if(!col) return;
+    var img = document.getElementById('foot-col-img');
+    var ph  = col.querySelector('.foot-img-ph');
+    var KEY = 'foot-img';
+    var inp = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    document.body.appendChild(inp);
+    if(img && validSrc(img.src)){
+      img.style.setProperty('display','block','important');
+      if(ph) ph.classList.add('hidden');
+      UNO.save(KEY, img.src);
+    } else {
+      UNO.load(KEY, function(s){
+        if(s&&img){ img.src=s; img.style.setProperty('display','block','important'); if(ph) ph.classList.add('hidden'); }
+      });
+    }
+    inp.addEventListener('change', function(){
+      var f=this.files[0]; if(!f) return;
+      toB64(f, function(url){
+        if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+        if(ph) ph.classList.add('hidden');
+        UNO.save(KEY, url);
+      });
+    });
+    col.style.cursor='pointer';
+    col.addEventListener('click', function(e){
+      if(e.target.closest('button,input')) return; e.stopPropagation(); pickFile(inp);
+    });
+  })();
+
+  /* 7. 로고 */
+  (function(){
+    var KEY='logo';
+    function applyLogo(url){
+      ['logo-img','foot-logo-img'].forEach(function(id){
+        var im=document.getElementById(id); if(im) im.src=url;
+      });
+    }
+    var fl=document.getElementById('logo-img');
+    if(fl && validSrc(fl.src)) UNO.save(KEY, fl.src);
+    else { UNO.load(KEY, function(s){ if(s) applyLogo(s); }); }
+    document.querySelectorAll('.logo-img-wrap, #foot-logo-wrap').forEach(function(wrap){
+      if(wrap._logoinit) return; wrap._logoinit=true;
+      var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.style.display='none';
+      document.body.appendChild(inp);
+      inp.addEventListener('change', function(){
+        var f=this.files[0]; if(!f) return;
+        toB64(f, function(url){ applyLogo(url); UNO.save(KEY,url); });
+      });
+      wrap.addEventListener('click', function(e){
+        if(e.target.closest('button')) return; e.stopPropagation(); pickFile(inp);
+      });
+    });
+  })();
+
+} /* end initAllBoxes */
+
+/* ══════════ 실행 타이밍: DOM 준비 후 즉시 ══════════ */
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initAllBoxes);
+} else {
+  initAllBoxes();
+}
+
+/* ══════════ 전역 Replace/Delete 함수 ══════════ */
+window.boxReplace = function(id){
+  var box=document.getElementById(id); if(!box) return;
+  if(!box._u4) initBox(box,'.box-img',['.box-placeholder'],box.dataset.key||id,'image/*,video/*');
+  pickFile(box.querySelector('input[type="file"]'));
+};
+window.boxDelete = function(id){
+  var box=document.getElementById(id); if(!box) return;
+  if(!confirm('"'+(box.dataset.label||id)+'" 삭제?')) return;
+  hideImage(box.querySelector('.box-img'),[box.querySelector('.box-placeholder')]);
+  UNO.del(box.dataset.key||id);
+};
+window.bizReplace = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!b._u4) initBox(b,'.biz-box-img',['.biz-img-ph'],b.dataset.key||id,'image/*,video/*');
+  pickFile(b.querySelector('input[type="file"]'));
+};
+window.bizDelete = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('"'+(b.dataset.label||id)+'" 삭제?')) return;
+  hideImage(b.querySelector('.biz-box-img'),[b.querySelector('.biz-img-ph')]);
+  UNO.del(b.dataset.key||id);
+};
+window.histReplace = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!b._u4) initBox(b,'.hist-img',['.hist-img-ph'],b.dataset.key||id,'image/*,video/*');
+  pickFile(b.querySelector('input[type="file"]'));
+};
+window.histDelete = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('삭제?')) return;
+  hideImage(b.querySelector('.hist-img'),[b.querySelector('.hist-img-ph')]);
+  UNO.del(b.dataset.key||id);
+};
+window.awReplace = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!b._u4) initBox(b,'.aw-img',['.award-img-ph'],b.dataset.key||id,'image/*');
+  pickFile(b.querySelector('input[type="file"]'));
+};
+window.awDelete = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('삭제?')) return;
+  hideImage(b.querySelector('.aw-img'),[b.querySelector('.award-img-ph')]);
+  UNO.del(b.dataset.key||id);
+};
+
+/* ══════════ 이탈 전 재저장 ══════════ */
+window.addEventListener('beforeunload', function(){
+  [
+    ['.img-box','.box-img'],
+    ['.biz-img-box','.biz-box-img'],
+    ['.hist-img-box','.hist-img'],
+    ['.award-img-box','.aw-img']
+  ].forEach(function(p){
+    document.querySelectorAll(p[0]).forEach(function(box){
+      var img=box.querySelector(p[1]), KEY=box.dataset.key||box.id;
+      if(img && validSrc(img.src)) UNO.save(KEY, img.src);
+    });
+  });
+  var fci=document.getElementById('foot-col-img');
+  if(fci && validSrc(fci.src)) UNO.save('foot-img', fci.src);
+});
+
+/* ══════════ 다운로드 ══════════ */
+function downloadPage(){
+  try{
+    /* 저장 전: 현재 모든 이미지 src를 localStorage에 재저장 */
+    [
+      ['.img-box','.box-img'],
+      ['.biz-img-box','.biz-box-img'],
+      ['.hist-img-box','.hist-img'],
+      ['.award-img-box','.aw-img']
+    ].forEach(function(p){
+      document.querySelectorAll(p[0]).forEach(function(box){
+        var img=box.querySelector(p[1]), KEY=box.dataset.key||box.id;
+        if(img && validSrc(img.src)) UNO.save(KEY, img.src);
+      });
+    });
+    var fci=document.getElementById('foot-col-img');
+    if(fci && validSrc(fci.src)) UNO.save('foot-img', fci.src);
+
+    var clone = document.documentElement.cloneNode(true);
+
+    /* ① id 기반 */
+    clone.querySelectorAll('img[id]').forEach(function(ci){
+      var o=document.getElementById(ci.id);
+      if(o && validSrc(o.src)) ci.src=o.src;
+    });
+
+    /* ② data-key 기반 (가장 정확) */
+    document.querySelectorAll('[data-key]').forEach(function(box){
+      var img=box.querySelector('img');
+      if(img && validSrc(img.src)){
+        var cBox=clone.querySelector('[data-key="'+box.dataset.key+'"]');
+        if(cBox){ var ci=cBox.querySelector('img'); if(ci) ci.src=img.src; }
+      }
+    });
+
+    /* ③ 클래스 기반 순서 동기화 */
+    ['.box-img','.biz-box-img','.aw-img','.hist-img'].forEach(function(sel){
+      var ol=document.querySelectorAll(sel), cl=clone.querySelectorAll(sel);
+      ol.forEach(function(img,i){ if(validSrc(img.src)&&cl[i]) cl[i].src=img.src; });
+    });
+
+    /* ④ hero */
+    document.querySelectorAll('.iaea-hero-wrap img').forEach(function(img,i){
+      if(!validSrc(img.src)) return;
+      var cl=clone.querySelectorAll('.iaea-hero-wrap img');
+      if(cl[i]) cl[i].src=img.src;
+    });
+
+    /* ⑤ foot-col-img */
+    if(fci && validSrc(fci.src)){
+      var cfi=clone.getElementById('foot-col-img'); if(cfi) cfi.src=fci.src;
+    }
+
+    /* ⑥ logo */
+    var li=document.getElementById('logo-img');
+    if(li && validSrc(li.src)){
+      var cli=clone.getElementById('logo-img'); if(cli) cli.src=li.src;
+    }
+
+    /* 저장 */
+    var html='<!DOCTYPE html>\n'+clone.outerHTML;
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download='projects_en.html';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    },300);
+  } catch(e){ alert('오류: '+e.message); }
+}
+
+/* ── Light/Dark 토글 ── */
+(function(){
+  var saved = localStorage.getItem('uno_theme') || 'dark';
+  applyTheme(saved);
+})();
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  var icon = document.getElementById('th-icon');
+  var label = document.getElementById('th-label');
+  if (icon) icon.textContent = t === 'light' ? '☀️' : '🌙';
+  if (label) label.textContent = t === 'light' ? 'Light' : 'Dark';
+  localStorage.setItem('uno_theme', t);
+}
+function toggleTheme() {
+  var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+</script>
+<script>
+/* ═══ PRODUCT IMAGE UPLOAD BOXES (prod-upbox) — IndexedDB 기반 ═══ */
+(function(){
+'use strict';
+var NS = 'pbox_';
+
+/* UNO IndexedDB 시스템 활용 */
+function pboxSave(key,val){ UNO.save(NS+key, val); }
+function pboxLoad(key,cb){ UNO.load(NS+key, cb); }
+function pboxDel(key){ UNO.del(NS+key); }
+
+function pboxShow(box,url){
+  var img=box.querySelector('.pbox-img');
+  if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+  box.classList.add('has-img');
+  var ph=box.querySelector('.pbox-ph'); if(ph) ph.style.display='none';
+}
+function pboxClear(box){
+  var img=box.querySelector('.pbox-img');
+  if(img){ img.removeAttribute('src'); img.style.display='none'; }
+  box.classList.remove('has-img');
+  var ph=box.querySelector('.pbox-ph'); if(ph) ph.style.display='';
+}
+
+var _lock=false;
+function pboxPick(box){
+  if(_lock) return; _lock=true;
+  var inp=document.createElement('input');
+  inp.type='file'; inp.accept='image/*,video/*';
+  inp.onchange=function(){
+    var f=this.files[0]; if(!f){_lock=false;return;}
+    var fr=new FileReader();
+    fr.onload=function(e){
+      pboxShow(box,e.target.result);
+      pboxSave(box.dataset.key||box.id, e.target.result);
+      _lock=false;
+    };
+    fr.readAsDataURL(f);
+  };
+  inp.addEventListener('cancel',function(){_lock=false;});
+  inp.click();
+  setTimeout(function(){_lock=false;},3000);
+}
+
+document.querySelectorAll('.prod-upbox').forEach(function(box){
+  if(box._pb) return; box._pb=true;
+  var key=box.dataset.key||box.id;
+  var existImg=box.querySelector('.pbox-img');
+  if(existImg && validSrc(existImg.src)){
+    box.classList.add('has-img');
+    var ph=box.querySelector('.pbox-ph'); if(ph) ph.style.display='none';
+    pboxSave(key, existImg.src);
+  } else {
+    pboxLoad(key, function(saved){ if(saved) pboxShow(box, saved); });
+  }
+  box.addEventListener('click',function(e){
+    if(e.target.closest('button')) return;
+    e.preventDefault(); e.stopPropagation();
+    pboxPick(box);
+  });
+});
+
+window.pboxReplace=function(id){ var b=document.getElementById(id); if(b) pboxPick(b); };
+window.pboxDelete=function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('"'+(b.dataset.label||id)+'" 이미지를 삭제하시겠습니까?')) return;
+  pboxClear(b); pboxDel(b.dataset.key||id);
+};
+
+/* downloadPage 확장: pbox 이미지도 포함 */
+var _origDL=window.downloadPage;
+window.downloadPage=function(){
+  var pending=[];
+  document.querySelectorAll('.prod-upbox').forEach(function(box){
+    var img=box.querySelector('.pbox-img');
+    var key=box.dataset.key||box.id;
+    if(img && !validSrc(img.src)){
+      pending.push({box:box,img:img,key:key});
+    }
+  });
+  if(pending.length===0){ if(_origDL) _origDL(); return; }
+  var done=0;
+  pending.forEach(function(p){
+    pboxLoad(p.key, function(s){
+      if(s){ p.img.src=s; p.img.style.setProperty('display','block','important'); p.box.classList.add('has-img'); }
+      done++;
+      if(done===pending.length && _origDL) _origDL();
+    });
+  });
+};
+})();
+
+/* ═══ 프로젝트 이미지 박스 (ref-img / pt-img-box / hcard / cli-logo) ═══ */
+(function(){
+  'use strict';
+  var NS='proj_';
+  function save(k,v){UNO.save(NS+k,v);}
+  function load(k,cb){UNO.load(NS+k,cb);}
+  function del(k){UNO.del(NS+k);}
+
+  function showImg(box, url){
+    var img=box.querySelector('.ref-img');
+    if(img){img.src=url;img.style.setProperty('display','block','important');}
+    var ph=box.querySelector('.ref-img-ph');
+    if(ph) ph.style.display='none';
+  }
+  function clearImg(box){
+    var img=box.querySelector('.ref-img');
+    if(img){img.removeAttribute('src');img.style.display='';}
+    var ph=box.querySelector('.ref-img-ph');
+    if(ph) ph.style.display='';
+  }
+
+  var _lock=false;
+  function pick(box){
+    if(_lock)return;_lock=true;
+    var inp=box.querySelector('input[type="file"]');
+    if(!inp){inp=document.createElement('input');inp.type='file';inp.accept='image/*,video/*';inp.style.display='none';box.appendChild(inp);}
+    inp.onchange=function(){
+      var f=this.files[0];if(!f){_lock=false;return;}
+      var fr=new FileReader();
+      fr.onload=function(e){
+        showImg(box,e.target.result);
+        save(box.dataset.key||box.id,e.target.result);
+        _lock=false;
+      };
+      fr.readAsDataURL(f);
+    };
+    inp.click();
+    setTimeout(function(){_lock=false;},3000);
+  }
+
+  /* 모든 박스 초기화 */
+  var sels=['.ref-card[data-key]','.pt-img-box[data-key]','.hcard[data-key]','.cli-logo-card[data-key]'];
+  sels.forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(box){
+      if(box._pj) return; box._pj=true;
+      var key=box.dataset.key||box.id;
+      var img=box.querySelector('.ref-img');
+      /* 복원: src 직접 내장 우선, 없으면 IndexedDB */
+      if(img && img.src && img.src.indexOf('data:')===0){
+        save(key,img.src);
+      } else {
+        load(key,function(saved){if(saved&&img)showImg(box,saved);});
+      }
+      /* 클릭 핸들러 */
+      box.addEventListener('click',function(e){
+        if(e.target.closest('button,input'))return;
+        e.preventDefault();e.stopPropagation();
+        pick(box);
+      });
+    });
+  });
+
+  window.pmReplace=function(id){
+    var b=document.getElementById(id);if(b)pick(b);
+  };
+  window.pmDelete=function(id){
+    var b=document.getElementById(id);if(!b)return;
+    if(!confirm('이미지를 삭제하시겠습니까?'))return;
+    clearImg(b);del(b.dataset.key||id);
+  };
+
+  /* 스크롤 fade-in */
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis');});
+  },{threshold:0.1});
+  document.querySelectorAll('.fu').forEach(function(el){obs.observe(el);});
+})();
+
+</script>
+<!-- ══ UNO SYSTEM GitHub 이미지/영상 로더 (soulthread88/unosystem) — GitHub 우선, 실패 시 기존 유지 ══ -->
+<script>
+function applyLang(l){
+  document.documentElement.setAttribute('data-lang', l);
+  document.querySelectorAll('[data-ko]').forEach(function(e){
+    var v=e.getAttribute('data-'+l); if(v!=null) e.innerHTML=v;
+  });
+  document.querySelectorAll('#lang-toggle .lang-opt').forEach(function(o){
+    o.classList.toggle('active', o.getAttribute('data-l')===l);
+  });
+  try{localStorage.setItem('uno_lang', l);}catch(e){}
+}
+function toggleLang(){
+  var c=document.documentElement.getAttribute('data-lang')||'ko';
+  applyLang(c==='ko'?'en':'ko');
+}
+(function(){var s='ko';try{s=localStorage.getItem('uno_lang')||'ko';}catch(e){}applyLang(s);})();
+</script>
+<script>
+function toggleNav(){var n=document.getElementById('mainNav');if(n)n.classList.toggle('open');}
+document.addEventListener('click',function(e){var a=e.target.closest('.main-nav a');if(a){var n=document.getElementById('mainNav');if(n)n.classList.remove('open');}});
+</script><script>
+/* ══ 대원칙 3 · KEYWORDS(.sec-kw) 클릭 → Google 검색(새 탭) ══ */
+(function(){
+  function kwText(kw){ return (kw.textContent||'').replace(/\s+/g,' ').trim(); }
+  function wire(){
+    document.querySelectorAll('.sec-kw').forEach(function(kw){
+      if(kw._kwsearch) return; kw._kwsearch=true;
+      kw.style.cursor='pointer';
+      if(!kw.title) kw.title='클릭하여 Google 검색';
+      kw.addEventListener('click',function(e){
+        var s=kwText(kw); if(!s) return;
+        e.preventDefault(); e.stopPropagation();
+        window.open('https://www.google.com/search?q='+encodeURIComponent(s),'_blank');
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',wire);
+  else wire();
+})();
+</script><script>
+/* ══ 대원칙 2-보강 · 우측 이미지 박스 상단을 좌측 제목 높이에 정렬 ══ */
+(function(){
+  if(window.alignImgBoxes) return;
+  function pairs(){
+    var out=[];
+    var hero=document.querySelector('.product-hero');
+    if(hero){ var ht=hero.querySelector('.product-name'), hc=hero.children[1]; if(ht&&hc) out.push([hc,ht]); }
+    document.querySelectorAll('.syscfg-row').forEach(function(r){
+      var t=r.querySelector('.syscfg-name'), i=r.querySelector('.syscfg-img'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.comp-row').forEach(function(r){
+      var t=r.querySelector('.feature-name'), i=r.querySelector('.img-box'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.feature-card').forEach(function(fc){
+      var row=fc.parentElement; if(!row||row.classList.contains('comp-row')) return;
+      var i=null;
+      for(var k=0;k<row.children.length;k++){ if(row.children[k].classList.contains('img-box')) i=row.children[k]; }
+      var t=fc.querySelector('.feature-name');
+      if(i&&t) out.push([i,t]);
+    });
+    return out;
+  }
+  function alignImgBoxes(){
+    var list=pairs(), mobile=window.innerWidth<=900;
+    list.forEach(function(p){ p[0].style.marginTop='0px'; p[0].classList.add('img-align-shift'); });
+    if(mobile) return;
+    list.forEach(function(p){
+      var d=p[1].getBoundingClientRect().top - p[0].getBoundingClientRect().top;
+      if(d>0) p[0].style.marginTop=Math.round(d)+'px';
+    });
+  }
+  window.alignImgBoxes=alignImgBoxes;
+  function schedule(){ requestAnimationFrame(function(){ requestAnimationFrame(alignImgBoxes); }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',schedule); else schedule();
+  window.addEventListener('load',schedule);
+  setTimeout(alignImgBoxes,900); setTimeout(alignImgBoxes,1800);
+  var t=null;
+  window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(alignImgBoxes,120); });
+})();
+</script><script>
+/* ══ 대원칙 10 · GitHub 이미지 로더 (soulthread88/my_images · unosystem/) ══
+   탐색순서: GH_BASE+<page>/<key>.<ext> → GH_BASE+<key>.<ext> · 실패 시 기존 src 유지(무손실) */
+(function(){
+  if(window.__unoGH) return; window.__unoGH=true;
+  var GH_BASE='https://raw.githubusercontent.com/soulthread88/my_images/main/unosystem/';
+  var GH_PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.[^.]+$/,'').replace(/_en$/,'').replace(/[^A-Za-z0-9_-]/g,'_');
+  var IMG_EXTS=['png','jpg','jpeg','webp','gif'];
+  var VID_EXTS=['mp4','webm'];
+  function bases(){ return [GH_BASE+GH_PAGE+'/', GH_BASE]; }
+  function imgCands(k){ var o=[]; bases().forEach(function(b){ IMG_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  function vidCands(k){ var o=[]; bases().forEach(function(b){ VID_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  var PH_SEL='.box-placeholder,.biz-img-ph,.hist-img-ph,.award-img-ph,.foot-img-ph,.ref-img-ph,.hero-empty,.cta-box-ph';
+  var BOX_SEL='[data-key],.img-box,.ref-card,.biz-img-box,.hist-img-box,.award-img-box,.foot-img-col,.iaea-hero-wrap,.cta-img-col';
+  function hidePH(im){ var b=im.closest(BOX_SEL); if(b) b.querySelectorAll(PH_SEL).forEach(function(p){ p.style.display='none'; p.classList.add('hidden'); }); }
+  function applyImg(imgs,url){ imgs.forEach(function(im){
+      im.src=url; im.style.setProperty('display','block','important');
+      im.style.setProperty('opacity','1','important'); im.style.setProperty('visibility','visible','important');
+      im.classList.add('active'); hidePH(im); }); }
+  function applyVid(imgs,url){ imgs.forEach(function(im){ try{
+      var v=document.createElement('video');
+      v.src=url; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+      v.className=im.className; v.style.cssText=im.style.cssText;
+      v.style.setProperty('display','block','important'); v.style.setProperty('width','100%'); v.style.setProperty('height','100%');
+      v.style.setProperty('object-fit', getComputedStyle(im).objectFit||'cover');
+      if(im.id) v.id=im.id;
+      im.parentNode.replaceChild(v,im); hidePH(v);
+    }catch(e){} }); }
+  function tryImg(imgs,key,onFail){ var list=imgCands(key), i=0;
+    (function nx(){ if(i>=list.length){ onFail&&onFail(); return; }
+      var url=list[i++], t=new Image(); t.onload=function(){ applyImg(imgs,url); }; t.onerror=nx; t.src=url; })(); }
+  function tryVid(imgs,key){ var list=vidCands(key), i=0;
+    (function nx(){ if(i>=list.length) return; var url=list[i++];
+      try{ fetch(url,{method:'HEAD'}).then(function(r){ if(r&&r.ok) applyVid(imgs,url); else nx(); }).catch(nx); }catch(e){ nx(); } })(); }
+  function run(){
+    var g={};
+    function add(k,im){ if(!k||!im) return; if(String(im.src).indexOf('data:')===0) return; (g[k]=g[k]||[]); if(g[k].indexOf(im)<0) g[k].push(im); }
+    document.querySelectorAll('[data-key]').forEach(function(b){ add(b.dataset.key, b.querySelector('img')); });
+    ['logo-img','foot-logo-img'].forEach(function(id){ add('logo', document.getElementById(id)); });
+    add('foot-img', document.getElementById('foot-col-img'));
+    Object.keys(g).forEach(function(k){ tryImg(g[k],k,function(){ tryVid(g[k],k); }); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(run,400); });
+  else setTimeout(run,400);
+})();
+</script><script>
+/* ══ 대원칙 7 · KOR|ENG 언어 전환 엔진 (기본값: en) ══ */
+(function(){
+  if(window.setLang) return;
+  var DEF='en';
+  function nodes(){ return document.querySelectorAll('[data-en]'); }
+  function cache(){ nodes().forEach(function(el){ if(el.dataset.ko===undefined) el.dataset.ko=el.innerHTML; }); }
+  window.setLang=function(l){
+    cache();
+    nodes().forEach(function(el){
+      if(el.tagName==='TITLE') return;
+      var v=(l==='en')?el.dataset.en:el.dataset.ko;
+      if(v!==undefined && v!==null) el.innerHTML=v;
+    });
+    document.documentElement.setAttribute('lang', l==='en'?'en':'ko');
+    document.documentElement.setAttribute('data-lang', l);
+    var k=document.getElementById('lang-ko'), e=document.getElementById('lang-en');
+    if(k) k.classList.toggle('on', l!=='en');
+    if(e) e.classList.toggle('on', l==='en');
+    var t=document.querySelector('title');
+    if(t && t.dataset.en){ if(t.dataset.ko===undefined) t.dataset.ko=t.textContent; document.title=(l==='en'?t.dataset.en:t.dataset.ko); }
+    try{ localStorage.setItem('uno_lang_'+location.pathname, l); }catch(err){}
+    if(window.alignImgBoxes) setTimeout(window.alignImgBoxes, 60);
+  };
+  function init(){
+    cache();
+    var s=DEF;
+    try{ s=localStorage.getItem('uno_lang_'+location.pathname)||DEF; }catch(err){}
+    window.setLang(s==='en'?'en':'ko');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script></body></html>

@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<script crossorigin="anonymous" integrity="sha512-iZ2ORl595Wx6miw+GuadDet4WQbdSWS3JLMoNfY8cRGoEFy6oT3G9IbcrBeL6AfkgpA51ETt/faX6yLV+/gFJg==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.min.js"></script>
+<script>
+      (function() {
+        const originalConsole = window.console;
+        window.console = {
+          log: (...args) => {
+            originalConsole.log(...args);
+            window.parent.postMessage({ type: 'console', message: args.join(' ') }, '*');
+          },
+          error: (...args) => {
+            originalConsole.error(...args);
+            window.parent.postMessage({ type: 'console', message: 'Error: ' + args.join(' ') }, '*');
+          },
+          warn: (...args) => {
+            originalConsole.warn(...args);
+            window.parent.postMessage({ type: 'console', message: 'Warning: ' + args.join(' ') }, '*');
+          }
+        };
+
+        let requestId = 0;
+        let callbacksMap = new Map();
+        let streamControllers = new Map();
+        
+        window.claude = {
+          complete: (prompt) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'claudeComplete', id, prompt }, '*');
+            });
+          }
+        };
+
+        window.storage = {
+          get: (key, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageGet', id, key, shared }, '*');
+            });
+          },
+          set: (key, value, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageSet', id, key, value, shared }, '*');
+            });
+          },
+          delete: (key, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageDelete', id, key, shared }, '*');
+            });
+          },
+          list: (prefix, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageList', id, prefix, shared }, '*');
+            });
+          }
+        };
+
+        let pendingBlobs = new Map();
+        URL.createObjectURL = (blob) => {
+          
+          const blobId = `blob-${Date.now()}-${Math.random()}`;
+          pendingBlobs.set(blobId, blob);
+          return `blob-request://${blobId}`;
+        };
+
+        URL.revokeObjectURL = (url) => {
+          
+          const blobId = url.replace("blob-request://", "");
+          pendingBlobs.delete(blobId);
+        };
+
+        const getBlobFromURL = (url) => {
+          const blobId = url.replace("blob-request://", "");
+          return pendingBlobs.get(blobId);
+        };
+
+        
+        window.fetch = (url, init = {}) => {
+          return new Promise((resolve, reject) => {
+            const id = requestId++;
+            const channelId = `fetch-${id}-${Date.now()}`;
+            
+            callbacksMap.set(id, { 
+              resolve: (response) => {
+                
+                const stream = new ReadableStream({
+                  start(controller) {
+                    streamControllers.set(channelId, controller);
+                  },
+                  cancel() {
+                    streamControllers.delete(channelId);
+                  }
+                });
+                
+                
+                resolve(new Response(stream, {
+                  status: response.status,
+                  statusText: response.statusText,
+                  headers: response.headers
+                }));
+              },
+              reject,
+              channelId
+            });
+            
+            window.parent.postMessage({
+              type: 'proxyFetch',
+              id,
+              url,
+              init,
+              channelId
+            }, '*');
+          });
+        };
+
+        window.addEventListener('message', async (event) => {
+          if (event.data.type === 'takeScreenshot') {
+            const rootElement = document.getElementById('artifacts-component-root-html');
+            if (!rootElement) {
+              window.parent.postMessage({
+                type: 'screenshotError',
+                error: new Error('Root element not found'),
+              }, '*');
+              return;
+            }
+            
+            
+            try {
+              const screenshot = await htmlToImage.toPng(rootElement, {
+                imagePlaceholder:
+                  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjePDgwX8ACOQDoNsk0PMAAAAASUVORK5CYII=",
+              });
+              window.parent.postMessage({
+                type: 'screenshotData',
+                data: screenshot,
+              }, '*');
+            } catch (err) {
+              window.parent.postMessage({
+                type: 'screenshotError',
+                error: err instanceof Error ? err : new Error(String(err)),
+              }, '*');
+            }
+          } else if (event.data.type === 'claudeComplete') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.completion);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'proxyFetchResponse') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+              callbacksMap.delete(event.data.id);
+            } else {
+              
+              callback.resolve({
+                status: event.data.status,
+                statusText: event.data.statusText,
+                headers: event.data.headers
+              });
+              
+              if (!event.data.body) {
+                callbacksMap.delete(event.data.id);
+              }
+            }
+          } else if (event.data.type === 'proxyFetchStream') {
+            
+            const controller = streamControllers.get(event.data.channelId);
+            if (controller) {
+              if (event.data.error) {
+                controller.error(new Error(event.data.error));
+                streamControllers.delete(event.data.channelId);
+              } else if (event.data.done) {
+                controller.close();
+                streamControllers.delete(event.data.channelId);
+                
+                const callback = Array.from(callbacksMap.entries()).find(
+                  ([_, value]) => value.channelId === event.data.channelId
+                );
+                if (callback) {
+                  callbacksMap.delete(callback[0]);
+                }
+              } else if (event.data.chunk) {
+                controller.enqueue(new Uint8Array(event.data.chunk));
+              }
+            }
+          } else if (event.data.type === 'storageGet') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'storageSet') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'storageDelete') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'storageList') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          }
+        });
+
+        window.addEventListener('click', (event) => {
+          const isEl = event.target instanceof HTMLElement;
+          if (!isEl) return;
+    
+          
+          const linkEl = event.target.closest("a");
+          if (!linkEl || !linkEl.href) return;
+    
+          event.preventDefault();
+          event.stopImmediatePropagation();
+    
+          if (linkEl.href.startsWith("blob-request:")) {
+            const blob = getBlobFromURL(linkEl.href);
+            if (!blob) return;
+            void blob.arrayBuffer().then((data) => {
+              window.parent.postMessage({
+                type: "downloadFile",
+                filename: linkEl.download,
+                data,
+                mimeType: blob.type || "application/octet-stream",
+              });
+            });
+          } else if (linkEl.href.startsWith("data:")) {
+            const [header, base64Data] = linkEl.href.split(",");
+            const mimeMatch = header.match(/data:([^;]+)/);
+            const mimeType = mimeMatch ? mimeMatch[1] : "application/octet-stream";
+            const binaryString = atob(base64Data);
+            const data = Uint8Array.from(binaryString, (c) =>
+              c.charCodeAt(0),
+            ).buffer;
+            window.parent.postMessage({
+              type: "downloadFile",
+              filename: linkEl.download,
+              data,
+              mimeType,
+            });
+          } else {
+            let linkUrl;
+            try {
+              linkUrl = new URL(linkEl.href);
+            } catch (error) {
+              return;
+            }
+    
+            if (linkUrl.hostname === window.location.hostname) return;
+      
+            window.parent.postMessage({
+              type: 'openExternal',
+              href: linkEl.href,
+            }, '*');
+          }
+      });
+
+        const originalOpen = window.open;
+        window.open = function (url) {
+          window.parent.postMessage({
+            type: "openExternal",
+            href: url,
+          }, "*");
+        };
+
+        window.addEventListener('error', (event) => {
+          window.parent.postMessage({ type: 'console', message: 'Uncaught Error: ' + event.message }, '*');
+        });
+      })();
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Integrated Fire Monitoring Facility | UNO SYSTEM Co., Ltd." data-ko="소방통합감시시설 | 유노시스템㈜ UNO SYSTEM">소방통합감시시설 | 유노시스템㈜ UNO SYSTEM</title>
+<meta content="유노시스템 소방통합감시시설 — 보조수신기, 무선 통신 장치, SCADA·GIS·BACnet 연동 소방 통합관제 시스템." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════ CSS VARIABLES ════════════════════════ */
+:root{
+  --bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;
+  --border:rgba(30,120,220,.18);--border2:rgba(0,210,240,.18);
+  --blue:#1a6fd4;--cyan:#00d2f0;--gold:#e8b84b;
+  --text:#dde8f8;--muted:#9ab5d0;--dim:#3a4d6a;
+  --fkr:"Noto Sans KR","Pretendard",sans-serif;
+  --fmono:"Noto Sans KR",sans-serif;
+  --fdis:"Bebas Neue",sans-serif;
+  --hdr:72px;
+  --font-title:20px;--font-body:16px;--font-small:13px;--font-xsmall:11px;--font-mono:12px;--font-body-sm:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fkr);font-size:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;word-break:keep-all;line-height:1.78}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,212,.03)1px,transparent 1px),linear-gradient(90deg,rgba(26,111,212,.03)1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+
+/* ════════════════════════ HEADER ════════════════════════ */
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(22px);display:flex;align-items:center;justify-content:space-between;padding:0 36px 0 0;z-index:700;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0}
+/* ── 로고 이미지: 클릭하여 교체 가능 ── */
+.logo-img-wrap{position:relative;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;border-radius:6px;overflow:hidden}
+.logo-img{height:40px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:3px 6px;transition:opacity .2s;display:block}
+.logo-img-wrap:hover .logo-img{opacity:.85}
+.logo-img-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);border-radius:9px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:var(--fkr);font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.3;padding:4px}
+.logo-img-wrap:hover .logo-img-hint{opacity:1}
+.logo-ko{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:16px;color:var(--text);line-height:1.15;display:flex;flex-direction:column}
+.logo-ko-en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.btn-dl{background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;color:var(--cyan);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.btn-dl:hover{background:rgba(0,210,240,.22);border-color:var(--cyan)}
+
+/* ════════════════════════ NAV ════════════════════════ */
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+
+/* Top-level button — 밑줄 없음 */
+.nb{background:transparent;border:none;color:var(--muted);font-family:var(--fkr);font-size:14px;font-weight:700;padding:10px 10px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .15s;height:auto}
+.nb:hover,.ni:hover>.nb{color:#fff}
+.nb.active-menu{color:var(--cyan)}
+.nb .caret{font-size:11px;transition:transform .22s;display:inline-block}
+.ni:hover>.nb .caret{transform:rotate(180deg)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:10px 20px;border-radius:6px;margin-left:10px}
+.nb.cta-nav:hover{opacity:.86}
+.nb.cta-nav .caret{display:none}
+
+/* ── L1 Dropdown: hover로 열림 ── */
+.dropdown{
+  display:none;position:absolute;top:100%;left:0;min-width:200px;
+  background:rgba(10,18,34,.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);
+  border-radius:0 0 10px 10px;box-shadow:0 16px 48px rgba(0,0,0,.75);
+  z-index:680;padding:6px 0 8px;
+}
+.ni:hover>.dropdown{display:block;animation:ddIn .18s ease forwards}
+@keyframes ddIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:8px 18px 6px;font-family:var(--fmono);font-size:11px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:4px}
+
+/* Dropdown items */
+.di{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;font-size:14px;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;white-space:nowrap;border-left:2px solid transparent;transition:all .12s;position:relative}
+.di:hover{background:rgba(0,210,240,.09);border-left-color:var(--cyan);color:var(--cyan)}
+.di.active{background:rgba(0,210,240,.14);border-left-color:var(--cyan);color:var(--cyan)}
+.arr{font-size:12px;color:var(--dim);margin-left:8px;flex-shrink:0}
+.di:hover .arr{color:var(--cyan)}
+.dd-sep{height:1px;background:rgba(255,255,255,.06);margin:6px 0}
+
+/* ── L2 Sub-dropdown ── */
+.has-sub{position:relative}
+.sub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:290px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:690;padding:6px 0 8px}
+.has-sub:hover>.sub-dropdown,.has-sub.open>.sub-dropdown{display:block;animation:subIn .14s ease forwards}
+@keyframes subIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+
+/* ── L3 Sub-sub-dropdown ── */
+.has-sub2{position:relative}
+.subsub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:240px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid rgba(0,210,240,.5);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:700;padding:6px 0 8px}
+.has-sub2:hover>.subsub-dropdown{display:block;animation:subIn .12s ease forwards}
+
+/* ════════════════════════ IMAGE / VIDEO BOX ════════════════════════
+   대원칙: 한 번 삽입 → 영구 저장 (base64 src에 직접 내장)
+═══════════════════════════════════════════════════════════════════ */
+.img-box{
+  position:relative;cursor:pointer;
+  background:var(--surface);border:2px dashed rgba(0,210,240,.3);border-radius:10px;
+  overflow:hidden;min-height:150px;transition:border-color .25s,box-shadow .25s;
+  display:flex;flex-direction:column;
+}
+.img-box:hover{border-color:var(--cyan);border-style:solid;box-shadow:0 0 18px rgba(0,210,240,.12)}
+.box-media-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:120px}
+.box-img{width:100%;height:100%;object-fit:cover}
+.box-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);padding:24px;text-align:center;width:100%}
+.box-placeholder.hidden{display:none}
+.box-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.5);transition:all .2s}
+.img-box:hover .box-plus{border-color:var(--cyan);color:var(--cyan);transform:scale(1.1)}
+.box-hint{font-size:var(--font-small);opacity:.7;line-height:1.5}
+.box-label{text-align:center;padding:8px 12px;font-family:var(--fkr);font-size:13px;font-weight:700;color:var(--text)!important;border-top:1px solid rgba(0,210,240,.2);background:rgba(0,0,0,.3);letter-spacing:-.02em;min-height:36px;display:flex;align-items:center;justify-content:center}
+
+/* Hidden controls (hover to reveal) */
+.box-controls{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:5px;z-index:20}
+.img-box:hover .box-controls{display:flex}
+.box-ctrl-btn{background:rgba(8,13,24,.92);border:1px solid var(--border2);color:var(--text);font-size:12px;font-family:var(--fkr);font-weight:700;padding:5px 11px;border-radius:5px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.box-ctrl-btn.replace{border-color:rgba(0,210,240,.4);color:var(--cyan)}
+.box-ctrl-btn.replace:hover{background:rgba(0,210,240,.15)}
+.box-ctrl-btn.delete{border-color:rgba(255,80,80,.4);color:#ff6060}
+.box-ctrl-btn.delete:hover{background:rgba(255,80,80,.12)}
+
+/* ════════════════════════ HERO IMAGE BOX ════════════════════════ */
+.iaea-hero-wrap{margin-top:var(--hdr);position:relative;cursor:pointer;overflow:hidden;background:#111;width:100%;min-height:200px}
+#hero-main-img{width:100%;height:520px;object-fit:cover;display:block;transition:transform .4s ease}
+.iaea-hero-wrap:hover #hero-main-img{transform:scale(1.02)}
+.hero-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);pointer-events:none}
+.hero-empty .he-plus{width:72px;height:72px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(0,210,240,.5)}
+.hero-empty.hidden{display:none}
+.hero-change-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .28s;pointer-events:none}
+.iaea-hero-wrap:hover .hero-change-hint{opacity:1}
+.hero-change-hint span{background:rgba(0,210,240,.82);padding:13px 26px;border-radius:8px;font-family:var(--fkr);font-size:17px;font-weight:700}
+.hero-controls{position:absolute;top:12px;right:12px;display:none;flex-direction:column;gap:6px;z-index:30}
+.iaea-hero-wrap:hover .hero-controls{display:flex}
+.iaea-source{background:#03060d;padding:9px 36px 9px 5mm;font-family:var(--fmono);font-size:17px;color:var(--muted);letter-spacing:.04em;border-bottom:1px solid var(--border);text-align:right;font-style:italic}
+
+/* ════════════════════════ PAGE SECTIONS ════════════════════════ */
+.page-hero{position:relative;height:220px;overflow:hidden;display:flex;align-items:center;padding-left:0}
+.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.3) saturate(.6)}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,24,.92),rgba(8,13,24,.45))}
+.page-hero-content{position:relative;z-index:2;padding:0}
+.page-hero-tag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;display:block}
+.page-hero-title{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.page-hero-sub{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.08em}
+.pg{position:relative;z-index:1;padding:64px 60px 64px 5mm}
+.pg.alt{background:var(--bg2);padding:64px 60px 64px 5mm}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);position:relative;z-index:1}
+.shdr{display:flex;align-items:center;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.shdr-left{display:flex;flex-direction:column;gap:4px}
+.shdr-hr{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent);min-width:60px;align-self:center}
+.stag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;display:block;white-space:nowrap;margin-bottom:2px}
+.stitle{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.1;letter-spacing:-.02em;display:block}
+.stitle .hl{color:var(--cyan)}
+
+/* OVERVIEW */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.kv-list{display:flex;flex-direction:column;gap:10px}
+.kv{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:8px;transition:border-color .2s}
+.kv:hover{border-color:rgba(0,210,240,.2)}
+.kv-ic{width:36px;height:36px;border-radius:7px;background:rgba(0,210,240,.08);border:1px solid rgba(0,210,240,.18);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.kv-lb{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.1em;margin-bottom:3px;text-transform:uppercase}
+.kv-val{font-size:var(--font-body);font-weight:400;line-height:1.5}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.12);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.sc{background:var(--surface);padding:24px 10px;text-align:center;transition:background .2s}
+.sc:hover{background:var(--surface2)}
+.sc-n{font-family:var(--fdis);font-size:54px;line-height:1;color:var(--cyan);margin-bottom:4px}
+.sc-l{font-size:var(--font-small);color:var(--muted);line-height:1.4}
+.cert-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cert{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(0,210,240,.05);border:1px solid rgba(0,210,240,.15);border-radius:7px}
+.cert-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.cert-tx{font-size:var(--font-small);font-weight:600;line-height:1.35}
+
+/* HISTORY */
+.hist-grid{display:grid;grid-template-columns:3fr 2fr;gap:48px;align-items:stretch}
+.tl{position:relative;padding-left:44px}
+.tl::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--cyan),var(--blue),transparent)}
+.tl-item{position:relative;margin-bottom:34px}
+.tl-dot{position:absolute;left:-44px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg2);border:2px solid var(--cyan);box-shadow:0 0 10px rgba(0,210,240,.4)}
+.tl-dot.M{background:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.7)}
+.tl-yr{font-family:var(--fdis);font-size:32px;color:var(--cyan);margin-bottom:4px}
+.tl-ev{font-size:var(--font-body);font-weight:800;margin-bottom:6px;line-height:1.35}
+.tl-dt{font-size:var(--font-small);color:var(--muted);line-height:1.8}
+.tl-bd{display:inline-flex;align-items:center;gap:5px;background:#ffffff;border:1.5px solid var(--gold);border-radius:4px;padding:5px 14px;font-family:"Noto Sans KR",sans-serif;font-size:var(--font-small);font-weight:700;color:var(--gold);margin-top:6px;letter-spacing:.02em}
+.award-g{display:flex;flex-direction:column;gap:14px}
+.award{display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award-info{flex:1}
+.award-img-box{width:160px;flex-shrink:0;min-height:180px;background:rgba(0,0,0,.2);border:2px dashed rgba(232,184,75,.3);border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:border-color .2s}
+.award-img-box:hover{border-color:var(--gold)}
+.award-img-box .aw-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.award-img-box .aw-img.active{display:block}
+.award-img-ph{display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(232,184,75,.5);font-size:11px;text-align:center;padding:8px;pointer-events:none}
+.award-img-ph .aw-plus{font-size:22px}
+.award-img-ph.hidden{display:none}
+.award-img-ctrl{position:absolute;top:4px;right:4px;display:none;flex-direction:column;gap:3px;z-index:10}
+.award-img-box:hover .award-img-ctrl{display:flex}
+.award{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:18px;transition:border-color .2s;display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award:hover{border-color:rgba(232,184,75,.3)}
+.award-yr{font-family:var(--fdis);font-size:32px;color:var(--gold);line-height:1;margin-bottom:6px}
+.award-title{font-size:var(--font-body);font-weight:800;margin-bottom:4px;line-height:1.3}
+.award-sub{font-size:var(--font-small);color:var(--muted)}
+
+/* BUSINESS */
+.biz-g{display:grid;grid-template-columns:1fr;gap:20px}
+.biz-item{display:grid;grid-template-columns:1fr 1fr;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);transition:border-color .25s,transform .25s;min-height:200px}
+.biz-item:hover{border-color:rgba(0,210,240,.3);transform:translateY(-4px)}
+.biz-img-box{position:relative;cursor:pointer;background:#f0f4f8;width:100%;min-height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-left:1px solid rgba(255,255,255,.07)}
+/* biz-box-img: 마스터 CSS에서 처리 */
+
+.biz-img-ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);padding:20px;pointer-events:none}
+.biz-img-ph .bp-plus{width:40px;height:40px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,210,240,.45)}
+.biz-img-ph.hidden{display:none}
+.biz-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s;pointer-events:none}
+.biz-img-box:hover .biz-img-overlay{opacity:1}
+.biz-img-overlay span{background:rgba(0,210,240,.8);padding:8px 16px;border-radius:6px;font-size:var(--font-small);font-family:var(--fkr);font-weight:700;color:#000}
+.biz-img-ctrl{position:absolute;top:6px;right:6px;display:none;flex-direction:column;gap:4px;z-index:10}
+.biz-img-box:hover .biz-img-ctrl{display:flex}
+.biz-card{height:100%;box-sizing:border-box;background:var(--surface);padding:28px;text-decoration:none;display:flex;flex-direction:column;justify-content:center}
+.biz-card:hover{background:var(--surface2)}
+.biz-num{font-family:var(--fmono);font-size:var(--font-small);color:var(--cyan);letter-spacing:.2em;margin-bottom:10px}
+.biz-title{font-size:var(--font-body);font-weight:800;margin-bottom:10px;color:var(--text)}
+.biz-desc{font-size:var(--font-small);color:var(--muted);line-height:1.8}
+
+/* CLIENTS */
+.cli-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cli-g .img-box{background:#ffffff;border-color:rgba(0,0,0,.12)}
+.cli-g .img-box:hover{border-color:var(--cyan)}
+.cli-g .box-label{background:rgba(0,0,0,.06);color:#333;border-top:1px solid rgba(0,0,0,.08);font-family:"Noto Sans KR",sans-serif;font-weight:500;font-size:13px}
+
+/* CTA & FOOTER */
+.cta-wrap{background:linear-gradient(135deg,#0a1525,#0d1e35);border-top:1px solid var(--border2);padding:70px 60px 70px 0;position:relative;z-index:1}
+.cta-inner{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+.cta-lb{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px}
+.cta-hd{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);letter-spacing:-.02em;margin-bottom:18px;line-height:1.1}
+.cta-hd span{color:var(--cyan)}
+.cta-info{display:flex;flex-direction:column;gap:10px}
+.cta-row{display:flex;align-items:center;gap:12px;font-size:var(--font-body);color:var(--muted)}
+.cta-row strong{color:var(--text)}
+.cta-ri{width:30px;height:30px;border-radius:5px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.cta-btns{display:flex;flex-direction:column;gap:12px;min-width:200px}
+.btn-p{background:var(--cyan);color:#000;font-family:var(--fkr);font-weight:900;font-size:var(--font-body);padding:16px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s}
+.btn-p:hover{opacity:.88}
+.btn-s{background:transparent;border:1px solid var(--border2);color:var(--text);font-family:var(--fkr);font-weight:700;font-size:var(--font-body);padding:15px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,210,240,.05)}
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:0}
+/* ── Footer two-column layout ── */
+.foot-inner{display:grid;grid-template-columns:25% 75%;min-height:180px;align-items:stretch}
+/* Left col: 1:1 image box */
+.foot-img-col{position:relative;cursor:pointer;background:var(--surface);border-right:1px solid rgba(255,255,255,.07);overflow:hidden;display:flex;align-items:center;justify-content:center;width:100%;height:100%;align-self:stretch;padding:8mm 0 8mm 8mm;box-sizing:border-box}
+.foot-img-col img.foot-col-img{width:100%;height:100%;object-fit:cover;display:none;position:relative;border-radius:6px}
+.foot-img-col img.foot-col-img.active{display:block}
+.foot-img-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);padding:20px;text-align:center;pointer-events:none}
+.foot-img-ph .fi-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.45)}
+.foot-img-ph.hidden{display:none}
+.foot-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;pointer-events:none}
+.foot-img-col:hover .foot-img-overlay{opacity:1}
+.foot-img-overlay span{background:rgba(0,210,240,.82);padding:8px 16px;border-radius:6px;font-family:var(--fkr);font-size:13px;font-weight:700;color:#000}
+.foot-img-ctrl{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:4px;z-index:10}
+.foot-img-col:hover .foot-img-ctrl{display:flex}
+/* Right col */
+.foot-right-col{display:flex;flex-direction:row;align-items:stretch;padding:24px 28px;gap:20px}
+.foot-info-area{display:flex;flex-direction:column;justify-content:center;gap:6px;flex:1}
+.foot-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.foot-logo-img-wrap{position:relative;cursor:pointer;display:inline-flex;border-radius:7px;overflow:hidden;flex-shrink:0}
+.foot-logo-img{height:40px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:3px 6px;display:block;transition:opacity .2s}
+.foot-logo-img-wrap:hover .foot-logo-img{opacity:.82}
+.foot-logo-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);border-radius:7px;opacity:0;transition:opacity .2s;pointer-events:none;font-size:10px;font-weight:700;color:#fff;text-align:center;line-height:1.3}
+.foot-logo-img-wrap:hover .foot-logo-hint{opacity:1}
+.foot-logo-text{display:flex;flex-direction:column;line-height:1.2}
+.foot-logo-kr{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:16px;color:var(--text)}
+.foot-logo-en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.foot-addr{font-family:var(--fmono);font-size:13px;color:var(--muted);line-height:1.6}
+.foot-contact{font-family:var(--fmono);font-size:13px;color:var(--muted);line-height:1.6}
+.foot-copy{font-family:var(--fmono);font-size:11px;color:var(--muted);margin-top:4px}
+.foot-inquiry-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:rgba(0,210,240,.07);border:2px solid rgba(0,210,240,.25);border-radius:10px;cursor:pointer;text-decoration:none;transition:all .2s;min-width:140px;align-self:center;flex-shrink:0}
+.foot-inquiry-box:hover{background:rgba(0,210,240,.16);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.15)}
+.foot-inquiry-icon{font-size:32px;line-height:1}
+.foot-inquiry-label{font-family:var(--fkr);font-size:var(--font-small);font-weight:700;color:var(--cyan);text-align:center;line-height:1.4}
+.foot-inquiry-sub{font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);text-align:center}
+.fu{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+.fu.vis{opacity:1;transform:translateY(0)}
+@media(max-width:1200px){.cli-g{grid-template-columns:repeat(3,1fr)}}
+
+
+
+/* CTA 이미지 박스 꽉 채움 */
+#box-cta-img { min-height: 220px; }
+#box-cta-img .box-media-wrap { flex: 1; overflow: hidden; min-height: 0; position:relative; }
+
+
+
+/* ─── 회사소개 인트로 이미지 박스 꽉 채움 ─── */
+
+/* ─── 연혁 이미지 박스 ─── */
+
+/* ─── tl-bd: Noto Sans KR, 흰색 바탕, 노란색 텍스트 ─── */
+.tl-bd { font-family: 'Noto Sans KR', sans-serif !important; }
+
+/* ─── 고객사 box-label ─── */
+.cli-g .box-label { font-family: 'Noto Sans KR', sans-serif !important; font-weight: 500; }
+
+/* 인증서 이미지 박스: 16:9 꽉 채움 */
+.cert-img-grid .img-box { position: relative; }
+.cert-img-grid .box-media-wrap { position: absolute; inset: 0; }
+.cert-img-grid .box-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cert-img-grid .box-img.active { display: block; }
+
+/* ═══ 이미지 active 표시 강화 ═══ */
+.aw-img.active { display: block !important; }
+
+.aw-img[src^="data:image"] { display: block !important; }
+.foot-col-img[src^="data:image"] { display: block !important; }
+
+/* ═══════════════════════════════════════════════════════
+   이미지 대원칙 CSS — 단일 규칙, 충돌 없음 v5
+═══════════════════════════════════════════════════════ */
+
+/* ── 전역: base64 src 있으면 무조건 표시 ── */
+img[src^="data:image"], img[src^="data:video"] {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ══ .img-box (인증서·고객사·회사소개·CTA) ══ */
+.img-box { position:relative; overflow:hidden; cursor:pointer; }
+.img-box .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block;
+  pointer-events:none;
+}
+.img-box .box-img:not([src]), .img-box .box-img[src=""] { display:none !important; }
+.img-box .box-placeholder {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px;
+  pointer-events:none;
+}
+.img-box:has(.box-img[src^="data:image"]) .box-placeholder,
+.img-box:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+.img-box .box-controls { pointer-events:auto; }
+.img-box:hover .box-controls { display:flex; }
+/* 고객사 로고: contain */
+.cli-g .img-box .box-img { object-fit:contain; background:#fff; }
+
+/* ══ #box-intro-img (회사소개) ══ */
+#box-intro-img { position:relative; overflow:hidden; cursor:pointer; }
+#box-intro-img .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+#box-intro-img .box-img:not([src]), #box-intro-img .box-img[src=""] { display:none !important; }
+#box-intro-img .box-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; pointer-events:none; }
+#box-intro-img:has(.box-img[src^="data:image"]) .box-placeholder,
+#box-intro-img:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+
+/* ══ #box-cta-img (제품상담) ══ */
+#box-cta-img {
+  position:relative; overflow:hidden; cursor:pointer;
+  display:flex; flex-direction:column;
+}
+#box-cta-img .box-media-wrap { position:relative; flex:1; min-height:0; overflow:hidden; }
+#box-cta-img .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+#box-cta-img .box-img:not([src]), #box-cta-img .box-img[src=""] { display:none !important; }
+#box-cta-img .box-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; pointer-events:none; }
+#box-cta-img:has(.box-img[src^="data:image"]) .box-placeholder,
+#box-cta-img:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+
+/* ══ 인증서 ══ */
+.cert-img-grid .img-box { overflow:hidden; }
+.cert-img-grid .box-media-wrap { position:absolute; inset:0; }
+.cert-img-grid .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+.cert-img-grid .box-img:not([src]), .cert-img-grid .box-img[src=""] { display:none !important; }
+
+/* ══ .biz-img-box (사업부문) ══ */
+.biz-img-box {
+  position:relative;
+  overflow:hidden;
+  min-height:200px;
+}
+.biz-img-box .biz-box-img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:0;
+  background:#f0f4f8;
+  display:block;
+  pointer-events:none;
+}
+/* 빈 src일 때만 숨김 */
+.biz-img-box .biz-box-img:not([src]),
+.biz-img-box .biz-box-img[src=""] {
+  display:none !important;
+}
+.biz-img-ph {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  pointer-events:none;
+}
+.biz-img-ph.hidden,
+.biz-img-box:has(.biz-box-img[src^="data:image"]) .biz-img-ph,
+.biz-img-box:has(.biz-box-img[src^="data:video"]) .biz-img-ph {
+  display:none !important;
+}
+.biz-img-ctrl { pointer-events:auto; }
+.biz-img-box:hover .biz-img-ctrl { display:flex; }
+
+/* ══ .hist-img-box (연혁) ══ */
+.hist-img-box { position:relative; overflow:hidden; }
+.hist-img-box .hist-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; background:rgba(0,0,0,.08);
+  display:block; pointer-events:none;
+}
+.hist-img-box .hist-img:not([src]), .hist-img-box .hist-img[src=""] { display:none !important; }
+.hist-img-ph {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:8px;
+  pointer-events:none;
+}
+.hist-img-ph.hidden,
+.hist-img-box:has(.hist-img[src^="data:image"]) .hist-img-ph,
+.hist-img-box:has(.hist-img[src^="data:video"]) .hist-img-ph { display:none !important; }
+.hist-img-box .box-controls { pointer-events:auto; }
+.hist-img-box:hover .box-controls { display:flex; }
+
+/* ══ .award-img-box (표창장) ══ */
+.award-img-box { position:relative; overflow:hidden; }
+.award-img-box .aw-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+.award-img-box .aw-img:not([src]), .award-img-box .aw-img[src=""] { display:none !important; }
+.award-img-ph.hidden,
+.award-img-box:has(.aw-img[src^="data:image"]) .award-img-ph { display:none !important; }
+.award-img-ctrl { pointer-events:auto; }
+.award-img-box:hover .award-img-ctrl { display:flex; }
+
+/* ══ Footer ══ */
+.foot-col-img { display:block; }
+.foot-col-img:not([src]), .foot-col-img[src=""] { display:none; }
+
+
+/* ── Light / Dark mode ── */
+[data-theme=light]{--bg:#f0f4fb;--bg2:#e4ecf7;--surface:#d9e4f4;--surface2:#c8d8ef;--border:#1a6fd430;--border2:#0097aa33;--text:#0d1a2e;--muted:#3a5575;--dim:#8aa5c0;--blue:#1a6fd4;--cyan:#0097aa;--gold:#b8862a}
+[data-theme=light] body:before{background-image:linear-gradient(#1a6fd410 1px,transparent 1px),linear-gradient(90deg,#1a6fd410 1px,transparent 1px)}
+[data-theme=light] header{background:#f0f4fbf7}
+[data-theme=light] .dropdown,[data-theme=light] .sub-dropdown,[data-theme=light] .subsub-dropdown{background:#e8f0fafc}
+[data-theme=light] .nb{color:#3a5575}
+[data-theme=light] .nb:hover,[data-theme=light] .ni:hover>.nb{color:#0d1a2e}
+[data-theme=light] .di{color:#0d1a2e}
+[data-theme=light] .logo-img{background:transparent}
+#theme-toggle:hover{border-color:#00d2f0;color:#00d2f0}
+
+/* ── 본문 왼쪽 5mm 여백 ── */
+.pg,.pg.alt{padding-left:5mm}
+.ov-grid,.hist-grid,.biz-g,.cli-g,.cta-inner{margin-left:max(5mm,0px)}
+
+/* ── Stats boxes ── */
+.stats-row{gap:2mm!important}
+.sc{border:1px solid rgba(0,210,240,.25);border-radius:8px;padding:12px 8px}
+
+/* ── Business: text left, image right ── */
+.biz-g{grid-template-columns:1fr!important}
+.biz-item{grid-template-columns:1fr 1fr!important;align-items:stretch;gap:0}
+.biz-card{height:100%;box-sizing:border-box;order:1;padding:24px 20px;display:flex;flex-direction:column;justify-content:center}
+.biz-img-box{order:2;aspect-ratio:16/9;height:auto!important;min-height:unset!important;width:100%}
+.biz-img-box .biz-box-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.biz-img-box{position:relative;overflow:hidden}
+
+/* ── 고객사 로고: 전체 표시 + 중앙 정렬 ── */
+.cli-g .img-box{background:var(--surface2)}
+.cli-g .box-media-wrap{padding:12px;background:var(--surface);border-radius:8px}
+.cli-g .box-img{object-fit:contain!important;width:100%;height:100%;padding:4px}
+
+[data-theme=light] .box-label{color:var(--text)!important;background:rgba(255,255,255,.6)}
+
+/* ── Light 모드 전용 색상 보정 ── */
+/* page-hero: 오버레이 색 조정 */
+[data-theme=light] .page-hero-overlay{background:linear-gradient(90deg,rgba(240,244,251,.92),rgba(240,244,251,.55))}
+[data-theme=light] .page-hero-tag{color:var(--cyan)}
+[data-theme=light] .page-hero-title{color:var(--text)}
+[data-theme=light] .page-hero-sub{color:var(--muted)}
+[data-theme=light] .breadcrumb{color:var(--muted)}
+[data-theme=light] .breadcrumb a{color:var(--cyan)}
+
+/* iaea-source: 고정 검정 배경 → 테마 배경 */
+[data-theme=light] .iaea-source{background:var(--bg2);color:var(--muted);border-bottom-color:var(--border)}
+
+/* cta-wrap: 고정 다크 배경 → 테마 배경 */
+[data-theme=light] .cta-wrap{background:linear-gradient(135deg,var(--bg2),var(--surface))}
+[data-theme=light] .cta-hd{color:var(--text)}
+[data-theme=light] .cta-hd span{color:var(--cyan)}
+[data-theme=light] .cta-lb{color:var(--cyan)}
+[data-theme=light] .cta-row{color:var(--muted)}
+[data-theme=light] .cta-row strong{color:var(--text)}
+
+/* footer: 고정 검정 배경 → 테마 배경 */
+[data-theme=light] footer{background:var(--bg2);border-top-color:rgba(0,0,0,.1)}
+[data-theme=light] .foot-img-col{background:var(--surface);border-right-color:rgba(0,0,0,.08)}
+[data-theme=light] .foot-logo-kr{color:var(--text)}
+[data-theme=light] .foot-logo-en{color:var(--muted)}
+[data-theme=light] .foot-addr,[data-theme=light] .foot-contact,[data-theme=light] .foot-copy{color:var(--muted)}
+
+/* prod-card: 텍스트 가시성 */
+[data-theme=light] .prod-card{background:var(--surface);border-color:rgba(0,0,0,.08)}
+[data-theme=light] .prod-card:hover{border-color:var(--cyan)}
+[data-theme=light] .prod-title{color:var(--text)}
+[data-theme=light] .prod-desc,[data-theme=light] .prod-bullets{color:var(--muted)}
+[data-theme=light] .prod-bullets li::before{color:var(--cyan)}
+[data-theme=light] .ptag{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:var(--muted)}
+[data-theme=light] .ptag.em{background:rgba(0,151,170,.08);border-color:rgba(0,151,170,.3);color:var(--cyan)}
+[data-theme=light] .prod-upbox{background:#dce8f4}
+[data-theme=light] .pbox-ph{background:linear-gradient(135deg,#c8d8ef,#d9e4f4)}
+
+/* ── Business image boxes: full image display ── */
+.biz-img-box{position:relative;overflow:hidden}
+.biz-box-img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:contain!important;background:var(--surface)}
+.biz-img-box{aspect-ratio:16/9}
+
+.biz-bullet{font-size:13px;color:var(--muted);padding:3px 0;line-height:1.6;display:flex;gap:6px}
+.biz-bullet:before{content:"";flex-shrink:0}
+
+/* ════════════════════════ PRODUCTS PAGE ════════════════════════ */
+.prod-g{display:grid;grid-template-columns:1fr;gap:24px}
+.prod-card{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;text-decoration:none;display:grid;grid-template-columns:1fr 400px;align-items:stretch}
+.prod-card:hover{transform:translateY(-4px);border-color:rgba(0,210,240,.3);box-shadow:0 16px 48px rgba(0,210,240,.07)}
+.prod-body{padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:10px;font-size:19px}
+.prod-num{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:14px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase}
+.prod-title{font-size:19px;font-weight:800;line-height:1.35;color:var(--text)}
+.prod-desc{font-size:17px;color:var(--muted);line-height:1.75}
+.prod-bullets{font-size:17px;color:var(--muted);line-height:1.75;padding-left:1.4em;margin:0;list-style:none}
+.prod-bullets li{position:relative;padding-left:.3em;margin-bottom:4px}
+.prod-bullets li::before{content:"▸";color:var(--cyan);position:absolute;left:-1.1em;font-size:14px}
+.prod-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.ptag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:4px 12px;font-size:14px;color:var(--muted)}
+.ptag.em{background:rgba(0,210,240,.08);border-color:rgba(0,210,240,.3);color:var(--cyan);font-size:14px}
+
+/* prod-upbox */
+.prod-upbox{position:relative;width:100%;height:100%;min-height:260px;cursor:pointer;overflow:hidden;background:#0a0f1e;display:flex;align-items:center;justify-content:center}
+.prod-upbox .pbox-img{display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.prod-upbox.has-img .pbox-img{display:block}
+.prod-upbox .pbox-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#091520,#0f2030);pointer-events:none}
+.prod-upbox.has-img .pbox-ph{display:none}
+.prod-upbox .pbox-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;gap:8px;z-index:5}
+.prod-upbox:hover .pbox-overlay{opacity:1}
+.pbox-btn{background:rgba(0,210,240,.9);color:#000;border:none;border-radius:5px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer}
+.pbox-btn.del{background:rgba(200,50,50,.9);color:#fff}
+@media(max-width:1024px){.prod-card{grid-template-columns:1fr 320px}}
+@media(max-width:768px){.prod-card{grid-template-columns:1fr}.prod-upbox{min-height:200px}}
+
+/* 브레드크럼 */
+.breadcrumb{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:12px;color:var(--muted);letter-spacing:.08em;margin-bottom:10px}
+.breadcrumb a{color:var(--cyan);text-decoration:none}
+.prod-inner{display:flex;flex-direction:row;gap:20px;align-items:stretch}.prod-inner .prod-img-box{order:2;flex:0 0 32%;max-width:32%}.prod-inner .feat-list,.prod-inner .btn-g,.prod-inner>div:not(.prod-img-box){order:1;flex:1 1 0;min-width:0;word-break:break-word}.prod-img-box.img-box{flex:0 0 32%;max-width:32%;width:32%;align-self:stretch}.prod-img-box.img-box .box-media-wrap{flex:1;min-height:0}.prod-img-box.img-box.square-box{aspect-ratio:1/1;align-self:flex-start}.prod-img-box.img-box.square-box .box-media-wrap{flex:1;min-height:0;height:100%}.feat{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}.feat:last-child{border-bottom:none}.feat-ic{font-size:22px;flex-shrink:0;margin-top:4px}.feat-tx{flex:1;min-width:0;word-break:break-word}.feat-tx strong{display:block;margin-bottom:4px;color:var(--text);font-weight:800;line-height:1.3}.btn-g{display:flex;gap:12px;flex-wrap:wrap;padding-top:8px}.diagram-row{display:flex;align-items:flex-start;gap:0;flex-wrap:nowrap;width:100%;padding-bottom:8px}.diag-slot{display:flex;align-items:center;gap:0;flex:1 1 0;min-width:0}.diag-box{display:flex;flex-direction:column;align-items:center;gap:0;border:1px solid rgba(0,210,240,.2);border-radius:10px;overflow:hidden;background:var(--surface);flex:1 1 0;min-width:0;transition:border-color .2s}.diag-box:hover{border-color:rgba(0,210,240,.5)}.diag-img-wrap{width:100%;aspect-ratio:1/1;position:relative;cursor:pointer;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}.diag-img-wrap .box-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}.diag-img-wrap .box-img:not([src]),.diag-img-wrap .box-img[src=""]{display:none!important}.diag-img-wrap .box-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);pointer-events:none}.diag-img-wrap:has(.box-img[src^="data:image"]) .box-placeholder,.diag-img-wrap:has(.box-img[src^="data:video"]) .box-placeholder{display:none!important}.diag-img-wrap .box-plus{font-size:24px;color:rgba(0,210,240,.4)}.diag-img-wrap .box-controls{position:absolute;top:4px;right:4px;display:none;flex-direction:column;gap:3px;z-index:10}.diag-img-wrap:hover .box-controls{display:flex}.diag-info{padding:10px 8px;text-align:center}.diag-ic{font-size:22px;margin-bottom:4px}.diag-nm{font-size:14px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:3px}.diag-sub{font-family:var(--fmono);font-size:11px;color:var(--muted)}.diag-arrow{font-size:22px;color:var(--cyan);padding:0 6px;flex-shrink:0;align-self:center;margin-top:0}.diag-desc{font-size:var(--font-body);color:var(--text);line-height:1.8;margin-bottom:28px;max-width:860px;border-left:3px solid rgba(0,210,240,.35);padding-left:16px}
+/* ════ 통합 2단 행 레이아웃 (텍스트 좌 · 16:9 이미지 우 + 하단 캡션) ════ */
+.srow-list{display:flex;flex-direction:column;gap:20px}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+.srow-text{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.srow-icon{font-size:30px;line-height:1}
+.srow-title{font-size:var(--font-title);font-weight:900;color:var(--text);line-height:1.3}
+.srow-desc{font-size:var(--font-body);color:var(--text);opacity:.88;line-height:1.85}
+.srow-imgbox.img-box{display:flex;flex-direction:column;width:100%;max-width:100%;flex:none;align-self:stretch;background:var(--surface);border:2px dashed rgba(0,210,240,.35);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.srow-imgbox.img-box:hover{border-color:var(--cyan);border-style:solid}
+.srow-imgbox .box-media-wrap{aspect-ratio:16/9;width:100%;flex:none;min-height:0;position:relative;overflow:hidden;background:var(--surface2);display:flex;align-items:center;justify-content:center}
+.srow-imgbox .box-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none;pointer-events:none}
+.srow-imgbox .box-img[src^="data:image"],.srow-imgbox .box-img[src^="data:video"]{display:block}
+.srow-imgbox .box-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);pointer-events:none}
+.srow-imgbox:has(.box-img[src^="data:image"]) .box-placeholder,.srow-imgbox:has(.box-img[src^="data:video"]) .box-placeholder{display:none}
+.srow-imgbox .box-controls{position:absolute;top:8px;right:8px;flex-direction:column;gap:5px;display:none;z-index:20}
+.srow-imgbox.img-box:hover .box-controls{display:flex}
+.srow-imgbox .box-label{text-align:center;padding:9px 12px;font-family:var(--fkr);font-size:13px;font-weight:700;color:var(--text)!important;border-top:1px solid rgba(0,210,240,.2);background:rgba(0,0,0,.25);letter-spacing:-.02em;min-height:38px;display:flex;align-items:center;justify-content:center}
+@media(max-width:900px){.srow{grid-template-columns:1fr}}
+/* 라이트 테마: 캡션 스트립 가독성 */
+[data-theme=light] .srow-imgbox .box-label{background:rgba(255,255,255,.65);color:var(--text)!important;border-top-color:var(--border)}
+[data-theme=light] .srow-text{background:var(--surface);border-color:var(--border)}
+</style>
+<style>
+/* ════ 대원칙 4 · 모바일 반응형(≤900px) — 햄버거 내비 + 2단→1단 ════ */
+.nav-toggle{display:none;margin-left:auto;background:transparent;border:1px solid var(--border2);color:var(--text);font-size:22px;line-height:1;padding:5px 12px;border-radius:6px;cursor:pointer;flex-shrink:0}
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  header{padding-left:16px;padding-right:12px;gap:8px}
+  .logo-ko{display:none}
+  .main-nav{position:fixed;top:var(--hdr);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#0a1222fa;backdrop-filter:blur(22px);border-bottom:1px solid var(--border2);max-height:calc(100vh - var(--hdr));overflow-y:auto;display:none;padding:6px 0 12px;z-index:680}
+  .main-nav.open{display:flex}
+  .ni{flex-direction:column;align-items:stretch;width:100%;position:static}
+  .nb{width:100%;justify-content:space-between;padding:14px 22px;font-size:16px!important}
+  .nb.cta-nav{margin:10px 22px;justify-content:center}
+  .dropdown{position:static;display:block;width:100%;min-width:0;border:none;border-top:1px solid #ffffff12;border-radius:0;box-shadow:none;background:transparent;padding:0 0 4px;animation:none!important}
+  .di{padding:11px 22px 11px 40px}
+  .sub-dropdown,.subsub-dropdown{display:none!important}
+  .ov-grid,.hist-grid,.biz-g,.two-col,.spec-columns,.features-grid,.cli-g{grid-template-columns:1fr!important}
+  .ov-grid>*,.hist-grid>*,.biz-g>*,.two-col>*,.ti-row>*,.cta-inner>*,.comp-row>*,.syscfg-row>*{min-width:0}
+  [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns: 1fr 1fr"],[style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  .foot-inner{grid-template-columns:1fr}
+  .foot-right-col{flex-direction:column;align-items:stretch;gap:14px}
+}
+</style><style>
+/* ════ 대원칙 6 · 브레드크럼 명도 ════ */
+.breadcrumb-nav{background:var(--bg2)!important}
+.breadcrumb-nav a{color:var(--muted)!important;text-decoration:none}
+.breadcrumb-nav a:hover{color:var(--cyan)!important}
+.breadcrumb-nav span{color:var(--text)}
+.breadcrumb-nav+.iaea-hero-wrap,.breadcrumb-nav+.full-hero-wrap,.breadcrumb-nav+.page-hero,.breadcrumb-nav+.product-hero{margin-top:0!important}
+#box-full-hero:first-of-type{margin-top:0}
+</style><style>
+/* ════ 대원칙 5 · 섹션 키워드 칩 ════ */
+.sec-keywords{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:40px;padding-top:20px;border-top:1px dashed var(--border2)}
+.kw-label{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-right:4px}
+.sec-kw{font-size:var(--font-small);color:var(--muted);background:#00d2f00d;border:1px solid #00d2f026;border-radius:16px;padding:4px 12px}
+</style><style>
+/* 대원칙 5 · 제목 줄바꿈 balance */
+.stitle,.page-hero-title,.product-name,.cta-hd,.ti-title,.syscfg-name,.feature-name,.biz-title,.award-title{text-wrap:balance}
+.img-align-shift{transition:margin-top .15s}
+</style><style>
+.lang-switch{display:inline-flex;align-items:center;border:1px solid var(--border2,#00d2f02e);border-radius:6px;overflow:hidden;flex-shrink:0;margin-left:8px}
+.lang-btn{background:transparent;border:none;color:var(--muted,#9ab5d0);font-family:var(--fkr,"Noto Sans KR",sans-serif);font-size:13px;font-weight:700;padding:7px 10px;cursor:pointer;transition:all .2s}
+.lang-btn:hover{color:var(--cyan,#00d2f0)}
+.lang-btn.on{background:var(--cyan,#00d2f0);color:#000}
+.lang-sep{color:var(--dim,#3a4d6a);font-size:12px}
+</style></head>
+<body id="artifacts-component-root-html">
+<header>
+<div class="logo-wrap">
+<div class="logo-img-wrap" id="logo-img-wrap" title="클릭하여 로고 교체">
+<img alt="UNO SYSTEM 로고" class="logo-img" id="logo-img" src=""/>
+<div class="logo-img-hint" data-en="📷&lt;br/&gt;Replace logo" data-ko="📷&lt;br/&gt;로고 교체">📷<br/>로고 교체</div>
+</div>
+<div class="logo-ko" contenteditable="true"><span class="i18n" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템(주)">유노시스템(주)</span><span class="logo-ko-en">UNO SYSTEM</span></div>
+</div>
+<nav class="main-nav" id="mainNav">
+<div class="ni" id="ni-company">
+<button class="nb" data-ni="ni-company"><span class="i18n" data-en="Company" data-ko="회사 소개">회사 소개</span> <span class="caret">▾</span></button>
+<div class="dropdown" id="dd-company">
+<a class="di" contenteditable="true" data-en="Company Overview" data-ko="회사 개요" href="company.html#overview">회사 개요</a>
+<a class="di" contenteditable="true" data-en="History" data-ko="회사 연혁" href="company.html#history">회사 연혁</a>
+<a class="di" contenteditable="true" data-en="Business Divisions" data-ko="사업 부문" href="company.html#business">사업 부문</a>
+<a class="di" contenteditable="true" data-en="Key Clients" data-ko="주요 고객사" href="company.html#clients">주요 고객사</a>
+</div>
+</div>
+<div class="ni" id="ni-prod">
+<button class="nb active-menu" data-ni="ni-prod"><span class="i18n" data-en="Products/Solutions" data-ko="제품/솔루션">제품/솔루션</span> <span class="caret">▾</span></button>
+<div class="dropdown" id="dd-prod">
+<div class="di has-sub"><span class="i18n" data-en="Fire Alarm Control Panels" data-ko="화재수신기">화재수신기</span> <span class="arr">›</span>
+<div class="sub-dropdown">
+<a class="di" contenteditable="true" data-en="R-Type DTS-Integrated FACP" data-ko="R형 DTS 통합형 수신기" href="제품/수신기/R형 DTS 통합형 수신기/r-type dts-integrated facp.html">R형 DTS 통합형 수신기</a>
+<div class="di has-sub2"><span class="i18n" data-en="P-Type Combination FACP" data-ko="P형 복합식 수신기">P형 복합식 수신기</span> <span class="arr">›</span>
+<div class="subsub-dropdown">
+<a class="di" contenteditable="true" data-en="6-Circuit P-Type FACP (FACP25-2)" data-ko="6회로 P형 수신기 (수25-2)" href="제품/수신기/P형 복합식 수신기/6 회로 P형 복합식 수신기(수25-2)/">6회로 P형 수신기 (수25-2)</a>
+<a class="di" contenteditable="true" data-en="30-Circuit P-Type FACP (FACP26-28)" data-ko="30회로 P형 수신기 (수26-28)" href="제품/수신기/P형 복합식 수신기/30 회로 P형 복합식 수신기(수26-28)/">30회로 P형 수신기 (수26-28)</a>
+</div>
+</div>
+<div class="di has-sub2"><span class="i18n" data-en="Other Control Panels" data-ko="기타 수신기">기타 수신기</span> <span class="arr">›</span>
+<div class="subsub-dropdown">
+<a class="di" contenteditable="true" data-en="DTS-Integrated R-Type (FACP24-14)" data-ko="DTS 통합 R형 (수24-14)" href="제품/수신기/기타 수신기/r-type dts-integrated facp (facp24-14)/">DTS 통합 R형 (수24-14)</a>
+<a class="di" contenteditable="true" data-en="P-Type Combination (FACP13-6)" data-ko="P형 복합식 (수13-6)" href="제품/수신기/기타 수신기/p-type facp (facp13-6)/">P형 복합식 (수13-6)</a>
+<a class="di" contenteditable="true" data-en="P-Type Combination (FACP17-47)" data-ko="P형 복합식 (수17-47)" href="제품/수신기/기타 수신기/p-type facp (facp17-47)/">P형 복합식 (수17-47)</a>
+<a class="di" contenteditable="true" data-en="P-Type Combination (FACP24-14)" data-ko="P형 복합식 (수24-14)" href="제품/수신기/기타 수신기/p-type facp (facp24-14)/">P형 복합식 (수24-14)</a>
+</div>
+</div>
+</div>
+</div>
+<div class="di has-sub"><span class="i18n" data-en="Detectors" data-ko="감지기">감지기</span> <span class="arr">›</span>
+<div class="sub-dropdown">
+<a class="di" contenteditable="true" data-en="Rate-of-Rise Distributed Fiber-Optic Cable Detector (DET24-74)" data-ko="차동식분포형 광케이블식 (감24-74)" href="제품/감지기/광케이블식 감지기(감24-74)/fiber optic cable ror detector (detector24-74).html">차동식분포형 광케이블식 (감24-74)</a>
+<a class="di" contenteditable="true" data-en="Rate-of-Rise Distributed Fiber-Optic Cable Detector (DET26-9)" data-ko="차동식분포형 광케이블식 (감26-9)" href="제품/감지기/광케이블식 감지기(감26-9)/fiber optic cable ror detector (detector26-9).html">차동식분포형 광케이블식 (감26-9)</a>
+</div>
+</div>
+<div class="dd-sep"></div>
+<a class="di active" contenteditable="true" data-en="Integrated Fire Monitoring Facilities" data-ko="소방통합감시시설" href="sofire.html">소방통합감시시설</a>
+<a class="di" contenteditable="true" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="network.html">네트워크기반 솔루션</a>
+<a class="di" contenteditable="true" data-en="Construction Management" data-ko="건설시공 관리" href="construction.html">건설시공 관리</a>
+</div>
+</div>
+<div class="ni" id="ni-proj">
+<button class="nb" data-ni="ni-proj"><span class="i18n" data-en="Projects" data-ko="프로젝트">프로젝트</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<a class="di" contenteditable="true" data-en="Construction Projects" data-ko="건설 프로젝트" href="company.html#clients">건설 프로젝트</a>
+<a class="di" contenteditable="true" href="company.html#clients">Case Studies</a>
+</div>
+</div>
+<div class="ni" id="ni-tech">
+<button class="nb" data-ni="ni-tech"><span class="i18n" data-en="Technology Portfolio" data-ko="기술보유현황">기술보유현황</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<a class="di" contenteditable="true" data-en="Intellectual Property / Patents" data-ko="지식재산권 / 특허" href="company.html#history">지식재산권 / 특허</a>
+<a class="di" contenteditable="true" data-en="KFI Type Approval Certificates" data-ko="KFI 형식승인서" href="company.html#history">KFI 형식승인서</a>
+<a class="di" contenteditable="true" data-en="Corporate Certifications" data-ko="기업 인증" href="company.html#history">기업 인증</a>
+<a class="di" contenteditable="true" data-en="Awards" data-ko="수상 실적" href="company.html#history">수상 실적</a>
+</div>
+</div>
+<div class="ni" id="ni-data">
+<button class="nb" data-ni="ni-data"><span class="i18n" data-en="Resources" data-ko="자료">자료</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<a class="di" contenteditable="true" data-en="Product Catalog" data-ko="제품 카탈로그" href="#">제품 카탈로그</a>
+<a class="di" contenteditable="true" data-en="Datasheets" data-ko="데이터시트" href="#">데이터시트</a>
+<a class="di" contenteditable="true" data-en="Installation Manual" data-ko="설치 매뉴얼" href="#">설치 매뉴얼</a>
+<a class="di" contenteditable="true" data-en="Certificates" data-ko="인증 서류" href="#">인증 서류</a>
+</div>
+</div>
+<div class="ni"><a class="nb" contenteditable="true" href="#footer" style="color:var(--muted);font-weight:700">CONTACT</a></div>
+</nav><button aria-label="메뉴" class="nav-toggle" onclick="toggleNav()" title="메뉴" type="button">☰</button>
+<div class="lang-switch"><button class="lang-btn on" id="lang-ko" onclick="setLang('ko')" title="한국어" type="button">KOR</button><span class="lang-sep">|</span><button class="lang-btn" id="lang-en" onclick="setLang('en')" title="English" type="button">ENG</button></div><button id="theme-toggle" onclick="toggleTheme()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:var(--muted);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 13px;cursor:pointer;flex-shrink:0;transition:all .2s" title="라이트/다크 모드 전환"><span id="th-icon">🌙</span><span id="th-label">Dark</span></button>
+</header><nav class="breadcrumb-nav" style="z-index:10;border-bottom:1px solid var(--border);font-size:var(--font-small);color:var(--muted);margin-top:var(--hdr);background:var(--bg2);align-items:center;gap:8px;padding:12px 60px 12px 5mm;display:flex;position:relative"><a data-en="Products" data-ko="제품" href="products.html" style="color:var(--muted);text-decoration:none">제품</a><span style="color:var(--cyan);opacity:.6;font-size:10px">▶</span><span data-en="Integrated Fire Monitoring Facilities" data-ko="소방통합감시시설" style="color:var(--text)">소방통합감시시설</span></nav>
+<div class="iaea-hero-wrap" id="hero-wrap" style="cursor:pointer">
+<div class="hero-empty hidden" id="hero-empty">
+<div class="he-plus">+</div>
+<div contenteditable="true" data-en="Click to insert an image / video" data-ko="클릭하여 이미지 / 영상 삽입" style="font-size:var(--font-body);font-weight:700">클릭하여 이미지 / 영상 삽입</div>
+</div>
+<img alt="Hero Image" id="hero-main-img" src="" style="display:none"/>
+<div class="hero-change-hint"><span contenteditable="true" data-en="📷 Click to replace the image / video" data-ko="📷 클릭하여 이미지 / 영상 교체">📷 클릭하여 이미지 / 영상 교체</span></div>
+<div class="hero-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();heroReplace()">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();heroDelete()">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" id="hero-file-input" style="display:none" type="file"/>
+</div>
+<div class="iaea-source" contenteditable="true" data-en="Source: enter the image source" data-ko="출처: 이미지 출처를 입력하세요">출처: 이미지 출처를 입력하세요</div>
+<section class="page-hero">
+<div class="page-hero-bg" style="background-image:url('')"></div>
+<div class="page-hero-overlay"></div>
+<div class="page-hero-content" style="padding:0 60px 0 5mm">
+<div class="breadcrumb"><a contenteditable="true" data-en="Home" data-ko="홈" href="index.html">홈</a> <span class="i18n" data-en="/ Integrated Fire Monitoring Facility" data-ko="/ 소방통합감시시설">/ 소방통합감시시설</span></div>
+<span class="page-hero-tag" contenteditable="true">Integrated Fire Protection Monitoring System</span>
+<h1 class="page-hero-title" contenteditable="true" data-en="Integrated Fire Monitoring Facilities" data-ko="소방통합감시시설">소방통합감시시설</h1>
+<div class="page-hero-sub" contenteditable="true" data-en="Auxiliary Control Panel · Wireless Communication Device · SCADA / GIS / BACnet Integration" data-ko="보조수신기 · 무선 통신 장치 · SCADA / GIS / BACnet 연동">보조수신기 · 무선 통신 장치 · SCADA / GIS / BACnet 연동</div>
+</div>
+</section>
+<div class="div-line"></div>
+<section class="pg" id="sub-facp">
+<div class="shdr">
+<div><span class="stag" contenteditable="true">01 · Sub Fire Alarm Control Panel</span><h2 class="stitle" contenteditable="true"><span class="i18n" data-en="Auxiliary" data-ko="보조">보조</span> <span class="hl" data-en="Control Panels" data-ko="수신기">수신기</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div class="srow-list fu vis"><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">📡</div><div class="srow-title" contenteditable="true" data-en="SCADA / BACnet / Modbus Support" data-ko="SCADA / BACnet / Modbus 지원">SCADA / BACnet / Modbus 지원</div><div class="srow-desc" contenteditable="true" data-en="Interworks flexibly with a wide range of upper-level supervisory systems. RS-485 and TCP/IP interfaces come as standard, so integration with existing infrastructure is quick and direct connection is possible without protocol conversion equipment. Broad support for industrial standards such as SCADA, BACnet, and Modbus means data exchange with building automation systems (BAS) or a central control server is unrestricted. Thanks to the open communication architecture, future system expansion or the addition of third-party equipment is easy to accommodate." data-ko="다양한 상위 관제 시스템과 유연하게 연동합니다. RS-485 및 TCP/IP 통신 인터페이스를 기본 제공하여 기존 인프라와 신속하게 통합할 수 있으며, 프로토콜 변환 장비 없이 직접 접속이 가능합니다. SCADA·BACnet·Modbus 등 산업 표준 프로토콜을 폭넓게 지원하므로 건물 자동제어(BAS)나 중앙 관제 서버와의 데이터 교환이 자유롭습니다. 개방형 통신 구조 덕분에 향후 시스템 확장이나 이기종 장비 추가에도 유연하게 대응할 수 있습니다.">다양한 상위 관제 시스템과 유연하게 연동합니다. RS-485 및 TCP/IP 통신 인터페이스를 기본 제공하여 기존 인프라와 신속하게 통합할 수 있으며, 프로토콜 변환 장비 없이 직접 접속이 가능합니다. SCADA·BACnet·Modbus 등 산업 표준 프로토콜을 폭넓게 지원하므로 건물 자동제어(BAS)나 중앙 관제 서버와의 데이터 교환이 자유롭습니다. 개방형 통신 구조 덕분에 향후 시스템 확장이나 이기종 장비 추가에도 유연하게 대응할 수 있습니다.</div></div><div class="img-box srow-imgbox" data-key="sf-row-1" data-label="SCADA / BACnet / Modbus 연동" id="sf-row-1"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="SCADA / BACnet / Modbus 연동" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('sf-row-1')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('sf-row-1')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="SCADA / BACnet / Modbus integration" data-ko="SCADA / BACnet / Modbus 연동">SCADA / BACnet / Modbus 연동</div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🏢</div><div class="srow-title" contenteditable="true" data-en="Nationwide Fire Station Integrated Monitoring" data-ko="전국 소방서 통합감시">전국 소방서 통합감시</div><div class="srow-desc" contenteditable="true" data-en="Connects directly to the integrated monitoring facility of the local fire department to share fire information in real time. When an alarm is raised, the fire station is notified automatically and immediately, shortening the time from report to dispatch and helping secure the golden hour for first response. Because the fire location and zone details are transmitted as well, crews arrive already aware of on-site conditions. Interworking with the nationwide monitoring network delivers a consistent integrated supervision framework even at large facilities." data-ko="관할 소방본부의 통합감시시설과 직결하여 실시간 화재 정보를 공유합니다. 경보가 발생하면 소방서에 즉시 자동으로 통보되어 접수·출동에 걸리는 시간을 단축하고, 초기 대응 골든타임 확보에 기여합니다. 화재 지점·경계구역 정보가 함께 전송되므로 소방 인력이 현장 상황을 사전에 파악한 상태로 출동할 수 있습니다. 전국 단위 감시망과의 연동을 통해 대규모 시설에서도 일관된 통합 관제 체계를 구현합니다.">관할 소방본부의 통합감시시설과 직결하여 실시간 화재 정보를 공유합니다. 경보가 발생하면 소방서에 즉시 자동으로 통보되어 접수·출동에 걸리는 시간을 단축하고, 초기 대응 골든타임 확보에 기여합니다. 화재 지점·경계구역 정보가 함께 전송되므로 소방 인력이 현장 상황을 사전에 파악한 상태로 출동할 수 있습니다. 전국 단위 감시망과의 연동을 통해 대규모 시설에서도 일관된 통합 관제 체계를 구현합니다.</div></div><div class="img-box srow-imgbox" data-key="sf-row-2" data-label="전국 소방서 통합감시" id="sf-row-2"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="전국 소방서 통합감시" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('sf-row-2')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('sf-row-2')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="Nationwide Fire Station Integrated Monitoring" data-ko="전국 소방서 통합감시">전국 소방서 통합감시</div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🔔</div><div class="srow-title" contenteditable="true" data-en="640 Units Delivered for Seoul Metro Line 2" data-ko="서울메트로 2호선 640대 납품">서울메트로 2호선 640대 납품</div><div class="srow-desc" contenteditable="true" data-en="640 auxiliary control panels were delivered to every station on Seoul Subway Line 2, proving integrated supervision of the fire protection system in service. Continuous, uninterrupted operation in busy 24-hour underground stations has validated the product's reliability and durability. Binding many stations into a single supervisory framework for integrated fire and equipment monitoring has raised the safety management standard of a major public transit network. This project is a flagship demonstration of our capability to deliver large-scale public infrastructure work." data-ko="서울지하철 2호선 전 역사에 보조수신기 640대를 납품하여 소방 시스템 통합 관제를 실증 완료했습니다. 유동 인구가 많고 24시간 운영되는 지하 역사 환경에서 장기간 무중단으로 운용되며 제품의 신뢰성과 내구성이 검증되었습니다. 다수 역사를 하나의 관제 체계로 묶어 화재·설비 정보를 통합 감시함으로써 대규모 대중교통 인프라의 안전 관리 수준을 높였습니다. 이 실적은 공공 대형 프로젝트 수행 역량을 입증하는 대표 사례입니다.">서울지하철 2호선 전 역사에 보조수신기 640대를 납품하여 소방 시스템 통합 관제를 실증 완료했습니다. 유동 인구가 많고 24시간 운영되는 지하 역사 환경에서 장기간 무중단으로 운용되며 제품의 신뢰성과 내구성이 검증되었습니다. 다수 역사를 하나의 관제 체계로 묶어 화재·설비 정보를 통합 감시함으로써 대규모 대중교통 인프라의 안전 관리 수준을 높였습니다. 이 실적은 공공 대형 프로젝트 수행 역량을 입증하는 대표 사례입니다.</div></div><div class="img-box srow-imgbox" data-key="sf-row-3" data-label="서울메트로 2호선 640대 납품 현장" id="sf-row-3"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="서울메트로 2호선 640대 납품 현장" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('sf-row-3')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('sf-row-3')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="Seoul Metro Line 2 installation site — 640 units delivered" data-ko="서울메트로 2호선 640대 납품 현장">서울메트로 2호선 640대 납품 현장</div></div></div></div><div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#AuxiliaryControlPanel" data-ko="#보조수신기">#보조수신기</span><span class="sec-kw" contenteditable="true">#SCADA</span><span class="sec-kw" contenteditable="true">#BACnet</span><span class="sec-kw" contenteditable="true" data-en="#SeoulMetro" data-ko="#서울메트로">#서울메트로</span></div></section>
+<div class="div-line"></div>
+<section class="pg alt" id="wireless">
+<div class="shdr">
+<div><span class="stag" contenteditable="true">02 · Wireless Communication Device</span><h2 class="stitle" contenteditable="true"><span class="i18n" data-en="Wireless" data-ko="무선">무선</span> <span class="hl" data-en="Communication Device" data-ko="통신 장치">통신 장치</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div class="srow-list fu vis"><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🔋</div><div class="srow-title" contenteditable="true" data-en="Low-Power Design" data-ko="저전력 설계">저전력 설계</div><div class="srow-desc" contenteditable="true" data-en="An ultra-low-power circuit design that allows long battery life minimizes the maintenance cycle after installation. The device runs independently without dedicated power wiring, so it installs easily in areas where cabling is difficult or in retrofits of existing buildings. Low-power sleep modes and event-driven communication curb battery drain while still delivering fire signals without delay. By greatly reducing power infrastructure cost and installation effort, it lowers total cost of ownership (TCO)." data-ko="배터리 장기 운용이 가능한 초저전력 회로 설계를 채택하여 설치 이후 유지보수 주기를 최소화합니다. 별도의 전원 배선 없이 독립적으로 운용할 수 있어 배선 공사가 어려운 구역이나 기존 건물의 리모델링 현장에도 손쉽게 설치할 수 있습니다. 저전력 슬립 모드와 이벤트 기반 통신으로 배터리 소모를 억제하면서도 화재 신호는 지연 없이 전달합니다. 전원 인프라 구축 비용과 시공 부담을 크게 줄여 총소유비용(TCO)을 낮추는 것이 강점입니다.">배터리 장기 운용이 가능한 초저전력 회로 설계를 채택하여 설치 이후 유지보수 주기를 최소화합니다. 별도의 전원 배선 없이 독립적으로 운용할 수 있어 배선 공사가 어려운 구역이나 기존 건물의 리모델링 현장에도 손쉽게 설치할 수 있습니다. 저전력 슬립 모드와 이벤트 기반 통신으로 배터리 소모를 억제하면서도 화재 신호는 지연 없이 전달합니다. 전원 인프라 구축 비용과 시공 부담을 크게 줄여 총소유비용(TCO)을 낮추는 것이 강점입니다.</div></div><div class="img-box srow-imgbox" data-key="wl-row-1" data-label="저전력 무선 통신 장치" id="wl-row-1"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="저전력 무선 통신 장치" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('wl-row-1')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('wl-row-1')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="Low-power wireless communication device" data-ko="저전력 무선 통신 장치">저전력 무선 통신 장치</div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🔗</div><div class="srow-title" contenteditable="true" data-en="Panel Integration" data-ko="수신기 연동">수신기 연동</div><div class="srow-desc" contenteditable="true" data-en="Communicates wirelessly and directly with the auxiliary control panel to relay fire signals instantly. A reliable two-way wireless link is maintained without any cabling, and panel-side acknowledgment (ACK) eliminates dropped signals. Continuous self-diagnosis of link status notifies administrators the moment a fault occurs, so no monitoring gap arises. Many wireless devices can be grouped under a single auxiliary control panel, covering large areas economically." data-ko="보조수신기와 무선으로 직접 통신하여 화재 신호를 즉시 전달합니다. 유선 배선 없이도 신뢰성 높은 양방향 무선 링크를 유지하며, 수신기 측 응답 확인(ACK)을 통해 신호 누락을 원천 차단합니다. 통신 상태를 상시 자가 진단하여 링크 이상 시 관리자에게 즉시 통보하므로 감시 공백이 발생하지 않습니다. 다수의 무선 장치를 하나의 보조수신기에 묶어 운용할 수 있어 넓은 구역을 경제적으로 커버합니다.">보조수신기와 무선으로 직접 통신하여 화재 신호를 즉시 전달합니다. 유선 배선 없이도 신뢰성 높은 양방향 무선 링크를 유지하며, 수신기 측 응답 확인(ACK)을 통해 신호 누락을 원천 차단합니다. 통신 상태를 상시 자가 진단하여 링크 이상 시 관리자에게 즉시 통보하므로 감시 공백이 발생하지 않습니다. 다수의 무선 장치를 하나의 보조수신기에 묶어 운용할 수 있어 넓은 구역을 경제적으로 커버합니다.</div></div><div class="img-box srow-imgbox" data-key="wl-row-2" data-label="수신기 무선 연동" id="wl-row-2"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="수신기 무선 연동" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('wl-row-2')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('wl-row-2')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="Wireless panel integration" data-ko="수신기 무선 연동">수신기 무선 연동</div></div></div></div><div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#WirelessCommunication" data-ko="#무선통신">#무선통신</span><span class="sec-kw" contenteditable="true" data-en="#LowPowerDesign" data-ko="#저전력설계">#저전력설계</span><span class="sec-kw" contenteditable="true" data-en="#PanelIntegration" data-ko="#수신기연동">#수신기연동</span><span class="sec-kw" contenteditable="true" data-en="#BatteryOperation" data-ko="#배터리운용">#배터리운용</span></div></section>
+<div class="div-line"></div>
+<section class="pg" id="architecture">
+<div class="shdr">
+<div><span class="stag" contenteditable="true">03 · System Architecture</span><h2 class="stitle" contenteditable="true"><span class="i18n" data-en="System" data-ko="시스템">시스템</span> <span class="hl" data-en="Integration Diagram" data-ko="연계 구성도">연계 구성도</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<p class="diag-desc" contenteditable="true" data-en="Temperature and fire information gathered by the fiber-optic detector is converted into digital signals by the R-type control panel and relayed in real time over the TCP/IP network to the integrated fire monitoring auxiliary control panel and the GIS system. Finally, a direct link to the 119 fire department integrated control center shares the fire location and situation immediately, establishing a rapid response chain." data-ko="광케이블 감지기에서 수집한 온도·화재 정보가 R형 수신기를 통해 디지털 신호로 변환되고, TCP/IP 네트워크를 거쳐 소방통합감시 보조수신기 및 GIS 시스템으로 실시간 전달됩니다. 최종적으로 119 소방본부 통합관제센터와 직결되어 화재 발생 위치·상황을 즉시 공유함으로써 신속한 대응 체계를 구축합니다.">광케이블 감지기에서 수집한 온도·화재 정보가 R형 수신기를 통해 디지털 신호로 변환되고, TCP/IP 네트워크를 거쳐 소방통합감시 보조수신기 및 GIS 시스템으로 실시간 전달됩니다. 최종적으로 119 소방본부 통합관제센터와 직결되어 화재 발생 위치·상황을 즉시 공유함으로써 신속한 대응 체계를 구축합니다.</p>
+<div class="diagram-row fu vis">
+<div class="diag-box">
+<div class="diag-img-wrap" data-key="diag-img01" id="diag-img01" style="cursor: pointer;">
+<img alt="광케이블 감지기" class="box-img" src=""/>
+<div class="box-placeholder"><div class="box-plus">+</div><div contenteditable="true" data-en="Insert an image" data-ko="이미지 삽입" style="font-size:11px">이미지 삽입</div></div>
+<div class="box-controls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();boxReplace('diag-img01')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();boxDelete('diag-img01')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-info"><div class="diag-ic">🌡️</div><div class="diag-nm" contenteditable="true" data-en="Fiber-Optic Detector" data-ko="광케이블 감지기">광케이블 감지기</div><div class="diag-sub" contenteditable="true" data-en="DET24-74 / DET26-9" data-ko="감24-74 / 감26-9">감24-74 / 감26-9</div></div>
+</div>
+<div class="diag-arrow">→</div>
+<div class="diag-box" style="border-color:rgba(0,210,240,.4)">
+<div class="diag-img-wrap" data-key="diag-img02" id="diag-img02" style="cursor: pointer;">
+<img alt="R형 수신기" class="box-img" src=""/>
+<div class="box-placeholder"><div class="box-plus">+</div><div contenteditable="true" data-en="Insert an image" data-ko="이미지 삽입" style="font-size:11px">이미지 삽입</div></div>
+<div class="box-controls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();boxReplace('diag-img02')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();boxDelete('diag-img02')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-info"><div class="diag-ic">🔴</div><div class="diag-nm" contenteditable="true" data-en="R-Type FACP" data-ko="R형 수신기">R형 수신기</div><div class="diag-sub" contenteditable="true" data-en="FACP25-66 DTS-Integrated" data-ko="수25-66 DTS 통합형">수25-66 DTS 통합형</div></div>
+</div>
+<div class="diag-arrow">→</div>
+<div class="diag-box">
+<div class="diag-img-wrap" data-key="diag-img03" id="diag-img03" style="cursor: pointer;">
+<img alt="TCP/IP 네트워크" class="box-img" src=""/>
+<div class="box-placeholder"><div class="box-plus">+</div><div contenteditable="true" data-en="Insert an image" data-ko="이미지 삽입" style="font-size:11px">이미지 삽입</div></div>
+<div class="box-controls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();boxReplace('diag-img03')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();boxDelete('diag-img03')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-info"><div class="diag-ic">📡</div><div class="diag-nm" contenteditable="true" data-en="TCP/IP Network" data-ko="TCP/IP 네트워크">TCP/IP 네트워크</div><div class="diag-sub" contenteditable="true">RS-485 / Ethernet</div></div>
+</div>
+<div class="diag-arrow">→</div>
+<div class="diag-box" style="border-color:rgba(0,230,118,.3)">
+<div class="diag-img-wrap" data-key="diag-img04" id="diag-img04" style="cursor: pointer;">
+<img alt="소방통합감시 보조수신기" class="box-img" src=""/>
+<div class="box-placeholder"><div class="box-plus">+</div><div contenteditable="true" data-en="Insert an image" data-ko="이미지 삽입" style="font-size:11px">이미지 삽입</div></div>
+<div class="box-controls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();boxReplace('diag-img04')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();boxDelete('diag-img04')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-info"><div class="diag-ic">🖥️</div><div class="diag-nm" contenteditable="true" data-en="Integrated Fire Monitoring" data-ko="소방통합감시">소방통합감시</div><div class="diag-sub" contenteditable="true" data-en="Auxiliary Control Panel / GIS" data-ko="보조수신기 / GIS">보조수신기 / GIS</div></div>
+</div>
+<div class="diag-arrow">→</div>
+<div class="diag-box">
+<div class="diag-img-wrap" data-key="diag-img05" id="diag-img05" style="cursor: pointer;">
+<img alt="소방서 통합관제" class="box-img" src=""/>
+<div class="box-placeholder"><div class="box-plus">+</div><div contenteditable="true" data-en="Insert an image" data-ko="이미지 삽입" style="font-size:11px">이미지 삽입</div></div>
+<div class="box-controls"><button class="box-ctrl-btn replace" onclick="event.stopPropagation();boxReplace('diag-img05')">🔄</button><button class="box-ctrl-btn delete" onclick="event.stopPropagation();boxDelete('diag-img05')">🗑</button></div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-info"><div class="diag-ic">🚒</div><div class="diag-nm" contenteditable="true" data-en="Fire Department Integrated Control" data-ko="소방서 통합관제">소방서 통합관제</div><div class="diag-sub" contenteditable="true" data-en="Link to the 119 Fire Department" data-ko="119 소방본부 연결">119 소방본부 연결</div></div>
+</div>
+</div>
+<div class="srow-list fu vis" style="margin-top:36px"><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🌡️</div><div class="srow-title" contenteditable="true" data-en="Fiber-Optic Detector" data-ko="광케이블 감지기">광케이블 감지기</div><div class="srow-desc" contenteditable="true" data-en="A rate-of-rise distributed detector that measures temperature continuously over runs of several kilometers with a single strand of optical cable. Raman backscattering captures the temperature profile of the entire cable in real time and pinpoints hot spots to within meters. Immune to electromagnetic interference and suitable for explosion-proof environments, it is ideal for harsh sites such as tunnels, utility tunnels, and underground ducts. It is a proven detection solution with KFI type approvals DET24-74 and DET26-9." data-ko="단일 광케이블 한 가닥으로 최대 수 킬로미터 구간의 온도를 연속 측정하는 차동식분포형 감지기입니다. 라만 후방산란 방식으로 케이블 전 구간의 온도 프로파일을 실시간 취득하여 열점(Hot spot) 발생 위치를 미터 단위로 특정합니다. 전자기 간섭에 강하고 방폭 환경에 적합하여 터널·전력구·지하구 등 가혹한 현장에 최적입니다. KFI 감24-74·감26-9 형식승인을 획득한 검증된 감지 솔루션입니다.">단일 광케이블 한 가닥으로 최대 수 킬로미터 구간의 온도를 연속 측정하는 차동식분포형 감지기입니다. 라만 후방산란 방식으로 케이블 전 구간의 온도 프로파일을 실시간 취득하여 열점(Hot spot) 발생 위치를 미터 단위로 특정합니다. 전자기 간섭에 강하고 방폭 환경에 적합하여 터널·전력구·지하구 등 가혹한 현장에 최적입니다. KFI 감24-74·감26-9 형식승인을 획득한 검증된 감지 솔루션입니다.</div></div><div class="img-box srow-imgbox" data-key="ar-row-1" data-label="광케이블 감지기 (감24-74 / 감26-9)" id="ar-row-1"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="광케이블 감지기 (감24-74 / 감26-9)" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('ar-row-1')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('ar-row-1')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="Fiber-Optic Detector (DET24-74 / DET26-9)" data-ko="광케이블 감지기 (감24-74 / 감26-9)">광케이블 감지기 (감24-74 / 감26-9)</div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🔴</div><div class="srow-title" contenteditable="true" data-en="R-Type FACP" data-ko="R형 수신기">R형 수신기</div><div class="srow-desc" contenteditable="true" data-en="An integrated R-type control panel that converts the analog temperature and fire information gathered by the fiber-optic detector into digital signals. With DTS (distributed temperature sensing) built into the panel, the entire cable run is monitored on one screen and an abnormal temperature triggers an alarm together with its location. 6 kV surge protection comes as standard to shield the circuitry from lightning and induced surges. As a type-approved FACP25-66 product, it operates reliably even in harsh environments such as extra-high-voltage utility tunnels." data-ko="광케이블 감지기가 수집한 아날로그 온도·화재 정보를 디지털 신호로 변환하는 통합형 R형 수신기입니다. DTS(분포형 온도 감지)를 수신기에 통합하여 케이블 전 구간을 하나의 화면에서 감시하고, 이상 온도 발생 시 위치와 함께 경보를 발생시킵니다. 6kV 서지 보호를 기본 탑재하여 낙뢰·유도 서지로부터 회로를 보호합니다. 수25-66 형식승인 제품으로 초고압 전력구 등 가혹한 환경에서도 안정적으로 동작합니다.">광케이블 감지기가 수집한 아날로그 온도·화재 정보를 디지털 신호로 변환하는 통합형 R형 수신기입니다. DTS(분포형 온도 감지)를 수신기에 통합하여 케이블 전 구간을 하나의 화면에서 감시하고, 이상 온도 발생 시 위치와 함께 경보를 발생시킵니다. 6kV 서지 보호를 기본 탑재하여 낙뢰·유도 서지로부터 회로를 보호합니다. 수25-66 형식승인 제품으로 초고압 전력구 등 가혹한 환경에서도 안정적으로 동작합니다.</div></div><div class="img-box srow-imgbox" data-key="ar-row-2" data-label="R형 수신기 (수25-66 DTS 통합형)" id="ar-row-2"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="R형 수신기 (수25-66 DTS 통합형)" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('ar-row-2')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('ar-row-2')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="R-Type Control Panel (FACP25-66 DTS-Integrated)" data-ko="R형 수신기 (수25-66 DTS 통합형)">R형 수신기 (수25-66 DTS 통합형)</div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">📡</div><div class="srow-title" contenteditable="true" data-en="TCP/IP Network" data-ko="TCP/IP 네트워크">TCP/IP 네트워크</div><div class="srow-desc" contenteditable="true" data-en="The communication layer that carries digitized fire information from the R-type control panel to upper-level systems. Support for RS-485 and Ethernet (TCP/IP) means it slots straight into existing network infrastructure, and standard protocols allow free data exchange between equipment from different vendors. A redundant configuration keeps communication alive even if one path fails. It serves as a stable backbone that delivers real-time data without delay, even on large sites." data-ko="R형 수신기에서 디지털화된 화재 정보를 상위 시스템으로 전달하는 통신 계층입니다. RS-485와 Ethernet(TCP/IP)을 지원하여 기존 네트워크 인프라에 그대로 편입할 수 있으며, 표준 프로토콜 기반으로 이기종 장비 간 데이터 교환이 자유롭습니다. 이중화 구성을 통해 한쪽 경로에 장애가 발생해도 통신이 중단되지 않도록 신뢰성을 확보합니다. 대규모 현장에서도 지연 없이 실시간 데이터를 전송하는 안정적인 백본 역할을 수행합니다.">R형 수신기에서 디지털화된 화재 정보를 상위 시스템으로 전달하는 통신 계층입니다. RS-485와 Ethernet(TCP/IP)을 지원하여 기존 네트워크 인프라에 그대로 편입할 수 있으며, 표준 프로토콜 기반으로 이기종 장비 간 데이터 교환이 자유롭습니다. 이중화 구성을 통해 한쪽 경로에 장애가 발생해도 통신이 중단되지 않도록 신뢰성을 확보합니다. 대규모 현장에서도 지연 없이 실시간 데이터를 전송하는 안정적인 백본 역할을 수행합니다.</div></div><div class="img-box srow-imgbox" data-key="ar-row-3" data-label="TCP/IP · RS-485 네트워크" id="ar-row-3"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="TCP/IP · RS-485 네트워크" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('ar-row-3')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('ar-row-3')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="TCP/IP · RS-485 Network" data-ko="TCP/IP · RS-485 네트워크">TCP/IP · RS-485 네트워크</div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🖥️</div><div class="srow-title" contenteditable="true" data-en="Integrated Fire Monitoring" data-ko="소방 통합 감시">소방 통합 감시</div><div class="srow-desc" contenteditable="true" data-en="Fire information delivered over the network is supervised in real time by the integrated fire monitoring auxiliary control panel and the GIS system. The fire location is visualized as coordinates on a map, so administrators can see at a glance what is happening and where. Zone and equipment details are shown alongside, allowing fast initial assessment and response orders. Multiple facilities are monitored from a single control screen, completing an integrated safety management framework." data-ko="네트워크를 통해 전달된 화재 정보를 소방통합감시 보조수신기와 GIS 시스템에서 실시간으로 통합 관제합니다. 화재 발생 위치가 지도 위 좌표로 시각화되어 관리자가 어느 구역에서 무슨 상황이 벌어지는지 직관적으로 파악할 수 있습니다. 경계구역·설비 정보가 함께 표시되므로 초기 판단과 대응 지시가 신속하게 이루어집니다. 복수 시설을 하나의 관제 화면에서 감시하여 통합 안전 관리 체계를 완성합니다.">네트워크를 통해 전달된 화재 정보를 소방통합감시 보조수신기와 GIS 시스템에서 실시간으로 통합 관제합니다. 화재 발생 위치가 지도 위 좌표로 시각화되어 관리자가 어느 구역에서 무슨 상황이 벌어지는지 직관적으로 파악할 수 있습니다. 경계구역·설비 정보가 함께 표시되므로 초기 판단과 대응 지시가 신속하게 이루어집니다. 복수 시설을 하나의 관제 화면에서 감시하여 통합 안전 관리 체계를 완성합니다.</div></div><div class="img-box srow-imgbox" data-key="ar-row-4" data-label="소방 통합 감시 (보조수신기 / GIS)" id="ar-row-4"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="소방 통합 감시 (보조수신기 / GIS)" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('ar-row-4')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('ar-row-4')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="Integrated Fire Monitoring (Auxiliary Control Panel / GIS)" data-ko="소방 통합 감시 (보조수신기 / GIS)">소방 통합 감시 (보조수신기 / GIS)</div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-icon">🚒</div><div class="srow-title" contenteditable="true" data-en="Fire Department Integrated Control" data-ko="소방서 통합 관제">소방서 통합 관제</div><div class="srow-desc" contenteditable="true" data-en="Finally, a direct link to the 119 fire department integrated control center shares the fire location and situation immediately. Automatic notification shortens the time from report to dispatch, and crews respond already holding on-site information, improving early suppression. Real-time data sharing with the responsible fire crews supports a coordinated command structure even during large-scale emergencies. This is the final supervisory stage, connecting everything from detection to fire response into a single flow." data-ko="최종적으로 119 소방본부 통합관제센터와 직결되어 화재 발생 위치·상황을 즉시 공유합니다. 자동 통보 체계를 통해 접수부터 출동까지의 시간을 단축하고, 현장 정보를 사전에 확보한 상태로 대응할 수 있어 초기 진압 효율을 높입니다. 관할 소방 인력과 실시간으로 데이터를 연동하여 대규모 재난 상황에서도 일사불란한 지휘 체계를 지원합니다. 감지부터 소방 대응까지 이어지는 전 과정을 하나의 흐름으로 연결하는 최종 관제 단계입니다.">최종적으로 119 소방본부 통합관제센터와 직결되어 화재 발생 위치·상황을 즉시 공유합니다. 자동 통보 체계를 통해 접수부터 출동까지의 시간을 단축하고, 현장 정보를 사전에 확보한 상태로 대응할 수 있어 초기 진압 효율을 높입니다. 관할 소방 인력과 실시간으로 데이터를 연동하여 대규모 재난 상황에서도 일사불란한 지휘 체계를 지원합니다. 감지부터 소방 대응까지 이어지는 전 과정을 하나의 흐름으로 연결하는 최종 관제 단계입니다.</div></div><div class="img-box srow-imgbox" data-key="ar-row-5" data-label="소방서 통합 관제 (119 소방본부)" id="ar-row-5"><input accept="image/*,video/*" style="display:none" type="file"/><div class="box-media-wrap srow-media"><img alt="소방서 통합 관제 (119 소방본부)" class="box-img" src=""/><div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to insert an image" data-ko="클릭하여 이미지 삽입">클릭하여 이미지 삽입</div></div><div class="box-controls"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="boxReplace('ar-row-5')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="boxDelete('ar-row-5')">🗑 삭제</button></div></div><div class="box-label" contenteditable="true" data-en="Fire Department Integrated Control (119 Fire Department)" data-ko="소방서 통합 관제 (119 소방본부)">소방서 통합 관제 (119 소방본부)</div></div></div></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#FiberOpticDetector" data-ko="#광케이블감지기">#광케이블감지기</span><span class="sec-kw" contenteditable="true" data-en="#RTypeFACP" data-ko="#R형수신기">#R형수신기</span><span class="sec-kw" contenteditable="true">#TCPIP</span><span class="sec-kw" contenteditable="true" data-en="#119FireDepartment" data-ko="#119소방본부">#119소방본부</span></div></section>
+<div class="div-line"></div>
+<section class="cta-wrap" id="contact">
+<div class="cta-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch">
+<div>
+<div class="cta-lb">// Contact Us</div>
+<h2 class="cta-hd" contenteditable="true"><span class="i18n" data-en="Integrated Fire Monitoring Facilities" data-ko="소방통합감시시설">소방통합감시시설</span> <span data-en="Technical Inquiry" data-ko="기술 문의">기술 문의</span></h2>
+<div class="cta-info">
+<div class="cta-row"><div class="cta-ri">📍</div><div contenteditable="true" data-en="11F, Unit 1116, Gasan Public Bldg. B,&lt;br/&gt;178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea" data-ko="(08513) 서울시 금천구 디지털로 178&lt;br/&gt;가산퍼블릭 B동 11층 1116호">(08513) 서울시 금천구 디지털로 178<br/>가산퍼블릭 B동 11층 1116호</div></div>
+<div class="cta-row"><div class="cta-ri">📞</div><div contenteditable="true">Tel: 02-6095-0520  |  Fax: 02-6095-0522</div></div>
+<div class="cta-row"><div class="cta-ri">✉️</div><div contenteditable="true">Email: info@uno-system.com</div></div>
+<div class="cta-row"><div class="cta-ri">🌐</div><div contenteditable="true">Website: <a contenteditable="false" href="https://www.uno-system.com" style="color:var(--cyan)">https://www.uno-system.com</a></div></div>
+<div class="cta-row"><div class="cta-ri">🕐</div><div contenteditable="true" data-en="Mon–Fri 09:00–18:00 KST (excl. public holidays)" data-ko="월–금 09:00–18:00 (공휴일 제외)">월–금 09:00–18:00 (공휴일 제외)</div></div>
+</div>
+</div>
+<div class="img-box" data-key="cta-img" id="box-cta-img" style="cursor:pointer;aspect-ratio:16/9">
+<div class="box-media-wrap">
+<img alt="문의 이미지" class="box-img" src="" style="object-fit:contain"/>
+<div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">클릭하여<br/>이미지/영상 삽입</div></div>
+</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();boxReplace('box-cta-img')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();boxDelete('box-cta-img')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</section>
+<footer id="footer">
+<div class="foot-inner">
+<div class="foot-img-col" data-key="foot-img" id="foot-img-col" title="클릭하여 이미지/영상 삽입">
+<img alt="푸터 이미지" class="foot-col-img active" id="foot-col-img" src=""/>
+<div class="foot-img-ph" id="foot-img-ph">
+<div class="fi-plus">+</div>
+<div contenteditable="true" data-en="Click to&lt;br/&gt;insert an image" data-ko="클릭하여&lt;br/&gt;이미지 삽입" style="font-size:var(--font-small)">클릭하여<br/>이미지 삽입</div>
+</div>
+<div class="foot-img-overlay"><span contenteditable="true" data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="foot-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();footImgReplace()">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();footImgDelete()">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" id="foot-img-input" style="display:none" type="file"/>
+</div>
+<div class="foot-right-col">
+<div class="foot-info-area">
+<div class="foot-logo-row">
+<div class="foot-logo-img-wrap" id="foot-logo-wrap" title="클릭하여 로고 교체">
+<img alt="UNO SYSTEM 로고" class="foot-logo-img" id="foot-logo-img" src=""/>
+<div class="foot-logo-hint" data-en="📷&lt;br/&gt;Replace" data-ko="📷&lt;br/&gt;교체">📷<br/>교체</div>
+</div>
+<div class="foot-logo-text">
+<span class="foot-logo-kr" contenteditable="true" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템(주)">유노시스템(주)</span>
+<span class="foot-logo-en" contenteditable="true">UNO SYSTEM</span>
+</div>
+</div>
+<div class="foot-addr" contenteditable="true" data-en="11F, Unit 1116, Gasan Public Bldg. B,&lt;br/&gt;178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea" data-ko="(08513) 서울시 금천구 디지털로 178&lt;br/&gt;가산퍼블릭 B동 11층 1116호">(08513) 서울시 금천구 디지털로 178<br/>가산퍼블릭 B동 11층 1116호</div>
+<div class="foot-contact" contenteditable="true">Tel: (02) 6095-0520  |  Fax: (02) 6095-0522</div>
+<div class="foot-contact" contenteditable="true">Email: info@uno-system.com</div>
+<div class="foot-contact" contenteditable="true">Website: <a contenteditable="false" href="https://www.uno-system.com" style="color:var(--cyan);text-decoration:none">https://www.uno-system.com</a></div>
+<div class="foot-copy" contenteditable="true">© 2026 UNO SYSTEM CO., LTD. All rights reserved.</div>
+</div>
+<a class="foot-inquiry-box" href="mailto:info@uno-system.com?subject=유노시스템㈜%20문의&amp;body=안녕하세요%2C%20유노시스템㈜%20문의드립니다." title="이메일 문의하기">
+<div class="foot-inquiry-icon">✉️</div>
+<div class="foot-inquiry-label" data-en="Email Inquiry" data-ko="이메일 문의하기">이메일 문의하기</div>
+<div aria-hidden="true" style="font-size:11px;color:var(--muted);opacity:0;height:0;overflow:hidden;user-select:none">info@uno-system.com</div>
+</a>
+</div>
+</div>
+</footer>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   UNO SYSTEM 이미지 시스템 — 영구 저장 확정판 v4
+   대원칙: 이미지 선택 → base64 → img.src 직접 내장 (HTML에 저장)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── IndexedDB 보조 ── */
+var UNO = (function(){
+  var DB_NAME='uno3db', STORE='imgs', NS='uno3_'+((location.pathname.split('/').pop()||'root').replace(/[^A-Za-z0-9_.-]/g,'_'))+'_';
+  var _db=null;
+  function openDB(cb){
+    if(_db){ cb(_db); return; }
+    try{
+      var req=indexedDB.open(DB_NAME,1);
+      req.onupgradeneeded=function(e){ e.target.result.createObjectStore(STORE); };
+      req.onsuccess=function(e){ _db=e.target.result; cb(_db); };
+      req.onerror=function(){ cb(null); };
+    } catch(e){
+      cb(null);
+    }
+  }
+  function save(k,v){
+    openDB(function(db){
+      if(!db) return;
+      try{
+        var tx=db.transaction(STORE,'readwrite');
+        tx.objectStore(STORE).put(v,NS+k);
+      }catch(e){}
+    });
+  }
+  function load(k,cb){
+    openDB(function(db){
+      if(!db){ cb(null); return; }
+      try{
+        var tx=db.transaction(STORE,'readonly');
+        var req=tx.objectStore(STORE).get(NS+k);
+        req.onsuccess=function(){ cb(req.result||null); };
+        req.onerror=function(){ cb(null); };
+      }catch(e){ cb(null); }
+    });
+  }
+  function del(k){
+    openDB(function(db){
+      if(!db) return;
+      try{
+        var tx=db.transaction(STORE,'readwrite');
+        tx.objectStore(STORE).delete(NS+k);
+      }catch(e){}
+    });
+  }
+  return { save:save, load:load, del:del };
+})();
+
+function toB64(file, cb){
+  var fr = new FileReader();
+  fr.onload = function(e){ cb(e.target.result); };
+  fr.onerror = function(){};
+  fr.readAsDataURL(file);
+}
+
+var _picking = new WeakSet();
+function pickFile(inp){
+  if(_picking.has(inp)) return;
+  _picking.add(inp); inp.value=''; inp.click();
+  setTimeout(function(){ _picking.delete(inp); }, 2000);
+}
+
+function validSrc(src){
+  return !!(src && (src.indexOf('data:image')===0 || src.indexOf('data:video')===0));
+}
+
+function showImage(img, phs, url){
+  if(!img) return;
+  img.src = url;
+  img.style.setProperty('display','block','important');
+  img.style.setProperty('opacity','1','important');
+  img.style.setProperty('visibility','visible','important');
+  img.classList.add('active');
+  if(phs) phs.forEach(function(ph){
+    if(ph){ ph.style.display='none'; ph.classList.add('hidden'); }
+  });
+  var par = img.parentElement;
+  if(par && par.offsetHeight < 10){
+    par.style.minHeight = '200px';
+    par.style.position = 'relative';
+  }
+}
+
+function hideImage(img, phs){
+  if(!img) return;
+  img.removeAttribute('src');
+  img.style.display='none';
+  img.classList.remove('active');
+  if(phs) phs.forEach(function(ph){
+    if(ph){ ph.style.display=''; ph.classList.remove('hidden'); }
+  });
+}
+
+function initBox(box, imgSel, phSels, KEY, accept){
+  if(box._u4) return; box._u4 = true;
+  var img = box.querySelector(imgSel);
+  var phs = (phSels||[]).map(function(s){ return box.querySelector(s); }).filter(Boolean);
+  var inp = box.querySelector('input[type="file"]');
+  if(!inp){
+    inp = document.createElement('input');
+    inp.type='file'; inp.accept=accept||'image/*,video/*'; inp.style.display='none';
+    box.appendChild(inp);
+  }
+  if(img && validSrc(img.src)){
+    showImage(img, phs, img.src);
+    UNO.save(KEY, img.src);
+  } else {
+    UNO.load(KEY, function(saved){ if(saved && img) showImage(img, phs, saved); });
+  }
+  inp.addEventListener('change', function(){
+    var f = this.files[0]; if(!f) return;
+    toB64(f, function(url){ showImage(img, phs, url); UNO.save(KEY, url); });
+  });
+  box.style.cursor='pointer';
+  box.addEventListener('click', function(e){
+    if(e.target.closest('button,input')) return;
+    e.stopPropagation(); pickFile(inp);
+  });
+}
+
+function initAllBoxes(){
+  /* 1. Hero */
+  document.querySelectorAll('.iaea-hero-wrap').forEach(function(wrap){
+    if(wrap._u4) return; wrap._u4=true;
+    var img   = wrap.querySelector('img');
+    var empty = wrap.querySelector('.hero-empty');
+    var KEY   = wrap.id || 'hero';
+    var inp   = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    document.body.appendChild(inp);
+    if(img && validSrc(img.src)){
+      img.style.setProperty('display','block','important');
+      if(empty) empty.classList.add('hidden');
+    } else {
+      UNO.load(KEY, function(s){
+        if(s&&img){ img.src=s; img.style.setProperty('display','block','important'); if(empty) empty.classList.add('hidden'); }
+      });
+    }
+    inp.addEventListener('change', function(){
+      var f=this.files[0]; if(!f) return;
+      toB64(f, function(url){
+        if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+        if(empty) empty.classList.add('hidden');
+        UNO.save(KEY, url);
+      });
+    });
+    wrap.style.cursor='pointer';
+    wrap.addEventListener('click', function(e){
+      if(e.target.closest('button,input')) return; e.stopPropagation(); pickFile(inp);
+    });
+    window.heroReplace = function(){ pickFile(inp); };
+    window.heroDelete  = function(){
+      if(!confirm('Hero 이미지 삭제?')) return;
+      if(img){ img.removeAttribute('src'); img.style.display='none'; }
+      if(empty) empty.classList.remove('hidden');
+      UNO.del(KEY);
+    };
+  });
+
+  /* 2. .img-box */
+  document.querySelectorAll('.img-box').forEach(function(box){
+    initBox(box, '.box-img', ['.box-placeholder'], box.dataset.key||box.id, 'image/*,video/*');
+  });
+
+  /* 3. .biz-img-box */
+  document.querySelectorAll('.biz-img-box').forEach(function(bib){
+    initBox(bib, '.biz-box-img', ['.biz-img-ph'], bib.dataset.key||bib.id, 'image/*,video/*');
+  });
+
+  /* 4. .diag-img-wrap */
+  document.querySelectorAll('.diag-img-wrap').forEach(function(box){
+    initBox(box, '.box-img', ['.box-placeholder'], box.dataset.key||box.id, 'image/*');
+  });
+
+  /* 5. Footer 이미지 */
+  (function(){
+    var col = document.getElementById('foot-img-col'); if(!col) return;
+    var img = document.getElementById('foot-col-img');
+    var ph  = col.querySelector('.foot-img-ph');
+    var KEY = 'foot-img';
+    var inp = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    document.body.appendChild(inp);
+    if(img && validSrc(img.src)){
+      img.style.setProperty('display','block','important');
+      if(ph) ph.classList.add('hidden');
+      UNO.save(KEY, img.src);
+    } else {
+      UNO.load(KEY, function(s){
+        if(s&&img){ img.src=s; img.style.setProperty('display','block','important'); if(ph) ph.classList.add('hidden'); }
+      });
+    }
+    inp.addEventListener('change', function(){
+      var f=this.files[0]; if(!f) return;
+      toB64(f, function(url){
+        if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+        if(ph) ph.classList.add('hidden');
+        UNO.save(KEY, url);
+      });
+    });
+    col.style.cursor='pointer';
+    col.addEventListener('click', function(e){
+      if(e.target.closest('button,input')) return; e.stopPropagation(); pickFile(inp);
+    });
+    window.footImgReplace = function(){ pickFile(inp); };
+    window.footImgDelete  = function(){
+      if(!confirm('푸터 이미지 삭제?')) return;
+      if(img){ img.removeAttribute('src'); img.style.display='none'; }
+      if(ph) ph.classList.remove('hidden');
+      UNO.del(KEY);
+    };
+  })();
+
+  /* 6. 로고 */
+  (function(){
+    var KEY='logo';
+    function applyLogo(url){
+      ['logo-img','foot-logo-img'].forEach(function(id){
+        var im=document.getElementById(id); if(im) im.src=url;
+      });
+    }
+    var fl=document.getElementById('logo-img');
+    if(fl && validSrc(fl.src)) UNO.save(KEY, fl.src);
+    else { UNO.load(KEY, function(s){ if(s) applyLogo(s); }); }
+    document.querySelectorAll('.logo-img-wrap, #foot-logo-wrap').forEach(function(wrap){
+      if(wrap._logoinit) return; wrap._logoinit=true;
+      var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.style.display='none';
+      document.body.appendChild(inp);
+      inp.addEventListener('change', function(){
+        var f=this.files[0]; if(!f) return;
+        toB64(f, function(url){ applyLogo(url); UNO.save(KEY,url); });
+      });
+      wrap.addEventListener('click', function(e){
+        if(e.target.closest('button')) return; e.stopPropagation(); pickFile(inp);
+      });
+    });
+  })();
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initAllBoxes);
+} else {
+  initAllBoxes();
+}
+
+window.boxReplace = function(id){
+  var box=document.getElementById(id); if(!box) return;
+  if(!box._u4) initBox(box,'.box-img',['.box-placeholder'],box.dataset.key||id,'image/*,video/*');
+  pickFile(box.querySelector('input[type="file"]'));
+};
+window.boxDelete = function(id){
+  var box=document.getElementById(id); if(!box) return;
+  if(!confirm('"'+(box.dataset.label||id)+'" 삭제?')) return;
+  hideImage(box.querySelector('.box-img'),[box.querySelector('.box-placeholder')]);
+  UNO.del(box.dataset.key||id);
+};
+
+window.addEventListener('beforeunload', function(){
+  document.querySelectorAll('[data-key]').forEach(function(box){
+    var img=box.querySelector('.box-img')||box.querySelector('img');
+    var KEY=box.dataset.key||box.id;
+    if(img && validSrc(img.src)) UNO.save(KEY, img.src);
+  });
+  var fci=document.getElementById('foot-col-img');
+  if(fci && validSrc(fci.src)) UNO.save('foot-img', fci.src);
+});
+
+/* ── Fade-in observer ── */
+(function(){
+  try {
+    var obs = new IntersectionObserver(function(entries, o){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); o.unobserve(e.target); } });
+    }, {threshold:.05});
+    document.querySelectorAll('.fu').forEach(function(el){ obs.observe(el); });
+  } catch(e){}
+})();
+
+/* ── 다운로드 ── */
+function downloadPage(){
+  try{
+    var clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('img[id]').forEach(function(ci){
+      var o=document.getElementById(ci.id); if(o && validSrc(o.src)) ci.src=o.src;
+    });
+    document.querySelectorAll('[data-key]').forEach(function(box){
+      var img=box.querySelector('img');
+      if(img && validSrc(img.src)){
+        var cBox=clone.querySelector('[data-key="'+box.dataset.key+'"]');
+        if(cBox){ var ci=cBox.querySelector('img'); if(ci) ci.src=img.src; }
+      }
+    });
+    ['.box-img','.biz-box-img'].forEach(function(sel){
+      var ol=document.querySelectorAll(sel), cl=clone.querySelectorAll(sel);
+      ol.forEach(function(img,i){ if(validSrc(img.src)&&cl[i]) cl[i].src=img.src; });
+    });
+    document.querySelectorAll('.iaea-hero-wrap img').forEach(function(img,i){
+      if(!validSrc(img.src)) return;
+      var cl=clone.querySelectorAll('.iaea-hero-wrap img');
+      if(cl[i]) cl[i].src=img.src;
+    });
+    var fci=document.getElementById('foot-col-img');
+    if(fci && validSrc(fci.src)){ var cfi=clone.getElementById('foot-col-img'); if(cfi) cfi.src=fci.src; }
+    var li=document.getElementById('logo-img');
+    if(li && validSrc(li.src)){ var cli=clone.getElementById('logo-img'); if(cli) cli.src=li.src; }
+    var html='<!DOCTYPE html>\n'+clone.outerHTML;
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download='sofire.html'; a.style.display='none';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },300);
+  } catch(e){ alert('오류: '+e.message); }
+}
+
+/* ── Light/Dark 토글 ── */
+(function(){
+  var saved = 'dark';
+  try{ saved = localStorage.getItem('uno_theme') || 'dark'; }catch(e){}
+  applyTheme(saved);
+})();
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  var icon = document.getElementById('th-icon');
+  var label = document.getElementById('th-label');
+  if (icon) icon.textContent = t === 'light' ? '☀️' : '🌙';
+  if (label) label.textContent = t === 'light' ? 'Light' : 'Dark';
+  try{ localStorage.setItem('uno_theme', t); }catch(e){}
+}
+function toggleTheme() {
+  var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+</script>
+<script>
+function toggleNav(){var n=document.getElementById('mainNav');if(n)n.classList.toggle('open');}
+document.addEventListener('click',function(e){var a=e.target.closest('.main-nav a');if(a){var n=document.getElementById('mainNav');if(n)n.classList.remove('open');}});
+</script><script>
+/* ══ 대원칙 3 · KEYWORDS(.sec-kw) 클릭 → Google 검색(새 탭) ══ */
+(function(){
+  function kwText(kw){ return (kw.textContent||'').replace(/\s+/g,' ').trim(); }
+  function wire(){
+    document.querySelectorAll('.sec-kw').forEach(function(kw){
+      if(kw._kwsearch) return; kw._kwsearch=true;
+      kw.style.cursor='pointer';
+      if(!kw.title) kw.title='클릭하여 Google 검색';
+      kw.addEventListener('click',function(e){
+        var s=kwText(kw); if(!s) return;
+        e.preventDefault(); e.stopPropagation();
+        window.open('https://www.google.com/search?q='+encodeURIComponent(s),'_blank');
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',wire);
+  else wire();
+})();
+</script><script>
+/* ══ 대원칙 2-보강 · 우측 이미지 박스 상단을 좌측 제목 높이에 정렬 ══ */
+(function(){
+  if(window.alignImgBoxes) return;
+  function pairs(){
+    var out=[];
+    var hero=document.querySelector('.product-hero');
+    if(hero){ var ht=hero.querySelector('.product-name'), hc=hero.children[1]; if(ht&&hc) out.push([hc,ht]); }
+    document.querySelectorAll('.syscfg-row').forEach(function(r){
+      var t=r.querySelector('.syscfg-name'), i=r.querySelector('.syscfg-img'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.comp-row').forEach(function(r){
+      var t=r.querySelector('.feature-name'), i=r.querySelector('.img-box'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.feature-card').forEach(function(fc){
+      var row=fc.parentElement; if(!row||row.classList.contains('comp-row')) return;
+      var i=null;
+      for(var k=0;k<row.children.length;k++){ if(row.children[k].classList.contains('img-box')) i=row.children[k]; }
+      var t=fc.querySelector('.feature-name');
+      if(i&&t) out.push([i,t]);
+    });
+    return out;
+  }
+  function alignImgBoxes(){
+    var list=pairs(), mobile=window.innerWidth<=900;
+    list.forEach(function(p){ p[0].style.marginTop='0px'; p[0].classList.add('img-align-shift'); });
+    if(mobile) return;
+    list.forEach(function(p){
+      var d=p[1].getBoundingClientRect().top - p[0].getBoundingClientRect().top;
+      if(d>0) p[0].style.marginTop=Math.round(d)+'px';
+    });
+  }
+  window.alignImgBoxes=alignImgBoxes;
+  function schedule(){ requestAnimationFrame(function(){ requestAnimationFrame(alignImgBoxes); }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',schedule); else schedule();
+  window.addEventListener('load',schedule);
+  setTimeout(alignImgBoxes,900); setTimeout(alignImgBoxes,1800);
+  var t=null;
+  window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(alignImgBoxes,120); });
+})();
+</script><script>
+/* ══ 대원칙 10 · GitHub 이미지 로더 (soulthread88/my_images · unosystem/) ══
+   탐색순서: GH_BASE+<page>/<key>.<ext> → GH_BASE+<key>.<ext> · 실패 시 기존 src 유지(무손실) */
+(function(){
+  if(window.__unoGH) return; window.__unoGH=true;
+  var GH_BASE='https://raw.githubusercontent.com/soulthread88/my_images/main/unosystem/';
+  var GH_PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.[^.]+$/,'').replace(/_en$/,'').replace(/[^A-Za-z0-9_-]/g,'_');
+  var IMG_EXTS=['png','jpg','jpeg','webp','gif'];
+  var VID_EXTS=['mp4','webm'];
+  function bases(){ return [GH_BASE+GH_PAGE+'/', GH_BASE]; }
+  function imgCands(k){ var o=[]; bases().forEach(function(b){ IMG_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  function vidCands(k){ var o=[]; bases().forEach(function(b){ VID_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  var PH_SEL='.box-placeholder,.biz-img-ph,.hist-img-ph,.award-img-ph,.foot-img-ph,.ref-img-ph,.hero-empty,.cta-box-ph';
+  var BOX_SEL='[data-key],.img-box,.ref-card,.biz-img-box,.hist-img-box,.award-img-box,.foot-img-col,.iaea-hero-wrap,.cta-img-col';
+  function hidePH(im){ var b=im.closest(BOX_SEL); if(b) b.querySelectorAll(PH_SEL).forEach(function(p){ p.style.display='none'; p.classList.add('hidden'); }); }
+  function applyImg(imgs,url){ imgs.forEach(function(im){
+      im.src=url; im.style.setProperty('display','block','important');
+      im.style.setProperty('opacity','1','important'); im.style.setProperty('visibility','visible','important');
+      im.classList.add('active'); hidePH(im); }); }
+  function applyVid(imgs,url){ imgs.forEach(function(im){ try{
+      var v=document.createElement('video');
+      v.src=url; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+      v.className=im.className; v.style.cssText=im.style.cssText;
+      v.style.setProperty('display','block','important'); v.style.setProperty('width','100%'); v.style.setProperty('height','100%');
+      v.style.setProperty('object-fit', getComputedStyle(im).objectFit||'cover');
+      if(im.id) v.id=im.id;
+      im.parentNode.replaceChild(v,im); hidePH(v);
+    }catch(e){} }); }
+  function tryImg(imgs,key,onFail){ var list=imgCands(key), i=0;
+    (function nx(){ if(i>=list.length){ onFail&&onFail(); return; }
+      var url=list[i++], t=new Image(); t.onload=function(){ applyImg(imgs,url); }; t.onerror=nx; t.src=url; })(); }
+  function tryVid(imgs,key){ var list=vidCands(key), i=0;
+    (function nx(){ if(i>=list.length) return; var url=list[i++];
+      try{ fetch(url,{method:'HEAD'}).then(function(r){ if(r&&r.ok) applyVid(imgs,url); else nx(); }).catch(nx); }catch(e){ nx(); } })(); }
+  function run(){
+    var g={};
+    function add(k,im){ if(!k||!im) return; if(String(im.src).indexOf('data:')===0) return; (g[k]=g[k]||[]); if(g[k].indexOf(im)<0) g[k].push(im); }
+    document.querySelectorAll('[data-key]').forEach(function(b){ add(b.dataset.key, b.querySelector('img')); });
+    ['logo-img','foot-logo-img'].forEach(function(id){ add('logo', document.getElementById(id)); });
+    add('foot-img', document.getElementById('foot-col-img'));
+    Object.keys(g).forEach(function(k){ tryImg(g[k],k,function(){ tryVid(g[k],k); }); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(run,400); });
+  else setTimeout(run,400);
+})();
+</script><script>
+/* ══ 대원칙 7 · KOR|ENG 언어 전환 엔진 (기본값: ko) ══ */
+(function(){
+  if(window.setLang) return;
+  var DEF='ko';
+  function nodes(){ return document.querySelectorAll('[data-en]'); }
+  function cache(){ nodes().forEach(function(el){ if(el.dataset.ko===undefined) el.dataset.ko=el.innerHTML; }); }
+  window.setLang=function(l){
+    cache();
+    nodes().forEach(function(el){
+      if(el.tagName==='TITLE') return;
+      var v=(l==='en')?el.dataset.en:el.dataset.ko;
+      if(v!==undefined && v!==null) el.innerHTML=v;
+    });
+    document.documentElement.setAttribute('lang', l==='en'?'en':'ko');
+    document.documentElement.setAttribute('data-lang', l);
+    var k=document.getElementById('lang-ko'), e=document.getElementById('lang-en');
+    if(k) k.classList.toggle('on', l!=='en');
+    if(e) e.classList.toggle('on', l==='en');
+    var t=document.querySelector('title');
+    if(t && t.dataset.en){ if(t.dataset.ko===undefined) t.dataset.ko=t.textContent; document.title=(l==='en'?t.dataset.en:t.dataset.ko); }
+    try{ localStorage.setItem('uno_lang_'+location.pathname, l); }catch(err){}
+    if(window.alignImgBoxes) setTimeout(window.alignImgBoxes, 60);
+  };
+  function init(){
+    cache();
+    var s=DEF;
+    try{ s=localStorage.getItem('uno_lang_'+location.pathname)||DEF; }catch(err){}
+    window.setLang(s==='en'?'en':'ko');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script></body></html>

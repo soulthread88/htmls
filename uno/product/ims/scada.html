@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<script crossorigin="anonymous" integrity="sha512-iZ2ORl595Wx6miw+GuadDet4WQbdSWS3JLMoNfY8cRGoEFy6oT3G9IbcrBeL6AfkgpA51ETt/faX6yLV+/gFJg==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.min.js"></script>
+<script>
+      (function() {
+        const originalConsole = window.console;
+        window.console = {
+          log: (...args) => {
+            originalConsole.log(...args);
+            window.parent.postMessage({ type: 'console', message: args.join(' ') }, '*');
+          },
+          error: (...args) => {
+            originalConsole.error(...args);
+            window.parent.postMessage({ type: 'console', message: 'Error: ' + args.join(' ') }, '*');
+          },
+          warn: (...args) => {
+            originalConsole.warn(...args);
+            window.parent.postMessage({ type: 'console', message: 'Warning: ' + args.join(' ') }, '*');
+          }
+        };
+
+        let requestId = 0;
+        let callbacksMap = new Map();
+        let streamControllers = new Map();
+        
+        window.claude = {
+          complete: (prompt) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'claudeComplete', id, prompt }, '*');
+            });
+          }
+        };
+
+        window.storage = {
+          get: (key, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageGet', id, key, shared }, '*');
+            });
+          },
+          set: (key, value, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageSet', id, key, value, shared }, '*');
+            });
+          },
+          delete: (key, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageDelete', id, key, shared }, '*');
+            });
+          },
+          list: (prefix, shared = false) => {
+            return new Promise((resolve, reject) => {
+              const id = requestId++;
+              callbacksMap.set(id, { resolve, reject });
+              window.parent.postMessage({ type: 'storageList', id, prefix, shared }, '*');
+            });
+          }
+        };
+
+        let pendingBlobs = new Map();
+        URL.createObjectURL = (blob) => {
+          // Store the blob and create an ID and URL for it
+          const blobId = `blob-${Date.now()}-${Math.random()}`;
+          pendingBlobs.set(blobId, blob);
+          return `blob-request://${blobId}`;
+        };
+
+        URL.revokeObjectURL = (url) => {
+          // Remove the blob from our store
+          const blobId = url.replace("blob-request://", "");
+          pendingBlobs.delete(blobId);
+        };
+
+        const getBlobFromURL = (url) => {
+          const blobId = url.replace("blob-request://", "");
+          return pendingBlobs.get(blobId);
+        };
+
+        // Override global fetch with streaming support
+        window.fetch = (url, init = {}) => {
+          return new Promise((resolve, reject) => {
+            const id = requestId++;
+            const channelId = `fetch-${id}-${Date.now()}`;
+            
+            callbacksMap.set(id, { 
+              resolve: (response) => {
+                // Create a ReadableStream for the response body
+                const stream = new ReadableStream({
+                  start(controller) {
+                    streamControllers.set(channelId, controller);
+                  },
+                  cancel() {
+                    streamControllers.delete(channelId);
+                  }
+                });
+                
+                // Create and return the Response with the stream
+                resolve(new Response(stream, {
+                  status: response.status,
+                  statusText: response.statusText,
+                  headers: response.headers
+                }));
+              },
+              reject,
+              channelId
+            });
+            
+            window.parent.postMessage({
+              type: 'proxyFetch',
+              id,
+              url,
+              init,
+              channelId
+            }, '*');
+          });
+        };
+
+        window.addEventListener('message', async (event) => {
+          if (event.data.type === 'takeScreenshot') {
+            const rootElement = document.getElementById('artifacts-component-root-html');
+            if (!rootElement) {
+              window.parent.postMessage({
+                type: 'screenshotError',
+                error: new Error('Root element not found'),
+              }, '*');
+              return;
+            }
+            // Catch CDN load failures (htmlToImage undefined) and toPng errors
+            // so the parent always gets a response instead of hanging forever.
+            try {
+              const screenshot = await htmlToImage.toPng(rootElement, {
+                imagePlaceholder:
+                  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjePDgwX8ACOQDoNsk0PMAAAAASUVORK5CYII=",
+              });
+              window.parent.postMessage({
+                type: 'screenshotData',
+                data: screenshot,
+              }, '*');
+            } catch (err) {
+              window.parent.postMessage({
+                type: 'screenshotError',
+                error: err instanceof Error ? err : new Error(String(err)),
+              }, '*');
+            }
+          } else if (event.data.type === 'claudeComplete') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.completion);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'proxyFetchResponse') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+              callbacksMap.delete(event.data.id);
+            } else {
+              // Initial response with headers, status, etc.
+              callback.resolve({
+                status: event.data.status,
+                statusText: event.data.statusText,
+                headers: event.data.headers
+              });
+              // Don't delete the callback yet if streaming
+              if (!event.data.body) {
+                callbacksMap.delete(event.data.id);
+              }
+            }
+          } else if (event.data.type === 'proxyFetchStream') {
+            // Handle streaming data chunks
+            const controller = streamControllers.get(event.data.channelId);
+            if (controller) {
+              if (event.data.error) {
+                controller.error(new Error(event.data.error));
+                streamControllers.delete(event.data.channelId);
+              } else if (event.data.done) {
+                controller.close();
+                streamControllers.delete(event.data.channelId);
+                // Clean up the callback
+                const callback = Array.from(callbacksMap.entries()).find(
+                  ([_, value]) => value.channelId === event.data.channelId
+                );
+                if (callback) {
+                  callbacksMap.delete(callback[0]);
+                }
+              } else if (event.data.chunk) {
+                controller.enqueue(new Uint8Array(event.data.chunk));
+              }
+            }
+          } else if (event.data.type === 'storageGet') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'storageSet') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'storageDelete') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          } else if (event.data.type === 'storageList') {
+            const callback = callbacksMap.get(event.data.id);
+            if (event.data.error) {
+              callback.reject(new Error(event.data.error));
+            } else {
+              callback.resolve(event.data.result);
+            }
+            callbacksMap.delete(event.data.id);
+          }
+        });
+
+        window.addEventListener('click', (event) => {
+          const isEl = event.target instanceof HTMLElement;
+          if (!isEl) return;
+    
+          // find ancestor links
+          const linkEl = event.target.closest("a");
+          if (!linkEl || !linkEl.href) return;
+    
+          event.preventDefault();
+          event.stopImmediatePropagation();
+    
+          if (linkEl.href.startsWith("blob-request:")) {
+            const blob = getBlobFromURL(linkEl.href);
+            if (!blob) return;
+            void blob.arrayBuffer().then((data) => {
+              window.parent.postMessage({
+                type: "downloadFile",
+                filename: linkEl.download,
+                data,
+                mimeType: blob.type || "application/octet-stream",
+              });
+            });
+          } else if (linkEl.href.startsWith("data:")) {
+            const [header, base64Data] = linkEl.href.split(",");
+            const mimeMatch = header.match(/data:([^;]+)/);
+            const mimeType = mimeMatch ? mimeMatch[1] : "application/octet-stream";
+            const binaryString = atob(base64Data);
+            const data = Uint8Array.from(binaryString, (c) =>
+              c.charCodeAt(0),
+            ).buffer;
+            window.parent.postMessage({
+              type: "downloadFile",
+              filename: linkEl.download,
+              data,
+              mimeType,
+            });
+          } else {
+            let linkUrl;
+            try {
+              linkUrl = new URL(linkEl.href);
+            } catch (error) {
+              return;
+            }
+    
+            if (linkUrl.hostname === window.location.hostname) return;
+      
+            window.parent.postMessage({
+              type: 'openExternal',
+              href: linkEl.href,
+            }, '*');
+          }
+      });
+
+        const originalOpen = window.open;
+        window.open = function (url) {
+          window.parent.postMessage({
+            type: "openExternal",
+            href: url,
+          }, "*");
+        };
+
+        window.addEventListener('error', (event) => {
+          window.parent.postMessage({ type: 'console', message: 'Uncaught Error: ' + event.message }, '*');
+        });
+      })();
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="SCADA Expansion Unit | UNO SYSTEM Co., Ltd." data-ko="SCADA 확장장치 | 유노시스템㈜ UNO SYSTEM">SCADA 확장장치 | 유노시스템㈜ UNO SYSTEM</title>
+<meta content="유노시스템㈜ 제품 라인업 — 화재수신기, 광케이블식 감지기, 소방통합감시시설, 네트워크 솔루션, 건설시공 관리." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════ CSS VARIABLES ════════════════════════ */
+:root{
+  --bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;
+  --border:rgba(30,120,220,.18);--border2:rgba(0,210,240,.18);
+  --blue:#1a6fd4;--cyan:#00d2f0;--gold:#e8b84b;
+  --text:#ffffff;--muted:#ddeaf8;--dim:#3a4d6a;
+  --fkr:"Noto Sans KR","Pretendard",sans-serif;
+  --fmono:"JetBrains Mono","Noto Sans KR",monospace;
+  --fdis:"Bebas Neue",sans-serif;
+  --hdr:72px;
+  --font-title:20px;--font-body:16px;--font-small:13px;--font-xsmall:11px;--font-mono:12px;--font-body-sm:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fkr);font-size:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;word-break:keep-all;line-height:1.78}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,212,.03)1px,transparent 1px),linear-gradient(90deg,rgba(26,111,212,.03)1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+
+/* ════════════════════════ HEADER ════════════════════════ */
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(22px);display:flex;align-items:center;justify-content:space-between;padding:0 36px 0 5mm;z-index:700;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0}
+/* ── 로고 이미지: 클릭하여 교체 가능 ── */
+.logo-img-wrap{position:relative;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;border-radius:6px;overflow:hidden}
+.logo-img{height:40px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:3px 6px;transition:opacity .2s;display:block}
+.logo-img-wrap:hover .logo-img{opacity:.85}
+.logo-img-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);border-radius:9px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:var(--fkr);font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.3;padding:4px}
+.logo-img-wrap:hover .logo-img-hint{opacity:1}
+.logo-ko{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:16px;color:var(--text);line-height:1.15;display:flex;flex-direction:column}
+.logo-ko-en{font-size:18px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.btn-dl{background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;color:var(--cyan);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.btn-dl:hover{background:rgba(0,210,240,.22);border-color:var(--cyan)}
+
+/* ════════════════════════ NAV ════════════════════════ */
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+
+/* Top-level button — 밑줄 없음 */
+.nb{background:transparent;border:none;color:var(--muted);font-family:var(--fkr);font-size:22px;font-weight:700;padding:10px 10px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .15s;height:auto}
+.nb:hover,.ni:hover>.nb{color:#fff}
+.nb.active-menu{color:var(--cyan)}
+.nb .caret{font-size:17px;transition:transform .22s;display:inline-block}
+.ni:hover>.nb .caret{transform:rotate(180deg)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:10px 20px;border-radius:6px;margin-left:10px}
+.nb.cta-nav:hover{opacity:.86}
+.nb.cta-nav .caret{display:none}
+
+/* ── L1 Dropdown: hover로 열림 ── */
+.dropdown{
+  display:none;position:absolute;top:100%;left:0;min-width:200px;
+  background:rgba(10,18,34,.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);
+  border-radius:0 0 10px 10px;box-shadow:0 16px 48px rgba(0,0,0,.75);
+  z-index:680;padding:6px 0 8px;
+}
+.ni:hover>.dropdown{display:block;animation:ddIn .18s ease forwards}
+@keyframes ddIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:8px 18px 6px;font-family:var(--fmono);font-size:11px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:4px}
+
+/* Dropdown items */
+.di{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;font-size:22px;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;white-space:nowrap;border-left:2px solid transparent;transition:all .12s;position:relative}
+.di:hover{background:rgba(0,210,240,.09);border-left-color:var(--cyan);color:var(--cyan)}
+.di.active{background:rgba(0,210,240,.14);border-left-color:var(--cyan);color:var(--cyan)}
+.arr{font-size:18px;color:var(--dim);margin-left:8px;flex-shrink:0}
+.di:hover .arr{color:var(--cyan)}
+.dd-sep{height:1px;background:rgba(255,255,255,.06);margin:6px 0}
+
+/* ── L2 Sub-dropdown ── */
+.has-sub{position:relative}
+.sub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:290px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:690;padding:6px 0 8px}
+.has-sub:hover>.sub-dropdown,.has-sub.open>.sub-dropdown{display:block;animation:subIn .14s ease forwards}
+@keyframes subIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+
+/* ── L3 Sub-sub-dropdown ── */
+.has-sub2{position:relative}
+.subsub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:240px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid rgba(0,210,240,.5);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:700;padding:6px 0 8px}
+.has-sub2:hover>.subsub-dropdown{display:block;animation:subIn .12s ease forwards}
+
+/* ════════════════════════ IMAGE / VIDEO BOX ════════════════════════
+   대원칙: 한 번 삽입 → 영구 저장 (base64 src에 직접 내장)
+═══════════════════════════════════════════════════════════════════ */
+.img-box{
+  position:relative;cursor:pointer;
+  background:var(--surface);border:2px dashed rgba(0,210,240,.3);border-radius:10px;
+  overflow:hidden;min-height:150px;transition:border-color .25s,box-shadow .25s;
+  display:flex;flex-direction:column;
+}
+.img-box:hover{border-color:var(--cyan);border-style:solid;box-shadow:0 0 18px rgba(0,210,240,.12)}
+.box-media-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:120px}
+.box-img{width:100%;height:100%;object-fit:cover}
+.box-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);padding:24px;text-align:center;width:100%}
+.box-placeholder.hidden{display:none}
+.box-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.5);transition:all .2s}
+.img-box:hover .box-plus{border-color:var(--cyan);color:var(--cyan);transform:scale(1.1)}
+.box-hint{font-size:var(--font-small);opacity:.7;line-height:1.5}
+.box-label{text-align:center;padding:8px 12px;font-family:var(--fkr);font-size:21px;font-weight:700;color:var(--text)!important;border-top:1px solid rgba(0,210,240,.2);background:rgba(0,0,0,.3);letter-spacing:-.02em;min-height:36px;display:flex;align-items:center;justify-content:center}
+
+/* Hidden controls (hover to reveal) */
+.box-controls{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:5px;z-index:20}
+.img-box:hover .box-controls{display:flex}
+.box-ctrl-btn{background:rgba(8,13,24,.92);border:1px solid var(--border2);color:var(--text);font-size:15px;font-weight:700;padding:6px 13px;border-radius:5px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.box-ctrl-btn.replace{border-color:rgba(0,210,240,.4);color:var(--cyan)}
+.box-ctrl-btn.replace:hover{background:rgba(0,210,240,.15)}
+.box-ctrl-btn.delete{border-color:rgba(255,80,80,.4);color:#ff6060}
+.box-ctrl-btn.delete:hover{background:rgba(255,80,80,.12)}
+
+/* ════════════════════════ HERO IMAGE BOX ════════════════════════ */
+.iaea-hero-wrap{margin-top:0;position:relative;cursor:pointer;overflow:hidden;background:#111;width:100%;min-height:200px}
+#hero-main-img{width:100%;height:520px;object-fit:contain;display:block;transition:transform .4s ease}
+.iaea-hero-wrap:hover #hero-main-img{transform:scale(1.02)}
+.hero-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);pointer-events:none}
+.hero-empty .he-plus{width:72px;height:72px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(0,210,240,.5)}
+.hero-empty.hidden{display:none}
+.hero-change-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .28s;pointer-events:none}
+.iaea-hero-wrap:hover .hero-change-hint{opacity:1}
+.hero-change-hint span{background:rgba(0,210,240,.82);padding:13px 26px;border-radius:8px;font-family:var(--fkr);font-size:17px;font-weight:700}
+.hero-controls{position:absolute;top:12px;right:12px;display:none;flex-direction:column;gap:6px;z-index:30}
+.iaea-hero-wrap:hover .hero-controls{display:flex}
+.iaea-source{background:#03060d;padding:9px 36px 9px 5mm;font-family:var(--fmono);font-size:13px;color:var(--muted);letter-spacing:.04em;border-bottom:1px solid var(--border);text-align:right;font-style:italic}
+
+/* ════════════════════════ PAGE SECTIONS ════════════════════════ */
+.page-hero{position:relative;height:220px;overflow:hidden;display:flex;align-items:center;padding-left:0}
+.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.3) saturate(.6)}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,24,.92),rgba(8,13,24,.45))}
+.page-hero-content{position:relative;z-index:2;padding:0}
+.page-hero-tag{font-family:var(--fmono);font-size:22px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;display:block}
+.page-hero-title{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.page-hero-sub{font-size:22px;color:var(--muted);font-family:var(--fmono);letter-spacing:.08em}
+.pg{position:relative;z-index:1;padding:64px 60px 64px 5mm}
+.pg.alt{background:var(--bg2);padding:64px 60px 64px 0}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);position:relative;z-index:1}
+.shdr{display:flex;align-items:center;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.shdr-left{display:flex;flex-direction:column;gap:4px}
+.shdr-hr{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent);min-width:60px;align-self:center}
+.stag{font-family:var(--fmono);font-size:21px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;display:block;white-space:nowrap;margin-bottom:2px}
+.stitle{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.1;letter-spacing:-.02em;display:block}
+.stitle .hl{color:var(--cyan)}
+
+/* OVERVIEW */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch}
+.kv-list{display:flex;flex-direction:column;gap:10px}
+.kv{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:8px;transition:border-color .2s}
+.kv:hover{border-color:rgba(0,210,240,.2)}
+.kv-ic{width:36px;height:36px;border-radius:7px;background:rgba(0,210,240,.08);border:1px solid rgba(0,210,240,.18);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.kv-lb{font-size:21px;color:var(--muted);font-family:var(--fmono);letter-spacing:.1em;margin-bottom:3px;text-transform:uppercase}
+.kv-val{font-size:var(--font-body);font-weight:400;line-height:1.5}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.12);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.sc{background:var(--surface);padding:24px 10px;text-align:center;transition:background .2s}
+.sc:hover{background:var(--surface2)}
+.sc-n{font-family:var(--fdis);font-size:54px;line-height:1;color:var(--cyan);margin-bottom:4px}
+.sc-l{font-size:21px;color:var(--muted);line-height:1.4}
+.cert-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cert{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(0,210,240,.05);border:1px solid rgba(0,210,240,.15);border-radius:7px}
+.cert-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.cert-tx{font-size:var(--font-small);font-weight:600;line-height:1.35}
+
+/* HISTORY */
+.hist-grid{display:grid;grid-template-columns:3fr 2fr;gap:48px;align-items:stretch}
+.tl{position:relative;padding-left:44px}
+.tl::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--cyan),var(--blue),transparent)}
+.tl-item{position:relative;margin-bottom:34px}
+.tl-dot{position:absolute;left:-44px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg2);border:2px solid var(--cyan);box-shadow:0 0 10px rgba(0,210,240,.4)}
+.tl-dot.M{background:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.7)}
+.tl-yr{font-family:var(--fdis);font-size:32px;color:var(--cyan);margin-bottom:4px}
+.tl-ev{font-size:var(--font-body);font-weight:800;margin-bottom:6px;line-height:1.35}
+.tl-dt{font-size:var(--font-small);color:var(--muted);line-height:1.8}
+.tl-bd{display:inline-flex;align-items:center;gap:5px;background:#ffffff;border:1.5px solid var(--gold);border-radius:4px;padding:5px 14px;font-family:"Noto Sans KR",sans-serif;font-size:var(--font-small);font-weight:700;color:var(--gold);margin-top:6px;letter-spacing:.02em}
+.award-g{display:flex;flex-direction:column;gap:14px}
+.award{display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award-info{flex:1}
+.award-img-box{width:160px;flex-shrink:0;min-height:180px;background:rgba(0,0,0,.2);border:2px dashed rgba(232,184,75,.3);border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:border-color .2s}
+.award-img-box:hover{border-color:var(--gold)}
+.award-img-box .aw-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.award-img-box .aw-img.active{display:block}
+.award-img-ph{display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(232,184,75,.5);font-size:11px;text-align:center;padding:8px;pointer-events:none}
+.award-img-ph .aw-plus{font-size:22px}
+.award-img-ph.hidden{display:none}
+.award-img-ctrl{position:absolute;top:4px;right:4px;display:none;flex-direction:column;gap:3px;z-index:10}
+.award-img-box:hover .award-img-ctrl{display:flex}
+.award{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:18px;transition:border-color .2s;display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award:hover{border-color:rgba(232,184,75,.3)}
+.award-yr{font-family:var(--fdis);font-size:32px;color:var(--gold);line-height:1;margin-bottom:6px}
+.award-title{font-size:var(--font-body);font-weight:800;margin-bottom:4px;line-height:1.3}
+.award-sub{font-size:var(--font-small);color:var(--muted)}
+
+/* BUSINESS */
+.biz-g{display:grid;grid-template-columns:1fr;gap:20px}
+.biz-item{display:grid;grid-template-columns:1fr 1fr;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);transition:border-color .25s,transform .25s;min-height:200px}
+.biz-item:hover{border-color:rgba(0,210,240,.3);transform:translateY(-4px)}
+.biz-img-box{position:relative;cursor:pointer;background:#f0f4f8;width:100%;min-height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-left:1px solid rgba(255,255,255,.07)}
+/* biz-box-img: 마스터 CSS에서 처리 */
+
+.biz-img-ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);padding:20px;pointer-events:none}
+.biz-img-ph .bp-plus{width:40px;height:40px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,210,240,.45)}
+.biz-img-ph.hidden{display:none}
+.biz-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s;pointer-events:none}
+.biz-img-box:hover .biz-img-overlay{opacity:1}
+.biz-img-overlay span{background:rgba(0,210,240,.8);padding:8px 16px;border-radius:6px;font-size:var(--font-small);font-family:var(--fkr);font-weight:700;color:#000}
+.biz-img-ctrl{position:absolute;top:6px;right:6px;display:none;flex-direction:column;gap:4px;z-index:10}
+.biz-img-box:hover .biz-img-ctrl{display:flex}
+.biz-card{height:100%;box-sizing:border-box;background:var(--surface);padding:28px;text-decoration:none;display:flex;flex-direction:column;justify-content:center}
+.biz-card:hover{background:var(--surface2)}
+.biz-num{font-family:var(--fmono);font-size:22px;color:var(--cyan);letter-spacing:.2em;margin-bottom:10px}
+.biz-title{font-size:25px;font-weight:800;margin-bottom:10px;color:var(--text)}
+.biz-desc{font-size:22px;color:var(--muted);line-height:1.8}
+
+/* CLIENTS */
+.cli-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cli-g .img-box{background:#ffffff;border-color:rgba(0,0,0,.12)}
+.cli-g .img-box:hover{border-color:var(--cyan)}
+.cli-g .box-label{background:rgba(0,0,0,.06);color:#333;border-top:1px solid rgba(0,0,0,.08);font-family:"Noto Sans KR",sans-serif;font-weight:500;font-size:13px}
+
+/* CTA & FOOTER */
+.cta-wrap{background:linear-gradient(135deg,#0a1525,#0d1e35);border-top:1px solid var(--border2);padding:70px 60px 70px 0;position:relative;z-index:1}
+.cta-inner{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+.cta-lb{font-family:var(--fmono);font-size:21px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px}
+.cta-hd{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:var(--font-title);margin-bottom:18px;line-height:1.2}
+.cta-hd span{color:var(--cyan)}
+.cta-info{display:flex;flex-direction:column;gap:10px}
+.cta-row{display:flex;align-items:center;gap:12px;font-size:23px;color:var(--muted)}
+.cta-row strong{color:var(--text)}
+.cta-ri{width:30px;height:30px;border-radius:5px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.cta-btns{display:flex;flex-direction:column;gap:12px;min-width:200px}
+.btn-p{background:var(--cyan);color:#000;font-family:var(--fkr);font-weight:900;font-size:var(--font-body);padding:16px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s}
+.btn-p:hover{opacity:.88}
+.btn-s{background:transparent;border:1px solid var(--border2);color:var(--text);font-family:var(--fkr);font-weight:700;font-size:var(--font-body);padding:15px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,210,240,.05)}
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:0}
+/* ── Footer two-column layout ── */
+.foot-inner{display:grid;grid-template-columns:25% 75%;min-height:180px;align-items:stretch}
+/* Left col: 1:1 image box */
+.foot-img-col{position:relative;cursor:pointer;background:var(--surface);border-right:1px solid rgba(255,255,255,.07);overflow:hidden;display:flex;align-items:center;justify-content:center;width:100%;height:100%;align-self:stretch;padding:8mm 0 8mm 8mm;box-sizing:border-box}
+.foot-img-col img.foot-col-img{width:100%;height:100%;object-fit:cover;display:none;position:relative;border-radius:6px}
+.foot-img-col img.foot-col-img.active{display:block}
+.foot-img-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);padding:20px;text-align:center;pointer-events:none}
+.foot-img-ph .fi-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.45)}
+.foot-img-ph.hidden{display:none}
+.foot-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;pointer-events:none}
+.foot-img-col:hover .foot-img-overlay{opacity:1}
+.foot-img-overlay span{background:rgba(0,210,240,.82);padding:8px 16px;border-radius:6px;font-family:var(--fkr);font-size:13px;font-weight:700;color:#000}
+.foot-img-ctrl{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:4px;z-index:10}
+.foot-img-col:hover .foot-img-ctrl{display:flex}
+/* Right col */
+.foot-right-col{display:flex;flex-direction:row;align-items:stretch;padding:24px 28px;gap:20px}
+.foot-info-area{display:flex;flex-direction:column;justify-content:center;gap:6px;flex:1}
+.foot-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.foot-logo-img-wrap{position:relative;cursor:pointer;display:inline-flex;border-radius:7px;overflow:hidden;flex-shrink:0}
+.foot-logo-img{height:40px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:3px 6px;display:block;transition:opacity .2s}
+.foot-logo-img-wrap:hover .foot-logo-img{opacity:.82}
+.foot-logo-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);border-radius:7px;opacity:0;transition:opacity .2s;pointer-events:none;font-size:10px;font-weight:700;color:#fff;text-align:center;line-height:1.3}
+.foot-logo-img-wrap:hover .foot-logo-hint{opacity:1}
+.foot-logo-text{display:flex;flex-direction:column;line-height:1.2}
+.foot-logo-kr{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:16px;color:var(--text)}
+.foot-logo-en{font-size:18px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.foot-addr{font-family:var(--fmono);font-size:22px;color:var(--muted);line-height:1.6}
+.foot-contact{font-family:var(--fmono);font-size:22px;color:var(--muted);line-height:1.6}
+.foot-copy{font-family:var(--fmono);font-size:19px;color:var(--muted);margin-top:4px}
+.foot-inquiry-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:rgba(0,210,240,.07);border:2px solid rgba(0,210,240,.25);border-radius:10px;cursor:pointer;text-decoration:none;transition:all .2s;min-width:140px;align-self:center;flex-shrink:0}
+.foot-inquiry-box:hover{background:rgba(0,210,240,.16);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.15)}
+.foot-inquiry-icon{font-size:32px;line-height:1}
+.foot-inquiry-label{font-family:var(--fkr);font-size:21px;font-weight:700;color:var(--cyan);text-align:center;line-height:1.4}
+.foot-inquiry-sub{font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);text-align:center}
+.fu{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+.fu.vis{opacity:1;transform:translateY(0)}
+@media(max-width:1200px){.cli-g{grid-template-columns:repeat(3,1fr)}}
+
+
+
+/* CTA 이미지 박스 꽉 채움 */
+#box-cta-img { min-height: 220px; }
+#box-cta-img .box-media-wrap { flex: 1; overflow: hidden; min-height: 0; position:relative; }
+
+
+
+/* ─── 회사소개 인트로 이미지 박스 꽉 채움 ─── */
+
+/* ─── 연혁 이미지 박스 ─── */
+
+/* ─── tl-bd: Noto Sans KR, 흰색 바탕, 노란색 텍스트 ─── */
+.tl-bd { font-family: 'Noto Sans KR', sans-serif !important; }
+
+/* ─── 고객사 box-label ─── */
+.cli-g .box-label { font-family: 'Noto Sans KR', sans-serif !important; font-weight: 500; }
+
+/* 인증서 이미지 박스: 16:9 꽉 채움 */
+.cert-img-grid .img-box { position: relative; }
+.cert-img-grid .box-media-wrap { position: absolute; inset: 0; }
+.cert-img-grid .box-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cert-img-grid .box-img.active { display: block; }
+
+/* ═══ 이미지 active 표시 강화 ═══ */
+.aw-img.active { display: block !important; }
+
+.aw-img[src^="data:image"] { display: block !important; }
+.foot-col-img[src^="data:image"] { display: block !important; }
+
+/* ═══════════════════════════════════════════════════════
+   이미지 대원칙 CSS — 단일 규칙, 충돌 없음 v5
+═══════════════════════════════════════════════════════ */
+
+/* ── 전역: base64 src 있으면 무조건 표시 ── */
+img[src^="data:image"], img[src^="data:video"] {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ══ .img-box (인증서·고객사·회사소개·CTA) ══ */
+.img-box { position:relative; overflow:hidden; cursor:pointer; }
+.img-box .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block;
+  pointer-events:none;
+}
+.img-box .box-img:not([src]), .img-box .box-img[src=""] { display:none !important; }
+.img-box .box-placeholder {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px;
+  pointer-events:none;
+}
+.img-box:has(.box-img[src^="data:image"]) .box-placeholder,
+.img-box:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+.img-box .box-controls { pointer-events:auto; }
+.img-box:hover .box-controls { display:flex; }
+/* 고객사 로고: contain */
+.cli-g .img-box .box-img { object-fit:contain; background:#fff; }
+
+/* ══ #box-intro-img (회사소개) ══ */
+#box-intro-img { position:relative; overflow:hidden; cursor:pointer; }
+#box-intro-img .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+#box-intro-img .box-img:not([src]), #box-intro-img .box-img[src=""] { display:none !important; }
+#box-intro-img .box-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; pointer-events:none; }
+#box-intro-img:has(.box-img[src^="data:image"]) .box-placeholder,
+#box-intro-img:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+
+/* ══ #box-cta-img (제품상담) ══ */
+#box-cta-img {
+  position:relative; overflow:hidden; cursor:pointer;
+  display:flex; flex-direction:column;
+}
+#box-cta-img .box-media-wrap { position:relative; flex:1; min-height:0; overflow:hidden; }
+#box-cta-img .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+#box-cta-img .box-img:not([src]), #box-cta-img .box-img[src=""] { display:none !important; }
+#box-cta-img .box-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; pointer-events:none; }
+#box-cta-img:has(.box-img[src^="data:image"]) .box-placeholder,
+#box-cta-img:has(.box-img[src^="data:video"]) .box-placeholder { display:none !important; }
+
+/* ══ 인증서 ══ */
+.cert-img-grid .img-box { overflow:hidden; }
+.cert-img-grid .box-media-wrap { position:absolute; inset:0; }
+.cert-img-grid .box-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+.cert-img-grid .box-img:not([src]), .cert-img-grid .box-img[src=""] { display:none !important; }
+
+/* ══ .biz-img-box (사업부문) ══ */
+.biz-img-box {
+  position:relative;
+  overflow:hidden;
+  min-height:200px;
+}
+.biz-img-box .biz-box-img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:0;
+  background:#f0f4f8;
+  display:block;
+  pointer-events:none;
+}
+/* 빈 src일 때만 숨김 */
+.biz-img-box .biz-box-img:not([src]),
+.biz-img-box .biz-box-img[src=""] {
+  display:none !important;
+}
+.biz-img-ph {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  pointer-events:none;
+}
+.biz-img-ph.hidden,
+.biz-img-box:has(.biz-box-img[src^="data:image"]) .biz-img-ph,
+.biz-img-box:has(.biz-box-img[src^="data:video"]) .biz-img-ph {
+  display:none !important;
+}
+.biz-img-ctrl { pointer-events:auto; }
+.biz-img-box:hover .biz-img-ctrl { display:flex; }
+
+/* ══ .hist-img-box (연혁) ══ */
+.hist-img-box { position:relative; overflow:hidden; }
+.hist-img-box .hist-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; background:rgba(0,0,0,.08);
+  display:block; pointer-events:none;
+}
+.hist-img-box .hist-img:not([src]), .hist-img-box .hist-img[src=""] { display:none !important; }
+.hist-img-ph {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:8px;
+  pointer-events:none;
+}
+.hist-img-ph.hidden,
+.hist-img-box:has(.hist-img[src^="data:image"]) .hist-img-ph,
+.hist-img-box:has(.hist-img[src^="data:video"]) .hist-img-ph { display:none !important; }
+.hist-img-box .box-controls { pointer-events:auto; }
+.hist-img-box:hover .box-controls { display:flex; }
+
+/* ══ .award-img-box (표창장) ══ */
+.award-img-box { position:relative; overflow:hidden; }
+.award-img-box .aw-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; pointer-events:none;
+}
+.award-img-box .aw-img:not([src]), .award-img-box .aw-img[src=""] { display:none !important; }
+.award-img-ph.hidden,
+.award-img-box:has(.aw-img[src^="data:image"]) .award-img-ph { display:none !important; }
+.award-img-ctrl { pointer-events:auto; }
+.award-img-box:hover .award-img-ctrl { display:flex; }
+
+/* ══ Footer ══ */
+.foot-col-img { display:block; }
+.foot-col-img:not([src]), .foot-col-img[src=""] { display:none; }
+
+
+/* ── Light / Dark mode ── */
+[data-theme=light]{--bg:#f0f4fb;--bg2:#e4ecf7;--surface:#d9e4f4;--surface2:#c8d8ef;--border:#1a6fd430;--border2:#0097aa33;--text:#0d1a2e;--muted:#3a5575;--dim:#8aa5c0;--blue:#1a6fd4;--cyan:#0097aa;--gold:#b8862a}
+[data-theme=light] body:before{background-image:linear-gradient(#1a6fd410 1px,transparent 1px),linear-gradient(90deg,#1a6fd410 1px,transparent 1px)}
+[data-theme=light] header{background:#f0f4fbf7}
+[data-theme=light] .dropdown,[data-theme=light] .sub-dropdown,[data-theme=light] .subsub-dropdown{background:#e8f0fafc}
+[data-theme=light] .nb{color:#3a5575}
+[data-theme=light] .nb:hover,[data-theme=light] .ni:hover>.nb{color:#0d1a2e}
+[data-theme=light] .di{color:#0d1a2e}
+[data-theme=light] .logo-img{background:transparent}
+
+
+/* ── 본문 왼쪽 5mm 여백 ── */
+.pg,.pg.alt{padding-left:5mm}
+.ov-grid,.hist-grid,.biz-g,.cli-g,.cta-inner{margin-left:max(5mm,0px)}
+
+/* ── Stats boxes ── */
+.stats-row{gap:2mm!important}
+.sc{border:1px solid rgba(0,210,240,.25);border-radius:8px;padding:12px 8px}
+
+/* ── Business: text left, image right ── */
+.biz-g{grid-template-columns:1fr!important}
+.biz-item{grid-template-columns:1fr 1fr!important;align-items:stretch;gap:0}
+.biz-card{height:100%;box-sizing:border-box;order:1;padding:24px 20px;display:flex;flex-direction:column;justify-content:center}
+.biz-img-box{order:2;aspect-ratio:16/9;height:auto!important;min-height:unset!important;width:100%}
+.biz-img-box .biz-box-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.biz-img-box{position:relative;overflow:hidden}
+
+/* ── 고객사 로고: 전체 표시 + 중앙 정렬 ── */
+.cli-g .img-box{background:var(--surface2)}
+.cli-g .box-media-wrap{padding:12px;background:var(--surface);border-radius:8px}
+.cli-g .box-img{object-fit:contain!important;width:100%;height:100%;padding:4px}
+
+[data-theme=light] .box-label{color:var(--text)!important;background:rgba(255,255,255,.6)}
+
+/* ── Light 모드 전용 색상 보정 ── */
+/* page-hero: 오버레이 색 조정 */
+[data-theme=light] .page-hero-overlay{background:linear-gradient(90deg,rgba(240,244,251,.92),rgba(240,244,251,.55))}
+[data-theme=light] .page-hero-tag{color:var(--cyan)}
+[data-theme=light] .page-hero-title{color:var(--text)}
+[data-theme=light] .page-hero-sub{color:var(--muted)}
+[data-theme=light] .breadcrumb{color:var(--muted)}
+[data-theme=light] .breadcrumb a{color:var(--cyan)}
+
+/* iaea-source: 고정 검정 배경 → 테마 배경 */
+[data-theme=light] .iaea-source{background:var(--bg2);color:var(--muted);border-bottom-color:var(--border)}
+
+/* cta-wrap: 고정 다크 배경 → 테마 배경 */
+[data-theme=light] .cta-wrap{background:linear-gradient(135deg,var(--bg2),var(--surface))}
+[data-theme=light] .cta-hd{color:var(--text)}
+[data-theme=light] .cta-hd span{color:var(--cyan)}
+[data-theme=light] .cta-lb{color:var(--cyan)}
+[data-theme=light] .cta-row{color:var(--muted)}
+[data-theme=light] .cta-row strong{color:var(--text)}
+
+/* footer: 고정 검정 배경 → 테마 배경 */
+[data-theme=light] footer{background:var(--bg2);border-top-color:rgba(0,0,0,.1)}
+[data-theme=light] .foot-img-col{background:var(--surface);border-right-color:rgba(0,0,0,.08)}
+[data-theme=light] .foot-logo-kr{color:var(--text)}
+[data-theme=light] .foot-logo-en{color:var(--muted)}
+[data-theme=light] .foot-addr,[data-theme=light] .foot-contact,[data-theme=light] .foot-copy{color:var(--muted)}
+
+/* prod-card: 텍스트 가시성 */
+[data-theme=light] .prod-card{background:var(--surface);border-color:rgba(0,0,0,.08)}
+[data-theme=light] .prod-card:hover{border-color:var(--cyan)}
+[data-theme=light] .prod-title{color:var(--text)}
+[data-theme=light] .prod-desc,[data-theme=light] .prod-bullets{color:var(--muted)}
+[data-theme=light] .prod-bullets li::before{color:var(--cyan)}
+[data-theme=light] .ptag{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:var(--muted)}
+[data-theme=light] .ptag.em{background:rgba(0,151,170,.08);border-color:rgba(0,151,170,.3);color:var(--cyan)}
+[data-theme=light] .prod-upbox{background:#dce8f4}
+[data-theme=light] .pbox-ph{background:linear-gradient(135deg,#c8d8ef,#d9e4f4)}
+
+/* ── Business image boxes: full image display ── */
+.biz-img-box{position:relative;overflow:hidden}
+.biz-box-img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:contain!important;background:var(--surface)}
+.biz-img-box{aspect-ratio:16/9}
+
+.biz-bullet{font-size:13px;color:var(--muted);padding:3px 0;line-height:1.6;display:flex;gap:6px}
+.biz-bullet:before{content:"";flex-shrink:0}
+
+/* ════════════════════════ PRODUCTS PAGE ════════════════════════ */
+.prod-g{display:grid;grid-template-columns:1fr;gap:24px}
+.prod-card{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;text-decoration:none;display:grid;grid-template-columns:1fr 400px;align-items:stretch}
+.prod-card:hover{transform:translateY(-4px);border-color:rgba(0,210,240,.3);box-shadow:0 16px 48px rgba(0,210,240,.07)}
+.prod-body{padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:10px;font-size:19px}
+.prod-num{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:14px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase}
+.prod-title{font-size:19px;font-weight:800;line-height:1.35;color:var(--text)}
+.prod-desc{font-size:17px;color:var(--muted);line-height:1.75}
+.prod-bullets{font-size:17px;color:var(--muted);line-height:1.75;padding-left:1.4em;margin:0;list-style:none}
+.prod-bullets li{position:relative;padding-left:.3em;margin-bottom:4px}
+.prod-bullets li::before{content:"▸";color:var(--cyan);position:absolute;left:-1.1em;font-size:14px}
+.prod-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.ptag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:4px 12px;font-size:14px;color:var(--muted)}
+.ptag.em{background:rgba(0,210,240,.08);border-color:rgba(0,210,240,.3);color:var(--cyan);font-size:14px}
+
+/* prod-upbox */
+.prod-upbox{position:relative;width:100%;height:100%;min-height:260px;cursor:pointer;overflow:hidden;background:#0a0f1e;display:flex;align-items:center;justify-content:center}
+.prod-upbox .pbox-img{display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.prod-upbox.has-img .pbox-img{display:block}
+.prod-upbox .pbox-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#091520,#0f2030);pointer-events:none}
+.prod-upbox.has-img .pbox-ph{display:none}
+.prod-upbox .pbox-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;gap:8px;z-index:5}
+.prod-upbox:hover .pbox-overlay{opacity:1}
+.pbox-btn{background:rgba(0,210,240,.9);color:#000;border:none;border-radius:5px;padding:8px 18px;font-size:18px;font-weight:700;cursor:pointer}
+.pbox-btn.del{background:rgba(200,50,50,.9);color:#fff}
+@media(max-width:1024px){.prod-card{grid-template-columns:1fr 320px}}
+@media(max-width:768px){.prod-card{grid-template-columns:1fr}.prod-upbox{min-height:200px}}
+
+/* 브레드크럼 */
+.breadcrumb{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:18px;color:var(--muted);letter-spacing:.08em;margin-bottom:10px}
+.breadcrumb a{color:var(--cyan);text-decoration:none}
+#box-scada-intro .box-img{object-fit:contain!important}
+</style>
+<body id="artifacts-component-root-html">
+<header>
+<!-- ── 로고 영역 ── -->
+<div class="logo-wrap">
+<div class="logo-img-wrap" id="logo-img-wrap" title="클릭하여 로고 교체">
+<img alt="UNO SYSTEM 로고" class="logo-img" id="logo-img" src=""/>
+<div class="logo-img-hint" data-en="📷&lt;br/&gt;Replace logo" data-ko="📷&lt;br/&gt;로고 교체">📷<br/>로고 교체</div>
+</div>
+<div class="logo-ko"><span class="i18n" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜">유노시스템㈜</span><span class="logo-ko-en">UNO SYSTEM</span></div>
+</div>
+<nav class="main-nav" id="mainNav">
+<!-- ① 홈 -->
+<div class="ni"><a class="nb" data-en="Home" data-ko="홈" href="index.html">홈</a></div>
+<!-- ② 회사 소개 -->
+<div class="ni" id="ni-company">
+<a class="nb" data-ni="ni-company" href="company.html"><span class="i18n" data-en="Company" data-ko="회사 소개">회사 소개</span> <span class="caret">▾</span></a>
+<div class="dropdown" id="dd-company">
+<a class="di" data-en="Company Overview" data-ko="회사 개요" href="company.html">회사 개요</a>
+<a class="di" data-en="History" data-ko="회사 연혁" href="company.html">회사 연혁</a>
+<a class="di" data-en="Business Divisions" data-ko="사업 부문" href="company.html">사업 부문</a>
+<a class="di" data-en="Key Clients" data-ko="주요 고객사" href="company.html">주요 고객사</a>
+</div>
+</div>
+<!-- ③ 제품 -->
+<div class="ni" id="ni-prod">
+<a class="nb active-menu" data-ni="ni-prod" href="products.html"><span class="i18n" data-en="Products" data-ko="제품">제품</span> <span class="caret">▾</span></a>
+<div class="dropdown" id="dd-prod">
+<a class="di" data-en="Fire Alarm Control Panels" data-ko="화재 수신기" href="products/facps.html">화재 수신기</a>
+<a class="di" data-en="Detectors" data-ko="감지기" href="products/detectors.html">감지기</a>
+<a class="di" data-en="Integrated Fire Monitoring Facilities" data-ko="소방통합감시시설" href="products/detectors.html">소방통합감시시설</a>
+<a class="di" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="products/network-based.html">네트워크기반 솔루션</a>
+<a class="di" data-en="Construction Management" data-ko="건설시공 관리" href="products/construction.html">건설시공 관리</a>
+<div class="dd-sep"></div>
+<a class="di" data-en="View All Products →" data-ko="전체 제품 보기 →" href="products/products.html">전체 제품 보기 →</a>
+</div>
+</div>
+<!-- ④ 프로젝트 -->
+<div class="ni" id="ni-proj">
+<a class="nb" data-ni="ni-proj" href="projects.html"><span class="i18n" data-en="Projects" data-ko="프로젝트">프로젝트</span> <span class="caret">▾</span></a>
+<div class="dropdown">
+<a class="di" data-en="Construction Projects" data-ko="건설 프로젝트" href="projects.html">건설 프로젝트</a>
+<a class="di" href="case_studies.html">Case Studies</a>
+<a class="di" data-en="Key Clients" data-ko="주요 고객사" href="company.html">주요 고객사</a>
+</div>
+</div>
+<!-- ⑤ 자료 -->
+<div class="ni" id="ni-data">
+<a class="nb" data-ni="ni-data" href="resources.html"><span class="i18n" data-en="Resources" data-ko="자료">자료</span> <span class="caret">▾</span></a>
+<div class="dropdown">
+<a class="di" data-en="Catalog" data-ko="카탈로그" href="resources/catalog.html">카탈로그</a>
+<a class="di" data-en="Datasheets" data-ko="데이터시트" href="resources/datasheets.html">데이터시트</a>
+<a class="di" data-en="Manuals" data-ko="매뉴얼" href="resources/manuals.html">매뉴얼</a>
+<a class="di" data-en="Certificates" data-ko="인증 서류" href="resources/certificates.html">인증 서류</a>
+</div>
+</div>
+<!-- ⑥ 파트너 -->
+<div class="ni"><a class="nb" data-en="Partners" data-ko="파트너" href="partners.html">파트너</a></div>
+<!-- ⑦ CONTACT -->
+<div class="ni"><a class="nb cta-nav" href="contact.html">CONTACT</a></div>
+</nav><button aria-label="메뉴" class="nav-toggle" onclick="toggleNav()" title="메뉴" type="button">☰</button>
+<div class="lang-switch"><button class="lang-btn on" id="lang-ko" onclick="setLang('ko')" title="한국어" type="button">KOR</button><span class="lang-sep">|</span><button class="lang-btn" id="lang-en" onclick="setLang('en')" title="English" type="button">ENG</button></div><button id="theme-toggle" onclick="toggleTheme()" title="라이트/다크 모드 전환" type="button"><span id="th-icon">🌙</span><span id="th-label">Dark</span></button></header>
+<nav class="breadcrumb-nav" style="z-index:10;border-bottom:1px solid var(--border);font-size:var(--font-small);color:var(--muted);margin-top:var(--hdr);align-items:center;gap:8px;padding:12px 60px 12px 5mm;display:flex;position:relative;background:var(--bg2);padding-left:5mm"><a data-en="Products" data-ko="제품" href="products.html" style="color:var(--muted);text-decoration:none">제품</a><span style="color:var(--cyan);opacity:.6;font-size:10px">▶</span><a data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="products/network-based.html" style="color:var(--muted);text-decoration:none">네트워크기반 솔루션</a><span style="color:var(--cyan);opacity:.6;font-size:10px">▶</span><span data-en="SCADA Expansion Unit" data-ko="SCADA 확장장치" style="color:var(--text)">SCADA 확장장치</span></nav>
+<!-- ═══ HERO IMAGE BOX ═══ -->
+<div class="iaea-hero-wrap" id="hero-wrap" style="cursor:pointer">
+<div class="hero-empty hidden" id="hero-empty">
+<div class="he-plus">+</div>
+<div data-en="Click to insert an image / video" data-ko="클릭하여 이미지 / 영상 삽입" style="font-size:var(--font-body);font-weight:700">클릭하여 이미지 / 영상 삽입</div>
+</div>
+<!-- ── 수신기 LCD 점등 일러스트 (기본 hero) ── -->
+<div id="hero-svg-bg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden">
+<svg style="width:100%;height:100%;display:block" viewbox="0 0 1400 520" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialgradient cx="35%" cy="50%" id="bg-grad" r="70%">
+<stop offset="0%" stop-color="#0a1a30"></stop>
+<stop offset="100%" stop-color="#040810"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="glow-r" r="50%">
+<stop offset="0%" stop-color="#00d2f0" stop-opacity="0.14"></stop>
+<stop offset="100%" stop-color="#00d2f0" stop-opacity="0"></stop>
+</radialgradient>
+<filter id="glow-strong">
+<fegaussianblur result="blur" stddeviation="3.5"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+<filter id="glow-soft">
+<fegaussianblur result="blur" stddeviation="1.8"></fegaussianblur>
+<femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+<filter id="box-shadow">
+<fedropshadow dx="0" dy="6" flood-color="#00d2f0" flood-opacity="0.13" stddeviation="18"></fedropshadow>
+</filter>
+<lineargradient id="box-grad" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#182a42"></stop>
+<stop offset="100%" stop-color="#0a1828"></stop>
+</lineargradient>
+<lineargradient id="led-g" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#40ff80"></stop><stop offset="100%" stop-color="#10a030"></stop>
+</lineargradient>
+<lineargradient id="led-a" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#ffcc00"></stop><stop offset="100%" stop-color="#cc8800"></stop>
+</lineargradient>
+<clippath id="sc1"><rect height="260" rx="3" width="280" x="70" y="110"></rect></clippath>
+<clippath id="sc2"><rect height="260" rx="3" width="220" x="390" y="110"></rect></clippath>
+</defs>
+<!-- 배경 -->
+<rect fill="url(#bg-grad)" height="520" width="1400"></rect>
+<g stroke="rgba(0,210,240,0.035)" stroke-width="1">
+<line x1="0" x2="1400" y1="104" y2="104"></line><line x1="0" x2="1400" y1="208" y2="208"></line>
+<line x1="0" x2="1400" y1="312" y2="312"></line><line x1="0" x2="1400" y1="416" y2="416"></line>
+<line x1="140" x2="140" y1="0" y2="520"></line><line x1="280" x2="280" y1="0" y2="520"></line>
+<line x1="420" x2="420" y1="0" y2="520"></line><line x1="560" x2="560" y1="0" y2="520"></line>
+<line x1="700" x2="700" y1="0" y2="520"></line><line x1="840" x2="840" y1="0" y2="520"></line>
+<line x1="980" x2="980" y1="0" y2="520"></line><line x1="1120" x2="1120" y1="0" y2="520"></line>
+<line x1="1260" x2="1260" y1="0" y2="520"></line>
+</g>
+<ellipse cx="350" cy="260" fill="url(#glow-r)" rx="340" ry="220"></ellipse>
+<!-- ══ SCADA 유닛 박스 1: I/O 모듈 ══ -->
+<rect fill="url(#box-grad)" filter="url(#box-shadow)" height="340" rx="8" width="300" x="60" y="90"></rect>
+<rect fill="none" height="340" rx="8" stroke="rgba(0,210,240,0.32)" stroke-width="1.5" width="300" x="60" y="90"></rect>
+<!-- 헤더 바 -->
+<rect fill="rgba(0,210,240,0.09)" height="36" rx="8" width="300" x="60" y="90"></rect>
+<rect fill="rgba(0,210,240,0.09)" height="14" width="300" x="60" y="112"></rect>
+<text fill="rgba(0,210,240,0.75)" font-family="monospace" font-size="10" letter-spacing="3" text-anchor="middle" x="210" y="113">I/O EXPANSION MODULE</text>
+<!-- 화면 영역 -->
+<rect fill="#000c18" height="264" rx="3" stroke="rgba(0,210,240,0.25)" stroke-width="1" width="284" x="68" y="108"></rect>
+<g clip-path="url(#sc1)">
+<!-- 헤더 -->
+<rect fill="rgba(0,210,240,0.1)" height="24" width="280" x="70" y="110"></rect>
+<text fill="#00d2f0" filter="url(#glow-soft)" font-family="monospace" font-size="9" x="80" y="126">▶ SCADA-EXT  ONLINE</text>
+<text fill="rgba(0,210,240,0.5)" font-family="monospace" font-size="9" text-anchor="end" x="340" y="126">2026-06-29</text>
+<!-- 구분선 -->
+<line stroke="rgba(0,210,240,0.18)" stroke-width="1" x1="70" x2="350" y1="134" y2="134"></line>
+<!-- DI 채널 -->
+<text fill="rgba(0,210,240,0.45)" font-family="monospace" font-size="9" x="80" y="149">── DIGITAL INPUT (DI) ──</text>
+<g filter="url(#glow-soft)">
+<circle cx="82" cy="161" fill="#00ff80" r="4"></circle><text fill="rgba(255,255,255,0.6)" font-family="monospace" font-size="9" x="92" y="165">DI-01  CLOSED</text><text fill="#00ff80" font-family="monospace" font-size="9" x="252" y="165">ON</text>
+<circle cx="82" cy="175" fill="#00ff80" r="4"></circle><text fill="rgba(255,255,255,0.6)" font-family="monospace" font-size="9" x="92" y="179">DI-02  CLOSED</text><text fill="#00ff80" font-family="monospace" font-size="9" x="252" y="179">ON</text>
+<circle cx="82" cy="189" fill="#333" r="4"></circle><text fill="rgba(255,255,255,0.35)" font-family="monospace" font-size="9" x="92" y="193">DI-03  OPEN</text><text fill="rgba(255,255,255,0.25)" font-family="monospace" font-size="9" x="252" y="193">OFF</text>
+<circle cx="82" cy="203" fill="#ffcc00" filter="url(#glow-strong)" r="4"></circle><text fill="#ffcc00" font-family="monospace" font-size="9" x="92" y="207">DI-04  PULSE</text><text fill="#ffcc00" font-family="monospace" font-size="9" x="252" y="207">▲</text>
+</g>
+<!-- DO 채널 -->
+<line stroke="rgba(0,210,240,0.1)" stroke-width="1" x1="70" x2="350" y1="215" y2="215"></line>
+<text fill="rgba(0,210,240,0.45)" font-family="monospace" font-size="9" x="80" y="228">── DIGITAL OUTPUT (DO) ──</text>
+<g filter="url(#glow-soft)">
+<circle cx="82" cy="240" fill="#00ff80" r="4"></circle><text fill="rgba(255,255,255,0.6)" font-family="monospace" font-size="9" x="92" y="244">DO-01  ENERGIZED</text><text fill="#00ff80" font-family="monospace" font-size="9" x="252" y="244">ON</text>
+<circle cx="82" cy="254" fill="#333" r="4"></circle><text fill="rgba(255,255,255,0.35)" font-family="monospace" font-size="9" x="92" y="258">DO-02  DE-ENRG.</text><text fill="rgba(255,255,255,0.25)" font-family="monospace" font-size="9" x="252" y="258">OFF</text>
+</g>
+<!-- AI 채널 -->
+<line stroke="rgba(0,210,240,0.1)" stroke-width="1" x1="70" x2="350" y1="266" y2="266"></line>
+<text fill="rgba(0,210,240,0.45)" font-family="monospace" font-size="9" x="80" y="279">── ANALOG INPUT (AI) ──</text>
+<text fill="rgba(255,255,255,0.55)" font-family="monospace" font-size="9" x="80" y="293">AI-01  4~20mA</text>
+<text fill="#00d2f0" font-family="monospace" font-size="9" x="200" y="293">12.4 mA</text><text fill="rgba(255,255,255,0.35)" font-family="monospace" font-size="9" x="265" y="293">62%</text>
+<text fill="rgba(255,255,255,0.55)" font-family="monospace" font-size="9" x="80" y="307">AI-02  0~10V</text>
+<text fill="#00d2f0" font-family="monospace" font-size="9" x="200" y="307"> 6.8 V</text><text fill="rgba(255,255,255,0.35)" font-family="monospace" font-size="9" x="265" y="307">68%</text>
+<!-- 상태 표시 바 -->
+<rect fill="rgba(0,210,240,0.07)" height="20" width="280" x="70" y="350"></rect>
+<text fill="rgba(0,210,240,0.5)" font-family="monospace" font-size="8.5" x="80" y="364">Modbus RTU  |  RS-485  |  19200 bps  |  OK</text>
+</g>
+<!-- ══ SCADA 유닛 박스 2: 통신 모듈 ══ -->
+<rect fill="url(#box-grad)" filter="url(#box-shadow)" height="340" rx="8" width="240" x="380" y="90"></rect>
+<rect fill="none" height="340" rx="8" stroke="rgba(0,210,240,0.28)" stroke-width="1.5" width="240" x="380" y="90"></rect>
+<rect fill="rgba(0,210,240,0.08)" height="36" rx="8" width="240" x="380" y="90"></rect>
+<rect fill="rgba(0,210,240,0.08)" height="14" width="240" x="380" y="112"></rect>
+<text fill="rgba(0,210,240,0.7)" font-family="monospace" font-size="10" letter-spacing="3" text-anchor="middle" x="500" y="113">COMM MODULE</text>
+<rect fill="#000c18" height="264" rx="3" stroke="rgba(0,210,240,0.2)" stroke-width="1" width="224" x="388" y="108"></rect>
+<g clip-path="url(#sc2)">
+<rect fill="rgba(0,210,240,0.08)" height="24" width="220" x="390" y="110"></rect>
+<text fill="#00d2f0" filter="url(#glow-soft)" font-family="monospace" font-size="9" x="400" y="126">▶ COMM  ACTIVE</text>
+<!-- 프로토콜 상태 -->
+<text fill="rgba(0,210,240,0.45)" font-family="monospace" font-size="9" x="400" y="148">── PROTOCOL ──</text>
+<circle cx="402" cy="162" fill="#00ff80" filter="url(#glow-soft)" r="4"></circle>
+<text fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="9" x="412" y="166">Modbus TCP</text>
+<text fill="#00ff80" font-family="monospace" font-size="9" text-anchor="end" x="560" y="166">ON</text>
+<circle cx="402" cy="178" fill="#00ff80" filter="url(#glow-soft)" r="4"></circle>
+<text fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="9" x="412" y="182">Modbus RTU</text>
+<text fill="#00ff80" font-family="monospace" font-size="9" text-anchor="end" x="560" y="182">ON</text>
+<circle cx="402" cy="194" fill="#00d2f0" filter="url(#glow-soft)" r="4"></circle>
+<text fill="rgba(255,255,255,0.65)" font-family="monospace" font-size="9" x="412" y="198">DNP3</text>
+<text fill="#00d2f0" font-family="monospace" font-size="9" text-anchor="end" x="560" y="198">STBY</text>
+<!-- 포트 -->
+<line stroke="rgba(0,210,240,0.1)" stroke-width="1" x1="390" x2="610" y1="207" y2="207"></line>
+<text fill="rgba(0,210,240,0.45)" font-family="monospace" font-size="9" x="400" y="220">── PORTS ──</text>
+<text fill="rgba(255,255,255,0.5)" font-family="monospace" font-size="9" x="400" y="234">ETH0</text>
+<text fill="#00d2f0" font-family="monospace" font-size="9" text-anchor="end" x="560" y="234">192.168.1.50</text>
+<text fill="rgba(255,255,255,0.5)" font-family="monospace" font-size="9" x="400" y="248">RS-485</text>
+<text fill="#00d2f0" font-family="monospace" font-size="9" text-anchor="end" x="560" y="248">19200/8N1</text>
+<text fill="rgba(255,255,255,0.5)" font-family="monospace" font-size="9" x="400" y="262">RS-232</text>
+<text fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9" text-anchor="end" x="560" y="262">N/C</text>
+<!-- 트래픽 -->
+<line stroke="rgba(0,210,240,0.1)" stroke-width="1" x1="390" x2="610" y1="272" y2="272"></line>
+<text fill="rgba(0,210,240,0.45)" font-family="monospace" font-size="9" x="400" y="285">── TRAFFIC ──</text>
+<text fill="rgba(255,255,255,0.5)" font-family="monospace" font-size="9" x="400" y="299">TX</text>
+<text fill="#00ff80" font-family="monospace" font-size="9" text-anchor="end" x="560" y="299">1,248 pkts</text>
+<text fill="rgba(255,255,255,0.5)" font-family="monospace" font-size="9" x="400" y="313">RX</text>
+<text fill="#00ff80" font-family="monospace" font-size="9" text-anchor="end" x="560" y="313">1,231 pkts</text>
+<text fill="rgba(255,255,255,0.5)" font-family="monospace" font-size="9" x="400" y="327">ERR</text>
+<text fill="#00ff80" font-family="monospace" font-size="9" text-anchor="end" x="560" y="327">0</text>
+<!-- 상태 -->
+<rect fill="rgba(0,210,240,0.07)" height="20" width="220" x="390" y="350"></rect>
+<text fill="rgba(0,210,240,0.5)" font-family="monospace" font-size="8.5" x="400" y="364">SCADA ● GIS ● HMI  LINKED</text>
+</g>
+<!-- DIN 레일 표현 -->
+<rect fill="rgba(0,210,240,0.18)" height="8" rx="2" stroke="rgba(0,210,240,0.3)" stroke-width="1" width="564" x="58" y="438"></rect>
+<text fill="rgba(0,210,240,0.35)" font-family="monospace" font-size="9" letter-spacing="2" text-anchor="middle" x="340" y="465">DIN RAIL MOUNT — UNO SYSTEM SCADA EXPANSION UNIT</text>
+<!-- ══ 우측 텍스트 ══ -->
+<text fill="rgba(0,210,240,0.055)" font-family="'Bebas Neue',sans-serif" font-size="72" letter-spacing="8" x="700" y="140">UNO SYSTEM</text>
+<text data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜  ·  UNO SYSTEM Co., Ltd." fill="rgba(0,210,240,0.35)" font-family="'Montserrat',sans-serif" font-size="13" font-weight="900" letter-spacing="3" x="700" y="200">유노시스템㈜  ·  UNO SYSTEM Co., Ltd.</text>
+<text fill="rgba(255,255,255,0.88)" font-family="'Montserrat',sans-serif" font-size="36" font-weight="900" x="700" y="252">SCADA</text>
+<text data-en="Expansion Unit" data-ko="확장장치" fill="rgba(255,255,255,0.88)" font-family="'Montserrat',sans-serif" font-size="36" font-weight="900" x="700" y="294">확장장치</text>
+<text fill="rgba(0,210,240,0.6)" font-family="monospace" font-size="13" letter-spacing="1" x="700" y="324">SCADA EXPANSION UNIT  ·  SCADA-EXT</text>
+<line stroke="rgba(0,210,240,0.15)" stroke-width="1" x1="700" x2="1340" y1="340" y2="340"></line>
+<!-- 뱃지 -->
+<rect fill="rgba(0,210,240,0.1)" height="26" rx="13" stroke="rgba(0,210,240,0.3)" stroke-width="1" width="90" x="700" y="352"></rect>
+<text data-en="I/O Expansion" data-ko="I/O 확장" fill="#00d2f0" font-family="monospace" font-size="10" text-anchor="middle" x="745" y="369">I/O 확장</text>
+<rect fill="rgba(0,210,240,0.1)" height="26" rx="13" stroke="rgba(0,210,240,0.3)" stroke-width="1" width="82" x="802" y="352"></rect>
+<text fill="#00d2f0" font-family="monospace" font-size="10" text-anchor="middle" x="843" y="369">Modbus RTU</text>
+<rect fill="rgba(0,210,240,0.1)" height="26" rx="13" stroke="rgba(0,210,240,0.3)" stroke-width="1" width="82" x="896" y="352"></rect>
+<text fill="#00d2f0" font-family="monospace" font-size="10" text-anchor="middle" x="937" y="369">Modbus TCP</text>
+<rect fill="rgba(0,210,240,0.1)" height="26" rx="13" stroke="rgba(0,210,240,0.3)" stroke-width="1" width="55" x="990" y="352"></rect>
+<text fill="#00d2f0" font-family="monospace" font-size="10" text-anchor="middle" x="1017" y="369">GIS</text>
+<rect fill="rgba(0,210,240,0.1)" height="26" rx="13" stroke="rgba(0,210,240,0.3)" stroke-width="1" width="55" x="1057" y="352"></rect>
+<text fill="#00d2f0" font-family="monospace" font-size="10" text-anchor="middle" x="1084" y="369">DNP3</text>
+<text data-en="Integrated remote supervision of energy, fire, and industrial infrastructure" data-ko="에너지·소방·산업 인프라 통합 원격 관제 실현" fill="rgba(255,255,255,0.5)" font-family="'Noto Sans KR',sans-serif" font-size="14" x="700" y="415">에너지·소방·산업 인프라 통합 원격 관제 실현</text>
+<text data-en="DI/DO/AI/AO multi-channel · simultaneous RS-485 / Ethernet" data-ko="DI/DO/AI/AO 다중 채널 · RS-485 / Ethernet 동시 지원" fill="rgba(255,255,255,0.5)" font-family="'Noto Sans KR',sans-serif" font-size="14" x="700" y="440">DI/DO/AI/AO 다중 채널 · RS-485 / Ethernet 동시 지원</text>
+<circle cx="688" cy="415" fill="rgba(0,210,240,0.6)" r="3"></circle>
+<circle cx="688" cy="440" fill="rgba(0,210,240,0.6)" r="3"></circle>
+</svg>
+</div>
+<img alt="Hero Image" id="hero-main-img" src="" style="display:none"/>
+<div class="hero-change-hint"><span data-en="📷 Click to replace the image / video" data-ko="📷 클릭하여 이미지 / 영상 교체">📷 클릭하여 이미지 / 영상 교체</span></div>
+<div class="hero-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();heroReplace()">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();heroDelete()">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" id="hero-file-input" style="display:none" type="file"/>
+</div>
+<div class="iaea-source" contenteditable="true" data-en="Source: enter the image source" data-ko="출처: 이미지 출처를 입력하세요">출처: 이미지 출처를 입력하세요</div>
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero">
+<div class="page-hero-bg" style="background-image:url('')"></div>
+<div class="page-hero-overlay"></div>
+<div class="page-hero-content" style="padding:0 60px 0 5mm">
+<span class="page-hero-tag">Network Solution · SCADA</span>
+<h1 class="page-hero-title" data-en="SCADA Expansion Unit" data-ko="SCADA 확장장치">SCADA 확장장치</h1>
+<div class="page-hero-sub">SCADA Expansion Unit · Modbus RTU/TCP · DNP3 · DI/DO/AI/AO · RS-485 / Ethernet</div>
+</div>
+</section>
+<div class="div-line"></div>
+<!-- ═══ 개요 ═══ -->
+<section class="pg" id="overview">
+<div class="shdr">
+<div class="shdr-left">
+<span class="stag">Network Solution · SCADA</span>
+<h2 class="stitle"><span class="i18n" data-en="Products" data-ko="제품">제품</span> <span class="hl" data-en="Overview" data-ko="개요">개요</span></h2>
+</div>
+<div class="shdr-hr"></div>
+</div>
+<div class="ov-grid">
+<div>
+<div class="kv-list">
+<div class="kv"><div class="kv-ic">🔌</div><div><div class="kv-lb" data-en="Product Name" data-ko="제품명">제품명</div><div class="kv-val" data-en="SCADA Expansion Unit" data-ko="SCADA 확장장치 (SCADA Expansion Unit)">SCADA 확장장치 (SCADA Expansion Unit)</div></div></div>
+<div class="kv"><div class="kv-ic">📋</div><div><div class="kv-lb" data-en="Application" data-ko="용도">용도</div><div class="kv-val" data-en="Expands the I/O points and communication channels of an existing SCADA system. Additional field measurement and control equipment can be connected to deliver integrated remote supervision of energy, fire protection, and industrial infrastructure." data-ko="기존 SCADA 시스템의 I/O 포인트 및 통신 채널 확장. 현장 계측·제어 설비를 추가 연결하여 에너지·소방·산업 인프라 통합 원격 관제 실현.">기존 SCADA 시스템의 I/O 포인트 및 통신 채널 확장. 현장 계측·제어 설비를 추가 연결하여 에너지·소방·산업 인프라 통합 원격 관제 실현.</div></div></div>
+<div class="kv"><div class="kv-ic">⚡</div><div><div class="kv-lb" data-en="Power Supply" data-ko="사용 전원">사용 전원</div><div class="kv-val">DC 24V / AC 220V</div></div></div>
+<div class="kv"><div class="kv-ic">🌡️</div><div><div class="kv-lb" data-en="Operating Temperature" data-ko="사용 온도">사용 온도</div><div class="kv-val">-20 ~ 70 °C</div></div></div>
+<div class="kv"><div class="kv-ic">🔧</div><div><div class="kv-lb" data-en="Mounting" data-ko="설치 방식">설치 방식</div><div class="kv-val" data-en="DIN rail / panel mount" data-ko="DIN 레일 / 패널 마운트">DIN 레일 / 패널 마운트</div></div></div>
+<div class="kv"><div class="kv-ic">🏭</div><div><div class="kv-lb" data-en="Manufacturer" data-ko="제조사">제조사</div><div class="kv-val" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜ (UNO SYSTEM Co., Ltd.)">유노시스템㈜ (UNO SYSTEM Co., Ltd.)</div></div></div>
+</div>
+</div>
+<div class="img-box" data-key="scada-intro" data-label="SCADA 확장장치 이미지" id="box-scada-intro" style="height:100%;min-height:300px">
+<div class="box-media-wrap">
+<img alt="SCADA 확장장치" class="box-img" src=""/>
+<div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to&lt;br/&gt;insert an image" data-ko="클릭하여&lt;br/&gt;이미지 삽입">클릭하여<br/>이미지 삽입</div></div>
+</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();boxReplace('box-scada-intro')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();boxDelete('box-scada-intro')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#SCADAExpansionUnit" data-ko="#SCADA확장장치">#SCADA확장장치</span><span class="sec-kw" contenteditable="true" data-en="#RemoteSupervision" data-ko="#원격관제">#원격관제</span><span class="sec-kw" contenteditable="true" data-en="#DINRail" data-ko="#DIN레일">#DIN레일</span><span class="sec-kw" contenteditable="true">#Modbus</span></div></section>
+<div class="div-line"></div>
+<!-- ═══ KPI ═══ -->
+<section class="pg alt" id="kpi">
+<div class="stats-row">
+<div class="sc"><div class="sc-n">I/O</div><div class="sc-l" data-en="Point Expansion&lt;br/&gt;Digital &amp;amp; Analog I/O" data-ko="포인트 확장&lt;br/&gt;디지털·아날로그 입출력">포인트 확장<br/>디지털·아날로그 입출력</div></div>
+<div class="sc"><div class="sc-n" data-en="Real Time" data-ko="실시간">실시간</div><div class="sc-l" data-en="Remote Monitoring&lt;br/&gt;SCADA Integrated Supervision" data-ko="원격 감시&lt;br/&gt;SCADA 통합 관제">원격 감시<br/>SCADA 통합 관제</div></div>
+<div class="sc"><div class="sc-n" data-en="Multiple" data-ko="다중">다중</div><div class="sc-l" data-en="Protocols&lt;br/&gt;Modbus · DNP3 · IEC" data-ko="프로토콜&lt;br/&gt;Modbus · DNP3 · IEC">프로토콜<br/>Modbus · DNP3 · IEC</div></div>
+<div class="sc"><div class="sc-n">24H</div><div class="sc-l" data-en="Continuous Uptime&lt;br/&gt;Redundant Design" data-ko="연속 무중단&lt;br/&gt;이중화 설계">연속 무중단<br/>이중화 설계</div></div>
+</div>
+</section>
+<div class="div-line"></div>
+<!-- ═══ 주요 특징 ═══ -->
+<section class="pg" id="features">
+<div class="shdr">
+<div class="shdr-left">
+<span class="stag">// Features</span>
+<h2 class="stitle"><span class="i18n" data-en="Key" data-ko="주요">주요</span> <span class="hl" data-en="Features" data-ko="특징">특징</span></h2>
+</div>
+<div class="shdr-hr"></div>
+</div>
+<div class="biz-g">
+<div class="biz-item">
+<div class="biz-card">
+<div class="biz-num">01</div>
+<div class="biz-title" data-en="I/O Point Expansion" data-ko="I/O 포인트 확장">I/O 포인트 확장</div>
+<div class="biz-desc" data-en="Digital input (DI), digital output (DO), analog input (AI), and analog output (AO) channels can be added freely to extend the monitoring and control reach of an existing SCADA system." data-ko="디지털 입력(DI), 디지털 출력(DO), 아날로그 입력(AI), 아날로그 출력(AO) 채널을 자유롭게 추가하여 기존 SCADA 시스템의 감시·제어 범위를 확장합니다.">디지털 입력(DI), 디지털 출력(DO), 아날로그 입력(AI), 아날로그 출력(AO) 채널을 자유롭게 추가하여 기존 SCADA 시스템의 감시·제어 범위를 확장합니다.</div>
+</div>
+<div class="biz-img-box" data-key="scada-feat01" data-label="I/O 포인트 확장 이미지" id="biz-scada-01">
+<img alt="I/O 포인트 확장" class="biz-box-img" src=""/>
+<div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div>
+<div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="biz-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-scada-01')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-scada-01')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="biz-item">
+<div class="biz-card">
+<div class="biz-num">02</div>
+<div class="biz-title" data-en="Standard Communication Protocols" data-ko="표준 통신 프로토콜">표준 통신 프로토콜</div>
+<div class="biz-desc" data-en="Supports Modbus RTU/TCP, DNP3, IEC 61850, and dedicated SCADA protocols for compatibility with a wide range of upper-level control systems (SCADA, DCS, GIS, HMI)." data-ko="Modbus RTU/TCP, DNP3, IEC 61850, SCADA 전용 프로토콜을 지원하여 다양한 상위 제어 시스템(SCADA, DCS, GIS, HMI)과 호환됩니다.">Modbus RTU/TCP, DNP3, IEC 61850, SCADA 전용 프로토콜을 지원하여 다양한 상위 제어 시스템(SCADA, DCS, GIS, HMI)과 호환됩니다.</div>
+</div>
+<div class="biz-img-box" data-key="scada-feat02" data-label="표준 통신 프로토콜 이미지" id="biz-scada-02">
+<img alt="표준 통신 프로토콜" class="biz-box-img" src=""/>
+<div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div>
+<div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="biz-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-scada-02')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-scada-02')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="biz-item">
+<div class="biz-card">
+<div class="biz-num">03</div>
+<div class="biz-title" data-en="GIS Integration" data-ko="GIS 통합 연동">GIS 통합 연동</div>
+<div class="biz-desc" data-en="Links to location-based GIS systems to visualize equipment status on a map. When an anomaly occurs, the alarm is delivered immediately together with its location." data-ko="위치 기반 GIS 시스템과 연계하여 설비 현황을 지도 위에 시각화합니다. 이상 발생 시 위치와 함께 경보를 즉시 제공합니다.">위치 기반 GIS 시스템과 연계하여 설비 현황을 지도 위에 시각화합니다. 이상 발생 시 위치와 함께 경보를 즉시 제공합니다.</div>
+</div>
+<div class="biz-img-box" data-key="scada-feat03" data-label="GIS 통합 연동 이미지" id="biz-scada-03">
+<img alt="GIS 통합 연동" class="biz-box-img" src=""/>
+<div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div>
+<div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="biz-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-scada-03')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-scada-03')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="biz-item">
+<div class="biz-card">
+<div class="biz-num">04</div>
+<div class="biz-title" data-en="Energy Infrastructure Integration" data-ko="에너지 인프라 연동">에너지 인프라 연동</div>
+<div class="biz-desc" data-en="Monitors and controls diverse energy and safety infrastructure — fire alarm control panels, AMI meters, substation equipment — from a single SCADA system." data-ko="소방 수신기, AMI 계량기, 변전설비 등 다양한 에너지·안전 인프라를 단일 SCADA 시스템으로 통합 감시·제어합니다.">소방 수신기, AMI 계량기, 변전설비 등 다양한 에너지·안전 인프라를 단일 SCADA 시스템으로 통합 감시·제어합니다.</div>
+</div>
+<div class="biz-img-box" data-key="scada-feat04" data-label="에너지 인프라 연동 이미지" id="biz-scada-04">
+<img alt="에너지 인프라 연동" class="biz-box-img" src=""/>
+<div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div>
+<div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="biz-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-scada-04')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-scada-04')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="biz-item">
+<div class="biz-card">
+<div class="biz-num">05</div>
+<div class="biz-title" data-en="Redundant, High-Reliability Design" data-ko="이중화·고신뢰 설계">이중화·고신뢰 설계</div>
+<div class="biz-desc" data-en="Redundant power and redundant communication paths eliminate single points of failure, guaranteeing the 99.9%+ availability that critical infrastructure monitoring demands." data-ko="전원 이중화, 통신 경로 이중화 설계로 단일 장애점을 제거합니다. 핵심 인프라 감시에 요구되는 99.9% 이상 가용성을 보장합니다.">전원 이중화, 통신 경로 이중화 설계로 단일 장애점을 제거합니다. 핵심 인프라 감시에 요구되는 99.9% 이상 가용성을 보장합니다.</div>
+</div>
+<div class="biz-img-box" data-key="scada-feat05" data-label="이중화 설계 이미지" id="biz-scada-05">
+<img alt="이중화 고신뢰 설계" class="biz-box-img" src=""/>
+<div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div>
+<div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="biz-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-scada-05')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-scada-05')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="biz-item">
+<div class="biz-card">
+<div class="biz-num">06</div>
+<div class="biz-title" data-en="DIN Rail Mounting" data-ko="DIN 레일 마운트">DIN 레일 마운트</div>
+<div class="biz-desc" data-en="A compact design that mounts on a standard DIN rail makes installation inside existing control cabinets easy. Suitable for both indoor and outdoor panels." data-ko="표준 DIN 레일에 장착 가능한 컴팩트 설계로 기존 제어반 내 설치가 용이합니다. 옥내·옥외 패널에 모두 적용 가능합니다.">표준 DIN 레일에 장착 가능한 컴팩트 설계로 기존 제어반 내 설치가 용이합니다. 옥내·옥외 패널에 모두 적용 가능합니다.</div>
+</div>
+<div class="biz-img-box" data-key="scada-feat06" data-label="DIN 레일 마운트 이미지" id="biz-scada-06">
+<img alt="DIN 레일 마운트" class="biz-box-img" src=""/>
+<div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div>
+<div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="biz-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-scada-06')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-scada-06')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#IOPointExpansion" data-ko="#IO포인트확장">#IO포인트확장</span><span class="sec-kw" contenteditable="true" data-en="#StandardProtocols" data-ko="#표준프로토콜">#표준프로토콜</span><span class="sec-kw" contenteditable="true" data-en="#GISIntegration" data-ko="#GIS연동">#GIS연동</span><span class="sec-kw" contenteditable="true" data-en="#RedundantDesign" data-ko="#이중화설계">#이중화설계</span></div></section>
+<div class="div-line"></div>
+<!-- ═══ 적용 분야 ═══ -->
+<section class="pg alt" id="applications">
+<div class="shdr">
+<div class="shdr-left">
+<span class="stag">// Applications</span>
+<h2 class="stitle"><span class="i18n" data-en="Applications" data-ko="적용">적용</span> <span class="hl" data-en="Areas" data-ko="분야">분야</span></h2>
+</div>
+<div class="shdr-hr"></div>
+</div>
+<div class="biz-g"><div class="biz-item"><div class="biz-card"><div class="biz-num">01</div><div class="biz-title" contenteditable="true" data-en="Electrical Substations" data-ko="전력 변전소">전력 변전소</div><div class="biz-desc" contenteditable="true" data-en="Expands SCADA I/O points so that switchgear, circuit breakers, and transformers in a substation can be monitored and controlled remotely in real time. Digital and analog channels that existing RTUs and PLCs cannot supply are added to widen measurement coverage. Power quality data such as voltage, current, and power factor is collected and sent to the central control system. Faults at unmanned substations are detected early, supporting rapid response and restoration. The unit is designed to operate reliably even in substation environments with heavy surges and noise." data-ko="변전소의 개폐기·차단기·변압기 상태를 원격에서 실시간으로 감시하고 제어할 수 있도록 SCADA I/O 포인트를 확장합니다. 기존 RTU·PLC로는 부족한 디지털·아날로그 채널을 추가하여 계측 범위를 넓힙니다. 전압·전류·역률 등 전력 품질 데이터를 수집해 중앙 관제 시스템으로 전송합니다. 무인 변전소의 사고를 조기에 감지하여 신속한 대응과 복구를 지원합니다. 서지·노이즈가 강한 변전 환경에서도 안정적으로 동작하도록 설계되었습니다.">변전소의 개폐기·차단기·변압기 상태를 원격에서 실시간으로 감시하고 제어할 수 있도록 SCADA I/O 포인트를 확장합니다. 기존 RTU·PLC로는 부족한 디지털·아날로그 채널을 추가하여 계측 범위를 넓힙니다. 전압·전류·역률 등 전력 품질 데이터를 수집해 중앙 관제 시스템으로 전송합니다. 무인 변전소의 사고를 조기에 감지하여 신속한 대응과 복구를 지원합니다. 서지·노이즈가 강한 변전 환경에서도 안정적으로 동작하도록 설계되었습니다.</div></div><div class="biz-img-box" data-key="scada-app01" data-label="전력 변전소 적용 이미지" id="biz-app-01"><img alt="전력 변전소" class="biz-box-img" src=""/><div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div><div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div><div class="biz-img-ctrl"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-app-01')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-app-01')">🗑 삭제</button></div><input accept="image/*,video/*" style="display:none" type="file"/></div></div><div class="biz-item"><div class="biz-card"><div class="biz-num">02</div><div class="biz-title" contenteditable="true" data-en="Integrated Fire Monitoring" data-ko="소방 통합감시">소방 통합감시</div><div class="biz-desc" contenteditable="true" data-en="Fire alarm control panels and suppression systems are linked to the SCADA system for integrated remote monitoring of fire status. Fire alarms, detector activations, and equipment fault signals are collected in real time and sent to the control room. Contact signals from existing fire equipment are extended as digital inputs, so integration requires no new wiring. Fire equipment distributed across many buildings and facilities is monitored from a single control screen. Alarms are broadcast immediately, shortening first-response time." data-ko="화재수신기와 소화설비를 SCADA 시스템에 연동하여 소방 상태를 통합적으로 원격 감시합니다. 화재 경보·감지기 동작·설비 고장 신호를 실시간으로 수집하여 통제실로 전송합니다. 기존 소방 설비의 접점 신호를 디지털 입력으로 확장해 별도 배선 없이 통합할 수 있습니다. 다수의 건물·시설에 분산된 소방 설비를 하나의 관제 화면에서 감시합니다. 이상 발생 시 즉시 경보를 전파하여 초동 대응 시간을 단축합니다.">화재수신기와 소화설비를 SCADA 시스템에 연동하여 소방 상태를 통합적으로 원격 감시합니다. 화재 경보·감지기 동작·설비 고장 신호를 실시간으로 수집하여 통제실로 전송합니다. 기존 소방 설비의 접점 신호를 디지털 입력으로 확장해 별도 배선 없이 통합할 수 있습니다. 다수의 건물·시설에 분산된 소방 설비를 하나의 관제 화면에서 감시합니다. 이상 발생 시 즉시 경보를 전파하여 초동 대응 시간을 단축합니다.</div></div><div class="biz-img-box" data-key="scada-app02" data-label="소방 통합감시 적용 이미지" id="biz-app-02"><img alt="소방 통합감시" class="biz-box-img" src=""/><div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div><div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div><div class="biz-img-ctrl"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-app-02')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-app-02')">🗑 삭제</button></div><input accept="image/*,video/*" style="display:none" type="file"/></div></div><div class="biz-item"><div class="biz-card"><div class="biz-num">03</div><div class="biz-title" contenteditable="true" data-en="Water &amp;amp; Wastewater Facilities" data-ko="상하수도 시설">상하수도 시설</div><div class="biz-desc" contenteditable="true" data-en="Remotely monitors and controls pumps, valves, water levels, and flow measurements at water treatment plants, reservoirs, and pumping stations. I/O points for water and wastewater equipment scattered over a wide area are expanded efficiently. Analog signals from level, pressure, and water-quality sensors are collected in real time to optimize operations. Pump operation can be controlled remotely, enabling unmanned operation without dispatching staff. Equipment faults and early signs of leakage are detected early, keeping supply stable." data-ko="정수장·배수지·펌프장의 펌프·밸브·수위·유량 계측 데이터를 원격으로 감시하고 제어합니다. 광범위한 지역에 분산된 상하수도 설비의 I/O 포인트를 효율적으로 확장합니다. 수위·압력·수질 센서의 아날로그 신호를 실시간으로 수집하여 운영을 최적화합니다. 펌프 운전 상태를 원격으로 제어하여 인력 투입 없이 무인 운영이 가능합니다. 설비 이상이나 누수 징후를 조기에 감지하여 안정적인 급수를 유지합니다.">정수장·배수지·펌프장의 펌프·밸브·수위·유량 계측 데이터를 원격으로 감시하고 제어합니다. 광범위한 지역에 분산된 상하수도 설비의 I/O 포인트를 효율적으로 확장합니다. 수위·압력·수질 센서의 아날로그 신호를 실시간으로 수집하여 운영을 최적화합니다. 펌프 운전 상태를 원격으로 제어하여 인력 투입 없이 무인 운영이 가능합니다. 설비 이상이나 누수 징후를 조기에 감지하여 안정적인 급수를 유지합니다.</div></div><div class="biz-img-box" data-key="scada-app03" data-label="상하수도 시설 적용 이미지" id="biz-app-03"><img alt="상하수도 시설" class="biz-box-img" src=""/><div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div><div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div><div class="biz-img-ctrl"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-app-03')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-app-03')">🗑 삭제</button></div><input accept="image/*,video/*" style="display:none" type="file"/></div></div><div class="biz-item"><div class="biz-card"><div class="biz-num">04</div><div class="biz-title" contenteditable="true" data-en="Industrial Plants" data-ko="산업 플랜트">산업 플랜트</div><div class="biz-desc" contenteditable="true" data-en="Expands sensor and actuator I/O for process equipment to bring the whole plant under integrated control. Process variables such as temperature, pressure, and flow on the production line are measured in real time. Monitoring and control channels are added flexibly in tandem with the existing control system. The collected data accumulates in the control system for process optimization and preventive maintenance. The unit works reliably even on industrial sites with severe electromagnetic interference." data-ko="공정 설비의 센서·액추에이터 I/O를 확장하여 플랜트 전반을 통합 제어합니다. 생산 라인의 온도·압력·유량 등 공정 변수를 실시간으로 계측합니다. 기존 제어 시스템과 연동하여 감시·제어 채널을 유연하게 증설합니다. 수집된 데이터를 관제 시스템에 축적하여 공정 최적화와 예방 정비에 활용합니다. 전자기 간섭이 심한 산업 현장에서도 신뢰성 있게 동작합니다.">공정 설비의 센서·액추에이터 I/O를 확장하여 플랜트 전반을 통합 제어합니다. 생산 라인의 온도·압력·유량 등 공정 변수를 실시간으로 계측합니다. 기존 제어 시스템과 연동하여 감시·제어 채널을 유연하게 증설합니다. 수집된 데이터를 관제 시스템에 축적하여 공정 최적화와 예방 정비에 활용합니다. 전자기 간섭이 심한 산업 현장에서도 신뢰성 있게 동작합니다.</div></div><div class="biz-img-box" data-key="scada-app04" data-label="산업 플랜트 적용 이미지" id="biz-app-04"><img alt="산업 플랜트" class="biz-box-img" src=""/><div class="biz-img-ph"><div class="bp-plus">+</div><div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:19px">이미지 삽입</div></div><div class="biz-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div><div class="biz-img-ctrl"><button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();bizReplace('biz-app-04')">🔄 교체</button><button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();bizDelete('biz-app-04')">🗑 삭제</button></div><input accept="image/*,video/*" style="display:none" type="file"/></div></div></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#Substation" data-ko="#변전소">#변전소</span><span class="sec-kw" contenteditable="true" data-en="#IntegratedFireMonitoring" data-ko="#소방통합감시">#소방통합감시</span><span class="sec-kw" contenteditable="true" data-en="#WaterAndWastewater" data-ko="#상하수도">#상하수도</span><span class="sec-kw" contenteditable="true" data-en="#IndustrialPlant" data-ko="#산업플랜트">#산업플랜트</span></div></section>
+<div class="div-line"></div>
+<!-- ═══ 제품 사양 ═══ -->
+<section class="pg" id="specifications">
+<div class="shdr">
+<div class="shdr-left">
+<span class="stag">// Specifications</span>
+<h2 class="stitle"><span class="i18n" data-en="Products" data-ko="제품">제품</span> <span class="hl" data-en="Specifications" data-ko="사양">사양</span></h2>
+</div>
+<div class="shdr-hr"></div>
+</div>
+<div class="ov-grid">
+<div style="background:var(--surface);border:1px solid rgba(0,210,240,0.12);border-radius:12px;overflow:hidden">
+<div data-en="General Specifications" data-ko="기본 사양" style="background:rgba(0,210,240,0.08);border-bottom:1px solid rgba(0,210,240,0.15);padding:12px 20px;font-family:var(--fmono);font-size:22px;font-weight:700;letter-spacing:.12em;color:var(--cyan);text-transform:uppercase">기본 사양</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Product Name" data-ko="제품명">제품명</span></div><div data-en="SCADA Expansion Unit" data-ko="SCADA 확장장치" style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">SCADA 확장장치</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Application" data-ko="용도">용도</span></div><div data-en="SCADA I/O expansion and communication relay" data-ko="SCADA I/O 확장 및 통신 중계" style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">SCADA I/O 확장 및 통신 중계</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Power Supply" data-ko="사용 전원">사용 전원</span></div><div style="padding:16px 22px;font-size:22px;color:var(--cyan);font-family:var(--fmono);display:flex;align-items:center">DC 24V / AC 220V</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Operating Temperature" data-ko="사용 온도">사용 온도</span></div><div style="padding:16px 22px;font-size:22px;color:var(--cyan);font-family:var(--fmono);display:flex;align-items:center">-20 ~ 70 °C</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Mounting" data-ko="설치 방식">설치 방식</span></div><div data-en="DIN rail / panel mount" data-ko="DIN 레일 / 패널 마운트" style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">DIN 레일 / 패널 마운트</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Manufacturer" data-ko="제조사">제조사</span></div><div data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜" style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">유노시스템㈜</div></div>
+</div>
+<div style="background:var(--surface);border:1px solid rgba(0,210,240,0.12);border-radius:12px;overflow:hidden">
+<div data-en="I/O and Communication" data-ko="I/O 및 통신" style="background:rgba(0,210,240,0.08);border-bottom:1px solid rgba(0,210,240,0.15);padding:12px 20px;font-family:var(--fmono);font-size:22px;font-weight:700;letter-spacing:.12em;color:var(--cyan);text-transform:uppercase">I/O 및 통신</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Digital Input (DI)" data-ko="디지털 입력 (DI)">디지털 입력 (DI)</span></div><div data-en="16 to 64 points (module expandable)" data-ko="16 ~ 64 포인트 (모듈 확장)" style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">16 ~ 64 포인트 (모듈 확장)</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Digital Output (DO)" data-ko="디지털 출력 (DO)">디지털 출력 (DO)</span></div><div data-en="16 to 32 points" data-ko="16 ~ 32 포인트" style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">16 ~ 32 포인트</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Analog Input (AI)" data-ko="아날로그 입력 (AI)">아날로그 입력 (AI)</span></div><div style="padding:16px 22px;font-size:22px;color:var(--cyan);font-family:var(--fmono);display:flex;align-items:center">4 ~ 20 mA / 0 ~ 10V</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Communication Ports" data-ko="통신 포트">통신 포트</span></div><div style="padding:16px 22px;font-size:22px;color:var(--cyan);font-family:var(--fmono);display:flex;align-items:center">RS-485, RS-232, Ethernet</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(255,255,255,.04)"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Protocol" data-ko="프로토콜">프로토콜</span></div><div style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">Modbus RTU/TCP, DNP3</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr"><div style="background:var(--surface);padding:16px 22px;font-size:22px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px"><span style="width:3px;height:3px;border-radius:50%;background:var(--cyan);flex-shrink:0;display:inline-block;opacity:.6"></span><span class="i18n" data-en="Integrated Systems" data-ko="연동 시스템">연동 시스템</span></div><div style="padding:16px 22px;font-size:22px;color:var(--text);display:flex;align-items:center">SCADA, DCS, GIS, HMI</div></div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#64DigitalInputs" data-ko="#디지털입력64">#디지털입력64</span><span class="sec-kw" contenteditable="true" data-en="#32DigitalOutputs" data-ko="#디지털출력32">#디지털출력32</span><span class="sec-kw" contenteditable="true">#RS485</span><span class="sec-kw" contenteditable="true">#Ethernet</span></div></section>
+<div class="div-line"></div>
+<!-- ═══ CONTACT US ═══ -->
+<section class="cta-wrap" id="contact">
+<div class="cta-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch">
+<div>
+<div class="cta-lb">// Contact Us</div>
+<h2 class="cta-hd" contenteditable="true"><span class="i18n" data-en="Quotation &amp;amp;" data-ko="견적 및">견적 및</span> <span data-en="Technical Inquiry" data-ko="기술 문의">기술 문의</span></h2>
+<div class="cta-info">
+<div class="cta-row"><div class="cta-ri">📍</div><div contenteditable="true" data-en="11F, Unit 1116, Gasan Public Bldg. B,&lt;br/&gt;178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea" data-ko="(08513) 서울시 금천구 디지털로 178&lt;br/&gt;가산퍼블릭 B동 11층 1116호">(08513) 서울시 금천구 디지털로 178<br/>가산퍼블릭 B동 11층 1116호</div></div>
+<div class="cta-row"><div class="cta-ri">📞</div><div contenteditable="true">Tel: 02-6095-0520  |  Fax: 02-6095-0522</div></div>
+<div class="cta-row"><div class="cta-ri">✉️</div><div contenteditable="true">Email: info@uno-system.com</div></div>
+<div class="cta-row"><div class="cta-ri">🌐</div><div contenteditable="true">Website: <a href="https://www.uno-system.com" style="color:var(--cyan)">https://www.uno-system.com</a></div></div>
+<div class="cta-row"><div class="cta-ri">🕐</div><div contenteditable="true" data-en="Mon–Fri 09:00–18:00 KST (excl. public holidays)" data-ko="월–금 09:00–18:00 (공휴일 제외)">월–금 09:00–18:00 (공휴일 제외)</div></div>
+</div>
+</div>
+<div class="img-box" data-key="cta-img" id="box-cta-img" style="cursor:pointer;aspect-ratio:16/9">
+<div class="box-media-wrap">
+<img alt="문의 이미지" class="box-img" src="" style="object-fit:contain"/>
+<div class="box-placeholder"><div class="box-plus">+</div><div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">클릭하여<br/>이미지/영상 삽입</div></div>
+</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();boxReplace('box-cta-img')">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();boxDelete('box-cta-img')">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+</section>
+<footer id="footer">
+<div class="foot-inner">
+<!-- 왼쪽: 이미지/영상 박스 (페이지 너비의 25%) -->
+<div class="foot-img-col" data-key="foot-img" id="foot-img-col" title="클릭하여 이미지/영상 삽입">
+<img alt="푸터 이미지" class="foot-col-img active" id="foot-col-img" src=""/>
+<div class="foot-img-ph hidden" id="foot-img-ph">
+<div class="fi-plus">+</div>
+<div data-en="Click to&lt;br/&gt;insert an image" data-ko="클릭하여&lt;br/&gt;이미지 삽입" style="font-size:var(--font-small)">클릭하여<br/>이미지 삽입</div>
+</div>
+<div class="foot-img-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 교체</span></div>
+<div class="foot-img-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();footImgReplace()">🔄 교체</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();footImgDelete()">🗑 삭제</button>
+</div>
+<input accept="image/*,video/*" id="foot-img-input" style="display:none" type="file"/>
+</div>
+<!-- 오른쪽: 로고 + 주소 + 이메일 문의 -->
+<div class="foot-right-col">
+<div class="foot-info-area">
+<div class="foot-logo-row">
+<div class="foot-logo-img-wrap" id="foot-logo-wrap" title="클릭하여 로고 교체">
+<img alt="UNO SYSTEM 로고" class="foot-logo-img" id="foot-logo-img" src=""/>
+<div class="foot-logo-hint" data-en="📷&lt;br/&gt;Replace" data-ko="📷&lt;br/&gt;교체">📷<br/>교체</div>
+</div>
+<div class="foot-logo-text">
+<span class="foot-logo-kr" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜">유노시스템㈜</span>
+<span class="foot-logo-en">UNO SYSTEM</span>
+</div>
+</div>
+<div class="foot-addr" data-en="11F, Unit 1116, Gasan Public Bldg. B,&lt;br/&gt;178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea" data-ko="(08513) 서울시 금천구 디지털로 178&lt;br/&gt;가산퍼블릭 B동 11층 1116호">(08513) 서울시 금천구 디지털로 178<br/>가산퍼블릭 B동 11층 1116호</div>
+<div class="foot-contact">Tel: (02) 6095-0520  |  Fax: (02) 6095-0522</div>
+<div class="foot-contact">Email: info@uno-system.com</div>
+<div class="foot-contact">Website: <a href="https://www.uno-system.com" style="color:var(--cyan);text-decoration:none">https://www.uno-system.com</a></div>
+<div class="foot-copy">© 2026 UNO SYSTEM CO., LTD. All rights reserved.</div>
+</div>
+<a class="foot-inquiry-box" href="mailto:info@uno-system.com?subject=유노시스템㈜%20문의&amp;body=안녕하세요%2C%20유노시스템㈜%20문의드립니다." title="이메일 문의하기">
+<div class="foot-inquiry-icon">✉️</div>
+<div class="foot-inquiry-label" data-en="Email Inquiry" data-ko="이메일 문의하기">이메일 문의하기</div>
+<div aria-hidden="true" style="font-size:11px;color:var(--muted);opacity:0;height:0;overflow:hidden;user-select:none">info@uno-system.com</div>
+</a>
+</div>
+</div>
+</footer>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   UNO SYSTEM 이미지 시스템 — 영구 저장 확정판 v4
+   
+   대원칙: 이미지 선택 → base64 → img.src 직접 내장 (HTML에 저장)
+   CSS:    src^="data:image" 선택자로 JS 없이도 즉시 표시
+   JS:     show() 함수로 active 클래스 + display:block 동시 적용
+   저장:   [다운로드] → 현재 HTML(base64 포함) 파일로 저장 → 영구
+═══════════════════════════════════════════════════════════════ */
+
+/* ── IndexedDB 보조 ── */
+var UNO = (function(){
+  var DB_NAME='uno3db', STORE='imgs', NS='uno3_';
+  var _db=null;
+  function openDB(cb){
+    if(_db){ cb(_db); return; }
+    var req=indexedDB.open(DB_NAME,1);
+    req.onupgradeneeded=function(e){ e.target.result.createObjectStore(STORE); };
+    req.onsuccess=function(e){ _db=e.target.result; cb(_db); };
+    req.onerror=function(){ cb(null); };
+  }
+  function save(k,v){
+    openDB(function(db){
+      if(!db) return;
+      var tx=db.transaction(STORE,'readwrite');
+      tx.objectStore(STORE).put(v,NS+k);
+    });
+  }
+  function load(k,cb){
+    openDB(function(db){
+      if(!db){ cb(null); return; }
+      var tx=db.transaction(STORE,'readonly');
+      var req=tx.objectStore(STORE).get(NS+k);
+      req.onsuccess=function(){ cb(req.result||null); };
+      req.onerror=function(){ cb(null); };
+    });
+  }
+  function del(k){
+    openDB(function(db){
+      if(!db) return;
+      var tx=db.transaction(STORE,'readwrite');
+      tx.objectStore(STORE).delete(NS+k);
+    });
+  }
+  return { save:save, load:load, del:del };
+})();
+
+/* ── base64 변환 ── */
+function toB64(file, cb){
+  var fr = new FileReader();
+  fr.onload = function(e){ cb(e.target.result); };
+  fr.onerror = function(){};
+  fr.readAsDataURL(file);
+}
+
+/* ── 파일 피커 ── */
+var _picking = new WeakSet();
+function pickFile(inp){
+  if(_picking.has(inp)) return;
+  _picking.add(inp); inp.value=''; inp.click();
+  setTimeout(function(){ _picking.delete(inp); }, 2000);
+}
+
+/* ── src 유효성 ── */
+function validSrc(src){
+  return !!(src && (src.indexOf('data:image')===0 || src.indexOf('data:video')===0));
+}
+
+/* ── 이미지 표시 ── */
+function showImage(img, phs, url){
+  if(!img) return;
+  img.src = url;
+  /* display만 변경 — object-fit은 CSS가 결정 */
+  img.style.setProperty('display','block','important');
+  img.style.setProperty('opacity','1','important');
+  img.style.setProperty('visibility','visible','important');
+  img.classList.add('active');
+  if(phs) phs.forEach(function(ph){
+    if(ph){ ph.style.display='none'; ph.classList.add('hidden'); }
+  });
+  /* 부모 높이 보장 */
+  var par = img.parentElement;
+  if(par && par.offsetHeight < 10){
+    par.style.minHeight = '200px';
+    par.style.position = 'relative';
+  }
+}
+
+/* ── 이미지 숨기기 ── */
+function hideImage(img, phs){
+  if(!img) return;
+  img.removeAttribute('src');
+  img.style.display='none';
+  img.classList.remove('active');
+  if(phs) phs.forEach(function(ph){
+    if(ph){ ph.style.display=''; ph.classList.remove('hidden'); }
+  });
+}
+
+/* ── 박스 초기화 공통 함수 ── */
+function initBox(box, imgSel, phSels, KEY, accept){
+  if(box._u4) return; box._u4 = true;
+  var img = box.querySelector(imgSel);
+  var phs = (phSels||[]).map(function(s){ return box.querySelector(s); }).filter(Boolean);
+
+  /* input 생성 */
+  var inp = box.querySelector('input[type="file"]');
+  if(!inp){
+    inp = document.createElement('input');
+    inp.type='file'; inp.accept=accept||'image/*,video/*'; inp.style.display='none';
+    box.appendChild(inp);
+  }
+
+  /* 복원: ① HTML src(base64) ② IndexedDB */
+  if(img && validSrc(img.src)){
+    showImage(img, phs, img.src);
+    UNO.save(KEY, img.src);
+  } else {
+    UNO.load(KEY, function(saved){ if(saved && img) showImage(img, phs, saved); });
+  }
+
+  /* 파일 선택 */
+  inp.addEventListener('change', function(){
+    var f = this.files[0]; if(!f) return;
+    toB64(f, function(url){ showImage(img, phs, url); UNO.save(KEY, url); });
+  });
+
+  /* 클릭 */
+  box.style.cursor='pointer';
+  box.addEventListener('click', function(e){
+    if(e.target.closest('button,input')) return;
+    e.stopPropagation(); pickFile(inp);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   각 박스 타입별 초기화
+══════════════════════════════════════════════ */
+function initAllBoxes(){
+
+  /* 1. Hero */
+  document.querySelectorAll('.iaea-hero-wrap').forEach(function(wrap){
+    if(wrap._u4) return; wrap._u4=true;
+    var img   = wrap.querySelector('img');
+    var empty = wrap.querySelector('.hero-empty, #hero-empty');
+    var KEY   = wrap.dataset.key || wrap.id || 'hero';
+    var inp   = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    document.body.appendChild(inp);
+    if(img && validSrc(img.src)){
+      img.style.setProperty('display','block','important');
+      if(empty) empty.classList.add('hidden');
+      var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='none';
+      UNO.save(KEY, img.src);
+    } else {
+      UNO.load(KEY, function(s){
+        if(s&&img){ img.src=s; img.style.setProperty('display','block','important'); if(empty) empty.classList.add('hidden');
+          var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='none';
+        }
+      });
+    }
+    inp.addEventListener('change', function(){
+      var f=this.files[0]; if(!f) return;
+      toB64(f, function(url){
+        if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+        if(empty) empty.classList.add('hidden');
+        var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='none';
+        UNO.save(KEY, url);
+      });
+    });
+    wrap.style.cursor='pointer';
+    wrap.addEventListener('click', function(e){
+      if(e.target.closest('button,input')) return; e.stopPropagation(); pickFile(inp);
+    });
+    window.heroReplace = function(){ pickFile(inp); };
+    window.heroDelete  = function(){
+      if(!confirm('Hero 이미지 삭제?')) return;
+      if(img){ img.removeAttribute('src'); img.style.display='none'; }
+      if(empty) empty.classList.remove('hidden');
+      var svgBg=document.getElementById('hero-svg-bg'); if(svgBg) svgBg.style.display='';
+      UNO.del(KEY);
+    };
+  });
+
+  /* 2. .img-box */
+  document.querySelectorAll('.img-box').forEach(function(box){
+    initBox(box, '.box-img', ['.box-placeholder'], box.dataset.key||box.id, 'image/*,video/*');
+  });
+
+  /* 3. .biz-img-box */
+  document.querySelectorAll('.biz-img-box').forEach(function(bib){
+    initBox(bib, '.biz-box-img', ['.biz-img-ph'], bib.dataset.key||bib.id, 'image/*,video/*');
+  });
+
+  /* 4. .hist-img-box */
+  document.querySelectorAll('.hist-img-box').forEach(function(box){
+    initBox(box, '.hist-img', ['.hist-img-ph'], box.dataset.key||box.id, 'image/*,video/*');
+  });
+
+  /* 5. .award-img-box */
+  document.querySelectorAll('.award-img-box').forEach(function(awb){
+    initBox(awb, '.aw-img', ['.award-img-ph'], awb.dataset.key||awb.id, 'image/*');
+  });
+
+  /* 6. Footer 이미지 */
+  (function(){
+    var col = document.getElementById('foot-img-col'); if(!col) return;
+    var img = document.getElementById('foot-col-img');
+    var ph  = col.querySelector('.foot-img-ph');
+    var KEY = 'foot-img';
+    var inp = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    document.body.appendChild(inp);
+    if(img && validSrc(img.src)){
+      img.style.setProperty('display','block','important');
+      if(ph) ph.classList.add('hidden');
+      UNO.save(KEY, img.src);
+    } else {
+      UNO.load(KEY, function(s){
+        if(s&&img){ img.src=s; img.style.setProperty('display','block','important'); if(ph) ph.classList.add('hidden'); }
+      });
+    }
+    inp.addEventListener('change', function(){
+      var f=this.files[0]; if(!f) return;
+      toB64(f, function(url){
+        if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+        if(ph) ph.classList.add('hidden');
+        UNO.save(KEY, url);
+      });
+    });
+    col.style.cursor='pointer';
+    col.addEventListener('click', function(e){
+      if(e.target.closest('button,input')) return; e.stopPropagation(); pickFile(inp);
+    });
+  })();
+
+  /* 7. 로고 */
+  (function(){
+    var KEY='logo';
+    function applyLogo(url){
+      ['logo-img','foot-logo-img'].forEach(function(id){
+        var im=document.getElementById(id); if(im) im.src=url;
+      });
+    }
+    var fl=document.getElementById('logo-img');
+    if(fl && validSrc(fl.src)) UNO.save(KEY, fl.src);
+    else { UNO.load(KEY, function(s){ if(s) applyLogo(s); }); }
+    document.querySelectorAll('.logo-img-wrap, #foot-logo-wrap').forEach(function(wrap){
+      if(wrap._logoinit) return; wrap._logoinit=true;
+      var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.style.display='none';
+      document.body.appendChild(inp);
+      inp.addEventListener('change', function(){
+        var f=this.files[0]; if(!f) return;
+        toB64(f, function(url){ applyLogo(url); UNO.save(KEY,url); });
+      });
+      wrap.addEventListener('click', function(e){
+        if(e.target.closest('button')) return; e.stopPropagation(); pickFile(inp);
+      });
+    });
+  })();
+
+} /* end initAllBoxes */
+
+/* ══════════ 실행 타이밍: DOM 준비 후 즉시 ══════════ */
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initAllBoxes);
+} else {
+  initAllBoxes();
+}
+
+/* ══════════ 전역 Replace/Delete 함수 ══════════ */
+window.boxReplace = function(id){
+  var box=document.getElementById(id); if(!box) return;
+  if(!box._u4) initBox(box,'.box-img',['.box-placeholder'],box.dataset.key||id,'image/*,video/*');
+  pickFile(box.querySelector('input[type="file"]'));
+};
+window.boxDelete = function(id){
+  var box=document.getElementById(id); if(!box) return;
+  if(!confirm('"'+(box.dataset.label||id)+'" 삭제?')) return;
+  hideImage(box.querySelector('.box-img'),[box.querySelector('.box-placeholder')]);
+  UNO.del(box.dataset.key||id);
+};
+window.bizReplace = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!b._u4) initBox(b,'.biz-box-img',['.biz-img-ph'],b.dataset.key||id,'image/*,video/*');
+  pickFile(b.querySelector('input[type="file"]'));
+};
+window.bizDelete = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('"'+(b.dataset.label||id)+'" 삭제?')) return;
+  hideImage(b.querySelector('.biz-box-img'),[b.querySelector('.biz-img-ph')]);
+  UNO.del(b.dataset.key||id);
+};
+window.histReplace = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!b._u4) initBox(b,'.hist-img',['.hist-img-ph'],b.dataset.key||id,'image/*,video/*');
+  pickFile(b.querySelector('input[type="file"]'));
+};
+window.histDelete = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('삭제?')) return;
+  hideImage(b.querySelector('.hist-img'),[b.querySelector('.hist-img-ph')]);
+  UNO.del(b.dataset.key||id);
+};
+window.awReplace = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!b._u4) initBox(b,'.aw-img',['.award-img-ph'],b.dataset.key||id,'image/*');
+  pickFile(b.querySelector('input[type="file"]'));
+};
+window.awDelete = function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('삭제?')) return;
+  hideImage(b.querySelector('.aw-img'),[b.querySelector('.award-img-ph')]);
+  UNO.del(b.dataset.key||id);
+};
+
+/* ══════════ 이탈 전 재저장 ══════════ */
+window.addEventListener('beforeunload', function(){
+  [
+    ['.img-box','.box-img'],
+    ['.biz-img-box','.biz-box-img'],
+    ['.hist-img-box','.hist-img'],
+    ['.award-img-box','.aw-img']
+  ].forEach(function(p){
+    document.querySelectorAll(p[0]).forEach(function(box){
+      var img=box.querySelector(p[1]), KEY=box.dataset.key||box.id;
+      if(img && validSrc(img.src)) UNO.save(KEY, img.src);
+    });
+  });
+  var fci=document.getElementById('foot-col-img');
+  if(fci && validSrc(fci.src)) UNO.save('foot-img', fci.src);
+});
+
+/* ══════════ 다운로드 ══════════ */
+function downloadPage(){
+  try{
+    /* 저장 전: 현재 모든 이미지 src를 IndexedDB에 재저장 */
+    [
+      ['.img-box','.box-img'],
+      ['.biz-img-box','.biz-box-img'],
+      ['.hist-img-box','.hist-img'],
+      ['.award-img-box','.aw-img']
+    ].forEach(function(p){
+      document.querySelectorAll(p[0]).forEach(function(box){
+        var img=box.querySelector(p[1]), KEY=box.dataset.key||box.id;
+        if(img && validSrc(img.src)) UNO.save(KEY, img.src);
+      });
+    });
+    var fci=document.getElementById('foot-col-img');
+    if(fci && validSrc(fci.src)) UNO.save('foot-img', fci.src);
+
+    var clone = document.documentElement.cloneNode(true);
+
+    /* ① id 기반 */
+    clone.querySelectorAll('img[id]').forEach(function(ci){
+      var o=document.getElementById(ci.id);
+      if(o && validSrc(o.src)) ci.src=o.src;
+    });
+
+    /* ② data-key 기반 (가장 정확) */
+    document.querySelectorAll('[data-key]').forEach(function(box){
+      var img=box.querySelector('img');
+      if(img && validSrc(img.src)){
+        var cBox=clone.querySelector('[data-key="'+box.dataset.key+'"]');
+        if(cBox){ var ci=cBox.querySelector('img'); if(ci) ci.src=img.src; }
+      }
+    });
+
+    /* ③ 클래스 기반 순서 동기화 */
+    ['.box-img','.biz-box-img','.aw-img','.hist-img'].forEach(function(sel){
+      var ol=document.querySelectorAll(sel), cl=clone.querySelectorAll(sel);
+      ol.forEach(function(img,i){ if(validSrc(img.src)&&cl[i]) cl[i].src=img.src; });
+    });
+
+    /* ④ hero */
+    document.querySelectorAll('.iaea-hero-wrap img').forEach(function(img,i){
+      if(!validSrc(img.src)) return;
+      var cl=clone.querySelectorAll('.iaea-hero-wrap img');
+      if(cl[i]) cl[i].src=img.src;
+    });
+
+    /* ⑤ foot-col-img */
+    if(fci && validSrc(fci.src)){
+      var cfi=clone.getElementById('foot-col-img'); if(cfi) cfi.src=fci.src;
+    }
+
+    /* ⑥ logo */
+    var li=document.getElementById('logo-img');
+    if(li && validSrc(li.src)){
+      var cli=clone.getElementById('logo-img'); if(cli) cli.src=li.src;
+    }
+
+    /* 저장 */
+    var html='<!DOCTYPE html>\n'+clone.outerHTML;
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download='scada.html';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    },300);
+  } catch(e){ alert('오류: '+e.message); }
+}
+
+</script>
+<script>
+/* ═══ PRODUCT IMAGE UPLOAD BOXES (prod-upbox) — IndexedDB 기반 ═══ */
+(function(){
+'use strict';
+var NS = 'pbox_';
+
+/* UNO IndexedDB 시스템 활용 */
+function pboxSave(key,val){ UNO.save(NS+key, val); }
+function pboxLoad(key,cb){ UNO.load(NS+key, cb); }
+function pboxDel(key){ UNO.del(NS+key); }
+
+function pboxShow(box,url){
+  var img=box.querySelector('.pbox-img');
+  if(img){ img.src=url; img.style.setProperty('display','block','important'); }
+  box.classList.add('has-img');
+  var ph=box.querySelector('.pbox-ph'); if(ph) ph.style.display='none';
+}
+function pboxClear(box){
+  var img=box.querySelector('.pbox-img');
+  if(img){ img.removeAttribute('src'); img.style.display='none'; }
+  box.classList.remove('has-img');
+  var ph=box.querySelector('.pbox-ph'); if(ph) ph.style.display='';
+}
+
+var _lock=false;
+function pboxPick(box){
+  if(_lock) return; _lock=true;
+  var inp=document.createElement('input');
+  inp.type='file'; inp.accept='image/*,video/*';
+  inp.onchange=function(){
+    var f=this.files[0]; if(!f){_lock=false;return;}
+    var fr=new FileReader();
+    fr.onload=function(e){
+      pboxShow(box,e.target.result);
+      pboxSave(box.dataset.key||box.id, e.target.result);
+      _lock=false;
+    };
+    fr.readAsDataURL(f);
+  };
+  inp.addEventListener('cancel',function(){_lock=false;});
+  inp.click();
+  setTimeout(function(){_lock=false;},3000);
+}
+
+document.querySelectorAll('.prod-upbox').forEach(function(box){
+  if(box._pb) return; box._pb=true;
+  var key=box.dataset.key||box.id;
+  var existImg=box.querySelector('.pbox-img');
+  if(existImg && validSrc(existImg.src)){
+    box.classList.add('has-img');
+    var ph=box.querySelector('.pbox-ph'); if(ph) ph.style.display='none';
+    pboxSave(key, existImg.src);
+  } else {
+    pboxLoad(key, function(saved){ if(saved) pboxShow(box, saved); });
+  }
+  box.addEventListener('click',function(e){
+    if(e.target.closest('button')) return;
+    e.preventDefault(); e.stopPropagation();
+    pboxPick(box);
+  });
+});
+
+window.pboxReplace=function(id){ var b=document.getElementById(id); if(b) pboxPick(b); };
+window.pboxDelete=function(id){
+  var b=document.getElementById(id); if(!b) return;
+  if(!confirm('"'+(b.dataset.label||id)+'" 이미지를 삭제하시겠습니까?')) return;
+  pboxClear(b); pboxDel(b.dataset.key||id);
+};
+
+/* downloadPage 확장: pbox 이미지도 포함 */
+var _origDL=window.downloadPage;
+window.downloadPage=function(){
+  var pending=[];
+  document.querySelectorAll('.prod-upbox').forEach(function(box){
+    var img=box.querySelector('.pbox-img');
+    var key=box.dataset.key||box.id;
+    if(img && !validSrc(img.src)){
+      pending.push({box:box,img:img,key:key});
+    }
+  });
+  if(pending.length===0){ if(_origDL) _origDL(); return; }
+  var done=0;
+  pending.forEach(function(p){
+    pboxLoad(p.key, function(s){
+      if(s){ p.img.src=s; p.img.style.setProperty('display','block','important'); p.box.classList.add('has-img'); }
+      done++;
+      if(done===pending.length && _origDL) _origDL();
+    });
+  });
+};
+})();
+</script>
+<!-- ══ GitHub 이미지 저장소 자동 로더 (soulthread88/my_images/unosystem) ══ -->
+<script>
+(function(){
+  var GH_BASE='https://raw.githubusercontent.com/soulthread88/my_images/main/unosystem/';
+  var GH_PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.[^.]+$/,'').replace(/[^A-Za-z0-9_-]/g,'_');
+  var GH_EXTS=['png','jpg','jpeg','webp','gif'];
+  function isLocal(s){ return !!(s && (s.indexOf('data:image')===0 || s.indexOf('data:video')===0)); }
+  function cands(key){ var o=[]; GH_EXTS.forEach(function(e){o.push(GH_BASE+GH_PAGE+'/'+key+'.'+e);}); GH_EXTS.forEach(function(e){o.push(GH_BASE+key+'.'+e);}); return o; }
+  function tryGH(imgs,key){
+    var urls=cands(key), idx=0;
+    (function next(){
+      if(idx>=urls.length) return;
+      var url=urls[idx++], probe=new Image();
+      probe.onload=function(){ imgs.forEach(function(im){ if(!isLocal(im.src)){ im.src=url; im.style.display=''; im.classList.add('active'); var ph=im.parentNode&&im.parentNode.querySelector('.box-placeholder,.hero-empty,.biz-img-ph,.hist-img-ph,.award-img-ph,.foot-img-ph'); if(ph) ph.classList.add('hidden'); } }); };
+      probe.onerror=next; probe.src=url;
+    })();
+  }
+  function run(){
+    var g={};
+    document.querySelectorAll('[data-key]').forEach(function(box){
+      var key=box.dataset.key; if(!key) return;
+      var im=box.querySelector('img'); if(!im) return;
+      if(isLocal(im.src)) return;
+      (g[key]=g[key]||[]).push(im);
+    });
+    Object.keys(g).forEach(function(k){ if(g[k].length) tryGH(g[k],k); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(run,500); });
+  else setTimeout(run,500);
+})();
+</script>
+<script>
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);var i=document.getElementById("th-icon"),l=document.getElementById("th-label");if(i)i.textContent=t==="light"?"☀️":"🌙";if(l)l.textContent=t==="light"?"Light":"Dark";try{localStorage.setItem("uno_theme",t);}catch(e){}}
+function toggleTheme(){var c=document.documentElement.getAttribute("data-theme")||"dark";applyTheme(c==="dark"?"light":"dark");}
+(function(){var s="dark";try{s=localStorage.getItem("uno_theme")||"dark";}catch(e){}applyTheme(s);})();
+</script><style>
+/* ════ 대원칙 4 · 모바일 반응형(≤900px) — 햄버거 내비 + 2단→1단 ════ */
+.nav-toggle{display:none;margin-left:auto;background:transparent;border:1px solid var(--border2);color:var(--text);font-size:22px;line-height:1;padding:5px 12px;border-radius:6px;cursor:pointer;flex-shrink:0}
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  header{padding-left:16px;padding-right:12px;gap:8px}
+  .logo-ko{display:none}
+  .main-nav{position:fixed;top:var(--hdr);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#0a1222fa;backdrop-filter:blur(22px);border-bottom:1px solid var(--border2);max-height:calc(100vh - var(--hdr));overflow-y:auto;display:none;padding:6px 0 12px;z-index:680}
+  .main-nav.open{display:flex}
+  .ni{flex-direction:column;align-items:stretch;width:100%;position:static}
+  .nb{width:100%;justify-content:space-between;padding:14px 22px;font-size:16px!important}
+  .nb.cta-nav{margin:10px 22px;justify-content:center}
+  .dropdown{position:static;display:block;width:100%;min-width:0;border:none;border-top:1px solid #ffffff12;border-radius:0;box-shadow:none;background:transparent;padding:0 0 4px;animation:none!important}
+  .di{padding:11px 22px 11px 40px}
+  .sub-dropdown,.subsub-dropdown{display:none!important}
+  .ov-grid,.hist-grid,.biz-g,.two-col,.spec-columns,.features-grid,.cli-g{grid-template-columns:1fr!important}
+  .ov-grid>*,.hist-grid>*,.biz-g>*,.two-col>*,.ti-row>*,.cta-inner>*,.comp-row>*,.syscfg-row>*{min-width:0}
+  [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns: 1fr 1fr"],[style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  .foot-inner{grid-template-columns:1fr}
+  .foot-right-col{flex-direction:column;align-items:stretch;gap:14px}
+}
+</style><script>
+function toggleNav(){var n=document.getElementById('mainNav');if(n)n.classList.toggle('open');}
+document.addEventListener('click',function(e){var a=e.target.closest('.main-nav a');if(a){var n=document.getElementById('mainNav');if(n)n.classList.remove('open');}});
+</script><style>
+/* ════ 대원칙 6 · 브레드크럼 명도 ════ */
+.breadcrumb-nav{background:var(--bg2)!important}
+.breadcrumb-nav a{color:var(--muted)!important;text-decoration:none}
+.breadcrumb-nav a:hover{color:var(--cyan)!important}
+.breadcrumb-nav span{color:var(--text)}
+.breadcrumb-nav+.iaea-hero-wrap,.breadcrumb-nav+.full-hero-wrap,.breadcrumb-nav+.page-hero,.breadcrumb-nav+.product-hero{margin-top:0!important}
+#box-full-hero:first-of-type{margin-top:0}
+</style><style>
+/* ════ 대원칙 5 · 섹션 키워드 칩 ════ */
+.sec-keywords{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:40px;padding-top:20px;border-top:1px dashed var(--border2)}
+.kw-label{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-right:4px}
+.sec-kw{font-size:var(--font-small);color:var(--muted);background:#00d2f00d;border:1px solid #00d2f026;border-radius:16px;padding:4px 12px}
+</style><script>
+/* ══ 대원칙 3 · KEYWORDS(.sec-kw) 클릭 → Google 검색(새 탭) ══ */
+(function(){
+  function kwText(kw){ return (kw.textContent||'').replace(/\s+/g,' ').trim(); }
+  function wire(){
+    document.querySelectorAll('.sec-kw').forEach(function(kw){
+      if(kw._kwsearch) return; kw._kwsearch=true;
+      kw.style.cursor='pointer';
+      if(!kw.title) kw.title='클릭하여 Google 검색';
+      kw.addEventListener('click',function(e){
+        var s=kwText(kw); if(!s) return;
+        e.preventDefault(); e.stopPropagation();
+        window.open('https://www.google.com/search?q='+encodeURIComponent(s),'_blank');
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',wire);
+  else wire();
+})();
+</script><script>
+/* ══ 대원칙 2-보강 · 우측 이미지 박스 상단을 좌측 제목 높이에 정렬 ══ */
+(function(){
+  if(window.alignImgBoxes) return;
+  function pairs(){
+    var out=[];
+    var hero=document.querySelector('.product-hero');
+    if(hero){ var ht=hero.querySelector('.product-name'), hc=hero.children[1]; if(ht&&hc) out.push([hc,ht]); }
+    document.querySelectorAll('.syscfg-row').forEach(function(r){
+      var t=r.querySelector('.syscfg-name'), i=r.querySelector('.syscfg-img'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.comp-row').forEach(function(r){
+      var t=r.querySelector('.feature-name'), i=r.querySelector('.img-box'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.feature-card').forEach(function(fc){
+      var row=fc.parentElement; if(!row||row.classList.contains('comp-row')) return;
+      var i=null;
+      for(var k=0;k<row.children.length;k++){ if(row.children[k].classList.contains('img-box')) i=row.children[k]; }
+      var t=fc.querySelector('.feature-name');
+      if(i&&t) out.push([i,t]);
+    });
+    return out;
+  }
+  function alignImgBoxes(){
+    var list=pairs(), mobile=window.innerWidth<=900;
+    list.forEach(function(p){ p[0].style.marginTop='0px'; p[0].classList.add('img-align-shift'); });
+    if(mobile) return;
+    list.forEach(function(p){
+      var d=p[1].getBoundingClientRect().top - p[0].getBoundingClientRect().top;
+      if(d>0) p[0].style.marginTop=Math.round(d)+'px';
+    });
+  }
+  window.alignImgBoxes=alignImgBoxes;
+  function schedule(){ requestAnimationFrame(function(){ requestAnimationFrame(alignImgBoxes); }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',schedule); else schedule();
+  window.addEventListener('load',schedule);
+  setTimeout(alignImgBoxes,900); setTimeout(alignImgBoxes,1800);
+  var t=null;
+  window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(alignImgBoxes,120); });
+})();
+</script><style>
+/* 대원칙 5 · 제목 줄바꿈 balance */
+.stitle,.page-hero-title,.product-name,.cta-hd,.ti-title,.syscfg-name,.feature-name,.biz-title,.award-title{text-wrap:balance}
+.img-align-shift{transition:margin-top .15s}
+</style><style>
+.lang-switch{display:inline-flex;align-items:center;border:1px solid var(--border2,#00d2f02e);border-radius:6px;overflow:hidden;flex-shrink:0;margin-left:8px}
+.lang-btn{background:transparent;border:none;color:var(--muted,#9ab5d0);font-family:var(--fkr,"Noto Sans KR",sans-serif);font-size:13px;font-weight:700;padding:7px 10px;cursor:pointer;transition:all .2s}
+.lang-btn:hover{color:var(--cyan,#00d2f0)}
+.lang-btn.on{background:var(--cyan,#00d2f0);color:#000}
+.lang-sep{color:var(--dim,#3a4d6a);font-size:12px}
+</style><script>
+/* ══ 대원칙 7 · KOR|ENG 언어 전환 엔진 (기본값: ko) ══ */
+(function(){
+  if(window.setLang) return;
+  var DEF='ko';
+  function nodes(){ return document.querySelectorAll('[data-en]'); }
+  function cache(){ nodes().forEach(function(el){ if(el.dataset.ko===undefined) el.dataset.ko=el.innerHTML; }); }
+  window.setLang=function(l){
+    cache();
+    nodes().forEach(function(el){
+      if(el.tagName==='TITLE') return;
+      var v=(l==='en')?el.dataset.en:el.dataset.ko;
+      if(v!==undefined && v!==null) el.innerHTML=v;
+    });
+    document.documentElement.setAttribute('lang', l==='en'?'en':'ko');
+    document.documentElement.setAttribute('data-lang', l);
+    var k=document.getElementById('lang-ko'), e=document.getElementById('lang-en');
+    if(k) k.classList.toggle('on', l!=='en');
+    if(e) e.classList.toggle('on', l==='en');
+    var t=document.querySelector('title');
+    if(t && t.dataset.en){ if(t.dataset.ko===undefined) t.dataset.ko=t.textContent; document.title=(l==='en'?t.dataset.en:t.dataset.ko); }
+    try{ localStorage.setItem('uno_lang_'+location.pathname, l); }catch(err){}
+    if(window.alignImgBoxes) setTimeout(window.alignImgBoxes, 60);
+  };
+  function init(){
+    cache();
+    var s=DEF;
+    try{ s=localStorage.getItem('uno_lang_'+location.pathname)||DEF; }catch(err){}
+    window.setLang(s==='en'?'en':'ko');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script></body>
+</html>

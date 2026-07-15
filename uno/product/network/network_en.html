@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="Network-Based Solutions | UNO SYSTEM Co., Ltd." data-ko="네트워크기반 솔루션 | 유노시스템(주) UNO SYSTEM">Network-Based Solutions | UNO SYSTEM Co., Ltd.</title>
+<meta content="유노시스템 네트워크기반 솔루션 — SCADA 확장장치, DNC 디지털 노드 컨트롤러, DTS 분산온도감지 네트워크." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+<style>
+
+/* ════════════════════════ CSS VARIABLES ════════════════════════ */
+:root{
+  --bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;
+  --border:rgba(30,120,220,.18);--border2:rgba(0,210,240,.18);
+  --blue:#1a6fd4;--cyan:#00d2f0;--gold:#e8b84b;
+  --text:#dde8f8;--muted:#9ab5d0;--dim:#3a4d6a;
+  --fkr:"Pretendard","Noto Sans KR",sans-serif;
+  --fmono:"JetBrains Mono",monospace;
+  --fdis:"Bebas Neue",sans-serif;
+  --hdr:120px;
+  --font-title:30pt;--font-body:20pt;--font-small:15pt;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fkr);font-size:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;word-break:keep-all;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,212,.03)1px,transparent 1px),linear-gradient(90deg,rgba(26,111,212,.03)1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+
+/* ════════════════════════ HEADER ════════════════════════ */
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 36px;z-index:700;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:14px;flex-shrink:0}
+/* ── 로고 이미지: 클릭하여 교체 가능 ── */
+.logo-img-wrap{position:relative;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;border-radius:9px;overflow:visible}
+.logo-img{height:60px;width:auto;object-fit:contain;background:#fff;border-radius:9px;padding:4px 8px;transition:opacity .2s;display:block}
+.logo-img-wrap:hover .logo-img{opacity:.85}
+.logo-img-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);border-radius:9px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:var(--fkr);font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.3;padding:4px}
+.logo-img-wrap:hover .logo-img-hint{opacity:1}
+.logo-ko{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:24px;color:var(--text);line-height:1.15;display:flex;flex-direction:column}
+.logo-ko-en{font-size:19px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.btn-dl{background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;color:var(--cyan);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.btn-dl:hover{background:rgba(0,210,240,.22);border-color:var(--cyan)}
+
+/* ════════════════════════ NAV ════════════════════════ */
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+
+/* Top-level button — 밑줄 없음 */
+.nb{background:transparent;border:none;color:var(--muted);font-family:var(--fkr);font-size:20px;font-weight:700;padding:12px 15px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color .15s;height:auto}
+.nb:hover,.ni:hover>.nb{color:#fff}
+.nb.active-menu{color:var(--cyan)}
+.nb .caret{font-size:11px;transition:transform .22s;display:inline-block}
+.ni:hover>.nb .caret{transform:rotate(180deg)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:10px 20px;border-radius:6px;margin-left:10px}
+.nb.cta-nav:hover{opacity:.86}
+.nb.cta-nav .caret{display:none}
+
+/* ── L1 Dropdown: hover로 열림 ── */
+.dropdown{
+  display:none;position:absolute;top:100%;left:0;min-width:200px;
+  background:rgba(10,18,34,.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);
+  border-radius:0 0 10px 10px;box-shadow:0 16px 48px rgba(0,0,0,.75);
+  z-index:680;padding:6px 0 8px;
+}
+.ni:hover>.dropdown{display:block;animation:ddIn .18s ease forwards}
+@keyframes ddIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:8px 18px 6px;font-family:var(--fmono);font-size:11px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:4px}
+
+/* Dropdown items */
+.di{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;font-size:14px;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;white-space:nowrap;border-left:2px solid transparent;transition:all .12s;position:relative}
+.di:hover{background:rgba(0,210,240,.09);border-left-color:var(--cyan);color:var(--cyan)}
+.di.active{background:rgba(0,210,240,.14);border-left-color:var(--cyan);color:var(--cyan)}
+.arr{font-size:12px;color:var(--dim);margin-left:8px;flex-shrink:0}
+.di:hover .arr{color:var(--cyan)}
+.dd-sep{height:1px;background:rgba(255,255,255,.06);margin:6px 0}
+
+/* ── L2 Sub-dropdown ── */
+.has-sub{position:relative}
+.sub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:290px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:690;padding:6px 0 8px}
+.has-sub:hover>.sub-dropdown,.has-sub.open>.sub-dropdown{display:block;animation:subIn .14s ease forwards}
+@keyframes subIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+
+/* ── L3 Sub-sub-dropdown ── */
+.has-sub2{position:relative}
+.subsub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:240px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid rgba(0,210,240,.5);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:700;padding:6px 0 8px}
+.has-sub2:hover>.subsub-dropdown{display:block;animation:subIn .12s ease forwards}
+
+/* ════════════════════════ IMAGE / VIDEO BOX ════════════════════════
+   대원칙: 한 번 삽입 → 영구 저장 (base64 src에 직접 내장)
+═══════════════════════════════════════════════════════════════════ */
+.img-box{
+  position:relative;cursor:pointer;
+  background:var(--surface);border:2px dashed rgba(0,210,240,.3);border-radius:10px;
+  overflow:hidden;min-height:150px;transition:border-color .25s,box-shadow .25s;
+  display:flex;flex-direction:column;
+}
+.img-box:hover{border-color:var(--cyan);border-style:solid;box-shadow:0 0 18px rgba(0,210,240,.12)}
+.box-media-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:120px}
+.box-img{width:100%;height:100%;object-fit:contain;display:none;max-height:200px}
+.box-img.active{display:block}
+.box-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);padding:24px;text-align:center;width:100%}
+.box-placeholder.hidden{display:none}
+.box-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.5);transition:all .2s}
+.img-box:hover .box-plus{border-color:var(--cyan);color:var(--cyan);transform:scale(1.1)}
+.box-hint{font-size:var(--font-small);opacity:.7;line-height:1.5}
+.box-label{text-align:center;padding:8px 12px;font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);border-top:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.2)}
+
+/* Hidden controls (hover to reveal) */
+.box-controls{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:5px;z-index:20}
+.img-box:hover .box-controls{display:flex}
+.box-ctrl-btn{background:rgba(8,13,24,.92);border:1px solid var(--border2);color:var(--text);font-size:12px;font-family:var(--fkr);font-weight:700;padding:5px 11px;border-radius:5px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.box-ctrl-btn.replace{border-color:rgba(0,210,240,.4);color:var(--cyan)}
+.box-ctrl-btn.replace:hover{background:rgba(0,210,240,.15)}
+.box-ctrl-btn.delete{border-color:rgba(255,80,80,.4);color:#ff6060}
+.box-ctrl-btn.delete:hover{background:rgba(255,80,80,.12)}
+
+/* ════════════════════════ HERO IMAGE BOX ════════════════════════ */
+.iaea-hero-wrap{margin-top:calc(var(--hdr) + 48px);position:relative;cursor:pointer;overflow:hidden;background:#111;width:100%;min-height:200px}
+.iaea-source{margin-bottom:0}
+#hero-main-img{width:100%;height:520px;object-fit:cover;display:block;transition:transform .4s ease}
+.iaea-hero-wrap:hover #hero-main-img{transform:scale(1.02)}
+.hero-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);pointer-events:none}
+.hero-empty .he-plus{width:72px;height:72px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(0,210,240,.5)}
+.hero-empty.hidden{display:none}
+.hero-change-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .28s;pointer-events:none}
+.iaea-hero-wrap:hover .hero-change-hint{opacity:1}
+.hero-change-hint span{background:rgba(0,210,240,.82);padding:13px 26px;border-radius:8px;font-family:var(--fkr);font-size:17px;font-weight:700}
+.hero-controls{position:absolute;top:12px;right:12px;display:none;flex-direction:column;gap:6px;z-index:30}
+.iaea-hero-wrap:hover .hero-controls{display:flex}
+.iaea-source{background:#03060d;padding:9px 36px 9px 0;font-family:var(--fmono);font-size:13pt;color:var(--muted);letter-spacing:.04em;border-bottom:1px solid var(--border);text-align:right;font-style:italic}
+
+/* ════════════════════════ PAGE SECTIONS ════════════════════════ */
+.page-hero{position:relative;height:110px;overflow:hidden;display:flex;align-items:center;padding-left:0}
+.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.3) saturate(.6)}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,24,.92),rgba(8,13,24,.45))}
+.page-hero-content{position:relative;z-index:2;padding:0}
+.page-hero-tag{font-family:var(--fmono);font-size:calc(var(--font-small) + 2pt);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;display:block}
+.page-hero-title{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(32pt,4vw,56pt);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.page-hero-sub{font-size:calc(var(--font-small) + 2pt);color:var(--muted);font-family:var(--fmono);letter-spacing:.08em}
+.pg{position:relative;z-index:1;padding:64px 60px 64px 0}
+.pg.alt{background:var(--bg2);padding:64px 60px 64px 0}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);position:relative;z-index:1}
+.shdr{display:flex;align-items:center;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.shdr-left{display:flex;flex-direction:column;gap:4px}
+.shdr-hr{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent);min-width:60px;align-self:center}
+.stag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;display:block;white-space:nowrap;margin-bottom:2px}
+.stitle{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:35pt;line-height:1.1;letter-spacing:-.02em;display:block}
+.stitle .hl{color:var(--cyan)}
+
+/* OVERVIEW */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.kv-list{display:flex;flex-direction:column;gap:10px}
+.kv{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:8px;transition:border-color .2s}
+.kv:hover{border-color:rgba(0,210,240,.2)}
+.kv-ic{width:36px;height:36px;border-radius:7px;background:rgba(0,210,240,.08);border:1px solid rgba(0,210,240,.18);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.kv-lb{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.1em;margin-bottom:3px;text-transform:uppercase}
+.kv-val{font-size:var(--font-body);font-weight:700;line-height:1.5}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.12);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.sc{background:var(--surface);padding:24px 10px;text-align:center;transition:background .2s}
+.sc:hover{background:var(--surface2)}
+.sc-n{font-family:var(--fdis);font-size:54px;line-height:1;color:var(--cyan);margin-bottom:4px}
+.sc-l{font-size:var(--font-small);color:var(--muted);line-height:1.4}
+.cert-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cert{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(0,210,240,.05);border:1px solid rgba(0,210,240,.15);border-radius:7px}
+.cert-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.cert-tx{font-size:var(--font-small);font-weight:600;line-height:1.35}
+
+/* HISTORY */
+.hist-grid{display:grid;grid-template-columns:3fr 2fr;gap:48px;align-items:start}
+.tl{position:relative;padding-left:44px}
+.tl::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--cyan),var(--blue),transparent)}
+.tl-item{position:relative;margin-bottom:34px}
+.tl-dot{position:absolute;left:-44px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg2);border:2px solid var(--cyan);box-shadow:0 0 10px rgba(0,210,240,.4)}
+.tl-dot.M{background:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.7)}
+.tl-yr{font-family:var(--fdis);font-size:32px;color:var(--cyan);margin-bottom:4px}
+.tl-ev{font-size:var(--font-body);font-weight:800;margin-bottom:6px;line-height:1.35}
+.tl-dt{font-size:var(--font-small);color:var(--muted);line-height:1.8}
+.tl-bd{display:inline-flex;align-items:center;gap:5px;background:rgba(232,184,75,.1);border:1px solid rgba(232,184,75,.3);border-radius:4px;padding:4px 12px;font-family:var(--fmono);font-size:var(--font-small);color:var(--gold);margin-top:6px}
+.award-g{display:flex;flex-direction:column;gap:14px}
+.award{display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award-info{flex:1}
+.award-img-box{width:130px;flex-shrink:0;min-height:140px;background:rgba(0,0,0,.2);border:2px dashed rgba(232,184,75,.3);border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;position:relative;transition:border-color .2s}
+.award-img-box:hover{border-color:var(--gold)}
+.award-img-box .aw-img{width:100%;height:100%;object-fit:contain;display:none;position:absolute;inset:0}
+.award-img-box .aw-img.active{display:block}
+.award-img-ph{display:flex;flex-direction:column;align-items:center;gap:4px;color:rgba(232,184,75,.5);font-size:11px;text-align:center;padding:8px;pointer-events:none}
+.award-img-ph .aw-plus{font-size:22px}
+.award-img-ph.hidden{display:none}
+.award-img-ctrl{position:absolute;top:4px;right:4px;display:none;flex-direction:column;gap:3px;z-index:10}
+.award-img-box:hover .award-img-ctrl{display:flex}
+.award{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:18px;transition:border-color .2s;display:flex;flex-direction:row;gap:14px;align-items:stretch}
+.award:hover{border-color:rgba(232,184,75,.3)}
+.award-yr{font-family:var(--fdis);font-size:32px;color:var(--gold);line-height:1;margin-bottom:6px}
+.award-title{font-size:var(--font-body);font-weight:800;margin-bottom:4px;line-height:1.3}
+.award-sub{font-size:var(--font-small);color:var(--muted)}
+
+/* BUSINESS */
+.biz-g{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.biz-item{display:flex;flex-direction:row;gap:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);transition:border-color .25s,transform .25s}
+.biz-item:hover{border-color:rgba(0,210,240,.3);transform:translateY(-4px)}
+.biz-img-box{position:relative;cursor:pointer;background:#f0f4f8;width:180px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;border-left:1px solid rgba(255,255,255,.07);order:2}
+.biz-img-box img.biz-box-img{width:100%;height:100%;object-fit:contain;object-position:center;display:none;padding:8px;background:#f0f4f8;position:absolute;inset:0}
+.biz-img-box img.biz-box-img.active{display:block}
+.biz-img-ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);padding:20px;pointer-events:none}
+.biz-img-ph .bp-plus{width:40px;height:40px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,210,240,.45)}
+.biz-img-ph.hidden{display:none}
+.biz-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s;pointer-events:none}
+.biz-img-box:hover .biz-img-overlay{opacity:1}
+.biz-img-overlay span{background:rgba(0,210,240,.8);padding:8px 16px;border-radius:6px;font-size:var(--font-small);font-family:var(--fkr);font-weight:700;color:#000}
+.biz-img-ctrl{position:absolute;top:6px;right:6px;display:none;flex-direction:column;gap:4px;z-index:10}
+.biz-img-box:hover .biz-img-ctrl{display:flex}
+.biz-card{background:var(--surface);padding:28px;text-decoration:none;display:block;flex:1;order:1}
+.biz-card:hover{background:var(--surface2)}
+.biz-num{font-family:var(--fmono);font-size:var(--font-small);color:var(--cyan);letter-spacing:.2em;margin-bottom:10px}
+.biz-title{font-size:var(--font-body);font-weight:800;margin-bottom:10px;color:var(--text)}
+.biz-desc{font-size:var(--font-small);color:var(--muted);line-height:1.8}
+
+/* CLIENTS */
+.cli-g{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.cli-g .img-box{background:#ffffff;border-color:rgba(0,0,0,.12)}
+.cli-g .img-box:hover{border-color:var(--cyan)}
+.cli-g .box-label{background:rgba(0,0,0,.06);color:#555;border-top:1px solid rgba(0,0,0,.08)}
+
+/* CTA & FOOTER */
+.cta-wrap{background:linear-gradient(135deg,#0a1525,#0d1e35);border-top:1px solid var(--border2);padding:70px 60px 70px 0;position:relative;z-index:1}
+.cta-inner{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.cta-lb{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px}
+.cta-hd{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:var(--font-title);margin-bottom:18px;line-height:1.2}
+.cta-hd span{color:var(--cyan)}
+.cta-info{display:flex;flex-direction:column;gap:10px}
+.cta-row{display:flex;align-items:center;gap:12px;font-size:var(--font-body);color:var(--muted)}
+.cta-row strong{color:var(--text)}
+.cta-ri{width:30px;height:30px;border-radius:5px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.cta-btns{display:flex;flex-direction:column;gap:12px;min-width:200px}
+.btn-p{background:var(--cyan);color:#000;font-family:var(--fkr);font-weight:900;font-size:var(--font-body);padding:16px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s}
+.btn-p:hover{opacity:.88}
+.btn-s{background:transparent;border:1px solid var(--border2);color:var(--text);font-family:var(--fkr);font-weight:700;font-size:var(--font-body);padding:15px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,210,240,.05)}
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:28px 40px}
+.foot-inner{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+.foot-nm{font-size:var(--font-small);font-weight:700;color:var(--text)}
+.foot-addr{font-family:var(--fmono);font-size:var(--font-small);color:var(--dim)}
+.foot-contact{font-family:var(--fmono);font-size:var(--font-small);color:var(--dim)}
+.foot-copy{font-family:var(--fmono);font-size:var(--font-small);color:var(--dim);margin-top:4px}
+.fu{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+.fu.vis{opacity:1;transform:translateY(0)}
+@media(max-width:1200px){.cli-g{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1024px){.ov-grid,.hist-grid{grid-template-columns:1fr}.pg,.pg.alt{padding:60px 40px 60px 0}.cta-inner{grid-template-columns:1fr}}
+@media(max-width:768px){.pg,.pg.alt{padding:40px 20px 40px 0}.biz-g{grid-template-columns:1fr}.biz-item{flex-direction:column}.biz-img-box{width:100%;order:0;min-height:140px}.cli-g{grid-template-columns:repeat(2,1fr)}.cta-wrap{padding:50px 20px 50px 0}.logo-ko{font-size:24px}.logo-ko-en{font-size:18px}footer{padding:16px 20px}.foot-inner{align-items:flex-start}}
+
+/* === 페이지 고유 CSS === */
+
+:root{--bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;--border:rgba(30,120,220,.18);--border2:rgba(0,210,240,.15);--blue:#1a6fd4;--cyan:#00d2f0;--gold:#e8b84b;--green:#00e676;--text:#dde8f8;--muted:#9ab5d0;--dim:#3a4d6a;--fkr:"Pretendard","Noto Sans KR",sans-serif;--fmono:"JetBrains Mono",monospace;--fdis:"Bebas Neue",sans-serif;--hdr:120px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:var(--fkr);font-size:16px;background:var(--bg);color:var(--text);overflow-x:hidden;word-break:keep-all}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,111,212,.03) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:600}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-pill{background:#fff;border-radius:9px;padding:6px 13px}
+.logo-text{font-family:"Montserrat",sans-serif;font-weight:900;font-size:22px;color:#1a6fd4;letter-spacing:.1em}
+.logo-ko{font-size:20px;font-weight:900;color:var(--text);display:flex;flex-direction:column;line-height:1.15}
+.logo-ko small{font-size:13px;color:var(--muted);font-weight:700}
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+
+.nb:hover{color:var(--text);border-bottom-color:rgba(0,210,240,.4)}
+.nb.active-menu{color:var(--cyan)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:0 18px;border-radius:6px;margin-left:8px;height:40px;border-bottom:none}
+.nb.cta-nav:hover{opacity:.85}
+
+.page-hero{position:relative;height:280px;margin-top:var(--hdr);overflow:hidden;display:flex;align-items:center}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,24,.95),rgba(8,13,24,.6)),linear-gradient(135deg,#04080f,#0a1525)}
+.page-hero-content{position:relative;z-index:2;padding:0}
+.breadcrumb{font-family:var(--fmono);font-size:12px;color:var(--muted);letter-spacing:.1em;margin-bottom:14px}
+.breadcrumb a{color:var(--cyan);text-decoration:none}
+.page-hero-tag{font-family:var(--fmono);font-size:12px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;display:block}
+.page-hero-title{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(32px,4vw,54px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.page-hero-sub{font-size:15px;color:var(--muted);font-family:var(--fmono);letter-spacing:.08em}
+.pg{position:relative;z-index:1;padding:72px 80px}
+.pg.alt{background:var(--bg2)}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);position:relative;z-index:1}
+.shdr{display:flex;align-items:flex-end;gap:16px;margin-bottom:36px}
+.shdr-hr{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent);margin-bottom:5px}
+.stag{font-family:var(--fmono);font-size:12px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:8px}
+.stitle{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(26px,3vw,40px);line-height:1.1;letter-spacing:-.02em;margin-bottom:10px}
+.stitle .hl{color:var(--cyan)}
+.prod-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.prod-inner.flip{direction:rtl}.prod-inner.flip>*{direction:ltr}
+.prod-img-box{position:relative;border-radius:14px;overflow:hidden;border:2px dashed rgba(0,210,240,.3);background:#000;height:400px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .25s,box-shadow .25s}
+.prod-img-box:hover{border-color:var(--cyan);border-style:solid;box-shadow:0 0 22px rgba(0,210,240,.13)}
+.prod-img-box img.pib-img{width:100%;height:100%;object-fit:contain;display:none;position:absolute;inset:0}
+.prod-img-box img.pib-img.active{display:block}
+.prod-img-box .pib-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);padding:32px;text-align:center;width:100%}
+.prod-img-box .pib-ph.hidden{display:none}
+.prod-img-box .pib-plus{width:60px;height:60px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(0,210,240,.5);transition:all .2s}
+.prod-img-box:hover .pib-plus{border-color:var(--cyan);color:var(--cyan);transform:scale(1.1)}
+.prod-img-box .pib-hint{font-size:13px;opacity:.7;line-height:1.6;font-family:var(--fmono)}
+.prod-img-box .pib-ctrl{position:absolute;top:10px;right:10px;display:none;flex-direction:column;gap:5px;z-index:20}
+.prod-img-box:hover .pib-ctrl{display:flex}
+.prod-img-box .pib-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .22s;pointer-events:none}
+.prod-img-box:hover .pib-overlay{opacity:1}
+.prod-img-box .pib-overlay span{background:rgba(0,210,240,.82);padding:10px 22px;border-radius:7px;font-family:var(--fkr);font-size:15px;font-weight:700;color:#000}
+.prod-tag{font-family:var(--fmono);font-size:12px;letter-spacing:.25em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;display:block}
+.prod-heading{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(24px,2.5vw,36px);line-height:1.15;margin-bottom:14px}
+.prod-desc{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px;border-left:2px solid var(--cyan);padding-left:14px}
+.feat-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.feat{display:flex;gap:12px;align-items:flex-start;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 14px}
+.feat-ic{font-size:20px;flex-shrink:0;margin-top:1px}
+.feat-tx{font-size:14px;color:var(--muted);line-height:1.6}
+.feat-tx strong{color:var(--text);display:block;margin-bottom:2px}
+.spec-t{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);margin-top:20px}
+.spec-t th{background:rgba(0,210,240,.08);border-bottom:1px solid rgba(0,210,240,.15);padding:11px 16px;font-family:var(--fmono);font-size:12px;letter-spacing:.12em;color:var(--cyan);text-align:left}
+.spec-t td{padding:11px 16px;font-size:14px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text)}
+.spec-t tr:last-child td{border-bottom:none}
+.spec-t td:first-child{color:var(--muted);font-weight:500}
+.diag-upload-box{min-width:130px;max-width:160px;flex:1;min-height:140px}
+.diagram-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-top:36px}
+.diag-box{background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:16px 20px;text-align:center;min-width:120px}
+.diag-box .diag-ic{font-size:28px;margin-bottom:6px}
+.diag-box .diag-nm{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
+.diag-box .diag-sub{font-family:var(--fmono);font-size:11px;color:var(--muted)}
+.diag-arrow{font-size:24px;color:var(--cyan);opacity:.6;padding:0 6px;flex-shrink:0}
+.btn-g{display:flex;gap:10px;flex-wrap:wrap}
+.btn-p{background:var(--cyan);color:#000;font-family:var(--fkr);font-weight:900;font-size:15px;padding:12px 22px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:opacity .2s}
+.btn-p:hover{opacity:.88}
+.btn-s{background:transparent;border:1px solid var(--border2);color:var(--text);font-family:var(--fkr);font-weight:700;font-size:15px;padding:11px 22px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all .2s}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan)}
+.cta-wrap{background:linear-gradient(135deg,#0a1525,#0d1e35);border-top:1px solid var(--border2);padding:70px 80px;position:relative;z-index:1}
+.cta-inner{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.cta-lb{font-family:var(--fmono);font-size:12px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px}
+.cta-hd{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(24px,2.5vw,36px);margin-bottom:16px;line-height:1.2}
+.cta-hd span{color:var(--cyan)}
+.cta-info{display:flex;flex-direction:column;gap:8px}
+.cta-row{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.cta-row strong{color:var(--text)}
+.cta-ri{width:26px;height:26px;border-radius:5px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.cta-btns{display:flex;flex-direction:column;gap:10px;min-width:180px}
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:20px 40px}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.foot-nm{font-size:14px;font-weight:700}
+.foot-info{font-family:var(--fmono);font-size:12px;color:var(--dim);text-align:center;line-height:1.7}
+.foot-copy{font-family:var(--fmono);font-size:12px;color:var(--dim);text-align:right}
+.fu{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+.fu.vis{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.prod-inner{grid-template-columns:1fr}.prod-inner.flip{direction:ltr}.pg{padding:60px 40px}.cta-inner{grid-template-columns:1fr}}
+@media(max-width:768px){.pg{padding:50px 20px}.cta-wrap{padding:50px 20px}.page-hero-content{padding:0 20px}footer{padding:16px 20px}.foot-inner{flex-direction:column;text-align:center}}
+
+/* ════════════════════════ HEADER ════════════════════════ */
+:root{
+  --hdr:120px;
+  --font-title:30pt;--font-body:20pt;--font-small:15pt;
+}
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 36px;z-index:700;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:14px;flex-shrink:0}
+/* ── 로고 이미지: 클릭하여 교체 가능 ── */
+.logo-img-wrap{position:relative;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;border-radius:9px;overflow:visible}
+.logo-img{height:60px;width:auto;object-fit:contain;background:#fff;border-radius:9px;padding:4px 8px;transition:opacity .2s;display:block}
+.logo-img-wrap:hover .logo-img{opacity:.85}
+.logo-img-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);border-radius:9px;opacity:0;transition:opacity .2s;pointer-events:none;font-family:var(--fkr);font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.3;padding:4px}
+.logo-img-wrap:hover .logo-img-hint{opacity:1}
+.logo-ko{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:24px;color:var(--text);line-height:1.15;display:flex;flex-direction:column}
+.logo-ko-en{font-size:19px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.btn-dl{background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;color:var(--cyan);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.btn-dl:hover{background:rgba(0,210,240,.22);border-color:var(--cyan)}
+
+/* ════════════════════════ NAV ════════════════════════ */
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+
+.nb:hover,.ni:hover>.nb{color:#fff}
+.nb.active-menu{color:var(--cyan)}
+.nb .caret{font-size:11px;transition:transform .22s;display:inline-block}
+.ni:hover>.nb .caret{transform:rotate(180deg)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:10px 20px;border-radius:6px;margin-left:10px}
+.nb.cta-nav:hover{opacity:.86}
+.nb.cta-nav .caret{display:none}
+
+/* ── L1 Dropdown ── */
+.dropdown{
+  display:none;position:absolute;top:100%;left:0;min-width:200px;
+  background:rgba(10,18,34,.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);
+  border-radius:0 0 10px 10px;box-shadow:0 16px 48px rgba(0,0,0,.75);
+  z-index:680;padding:6px 0 8px;
+}
+
+@keyframes ddIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:8px 18px 6px;font-family:var(--fmono);font-size:11px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:4px}
+.di{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;font-size:14px;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;white-space:nowrap;border-left:2px solid transparent;transition:all .12s;position:relative}
+.di:hover{background:rgba(0,210,240,.09);border-left-color:var(--cyan);color:var(--cyan)}
+.di.active{background:rgba(0,210,240,.14);border-left-color:var(--cyan);color:var(--cyan)}
+.arr{font-size:12px;color:var(--dim);margin-left:8px;flex-shrink:0}
+.di:hover .arr{color:var(--cyan)}
+.dd-sep{height:1px;background:rgba(255,255,255,.06);margin:6px 0}
+
+/* ── L2 Sub-dropdown ── */
+.has-sub{position:relative}
+.sub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:290px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:690;padding:6px 0 8px}
+.has-sub:hover>.sub-dropdown,.has-sub.open>.sub-dropdown{display:block;animation:subIn .14s ease forwards}
+@keyframes subIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+
+/* ── L3 Sub-sub-dropdown ── */
+.has-sub2{position:relative}
+.subsub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:240px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid rgba(0,210,240,.5);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:700;padding:6px 0 8px}
+.has-sub2:hover>.subsub-dropdown{display:block;animation:subIn .12s ease forwards}
+
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:36px 40px}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot-left{display:flex;flex-direction:column;gap:5px}
+.foot-nm{font-size:var(--font-small);font-weight:700;color:var(--text)}
+.foot-addr{font-family:var(--fmono);font-size:var(--font-small);color:var(--dim)}
+.foot-contact{font-family:var(--fmono);font-size:var(--font-small);color:var(--dim)}
+.foot-copy{font-family:var(--fmono);font-size:var(--font-small);color:var(--dim);margin-top:4px}
+.foot-inquiry-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(0,210,240,.06);border:1px solid rgba(0,210,240,.2);border-radius:10px;padding:18px 28px;text-decoration:none;transition:all .22s;min-width:200px;text-align:center}
+.foot-inquiry-box:hover{background:rgba(0,210,240,.13);border-color:var(--cyan)}
+.foot-inquiry-icon{font-size:24px}
+.foot-inquiry-label{font-family:var(--fkr);font-size:var(--font-small);font-weight:700;color:var(--cyan)}
+.foot-inquiry-sub{font-family:var(--fmono);font-size:12px;color:var(--muted)}
+
+</style>
+<link href="./css/img-manager.css" rel="stylesheet"/>
+<style>
+/* ════ 대원칙 1·3 · 폰트/헤더 표준 스케일 정규화 (template.html 표준값) ════ */
+:root{--hdr:72px;--font-title:20px;--font-body:16px;--font-small:13px;--font-xsmall:11px;--font-mono:12px;--font-body-sm:14px}
+.logo-img{height:40px!important;padding:3px 6px!important}
+.foot-logo-img{height:46px!important}
+.nb{font-size:14px!important;padding:10px 10px!important}
+.stitle,.page-hero-title,.product-name,.cta-hd{font-size:clamp(28px,3.5vw,48px)!important;letter-spacing:-.02em;line-height:1.1}
+header{padding-left:5mm}
+</style><style>
+/* ════ Light/Dark 테마 (대원칙: 헤더 토글) ════ */
+#theme-toggle{background:transparent;border:1px solid var(--border2);color:var(--muted);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 10px;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:all .2s}
+#theme-toggle:hover{border-color:var(--cyan);color:var(--cyan)}
+[data-theme=light]{--bg:#f0f4fb;--bg2:#e4ecf7;--surface:#d9e4f4;--surface2:#c8d8ef;--border:#1a6fd430;--border2:#0097aa33;--text:#06101e;--muted:#1a3352;--dim:#4a6888;--blue:#1a6fd4;--cyan:#006e80;--gold:#7a5410}
+[data-theme=light] body:before{background-image:linear-gradient(#1a6fd410 1px,#0000 1px),linear-gradient(90deg,#1a6fd410 1px,#0000 1px)}
+[data-theme=light] header{background:#f0f4fbf7}
+[data-theme=light] .dropdown,[data-theme=light] .sub-dropdown,[data-theme=light] .subsub-dropdown,[data-theme=light] .main-nav{background:#e8f0fafc}
+[data-theme=light] .nb:hover,[data-theme=light] .ni:hover>.nb{color:#0d1a2e}
+[data-theme=light] .logo-img,[data-theme=light] .foot-logo-img{background:#fff}
+[data-theme=light] footer{background:#dbe6f5}
+[data-theme=light] .cta-wrap{background:linear-gradient(135deg,#e4ecf7,#d9e4f4)}
+[data-theme=light] .cta-ri{background:#00c8e01a;border-color:#00c8e055}
+[data-theme=light] .page-hero-overlay{background:linear-gradient(90deg,rgba(240,244,251,.92),rgba(240,244,251,.55))}
+[data-theme=light] .box-ctrl-btn{background:#080d18eb;color:#dde8f8}
+[data-theme=light] .box-label{background:rgba(255,255,255,.92);color:#06101e!important}
+[data-theme=light] .box-placeholder,[data-theme=light] .box-hint,[data-theme=light] .box-plus,
+[data-theme=light] .cta-box-ph,[data-theme=light] .foot-img-ph,[data-theme=light] .biz-img-ph{color:#9ab5d0}
+[data-theme=light] .gallery-item .caption{color:#fff}
+[data-theme=light] .cli-g .box-label{color:#333}
+</style><style>
+/* ════ 대원칙 4 · 모바일 반응형(≤900px) — 햄버거 내비 + 2단→1단 ════ */
+.nav-toggle{display:none;margin-left:auto;background:transparent;border:1px solid var(--border2);color:var(--text);font-size:22px;line-height:1;padding:5px 12px;border-radius:6px;cursor:pointer;flex-shrink:0}
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  header{padding-left:16px;padding-right:12px;gap:8px}
+  .logo-ko{display:none}
+  .main-nav{position:fixed;top:var(--hdr);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#0a1222fa;backdrop-filter:blur(22px);border-bottom:1px solid var(--border2);max-height:calc(100vh - var(--hdr));overflow-y:auto;display:none;padding:6px 0 12px;z-index:680}
+  .main-nav.open{display:flex}
+  .ni{flex-direction:column;align-items:stretch;width:100%;position:static}
+  .nb{width:100%;justify-content:space-between;padding:14px 22px;font-size:16px!important}
+  .nb.cta-nav{margin:10px 22px;justify-content:center}
+  .dropdown{position:static;display:block;width:100%;min-width:0;border:none;border-top:1px solid #ffffff12;border-radius:0;box-shadow:none;background:transparent;padding:0 0 4px;animation:none!important}
+  .di{padding:11px 22px 11px 40px}
+  .sub-dropdown,.subsub-dropdown{display:none!important}
+  .ov-grid,.hist-grid,.biz-g,.two-col,.spec-columns,.features-grid,.cli-g{grid-template-columns:1fr!important}
+  .ov-grid>*,.hist-grid>*,.biz-g>*,.two-col>*,.ti-row>*,.cta-inner>*,.comp-row>*,.syscfg-row>*{min-width:0}
+  [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns: 1fr 1fr"],[style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  .foot-inner{grid-template-columns:1fr}
+  .foot-right-col{flex-direction:column;align-items:stretch;gap:14px}
+}
+</style><style>
+/* ════ 대원칙 6 · 브레드크럼 명도 ════ */
+.breadcrumb-nav{background:var(--bg2)!important}
+.breadcrumb-nav a{color:var(--muted)!important;text-decoration:none}
+.breadcrumb-nav a:hover{color:var(--cyan)!important}
+.breadcrumb-nav span{color:var(--text)}
+.breadcrumb-nav+.iaea-hero-wrap,.breadcrumb-nav+.full-hero-wrap,.breadcrumb-nav+.page-hero,.breadcrumb-nav+.product-hero{margin-top:0!important}
+#box-full-hero:first-of-type{margin-top:0}
+</style><style>
+/* ════ 대원칙 5 · 섹션 키워드 칩 ════ */
+.sec-keywords{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:40px;padding-top:20px;border-top:1px dashed var(--border2)}
+.kw-label{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-right:4px}
+.sec-kw{font-size:var(--font-small);color:var(--muted);background:#00d2f00d;border:1px solid #00d2f026;border-radius:16px;padding:4px 12px}
+</style><style>
+/* 대원칙 5 · 제목 줄바꿈 balance */
+.stitle,.page-hero-title,.product-name,.cta-hd,.ti-title,.syscfg-name,.feature-name,.biz-title,.award-title{text-wrap:balance}
+.img-align-shift{transition:margin-top .15s}
+</style><style>
+.lang-switch{display:inline-flex;align-items:center;border:1px solid var(--border2,#00d2f02e);border-radius:6px;overflow:hidden;flex-shrink:0;margin-left:8px}
+.lang-btn{background:transparent;border:none;color:var(--muted,#9ab5d0);font-family:var(--fkr,"Noto Sans KR",sans-serif);font-size:13px;font-weight:700;padding:7px 10px;cursor:pointer;transition:all .2s}
+.lang-btn:hover{color:var(--cyan,#00d2f0)}
+.lang-btn.on{background:var(--cyan,#00d2f0);color:#000}
+.lang-sep{color:var(--dim,#3a4d6a);font-size:12px}
+</style></head>
+<body id="artifacts-component-root-html">
+<header>
+<!-- ── 로고 영역 ── -->
+<div class="logo-wrap">
+<!-- 로고 이미지 : JS가 wrap 자동 생성하므로 img만 정의 -->
+<div class="logo-img-wrap" title="클릭하여 로고 교체">
+<div id="logo-img-wrap" style="position: relative; cursor: pointer; display: inline-flex; border-radius: 9px; overflow: hidden; flex-shrink: 0;" title="클릭하여 로고 교체"><div id="logo-img-wrap-2" style="position: relative; cursor: pointer; display: inline-flex; border-radius: 9px; overflow: hidden; flex-shrink: 0;" title="클릭하여 로고 교체"><img alt="UNO SYSTEM 로고" class="logo-img" id="logo-img" onerror="this.style.display='none';var p=this.parentElement.querySelector('.box-placeholder,.biz-img-ph,.foot-img-ph');if(p)p.classList.remove('hidden')" src=""/><div data-en="📷&lt;br/&gt;Replace logo" data-ko="📷&lt;br/&gt;로고 교체" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); border-radius: 9px; opacity: 0; transition: opacity 0.2s; pointer-events: none; font-size: 11px; font-weight: 700; color: rgb(255, 255, 255); text-align: center; line-height: 1.4; z-index: 10;">📷<br/>Replace logo</div></div><div data-en="📷&lt;br/&gt;Replace logo" data-ko="📷&lt;br/&gt;로고 교체" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); border-radius: 9px; opacity: 0; transition: opacity 0.2s; pointer-events: none; font-size: 11px; font-weight: 700; color: rgb(255, 255, 255); text-align: center; line-height: 1.4; z-index: 10;">📷<br/>Replace logo</div></div>
+<div class="logo-img-hint" data-en="📷&lt;br/&gt;Replace logo" data-ko="📷&lt;br/&gt;로고 교체">📷<br/>Replace logo</div>
+</div>
+<!-- 회사명 텍스트 (고정) -->
+<div class="logo-ko"><span class="i18n" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템(주)">UNO SYSTEM Co., Ltd.</span><span class="logo-ko-en">UNO SYSTEM</span></div>
+</div>
+<!-- ── 네비게이션 (전 페이지 공통 — 수정 금지) ── -->
+<nav class="main-nav" id="mainNav">
+<!-- ① 회사소개 -->
+<div class="ni" id="ni-company">
+<button class="nb" data-ni="ni-company"><span class="i18n" data-en="Company" data-ko="회사 소개">Company</span> <span class="caret">▾</span></button>
+<div class="dropdown" id="dd-company">
+<div class="dd-head" data-en="Company" data-ko="회사 소개">Company</div>
+<a class="di" data-en="Company Overview" data-ko="회사 개요" href="#overview">Company Overview</a>
+<a class="di" data-en="History" data-ko="회사 연혁" href="#history">History</a>
+<a class="di" data-en="Business Divisions" data-ko="사업 부문" href="#business">Business Divisions</a>
+<a class="di" data-en="Key Clients" data-ko="주요 고객사" href="#clients">Key Clients</a>
+</div>
+</div>
+<!-- ② 제품/솔루션 -->
+<div class="ni" id="ni-prod">
+<button class="nb active-menu" data-ni="ni-prod"><span class="i18n" data-en="Products/Solutions" data-ko="제품/솔루션">Products/Solutions</span> <span class="caret">▾</span></button>
+<div class="dropdown" id="dd-prod">
+<div class="dd-head" data-en="Products / Solutions" data-ko="제품 / 솔루션">Products / Solutions</div>
+<!-- SUB: 화재수신기 -->
+<div class="di has-sub"><span class="i18n" data-en="Fire Alarm Control Panels" data-ko="화재수신기">Fire Alarm Control Panels</span> <span class="arr">›</span>
+<div class="sub-dropdown">
+<div class="dd-head" data-en="Fire Alarm Control Panels" data-ko="화재수신기">Fire Alarm Control Panels</div>
+<a class="di" data-en="R-Type DTS-Integrated FACP" data-ko="R형 DTS 통합형 수신기" href="제품/수신기/R형 DTS 통합형 수신기/r-type dts-integrated facp.html">R-Type DTS-Integrated FACP</a>
+<!-- SUB-SUB: P형 복합식 -->
+<div class="di has-sub2"><span class="i18n" data-en="P-Type Combination FACP" data-ko="P형 복합식 수신기">P-Type Combination FACP</span> <span class="arr">›</span>
+<div class="subsub-dropdown">
+<div class="dd-head" data-en="P-Type Combination" data-ko="P형 복합식">P-Type Combination</div>
+<a class="di" data-en="6-Circuit P-Type FACP (FACP25-2)" data-ko="6회로 P형 수신기 (수25-2)" href="제품/수신기/P형 복합식 수신기/6 회로 P형 복합식 수신기(수25-2)/">6-Circuit P-Type FACP (FACP25-2)</a>
+<a class="di" data-en="30-Circuit P-Type FACP (FACP26-28)" data-ko="30회로 P형 수신기 (수26-28)" href="제품/수신기/P형 복합식 수신기/30 회로 P형 복합식 수신기(수26-28)/">30-Circuit P-Type FACP (FACP26-28)</a>
+</div>
+</div>
+<!-- SUB-SUB: 기타 수신기 -->
+<div class="di has-sub2"><span class="i18n" data-en="Other Control Panels" data-ko="기타 수신기">Other Control Panels</span> <span class="arr">›</span>
+<div class="subsub-dropdown">
+<div class="dd-head" data-en="Other Control Panels" data-ko="기타 수신기">Other Control Panels</div>
+<a class="di" data-en="DTS-Integrated R-Type (FACP24-14)" data-ko="DTS 통합 R형 (수24-14)" href="제품/수신기/기타 수신기/r-type dts-integrated facp (facp24-14)/">DTS-Integrated R-Type (FACP24-14)</a>
+<a class="di" data-en="P-Type Combination (FACP13-6)" data-ko="P형 복합식 (수13-6)" href="제품/수신기/기타 수신기/p-type facp (facp13-6)/">P-Type Combination (FACP13-6)</a>
+<a class="di" data-en="P-Type Combination (FACP17-47)" data-ko="P형 복합식 (수17-47)" href="제품/수신기/기타 수신기/p-type facp (facp17-47)/">P-Type Combination (FACP17-47)</a>
+<a class="di" data-en="P-Type Combination (FACP24-14)" data-ko="P형 복합식 (수24-14)" href="제품/수신기/기타 수신기/p-type facp (facp24-14)/">P-Type Combination (FACP24-14)</a>
+</div>
+</div>
+</div>
+</div>
+<!-- SUB: 감지기 -->
+<div class="di has-sub"><span class="i18n" data-en="Detectors" data-ko="감지기">Detectors</span> <span class="arr">›</span>
+<div class="sub-dropdown">
+<div class="dd-head" data-en="Detectors" data-ko="감지기">Detectors</div>
+<a class="di" data-en="Rate-of-Rise Distributed Fiber-Optic Cable Detector (DET24-74)" data-ko="차동식분포형 광케이블식 (감24-74)" href="제품/감지기/광케이블식 감지기(감24-74)/fiber optic cable ror detector (detector24-74).html">Rate-of-Rise Distributed Fiber-Optic Cable Detector (DET24-74)</a>
+<a class="di" data-en="Rate-of-Rise Distributed Fiber-Optic Cable Detector (DET26-9)" data-ko="차동식분포형 광케이블식 (감26-9)" href="제품/감지기/광케이블식 감지기(감26-9)/fiber optic cable ror detector (detector26-9).html">Rate-of-Rise Distributed Fiber-Optic Cable Detector (DET26-9)</a>
+</div>
+</div>
+<div class="dd-sep"></div>
+<a class="di" data-en="Integrated Fire Monitoring Facility" data-ko="소방통합감시설비" href="sofire.html">Integrated Fire Monitoring Facility</a>
+<a class="di" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="network.html">Network-Based Solutions</a>
+<a class="di" data-en="Construction Management" data-ko="건설시공 관리" href="construction.html">Construction Management</a>
+<div class="dd-sep"></div>
+<a class="di" data-en="View All Products →" data-ko="전체 제품 보기 →" href="products.html">View All Products →</a>
+</div>
+</div>
+<!-- ③ 프로젝트 -->
+<div class="ni" id="ni-proj">
+<button class="nb" data-ni="ni-proj"><span class="i18n" data-en="Projects" data-ko="프로젝트">Projects</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<div class="dd-head" data-en="Projects" data-ko="프로젝트">Projects</div>
+<a class="di" data-en="Construction Projects" data-ko="건설 프로젝트" href="#clients">Construction Projects</a>
+<a class="di" href="#clients">Case Studies</a>
+<a class="di" data-en="Key Clients" data-ko="주요 고객사" href="#clients">Key Clients</a>
+</div>
+</div>
+<!-- ④ 기술보유현황 -->
+<div class="ni" id="ni-tech">
+<button class="nb" data-ni="ni-tech"><span class="i18n" data-en="Technology Portfolio" data-ko="기술보유현황">Technology Portfolio</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<div class="dd-head" data-en="Technology Portfolio" data-ko="기술보유현황">Technology Portfolio</div>
+<a class="di" data-en="Intellectual Property / Patents" data-ko="지식재산권 / 특허" href="#history">Intellectual Property / Patents</a>
+<a class="di" data-en="KFI Type Approval Certificates" data-ko="KFI 형식승인서" href="#history">KFI Type Approval Certificates</a>
+<a class="di" data-en="Corporate Certifications" data-ko="기업 인증" href="#history">Corporate Certifications</a>
+<a class="di" data-en="Awards" data-ko="수상 실적" href="#history">Awards</a>
+</div>
+</div>
+<!-- ⑤ 자료 -->
+<div class="ni" id="ni-data">
+<button class="nb" data-ni="ni-data"><span class="i18n" data-en="Resources" data-ko="자료">Resources</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<div class="dd-head" data-en="Resources" data-ko="자료">Resources</div>
+<a class="di" data-en="Product Catalog" data-ko="제품 카탈로그" href="#business">Product Catalog</a>
+<a class="di" data-en="Datasheets" data-ko="데이터시트" href="#business">Datasheets</a>
+<a class="di" data-en="Installation Manual" data-ko="설치 매뉴얼" href="#business">Installation Manual</a>
+<a class="di" data-en="Certificates" data-ko="인증 서류" href="#business">Certificates</a>
+</div>
+</div>
+<!-- ⑥ CONTACT -->
+<div class="ni"><a class="nb cta-nav" href="#contact">CONTACT</a></div>
+</nav><button aria-label="메뉴" class="nav-toggle" onclick="toggleNav()" title="메뉴" type="button">☰</button>
+<button class="btn-dl" data-en="📥 Download" data-ko="📥 다운로드" onclick="downloadPage()" title="현재 이미지 포함 HTML 영구 저장">📥 Download</button>
+<div class="lang-switch"><button class="lang-btn" id="lang-ko" onclick="setLang('ko')" title="한국어" type="button">KOR</button><span class="lang-sep">|</span><button class="lang-btn on" id="lang-en" onclick="setLang('en')" title="English" type="button">ENG</button></div><button id="theme-toggle" onclick="toggleTheme()" title="라이트/다크 모드 전환" type="button"><span id="th-icon">🌙</span><span id="th-label">Dark</span></button></header><nav class="breadcrumb-nav" style="z-index:10;border-bottom:1px solid var(--border);font-size:var(--font-small);color:var(--muted);margin-top:var(--hdr);background:var(--bg2);align-items:center;gap:8px;padding:12px 60px 12px 5mm;display:flex;position:relative"><a data-en="Products" data-ko="제품" href="products.html" style="color:var(--muted);text-decoration:none">Products</a><span style="color:var(--cyan);opacity:.6;font-size:10px">▶</span><span data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" style="color:var(--text)">Network-Based Solutions</span></nav>
+<div class="iaea-hero-wrap" id="hero_network-wrap" style="cursor: pointer;">
+<!-- 이미지가 없으면 placeholder 표시 -->
+<div class="hero-empty hidden" id="hero_network-empty">
+<div class="he-plus">+</div>
+<div data-en="Click to insert an image / video" data-ko="클릭하여 이미지 / 영상 삽입" style="font-size:var(--font-body);font-weight:700">Click to insert an image / video</div>
+<div style="font-size:var(--font-small);opacity:.6">Source: Korea Nuclear Power Plant by IAEA Imagebank</div>
+</div>
+<!-- base64 src가 채워지면 자동으로 표시됨 -->
+<img alt="Korea Gori Nuclear Power Plant — IAEA Imagebank" id="hero_network-img" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ulchin_Nuclear_Power_Plant_02.jpg/1280px-Ulchin_Nuclear_Power_Plant_02.jpg'" src="images/00-image.webp" style="display:block;width:100%;height:520px;object-fit:cover;"/>
+<div class="hero-change-hint"><span data-en="📷 Click to replace the image / video" data-ko="📷 클릭하여 이미지 / 영상 교체">📷 Click to replace the image / video</span></div>
+<div class="hero-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();heroReplace_hero_network()">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();heroDelete_hero_network()">🗑 Delete</button>
+</div>
+</div>
+<div class="iaea-source">Source: National Museum of Tajikistan</div>
+<div class="page-hero">
+<div class="page-hero-overlay"></div>
+<div class="page-hero-content">
+<span class="page-hero-tag">Network-Based Solutions</span>
+<h1 class="page-hero-title" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션">Network-Based Solutions</h1>
+<div class="page-hero-sub" data-en="SCADA Expansion Unit · DNC · DTS Distributed Temperature Sensing Network" data-ko="SCADA 확장장치 · DNC · DTS 분산온도감지 네트워크">SCADA Expansion Unit · DNC · DTS Distributed Temperature Sensing Network</div>
+</div>
+</div>
+<!-- SCADA 확장장치 -->
+<section class="pg" id="scada">
+<div class="shdr">
+<div><span class="stag">01 · SCADA Extension Device</span><h2 class="stitle">SCADA <span class="hl" data-en="Expansion Unit" data-ko="확장장치">Expansion Unit</span></h2></div>
+<div class="shdr-hr"></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#SCADA</span><span class="sec-kw" contenteditable="true" data-en="#IOExpansion" data-ko="#IO확장">#IOExpansion</span><span class="sec-kw" contenteditable="true" data-en="#ProtocolConversion" data-ko="#프로토콜변환">#ProtocolConversion</span><span class="sec-kw" contenteditable="true" data-en="#CentralSupervision" data-ko="#중앙관제">#CentralSupervision</span></div></div>
+<div class="prod-inner fu vis">
+<div class="prod-img-box" data-key="pib-scada" data-label="SCADA 확장장치" id="pib-scada">
+<img alt="SCADA 확장장치" class="pib-img active" src="images/01-SCADA_____.webp"/>
+<div class="pib-ph hidden">
+<div class="pib-plus">+</div>
+<div class="pib-hint" data-en="Click to&lt;br/&gt;insert an image / video" data-ko="클릭하여&lt;br/&gt;이미지 / 영상 삽입">Click to<br/>insert an image / video</div>
+</div>
+<div class="pib-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="pib-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();pibReplace('pib-scada')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();pibDelete('pib-scada')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div>
+<span class="prod-tag" data-en="Products/Solutions · Network-Based Solutions" data-ko="제품/솔루션 · 네트워크기반 솔루션">Products/Solutions · Network-Based Solutions</span>
+<h2 class="prod-heading" data-en="SCADA Expansion Unit" data-ko="SCADA 확장장치">SCADA Expansion Unit</h2>
+<p class="prod-desc" data-en="An expansion unit that bridges communication between field panels and the central SCADA system. It consolidates up to 32 panels onto a single SCADA server for efficient centralized supervision." data-ko="현장 수신기와 중앙 SCADA 시스템 간 통신을 연결하는 확장 장치. 최대 32대의 수신기를 하나의 SCADA 서버에 통합하여 효율적인 중앙 집중 관제를 실현합니다.">An expansion unit that bridges communication between field panels and the central SCADA system. It consolidates up to 32 panels onto a single SCADA server for efficient centralized supervision.</p>
+<div class="feat-list">
+<div class="feat"><div class="feat-ic">🔌</div><div class="feat-tx"><strong data-en="Multi-Panel Connectivity" data-ko="다중 수신기 연결">Multi-Panel Connectivity</strong><span class="i18n" data-en="Connects up to 32 panels simultaneously. Supports RS-485 / RS-232 / Ethernet communication." data-ko="최대 32대 수신기 동시 접속. RS-485 / RS-232 / Ethernet 통신 지원.">Connects up to 32 panels simultaneously. Supports RS-485 / RS-232 / Ethernet communication.</span></div></div>
+<div class="feat"><div class="feat-ic">⚙️</div><div class="feat-tx"><strong data-en="Protocol Conversion" data-ko="프로토콜 변환">Protocol Conversion</strong><span class="i18n" data-en="Converts between Modbus RTU and TCP/IP. Bridges legacy equipment with modern systems." data-ko="Modbus RTU ↔ TCP/IP 프로토콜 변환. 레거시 장비와 최신 시스템 연동.">Converts between Modbus RTU and TCP/IP. Bridges legacy equipment with modern systems.</span></div></div>
+<div class="feat"><div class="feat-ic">💡</div><div class="feat-tx"><strong data-en="Low-Heat, Rugged Design" data-ko="저발열 내구 설계">Low-Heat, Rugged Design</strong><span class="i18n" data-en="DC 24 V low-power operation. Wide temperature range for industrial environments (−20 to 70 °C)." data-ko="DC 24V 저전력 동작. 산업 환경 대응 광범위 온도 범위 (-20~70°C).">DC 24 V low-power operation. Wide temperature range for industrial environments (−20 to 70 °C).</span></div></div>
+</div>
+<table class="spec-t">
+<tbody><tr><th data-en="Item" data-ko="항목">Item</th><th data-en="Specifications" data-ko="사양">Specifications</th></tr>
+<tr><td data-en="Communication Method" data-ko="통신 방식">Communication Method</td><td>RS-485 / RS-232 / Ethernet (TCP/IP)</td></tr>
+<tr><td data-en="Connected Panels" data-ko="접속 수신기 수">Connected Panels</td><td data-en="Up to 32 units" data-ko="최대 32대">Up to 32 units</td></tr>
+<tr><td data-en="Power" data-ko="전원">Power</td><td>DC 24V</td></tr>
+<tr><td data-en="Protocol" data-ko="프로토콜">Protocol</td><td>Modbus RTU, Modbus TCP, SCADA</td></tr>
+<tr><td data-en="Operating Temperature" data-ko="동작 온도">Operating Temperature</td><td>-20 ~ 70°C</td></tr>
+</tbody></table>
+</div>
+</div>
+</section>
+<div class="div-line"></div>
+<!-- DNC -->
+<section class="pg alt" id="dnc">
+<div class="shdr">
+<div><span class="stag">02 · Digital Node Controller</span><h2 class="stitle">DNC <span class="hl" data-en="Digital Node Controller" data-ko="디지털 노드 컨트롤러">Digital Node Controller</span></h2></div>
+<div class="shdr-hr"></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#DNC</span><span class="sec-kw" contenteditable="true" data-en="#RingCommunication" data-ko="#링통신">#RingCommunication</span><span class="sec-kw" contenteditable="true" data-en="#Redundancy" data-ko="#이중화">#Redundancy</span><span class="sec-kw" contenteditable="true" data-en="#IoTIntegration" data-ko="#IoT연동">#IoTIntegration</span></div></div>
+<div class="prod-inner flip fu vis">
+<div class="prod-img-box" data-key="pib-dnc" data-label="DNC 디지털 노드 컨트롤러" id="pib-dnc">
+<img alt="DNC 디지털 노드 컨트롤러" class="pib-img active" src="images/02-DNC____________.webp"/>
+<div class="pib-ph hidden">
+<div class="pib-plus">+</div>
+<div class="pib-hint" data-en="Click to&lt;br/&gt;insert an image / video" data-ko="클릭하여&lt;br/&gt;이미지 / 영상 삽입">Click to<br/>insert an image / video</div>
+</div>
+<div class="pib-overlay"><span data-en="📷 Replace" data-ko="📷 교체">📷 Replace</span></div>
+<div class="pib-ctrl">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();pibReplace('pib-dnc')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();pibDelete('pib-dnc')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div>
+<span class="prod-tag" data-en="Products/Solutions · Network-Based Solutions" data-ko="제품/솔루션 · 네트워크기반 솔루션">Products/Solutions · Network-Based Solutions</span>
+<h2 class="prod-heading" data-en="DNC Digital Node Controller" data-ko="DNC 디지털 노드 컨트롤러">DNC Digital Node Controller</h2>
+<p class="prod-desc" data-en="A digital node controller that unites distributed DTS detector nodes into one network. Ring communication creates redundant communication paths for higher reliability." data-ko="분산된 DTS 감지기 노드들을 네트워크로 통합하는 디지털 노드 컨트롤러. 링 통신 방식으로 이중화 통신 경로를 구성하여 신뢰성을 높입니다.">A digital node controller that unites distributed DTS detector nodes into one network. Ring communication creates redundant communication paths for higher reliability.</p>
+<div class="feat-list">
+<div class="feat"><div class="feat-ic">🔄</div><div class="feat-tx"><strong data-en="Ring Communication Topology" data-ko="링(Ring) 통신 구조">Ring Communication Topology</strong><span class="i18n" data-en="Builds redundant communication paths. Traffic reroutes automatically if a line breaks, keeping communication alive." data-ko="이중화 통신 경로 구성. 단선 발생 시 자동 우회하여 통신 유지.">Builds redundant communication paths. Traffic reroutes automatically if a line breaks, keeping communication alive.</span></div></div>
+<div class="feat"><div class="feat-ic">🤝</div><div class="feat-tx"><strong data-en="Peer-to-Peer Communication" data-ko="Peer-to-Peer 통신">Peer-to-Peer Communication</strong><span class="i18n" data-en="Supports direct node-to-node communication, minimizing central server load." data-ko="노드 간 직접 통신 지원. 중앙 서버 부하 최소화.">Supports direct node-to-node communication, minimizing central server load.</span></div></div>
+<div class="feat"><div class="feat-ic">📱</div><div class="feat-tx"><strong data-en="IoT Integration" data-ko="IoT 연동">IoT Integration</strong><span class="i18n" data-en="Supports MQTT and REST API. Connects to cloud and IoT platforms." data-ko="MQTT, REST API 지원. 클라우드 및 IoT 플랫폼 연결 가능.">Supports MQTT and REST API. Connects to cloud and IoT platforms.</span></div></div>
+</div>
+</div>
+</div>
+</section>
+<div class="div-line"></div>
+<section class="pg">
+<div class="shdr">
+<div><span class="stag">03 · System Architecture</span><h2 class="stitle"><span class="i18n" data-en="DTS Network" data-ko="DTS 네트워크">DTS Network</span> <span class="hl" data-en="Diagram" data-ko="구성도">Diagram</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div class="diagram-row fu vis">
+<div class="img-box diag-upload-box" data-label="DTS 감지기" id="diag-box-1" style="cursor: pointer;">
+<div class="box-media-wrap">
+<img alt="DTS 감지기" class="box-img active" src="images/03-DTS____.webp" style="display: block;"/>
+<div class="box-placeholder hidden">
+<div class="box-plus">+</div>
+<div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">Click to<br/>insert image/video</div>
+</div>
+</div>
+<div class="box-label" data-en="DTS Detector" data-ko="DTS 감지기">DTS Detector</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();diagReplace('diag-box-1')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();diagDelete('diag-box-1')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-arrow">→</div>
+<div class="img-box diag-upload-box" data-label="DNC 노드" id="diag-box-2" style="cursor: pointer;">
+<div class="box-media-wrap">
+<img alt="DNC 노드" class="box-img active" src="images/04-DNC___.webp" style="display: block;"/>
+<div class="box-placeholder hidden">
+<div class="box-plus">+</div>
+<div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">Click to<br/>insert image/video</div>
+</div>
+</div>
+<div class="box-label" data-en="DNC Node" data-ko="DNC 노드">DNC Node</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();diagReplace('diag-box-2')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();diagDelete('diag-box-2')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-arrow">→</div>
+<div class="img-box diag-upload-box" data-label="네트워크 허브" id="diag-box-3" style="cursor: pointer;">
+<div class="box-media-wrap">
+<img alt="네트워크 허브" class="box-img active" src="images/05-_______.webp" style="display: block;"/>
+<div class="box-placeholder hidden">
+<div class="box-plus">+</div>
+<div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">Click to<br/>insert image/video</div>
+</div>
+</div>
+<div class="box-label" data-en="Network Hub" data-ko="네트워크 허브">Network Hub</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();diagReplace('diag-box-3')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();diagDelete('diag-box-3')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-arrow">→</div>
+<div class="img-box diag-upload-box" data-label="SCADA 서버" id="diag-box-4" style="cursor: pointer;">
+<div class="box-media-wrap">
+<img alt="SCADA 서버" class="box-img active" src="images/06-SCADA___.webp" style="display: block;"/>
+<div class="box-placeholder hidden">
+<div class="box-plus">+</div>
+<div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">Click to<br/>insert image/video</div>
+</div>
+</div>
+<div class="box-label" data-en="SCADA Server" data-ko="SCADA 서버">SCADA Server</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();diagReplace('diag-box-4')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();diagDelete('diag-box-4')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+<div class="diag-arrow">→</div>
+<div class="img-box diag-upload-box" data-label="원격 관제" id="diag-box-5" style="cursor: pointer;">
+<div class="box-media-wrap">
+<img alt="원격 관제" class="box-img active" src="images/07-_____.webp" style="display: block;"/>
+<div class="box-placeholder hidden">
+<div class="box-plus">+</div>
+<div class="box-hint" data-en="Click to&lt;br/&gt;insert image/video" data-ko="클릭하여&lt;br/&gt;이미지/영상 삽입">Click to<br/>insert image/video</div>
+</div>
+</div>
+<div class="box-label" data-en="Remote Supervision" data-ko="원격 관제">Remote Supervision</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();diagReplace('diag-box-5')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();diagDelete('diag-box-5')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" style="display:none" type="file"/>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#DTSNetwork" data-ko="#DTS네트워크">#DTSNetwork</span><span class="sec-kw" contenteditable="true" data-en="#DetectorNode" data-ko="#감지기노드">#DetectorNode</span><span class="sec-kw" contenteditable="true" data-en="#NetworkHub" data-ko="#네트워크허브">#NetworkHub</span><span class="sec-kw" contenteditable="true" data-en="#RemoteSupervision" data-ko="#원격관제">#RemoteSupervision</span></div></section>
+<footer>
+<div class="foot-layout">
+<div class="foot-img-col">
+<div class="foot-building-box" data-key="footer-building" data-label="건물 이미지" id="foot-building" title="클릭하여 건물 이미지 삽입">
+<img alt="유노시스템 건물" class="pbox-img" src=""/>
+<div class="pbox-ph foot-building-ph">
+<div style="font-size:40px;">🏢</div>
+<div data-en="Building image" data-ko="건물 이미지" style="font-family:var(--fmono);font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:.05em;margin-top:6px;">Building image</div>
+<div data-en="Click to insert" data-ko="클릭하여 삽입" style="font-size:10px;color:var(--dim);margin-top:2px;">Click to insert</div>
+</div>
+<div class="pbox-overlay">
+<button data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.preventDefault();event.stopPropagation();pboxReplace('foot-building')" style="background:rgba(0,210,240,.9);color:#000;border:none;border-radius:5px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;">🔄 Replace</button>
+<button data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.preventDefault();event.stopPropagation();pboxDelete('foot-building')" style="background:rgba(200,50,50,.9);color:#fff;border:none;border-radius:5px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;">🗑 Delete</button>
+</div>
+</div>
+</div>
+<div class="foot-info-col">
+<!-- 로고+회사명: 헤더와 동일 구조 -->
+<div class="foot-logo-row">
+<div class="foot-logo-box" data-key="footer-logo" data-label="회사 로고" id="foot-logo" title="클릭하여 로고 이미지 삽입">
+<img alt="UNO SYSTEM 로고" class="pbox-img" id="logo-img-footer" onerror="this.style.display='none';var p=this.parentElement.querySelector('.box-placeholder,.biz-img-ph,.foot-img-ph');if(p)p.classList.remove('hidden')" src=""/>
+<div class="pbox-ph foot-logo-ph">
+<div style="font-size:22px;color:rgba(0,210,240,.5);">🖼️</div>
+<div data-en="Insert a logo" data-ko="로고 삽입" style="font-family:var(--fmono);font-size:10px;font-weight:700;color:var(--cyan);margin-top:2px;">Insert a logo</div>
+</div>
+<div class="foot-logo-overlay">
+<button data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.preventDefault();event.stopPropagation();pboxReplace('foot-logo')" style="background:rgba(0,210,240,.9);color:#000;border:none;border-radius:4px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;width:100%;">🔄 Replace</button>
+<button data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.preventDefault();event.stopPropagation();pboxDelete('foot-logo')" style="background:rgba(200,50,50,.9);color:#fff;border:none;border-radius:4px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;width:100%;">🗑 Delete</button>
+</div>
+</div>
+<div class="foot-logo-txt">
+<div class="foot-nm" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템(주)">UNO SYSTEM Co., Ltd.</div>
+<div class="foot-nm-en">UNO SYSTEM</div>
+</div>
+</div>
+<div class="foot-divider"></div>
+<div class="foot-addr" data-en="11F, Unit 1116, Gasan Public Bldg. B, 178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea" data-ko="서울시 금천구 디지털로 178 가산퍼블릭B동 11층 1116호   우 08513">11F, Unit 1116, Gasan Public Bldg. B, 178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea</div>
+<div class="foot-contact">Tel: (02) 6095-0520   |   Fax: (02) 6095-0522</div>
+<div class="foot-contact">Email: joo1@uno-system.com</div>
+<div class="foot-contact">Website: https://www.uno-system.com</div>
+<div class="foot-copy">© 2026 UNO SYSTEM All rights reserved.</div>
+</div>
+</div>
+</footer>
+<script src="./js/img-manager.js"></script>
+<script>
+'use strict';
+
+/* ── 1. Fade-in observer ── */
+new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, {threshold:.05}).observe(...document.querySelectorAll('.fu'));
+
+/* ────────────────────────────────────────────────────────
+   2. DROPDOWN — JavaScript-controlled (click to open/close)
+   anchor-link 클래스 = 페이지 내 앵커 → smooth scroll
+──────────────────────────────────────────────────────── */
+const niButtons = document.querySelectorAll('.nb[data-ni]');
+
+/* Open / close on button click */
+niButtons.forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const niId = this.dataset.ni;
+    const ni   = document.getElementById(niId);
+    const isOpen = ni.classList.contains('open');
+    // close all
+    document.querySelectorAll('.ni.open').forEach(n => n.classList.remove('open'));
+    if (!isOpen) ni.classList.add('open');
+  });
+});
+
+/* Close on outside click */
+document.addEventListener('click', () => {
+  document.querySelectorAll('.ni.open').forEach(n => n.classList.remove('open'));
+});
+
+/* ── Anchor links: smooth scroll + close dropdown ── */
+document.querySelectorAll('a.anchor-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const hash = this.getAttribute('href');
+    if (!hash || !hash.startsWith('#')) return;
+    e.preventDefault();
+    // Close all dropdowns
+    document.querySelectorAll('.ni.open').forEach(n => n.classList.remove('open'));
+    // Highlight active item
+    document.querySelectorAll('.di.active').forEach(d => d.classList.remove('active'));
+    this.classList.add('active');
+    // Smooth scroll to target section
+    const target = document.querySelector(hash);
+    if (target) {
+      const offset = document.querySelector('header').offsetHeight + 16;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({top, behavior:'smooth'});
+    }
+  });
+});
+
+/* Highlight active section while scrolling */
+const sections = ['overview','history','business','clients','contact'];
+window.addEventListener('scroll', () => {
+  const hh = document.querySelector('header').offsetHeight + 20;
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= hh) current = id;
+  });
+  document.querySelectorAll('.di.anchor-link').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}, {passive:true});
+
+/* ────────────────────────────────────────────────────────
+   3. IMAGE BOX SYSTEM
+   영구 저장 원리:
+     ① 이미지 선택 → FileReader → base64 Data URL
+     ② img.src 에 직접 내장 (HTML 소스에 기록)
+     ③ localStorage 에도 백업 (같은 브라우저 재방문 시)
+     ④ 다운로드 버튼 → 현재 DOM 상태(base64 src 포함) 저장
+        → 저장된 .html 파일에 base64가 내장되어 영구 보존
+──────────────────────────────────────────────────────── */
+const LS = 'uno_v3_';   // localStorage namespace
+
+function _showMedia(box, dataUrl) {
+  const img = box.querySelector('.box-img');
+  const ph  = box.querySelector('.box-placeholder');
+  img.src = dataUrl;          // ← base64 직접 내장
+  img.classList.add('active');
+  if (ph) ph.classList.add('hidden');
+}
+function _clearMedia(box) {
+  const img = box.querySelector('.box-img');
+  const ph  = box.querySelector('.box-placeholder');
+  img.removeAttribute('src');
+  img.classList.remove('active');
+  if (ph) ph.classList.remove('hidden');
+}
+
+/* Restore all boxes on load (localStorage backup) */
+document.querySelectorAll('.img-box').forEach(box => {
+  const key = box.dataset.key;
+  // If img already has a data: src (from downloaded html), use it
+  const existImg = box.querySelector('.box-img');
+  if (existImg && existImg.src && existImg.src.startsWith('data:')) {
+    existImg.classList.add('active');
+    const ph = box.querySelector('.box-placeholder');
+    if (ph) ph.classList.add('hidden');
+    // re-save to localStorage in case this is a freshly opened download
+    try { localStorage.setItem(LS + key, existImg.src); } catch(e){}
+    return;
+  }
+  // Otherwise restore from localStorage
+  try {
+    const saved = localStorage.getItem(LS + key);
+    if (saved) _showMedia(box, saved);
+  } catch(e){}
+
+  /* Click → file picker */
+  box.addEventListener('click', () => _openPicker(box));
+});
+
+function _openPicker(box) {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*,video/*';
+  inp.onchange = () => {
+    const file = inp.files[0]; if (!file) return;
+    new FileReader().onload = ev => {
+      _showMedia(box, ev.target.result);
+      try { localStorage.setItem(LS + box.dataset.key, ev.target.result); } catch(e){}
+    }, new FileReader().readAsDataURL(file);
+    // Fix: use proper FileReader
+    const fr = new FileReader();
+    fr.onload = ev => {
+      _showMedia(box, ev.target.result);
+      try { localStorage.setItem(LS + box.dataset.key, ev.target.result); } catch(e){}
+    };
+    fr.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+function boxReplace(id) { _openPicker(document.getElementById(id)); }
+function boxDelete(id) {
+  const box = document.getElementById(id);
+  if (!confirm('"' + (box.dataset.label||id) + '" 이미지를 삭제하시겠습니까?')) return;
+  _clearMedia(box);
+  try { localStorage.removeItem(LS + box.dataset.key); } catch(e){}
+}
+
+/* ── Business image boxes ── */
+document.querySelectorAll('.biz-img-box').forEach(bib => {
+  const key = bib.dataset.key;
+  const img = bib.querySelector('.biz-box-img');
+  const ph  = bib.querySelector('.biz-img-ph');
+  // Restore from data: src (downloaded html) or localStorage
+  if (img && img.src && img.src.startsWith('data:')) {
+    img.classList.add('active'); if(ph) ph.classList.add('hidden');
+    try { localStorage.setItem(LS + key, img.src); } catch(e){}
+  } else {
+    try { const s = localStorage.getItem(LS + key); if(s){ img.src=s; img.classList.add('active'); if(ph) ph.classList.add('hidden'); } } catch(e){}
+  }
+  bib.addEventListener('click', () => _openBizPicker(bib));
+});
+
+function _openBizPicker(bib) {
+  const inp = document.createElement('input');
+  inp.type='file'; inp.accept='image/*,video/*';
+  inp.onchange = () => {
+    const file = inp.files[0]; if(!file) return;
+    const fr = new FileReader();
+    fr.onload = ev => {
+      const img = bib.querySelector('.biz-box-img');
+      const ph  = bib.querySelector('.biz-img-ph');
+      img.src = ev.target.result; img.classList.add('active');
+      if(ph) ph.classList.add('hidden');
+      try { localStorage.setItem(LS + bib.dataset.key, ev.target.result); } catch(e){}
+    };
+    fr.readAsDataURL(file);
+  };
+  inp.click();
+}
+function bizReplace(id) { _openBizPicker(document.getElementById(id)); }
+function bizDelete(id) {
+  const bib = document.getElementById(id);
+  if (!confirm('"' + (bib.dataset.label||id) + '" 이미지를 삭제하시겠습니까?')) return;
+  const img = bib.querySelector('.biz-box-img');
+  const ph  = bib.querySelector('.biz-img-ph');
+  img.removeAttribute('src'); img.classList.remove('active');
+  if(ph) ph.classList.remove('hidden');
+  try { localStorage.removeItem(LS + bib.dataset.key); } catch(e){}
+}
+
+ catch(e){}
+}
+
+/* ────────────────────────────────────────────────────────
+   4. DOWNLOAD — 모든 base64 이미지를 HTML에 내장하여 저장
+──────────────────────────────────────────────────────── */
+
+/* ── Award image boxes ── */
+document.querySelectorAll('.award-img-box').forEach(awb => {
+  const key = awb.dataset.key;
+  const img = awb.querySelector('.aw-img');
+  const ph  = awb.querySelector('.award-img-ph');
+  if (img && img.src && img.src.startsWith('data:')) {
+    img.classList.add('active'); if(ph) ph.classList.add('hidden');
+    try { localStorage.setItem(LS + key, img.src); } catch(e){}
+  } else {
+    try { const s = localStorage.getItem(LS + key); if(s){ img.src=s; img.classList.add('active'); if(ph) ph.classList.add('hidden'); } } catch(e){}
+  }
+  awb.addEventListener('click', () => _openAwPicker(awb));
+});
+function _openAwPicker(awb) {
+  const inp = document.createElement('input');
+  inp.type='file'; inp.accept='image/*';
+  inp.onchange = () => {
+    const file = inp.files[0]; if(!file) return;
+    const fr = new FileReader();
+    fr.onload = ev => {
+      const img = awb.querySelector('.aw-img');
+      const ph  = awb.querySelector('.award-img-ph');
+      img.src = ev.target.result; img.classList.add('active');
+      if(ph) ph.classList.add('hidden');
+      try { localStorage.setItem(LS + awb.dataset.key, ev.target.result); } catch(e){}
+    };
+    fr.readAsDataURL(file);
+  };
+  inp.click();
+}
+function awReplace(id) { _openAwPicker(document.getElementById(id)); }
+function awDelete(id) {
+  const awb = document.getElementById(id);
+  if (!confirm('"' + (awb.dataset.label||id) + '" 이미지를 삭제하시겠습니까?')) return;
+  const img = awb.querySelector('.aw-img');
+  const ph  = awb.querySelector('.award-img-ph');
+  img.removeAttribute('src'); img.classList.remove('active');
+  if(ph) ph.classList.remove('hidden');
+  try { localStorage.removeItem(LS + awb.dataset.key); } catch(e){}
+}
+
+<script>
+/* ═══ 다운로드: 모든 이미지 base64 내장 저장 ═══ */
+
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   UNO SYSTEM — 이미지 저장 시스템 (영구 보존 강화판)
+
+   저장 방식:
+   ① 이미지 선택 → img.src 에 base64 직접 반영 (DOM에 내장)
+   ② localStorage 백업
+   ③ 📥 다운로드 → 현재 DOM을 HTML로 저장 (base64 포함)
+
+   ※ 새 파일 로드 시: localStorage에서 자동 복원
+═══════════════════════════════════════════════════════════════ */
+(function(){
+'use strict';
+
+const NS = 'uno_';
+
+/* ── 공통 유틸 ── */
+function toBase64(file, cb){
+  const fr = new FileReader();
+  fr.onload = e => cb(e.target.result);
+  fr.readAsDataURL(file);
+}
+function lsSave(key, val){ try{ localStorage.setItem(NS+key, val); }catch(e){} }
+function lsLoad(key){ try{ return localStorage.getItem(NS+key); }catch(e){ return null; } }
+function lsDel(key){ try{ localStorage.removeItem(NS+key); }catch(e){} }
+
+/* ── 이미지 표시 ── */
+function showImg(img, ph, url){
+  if(!img) return;
+  img.src = url;
+  img.style.display = 'block';
+  img.classList.add('active');
+  if(ph) ph.classList.add('hidden');
+}
+function clearImg(img, ph){
+  if(!img) return;
+  img.removeAttribute('src');
+  img.style.display = 'none';
+  img.classList.remove('active');
+  if(ph) ph.classList.remove('hidden');
+}
+
+/* ── 파일 선택창 중복 열기 방지 ── */
+const _open = new WeakSet();
+function safePick(inp){
+  if(_open.has(inp)) return;
+  _open.add(inp);
+  inp.value = '';
+  inp.click();
+  setTimeout(() => _open.delete(inp), 2000);
+}
+
+/* ═══ 1. HERO 이미지 ═══ */
+document.querySelectorAll('.iaea-hero-wrap').forEach(wrap => {
+  if(wrap._done) return; wrap._done = true;
+
+  const slug   = wrap.id.replace('-wrap','');
+  const img    = wrap.querySelector('img');
+  const empty  = document.getElementById(slug+'-empty') || document.getElementById('hero-empty');
+  const KEY    = slug;
+
+  let inp = document.getElementById(slug+'-file-input');
+  if(!inp){
+    inp = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    inp.id = slug+'-file-input';
+    document.body.appendChild(inp);
+  }
+  inp._done = true;
+
+  /* 복원: img.src가 data: 이면 우선, 아니면 localStorage */
+  if(img && img.src && img.src.startsWith('data:')){
+    img.style.display='block'; if(empty) empty.classList.add('hidden');
+    lsSave(KEY, img.src);
+  } else {
+    const saved = lsLoad(KEY);
+    if(saved && img){ img.src=saved; img.style.display='block'; if(empty) empty.classList.add('hidden'); }
+    else if(img && img.src && img.src.startsWith('http')){ img.style.display='block'; if(empty) empty.classList.add('hidden'); }
+  }
+
+  inp.addEventListener('change', function(){
+    const f = this.files[0]; if(!f) return;
+    toBase64(f, url => {
+      if(img){ img.src=url; img.style.display='block'; }
+      if(empty) empty.classList.add('hidden');
+      lsSave(KEY, url);
+    });
+  });
+
+  wrap.style.cursor = 'pointer';
+  wrap.addEventListener('click', function(e){
+    if(e.target.closest('button')) return;
+    e.stopPropagation();
+    safePick(inp);
+  });
+
+  const base = slug.replace(/\W/g,'_');
+  window['heroReplace_'+base] = () => safePick(inp);
+  window['heroReplace'+base]  = () => safePick(inp);
+  window['heroReplace']       = () => safePick(inp);
+  window['heroDelete_'+base]  = () => { if(confirm('이미지를 삭제하시겠습니까?')){ clearImg(img, null); if(empty) empty.classList.remove('hidden'); lsDel(KEY); } };
+  window['heroDelete'+base]   = window['heroDelete_'+base];
+  window['heroDelete']        = window['heroDelete_'+base];
+});
+
+/* ═══ 2. img-box (클라이언트 로고, 수상, 갤러리 등) ═══ */
+document.querySelectorAll('.img-box').forEach(box => {
+  if(box._done) return; box._done = true;
+
+  const img = box.querySelector('.box-img');
+  const ph  = box.querySelector('.box-placeholder');
+  const KEY = box.dataset.key || box.id;
+
+  let inp = box.querySelector('input[type="file"]');
+  if(!inp){
+    inp = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    inp._done = true;
+    box.appendChild(inp);
+  }
+
+  /* 복원 */
+  if(img && img.src && img.src.startsWith('data:')){
+    img.classList.add('active'); if(ph) ph.classList.add('hidden');
+    lsSave(KEY, img.src);
+  } else {
+    const saved = lsLoad(KEY);
+    if(saved && img){ showImg(img, ph, saved); }
+  }
+
+  inp.addEventListener('change', function(){
+    const f = this.files[0]; if(!f) return;
+    toBase64(f, url => { showImg(img, ph, url); lsSave(KEY, url); });
+  });
+
+  box.style.cursor = 'pointer';
+  box.addEventListener('click', function(e){
+    if(e.target.closest('button,input')) return;
+    e.stopPropagation();
+    safePick(inp);
+  });
+});
+
+/* ═══ 전역 boxReplace / boxDelete */
+window.boxReplace = function(id){
+  const box = document.getElementById(id); if(!box) return;
+  let inp = box.querySelector('input[type="file"]');
+  if(!inp){ inp=document.createElement('input'); inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none'; inp._done=true; box.appendChild(inp);
+    inp.addEventListener('change',function(){ const f=this.files[0]; if(!f) return; toBase64(f,url=>{ showImg(box.querySelector('.box-img'),box.querySelector('.box-placeholder'),url); lsSave(box.dataset.key||id,url); }); });
+  }
+  safePick(inp);
+};
+window.boxDelete = function(id){
+  const box=document.getElementById(id); if(!box) return;
+  if(!confirm('"'+(box.dataset.label||id)+'" 이미지를 삭제하시겠습니까?')) return;
+  clearImg(box.querySelector('.box-img'), box.querySelector('.box-placeholder'));
+  lsDel(box.dataset.key||id);
+};
+
+/* ═══ prod-img-box (pib) 업로드 시스템 ═══ */
+document.querySelectorAll('.prod-img-box').forEach(box => {
+  if(box._done) return; box._done = true;
+  const img = box.querySelector('img.pib-img');
+  const ph  = box.querySelector('.pib-ph');
+  const KEY = box.dataset.key || box.id;
+  let inp = box.querySelector('input[type="file"]');
+  if(!inp){
+    inp = document.createElement('input');
+    inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none';
+    inp._done = true;
+    box.appendChild(inp);
+  }
+  inp._done = true;
+
+  /* 복원 */
+  const saved = lsLoad(KEY);
+  if(saved && img){ img.src=saved; img.classList.add('active'); if(ph) ph.classList.add('hidden'); }
+
+  inp.addEventListener('change', function(){
+    const f = this.files[0]; if(!f) return;
+    toBase64(f, url => {
+      if(img){ img.src=url; img.classList.add('active'); }
+      if(ph) ph.classList.add('hidden');
+      lsSave(KEY, url);
+    });
+  });
+
+  box.addEventListener('click', function(e){
+    if(e.target.closest('button,input')) return;
+    e.stopPropagation();
+    safePick(inp);
+  });
+});
+
+window.pibReplace = function(id){
+  const box = document.getElementById(id); if(!box) return;
+  const inp = box.querySelector('input[type="file"]');
+  if(inp) safePick(inp);
+};
+window.pibDelete = function(id){
+  const box = document.getElementById(id); if(!box) return;
+  if(!confirm('"'+(box.dataset.label||id)+'" 이미지를 삭제하시겠습니까?')) return;
+  const img = box.querySelector('img.pib-img');
+  const ph  = box.querySelector('.pib-ph');
+  if(img){ img.removeAttribute('src'); img.classList.remove('active'); }
+  if(ph) ph.classList.remove('hidden');
+  lsDel(box.dataset.key||id);
+};
+
+/* ═══ 3. iub (점선 박스, 파일 input 있음) ═══ */
+document.querySelectorAll('.iub').forEach(box => {
+  if(box._done) return; box._done = true;
+  const inp = box.querySelector('input[type="file"]');
+  if(!inp || inp._done) return; inp._done = true;
+  const img = box.querySelector('img.up');
+  const KEY = box.id;
+
+  if(img && img.src && img.src.startsWith('data:')){
+    box.classList.add('filled'); lsSave(KEY, img.src);
+  } else {
+    const saved = lsLoad(KEY);
+    if(saved && img){ img.src=saved; img.style.display='block'; box.classList.add('filled'); }
+  }
+
+  inp.addEventListener('change', function(){
+    const f=this.files[0]; if(!f) return;
+    toBase64(f, url=>{ if(img){img.src=url;img.style.display='block';} box.classList.add('filled'); lsSave(KEY,url); });
+  });
+  box.style.cursor='pointer';
+  box.addEventListener('click',function(e){ if(e.target.closest('button,a,input')) return; e.stopPropagation(); safePick(inp); });
+});
+
+/* ═══ 4. imgupbox (갤러리, 프로젝트 사진 등) ═══ */
+document.querySelectorAll('.imgupbox, .prod-imgbox').forEach(box => {
+  if(box._done) return; box._done = true;
+  const inp = box.querySelector('input[type="file"]');
+  if(!inp || inp._done) return; inp._done = true;
+  const img = box.querySelector('img.box-img');
+  const KEY = box.id;
+
+  if(img && img.src && img.src.startsWith('data:')){
+    box.classList.add('has-img'); lsSave(KEY, img.src);
+  } else if(img && img.src && img.src.startsWith('http')){
+    box.classList.add('has-img');
+    const saved = lsLoad(KEY); if(saved) img.src = saved;
+  } else {
+    const saved = lsLoad(KEY);
+    if(saved && img){ img.src=saved; img.style.display='block'; box.classList.add('has-img'); }
+  }
+
+  inp.addEventListener('change', function(){
+    const f=this.files[0]; if(!f) return;
+    toBase64(f, url=>{ if(img){img.src=url;img.style.display='block';} box.classList.add('has-img'); lsSave(KEY,url); });
+  });
+  box.style.cursor='pointer';
+  box.addEventListener('click',function(e){ if(e.target.closest('button,input,a')) return; e.stopPropagation(); safePick(inp); });
+});
+
+/* ═══ 5. biz-img-box ═══ */
+document.querySelectorAll('.biz-img-box').forEach(bib => {
+  if(bib._done) return; bib._done = true;
+  const img = bib.querySelector('.biz-box-img');
+  const ph  = bib.querySelector('.biz-img-ph');
+  const KEY = bib.dataset.key || bib.id;
+  const inp = document.createElement('input'); inp.type='file'; inp.accept='image/*,video/*'; inp.style.display='none'; inp._done=true; bib.appendChild(inp);
+
+  if(img && img.src && img.src.startsWith('data:')){ img.classList.add('active'); if(ph)ph.classList.add('hidden'); lsSave(KEY,img.src); }
+  else { const s=lsLoad(KEY); if(s&&img){img.src=s;img.classList.add('active');if(ph)ph.classList.add('hidden');} }
+
+  inp.addEventListener('change',function(){ const f=this.files[0]; if(!f) return; toBase64(f,url=>{if(img){img.src=url;img.classList.add('active');}if(ph)ph.classList.add('hidden');lsSave(KEY,url);}); });
+  bib.style.cursor='pointer';
+  bib.addEventListener('click',function(e){ if(e.target.closest('button,input')) return; e.stopPropagation(); safePick(inp); });
+});
+window.bizReplace = id => { const b=document.getElementById(id); if(b){const i=b.querySelector('input[type="file"]'); if(i) safePick(i);} };
+window.bizDelete  = id => { const b=document.getElementById(id); if(!b||!confirm('"'+(b.dataset.label||id)+'" 삭제?')) return; clearImg(b.querySelector('.biz-box-img'),b.querySelector('.biz-img-ph')); lsDel(b.dataset.key||id); };
+
+/* ═══ 6. award-img-box ═══ */
+document.querySelectorAll('.award-img-box').forEach(awb => {
+  if(awb._done) return; awb._done = true;
+  const img = awb.querySelector('.aw-img');
+  const ph  = awb.querySelector('.award-img-ph');
+  const KEY = awb.dataset.key || awb.id;
+  const inp = document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.style.display='none'; inp._done=true; awb.appendChild(inp);
+
+  if(img && img.src && img.src.startsWith('data:')){ img.classList.add('active'); if(ph)ph.classList.add('hidden'); lsSave(KEY,img.src); }
+  else { const s=lsLoad(KEY); if(s&&img){img.src=s;img.classList.add('active');if(ph)ph.classList.add('hidden');} }
+
+  inp.addEventListener('change',function(){ const f=this.files[0]; if(!f) return; toBase64(f,url=>{if(img){img.src=url;img.classList.add('active');}if(ph)ph.classList.add('hidden');lsSave(KEY,url);}); });
+  awb.style.cursor='pointer';
+  awb.addEventListener('click',function(e){ if(e.target.closest('button,input')) return; e.stopPropagation(); safePick(inp); });
+});
+window.awReplace = id => { const b=document.getElementById(id); if(b){const i=b.querySelector('input[type="file"]'); if(i) safePick(i);} };
+window.awDelete  = id => { const b=document.getElementById(id); if(!b||!confirm('"'+(b.dataset.label||id)+'" 삭제?')) return; clearImg(b.querySelector('.aw-img'),b.querySelector('.award-img-ph')); lsDel(b.dataset.key||id); };
+
+/* ═══ 7. 로고 이미지 ═══ */
+(function(){
+  const hdr = document.querySelector('header .logo-wrap');
+  if(!hdr) return;
+  const logoImg = hdr.querySelector('.logo-img');
+  if(!logoImg) return;
+  logoImg.id = 'logo-img';
+  const KEY = 'logo';
+
+  const hint = document.createElement('div');
+  hint.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);border-radius:9px;opacity:0;transition:opacity .2s;pointer-events:none;font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.4;z-index:10;';
+  hint.innerHTML='📷<br>로고 교체';
+
+  const wrap = document.createElement('div');
+  wrap.id='logo-img-wrap'; wrap.title='클릭하여 로고 교체';
+  wrap.style.cssText='position:relative;cursor:pointer;display:inline-flex;border-radius:9px;overflow:hidden;flex-shrink:0;';
+  logoImg.parentNode.insertBefore(wrap, logoImg);
+  wrap.appendChild(logoImg); wrap.appendChild(hint);
+  wrap.addEventListener('mouseenter',()=>hint.style.opacity='1');
+  wrap.addEventListener('mouseleave',()=>hint.style.opacity='0');
+
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.style.display='none'; inp.id='logo-file-input'; inp._done=true; document.body.appendChild(inp);
+
+  if(logoImg.src && logoImg.src.startsWith('data:')){ lsSave(KEY,logoImg.src); }
+  else { const s=lsLoad(KEY); if(s) logoImg.src=s; }
+
+  inp.addEventListener('change',function(){ const f=this.files[0]; if(!f) return; toBase64(f,url=>{logoImg.src=url;lsSave(KEY,url);}); });
+
+  let _lp=false;
+  wrap.addEventListener('click',function(e){ e.stopPropagation(); if(_lp) return; _lp=true; inp.value=''; inp.click(); setTimeout(()=>_lp=false,2000); });
+})();
+
+/* ═══ 9. diag-upload-box (03 구성도 5개 박스) ═══ */
+document.querySelectorAll('.diag-upload-box').forEach(box => {
+  if(box._done) return; box._done = true;
+  const inp = box.querySelector('input[type="file"]');
+  if(!inp || inp._done) return; inp._done = true;
+  const img = box.querySelector('img.box-img');
+  const ph  = box.querySelector('.box-placeholder');
+  const KEY = box.id;
+
+  const saved = lsLoad(KEY);
+  if(saved && img){ img.src=saved; img.classList.add('active'); if(ph)ph.classList.add('hidden'); }
+
+  inp.addEventListener('change', function(){
+    const f=this.files[0]; if(!f) return;
+    toBase64(f, url=>{ if(img){img.src=url;img.classList.add('active');} if(ph)ph.classList.add('hidden'); lsSave(KEY,url); });
+  });
+  box.style.cursor='pointer';
+  box.addEventListener('click',function(e){ if(e.target.closest('button,input')) return; e.stopPropagation(); safePick(inp); });
+});
+window.diagReplace = id => { const b=document.getElementById(id); if(b){const i=b.querySelector('input[type="file"]'); if(i) safePick(i);} };
+window.diagDelete  = id => {
+  const b=document.getElementById(id); if(!b||!confirm('"'+(b.dataset.label||id)+'" 삭제?')) return;
+  const img=b.querySelector('img.box-img'); const ph=b.querySelector('.box-placeholder');
+  if(img){img.removeAttribute('src');img.classList.remove('active');}
+  if(ph)ph.classList.remove('hidden');
+  lsDel(id);
+};
+try{ const obs=new IntersectionObserver((en,o)=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');o.unobserve(e.target);}});},{threshold:.05}); document.querySelectorAll('.fu').forEach(el=>obs.observe(el)); }catch(e){}
+
+})(); /* end IIFE */
+</script>
+<script>
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);var i=document.getElementById("th-icon"),l=document.getElementById("th-label");if(i)i.textContent=t==="light"?"☀️":"🌙";if(l)l.textContent=t==="light"?"Light":"Dark";try{localStorage.setItem("uno_theme",t);}catch(e){}}
+function toggleTheme(){var c=document.documentElement.getAttribute("data-theme")||"dark";applyTheme(c==="dark"?"light":"dark");}
+(function(){var s="dark";try{s=localStorage.getItem("uno_theme")||"dark";}catch(e){}applyTheme(s);})();
+</script><script>
+function toggleNav(){var n=document.getElementById('mainNav');if(n)n.classList.toggle('open');}
+document.addEventListener('click',function(e){var a=e.target.closest('.main-nav a');if(a){var n=document.getElementById('mainNav');if(n)n.classList.remove('open');}});
+</script><script>
+/* ══ 대원칙 3 · KEYWORDS(.sec-kw) 클릭 → Google 검색(새 탭) ══ */
+(function(){
+  function kwText(kw){ return (kw.textContent||'').replace(/\s+/g,' ').trim(); }
+  function wire(){
+    document.querySelectorAll('.sec-kw').forEach(function(kw){
+      if(kw._kwsearch) return; kw._kwsearch=true;
+      kw.style.cursor='pointer';
+      if(!kw.title) kw.title='클릭하여 Google 검색';
+      kw.addEventListener('click',function(e){
+        var s=kwText(kw); if(!s) return;
+        e.preventDefault(); e.stopPropagation();
+        window.open('https://www.google.com/search?q='+encodeURIComponent(s),'_blank');
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',wire);
+  else wire();
+})();
+</script><script>
+/* ══ 대원칙 2-보강 · 우측 이미지 박스 상단을 좌측 제목 높이에 정렬 ══ */
+(function(){
+  if(window.alignImgBoxes) return;
+  function pairs(){
+    var out=[];
+    var hero=document.querySelector('.product-hero');
+    if(hero){ var ht=hero.querySelector('.product-name'), hc=hero.children[1]; if(ht&&hc) out.push([hc,ht]); }
+    document.querySelectorAll('.syscfg-row').forEach(function(r){
+      var t=r.querySelector('.syscfg-name'), i=r.querySelector('.syscfg-img'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.comp-row').forEach(function(r){
+      var t=r.querySelector('.feature-name'), i=r.querySelector('.img-box'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.feature-card').forEach(function(fc){
+      var row=fc.parentElement; if(!row||row.classList.contains('comp-row')) return;
+      var i=null;
+      for(var k=0;k<row.children.length;k++){ if(row.children[k].classList.contains('img-box')) i=row.children[k]; }
+      var t=fc.querySelector('.feature-name');
+      if(i&&t) out.push([i,t]);
+    });
+    return out;
+  }
+  function alignImgBoxes(){
+    var list=pairs(), mobile=window.innerWidth<=900;
+    list.forEach(function(p){ p[0].style.marginTop='0px'; p[0].classList.add('img-align-shift'); });
+    if(mobile) return;
+    list.forEach(function(p){
+      var d=p[1].getBoundingClientRect().top - p[0].getBoundingClientRect().top;
+      if(d>0) p[0].style.marginTop=Math.round(d)+'px';
+    });
+  }
+  window.alignImgBoxes=alignImgBoxes;
+  function schedule(){ requestAnimationFrame(function(){ requestAnimationFrame(alignImgBoxes); }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',schedule); else schedule();
+  window.addEventListener('load',schedule);
+  setTimeout(alignImgBoxes,900); setTimeout(alignImgBoxes,1800);
+  var t=null;
+  window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(alignImgBoxes,120); });
+})();
+</script><script>
+/* ══ 대원칙 10 · GitHub 이미지 로더 (soulthread88/my_images · unosystem/) ══
+   탐색순서: GH_BASE+<page>/<key>.<ext> → GH_BASE+<key>.<ext> · 실패 시 기존 src 유지(무손실) */
+(function(){
+  if(window.__unoGH) return; window.__unoGH=true;
+  var GH_BASE='https://raw.githubusercontent.com/soulthread88/my_images/main/unosystem/';
+  var GH_PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.[^.]+$/,'').replace(/_en$/,'').replace(/[^A-Za-z0-9_-]/g,'_');
+  var IMG_EXTS=['png','jpg','jpeg','webp','gif'];
+  var VID_EXTS=['mp4','webm'];
+  function bases(){ return [GH_BASE+GH_PAGE+'/', GH_BASE]; }
+  function imgCands(k){ var o=[]; bases().forEach(function(b){ IMG_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  function vidCands(k){ var o=[]; bases().forEach(function(b){ VID_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  var PH_SEL='.box-placeholder,.biz-img-ph,.hist-img-ph,.award-img-ph,.foot-img-ph,.ref-img-ph,.hero-empty,.cta-box-ph';
+  var BOX_SEL='[data-key],.img-box,.ref-card,.biz-img-box,.hist-img-box,.award-img-box,.foot-img-col,.iaea-hero-wrap,.cta-img-col';
+  function hidePH(im){ var b=im.closest(BOX_SEL); if(b) b.querySelectorAll(PH_SEL).forEach(function(p){ p.style.display='none'; p.classList.add('hidden'); }); }
+  function applyImg(imgs,url){ imgs.forEach(function(im){
+      im.src=url; im.style.setProperty('display','block','important');
+      im.style.setProperty('opacity','1','important'); im.style.setProperty('visibility','visible','important');
+      im.classList.add('active'); hidePH(im); }); }
+  function applyVid(imgs,url){ imgs.forEach(function(im){ try{
+      var v=document.createElement('video');
+      v.src=url; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+      v.className=im.className; v.style.cssText=im.style.cssText;
+      v.style.setProperty('display','block','important'); v.style.setProperty('width','100%'); v.style.setProperty('height','100%');
+      v.style.setProperty('object-fit', getComputedStyle(im).objectFit||'cover');
+      if(im.id) v.id=im.id;
+      im.parentNode.replaceChild(v,im); hidePH(v);
+    }catch(e){} }); }
+  function tryImg(imgs,key,onFail){ var list=imgCands(key), i=0;
+    (function nx(){ if(i>=list.length){ onFail&&onFail(); return; }
+      var url=list[i++], t=new Image(); t.onload=function(){ applyImg(imgs,url); }; t.onerror=nx; t.src=url; })(); }
+  function tryVid(imgs,key){ var list=vidCands(key), i=0;
+    (function nx(){ if(i>=list.length) return; var url=list[i++];
+      try{ fetch(url,{method:'HEAD'}).then(function(r){ if(r&&r.ok) applyVid(imgs,url); else nx(); }).catch(nx); }catch(e){ nx(); } })(); }
+  function run(){
+    var g={};
+    function add(k,im){ if(!k||!im) return; if(String(im.src).indexOf('data:')===0) return; (g[k]=g[k]||[]); if(g[k].indexOf(im)<0) g[k].push(im); }
+    document.querySelectorAll('[data-key]').forEach(function(b){ add(b.dataset.key, b.querySelector('img')); });
+    ['logo-img','foot-logo-img'].forEach(function(id){ add('logo', document.getElementById(id)); });
+    add('foot-img', document.getElementById('foot-col-img'));
+    Object.keys(g).forEach(function(k){ tryImg(g[k],k,function(){ tryVid(g[k],k); }); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(run,400); });
+  else setTimeout(run,400);
+})();
+</script><script>
+/* ══ 대원칙 7 · KOR|ENG 언어 전환 엔진 (기본값: en) ══ */
+(function(){
+  if(window.setLang) return;
+  var DEF='en';
+  function nodes(){ return document.querySelectorAll('[data-en]'); }
+  function cache(){ nodes().forEach(function(el){ if(el.dataset.ko===undefined) el.dataset.ko=el.innerHTML; }); }
+  window.setLang=function(l){
+    cache();
+    nodes().forEach(function(el){
+      if(el.tagName==='TITLE') return;
+      var v=(l==='en')?el.dataset.en:el.dataset.ko;
+      if(v!==undefined && v!==null) el.innerHTML=v;
+    });
+    document.documentElement.setAttribute('lang', l==='en'?'en':'ko');
+    document.documentElement.setAttribute('data-lang', l);
+    var k=document.getElementById('lang-ko'), e=document.getElementById('lang-en');
+    if(k) k.classList.toggle('on', l!=='en');
+    if(e) e.classList.toggle('on', l==='en');
+    var t=document.querySelector('title');
+    if(t && t.dataset.en){ if(t.dataset.ko===undefined) t.dataset.ko=t.textContent; document.title=(l==='en'?t.dataset.en:t.dataset.ko); }
+    try{ localStorage.setItem('uno_lang_'+location.pathname, l); }catch(err){}
+    if(window.alignImgBoxes) setTimeout(window.alignImgBoxes, 60);
+  };
+  function init(){
+    cache();
+    var s=DEF;
+    try{ s=localStorage.getItem('uno_lang_'+location.pathname)||DEF; }catch(err){}
+    window.setLang(s==='en'?'en':'ko');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script></body></html>

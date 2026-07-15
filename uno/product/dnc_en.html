@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+<html id="artifacts-component-root-html" lang="en"><head>
+<script crossorigin="anonymous" integrity="sha512-iZ2ORl595Wx6miw+GuadDet4WQbdSWS3JLMoNfY8cRGoEFy6oT3G9IbcrBeL6AfkgpA51ETt/faX6yLV+/gFJg==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.13/html-to-image.min.js"></script>
+<script>
+      (function() {
+        const originalConsole = window.console;
+        window.console = {
+          log: (...args) => { originalConsole.log(...args); window.parent.postMessage({ type: 'console', message: args.join(' ') }, '*'); },
+          error: (...args) => { originalConsole.error(...args); window.parent.postMessage({ type: 'console', message: 'Error: ' + args.join(' ') }, '*'); },
+          warn: (...args) => { originalConsole.warn(...args); window.parent.postMessage({ type: 'console', message: 'Warning: ' + args.join(' ') }, '*'); }
+        };
+        let requestId = 0; let callbacksMap = new Map(); let streamControllers = new Map();
+        window.claude = { complete: (prompt) => new Promise((resolve, reject) => { const id = requestId++; callbacksMap.set(id, { resolve, reject }); window.parent.postMessage({ type: 'claudeComplete', id, prompt }, '*'); }) };
+        window.storage = {
+          get: (key, shared=false) => new Promise((resolve,reject)=>{ const id=requestId++; callbacksMap.set(id,{resolve,reject}); window.parent.postMessage({type:'storageGet',id,key,shared},'*'); }),
+          set: (key,value,shared=false) => new Promise((resolve,reject)=>{ const id=requestId++; callbacksMap.set(id,{resolve,reject}); window.parent.postMessage({type:'storageSet',id,key,value,shared},'*'); }),
+          delete: (key,shared=false) => new Promise((resolve,reject)=>{ const id=requestId++; callbacksMap.set(id,{resolve,reject}); window.parent.postMessage({type:'storageDelete',id,key,shared},'*'); }),
+          list: (prefix,shared=false) => new Promise((resolve,reject)=>{ const id=requestId++; callbacksMap.set(id,{resolve,reject}); window.parent.postMessage({type:'storageList',id,prefix,shared},'*'); })
+        };
+        let pendingBlobs = new Map();
+        URL.createObjectURL = (blob) => { const blobId=`blob-${Date.now()}-${Math.random()}`; pendingBlobs.set(blobId,blob); return `blob-request://${blobId}`; };
+        URL.revokeObjectURL = (url) => { pendingBlobs.delete(url.replace("blob-request://","")); };
+        const getBlobFromURL = (url) => pendingBlobs.get(url.replace("blob-request://",""));
+        window.fetch = (url, init={}) => new Promise((resolve,reject)=>{ const id=requestId++; const channelId=`fetch-${id}-${Date.now()}`; callbacksMap.set(id,{ resolve:(response)=>{ const stream=new ReadableStream({ start(controller){streamControllers.set(channelId,controller);}, cancel(){streamControllers.delete(channelId);} }); resolve(new Response(stream,{status:response.status,statusText:response.statusText,headers:response.headers})); }, reject, channelId }); window.parent.postMessage({type:'proxyFetch',id,url,init,channelId},'*'); });
+        window.addEventListener('message', async (event) => {
+          if(event.data.type==='takeScreenshot'){const rootElement=document.getElementById('artifacts-component-root-html');if(!rootElement){window.parent.postMessage({type:'screenshotError',error:new Error('Root element not found')},'*');return;}try{const screenshot=await htmlToImage.toPng(rootElement,{imagePlaceholder:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjePDgwX8ACOQDoNsk0PMAAAAASUVORK5CYII="});window.parent.postMessage({type:'screenshotData',data:screenshot},'*');}catch(err){window.parent.postMessage({type:'screenshotError',error:err instanceof Error?err:new Error(String(err))},'*');}}
+          else if(event.data.type==='claudeComplete'){const cb=callbacksMap.get(event.data.id);if(event.data.error)cb.reject(new Error(event.data.error));else cb.resolve(event.data.completion);callbacksMap.delete(event.data.id);}
+          else if(event.data.type==='proxyFetchResponse'){const cb=callbacksMap.get(event.data.id);if(event.data.error){cb.reject(new Error(event.data.error));callbacksMap.delete(event.data.id);}else{cb.resolve({status:event.data.status,statusText:event.data.statusText,headers:event.data.headers});if(!event.data.body)callbacksMap.delete(event.data.id);}}
+          else if(event.data.type==='proxyFetchStream'){const controller=streamControllers.get(event.data.channelId);if(controller){if(event.data.error){controller.error(new Error(event.data.error));streamControllers.delete(event.data.channelId);}else if(event.data.done){controller.close();streamControllers.delete(event.data.channelId);const cb=Array.from(callbacksMap.entries()).find(([_,v])=>v.channelId===event.data.channelId);if(cb)callbacksMap.delete(cb[0]);}else if(event.data.chunk)controller.enqueue(new Uint8Array(event.data.chunk));}}
+          else if(['storageGet','storageSet','storageDelete','storageList'].includes(event.data.type)){const cb=callbacksMap.get(event.data.id);if(event.data.error)cb.reject(new Error(event.data.error));else cb.resolve(event.data.result);callbacksMap.delete(event.data.id);}
+        });
+        window.addEventListener('click',(event)=>{const isEl=event.target instanceof HTMLElement;if(!isEl)return;const linkEl=event.target.closest("a");if(!linkEl||!linkEl.href)return;event.preventDefault();event.stopImmediatePropagation();if(linkEl.href.startsWith("blob-request:")){const blob=getBlobFromURL(linkEl.href);if(!blob)return;void blob.arrayBuffer().then((data)=>{window.parent.postMessage({type:"downloadFile",filename:linkEl.download,data,mimeType:blob.type||"application/octet-stream"});});}else if(linkEl.href.startsWith("data:")){const[header,base64Data]=linkEl.href.split(",");const mimeMatch=header.match(/data:([^;]+)/);const mimeType=mimeMatch?mimeMatch[1]:"application/octet-stream";const binaryString=atob(base64Data);const data=Uint8Array.from(binaryString,(c)=>c.charCodeAt(0)).buffer;window.parent.postMessage({type:"downloadFile",filename:linkEl.download,data,mimeType});}else{let linkUrl;try{linkUrl=new URL(linkEl.href);}catch(error){return;}if(linkUrl.hostname===window.location.hostname)return;window.parent.postMessage({type:'openExternal',href:linkEl.href},'*');}});
+        const originalOpen=window.open; window.open=function(url){window.parent.postMessage({type:"openExternal",href:url},"*");};
+        window.addEventListener('error',(event)=>{window.parent.postMessage({type:'console',message:'Uncaught Error: '+event.message},'*');});
+      })();
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title data-en="DNC (L2 Ring Switch Network) — UNO SYSTEM Co., Ltd. Product Details" data-ko="DNC (L2 Ring 스위치 네트워크) — 유노시스템㈜ 제품 상세">DNC (L2 Ring Switch Network) — UNO SYSTEM Co., Ltd. Product Details</title>
+<meta content="유노시스템㈜의 DNC(Data Network Controller) — L2 Ring 스위치 기반 소방 네트워크 집중 장치. 8 TP + 2 SFP 포트, ITU-T G.8032 ERPS(Ring) 지원, TCP/IP 서버 내장." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+<style>
+/* ══════════ CSS VARIABLES (template 그대로) ══════════ */
+:root{
+  --bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;
+  --border:rgba(30,120,220,.18);--border2:rgba(0,210,240,.18);
+  --blue:#1a6fd4;--cyan:#00d2f0;--gold:#e8b84b;
+  --text:#dde8f8;--muted:#9ab5d0;--dim:#3a4d6a;
+  --fkr:"Pretendard","Noto Sans KR",sans-serif;
+  --fmono:"JetBrains Mono",monospace;
+  --fdis:"Bebas Neue",sans-serif;
+  --hdr:120px;
+  --font-title:30pt;--font-body:20pt;--font-small:15pt;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fkr);font-size:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;word-break:keep-all;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,212,.03)1px,transparent 1px),linear-gradient(90deg,rgba(26,111,212,.03)1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+
+/* ══════════ HEADER ══════════ */
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 36px 0 0;z-index:700;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.logo-img-wrap{position:relative;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;border-radius:0 9px 9px 0;overflow:hidden}
+.logo-img{height:60px;width:auto;object-fit:contain;background:#fff;border-radius:0 9px 9px 0;padding:4px 8px;transition:opacity .2s;display:block}
+.logo-img-wrap:hover .logo-img{opacity:.85}
+.logo-ko{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:24px;color:var(--text);line-height:1.15;display:flex;flex-direction:column}
+.logo-ko-en{font-size:19px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.btn-dl{background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;color:var(--cyan);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.btn-dl:hover{background:rgba(0,210,240,.22);border-color:var(--cyan)}
+
+/* ══════════ NAV ══════════ */
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+.nb{background:transparent;border:none;color:var(--muted);font-family:var(--fkr);font-size:20px;font-weight:700;padding:12px 15px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color .15s;height:auto}
+.nb:hover,.ni:hover>.nb{color:#fff}
+.nb.active-menu{color:var(--cyan)}
+.nb .caret{font-size:11px;transition:transform .22s;display:inline-block}
+.ni:hover>.nb .caret{transform:rotate(180deg)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:10px 20px;border-radius:6px;margin-left:10px}
+.nb.cta-nav:hover{opacity:.86}
+.dropdown{display:none;position:absolute;top:100%;left:0;min-width:200px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);border-radius:0 0 10px 10px;box-shadow:0 16px 48px rgba(0,0,0,.75);z-index:680;padding:6px 0 8px}
+.ni:hover>.dropdown{display:block;animation:ddIn .18s ease forwards}
+@keyframes ddIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:8px 18px 6px;font-family:var(--fmono);font-size:11px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:4px}
+.di{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;font-size:14px;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;white-space:nowrap;border-left:2px solid transparent;transition:all .12s;position:relative}
+.di:hover,.di.active{background:rgba(0,210,240,.09);border-left-color:var(--cyan);color:var(--cyan)}
+.arr{font-size:12px;color:var(--dim);margin-left:8px;flex-shrink:0}
+.di:hover .arr{color:var(--cyan)}
+.dd-sep{height:1px;background:rgba(255,255,255,.06);margin:6px 0}
+.has-sub{position:relative}
+.sub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:260px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:690;padding:6px 0 8px}
+.has-sub:hover>.sub-dropdown{display:block;animation:subIn .14s ease forwards}
+@keyframes subIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+.has-sub2{position:relative}
+.subsub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:220px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid rgba(0,210,240,.5);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:700;padding:6px 0 8px}
+.has-sub2:hover>.subsub-dropdown{display:block;animation:subIn .12s ease forwards}
+
+/* ══════════ HERO IMAGE BOX ══════════ */
+.iaea-hero-wrap{margin-top:calc(var(--hdr) + 0px);position:relative;cursor:pointer;overflow:hidden;background:#111;width:100%;min-height:200px}
+#hero-main-img{width:100%;height:480px;object-fit:cover;display:block;transition:transform .4s ease}
+.iaea-hero-wrap:hover #hero-main-img{transform:scale(1.02)}
+.hero-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);pointer-events:none}
+.hero-empty .he-plus{width:72px;height:72px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(0,210,240,.5)}
+.hero-empty.hidden{display:none}
+.hero-change-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .28s;pointer-events:none}
+.iaea-hero-wrap:hover .hero-change-hint{opacity:1}
+.hero-change-hint span{background:rgba(0,210,240,.82);padding:13px 26px;border-radius:8px;font-family:var(--fkr);font-size:17px;font-weight:700}
+.hero-controls{position:absolute;top:12px;right:12px;display:none;flex-direction:column;gap:6px;z-index:30}
+.iaea-hero-wrap:hover .hero-controls{display:flex}
+.box-ctrl-btn{background:rgba(8,13,24,.92);border:1px solid var(--border2);color:var(--text);font-size:12px;font-family:var(--fkr);font-weight:700;padding:5px 11px;border-radius:5px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.box-ctrl-btn.replace{border-color:rgba(0,210,240,.4);color:var(--cyan)}
+.box-ctrl-btn.replace:hover{background:rgba(0,210,240,.15)}
+.box-ctrl-btn.delete{border-color:rgba(255,80,80,.4);color:#ff6060}
+.box-ctrl-btn.delete:hover{background:rgba(255,80,80,.12)}
+.iaea-source{background:#03060d;padding:9px 36px 9px 0;font-family:var(--fmono);font-size:13pt;color:var(--muted);letter-spacing:.04em;border-bottom:1px solid var(--border);text-align:right;font-style:italic}
+
+/* ══════════ PAGE HERO ══════════ */
+.page-hero{position:relative;height:220px;overflow:hidden;display:flex;align-items:center;padding-left:0}
+.page-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.3) saturate(.6)}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,24,.92),rgba(8,13,24,.45))}
+.page-hero-content{position:relative;z-index:2;padding:0 0 0 60px}
+.page-hero-tag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;display:block}
+.page-hero-title{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(30pt,4vw,54pt);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.page-hero-sub{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.08em}
+
+/* ══════════ SECTION ══════════ */
+.pg{position:relative;z-index:1;padding:64px 60px}
+.pg.alt{background:var(--bg2);padding:64px 60px}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);position:relative;z-index:1}
+.shdr{display:flex;align-items:center;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.shdr-left{display:flex;flex-direction:column;gap:4px}
+.shdr-hr{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent);min-width:60px;align-self:center}
+.stag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;display:block;white-space:nowrap;margin-bottom:2px}
+.stitle{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:var(--font-title);line-height:1.1;letter-spacing:-.02em;display:block}
+.stitle .hl{color:var(--cyan)}
+
+/* ══════════ PRODUCT OVERVIEW (2-col) ══════════ */
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.kv-list{display:flex;flex-direction:column;gap:10px}
+.kv{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:8px;transition:border-color .2s}
+.kv:hover{border-color:rgba(0,210,240,.2)}
+.kv-ic{width:36px;height:36px;border-radius:7px;background:rgba(0,210,240,.08);border:1px solid rgba(0,210,240,.18);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.kv-lb{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.1em;margin-bottom:3px;text-transform:uppercase}
+.kv-val{font-size:var(--font-body);font-weight:400;line-height:1.5}
+
+/* ══════════ SPEC TABLE ══════════ */
+.spec-wrap{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.spec-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.spec-block-title{background:rgba(0,210,240,.08);border-bottom:1px solid var(--border2);padding:12px 20px;font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.06em;color:var(--cyan);text-transform:uppercase}
+.spec-row{display:grid;grid-template-columns:2fr 3fr;border-bottom:1px solid rgba(255,255,255,.05)}
+.spec-row:last-child{border-bottom:none}
+.spec-k{padding:13px 18px;background:rgba(0,0,0,.15);font-size:var(--font-small);color:var(--muted);font-weight:500;display:flex;align-items:center;gap:6px}
+.spec-k::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--cyan);opacity:.5;flex-shrink:0}
+.spec-v{padding:13px 18px;font-size:var(--font-small);color:var(--text);display:flex;align-items:center}
+.spec-v.mono{font-family:var(--fmono);color:var(--cyan)}
+.spec-v.gold{font-weight:700;color:var(--gold)}
+.spec-v .chip{display:inline-flex;align-items:center;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);border-radius:4px;padding:2px 8px;font-family:var(--fmono);font-size:13px;color:var(--cyan);margin:2px}
+.check{display:inline-block;width:18px;height:18px;border-radius:50%;background:rgba(0,210,240,.18);border:1px solid rgba(0,210,240,.4);color:var(--cyan);text-align:center;line-height:18px;font-size:12px;font-weight:900}
+
+/* ══════════ NETWORK DIAGRAM ══════════ */
+.ring-diagram{position:relative;z-index:1;padding:64px 60px;background:var(--bg2)}
+.diagram-svg-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.diagram-svg-wrap svg{min-width:900px;width:100%}
+
+/* ══════════ PRODUCT IMAGE BOX ══════════ */
+.img-box{position:relative;cursor:pointer;background:var(--surface);border:2px dashed rgba(0,210,240,.3);border-radius:10px;overflow:hidden;min-height:150px;transition:border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+.img-box:hover{border-color:var(--cyan);border-style:solid;box-shadow:0 0 18px rgba(0,210,240,.12)}
+.box-media-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;min-height:120px}
+.box-img{width:100%;height:100%;object-fit:cover}
+.box-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);padding:24px;text-align:center;width:100%}
+.box-placeholder.hidden{display:none}
+.box-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.5);transition:all .2s}
+.img-box:hover .box-plus{border-color:var(--cyan);color:var(--cyan);transform:scale(1.1)}
+.box-hint{font-size:var(--font-small);opacity:.7;line-height:1.5}
+.box-label{text-align:center;padding:8px 12px;font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);border-top:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.2)}
+.box-controls{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:5px;z-index:20}
+.img-box:hover .box-controls{display:flex}
+
+/* ══════════ KPI ROW ══════════ */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.12);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.kpi{background:var(--surface);padding:24px 10px;text-align:center;transition:background .2s}
+.kpi:hover{background:var(--surface2)}
+.kpi-n{font-family:var(--fdis);font-size:54px;line-height:1;color:var(--cyan);margin-bottom:4px}
+.kpi-l{font-size:var(--font-small);color:var(--muted);line-height:1.4}
+
+/* ══════════ FEATURES GRID ══════════ */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-card{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:28px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.feat-card:hover{border-color:rgba(0,210,240,.35);transform:translateY(-3px)}
+.feat-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--cyan),transparent);opacity:0;transition:opacity .3s}
+.feat-card:hover::before{opacity:1}
+.feat-ic{width:52px;height:52px;border-radius:10px;background:rgba(0,210,240,.08);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px}
+.feat-nm{font-size:var(--font-body);font-weight:700;margin-bottom:12px;color:var(--text)}
+.feat-desc{font-size:var(--font-small);color:var(--muted);line-height:1.7}
+
+/* ══════════ APPLICATIONS ══════════ */
+.app-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.app-item{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:24px 20px;display:flex;gap:14px;align-items:flex-start;transition:border-color .3s,background .3s}
+.app-item:hover{border-color:rgba(0,210,240,.3);background:rgba(0,210,240,.04)}
+.app-icon{font-size:32px;flex-shrink:0;margin-top:2px}
+.app-nm{font-size:var(--font-body);font-weight:600;color:var(--text);margin-bottom:6px}
+.app-desc{font-size:var(--font-small);color:var(--muted);line-height:1.6}
+
+/* ══════════ CTA & FOOTER ══════════ */
+.cta-wrap{background:linear-gradient(135deg,#0a1525,#0d1e35);border-top:1px solid var(--border2);padding:70px 60px;position:relative;z-index:1}
+.cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.cta-lb{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:12px}
+.cta-hd{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:var(--font-title);margin-bottom:18px;line-height:1.2}
+.cta-hd span{color:var(--cyan)}
+.cta-info{display:flex;flex-direction:column;gap:10px}
+.cta-row{display:flex;align-items:center;gap:12px;font-size:var(--font-body);color:var(--muted)}
+.cta-row strong{color:var(--text)}
+.cta-ri{width:30px;height:30px;border-radius:5px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.btn-p{background:var(--cyan);color:#000;font-family:var(--fkr);font-weight:900;font-size:var(--font-body);padding:16px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s;border:none;cursor:pointer}
+.btn-p:hover{opacity:.88}
+.btn-s{background:transparent;border:1px solid var(--border2);color:var(--text);font-family:var(--fkr);font-weight:700;font-size:var(--font-body);padding:15px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;cursor:pointer}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,210,240,.05)}
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:0}
+.foot-inner{display:grid;grid-template-columns:25% 75%;min-height:180px;align-items:stretch}
+.foot-img-col{position:relative;cursor:pointer;background:var(--surface);border-right:1px solid rgba(255,255,255,.07);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:8mm 0 8mm 8mm;box-sizing:border-box}
+.foot-img-col img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.foot-img-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);padding:20px;text-align:center;pointer-events:none}
+.foot-right-col{display:flex;flex-direction:row;align-items:stretch;padding:24px 28px;gap:20px}
+.foot-info-area{display:flex;flex-direction:column;justify-content:center;gap:6px;flex:1}
+.foot-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.foot-logo-text{display:flex;flex-direction:column;line-height:1.2}
+.foot-logo-kr{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:19pt;color:var(--text)}
+.foot-logo-en{font-size:14pt;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.foot-addr,.foot-contact,.foot-copy{font-family:var(--fmono);font-size:15pt;color:var(--muted);line-height:1.6}
+
+/* img active helpers */
+img[src^="data:image"],img[src^="data:video"]{display:block!important;opacity:1!important;visibility:visible!important}
+.img-box .box-img[src=""],.img-box .box-img:not([src]){display:none}
+.img-box:has(.box-img[src^="data:image"]) .box-placeholder{display:none}
+</style>
+<style>
+/* ════ 대원칙 1·3 · 폰트/헤더 표준 스케일 정규화 (template.html 표준값) ════ */
+:root{--hdr:72px;--font-title:20px;--font-body:16px;--font-small:13px;--font-xsmall:11px;--font-mono:12px;--font-body-sm:14px}
+.logo-img{height:40px!important;padding:3px 6px!important}
+.foot-logo-img{height:46px!important}
+.nb{font-size:14px!important;padding:10px 10px!important}
+.stitle,.page-hero-title,.product-name,.cta-hd{font-size:clamp(28px,3.5vw,48px)!important;letter-spacing:-.02em;line-height:1.1}
+header{padding-left:5mm}
+</style><style>
+/* ════ Light/Dark 테마 (대원칙: 헤더 토글) ════ */
+#theme-toggle{background:transparent;border:1px solid var(--border2);color:var(--muted);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 10px;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:all .2s}
+#theme-toggle:hover{border-color:var(--cyan);color:var(--cyan)}
+[data-theme=light]{--bg:#f0f4fb;--bg2:#e4ecf7;--surface:#d9e4f4;--surface2:#c8d8ef;--border:#1a6fd430;--border2:#0097aa33;--text:#06101e;--muted:#1a3352;--dim:#4a6888;--blue:#1a6fd4;--cyan:#006e80;--gold:#7a5410}
+[data-theme=light] body:before{background-image:linear-gradient(#1a6fd410 1px,#0000 1px),linear-gradient(90deg,#1a6fd410 1px,#0000 1px)}
+[data-theme=light] header{background:#f0f4fbf7}
+[data-theme=light] .dropdown,[data-theme=light] .sub-dropdown,[data-theme=light] .subsub-dropdown,[data-theme=light] .main-nav{background:#e8f0fafc}
+[data-theme=light] .nb:hover,[data-theme=light] .ni:hover>.nb{color:#0d1a2e}
+[data-theme=light] .logo-img,[data-theme=light] .foot-logo-img{background:#fff}
+[data-theme=light] footer{background:#dbe6f5}
+[data-theme=light] .cta-wrap{background:linear-gradient(135deg,#e4ecf7,#d9e4f4)}
+[data-theme=light] .cta-ri{background:#00c8e01a;border-color:#00c8e055}
+[data-theme=light] .page-hero-overlay{background:linear-gradient(90deg,rgba(240,244,251,.92),rgba(240,244,251,.55))}
+[data-theme=light] .box-ctrl-btn{background:#080d18eb;color:#dde8f8}
+[data-theme=light] .box-label{background:rgba(255,255,255,.92);color:#06101e!important}
+[data-theme=light] .box-placeholder,[data-theme=light] .box-hint,[data-theme=light] .box-plus,
+[data-theme=light] .cta-box-ph,[data-theme=light] .foot-img-ph,[data-theme=light] .biz-img-ph{color:#9ab5d0}
+[data-theme=light] .gallery-item .caption{color:#fff}
+[data-theme=light] .cli-g .box-label{color:#333}
+</style><style>
+/* ════ 대원칙 4 · 모바일 반응형(≤900px) — 햄버거 내비 + 2단→1단 ════ */
+.nav-toggle{display:none;margin-left:auto;background:transparent;border:1px solid var(--border2);color:var(--text);font-size:22px;line-height:1;padding:5px 12px;border-radius:6px;cursor:pointer;flex-shrink:0}
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  header{padding-left:16px;padding-right:12px;gap:8px}
+  .logo-ko{display:none}
+  .main-nav{position:fixed;top:var(--hdr);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#0a1222fa;backdrop-filter:blur(22px);border-bottom:1px solid var(--border2);max-height:calc(100vh - var(--hdr));overflow-y:auto;display:none;padding:6px 0 12px;z-index:680}
+  .main-nav.open{display:flex}
+  .ni{flex-direction:column;align-items:stretch;width:100%;position:static}
+  .nb{width:100%;justify-content:space-between;padding:14px 22px;font-size:16px!important}
+  .nb.cta-nav{margin:10px 22px;justify-content:center}
+  .dropdown{position:static;display:block;width:100%;min-width:0;border:none;border-top:1px solid #ffffff12;border-radius:0;box-shadow:none;background:transparent;padding:0 0 4px;animation:none!important}
+  .di{padding:11px 22px 11px 40px}
+  .sub-dropdown,.subsub-dropdown{display:none!important}
+  .ov-grid,.hist-grid,.biz-g,.two-col,.spec-columns,.features-grid,.cli-g{grid-template-columns:1fr!important}
+  .ov-grid>*,.hist-grid>*,.biz-g>*,.two-col>*,.ti-row>*,.cta-inner>*,.comp-row>*,.syscfg-row>*{min-width:0}
+  [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns: 1fr 1fr"],[style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr!important}
+  .foot-inner{grid-template-columns:1fr}
+  .foot-right-col{flex-direction:column;align-items:stretch;gap:14px}
+}
+</style><style>
+/* ════ 대원칙 6 · 브레드크럼 명도 ════ */
+.breadcrumb-nav{background:var(--bg2)!important}
+.breadcrumb-nav a{color:var(--muted)!important;text-decoration:none}
+.breadcrumb-nav a:hover{color:var(--cyan)!important}
+.breadcrumb-nav span{color:var(--text)}
+.breadcrumb-nav+.iaea-hero-wrap,.breadcrumb-nav+.full-hero-wrap,.breadcrumb-nav+.page-hero,.breadcrumb-nav+.product-hero{margin-top:0!important}
+#box-full-hero:first-of-type{margin-top:0}
+</style><style>
+/* ════ 대원칙 5 · 섹션 키워드 칩 ════ */
+.sec-keywords{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:40px;padding-top:20px;border-top:1px dashed var(--border2)}
+.kw-label{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase;margin-right:4px}
+.sec-kw{font-size:var(--font-small);color:var(--muted);background:#00d2f00d;border:1px solid #00d2f026;border-radius:16px;padding:4px 12px}
+</style><style>
+/* 대원칙 5 · 제목 줄바꿈 balance */
+.stitle,.page-hero-title,.product-name,.cta-hd,.ti-title,.syscfg-name,.feature-name,.biz-title,.award-title{text-wrap:balance}
+.img-align-shift{transition:margin-top .15s}
+</style><style>
+.lang-switch{display:inline-flex;align-items:center;border:1px solid var(--border2,#00d2f02e);border-radius:6px;overflow:hidden;flex-shrink:0;margin-left:8px}
+.lang-btn{background:transparent;border:none;color:var(--muted,#9ab5d0);font-family:var(--fkr,"Noto Sans KR",sans-serif);font-size:13px;font-weight:700;padding:7px 10px;cursor:pointer;transition:all .2s}
+.lang-btn:hover{color:var(--cyan,#00d2f0)}
+.lang-btn.on{background:var(--cyan,#00d2f0);color:#000}
+.lang-sep{color:var(--dim,#3a4d6a);font-size:12px}
+</style></head>
+<body>
+<!-- ═══════ HEADER ═══════ -->
+<header>
+<div class="logo-wrap">
+<div class="logo-img-wrap" title="클릭하여 로고 교체">
+<img alt="유노시스템 로고" class="logo-img" id="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='none'" src=""/>
+<div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;color:#00d2f0;letter-spacing:.08em;padding:4px 10px">UNO</div>
+</div>
+<div class="logo-ko"><span class="i18n" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜">UNO SYSTEM Co., Ltd.</span><span class="logo-ko-en">UNO SYSTEM</span></div>
+</div>
+<nav class="main-nav" id="mainNav">
+<!-- 회사소개 -->
+<div class="ni"><button class="nb" data-ni="ni-co"><span class="i18n" data-en="About Us" data-ko="회사소개">About Us</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<div class="dd-head" data-en="About Us" data-ko="회사소개">About Us</div>
+<a class="di" data-en="Company Overview" data-ko="회사개요" href="#">Company Overview</a><a class="di" data-en="Vision / Mission" data-ko="비전/미션" href="#">Vision / Mission</a><a class="di" data-en="History" data-ko="연혁" href="#">History</a><a class="di" data-en="Directions" data-ko="오시는 길" href="#">Directions</a>
+</div></div>
+<!-- 제품/솔루션 -->
+<div class="ni"><button class="nb active-menu" data-ni="ni-prod"><span class="i18n" data-en="Products/Solutions" data-ko="제품/솔루션">Products/Solutions</span> <span class="caret">▾</span></button>
+<div class="dropdown">
+<div class="dd-head" data-en="Products / Solutions" data-ko="제품 / 솔루션">Products / Solutions</div>
+<div class="di has-sub"><span class="i18n" data-en="Fire Alarm Control Panels" data-ko="화재수신기">Fire Alarm Control Panels</span> <span class="arr">›</span>
+<div class="sub-dropdown"><div class="dd-head" data-en="Fire Alarm Control Panels" data-ko="화재수신기">Fire Alarm Control Panels</div><a class="di" data-en="R-Type DTS-Integrated" data-ko="R형 DTS 통합형" href="#">R-Type DTS-Integrated</a><a class="di" data-en="P-Type Combination" data-ko="P형 복합식" href="#">P-Type Combination</a></div></div>
+<div class="di has-sub"><span class="i18n" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션">Network-Based Solutions</span> <span class="arr">›</span>
+<div class="sub-dropdown"><div class="dd-head" data-en="Network-Based" data-ko="네트워크기반">Network-Based</div><a class="di active" data-en="DNC (L2 Ring Switch)" data-ko="DNC (L2 Ring 스위치)" href="#">DNC (L2 Ring Switch)</a><a class="di" data-en="AMI System" data-ko="AMI 시스템" href="#">AMI System</a><a class="di" data-en="IoT Gateway" data-ko="IoT 게이트웨이" href="#">IoT Gateway</a></div></div>
+<div class="di has-sub"><span class="i18n" data-en="Energy Solutions" data-ko="에너지 솔루션">Energy Solutions</span> <span class="arr">›</span>
+<div class="sub-dropdown"><div class="dd-head" data-en="Energy Solutions" data-ko="에너지 솔루션">Energy Solutions</div><a class="di" data-en="Smart Metering" data-ko="스마트 미터링" href="#">Smart Metering</a><a class="di" data-en="Energy Management" data-ko="에너지 관리" href="#">Energy Management</a></div></div>
+<div class="dd-sep"></div><a class="di" data-en="View All Products →" data-ko="전체 제품 보기 →" href="#">View All Products →</a>
+</div></div>
+<!-- 프로젝트 -->
+<div class="ni"><button class="nb" data-ni="ni-proj"><span class="i18n" data-en="Projects" data-ko="프로젝트">Projects</span> <span class="caret">▾</span></button>
+<div class="dropdown"><div class="dd-head" data-en="Projects" data-ko="프로젝트">Projects</div><a class="di" data-en="Key Projects" data-ko="주요 프로젝트" href="#">Key Projects</a><a class="di" data-en="Overseas Projects" data-ko="해외 프로젝트" href="#">Overseas Projects</a></div></div>
+<!-- 기술보유현황 -->
+<div class="ni"><button class="nb" data-ni="ni-tech"><span class="i18n" data-en="Technology Portfolio" data-ko="기술보유현황">Technology Portfolio</span> <span class="caret">▾</span></button>
+<div class="dropdown"><div class="dd-head" data-en="Technology Portfolio" data-ko="기술보유현황">Technology Portfolio</div><a class="di" data-en="Patents" data-ko="특허현황" href="#">Patents</a><a class="di" data-en="Certifications" data-ko="인증현황" href="#">Certifications</a><a class="di" data-en="R&amp;amp;D" data-ko="연구개발" href="#">R&amp;D</a></div></div>
+<!-- 자료 -->
+<div class="ni"><button class="nb" data-ni="ni-data"><span class="i18n" data-en="Resources" data-ko="자료">Resources</span> <span class="caret">▾</span></button>
+<div class="dropdown"><div class="dd-head" data-en="Resources" data-ko="자료">Resources</div><a class="di" data-en="Product Literature" data-ko="제품자료" href="#">Product Literature</a><a class="di" data-en="Installation Manual" data-ko="설치 매뉴얼" href="#">Installation Manual</a><a class="di" data-en="Notices" data-ko="공지사항" href="#">Notices</a></div></div>
+<!-- CONTACT -->
+<div class="ni"><a class="nb cta-nav" href="#contact">CONTACT</a></div>
+</nav><button aria-label="메뉴" class="nav-toggle" onclick="toggleNav()" title="메뉴" type="button">☰</button>
+<button class="btn-dl" data-en="📥 Download" data-ko="📥 다운로드" onclick="downloadPage()" title="현재 이미지 포함 HTML 영구 저장">📥 Download</button>
+<div class="lang-switch"><button class="lang-btn" id="lang-ko" onclick="setLang('ko')" title="한국어" type="button">KOR</button><span class="lang-sep">|</span><button class="lang-btn on" id="lang-en" onclick="setLang('en')" title="English" type="button">ENG</button></div><button id="theme-toggle" onclick="toggleTheme()" title="라이트/다크 모드 전환" type="button"><span id="th-icon">🌙</span><span id="th-label">Dark</span></button></header><nav class="breadcrumb-nav" style="z-index:10;border-bottom:1px solid var(--border);font-size:var(--font-small);color:var(--muted);margin-top:var(--hdr);background:var(--bg2);align-items:center;gap:8px;padding:12px 60px 12px 5mm;display:flex;position:relative"><a data-en="Products" data-ko="제품" href="products.html" style="color:var(--muted);text-decoration:none">Products</a><span style="color:var(--cyan);opacity:.6;font-size:10px">▶</span><a data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="network.html" style="color:var(--muted);text-decoration:none">Network-Based Solutions</a><span style="color:var(--cyan);opacity:.6;font-size:10px">▶</span><span data-en="DNC (L2 Ring Switch)" data-ko="DNC (L2 Ring 스위치)" style="color:var(--text)">DNC (L2 Ring Switch)</span></nav>
+<!-- ═══════ HERO IMAGE ═══════ -->
+<div class="iaea-hero-wrap" id="hero-wrap" onclick="document.getElementById('hero-file-input').click()" style="cursor:pointer">
+<div class="hero-empty hidden" id="hero-empty">
+<div class="he-plus">+</div>
+<div data-en="Click to insert an image/video" data-ko="클릭하여 이미지/영상 삽입" style="font-size:var(--font-body);font-weight:700">Click to insert an image/video</div>
+<div data-en="DNC installation site photo" data-ko="DNC 설치 현장 사진" style="font-size:var(--font-small);opacity:.6">DNC installation site photo</div>
+</div>
+<img alt="DNC 설치 현장 — L2 Ring 스위치 수납함" id="hero-main-img" src="" style="display:block"/>
+<div class="hero-change-hint"><span data-en="📷 Click to replace the image/video" data-ko="📷 클릭하여 이미지/영상 교체">📷 Click to replace the image/video</span></div>
+<div class="hero-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();heroReplace()">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();heroDelete()">🗑 Delete</button>
+</div>
+</div>
+<div class="iaea-source" data-en="Source: DNC Installation Specification — L2 (RING) Switch Enclosure (UNO SYSTEM Co., Ltd.)" data-ko="Source: DNC 설치 시방서 — L2 (RING) 스위치 수납함 (유노시스템㈜)">Source: DNC Installation Specification — L2 (RING) Switch Enclosure (UNO SYSTEM Co., Ltd.)</div>
+<!-- ═══════ PAGE HERO (BREADCRUMB BANNER) ═══════ -->
+<div class="page-hero">
+<div class="page-hero-bg" style="background-image:url('')"></div>
+<div class="page-hero-overlay"></div>
+<div class="page-hero-content">
+<span class="page-hero-tag" data-en="Network-Based Solutions · L2 Ring Switch" data-ko="네트워크기반 솔루션 · L2 Ring 스위치">Network-Based Solutions · L2 Ring Switch</span>
+<h1 class="page-hero-title">DNC</h1>
+<div class="page-hero-sub" data-en="Data Network Controller | UNO SYSTEM Co., Ltd." data-ko="Data Network Controller  |  유노시스템㈜">Data Network Controller | UNO SYSTEM Co., Ltd.</div>
+</div>
+</div>
+<!-- ═══════ 01 · 제품 개요 ═══════ -->
+<section class="pg" id="overview">
+<div class="shdr">
+<div class="shdr-left"><span class="stag">01 · Product Overview</span><h2 class="stitle"><span class="i18n" data-en="Products" data-ko="제품">Products</span> <span class="hl" data-en="Overview" data-ko="개요">Overview</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div class="ov-grid">
+<!-- 왼쪽: KV 정보 -->
+<div class="kv-list">
+<div class="kv"><div class="kv-ic">📦</div><div><div class="kv-lb" data-en="Product Name" data-ko="제품명">Product Name</div><div class="kv-val">DNC — Data Network Controller</div></div></div>
+<div class="kv"><div class="kv-ic">🔧</div><div><div class="kv-lb" data-en="Configuration" data-ko="구성 구조">Configuration</div><div class="kv-val" data-en="L2 (RING) switch · TCP/IP server · control panel · FDF enclosure" data-ko="L2 (RING) 스위치 · TCP/IP 서버 · 수신기 · FDF 수납함">L2 (RING) switch · TCP/IP server · control panel · FDF enclosure</div></div></div>
+<div class="kv"><div class="kv-ic">🌐</div><div><div class="kv-lb" data-en="Network Topology" data-ko="네트워크 방식">Network Topology</div><div class="kv-val" data-en="Ring topology — master-slave panel connection" data-ko="Ring 방식 — 마스터-슬레이브 수신기 연결">Ring topology — master-slave panel connection</div></div></div>
+<div class="kv"><div class="kv-ic">📍</div><div><div class="kv-lb" data-en="Example IP Address" data-ko="IP 주소 예시">Example IP Address</div><div class="kv-val" style="font-family:var(--fmono);color:var(--cyan)">M : 192.168.127.100</div></div></div>
+<div class="kv"><div class="kv-ic">🏭</div><div><div class="kv-lb" data-en="Manufacturer" data-ko="제조사">Manufacturer</div><div class="kv-val" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜ (UNO SYSTEM Co., Ltd.)">UNO SYSTEM Co., Ltd.</div></div></div>
+<div class="kv"><div class="kv-ic">📋</div><div><div class="kv-lb" data-en="Reference Document" data-ko="문서 기준">Reference Document</div><div class="kv-val" data-en="DNC Installation Specification — Ring Topology (May 1, 2024)" data-ko="DNC 설치 시방서 — RING방식 (2024.05.01)">DNC Installation Specification — Ring Topology (May 1, 2024)</div></div></div>
+</div>
+<!-- 오른쪽: 제품 이미지 박스 -->
+<div class="img-box" id="box-overview-img" onclick="document.getElementById('ov-file').click()" style="aspect-ratio:4/3;min-height:260px;cursor:pointer">
+<div class="box-media-wrap">
+<img alt="DNC 제품 사진" class="box-img" src=""/>
+<div class="box-placeholder">
+<div class="box-plus">+</div>
+<div class="box-hint" data-en="Click to&lt;br/&gt;insert a product photo&lt;br/&gt;(see PDF p.1)" data-ko="클릭하여&lt;br/&gt;제품 사진 삽입&lt;br/&gt;(PDF p.1 참조)">Click to<br/>insert a product photo<br/>(see PDF p.1)</div>
+</div>
+</div>
+<div class="box-label" data-en="Inside the DNC enclosure — L2 (RING) switch, TCP/IP server, control panel, FDF" data-ko="DNC 수납함 내부 — L2(RING)스위치, TCP/IP서버, 수신기, FDF">Inside the DNC enclosure — L2 (RING) switch, TCP/IP server, control panel, FDF</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();boxReplace('box-overview-img')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();boxDelete('box-overview-img')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" id="ov-file" onchange="boxUpload(event,'box-overview-img')" style="display:none" type="file"/>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#DNC</span><span class="sec-kw" contenteditable="true" data-en="#L2RingSwitch" data-ko="#L2Ring스위치">#L2RingSwitch</span><span class="sec-kw" contenteditable="true">#ERPS</span><span class="sec-kw" contenteditable="true" data-en="#FireProtectionNetwork" data-ko="#소방네트워크">#FireProtectionNetwork</span></div></section>
+<div class="div-line"></div>
+<!-- ═══════ 02 · KPI ═══════ -->
+<section class="pg alt" id="kpi">
+<div class="kpi-row">
+<div class="kpi"><div class="kpi-n">8</div><div class="kpi-l" data-en="TP Ports&lt;br/&gt;1 Gbps" data-ko="TP 포트&lt;br/&gt;1 Gbps">TP Ports<br/>1 Gbps</div></div>
+<div class="kpi"><div class="kpi-n">2</div><div class="kpi-l" data-en="SFP Optical Ports&lt;br/&gt;1 Gbps" data-ko="SFP 광포트&lt;br/&gt;1 Gbps">SFP Optical Ports<br/>1 Gbps</div></div>
+<div class="kpi"><div class="kpi-n">20</div><div class="kpi-l">Switch Fabric<br/>Gbps</div></div>
+<div class="kpi"><div class="kpi-n">Ring</div><div class="kpi-l" data-en="ITU-T G.8032&lt;br/&gt;ERPS Support" data-ko="ITU-T G.8032&lt;br/&gt;ERPS 지원">ITU-T G.8032<br/>ERPS Support</div></div>
+</div>
+</section>
+<div class="div-line"></div>
+<!-- ═══════ 03 · 제품 규격 (PDF p.2) ═══════ -->
+<section class="pg" id="spec">
+<div class="shdr">
+<div class="shdr-left"><span class="stag">02 · Specifications</span><h2 class="stitle"><span class="i18n" data-en="Products" data-ko="제품">Products</span> <span class="hl" data-en="Specification" data-ko="규격">Specification</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div class="spec-wrap">
+<!-- 포트 & 성능 -->
+<div class="spec-block">
+<div class="spec-block-title" data-en="Ports &amp;amp; Performance" data-ko="포트 &amp;amp; 성능">Ports &amp; Performance</div>
+<div class="spec-row"><div class="spec-k" data-en="TP Ports" data-ko="TP포트">TP Ports</div><div class="spec-v mono">8 TP (1Gbps)</div></div>
+<div class="spec-row"><div class="spec-k" data-en="1G Optical Ports" data-ko="1G 광포트">1G Optical Ports</div><div class="spec-v mono">2 SFP (1Gbps)</div></div>
+<div class="spec-row"><div class="spec-k">Switch Fabric</div><div class="spec-v mono">20 Gbps</div></div>
+<div class="spec-row"><div class="spec-k">Throughput</div><div class="spec-v mono">14.8 Mpps</div></div>
+<div class="spec-row"><div class="spec-k">Memory (RAM)</div><div class="spec-v mono">128 MB</div></div>
+<div class="spec-row"><div class="spec-k">Flash Memory</div><div class="spec-v mono">16 MB</div></div>
+<div class="spec-row"><div class="spec-k">MAC Table</div><div class="spec-v mono">8 K</div></div>
+<div class="spec-row"><div class="spec-k">Jumbo Frame</div><div class="spec-v mono">9.6 K</div></div>
+</div>
+<!-- 네트워크 관리 & 전원/환경 -->
+<div>
+<div class="spec-block" style="margin-bottom:20px">
+<div class="spec-block-title" data-en="Network Management" data-ko="네트워크 관리">Network Management</div>
+<div class="spec-row"><div class="spec-k">STP/RSTP/MSTP</div><div class="spec-v"><span class="check">✓</span></div></div>
+<div class="spec-row"><div class="spec-k">802.1Q VLAN</div><div class="spec-v"><span class="check">✓</span></div></div>
+<div class="spec-row"><div class="spec-k">IEEE 802.1x</div><div class="spec-v"><span class="check">✓</span></div></div>
+<div class="spec-row"><div class="spec-k">IGMP Snooping</div><div class="spec-v"><span class="check">✓</span></div></div>
+<div class="spec-row"><div class="spec-k">ITU-T G.8032 ERPS</div><div class="spec-v"><span class="check">✓</span></div></div>
+<div class="spec-row"><div class="spec-k">S-Ring</div><div class="spec-v"><span class="check">✓</span></div></div>
+</div>
+<div class="spec-block">
+<div class="spec-block-title" data-en="Power &amp;amp; Operating Environment" data-ko="전원 &amp;amp; 동작환경">Power &amp; Operating Environment</div>
+<div class="spec-row"><div class="spec-k" data-en="Input Power" data-ko="입력 전원">Input Power</div><div class="spec-v mono">AC 100 ~ 240 V</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Max. Power / No-Load Power" data-ko="최대전력 / 무부하전력">Max. Power / No-Load Power</div><div class="spec-v mono">AC 7.6 W / 3.15 W</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Operating Temperature" data-ko="동작 온도">Operating Temperature</div><div class="spec-v mono">0 ~ 60 °C</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Dimensions (W×D×H)" data-ko="크기 (WxDxH)">Dimensions (W×D×H)</div><div class="spec-v mono">217 × 155 × 44 mm</div></div>
+</div>
+</div>
+</div>
+</section>
+<div class="div-line"></div>
+<!-- ═══════ 04 · 제품 규격 및 외형치수 (PDF p.3) ═══════ -->
+<section class="pg alt" id="dimension">
+<div class="shdr">
+<div class="shdr-left"><span class="stag">03 · Dimensions</span><h2 class="stitle"><span class="i18n" data-en="Product Specifications and" data-ko="제품 규격 및">Product Specifications and</span> <span class="hl" data-en="Dimensions" data-ko="외형치수">Dimensions</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+<!-- 치수 이미지 박스 -->
+<div class="img-box" id="box-dim-img" onclick="document.getElementById('dim-file').click()" style="aspect-ratio:4/3;min-height:280px;cursor:pointer">
+<div class="box-media-wrap">
+<img alt="DNC 외형치수 도면" class="box-img" src=""/>
+<div class="box-placeholder">
+<div class="box-plus">+</div>
+<div class="box-hint" data-en="Click to&lt;br/&gt;insert the dimensional drawing&lt;br/&gt;(see PDF p.3)" data-ko="클릭하여&lt;br/&gt;외형치수 도면 삽입&lt;br/&gt;(PDF p.3 참조)">Click to<br/>insert the dimensional drawing<br/>(see PDF p.3)</div>
+</div>
+</div>
+<div class="box-label" data-en="Dimensional drawing — Section A-A / Section B-B" data-ko="외형치수 도면 — Section A-A / Section B-B">Dimensional drawing — Section A-A / Section B-B</div>
+<div class="box-controls">
+<button class="box-ctrl-btn replace" data-en="🔄 Replace" data-ko="🔄 교체" onclick="event.stopPropagation();boxReplace('box-dim-img')">🔄 Replace</button>
+<button class="box-ctrl-btn delete" data-en="🗑 Delete" data-ko="🗑 삭제" onclick="event.stopPropagation();boxDelete('box-dim-img')">🗑 Delete</button>
+</div>
+<input accept="image/*,video/*" id="dim-file" onchange="boxUpload(event,'box-dim-img')" style="display:none" type="file"/>
+</div>
+<!-- 치수 텍스트 스펙 -->
+<div>
+<div class="spec-block">
+<div class="spec-block-title" data-en="Enclosure Dimensions" data-ko="케이스 외형 치수">Enclosure Dimensions</div>
+<div class="spec-row"><div class="spec-k" data-en="Enclosure Overall (W)" data-ko="케이스 전체 (W)">Enclosure Overall (W)</div><div class="spec-v mono">460.4 mm</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Enclosure Overall (H)" data-ko="케이스 전체 (H)">Enclosure Overall (H)</div><div class="spec-v mono">378 mm</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Enclosure Overall (D)" data-ko="케이스 전체 (D)">Enclosure Overall (D)</div><div class="spec-v mono">120 mm</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Mounting Plate (W)" data-ko="마운팅 플레이트 (W)">Mounting Plate (W)</div><div class="spec-v mono">416 mm (LIMIT)</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Mounting Plate (H)" data-ko="마운팅 플레이트 (H)">Mounting Plate (H)</div><div class="spec-v mono">318 mm (LIMIT)</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Printable Area" data-ko="인쇄 가능 범위">Printable Area</div><div class="spec-v mono">320 × 420 mm (4-R3)</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Assembly Holes" data-ko="조립 홀">Assembly Holes</div><div class="spec-v mono">4-M5 DP10 FOR ASSY</div></div>
+<div class="spec-row"><div class="spec-k" data-en="Base Holes" data-ko="베이스 홀">Base Holes</div><div class="spec-v mono">4-M5 DP10 FOR BASE</div></div>
+<div class="spec-row"><div class="spec-k" data-en="DIN Hole Pitch" data-ko="DIN 홀 피치">DIN Hole Pitch</div><div class="spec-v mono">40-Φ4 DPB</div></div>
+<div class="spec-row"><div class="spec-k">GASKET</div><div class="spec-v" data-en="Built-in (waterproofed)" data-ko="내장 (방수 처리)">Built-in (waterproofed)</div></div>
+</div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#Dimensions" data-ko="#외형치수">#Dimensions</span><span class="sec-kw" contenteditable="true" data-en="#IPWaterproof" data-ko="#IP방수">#IPWaterproof</span><span class="sec-kw" contenteditable="true" data-en="#Enclosure" data-ko="#수납함">#Enclosure</span><span class="sec-kw" contenteditable="true" data-en="#DINRail" data-ko="#DIN레일">#DINRail</span></div></section>
+<div class="div-line"></div>
+<!-- ═══════ 05 · Ring 방식 연결도 (PDF p.4) ═══════ -->
+<section class="ring-diagram" id="wiring">
+<div class="shdr">
+<div class="shdr-left"><span class="stag">04 · Wiring Diagram</span><h2 class="stitle"><span class="i18n" data-en="Master-Slave Panel" data-ko="마스터-슬레이브 수신기">Master-Slave Panel</span> <span class="hl" data-en="Connection Diagram" data-ko="연결도">Connection Diagram</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<p data-en="DNC network connection — ring topology | S/S ICT room master ↔ ventilation shaft slaves 1, 2, and 3 (end node)" data-ko="
+    DNC 네트워크 연결 — Ring 방식  |  S/S ICT실 마스터 ↔ 환기구 슬레이브 1·2·3(말단) 구성
+  " style="font-size:var(--font-small);color:var(--muted);margin-bottom:32px">DNC network connection — ring topology | S/S ICT room master ↔ ventilation shaft slaves 1, 2, and 3 (end node)</p>
+<!-- SVG 연결도 (PDF p.4 기반 재현) -->
+<div class="diagram-svg-wrap">
+<svg style="font-family:'JetBrains Mono',monospace;background:transparent" viewbox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arr-blue" markerheight="8" markerwidth="8" orient="auto" refx="6" refy="3">
+<path d="M0,0 L0,6 L8,3 z" fill="#1a6fd4"></path>
+</marker>
+<marker id="arr-red" markerheight="8" markerwidth="8" orient="auto" refx="6" refy="3">
+<path d="M0,0 L0,6 L8,3 z" fill="#e05555"></path>
+</marker>
+</defs>
+<!-- ── MASTER: S/S ICT실 ── -->
+<g transform="translate(820,20)">
+<rect fill="rgba(232,184,75,.15)" height="34" rx="4" stroke="#e8b84b" stroke-width="1.5" width="260" x="0" y="0"></rect>
+<text data-en="S/S ICT Room  Master" data-ko="S/S ICT실   마스터" fill="#e8b84b" font-size="14" font-weight="bold" text-anchor="middle" x="130" y="22">S/S ICT Room  Master</text>
+</g>
+<!-- 수신기 박스 MASTER -->
+<g transform="translate(820,65)">
+<rect fill="none" height="200" rx="4" stroke="rgba(255,255,255,.2)" stroke-dasharray="4,3" stroke-width="1" width="260" x="0" y="0"></rect>
+<text data-en="Utility Tunnel" data-ko="전력구" fill="var(--muted)" font-size="11" x="10" y="20">Utility Tunnel</text>
+<text data-en="End Side" data-ko="종단측" fill="var(--muted)" font-size="11" x="10" y="32">End Side</text>
+<text data-en="S/S Side" data-ko="S/S측" fill="var(--muted)" font-size="11" x="180" y="20">S/S Side</text>
+<!-- 단자 LEFT -->
+<g fill="var(--muted)" font-size="12">
+<text x="15" y="60">1</text><circle cx="40" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="82">2</text><circle cx="40" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="104">3</text><circle cx="40" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="126">4</text><circle cx="40" cy="122" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="148">5</text><circle cx="40" cy="144" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+</g>
+<!-- 단자 RIGHT -->
+<g fill="var(--muted)" font-size="12">
+<text x="215" y="60">6</text><circle cx="210" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="82">7</text><circle cx="210" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="104">8</text><circle cx="210" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="126">9</text><circle cx="210" cy="122" fill="rgba(26,111,212,.5)" r="5" stroke="#1a6fd4" stroke-width="1.5"></circle>
+<text x="210" y="148">10</text><circle cx="210" cy="144" fill="rgba(224,85,85,.5)" r="5" stroke="#e05555" stroke-width="1.5"></circle>
+</g>
+<!-- P9/P10 labels -->
+<text fill="#1a6fd4" font-size="13" font-weight="bold" x="195" y="180">P9</text>
+<text fill="#e05555" font-size="13" font-weight="bold" x="225" y="180">P10</text>
+</g>
+<!-- L2 Switch MASTER -->
+<rect fill="rgba(26,111,212,.12)" height="44" rx="4" stroke="rgba(26,111,212,.4)" stroke-width="1.5" width="260" x="820" y="285"></rect>
+<text data-en="L2 (Ring) Switch" data-ko="L2 (Ring) 스위치" fill="#9ab5d0" font-size="13" text-anchor="middle" x="950" y="311">L2 (Ring) Switch</text>
+<!-- Blue wire MASTER -->
+<polyline fill="none" marker-end="url(#arr-blue)" points="1010,187 1010,250 1000,250 1000,285" stroke="#1a6fd4" stroke-width="2.5"></polyline>
+<!-- Red wire MASTER -->
+<polyline fill="none" marker-end="url(#arr-red)" points="1030,209 1030,260 1020,260 1020,285" stroke="#e05555" stroke-width="2.5"></polyline>
+<!-- ── SLAVE 1: 환기구#1 ── -->
+<g transform="translate(530,20)">
+<rect fill="rgba(224,85,85,.12)" height="34" rx="4" stroke="#e05555" stroke-width="1.5" width="260" x="0" y="0"></rect>
+<text data-en="Vent Shaft #1  Slave 1" data-ko="환기구#1   슬레이브1" fill="#e05555" font-size="14" font-weight="bold" text-anchor="middle" x="130" y="22">Vent Shaft #1  Slave 1</text>
+</g>
+<g transform="translate(530,65)">
+<rect fill="none" height="200" rx="4" stroke="rgba(255,255,255,.2)" stroke-dasharray="4,3" stroke-width="1" width="260" x="0" y="0"></rect>
+<text data-en="Utility Tunnel End" data-ko="전력구종단측" fill="var(--muted)" font-size="11" x="10" y="20">Utility Tunnel End</text>
+<text data-en="S/S Side" data-ko="S/S측" fill="var(--muted)" font-size="11" x="180" y="20">S/S Side</text>
+<g fill="var(--muted)" font-size="12">
+<text x="15" y="60">1</text><circle cx="40" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="82">2</text><circle cx="40" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="104">3</text><circle cx="40" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="126">4</text><circle cx="40" cy="122" fill="rgba(26,111,212,.5)" r="5" stroke="#1a6fd4" stroke-width="1.5"></circle>
+<text x="15" y="148">5</text><circle cx="40" cy="144" fill="rgba(224,85,85,.5)" r="5" stroke="#e05555" stroke-width="1.5"></circle>
+</g>
+<g fill="var(--muted)" font-size="12">
+<text x="215" y="60">6</text><circle cx="210" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="82">7</text><circle cx="210" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="104">8</text><circle cx="210" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="126">9</text><circle cx="210" cy="122" fill="rgba(26,111,212,.5)" r="5" stroke="#1a6fd4" stroke-width="1.5"></circle>
+<text x="210" y="148">10</text><circle cx="210" cy="144" fill="rgba(224,85,85,.5)" r="5" stroke="#e05555" stroke-width="1.5"></circle>
+</g>
+<text fill="#1a6fd4" font-size="13" font-weight="bold" x="20" y="180">P9</text>
+<text fill="#e05555" font-size="13" font-weight="bold" x="50" y="180">P10</text>
+<text fill="#1a6fd4" font-size="13" font-weight="bold" x="195" y="180">P9</text>
+<text fill="#e05555" font-size="13" font-weight="bold" x="225" y="180">P10</text>
+</g>
+<rect fill="rgba(26,111,212,.12)" height="44" rx="4" stroke="rgba(26,111,212,.4)" stroke-width="1.5" width="260" x="530" y="285"></rect>
+<text data-en="L2 (Ring) Switch" data-ko="L2 (Ring) 스위치" fill="#9ab5d0" font-size="13" text-anchor="middle" x="660" y="311">L2 (Ring) Switch</text>
+<polyline fill="none" marker-end="url(#arr-blue)" points="567,187 567,250 557,250 557,285" stroke="#1a6fd4" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-red)" points="587,209 587,260 577,260 577,285" stroke="#e05555" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-blue)" points="720,187 720,250 730,250 730,285" stroke="#1a6fd4" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-red)" points="740,209 740,260 750,260 750,285" stroke="#e05555" stroke-width="2.5"></polyline>
+<!-- Ring 연결 좌↔우 (slave1 ↔ master) -->
+<line stroke="rgba(0,210,240,.4)" stroke-dasharray="5,3" stroke-width="2" x1="790" x2="820" y1="307" y2="307"></line>
+<text fill="rgba(0,210,240,.6)" font-size="10" text-anchor="middle" x="805" y="302">Ring</text>
+<!-- ── SLAVE 2: 환기구#2 ── -->
+<g transform="translate(240,20)">
+<rect fill="rgba(224,85,85,.12)" height="34" rx="4" stroke="#e05555" stroke-width="1.5" width="260" x="0" y="0"></rect>
+<text data-en="Vent Shaft #2  Slave 2" data-ko="환기구#2   슬레이브2" fill="#e05555" font-size="14" font-weight="bold" text-anchor="middle" x="130" y="22">Vent Shaft #2  Slave 2</text>
+</g>
+<g transform="translate(240,65)">
+<rect fill="none" height="200" rx="4" stroke="rgba(255,255,255,.2)" stroke-dasharray="4,3" stroke-width="1" width="260" x="0" y="0"></rect>
+<text data-en="Utility Tunnel End" data-ko="전력구종단측" fill="var(--muted)" font-size="11" x="10" y="20">Utility Tunnel End</text>
+<text data-en="S/S Side" data-ko="S/S측" fill="var(--muted)" font-size="11" x="180" y="20">S/S Side</text>
+<g fill="var(--muted)" font-size="12">
+<text x="15" y="60">1</text><circle cx="40" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="82">2</text><circle cx="40" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="104">3</text><circle cx="40" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="15" y="126">4</text><circle cx="40" cy="122" fill="rgba(26,111,212,.5)" r="5" stroke="#1a6fd4" stroke-width="1.5"></circle>
+<text x="15" y="148">5</text><circle cx="40" cy="144" fill="rgba(224,85,85,.5)" r="5" stroke="#e05555" stroke-width="1.5"></circle>
+</g>
+<g fill="var(--muted)" font-size="12">
+<text x="215" y="60">6</text><circle cx="210" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="82">7</text><circle cx="210" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="104">8</text><circle cx="210" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="215" y="126">9</text><circle cx="210" cy="122" fill="rgba(26,111,212,.5)" r="5" stroke="#1a6fd4" stroke-width="1.5"></circle>
+<text x="210" y="148">10</text><circle cx="210" cy="144" fill="rgba(224,85,85,.5)" r="5" stroke="#e05555" stroke-width="1.5"></circle>
+</g>
+<text fill="#1a6fd4" font-size="13" font-weight="bold" x="20" y="180">P9</text>
+<text fill="#e05555" font-size="13" font-weight="bold" x="50" y="180">P10</text>
+<text fill="#1a6fd4" font-size="13" font-weight="bold" x="195" y="180">P9</text>
+<text fill="#e05555" font-size="13" font-weight="bold" x="225" y="180">P10</text>
+</g>
+<rect fill="rgba(26,111,212,.12)" height="44" rx="4" stroke="rgba(26,111,212,.4)" stroke-width="1.5" width="260" x="240" y="285"></rect>
+<text data-en="L2 (Ring) Switch" data-ko="L2 (Ring) 스위치" fill="#9ab5d0" font-size="13" text-anchor="middle" x="370" y="311">L2 (Ring) Switch</text>
+<polyline fill="none" marker-end="url(#arr-blue)" points="277,187 277,250 267,250 267,285" stroke="#1a6fd4" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-red)" points="297,209 297,260 287,260 287,285" stroke="#e05555" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-blue)" points="430,187 430,250 440,250 440,285" stroke="#1a6fd4" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-red)" points="450,209 450,260 460,260 460,285" stroke="#e05555" stroke-width="2.5"></polyline>
+<!-- Ring 연결 slave2 ↔ slave1 -->
+<line stroke="rgba(0,210,240,.4)" stroke-dasharray="5,3" stroke-width="2" x1="500" x2="530" y1="307" y2="307"></line>
+<text fill="rgba(0,210,240,.6)" font-size="10" text-anchor="middle" x="515" y="302">Ring</text>
+<!-- ── SLAVE 3 (말단): 환기구#3 ── -->
+<g transform="translate(0,20)">
+<rect fill="rgba(224,85,85,.18)" height="34" rx="4" stroke="#e05555" stroke-width="2" width="220" x="0" y="0"></rect>
+<text data-en="Vent Shaft #3 (End)  Slave 3" data-ko="환기구#3 (말단) 슬레이브3" fill="#e05555" font-size="13" font-weight="bold" text-anchor="middle" x="110" y="22">Vent Shaft #3 (End)  Slave 3</text>
+</g>
+<g transform="translate(0,65)">
+<rect fill="none" height="200" rx="4" stroke="rgba(255,255,255,.2)" stroke-dasharray="4,3" stroke-width="1" width="220" x="0" y="0"></rect>
+<text data-en="Utility Tunnel End" data-ko="전력구종단측" fill="var(--muted)" font-size="11" x="10" y="20">Utility Tunnel End</text>
+<text data-en="S/S Side" data-ko="S/S측" fill="var(--muted)" font-size="11" x="150" y="20">S/S Side</text>
+<g fill="var(--muted)" font-size="12">
+<text x="10" y="60">1</text><circle cx="35" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="10" y="82">2</text><circle cx="35" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="10" y="104">3</text><circle cx="35" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="10" y="126">4</text><circle cx="35" cy="122" fill="rgba(26,111,212,.5)" r="5" stroke="#1a6fd4" stroke-width="1.5"></circle>
+<text x="10" y="148">5</text><circle cx="35" cy="144" fill="rgba(224,85,85,.5)" r="5" stroke="#e05555" stroke-width="1.5"></circle>
+</g>
+<g fill="var(--muted)" font-size="12">
+<text x="175" y="60">6</text><circle cx="170" cy="56" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="175" y="82">7</text><circle cx="170" cy="78" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="175" y="104">8</text><circle cx="170" cy="100" fill="none" r="5" stroke="var(--muted)" stroke-width="1.2"></circle>
+<text x="175" y="126">9</text><circle cx="170" cy="122" fill="rgba(26,111,212,.5)" r="5" stroke="#1a6fd4" stroke-width="1.5"></circle>
+<text x="170" y="148">10</text><circle cx="170" cy="144" fill="rgba(224,85,85,.5)" r="5" stroke="#e05555" stroke-width="1.5"></circle>
+</g>
+<text fill="#1a6fd4" font-size="13" font-weight="bold" x="15" y="180">P9</text>
+<text fill="#e05555" font-size="13" font-weight="bold" x="45" y="180">P10</text>
+<text fill="#1a6fd4" font-size="13" font-weight="bold" x="150" y="180">P9</text>
+<text fill="#e05555" font-size="13" font-weight="bold" x="180" y="180">P10</text>
+</g>
+<rect fill="rgba(26,111,212,.12)" height="44" rx="4" stroke="rgba(26,111,212,.4)" stroke-width="1.5" width="220" x="0" y="285"></rect>
+<text data-en="L2 (Ring) Switch" data-ko="L2 (Ring) 스위치" fill="#9ab5d0" font-size="13" text-anchor="middle" x="110" y="311">L2 (Ring) Switch</text>
+<polyline fill="none" marker-end="url(#arr-blue)" points="30,187 30,250 25,250 25,285" stroke="#1a6fd4" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-red)" points="50,209 50,260 45,260 45,285" stroke="#e05555" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-blue)" points="160,187 160,250 175,250 175,285" stroke="#1a6fd4" stroke-width="2.5"></polyline>
+<polyline fill="none" marker-end="url(#arr-red)" points="180,209 180,260 195,260 195,285" stroke="#e05555" stroke-width="2.5"></polyline>
+<!-- Ring 연결 slave3 ↔ slave2 -->
+<line stroke="rgba(0,210,240,.4)" stroke-dasharray="5,3" stroke-width="2" x1="220" x2="240" y1="307" y2="307"></line>
+<text fill="rgba(0,210,240,.6)" font-size="10" text-anchor="middle" x="230" y="302">Ring</text>
+<!-- 범례 -->
+<g transform="translate(0,360)">
+<text data-en="Legend:" data-ko="범례:" fill="var(--muted)" font-size="13" x="0" y="16">Legend:</text>
+<line stroke="#1a6fd4" stroke-width="2.5" x1="55" x2="110" y1="10" y2="10"></line>
+<circle cx="82" cy="10" fill="#1a6fd4" r="4"></circle>
+<text data-en="P9 (Blue — internal ring link)" data-ko="P9 (Blue — Ring 내부 연결)" fill="#1a6fd4" font-size="12" x="115" y="14">P9 (Blue — internal ring link)</text>
+<line stroke="#e05555" stroke-width="2.5" x1="55" x2="110" y1="32" y2="32"></line>
+<circle cx="82" cy="32" fill="#e05555" r="4"></circle>
+<text data-en="P10 (Red — internal ring link)" data-ko="P10 (Red — Ring 내부 연결)" fill="#e05555" font-size="12" x="115" y="36">P10 (Red — internal ring link)</text>
+<line stroke="rgba(0,210,240,.6)" stroke-dasharray="5,3" stroke-width="2" x1="55" x2="110" y1="54" y2="54"></line>
+<text data-en="Ring segment (fiber or UTP)" data-ko="Ring 구간 (광케이블 또는 UTP)" fill="rgba(0,210,240,.7)" font-size="12" x="115" y="58">Ring segment (fiber or UTP)</text>
+</g>
+</svg>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#RingTopology" data-ko="#링토폴로지">#RingTopology</span><span class="sec-kw" contenteditable="true" data-en="#MasterSlave" data-ko="#마스터슬레이브">#MasterSlave</span><span class="sec-kw" contenteditable="true" data-en="#UtilityTunnel" data-ko="#전력구">#UtilityTunnel</span><span class="sec-kw" contenteditable="true" data-en="#VentilationShaft" data-ko="#환기구">#VentilationShaft</span></div></section>
+<div class="div-line"></div>
+<!-- ═══════ 06 · 주요 특징 ═══════ -->
+<section class="pg" id="features">
+<div class="shdr">
+<div class="shdr-left"><span class="stag">05 · Features</span><h2 class="stitle"><span class="i18n" data-en="Key" data-ko="주요">Key</span> <span class="hl" data-en="Features" data-ko="특징">Features</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div class="feat-grid">
+<div class="feat-card">
+<div class="feat-ic">🔄</div>
+<div class="feat-nm" data-en="Ring Self-Healing" data-ko="Ring 방식 자가 복구">Ring Self-Healing</div>
+<div class="feat-desc" data-en="ITU-T G.8032 ERPS and S-Ring support switch traffic to an alternate path in milliseconds when a link fails, guaranteeing uninterrupted operation of the fire protection network." data-ko="ITU-T G.8032 ERPS 및 S-Ring 지원으로 링크 장애 시 밀리초 단위 자동 우회 경로 전환. 소방 네트워크의 무중단 운영을 보장합니다.">ITU-T G.8032 ERPS and S-Ring support switch traffic to an alternate path in milliseconds when a link fails, guaranteeing uninterrupted operation of the fire protection network.</div>
+</div>
+<div class="feat-card">
+<div class="feat-ic">🌐</div>
+<div class="feat-nm" data-en="High-Performance L2 Switching" data-ko="고성능 L2 스위칭">High-Performance L2 Switching</div>
+<div class="feat-desc" data-en="8 TP (1 Gbps) + 2 SFP (1G) ports, 20 Gbps switch fabric, 14.8 Mpps throughput. Handles heavy data traffic without delay." data-ko="8 TP(1Gbps) + 2 SFP(1G) 포트, Switch Fabric 20Gbps, Throughput 14.8Mpps. 대용량 데이터도 지연 없이 처리합니다.">8 TP (1 Gbps) + 2 SFP (1G) ports, 20 Gbps switch fabric, 14.8 Mpps throughput. Handles heavy data traffic without delay.</div>
+</div>
+<div class="feat-card">
+<div class="feat-ic">🔒</div>
+<div class="feat-nm" data-en="Security &amp;amp; VLAN Management" data-ko="보안 &amp;amp; VLAN 관리">Security &amp; VLAN Management</div>
+<div class="feat-desc" data-en="802.1Q VLAN, IEEE 802.1x authentication, and IGMP snooping deliver fine-grained network security and optimized multicast traffic." data-ko="802.1Q VLAN, IEEE 802.1x 인증, IGMP Snooping으로 네트워크 보안 세분화 및 멀티캐스트 트래픽 최적화를 구현합니다.">802.1Q VLAN, IEEE 802.1x authentication, and IGMP snooping deliver fine-grained network security and optimized multicast traffic.</div>
+</div>
+<div class="feat-card">
+<div class="feat-ic">🏗️</div>
+<div class="feat-nm" data-en="Rugged Enclosure" data-ko="견고한 수납 구조">Rugged Enclosure</div>
+<div class="feat-desc" data-en="Enclosure 460.4 × 378 × 120 mm (built-in IP-rated waterproof gasket), printable area 320 × 420 mm. Designed for harsh environments such as outdoor sites and utility tunnels." data-ko="케이스 460.4×378×120mm(IP 방수 GASKET 내장), 인쇄 가능 범위 320×420mm. 옥외·전력구 등 열악한 환경에 최적화된 설계.">Enclosure 460.4 × 378 × 120 mm (built-in IP-rated waterproof gasket), printable area 320 × 420 mm. Designed for harsh environments such as outdoor sites and utility tunnels.</div>
+</div>
+<div class="feat-card">
+<div class="feat-ic">⚡</div>
+<div class="feat-nm" data-en="Low Power, High Efficiency" data-ko="저전력 고효율">Low Power, High Efficiency</div>
+<div class="feat-desc" data-en="Maximum power AC 7.6 W, no-load power 3.15 W. A wide AC 100–240 V input suits a broad range of site power conditions." data-ko="최대전력 AC 7.6W, 무부하전력 3.15W. AC 100~240V 광폭 입력으로 다양한 현장 전원 조건에 적용 가능합니다.">Maximum power AC 7.6 W, no-load power 3.15 W. A wide AC 100–240 V input suits a broad range of site power conditions.</div>
+</div>
+<div class="feat-card">
+<div class="feat-ic">🖧</div>
+<div class="feat-nm" data-en="Master-Slave Topology" data-ko="마스터-슬레이브 토폴로지">Master-Slave Topology</div>
+<div class="feat-desc" data-en="S/S ICT room master ↔ ventilation shaft slaves. Ports P9 (blue) and P10 (red) close the ring loop. Supports a large number of slave nodes." data-ko="S/S ICT실 마스터 ↔ 환기구 슬레이브 구성. P9(Blue)/P10(Red) 포트로 Ring 루프 완성. 최대 다수 슬레이브 노드 연결 지원.">S/S ICT room master ↔ ventilation shaft slaves. Ports P9 (blue) and P10 (red) close the ring loop. Supports a large number of slave nodes.</div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#SelfHealing" data-ko="#자가복구">#SelfHealing</span><span class="sec-kw" contenteditable="true" data-en="#L2Switching" data-ko="#L2스위칭">#L2Switching</span><span class="sec-kw" contenteditable="true">#VLAN</span><span class="sec-kw" contenteditable="true" data-en="#LowPower" data-ko="#저전력">#LowPower</span></div></section>
+<div class="div-line"></div>
+<!-- ═══════ 07 · 적용 분야 ═══════ -->
+<section class="pg alt" id="applications">
+<div class="shdr">
+<div class="shdr-left"><span class="stag">06 · Applications</span><h2 class="stitle"><span class="i18n" data-en="Applications" data-ko="적용">Applications</span> <span class="hl" data-en="Areas" data-ko="분야">Areas</span></h2></div>
+<div class="shdr-hr"></div>
+</div>
+<div class="app-grid">
+<div class="app-item">
+<div class="app-icon">🔥</div>
+<div>
+<div class="app-nm" data-en="Fire Protection Networks" data-ko="소방 네트워크">Fire Protection Networks</div>
+<div class="app-desc" data-en="Master-slave ring connection of utility-tunnel fire alarm control panels" data-ko="전력구 화재수신기 마스터-슬레이브 Ring 방식 연결">Master-slave ring connection of utility-tunnel fire alarm control panels</div>
+</div>
+</div>
+<div class="app-item">
+<div class="app-icon">⚡</div>
+<div>
+<div class="app-nm" data-en="Utility &amp;amp; Common Tunnels" data-ko="전력구·공동구">Utility &amp; Common Tunnels</div>
+<div class="app-desc" data-en="Monitoring and control networks for underground utility tunnel ventilation shafts" data-ko="지하 전력구 환기구 감시·제어 네트워크 구성">Monitoring and control networks for underground utility tunnel ventilation shafts</div>
+</div>
+</div>
+<div class="app-item">
+<div class="app-icon">🚇</div>
+<div>
+<div class="app-nm" data-en="Subways &amp;amp; Tunnels" data-ko="지하철·터널">Subways &amp; Tunnels</div>
+<div class="app-desc" data-en="High-reliability ring networks across sections with distributed equipment" data-ko="분산 설비 구간 고신뢰성 링 네트워크 적용">High-reliability ring networks across sections with distributed equipment</div>
+</div>
+</div>
+<div class="app-item">
+<div class="app-icon">🏭</div>
+<div>
+<div class="app-nm" data-en="Industrial Automation" data-ko="산업 자동화">Industrial Automation</div>
+<div class="app-desc" data-en="Industrial Ethernet ring networks for SCADA/DCS" data-ko="SCADA/DCS 산업용 이더넷 링 네트워크 구축">Industrial Ethernet ring networks for SCADA/DCS</div>
+</div>
+</div>
+</div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true" data-en="#FireProtectionNetwork" data-ko="#소방네트워크">#FireProtectionNetwork</span><span class="sec-kw" contenteditable="true" data-en="#UtilityAndCommonTunnels" data-ko="#전력구공동구">#UtilityAndCommonTunnels</span><span class="sec-kw" contenteditable="true" data-en="#SubwayAndTunnels" data-ko="#지하철터널">#SubwayAndTunnels</span><span class="sec-kw" contenteditable="true" data-en="#IndustrialAutomation" data-ko="#산업자동화">#IndustrialAutomation</span></div></section>
+<div class="div-line"></div>
+<!-- ═══════ CTA / 문의 ═══════ -->
+<section class="cta-wrap" id="contact">
+<div class="cta-inner">
+<div>
+<div class="cta-lb">// Contact Us</div>
+<h2 class="cta-hd"><span class="i18n" data-en="Product Consultation &amp;amp;" data-ko="제품 상담 및">Product Consultation &amp;</span> <span data-en="Quotation Inquiry" data-ko="견적 문의">Quotation Inquiry</span></h2>
+<div class="cta-info">
+<div class="cta-row"><div class="cta-ri">📍</div><div data-en="11F, Unit 1116, Gasan Public Bldg. B,&lt;br/&gt;178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea" data-ko="(08513) 서울시 금천구 디지털로 178&lt;br/&gt;가산퍼블릭 B동 11층 1116호">11F, Unit 1116, Gasan Public Bldg. B,<br/>178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea</div></div>
+<div class="cta-row"><div class="cta-ri">📞</div><div>Tel: 02-6095-0520  |  Fax: 02-6095-0522</div></div>
+<div class="cta-row"><div class="cta-ri">✉️</div><div>Email: joo1@uno-system.com</div></div>
+<div class="cta-row"><div class="cta-ri">🌐</div><div><a href="https://www.uno-system.com" style="color:var(--cyan);text-decoration:none" target="_blank">https://www.uno-system.com</a></div></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<button class="btn-p" data-en="Request a Quote" data-ko="견적 문의하기">Request a Quote</button>
+<button class="btn-s" data-en="📥 Save Page (HTML)" data-ko="📥 페이지 저장 (HTML)" onclick="downloadPage()">📥 Save Page (HTML)</button>
+</div>
+</div>
+</section>
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+<div class="foot-inner">
+<div class="foot-img-col" id="foot-img-col" onclick="document.getElementById('foot-file').click()" title="클릭하여 이미지 삽입">
+<img alt="푸터 이미지" class="foot-col-img" id="foot-col-img" src="" style="display:none"/>
+<div class="foot-img-ph" id="foot-img-ph">
+<div style="width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:24px;color:rgba(0,210,240,.45)">+</div>
+<div data-en="Insert an image" data-ko="이미지 삽입" style="font-size:13px;color:var(--muted)">Insert an image</div>
+</div>
+<input accept="image/*,video/*" id="foot-file" onchange="footUpload(event)" style="display:none" type="file"/>
+</div>
+<div class="foot-right-col">
+<div class="foot-info-area">
+<div class="foot-logo-row">
+<div class="foot-logo-text">
+<span class="foot-logo-kr" data-en="UNO SYSTEM Co., Ltd." data-ko="유노시스템㈜">UNO SYSTEM Co., Ltd.</span>
+<span class="foot-logo-en">UNO SYSTEM</span>
+</div>
+</div>
+<div class="foot-addr" data-en="11F, Unit 1116, Gasan Public Bldg. B, 178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea" data-ko="(08513) 서울시 금천구 디지털로 178, 가산퍼블릭 B동 11층 1116호">11F, Unit 1116, Gasan Public Bldg. B, 178 Digital-ro, Geumcheon-gu, Seoul 08513, Korea</div>
+<div class="foot-contact">Tel. 02-6095-0520  |  Fax. 02-6095-0522  |  joo1@uno-system.com</div>
+<div class="foot-copy" data-en="© 2024 UNO SYSTEM Co., Ltd. All Rights Reserved." data-ko="© 2024 유노시스템㈜ All Rights Reserved.">© 2024 UNO SYSTEM Co., Ltd. All Rights Reserved.</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+/* ══ 이미지 박스 공통 ══ */
+function boxUpload(event, id) {
+  const file = event.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const box = document.getElementById(id);
+    const img = box.querySelector('.box-img');
+    const ph = box.querySelector('.box-placeholder');
+    if (img) { img.src = e.target.result; img.style.display = 'block'; }
+    if (ph) ph.style.display = 'none';
+    try { localStorage.setItem('unosys_dnc_' + id, e.target.result); } catch(ex) {}
+  };
+  reader.readAsDataURL(file);
+}
+function boxReplace(id) { const el = document.querySelector('#' + id + ' input[type=file]'); if (el) el.click(); }
+function boxDelete(id) {
+  const box = document.getElementById(id);
+  const img = box.querySelector('.box-img'); if (img) { img.src = ''; img.style.display = 'none'; }
+  const ph = box.querySelector('.box-placeholder'); if (ph) ph.style.display = 'flex';
+  try { localStorage.removeItem('unosys_dnc_' + id); } catch(ex) {}
+}
+/* ══ 히어로 이미지 ══ */
+function heroUpload(event) {
+  const file = event.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.getElementById('hero-main-img');
+    img.src = e.target.result; img.style.display = 'block';
+    document.getElementById('hero-empty').classList.add('hidden');
+    try { localStorage.setItem('unosys_dnc_hero', e.target.result); } catch(ex) {}
+  };
+  reader.readAsDataURL(file);
+}
+function heroReplace() { document.getElementById('hero-file-input').click(); }
+function heroDelete() {
+  const img = document.getElementById('hero-main-img'); img.src = ''; img.style.display = 'none';
+  document.getElementById('hero-empty').classList.remove('hidden');
+  try { localStorage.removeItem('unosys_dnc_hero'); } catch(ex) {}
+}
+/* ══ 푸터 이미지 ══ */
+function footUpload(event) {
+  const file = event.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.getElementById('foot-col-img');
+    img.src = e.target.result; img.style.display = 'block';
+    document.getElementById('foot-img-ph').style.display = 'none';
+    try { localStorage.setItem('unosys_dnc_foot', e.target.result); } catch(ex) {}
+  };
+  reader.readAsDataURL(file);
+}
+/* ══ localStorage 복원 ══ */
+(function restore() {
+  const keys = ['hero','box-overview-img','box-dim-img','foot'];
+  keys.forEach(function(k) {
+    try {
+      const saved = localStorage.getItem('unosys_dnc_' + k);
+      if (!saved) return;
+      if (k === 'hero') {
+        const img = document.getElementById('hero-main-img');
+        img.src = saved; img.style.display = 'block';
+        document.getElementById('hero-empty').classList.add('hidden');
+      } else if (k === 'foot') {
+        const img = document.getElementById('foot-col-img');
+        img.src = saved; img.style.display = 'block';
+        document.getElementById('foot-img-ph').style.display = 'none';
+      } else {
+        const box = document.getElementById(k);
+        if (!box) return;
+        const img = box.querySelector('.box-img');
+        const ph = box.querySelector('.box-placeholder');
+        if (img) { img.src = saved; img.style.display = 'block'; }
+        if (ph) ph.style.display = 'none';
+      }
+    } catch(ex) {}
+  });
+})();
+/* ══ downloadPage ══ */
+function downloadPage() {
+  try {
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'dnc_en.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  } catch(e) { alert('다운로드 중 오류: ' + e.message); }
+}
+</script>
+<script>
+function applyTheme(t){document.documentElement.setAttribute("data-theme",t);var i=document.getElementById("th-icon"),l=document.getElementById("th-label");if(i)i.textContent=t==="light"?"☀️":"🌙";if(l)l.textContent=t==="light"?"Light":"Dark";try{localStorage.setItem("uno_theme",t);}catch(e){}}
+function toggleTheme(){var c=document.documentElement.getAttribute("data-theme")||"dark";applyTheme(c==="dark"?"light":"dark");}
+(function(){var s="dark";try{s=localStorage.getItem("uno_theme")||"dark";}catch(e){}applyTheme(s);})();
+</script><script>
+function toggleNav(){var n=document.getElementById('mainNav');if(n)n.classList.toggle('open');}
+document.addEventListener('click',function(e){var a=e.target.closest('.main-nav a');if(a){var n=document.getElementById('mainNav');if(n)n.classList.remove('open');}});
+</script><script>
+/* ══ 대원칙 3 · KEYWORDS(.sec-kw) 클릭 → Google 검색(새 탭) ══ */
+(function(){
+  function kwText(kw){ return (kw.textContent||'').replace(/\s+/g,' ').trim(); }
+  function wire(){
+    document.querySelectorAll('.sec-kw').forEach(function(kw){
+      if(kw._kwsearch) return; kw._kwsearch=true;
+      kw.style.cursor='pointer';
+      if(!kw.title) kw.title='클릭하여 Google 검색';
+      kw.addEventListener('click',function(e){
+        var s=kwText(kw); if(!s) return;
+        e.preventDefault(); e.stopPropagation();
+        window.open('https://www.google.com/search?q='+encodeURIComponent(s),'_blank');
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',wire);
+  else wire();
+})();
+</script><script>
+/* ══ 대원칙 2-보강 · 우측 이미지 박스 상단을 좌측 제목 높이에 정렬 ══ */
+(function(){
+  if(window.alignImgBoxes) return;
+  function pairs(){
+    var out=[];
+    var hero=document.querySelector('.product-hero');
+    if(hero){ var ht=hero.querySelector('.product-name'), hc=hero.children[1]; if(ht&&hc) out.push([hc,ht]); }
+    document.querySelectorAll('.syscfg-row').forEach(function(r){
+      var t=r.querySelector('.syscfg-name'), i=r.querySelector('.syscfg-img'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.comp-row').forEach(function(r){
+      var t=r.querySelector('.feature-name'), i=r.querySelector('.img-box'); if(t&&i) out.push([i,t]);
+    });
+    document.querySelectorAll('.feature-card').forEach(function(fc){
+      var row=fc.parentElement; if(!row||row.classList.contains('comp-row')) return;
+      var i=null;
+      for(var k=0;k<row.children.length;k++){ if(row.children[k].classList.contains('img-box')) i=row.children[k]; }
+      var t=fc.querySelector('.feature-name');
+      if(i&&t) out.push([i,t]);
+    });
+    return out;
+  }
+  function alignImgBoxes(){
+    var list=pairs(), mobile=window.innerWidth<=900;
+    list.forEach(function(p){ p[0].style.marginTop='0px'; p[0].classList.add('img-align-shift'); });
+    if(mobile) return;
+    list.forEach(function(p){
+      var d=p[1].getBoundingClientRect().top - p[0].getBoundingClientRect().top;
+      if(d>0) p[0].style.marginTop=Math.round(d)+'px';
+    });
+  }
+  window.alignImgBoxes=alignImgBoxes;
+  function schedule(){ requestAnimationFrame(function(){ requestAnimationFrame(alignImgBoxes); }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',schedule); else schedule();
+  window.addEventListener('load',schedule);
+  setTimeout(alignImgBoxes,900); setTimeout(alignImgBoxes,1800);
+  var t=null;
+  window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(alignImgBoxes,120); });
+})();
+</script><script>
+/* ══ 대원칙 10 · GitHub 이미지 로더 (soulthread88/my_images · unosystem/) ══
+   탐색순서: GH_BASE+<page>/<key>.<ext> → GH_BASE+<key>.<ext> · 실패 시 기존 src 유지(무손실) */
+(function(){
+  if(window.__unoGH) return; window.__unoGH=true;
+  var GH_BASE='https://raw.githubusercontent.com/soulthread88/my_images/main/unosystem/';
+  var GH_PAGE=(location.pathname.split('/').pop()||'index.html').replace(/\.[^.]+$/,'').replace(/_en$/,'').replace(/[^A-Za-z0-9_-]/g,'_');
+  var IMG_EXTS=['png','jpg','jpeg','webp','gif'];
+  var VID_EXTS=['mp4','webm'];
+  function bases(){ return [GH_BASE+GH_PAGE+'/', GH_BASE]; }
+  function imgCands(k){ var o=[]; bases().forEach(function(b){ IMG_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  function vidCands(k){ var o=[]; bases().forEach(function(b){ VID_EXTS.forEach(function(e){ o.push(b+encodeURIComponent(k)+'.'+e); }); }); return o; }
+  var PH_SEL='.box-placeholder,.biz-img-ph,.hist-img-ph,.award-img-ph,.foot-img-ph,.ref-img-ph,.hero-empty,.cta-box-ph';
+  var BOX_SEL='[data-key],.img-box,.ref-card,.biz-img-box,.hist-img-box,.award-img-box,.foot-img-col,.iaea-hero-wrap,.cta-img-col';
+  function hidePH(im){ var b=im.closest(BOX_SEL); if(b) b.querySelectorAll(PH_SEL).forEach(function(p){ p.style.display='none'; p.classList.add('hidden'); }); }
+  function applyImg(imgs,url){ imgs.forEach(function(im){
+      im.src=url; im.style.setProperty('display','block','important');
+      im.style.setProperty('opacity','1','important'); im.style.setProperty('visibility','visible','important');
+      im.classList.add('active'); hidePH(im); }); }
+  function applyVid(imgs,url){ imgs.forEach(function(im){ try{
+      var v=document.createElement('video');
+      v.src=url; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+      v.className=im.className; v.style.cssText=im.style.cssText;
+      v.style.setProperty('display','block','important'); v.style.setProperty('width','100%'); v.style.setProperty('height','100%');
+      v.style.setProperty('object-fit', getComputedStyle(im).objectFit||'cover');
+      if(im.id) v.id=im.id;
+      im.parentNode.replaceChild(v,im); hidePH(v);
+    }catch(e){} }); }
+  function tryImg(imgs,key,onFail){ var list=imgCands(key), i=0;
+    (function nx(){ if(i>=list.length){ onFail&&onFail(); return; }
+      var url=list[i++], t=new Image(); t.onload=function(){ applyImg(imgs,url); }; t.onerror=nx; t.src=url; })(); }
+  function tryVid(imgs,key){ var list=vidCands(key), i=0;
+    (function nx(){ if(i>=list.length) return; var url=list[i++];
+      try{ fetch(url,{method:'HEAD'}).then(function(r){ if(r&&r.ok) applyVid(imgs,url); else nx(); }).catch(nx); }catch(e){ nx(); } })(); }
+  function run(){
+    var g={};
+    function add(k,im){ if(!k||!im) return; if(String(im.src).indexOf('data:')===0) return; (g[k]=g[k]||[]); if(g[k].indexOf(im)<0) g[k].push(im); }
+    document.querySelectorAll('[data-key]').forEach(function(b){ add(b.dataset.key, b.querySelector('img')); });
+    ['logo-img','foot-logo-img'].forEach(function(id){ add('logo', document.getElementById(id)); });
+    add('foot-img', document.getElementById('foot-col-img'));
+    Object.keys(g).forEach(function(k){ tryImg(g[k],k,function(){ tryVid(g[k],k); }); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(run,400); });
+  else setTimeout(run,400);
+})();
+</script><script>
+/* ══ 대원칙 7 · KOR|ENG 언어 전환 엔진 (기본값: en) ══ */
+(function(){
+  if(window.setLang) return;
+  var DEF='en';
+  function nodes(){ return document.querySelectorAll('[data-en]'); }
+  function cache(){ nodes().forEach(function(el){ if(el.dataset.ko===undefined) el.dataset.ko=el.innerHTML; }); }
+  window.setLang=function(l){
+    cache();
+    nodes().forEach(function(el){
+      if(el.tagName==='TITLE') return;
+      var v=(l==='en')?el.dataset.en:el.dataset.ko;
+      if(v!==undefined && v!==null) el.innerHTML=v;
+    });
+    document.documentElement.setAttribute('lang', l==='en'?'en':'ko');
+    document.documentElement.setAttribute('data-lang', l);
+    var k=document.getElementById('lang-ko'), e=document.getElementById('lang-en');
+    if(k) k.classList.toggle('on', l!=='en');
+    if(e) e.classList.toggle('on', l==='en');
+    var t=document.querySelector('title');
+    if(t && t.dataset.en){ if(t.dataset.ko===undefined) t.dataset.ko=t.textContent; document.title=(l==='en'?t.dataset.en:t.dataset.ko); }
+    try{ localStorage.setItem('uno_lang_'+location.pathname, l); }catch(err){}
+    if(window.alignImgBoxes) setTimeout(window.alignImgBoxes, 60);
+  };
+  function init(){
+    cache();
+    var s=DEF;
+    try{ s=localStorage.getItem('uno_lang_'+location.pathname)||DEF; }catch(err){}
+    window.setLang(s==='en'?'en':'ko');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script></body></html>

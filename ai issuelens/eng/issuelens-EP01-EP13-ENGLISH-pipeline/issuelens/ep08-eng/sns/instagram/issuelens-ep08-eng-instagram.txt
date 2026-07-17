@@ -1,0 +1,72 @@
+╔══════════════════════════════════════════════════════╗
+║  IssueLens EP.08 — Instagram CAROUSEL  (10 slides) ║
+╚══════════════════════════════════════════════════════╝
+
+━━━ SLIDE 1 — COVER
+Headline: Tencent's Quiet Takeover of a U.S. Ally — Gaming, 
+Subhead:  "Swipe to find out →"
+Style: IssueLens Red (#C8001A) + Dark gradient
+Badge: EP.08 top-left | @IssueLens bottom-right
+Size: 1080×1080px
+
+━━━ SLIDE 2 — THE SHOCKING NUMBERS
+Title: "By the Numbers"
+Content:
+  📊 35% — Tencent stakein Shift Up
+  📊 32% — Ant Group stakein KakaoPay
+  📊 5+ — Korean firmswith major CCP-linked stakes
+
+━━━ SLIDE 3 — THE PROBLEM
+Title: "Why Korea? Tencent's Global Playbook, Applied to a U.S. Ally"
+Body: "In EP.07, we tracked the hardware threat: Huawei's 5G networks, DeepSeek's AI ambitions, SMIC's semiconductor push. But there's a second front — quieter, already years deep, and operating entirely wit..."
+Visual: Relevant infographic / icon
+
+━━━ SLIDE 4 — HOW IT WORKS
+Title: "How This Actually Happens"
+Body: Data flow / process breakdown
+Visual: Step-by-step diagram (arrows)
+
+━━━ SLIDE 5 — THE DATA
+Title: "The Hard Numbers"
+  • 5+ firms — Korean publicly listed gaming and tech companies where Tencent holds 5%+ equity — as of 2024 regulatory filings
+  • ~32% — Alipay Singapore's (Ant Group subsidiary) stake in KakaoPay — 2nd-largest shareholder, per Korean FSS DART filings
+
+━━━ SLIDE 6 — The Stakes: Verified Equity Positions in
+Body: [Content from section 2]
+Source citation (italic, -2pt): *Source: [Publication], [Date], [Author]*
+
+━━━ SLIDE 7 — The Fintech Problem: Ant Group Holds 32%
+Body: [Content from section 3]
+
+━━━ SLIDE 8 — PRO vs. CON  (if politically contested)
+PRO side: [Argument in favor]
+CON side: [Argument against]
+⚖️ Balanced — both sides shown equally
+
+━━━ SLIDE 9 — ACTION ITEMS
+Title: "What You Can Do RIGHT NOW"
+  1. Know What You're Playing
+  2. Push for CFIUS Expansion
+  3. Support Allied Data Governance
+  4. Support Independent Ecosystems
+
+━━━ SLIDE 10 — CTA
+"Save this. Share it. Follow @IssueLens."
+Subtext: "New deep-dive every single day."
+Visual: All platform icons
+
+━━━ CAPTION  (≤2200 chars) ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Tencent's Quiet Takeover of a U.S. Ally — Gaming, Fintech & K-Content at Risk | IssueLens EP.08 🚨
+
+Netmarble 17.5%, Krafton 13.7%, KakaoPay 32%, Shift Up 35%. Tencent and Ant Group hold major stakes in South Korea's gaming, fintech, and content industries — and Washington is watching.
+
+💬 ""The moment a company accepts Tencent's investment,its data is no longer beyond the reachof Chinese intelligence services."— Australian Strategic Poli"
+
+👉 Full breakdown at link in bio — IssueLens EP.08
+🔔 Follow @IssueLens for a new deep-dive EVERY DAY.
+
+#TencentKoreainvestment #Tencentgamingstocks #KakaoPayAntGroup #ChinacapitalKorea #CFIUSChinagaming #nationalsecuritygaming #ChinaNationalIntelligenceLaw #Koreadatasovereignty #USallyChinarisk #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth
+
+━━━ HASHTAGS (comment drop — 30 max) ━━━━━━━━━━━━━━━
+#TencentKoreainvestment #Tencentgamingstocks #KakaoPayAntGroup #ChinacapitalKorea #CFIUSChinagaming #nationalsecuritygaming #ChinaNationalIntelligenceLaw #Koreadatasovereignty #USallyChinarisk #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth

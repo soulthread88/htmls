@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>IssueLens EP.00 | [제목을 입력하세요]</title>
+<meta name="description" content="[메타 설명을 입력하세요 — 검색 결과에 표시됩니다. 150자 이내 권장]">
+<meta name="keywords" content="[키워드1,키워드2,키워드3]">
+<meta property="og:title" content="[OG 제목] | IssueLens EP.00">
+<meta property="og:description" content="[OG 설명 — SNS 공유 시 표시됩니다]">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Do+Hyeon&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<!--
+╔════════════════════════════════════════════════════════════════════╗
+║        IssueLens  —  MASTER TEMPLATE  v2.0                        ║
+║        추가 지시·명령은 반드시 이 템플릿을 따를 것                    ║
+╠════════════════════════════════════════════════════════════════════╣
+║                                                                    ║
+║  ██ 1. 파일 구조 (변경 금지)                                        ║
+║  ┌──────────────────────────────────────────────────────────┐     ║
+║  │ <head>  CSS변수·폰트·스타일 전체                           │     ║
+║  │ <body>                                                    │     ║
+║  │   [YouTube 모달]  id="ytm"                                │     ║
+║  │   <header class="mh">  마스트헤드                          │     ║
+║  │   <div class="brand-strip">  브랜드 스트립                 │     ║
+║  │   <main>                                                  │     ║
+║  │     <div class="disclaimer">  면책 공고                   │     ║
+║  │     <div class="ab">  본문 전체 래퍼                       │     ║
+║  │       <p class="intro">  리드 문단                        │     ║
+║  │       <div class="sec">  섹션 (반복)                      │     ║
+║  │       <div class="pq">  인용구 블록                       │     ║
+║  │     </div>                                                │     ║
+║  │     <section class="action">  실천 강령                   │     ║
+║  │     [SNS 모달]  id="sns-modal"                            │     ║
+║  │     <div class="sb">  소셜 공유 바                         │     ║
+║  │   </main>                                                 │     ║
+║  │   <footer class="ft">  푸터                               │     ║
+║  │   <script>  JS 전체                                       │     ║
+║  └──────────────────────────────────────────────────────────┘     ║
+║                                                                    ║
+║  ██ 2. 폰트 대원칙 (절대 변경 금지)                                 ║
+║  ┌──────────────────────────────────────────────────────────┐     ║
+║  │ 영문 제목  →  Playfair Display  (var(--fe-head))          │     ║
+║  │   적용 클래스: .en-head .en-src-label .vc-name            │     ║
+║  │               .on-name .aweb-org-ttl                      │     ║
+║  │ 영문 본문  →  Source Serif 4    (var(--fe-body))          │     ║
+║  │   적용 클래스: .en-body .en-src본문 .ko-trans .src-cite   │     ║
+║  │ 한국어 전체  →  Noto Sans KR    (var(--fb))               │     ║
+║  │ UI·제목·버튼  →  Pretendard     (var(--ft))               │     ║
+║  └──────────────────────────────────────────────────────────┘     ║
+║                                                                    ║
+║  ██ 3. 이탤릭 규칙 (절대 원칙)                                      ║
+║  ┌──────────────────────────────────────────────────────────┐     ║
+║  │ ✗ 금지: em, i 태그  →  CSS에서 font-style:normal 강제     │     ║
+║  │ ✗ 금지: .ko-trans   →  font-style:normal !important       │     ║
+║  │ ✓ 허용: .src-cite 만 이탤릭  (Source: … 출처 라인)        │     ║
+║  └──────────────────────────────────────────────────────────┘     ║
+║                                                                    ║
+║  ██ 4. 영문 원문 블록 표준 구조 (순서 엄수)                          ║
+║  ┌──────────────────────────────────────────────────────────┐     ║
+║  │  <div class="en-src">                                    │     ║
+║  │    <div class="en-src-label">                            │     ║
+║  │      🇺🇸 [기관명] ([발표 연월])                            │     ║
+║  │    </div>                                                │     ║
+║  │    "영문 원문 — Source Serif 4, Roman, 이탤릭 금지"       │     ║
+║  │    <div class="src-cite">                                │     ║
+║  │      Source: [기관 공식 명칭], [발표 연월]  ← 이탤릭      │     ║
+║  │    </div>                                                │     ║
+║  │  </div>                                                  │     ║
+║  │  <div class="ko-trans">                                  │     ║
+║  │    🇰🇷 한국어 번역: [번역문 — 평서체, 이탤릭 절대 금지]    │     ║
+║  │  </div>                                                  │     ║
+║  └──────────────────────────────────────────────────────────┘     ║
+║                                                                    ║
+║  ██ 5. 섹션 컴포넌트 목록                                           ║
+║  ┌──────────────────────────────────────────────────────────┐     ║
+║  │ .sec-ttl          빨간 좌측 바 섹션 제목 (기본)             │     ║
+║  │ .sec-ttl.b2       파란 좌측 바 섹션 제목 (Do Hyeon 폰트)   │     ║
+║  │ .dcall            빨간 데이터 콜아웃 박스                   │     ║
+║  │ .cctx             파란 컨텍스트 박스                        │     ║
+║  │ .lq               법조항/공식 인용 박스                     │     ║
+║  │ .flow             흐름 다이어그램                           │     ║
+║  │ .rm               리스크 미터 (애니메이션 바)               │     ║
+║  │ .pq               인용구 블록 (전폭 배경)                   │     ║
+║  │ .en-src           영문 원문 박스                            │     ║
+║  │ .ko-trans         한국어 번역 박스 (황색 좌측 바)           │     ║
+║  │ .vendor-grid/.vendor-card  업체 정보 카드 그리드            │     ║
+║  │ .aweb-org/.org-node  조직도                                │     ║
+║  │ .media-pair       이미지+영상 나란히 박스 쌍                │     ║
+║  │ .action/.ac       실천 강령 카드                            │     ║
+║  └──────────────────────────────────────────────────────────┘     ║
+║                                                                    ║
+║  ██ 6. 색상 강조 클래스                                             ║
+║  ┌──────────────────────────────────────────────────────────┐     ║
+║  │ .hl-r  빨간 강조  (var(--red)   #C8001A)                  │     ║
+║  │ .hl-b  파란 강조  (var(--blu)   #1E3A8A)                  │     ║
+║  │ .hl-a  황색 강조  (var(--amb)   #B45309)                  │     ║
+║  │ .hl-g  초록 강조  (var(--grn)   #065F46)                  │     ║
+║  └──────────────────────────────────────────────────────────┘     ║
+║                                                                    ║
+║  ██ 7. 새 블로그 글 제작 체크리스트                                  ║
+║  ┌──────────────────────────────────────────────────────────┐     ║
+║  │ □ <title> EP.00 → 실제 번호로 교체                         │     ║
+║  │ □ <meta description> 150자 이내 작성                       │     ║
+║  │ □ <meta keywords> 관련 키워드 입력                          │     ║
+║  │ □ .mh-top : EP번호, 연재 시리즈 이름 교체                   │     ║
+║  │ □ .ep-lbl : 카테고리 레이블 교체                            │     ║
+║  │ □ .headline : h1 제목 작성 (.acc 강조어 포함)               │     ║
+║  │ □ .sub-hl : 부제 2줄 작성                                  │     ║
+║  │ □ .stat × 3 : 핵심 통계 숫자+라벨 채우기                   │     ║
+║  │ □ .tag : 주요(.hot) 4개 + 보조 6개 태그 작성               │     ║
+║  │ □ brand-strip : 주제 관련 브랜드 카드 교체                  │     ║
+║  │ □ .disclaimer : 면책 공고 내용 맞춤 작성                    │     ║
+║  │ □ .intro : 리드 문단 작성                                  │     ║
+║  │ □ 섹션 수·순서·컴포넌트 주제에 맞게 구성                     │     ║
+║  │ □ 모든 en-src 블록에 src-cite 출처 추가                    │     ║
+║  │ □ 모든 ko-trans 이탤릭 없는지 확인                          │     ║
+║  │ □ .pq 인용구 작성                                         │     ║
+║  │ □ .action 실천 강령 4개 이상 작성                          │     ║
+║  │ □ footer 연재명·EP번호 교체                                │     ║
+║  │ □ media-pair mbox ID 중복 없는지 확인 (s1i, s1v, s2i …)  │     ║
+║  └──────────────────────────────────────────────────────────┘     ║
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝
+-->
+<style>
+:root{
+  --ft:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
+  --fb:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  /* ══ GRAND PRINCIPLE: 영문 타이포그래피 CSS 변수 ══
+     --fe-head : 영문 제목 전용 → Playfair Display
+     --fe-body : 영문 본문 전용 → Source Serif 4
+     이 변수 값은 절대 변경하지 말 것.               */
+  --fe-head:'Playfair Display','Georgia',serif;  /* English headings  */
+  --fe-body:'Source Serif 4','Georgia',serif;    /* English body text */
+  --bg:#fff;--bg2:#F7F9FC;--bg3:#FFF8F0;
+  --ink:#0A0A0A;--ink2:#1F2937;--ink3:#4B5563;
+  --red:#C8001A;--redbg:#FFF0F3;--redl:#FFCCD5;
+  --amb:#B45309;--ambbg:#FFFBEB;
+  --grn:#065F46;--blu:#1E3A8A;--blubg:#EFF6FF;
+  --bdr:#CBD5E1;--rul:#E2E8F0;
+  --sh:0 2px 14px rgba(0,0,0,.07);
+  --shl:0 8px 32px rgba(0,0,0,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:20px;line-height:1.95;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:var(--red);text-decoration:none}
+
+/* ── 진행 바 ── */
+#pb{position:fixed;top:0;left:0;height:5px;background:var(--red);z-index:9999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(200,0,26,.5)}
+
+/* ── 마스트헤드 ── */
+.mh{background:var(--bg);border-bottom:3px solid var(--red)}
+.mh-top{background:var(--red);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:8px}
+.logo{font-family:var(--ft);font-size:clamp(1.1rem,3.5vw,1.3rem);font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.logo-dot{width:10px;height:10px;background:#fff;border-radius:50%;opacity:.85}
+.mh-meta{font-family:var(--fb);font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.88);font-weight:600}
+.mh-hero{padding:36px 20px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+.ep-lbl{font-family:var(--ft);font-size:clamp(13px,3.2vw,15px);font-weight:700;color:var(--red);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ep-lbl::before{content:'';width:22px;height:3px;background:var(--red);border-radius:2px;display:inline-block}
+.headline{font-family:var(--ft);font-size:clamp(1.85rem,6vw,3.6rem);font-weight:800;line-height:1.22;color:var(--ink);letter-spacing:-.03em}
+.headline .acc{color:var(--red);background:var(--redbg);padding:2px 8px;border-radius:5px;display:inline-block}
+.sub-hl{font-family:var(--fb);margin-top:14px;font-size:clamp(17px,3.5vw,20px);color:var(--ink3);line-height:1.82;font-weight:500}
+.stats{display:flex;flex-direction:column;gap:10px;min-width:155px}
+.stat{background:var(--redbg);border:2.5px solid var(--redl);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--sh)}
+.stat-n{font-family:var(--ft);font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--red);display:block;line-height:1;letter-spacing:-.02em}
+.stat-l{font-family:var(--fb);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);margin-top:4px;display:block;line-height:1.4}
+.tags{padding:10px 20px 14px;border-top:1.5px solid var(--rul);display:flex;gap:7px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.tag{font-family:var(--fb);font-size:clamp(13px,3vw,15px);font-weight:700;border:2px solid var(--bdr);color:var(--ink3);padding:4px 12px;border-radius:20px;cursor:pointer;transition:all .2s}
+.tag:hover,.tag.hot{border-color:var(--red);color:var(--red);background:var(--redbg)}
+
+/* ── 브랜드 스트립 ── */
+.brand-strip{background:var(--bg2);border-top:2px solid var(--rul);border-bottom:2px solid var(--rul);padding:22px 20px}
+.brand-strip-inner{max-width:920px;margin:0 auto}
+.brand-ttl{font-family:var(--ft);font-size:clamp(15px,3.5vw,17px);font-weight:800;color:var(--ink2);text-align:center;margin-bottom:18px;letter-spacing:.02em}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.bp{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 18px;border-radius:14px;border:2.5px solid var(--bdr);background:#fff;box-shadow:var(--sh);min-width:100px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:default}
+.bp:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:var(--red)}
+.bp-svg{width:84px;height:42px;display:flex;align-items:center;justify-content:center}
+.bp-name{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:var(--ink2)}
+.bp-sub{font-family:var(--fb);font-size:clamp(11px,2.5vw,13px);color:var(--ink3);font-weight:600}
+
+/* ── 면책 공고 ── */
+.disclaimer{max-width:860px;margin:30px auto 0;padding:16px 22px;background:var(--bg2);border:1.5px solid var(--bdr);border-left:6px solid var(--blu);border-radius:10px;font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);line-height:1.82}
+
+/* ── 아티클 바디 ── */
+.ab{max-width:860px;margin:0 auto;padding:36px 20px 56px}
+.intro{font-family:var(--fb);font-size:clamp(18px,3.8vw,21px);line-height:1.95;color:var(--ink2);background:var(--ambbg);border-left:6px solid #F59E0B;padding:20px 22px;border-radius:0 12px 12px 0;font-weight:500}
+.sec{margin-top:52px}
+.sec-ttl{font-family:var(--ft);font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:800;color:var(--ink);padding:16px 18px 16px 22px;border-left:7px solid var(--red);background:linear-gradient(90deg,var(--redbg) 0%,#fff 65%);border-radius:0 12px 12px 0;margin-bottom:22px;line-height:1.42;display:flex;align-items:center;gap:11px;box-shadow:var(--sh);letter-spacing:-.02em}
+.sec-ttl.b2{font-family:'Do Hyeon',sans-serif;font-size:clamp(1.3rem,4.5vw,1.7rem);font-weight:400;background:linear-gradient(90deg,var(--blubg) 0%,#fff 65%);border-left-color:var(--blu);color:var(--blu);letter-spacing:0}
+.sec-ttl .num{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:#fff;background:var(--red);border-radius:6px;padding:3px 11px;flex-shrink:0;letter-spacing:.06em}
+.sec-ttl.b2 .num{background:var(--blu)}
+.bt{font-family:var(--fb);font-size:clamp(18px,3.5vw,21px);line-height:2.0;color:var(--ink2);margin-bottom:20px}
+.hl-r{color:var(--red);font-weight:800}
+.hl-b{color:var(--blu);font-weight:800}
+.hl-a{color:var(--amb);font-weight:800}
+
+/* ── 데이터 콜아웃 ── */
+.dcall{background:var(--redbg);border:2px solid var(--redl);border-top:6px solid var(--red);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.dcall-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--red);letter-spacing:.16em;margin-bottom:10px;display:flex;align-items:center;gap:7px;text-transform:uppercase}
+.dcall-lbl::before{content:'●';animation:blink 1.5s infinite;font-size:.65rem}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.12}}
+.bignum{font-family:var(--ft);font-size:clamp(2.4rem,7vw,3.8rem);font-weight:800;color:var(--red);display:block;line-height:1;margin:6px 0 5px;letter-spacing:-.03em}
+.biglbl{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);font-weight:700;margin-bottom:12px;display:block}
+.cbody{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);line-height:1.95;color:var(--ink2)}
+.cbody strong{color:var(--red);font-weight:800}
+
+.cctx{background:var(--blubg);border:2px solid #BFDBFE;border-top:6px solid var(--blu);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.cctx-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--blu);letter-spacing:.14em;margin-bottom:10px;text-transform:uppercase}
+.cctx .cbody strong{color:var(--blu)}
+
+/* ── 플로우 ── */
+.flow{margin:24px 0;background:#fff;border:2px solid var(--bdr);border-radius:16px;padding:24px 16px 20px;box-shadow:var(--sh)}
+.flow-ttl{font-family:var(--ft);font-size:clamp(15px,3.2vw,17px);font-weight:700;color:var(--ink);text-align:center;margin-bottom:20px}
+.flow-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.fs{flex:1;min-width:80px;max-width:120px;text-align:center}
+.fi{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.45rem;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.fi.s{background:#DCFCE7;border:3px solid #22C55E}
+.fi.w{background:#FEF3C7;border:3px solid #F59E0B}
+.fi.d{background:#FFE4E6;border:3px solid var(--red)}
+.fs-lbl{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink);line-height:1.38}
+.fs-sub{font-family:var(--fb);font-size:clamp(11px,2.4vw,13px);color:var(--ink3);margin-top:2px;font-weight:600}
+.farrow{color:var(--red);font-size:1.45rem;flex-shrink:0;font-weight:900;animation:ap 1.9s infinite}
+@keyframes ap{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(4px);opacity:.3}}
+
+/* ── 법조항 박스 ── */
+.lq{border:2.5px solid #9CA3AF;border-radius:14px;padding:26px 26px;margin:26px 0;position:relative;background:var(--bg2);box-shadow:var(--sh)}
+.lq-bdg{position:absolute;top:-14px;left:18px;background:var(--ink);color:#fff;font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:3px 14px;border-radius:4px;letter-spacing:.04em;white-space:nowrap}
+.lq-txt{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);color:var(--ink2);line-height:2.0;margin-top:4px}
+.lq-txt strong{color:var(--red);font-weight:800}
+.lq-src{font-family:var(--fb);margin-top:10px;font-size:clamp(13px,2.8vw,15px);color:var(--ink3);text-align:right;font-weight:700}
+
+/* ── 리스크 미터 ── */
+.rm{margin:26px 0;padding:24px 26px;background:#fff;border:2px solid var(--bdr);border-radius:16px;box-shadow:var(--sh)}
+.rm-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:700;color:var(--ink);margin-bottom:18px}
+.ri{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rl{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:800;width:140px;flex-shrink:0;color:var(--ink)}
+.rbg{flex:1;height:14px;background:#F1F5F9;border-radius:7px;overflow:hidden;border:1px solid var(--rul)}
+.rbf{height:100%;border-radius:7px;width:0;transition:width 1.5s cubic-bezier(.2,1,.3,1)}
+.rbf.h{background:linear-gradient(90deg,#F87171,var(--red))}
+.rbf.m{background:linear-gradient(90deg,#FCD34D,#D97706)}
+.rbf.l{background:linear-gradient(90deg,#6EE7B7,#059669)}
+.rp{font-family:var(--ft);font-size:clamp(15px,3vw,17px);font-weight:800;width:48px;text-align:right;flex-shrink:0}
+
+/* ── 미디어 박스 (이미지 + 영상 나란히) ── */
+.media-pair{display:grid;grid-template-columns:1fr;gap:14px;margin:28px 0}
+.mbox-wrap{position:relative}
+.mbox-label{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--ink3);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.mbox{
+  position:relative;border-radius:14px;overflow:hidden;
+  background:#F1F5F9;border:2.5px dashed var(--bdr);
+  min-height:200px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .2s,box-shadow .2s;
+}
+.mbox:hover{border-color:var(--red);box-shadow:var(--shl)}
+.mbox-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);padding:20px;text-align:center;pointer-events:none;width:100%}
+.mbox-ph .ico{font-size:2.4rem;opacity:.45}
+.mbox-ph p{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:700;line-height:1.45;color:var(--ink3)}
+.mbox-ph .hint{font-size:clamp(12px,2.5vw,13px);color:#94A3B8;margin-top:2px}
+.mbox img.prev{width:100%;height:100%;min-height:200px;object-fit:cover;display:block;border-radius:12px}
+.mbox iframe{width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px}
+
+/* hover 버튼 */
+.mctrl{position:absolute;top:8px;right:8px;display:flex;gap:7px;opacity:0;transition:opacity .22s;pointer-events:none;z-index:20}
+.mbox:hover .mctrl{opacity:1;pointer-events:auto}
+.mbtn{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:6px 14px;border-radius:7px;border:none;cursor:pointer;backdrop-filter:blur(8px);transition:transform .15s;white-space:nowrap}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn.rep{background:rgba(255,255,255,.92);color:var(--ink)}
+.mbtn.del{background:rgba(200,0,26,.88);color:#fff}
+
+/* ── 인용구 ── */
+.pq{margin:26px 0 10px;padding:28px 22px;background:var(--bg3);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);text-align:center}
+.pq-txt{font-family:var(--ft);font-size:clamp(1.2rem,4vw,1.85rem);font-weight:800;color:var(--ink);line-height:1.62;letter-spacing:-.02em}
+.pq-txt em{color:var(--red);font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+
+/* ── 실천 강령 ── */
+.action{background:var(--bg2);border-top:3px solid var(--rul);padding:40px 20px;margin-top:0}
+.action-inner{max-width:860px;margin:0 auto}
+.action-ttl{font-family:var(--ft);font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em}
+.action-sub{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);margin-bottom:24px;font-weight:700}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ac{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s,border-color .2s}
+.ac:hover{border-color:var(--red);box-shadow:var(--shl);transform:translateY(-4px)}
+.ac-n{font-family:var(--ft);font-size:clamp(11px,2.5vw,13px);font-weight:700;color:var(--red);letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase}
+.ac-ico{font-size:1.9rem;margin-bottom:8px;line-height:1}
+.ac-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.42;letter-spacing:-.01em}
+.ac-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);line-height:1.85}
+
+/* ── 소셜 바 ── */
+.sb{max-width:860px;margin:0 auto;padding:24px 20px;border-top:1.5px solid var(--rul)}
+.sb-lbl{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sb-lbl::after{content:'';flex:1;height:1.5px;background:var(--rul)}
+.sb-btns{display:flex;flex-wrap:wrap;gap:9px}
+.snsbtn{display:inline-flex;align-items:center;gap:7px;font-family:var(--ft);font-size:clamp(13px,3vw,15px);font-weight:700;padding:9px 16px;border-radius:8px;border:2.5px solid;cursor:pointer;text-decoration:none;transition:background .18s,color .18s,transform .15s;white-space:nowrap;background:transparent;position:relative}
+.snsbtn.has-link::after{content:'✓';position:absolute;top:-7px;right:-7px;width:18px;height:18px;background:#22C55E;color:#fff;border-radius:50%;font-size:11px;font-weight:900;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.snsbtn svg{width:18px;height:18px;flex-shrink:0;transition:fill .18s}
+.snsbtn:hover{transform:translateY(-2px)}
+.snsbtn.yt{color:#CC0000;border-color:#CC0000}.snsbtn.yt svg{fill:#CC0000}.snsbtn.yt:hover{background:#CC0000;color:#fff}.snsbtn.yt:hover svg{fill:#fff}
+.snsbtn.ig{color:#C13584;border-color:#C13584}.snsbtn.ig svg{fill:#C13584}.snsbtn.ig:hover{background:#C13584;color:#fff}.snsbtn.ig:hover svg{fill:#fff}
+.snsbtn.tt{color:#010101;border-color:#010101}.snsbtn.tt svg{fill:#010101}.snsbtn.tt:hover{background:#010101;color:#fff}.snsbtn.tt:hover svg{fill:#fff}
+.snsbtn.th{color:#000;border-color:#000}.snsbtn.th svg{fill:#000}.snsbtn.th:hover{background:#000;color:#fff}.snsbtn.th:hover svg{fill:#fff}
+.snsbtn.xb{color:#14171A;border-color:#14171A}.snsbtn.xb svg{fill:#14171A}.snsbtn.xb:hover{background:#14171A;color:#fff}.snsbtn.xb:hover svg{fill:#fff}
+.snsbtn.fb{color:#1877F2;border-color:#1877F2}.snsbtn.fb svg{fill:#1877F2}.snsbtn.fb:hover{background:#1877F2;color:#fff}.snsbtn.fb:hover svg{fill:#fff}
+
+/* ── 푸터 ── */
+.ft{background:#0D0D0D;color:#9CA3AF;padding:32px 20px;text-align:center;border-top:4px solid var(--red)}
+.ft-brand{font-family:var(--ft);font-size:1.2rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:6px}
+.ft-dot{width:9px;height:9px;background:var(--red);border-radius:50%}
+.ft p{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);line-height:1.88;color:#6B7280;margin-top:6px}
+
+/* ── YouTube 모달 ── */
+.yt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.yt-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.yt-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.yt-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.yt-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.yt-inp:focus{border-color:var(--red)}
+.yt-btns{display:flex;gap:9px;margin-top:14px}
+.yt-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s}
+.yt-ok:hover{background:#a80018}
+.yt-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+
+/* ── 스크롤 reveal ── */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:none}
+
+/* ════════════════════════════════════════════════════════════════
+   ★ GRAND PRINCIPLE — 타이포그래피 대원칙 (절대 변경 금지)
+   ────────────────────────────────────────────────────────────────
+   [원칙 1] 영문 제목 → Playfair Display (var(--fe-head))
+            적용: .en-head .en-src-label .vc-name .on-name .aweb-org-ttl
+   [원칙 2] 영문 본문 → Source Serif 4   (var(--fe-body))
+            적용: .en-body .en-src 본문 .ko-trans .src-cite
+   [원칙 3] 한국어 전체 → Noto Sans KR  (var(--fb))
+   [원칙 4] UI·버튼 → Pretendard         (var(--ft))
+   [원칙 5] 이탤릭 전면 금지 — em, i 태그 포함 모든 요소 font-style:normal
+   [원칙 6] 이탤릭 유일 예외 → .src-cite  (Source: 출처 라인만)
+   [원칙 7] .ko-trans 평서체 필수 — font-style:normal !important 지정
+   ────────────────────────────────────────────────────────────────
+   컴포넌트 CSS 클래스 빠른 참조
+   .dcall        빨간 데이터 콜아웃   | .cctx       파란 컨텍스트 박스
+   .lq           법조항/인용 박스     | .flow        흐름 다이어그램
+   .rm           리스크 미터(바)      | .pq          전폭 인용구 블록
+   .en-src       영문 원문 박스       | .ko-trans    한국어 번역 박스
+   .vendor-card  업체 정보 카드       | .aweb-org    조직도 래퍼
+   .media-pair   이미지+영상 쌍       | .ac          실천 강령 카드
+   fi.s=초록 fi.w=황색 fi.d=빨강     | rbf.h=적 .m=황 .l=녹
+   ════════════════════════════════════════════════════════════════ */
+
+/* 영문 제목 스타일 — Playfair Display */
+.en-head{font-family:var(--fe-head);font-style:normal;font-weight:800}
+/* 영문 본문 스타일 — Source Serif 4 */
+.en-body{font-family:var(--fe-body);font-style:normal;font-weight:400}
+/* 이탤릭 전면 차단 — 출처(.src-cite) 제외한 모든 요소 */
+em, i{font-style:normal}
+/* 출처(Source:) 라인만 이탤릭 허용 */
+.src-cite{font-style:italic !important;font-family:var(--fe-body);font-size:clamp(13px,2.8vw,15px);color:var(--ink3);text-align:right;margin-top:10px;display:block}
+/* .lq-src(법조항 박스 출처)도 동일 규칙 */
+.lq-src{font-style:italic !important;font-family:var(--fe-body)}
+
+/* ────────────────────────────────────────────────────────────────
+   ★ 영문 원문 박스 (.en-src) — 사용 규칙
+   ────────────────────────────────────────────────────────────────
+   구조 (반드시 이 순서 준수):
+   <div class="en-src">
+     <div class="en-src-label">🇺🇸 [국기+기관명·발표일]</div>
+     [영문 원문 본문 — Source Serif 4, Roman]
+     <div class="src-cite">Source: [기관명, 연월]</div>   ← 이탤릭
+   </div>
+   <div class="ko-trans">
+     🇰🇷 한국어 번역: [번역문 — 평서체, 이탤릭 금지]
+   </div>
+   ──────────────────────────────────────────────────────────────── */
+.en-src{
+  background:#F8FAFC;border:2px solid #94A3B8;border-left:6px solid #475569;
+  border-radius:12px;padding:20px 24px;margin:18px 0 0;
+  font-family:var(--fe-body);font-size:clamp(15px,3vw,17px);
+  color:#1E293B;line-height:1.9;font-style:normal
+}
+.en-src-label{
+  font-family:var(--fe-head);font-size:clamp(12px,2.6vw,14px);font-weight:700;
+  color:#475569;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:10px;font-style:normal
+}
+/* 한국어 번역 박스 — 평서체(Roman) 강제, 이탤릭 절대 금지 */
+.ko-trans{
+  background:var(--ambbg);border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;
+  padding:16px 20px;margin:0 0 20px;
+  font-family:var(--fb);font-size:clamp(16px,3.2vw,18px);
+  color:#78350F;line-height:1.92;
+  font-style:normal !important  /* ← 이탤릭 절대 금지 */
+}
+
+/* ── A-WEB 조직도 ── */
+.aweb-org{margin:28px 0;background:#fff;border:2px solid var(--bdr);border-radius:16px;padding:26px 20px;box-shadow:var(--sh);overflow-x:auto}
+.aweb-org-ttl{font-family:var(--fe-head);font-size:clamp(17px,3.5vw,20px);font-weight:800;color:var(--ink);text-align:center;margin-bottom:22px;font-style:normal}
+.org-level{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;position:relative}
+.org-node{background:var(--redbg);border:2.5px solid var(--redl);border-radius:12px;padding:12px 16px;text-align:center;min-width:130px;box-shadow:var(--sh)}
+.org-node.top{background:var(--red);border-color:var(--red)}
+.org-node.top .on-name{color:#fff}
+.org-node.top .on-sub{color:rgba(255,255,255,.82)}
+.org-node.blu{background:var(--blubg);border-color:#BFDBFE}
+.org-node.blu .on-name{color:var(--blu)}
+.on-name{font-family:var(--fe-head);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--red);line-height:1.35;font-style:normal}
+.on-sub{font-family:var(--fb);font-size:clamp(11px,2.4vw,12px);color:var(--ink3);margin-top:3px;font-weight:600}
+.org-connector{text-align:center;font-size:1.3rem;color:var(--bdr);line-height:1;margin:2px 0}
+
+/* ── 선거장비 업체 정보 카드 ── */
+.vendor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:26px 0}
+.vendor-card{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 20px;box-shadow:var(--sh);transition:border-color .2s,box-shadow .2s}
+.vendor-card:hover{border-color:var(--red);box-shadow:var(--shl)}
+.vc-badge{font-family:var(--ft);font-size:clamp(11px,2.4vw,13px);font-weight:700;color:#fff;background:var(--red);border-radius:6px;padding:3px 10px;display:inline-block;letter-spacing:.08em;margin-bottom:10px}
+.vc-badge.b{background:var(--blu)}
+.vc-badge.g{background:var(--grn)}
+.vc-name{font-family:var(--fe-head);font-size:clamp(16px,3.2vw,19px);font-weight:800;color:var(--ink);margin-bottom:6px;line-height:1.3;font-style:normal}
+.vc-name-ko{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--ink3);margin-bottom:10px}
+.vc-info{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink2);line-height:1.95}
+.vc-info strong{font-weight:700;color:var(--ink)}
+.vc-role{margin-top:10px;padding-top:10px;border-top:1.5px solid var(--rul);font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);color:var(--ink3);line-height:1.75}
+
+/* ── 반응형 ── */
+@media(max-width:600px){
+  .mh-hero{grid-template-columns:1fr}
+  .stats{flex-direction:row;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px}
+  .sec-ttl{font-size:1.15rem}
+  .rl{width:110px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<!-- YouTube 모달 -->
+<div class="yt-modal" id="ytm" style="display:none">
+  <div class="yt-box">
+    <div class="yt-ttl">📹 YouTube 영상 삽입</div>
+    <div class="yt-desc">관련 YouTube 영상 링크를 붙여넣으세요.<br>확인하면 영상이 이 섹션에 영구 삽입됩니다.</div>
+    <input class="yt-inp" id="yti" type="text" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="yt-btns">
+      <button class="yt-ok" onclick="ytOk()">✓ 삽입하기</button>
+      <button class="yt-cancel" onclick="ytClose()">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     ★ 마스트헤드 (.mh)  ← 체크리스트 순서대로 수정
+     □ mh-meta    : EP.00 → 실제 번호, 연재 시리즈 이름
+     □ ep-lbl     : 카테고리 레이블 (예: "긴급 추적")
+     □ .headline  : h1 제목 — <span class="acc">강조어</span>
+     □ .sub-hl    : 부제 1~2줄
+     □ .stat × 3  : stat-n(숫자) + stat-l(라벨) — 핵심 통계
+     □ .tag       : .hot 4개(주요) + 일반 6개(보조)
+════════════════════════════════════════ -->
+<header class="mh">
+  <div class="mh-top">
+    <div class="logo"><span class="logo-dot"></span>IssueLens</div>
+    <span class="mh-meta">EP.00 · [연재 시리즈 이름]</span>
+    <span class="mh-meta">IssueLens 편집부</span>
+  </div>
+  <div class="mh-hero">
+    <div>
+      <div class="ep-lbl">EP.00 &nbsp;[카테고리 레이블]</div>
+      <h1 class="headline">
+        [헤드라인 첫 줄],<br>
+        <span class="acc">[강조 키워드]</span><br>
+        [헤드라인 마지막 줄]
+      </h1>
+      <p class="sub-hl">[부제 첫 문장]<br>[부제 두 번째 문장]</p>
+    </div>
+    <div class="stats">
+      <!-- 통계 카드 1 -->
+      <div class="stat">
+        <span class="stat-n">[숫자]</span>
+        <span class="stat-l">[라벨 첫 줄]<br>[라벨 둘째 줄]</span>
+      </div>
+      <!-- 통계 카드 2 -->
+      <div class="stat">
+        <span class="stat-n">[숫자]</span>
+        <span class="stat-l">[라벨 첫 줄]<br>[라벨 둘째 줄]</span>
+      </div>
+      <!-- 통계 카드 3 -->
+      <div class="stat">
+        <span class="stat-n">[숫자]</span>
+        <span class="stat-l">[라벨 첫 줄]<br>[라벨 둘째 줄]</span>
+      </div>
+    </div>
+  </div>
+  <div class="tags">
+    <!-- .hot = 주요 태그, 일반 .tag = 보조 태그 -->
+    <span class="tag hot">#[주요태그1]</span>
+    <span class="tag hot">#[주요태그2]</span>
+    <span class="tag hot">#[주요태그3]</span>
+    <span class="tag hot">#[주요태그4]</span>
+    <span class="tag">#[보조태그1]</span>
+    <span class="tag">#[보조태그2]</span>
+    <span class="tag">#[보조태그3]</span>
+    <span class="tag">#[보조태그4]</span>
+    <span class="tag">#[보조태그5]</span>
+    <span class="tag">#[보조태그6]</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     ★ 브랜드 스트립 (.brand-strip)
+     ─ 주제 관련 핵심 브랜드/기관/키워드 카드
+     ─ bp-svg : SVG 색상 블록 또는 로고 이미지
+     ─ bp-name: 영문 공식명 (Pretendard 800)
+     ─ bp-sub : 한글 부제 (Noto Sans KR 600)
+     ─ 카드 수: 4~8개 권장 / hover 효과 자동
+════════════════════════════════════════ -->
+<div class="brand-strip rev">
+  <div class="brand-strip-inner">
+    <div class="brand-ttl">⚠️ [브랜드 스트립 제목]</div>
+    <div class="brand-row">
+      <!-- 브랜드 카드 반복 — 필요에 따라 추가/삭제 -->
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#4B5563"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="16" font-weight="900" fill="white" text-anchor="middle">[BRAND 1]</text>
+          </svg>
+        </div>
+        <span class="bp-name">[Brand 1]</span><span class="bp-sub">[브랜드1]</span>
+      </div>
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#1E3A8A"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="16" font-weight="900" fill="white" text-anchor="middle">[BRAND 2]</text>
+          </svg>
+        </div>
+        <span class="bp-name">[Brand 2]</span><span class="bp-sub">[브랜드2]</span>
+      </div>
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#065F46"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="16" font-weight="900" fill="white" text-anchor="middle">[BRAND 3]</text>
+          </svg>
+        </div>
+        <span class="bp-name">[Brand 3]</span><span class="bp-sub">[브랜드3]</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 기사 본문 ═══ -->
+<main>
+
+  <!-- ── 면책 공고 ── -->
+  <div class="disclaimer rev" style="margin:28px 20px 0;max-width:860px;margin-left:auto;margin-right:auto">
+    <strong style="color:var(--blu)">📌 알림 및 면책 공고</strong><br>
+    [면책 공고 내용을 입력하세요. 예: 본 게시물은 공신력 있는 언론 보도 및 정부 기관 발표 자료를 바탕으로 작성된 공익적 논평입니다.]
+  </div>
+
+  <div class="ab">
+
+    <!-- ── 리드 문단 (인트로) ── -->
+    <!-- 배경: 황색 좌측 바. 강조: .hl-a(amber) .hl-r(red) .hl-b(blue) -->
+    <p class="intro rev" style="margin-top:28px">
+      <strong class="hl-a">[핵심 키워드]</strong> [리드 문단 내용을 입력하세요. 독자의 관심을 끌 수 있는 강렬한 첫 문장으로 시작하세요.]
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         ★ SECTION 1 — 빨간 섹션 (.sec-ttl)
+         ─ 내부 컴포넌트 선택 사용:
+           .dcall   빨간 데이터 콜아웃 (bignum + biglbl + cbody)
+           .cctx    파란 컨텍스트 박스 (cctx-lbl + cbody)
+           .lq      법조항/인용 박스 (lq-bdg + lq-txt + lq-src)
+           .flow    흐름 다이어그램 (fi.s=초록 .w=황색 .d=빨강)
+           .rm      리스크 미터 바 (rbf.h=적 .m=황 .l=녹, data-w=0~100)
+           .en-src  영문 원문 → .ko-trans 번역 쌍 (반드시 src-cite 포함)
+           .pq      인용구 블록 (em = 빨간 밑줄)
+           media-pair  이미지+영상 박스 쌍 (mbox ID 중복 금지)
+         ─ SEO 검색 질문 박스: 선택 사항
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">01</span>[섹션 1 제목]</h2>
+
+      <!-- SEO 검색 질문 박스 (선택) -->
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "[검색어1]" · "[검색어2]" · "[검색어3]"
+      </div>
+
+      <!-- 본문 문단 -->
+      <p class="bt">
+        <strong class="hl-r">[강조 키워드]</strong> [본문 내용을 입력하세요.]
+      </p>
+
+      <!-- 데이터 콜아웃 (빨간) -->
+      <div class="dcall rev">
+        <div class="dcall-lbl">FACT CHECK · [출처 또는 라벨]</div>
+        <span class="bignum">[큰 숫자 또는 수치]</span>
+        <span class="biglbl">[수치 설명 — 날짜, 출처 등]</span>
+        <p class="cbody">[콜아웃 본문 내용. <strong>강조할 텍스트</strong>는 strong 태그를 사용하세요.]</p>
+      </div>
+
+      <!-- ★ 영문 원문 박스 표준 구조 — 복사해서 사용
+           순서: en-src-label → 영문본문 → src-cite(이탤릭) → 닫기 → ko-trans(평서체)
+           상세 규칙: 파일 최상단 Master Template 주석 ██4 참조 -->
+      <div class="en-src rev">
+        <div class="en-src-label">🇺🇸 [국기] [기관명] — [발표 연월]</div>
+        "[영문 원문 본문. Source Serif 4 Roman. 이탤릭 금지.]"
+        <div class="src-cite">Source: [기관 공식 명칭], [발표 연월]</div>
+      </div>
+      <div class="ko-trans">
+        🇰🇷 한국어 번역: [번역문. 평서체 필수. 이탤릭 절대 금지.]
+      </div>
+
+      <!-- 흐름 다이어그램 -->
+      <!-- fi 클래스: .s(초록/긍정) .w(황색/경고) .d(빨강/위험) -->
+      <div class="flow rev">
+        <div class="flow-ttl">📊 [다이어그램 제목]</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi s">📌</div><div class="fs-lbl">[단계 1]</div><div class="fs-sub">[설명]</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">⚙️</div><div class="fs-lbl">[단계 2]</div><div class="fs-sub">[설명]</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">⚠️</div><div class="fs-lbl">[단계 3]</div><div class="fs-sub">[설명]</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🔴</div><div class="fs-lbl">[단계 4]</div><div class="fs-sub">[설명]</div></div>
+        </div>
+      </div>
+
+      <!-- 미디어 박스 쌍 (이미지 + 영상) -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입</div>
+          <div class="mbox" id="mb-s1i" data-t="img" onclick="mbClick('s1i')">
+            <div class="mbox-ph" id="ph-s1i">
+              <span class="ico">🖼️</span>
+              <p>이미지 삽입</p>
+              <span class="hint">클릭 → 파일 선택</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s1i" accept="image/*" style="display:none" onchange="mbLoadImg('s1i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입</div>
+          <div class="mbox" id="mb-s1v" data-t="vid" onclick="mbClick('s1v')">
+            <div class="mbox-ph" id="ph-s1v">
+              <span class="ico">🎬</span>
+              <p>YouTube 영상 삽입</p>
+              <span class="hint">클릭 → 링크 입력</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 1 -->
+
+    <!-- ══════════════════════════════════════════
+         ★ SECTION 2 — 파란 섹션 (.sec-ttl.b2)
+         ─ Do Hyeon 폰트 + 파란 좌측 바
+         ─ .num 배지도 파란색으로 자동 변경
+         ─ 동일 컴포넌트 사용 가능 (Section 1 참조)
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">02</span>[섹션 2 제목]</h2>
+
+      <!-- SEO 검색 질문 박스 (선택) -->
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "[검색어1]" · "[검색어2]" · "[검색어3]"
+      </div>
+
+      <p class="bt"><strong class="hl-b">[강조 키워드]</strong> [본문 내용을 입력하세요.]</p>
+
+      <!-- 법조항 / 공식 인용 박스 -->
+      <div class="lq rev">
+        <div class="lq-bdg">[법령명 / 출처 배지]</div>
+        <p class="lq-txt">[인용 내용을 입력하세요. <strong>핵심 구절</strong>은 strong 태그로 강조하세요.]</p>
+        <div class="lq-src">— [출처 / 제정년도 / 시행 현황] —</div>
+      </div>
+
+      <p class="bt"><strong class="hl-r">[강조 키워드]</strong> [추가 본문 내용을 입력하세요.]</p>
+
+      <!-- 리스크 미터 -->
+      <!-- rbf 클래스: .h(빨강) .m(황색) .l(초록) / data-w: 0~100 퍼센트 -->
+      <div class="rm rev">
+        <div class="rm-ttl">⚡ [리스크 미터 제목]</div>
+        <div class="ri"><div class="rl">[항목 1]</div><div class="rbg"><div class="rbf h" data-w="90"></div></div><div class="rp" style="color:var(--red)">90%</div></div>
+        <div class="ri"><div class="rl">[항목 2]</div><div class="rbg"><div class="rbf h" data-w="80"></div></div><div class="rp" style="color:var(--red)">80%</div></div>
+        <div class="ri"><div class="rl">[항목 3]</div><div class="rbg"><div class="rbf m" data-w="65"></div></div><div class="rp" style="color:var(--amb)">65%</div></div>
+        <div class="ri"><div class="rl">[항목 4]</div><div class="rbg"><div class="rbf m" data-w="50"></div></div><div class="rp" style="color:var(--amb)">50%</div></div>
+        <div class="ri"><div class="rl">[항목 5]</div><div class="rbg"><div class="rbf l" data-w="20"></div></div><div class="rp" style="color:var(--grn)">20%</div></div>
+      </div>
+
+      <!-- 미디어 박스 쌍 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입</div>
+          <div class="mbox" id="mb-s2i" data-t="img" onclick="mbClick('s2i')">
+            <div class="mbox-ph" id="ph-s2i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s2i" accept="image/*" style="display:none" onchange="mbLoadImg('s2i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입</div>
+          <div class="mbox" id="mb-s2v" data-t="vid" onclick="mbClick('s2v')">
+            <div class="mbox-ph" id="ph-s2v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 2 -->
+
+    <!-- ══════════════════════════════════════════
+         ★ SECTION 3+ — 추가 섹션 (필요시 복사·반복)
+         ─ 빨간(.sec-ttl) / 파란(.sec-ttl.b2) 교대 권장
+         ─ mbox ID는 섹션마다 고유하게: s3i, s3v, s4i …
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">03</span>[섹션 3 제목]</h2>
+
+      <!-- SEO 검색 질문 박스 (선택) -->
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "[검색어1]" · "[검색어2]" · "[검색어3]"
+      </div>
+
+      <p class="bt"><strong class="hl-r">[강조 키워드]</strong> [본문 내용을 입력하세요.]</p>
+
+      <p class="bt"><strong class="hl-r">[강조 키워드]</strong> [두 번째 본문 문단을 입력하세요.]</p>
+
+      <!-- 컨텍스트 박스 (파란) -->
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 CONTEXT · [컨텍스트 박스 소제목]</div>
+        <p class="cbody"><strong>[핵심 내용]</strong>을 여기에 입력하세요. 배경 설명, 추가 맥락, 비교 정보 등을 담는 데 적합합니다.</p>
+      </div>
+
+      <!-- 미디어 박스 쌍 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입</div>
+          <div class="mbox" id="mb-s3i" data-t="img" onclick="mbClick('s3i')">
+            <div class="mbox-ph" id="ph-s3i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s3i" accept="image/*" style="display:none" onchange="mbLoadImg('s3i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입</div>
+          <div class="mbox" id="mb-s3v" data-t="vid" onclick="mbClick('s3v')">
+            <div class="mbox-ph" id="ph-s3v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 3 -->
+
+    <!-- ══════════════════════════════════════════
+         ★ A-WEB 운영 조직도
+         세계선거기관협의회(A-WEB) 공식 조직 구조
+         출처: aweb.org / NEC Korea
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">★</span>A-WEB 운영 조직도 — Association of World Election Bodies</h2>
+
+      <p class="bt">
+        <strong class="hl-r">A-WEB(세계선거기관협의회)</strong>는 대한민국 중앙선거관리위원회(NEC)가 주도하여 2013년 10월 창설한 선거관리 분야 세계 최대 국제기구입니다. 현재 111개국 121개 회원기관으로 구성되며, 사무국은 인천 송도 미추홀타워에 위치합니다.
+      </p>
+
+      <!-- A-WEB 조직도 -->
+      <div class="aweb-org rev">
+        <div class="aweb-org-ttl">🏛️ A-WEB Official Organization Chart</div>
+
+        <!-- 총회 -->
+        <div class="org-level">
+          <div class="org-node top" style="min-width:220px">
+            <div class="on-name">General Assembly</div>
+            <div class="on-sub">총회 — 최고의결기구 / 격년 개최</div>
+          </div>
+        </div>
+        <div class="org-connector">↓</div>
+
+        <!-- 집행이사회 -->
+        <div class="org-level">
+          <div class="org-node" style="min-width:220px">
+            <div class="on-name">Executive Board</div>
+            <div class="on-sub">집행이사회 — 12개 이사국 구성</div>
+          </div>
+          <div class="org-node blu" style="min-width:180px">
+            <div class="on-name">Oversight &amp; Audit Committee</div>
+            <div class="on-sub">감사위원회</div>
+          </div>
+        </div>
+        <div class="org-connector">↓</div>
+
+        <!-- 사무국 -->
+        <div class="org-level">
+          <div class="org-node" style="min-width:280px;background:var(--ambbg);border-color:#FDE68A">
+            <div class="on-name" style="color:var(--amb)">Secretariat · 사무국</div>
+            <div class="on-sub">사무총장 (Secretary General): Dr. In-sik Jang</div>
+            <div class="on-sub" style="margin-top:4px">약 15명의 선거 전문인력 구성</div>
+          </div>
+        </div>
+        <div class="org-connector">↓</div>
+
+        <!-- 사무국 하위 부서 -->
+        <div class="org-level">
+          <div class="org-node blu">
+            <div class="on-name">Research &amp; Consulting</div>
+            <div class="on-sub">연구·컨설팅부</div>
+          </div>
+          <div class="org-node blu">
+            <div class="on-name">Capacity Building</div>
+            <div class="on-sub">역량강화부 (연수·시찰)</div>
+          </div>
+          <div class="org-node blu">
+            <div class="on-name">Communications</div>
+            <div class="on-sub">홍보·출판부</div>
+          </div>
+          <div class="org-node blu">
+            <div class="on-name">Administration</div>
+            <div class="on-sub">행정·재무부</div>
+          </div>
+        </div>
+
+        <!-- 사무국 연락정보 -->
+        <div style="margin-top:20px;padding:16px 18px;background:var(--bg2);border-radius:12px;border:1.5px solid var(--bdr)">
+          <div style="font-family:var(--fe-head);font-weight:800;font-size:clamp(14px,3vw,16px);color:var(--ink);margin-bottom:8px;font-style:normal">📍 A-WEB Secretariat — Official Contact</div>
+          <div style="font-family:var(--fe-body);font-size:clamp(14px,3vw,15px);color:var(--ink2);line-height:2;font-style:normal">
+            <strong>Address:</strong> 1911, 19F, Michuhol Tower, 12 Gaetbeol-ro, Yeonsu-gu, Incheon 21999, Republic of Korea<br>
+            <strong>한국어 주소:</strong> 인천광역시 연수구 갯벌로 12 미추홀타워 19층 1911호<br>
+            <strong>Tel:</strong> +82-32-930-7200 &nbsp;|&nbsp; <strong>Fax:</strong> +82-32-930-7299<br>
+            <strong>E-mail:</strong> <a href="/cdn-cgi/l/email-protection#e497818796819085968d8590a485938186ca8b9683"><span class="__cf_email__" data-cfemail="e99a8c8a9b8c9d889b80889da9889e8c8bc7869b8e">[email&#160;protected]</span></a> &nbsp;|&nbsp; <strong>Web:</strong> www.aweb.org
+          </div>
+          <div class="src-cite" style="margin-top:8px;font-size:clamp(13px,2.8vw,14px);color:var(--ink3);text-align:right">
+            Source: A-WEB Official Website (aweb.org), April 2026
+          </div>
+        </div>
+      </div><!-- /aweb-org -->
+
+      <!-- NEC 대표 연락정보 -->
+      <div class="cctx rev" style="margin-top:20px">
+        <div class="cctx-lbl">📌 A-WEB 주관기관 — 중앙선거관리위원회 (NEC, Korea)</div>
+        <p class="cbody" style="font-style:normal">
+          <strong>주소:</strong> 경기도 과천시 홍촌말로 44 (중앙동) 정부과천청사<br>
+          <strong>대표전화:</strong> 02-503-1114 &nbsp;|&nbsp; <strong>민원전화:</strong> 1390<br>
+          <strong>홈페이지:</strong> www.nec.go.kr
+        </p>
+        <div class="src-cite" style="text-align:right;font-size:clamp(13px,2.8vw,14px);color:var(--ink3)">
+          Source: 중앙선거관리위원회 공식 홈페이지 (nec.go.kr)
+        </div>
+      </div>
+    </div><!-- /A-WEB 조직도 sec -->
+
+    <!-- ══════════════════════════════════════════
+         ★ 선거 투표기 · 개표기 제조사 및 납품사
+         한국선거관리위원회 장비 공급망 정보
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">🏭</span>선거장비 제조·납품사 — 투표기·개표기·분류기 공급망</h2>
+
+      <p class="bt">
+        한국 선관위에 투표지분류기(전자 개표 보조기기) 등을 납품하는 주요 업체는 아래와 같습니다. 이들 업체는 조달청 나라장터 입찰을 통해 선발되며, A-WEB 해외 수출 사업과도 연계됩니다.
+      </p>
+
+      <div class="vendor-grid rev">
+
+        <!-- 미루시스템즈 -->
+        <div class="vendor-card">
+          <div class="vc-badge">투표지분류기 제조·납품</div>
+          <div class="vc-name">MIRU Systems Co., Ltd.</div>
+          <div class="vc-name-ko">(주)미루시스템즈</div>
+          <div class="vc-info">
+            <strong>주소:</strong> 경기도 성남시 분당구 판교로228번길 17,<br>
+            판교세븐벤처밸리2 1동 601호<br>
+            (삼평동)<br>
+            <strong>전화:</strong> 031-622-3900<br>
+            <strong>홈페이지:</strong> mirusystems.com<br>
+            <strong>설립:</strong> 1999년 3월<br>
+            <strong>직원수:</strong> 약 78명
+          </div>
+          <div class="vc-role">
+            ▸ 2013년~: 투표지분류기 선관위 주공급사 (118억 원 규모 낙찰)<br>
+            ▸ 이라크·엘살바도르·키르기스스탄 등 해외 전자투표시스템 수출<br>
+            ▸ A-WEB 연계 해외 선거 ICT 인프라 사업 참여
+          </div>
+          <div class="src-cite" style="margin-top:8px;font-size:clamp(12px,2.5vw,13px)">
+            Source: 경기도일자리재단 기업정보, 조달청 나라장터 입찰공고, 오마이뉴스 2013.8
+          </div>
+        </div>
+
+        <!-- 한틀시스템 -->
+        <div class="vendor-card">
+          <div class="vc-badge b">투표지분류기 제조·납품 (前 독점)</div>
+          <div class="vc-name">Hantl System Co., Ltd.</div>
+          <div class="vc-name-ko">(주)한틀시스템</div>
+          <div class="vc-info">
+            <strong>소재지:</strong> 대한민국<br>
+            <strong>업종:</strong> 선거장비 제조 / 컴퓨터 주변기기<br>
+            <strong>사업자번호:</strong> 494-88-00308 (추정)<br>
+            <br>
+            <em style="font-style:normal;color:var(--ink3);font-size:0.9em">※ 홈페이지 비공개, 공개 연락처 미확인</em>
+          </div>
+          <div class="vc-role">
+            ▸ 2002~2013년: 투표지분류기 10년간 독점 납품<br>
+            ▸ 2013년 입찰 탈락 → 2017년 우선협상대상자 선정<br>
+            ▸ 2022년 입찰 참여 이력
+          </div>
+          <div class="src-cite" style="margin-top:8px;font-size:clamp(12px,2.5vw,13px)">
+            Source: 오마이뉴스 2013.8, 더퍼블릭 2025.3, 조달청 나라장터
+          </div>
+        </div>
+
+        <!-- 한국전자투표 -->
+        <div class="vendor-card">
+          <div class="vc-badge g">온라인 투표 시스템</div>
+          <div class="vc-name">Korea e-Voting Co., Ltd.</div>
+          <div class="vc-name-ko">(주)한국전자투표</div>
+          <div class="vc-info">
+            <strong>서비스:</strong> 중앙선관위 온라인투표시스템 운영<br>
+            <strong>플랫폼:</strong> vote.kvoting.go.kr<br>
+            <strong>기술:</strong> 블록체인 기반 전자투표·설문 시스템<br>
+            <strong>대표제품:</strong> DooRoo(두루) 전자투표 플랫폼<br>
+            <strong>규모:</strong> 11~50명
+          </div>
+          <div class="vc-role">
+            ▸ 선관위가 승인한 기관·단체 온라인 선거 서비스 제공<br>
+            ▸ PC·모바일 투표관리, 이용기관 교육, 기술지원<br>
+            ▸ 방송사 대국민 투표 시스템 운영 이력 (미스터트롯 등)
+          </div>
+          <div class="src-cite" style="margin-top:8px;font-size:clamp(12px,2.5vw,13px)">
+            Source: 중앙선거관리위원회 온라인투표시스템 (kvoting.go.kr), 로켓펀치
+          </div>
+        </div>
+
+      </div><!-- /vendor-grid -->
+
+      <!-- 공급망 플로우 -->
+      <div class="flow rev">
+        <div class="flow-ttl">🔗 선거장비 공급망 — Election Equipment Supply Chain</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi s">🏭</div><div class="fs-lbl">제조업체</div><div class="fs-sub">미루시스템즈<br>한틀시스템</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">📋</div><div class="fs-lbl">조달청 입찰</div><div class="fs-sub">나라장터<br>경쟁입찰</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">🏛️</div><div class="fs-lbl">중앙선관위</div><div class="fs-sub">검수·인증<br>배포</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi s">🗳️</div><div class="fs-lbl">전국 개표소</div><div class="fs-sub">투표지<br>분류기 운용</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🌐</div><div class="fs-lbl">A-WEB 수출</div><div class="fs-sub">개도국<br>선거지원</div></div>
+        </div>
+      </div>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">SUPPLY CHAIN NOTE · 공급망 주요 사실</div>
+        <p class="cbody" style="font-style:normal">
+          현행 투표지분류기는 <strong>전자개표기가 아닌 분류 보조기기</strong>로, 실물 투표지를 후보자별로 물리적으로 나누는 역할만 수행합니다. 최종 개표 확정은 선관위 직원과 정당 추천 위원이 수작업으로 재검표 후 공표합니다. 조달청 나라장터를 통한 공개경쟁 입찰이 원칙이며, 2002년 첫 도입 이래 2013·2017·2022년 세 차례 교체 발주가 이루어졌습니다.
+        </p>
+        <div class="src-cite" style="text-align:right;margin-top:8px;font-size:clamp(13px,2.8vw,14px);color:var(--ink3)">
+          Source: 중앙선거관리위원회 개표절차 공식 안내 / 조달청 나라장터 입찰공고
+        </div>
+      </div>
+    </div><!-- /선거장비 sec -->
+
+    <!-- ══════════════════════════════════════════
+         ★ 인용구 블록 (.pq)
+         ─ 본문 마지막에 배치 권장
+         ─ em 태그 → 빨간 밑줄 강조 (이탤릭 아님)
+         ─ 출처: <span style="font-size:…;color:var(--ink3)">
+    ══════════════════════════════════════════ -->
+    <div class="pq rev">
+      <div class="pq-txt">
+        "[인용구 첫 줄 — <em>강조 키워드</em>]<br>
+        [인용구 둘째 줄 — <em>강조 키워드</em>]"
+      </div>
+    </div>
+
+  </div><!-- /ab -->
+
+  <!-- ═══════════════════════════════════════
+       ★ 실천 강령 (.action / .ac)
+       ─ action-grid: auto-fit, minmax(180px,1fr) 자동 배치
+       ─ 카드 구성: ac-n(번호) + ac-ico(이모지) + ac-ttl + ac-desc
+       ─ 최소 4개, 최대 6개 권장
+       ─ action-ttl / action-sub 반드시 작성
+  ════════════════════════════════════════ -->
+  <section class="action" style="padding-top:26px">
+    <div class="action-inner">
+      <div class="action-ttl">[🛡️ 실천 강령 섹션 제목]</div>
+      <div class="action-sub">[실천 강령 부제]</div>
+      <div class="action-grid">
+        <div class="ac">
+          <div class="ac-n">ACTION 01</div>
+          <div class="ac-ico">[🔧]</div>
+          <div class="ac-ttl">[액션 1 제목]</div>
+          <div class="ac-desc">[액션 1 설명을 입력하세요. 구체적이고 실행 가능한 내용으로 작성하세요.]</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 02</div>
+          <div class="ac-ico">[📋]</div>
+          <div class="ac-ttl">[액션 2 제목]</div>
+          <div class="ac-desc">[액션 2 설명을 입력하세요.]</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 03</div>
+          <div class="ac-ico">[📣]</div>
+          <div class="ac-ttl">[액션 3 제목]</div>
+          <div class="ac-desc">[액션 3 설명을 입력하세요.]</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 04</div>
+          <div class="ac-ico">[🗳️]</div>
+          <div class="ac-ttl">[액션 4 제목]</div>
+          <div class="ac-desc">[액션 4 설명을 입력하세요.]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ★ 소셜 공유 바 (.sb) — 수정 불필요
+       ─ 버튼 클릭 → SNS 링크 입력 모달 팝업
+       ─ 저장 후 클릭: 링크 이동 / 더블클릭: 링크 변경
+       ─ ✓ 배지: 링크 저장 완료 표시
+  ════════════════════════════════════════ -->
+
+  <!-- 소셜 링크 입력 모달 -->
+  <div id="sns-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#fff;border-radius:20px;padding:28px 24px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span id="sns-modal-icon" style="font-size:1.6rem"></span>
+        <div id="sns-modal-title" style="font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink)"></div>
+      </div>
+      <div id="sns-modal-desc" style="font-family:var(--fb);font-size:clamp(14px,3vw,15px);color:var(--ink3);margin-bottom:14px;line-height:1.7"></div>
+      <input id="sns-url-input" type="url" placeholder="https://" style="width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s;color:var(--ink)">
+      <div id="sns-saved-bar" style="display:none;margin-top:10px;padding:8px 12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:8px;font-family:var(--fb);font-size:clamp(13px,2.8vw,14px);color:#166534;align-items:center;gap:8px;flex-wrap:wrap">
+        <span>✅ 저장된 링크:</span>
+        <a id="sns-saved-link" href="#" target="_blank" rel="noopener" style="color:#15803D;font-weight:700;word-break:break-all;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></a>
+        <button onclick="snsClearSaved()" style="font-family:var(--ft);font-size:12px;font-weight:700;background:none;border:1.5px solid #86EFAC;border-radius:6px;padding:3px 9px;cursor:pointer;color:#166534;flex-shrink:0">삭제</button>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:14px">
+        <button onclick="snsSave()" style="flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s">저장하기</button>
+        <button onclick="snsClose()" style="font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb">
+    <div class="sb-lbl">공유하기</div>
+    <div class="sb-btns">
+      <button class="snsbtn yt" onclick="snsOpen('yt')">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube
+      </button>
+      <button class="snsbtn ig" onclick="snsOpen('ig')">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+      </button>
+      <button class="snsbtn tt" onclick="snsOpen('tt')">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/></svg>TikTok
+      </button>
+      <button class="snsbtn th" onclick="snsOpen('th')">
+        <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.742-1.757-.438-.505-1.103-.769-1.98-.789h-.047c-.67 0-1.64.191-2.253 1.109l-1.755-1.2c.894-1.307 2.277-2.031 3.98-2.049h.064c2.71.048 4.327 1.692 4.73 4.778.108.028.214.057.316.089l-.001.007c1.338.386 2.462 1.093 3.24 2.254C22.01 16.06 21.748 19 19.743 21c-1.737 1.745-4.189 2.627-7.274 2.647l-.283-.003v.003Z"/></svg>Threads
+      </button>
+      <button class="snsbtn xb" onclick="snsOpen('xb')">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>X
+      </button>
+      <button class="snsbtn fb" onclick="snsOpen('fb')">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+      </button>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════════════════
+     ★ 푸터 (.ft)
+     □ ft-brand : 브랜드명 (기본 IssueLens 유지)
+     □ 두 번째 줄 : [연재 시리즈 이름] · EP.00 교체
+     □ <p> : 저작권 및 출처 문구 맞춤 작성
+════════════════════════════════════════ -->
+<footer class="ft">
+  <div class="ft-brand"><span class="ft-dot"></span>IssueLens</div>
+  <div style="color:#9CA3AF;font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);margin-top:4px">[연재 시리즈 이름] · EP.00</div>
+  <p>본 게시물은 공익 목적의 논평입니다. 공신력 있는 언론 보도 및 정부 기관 발표 자료를 근거로 합니다.<br>Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+<script>
+// ── 진행 바 ──
+const pb=document.getElementById('pb');
+window.addEventListener('scroll',()=>{pb.style.width=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-document.documentElement.clientHeight)*100)+'%'});
+
+// ── 스크롤 reveal ──
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);ro.unobserve(e.target)}})},{threshold:.07});
+document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
+
+// ── 리스크 바 ──
+const bo=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.rbf').forEach(b=>{setTimeout(()=>b.style.width=b.dataset.w+'%',260)});bo.unobserve(e.target)}})},{threshold:.25});
+document.querySelectorAll('.rm').forEach(el=>bo.observe(el));
+
+// ════════════════════════════════════════════════════════════════
+// ── IndexedDB 기반 영구 저장 — IssueLensTemplateMedia v1 ──
+//    이미지 · YouTube · SNS 링크 — 블로그 환경 완전 호환
+// ════════════════════════════════════════════════════════════════
+const IDB_NAME    = 'IssueLensTemplateMedia';
+const IDB_VER     = 1;
+const IDB_MEDIA   = 'mediaStore';
+const IDB_SNS     = 'snsStore';
+let   _db         = null;
+
+function openDB() {
+  if (_db) return Promise.resolve(_db);
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(IDB_NAME, IDB_VER);
+    req.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(IDB_MEDIA))
+        db.createObjectStore(IDB_MEDIA, { keyPath: 'id' });
+      if (!db.objectStoreNames.contains(IDB_SNS))
+        db.createObjectStore(IDB_SNS,   { keyPath: 'id' });
+    };
+    req.onsuccess = e => { _db = e.target.result; resolve(_db); };
+    req.onerror   = e => { console.warn('IndexedDB 열기 실패:', e); reject(e); };
+  });
+}
+
+// ── 미디어 저장 / 삭제 ──
+async function persistMedia(id, val) {
+  try {
+    const db = await openDB();
+    return new Promise((res, rej) => {
+      const tx = db.transaction(IDB_MEDIA, 'readwrite');
+      tx.objectStore(IDB_MEDIA).put({ id, val, _intentionalDelete: false });
+      tx.oncomplete = () => res();
+      tx.onerror    = e => rej(e);
+    });
+  } catch(e) { console.warn('persistMedia 실패:', e); }
+}
+async function persistMediaDeleted(id) {
+  try {
+    const db = await openDB();
+    return new Promise((res, rej) => {
+      const tx = db.transaction(IDB_MEDIA, 'readwrite');
+      tx.objectStore(IDB_MEDIA).put({ id, val: null, _intentionalDelete: true });
+      tx.oncomplete = () => res();
+      tx.onerror    = e => rej(e);
+    });
+  } catch(e) { console.warn('persistMediaDeleted 실패:', e); }
+}
+async function removeMedia(id) {
+  try {
+    const db = await openDB();
+    return new Promise((res, rej) => {
+      const tx = db.transaction(IDB_MEDIA, 'readwrite');
+      tx.objectStore(IDB_MEDIA).delete(id);
+      tx.oncomplete = () => res();
+      tx.onerror    = e => rej(e);
+    });
+  } catch(e) { console.warn('removeMedia 실패:', e); }
+}
+
+// ── SNS 링크 저장 / 삭제 ──
+async function persistSns(id, url) {
+  try {
+    const db = await openDB();
+    return new Promise((res, rej) => {
+      const tx = db.transaction(IDB_SNS, 'readwrite');
+      tx.objectStore(IDB_SNS).put({ id, url });
+      tx.oncomplete = () => res();
+      tx.onerror    = e => rej(e);
+    });
+  } catch(e) { console.warn('persistSns 실패:', e); }
+}
+async function removeSns(id) {
+  try {
+    const db = await openDB();
+    return new Promise((res, rej) => {
+      const tx = db.transaction(IDB_SNS, 'readwrite');
+      tx.objectStore(IDB_SNS).delete(id);
+      tx.oncomplete = () => res();
+      tx.onerror    = e => rej(e);
+    });
+  } catch(e) { console.warn('removeSns 실패:', e); }
+}
+
+// ── 페이지 로드 시 미디어 · SNS 전체 복원 ──
+async function restoreAll() {
+  try {
+    const db = await openDB();
+    // ① 미디어 복원
+    const mRecs = await new Promise((res, rej) => {
+      const tx  = db.transaction(IDB_MEDIA, 'readonly');
+      const req = tx.objectStore(IDB_MEDIA).getAll();
+      req.onsuccess = e => res(e.target.result);
+      req.onerror   = e => rej(e);
+    });
+    for (const rec of mRecs) {
+      if (!rec || !rec.id) continue;
+      if (rec._intentionalDelete) { _restoreDel(rec.id); continue; }
+      if (!rec.val) continue;
+      if (rec.val.startsWith('yt:'))   { _applyYt(rec.id,  rec.val.slice(3).replace('&autoplay=1',''), false); }
+      else if (rec.val.startsWith('data:')) { _applyImg(rec.id, rec.val, false); }
+    }
+    // ② SNS 링크 복원
+    const sRecs = await new Promise((res, rej) => {
+      const tx  = db.transaction(IDB_SNS, 'readonly');
+      const req = tx.objectStore(IDB_SNS).getAll();
+      req.onsuccess = e => res(e.target.result);
+      req.onerror   = e => rej(e);
+    });
+    for (const rec of sRecs) {
+      if (!rec || !rec.id || !rec.url) continue;
+      snsLinks[rec.id] = rec.url;
+      const btn = document.querySelector('.snsbtn.'+rec.id);
+      if (!btn) continue;
+      btn.classList.add('has-link');
+      btn.onclick    = () => window.open(rec.url, '_blank', 'noopener,noreferrer');
+      btn.ondblclick = e  => { e.preventDefault(); snsOpen(rec.id); };
+      btn.title = '클릭: 링크 열기 | 더블클릭: 링크 변경';
+    }
+  } catch(e) { console.warn('restoreAll 실패:', e); }
+}
+
+// ── 삭제 상태 DOM 복원 ──
+function _restoreDel(id) {
+  const box = document.getElementById('mb-'+id);
+  if (!box) return;
+  const wrap = box.closest('.mbox-wrap');
+  if (!wrap) return;
+  wrap.style.display = 'none';
+  const pair = wrap.closest('.media-pair');
+  if (pair && [...pair.querySelectorAll('.mbox-wrap')].every(w=>w.style.display==='none'))
+    pair.style.display = 'none';
+}
+
+// ══════════════════
+// ── 미디어 박스 ──
+// ══════════════════
+let cur = null;
+
+function mbClick(id) {
+  const box = document.getElementById('mb-'+id);
+  if (box.classList.contains('filled')) return;
+  if (box.dataset.t === 'img') document.getElementById('fi-'+id).click();
+  else ytOpen(id);
+}
+
+function mbReplace(id) {
+  mbClear(id);
+  const box = document.getElementById('mb-'+id);
+  if (box.dataset.t === 'img') document.getElementById('fi-'+id).click();
+  else ytOpen(id);
+}
+
+function mbDel(id) {
+  const box  = document.getElementById('mb-'+id);
+  const wrap = box.closest('.mbox-wrap');
+  wrap.style.transition = 'max-height .35s ease, opacity .3s ease, margin .3s ease';
+  wrap.style.overflow   = 'hidden';
+  wrap.style.maxHeight  = wrap.offsetHeight+'px';
+  requestAnimationFrame(() => {
+    wrap.style.maxHeight = '0';
+    wrap.style.opacity   = '0';
+    wrap.style.margin    = '0';
+    wrap.style.padding   = '0';
+  });
+  setTimeout(() => {
+    const pair = wrap.closest('.media-pair');
+    wrap.remove();
+    if (pair && pair.querySelectorAll('.mbox-wrap').length === 0) {
+      pair.style.transition = 'max-height .3s ease, opacity .25s ease, margin .3s ease';
+      pair.style.overflow   = 'hidden';
+      pair.style.maxHeight  = '0';
+      pair.style.opacity    = '0';
+      pair.style.margin     = '0';
+      setTimeout(() => pair.remove(), 320);
+    }
+  }, 360);
+  // 삭제 상태 영구 저장
+  persistMediaDeleted(id);
+}
+
+function mbClear(id) {
+  const box  = document.getElementById('mb-'+id);
+  const ifrm = box.querySelector('iframe');
+  const img  = box.querySelector('img.prev');
+  if (ifrm) ifrm.remove();
+  if (img)  img.remove();
+  box.classList.remove('filled');
+  const ph = document.getElementById('ph-'+id);
+  if (ph) ph.style.display = '';
+  const fi = document.getElementById('fi-'+id);
+  if (fi) fi.value = '';
+  // 교체 시 스토리지에서 제거
+  removeMedia(id);
+}
+
+// ── 이미지 DOM 적용 ──
+function _applyImg(id, dataUrl, save) {
+  const box = document.getElementById('mb-'+id);
+  if (!box) return;
+  const ph = document.getElementById('ph-'+id);
+  if (ph) ph.style.display = 'none';
+  let img = box.querySelector('img.prev');
+  if (!img) {
+    img = document.createElement('img');
+    img.className = 'prev';
+    box.insertBefore(img, box.querySelector('.mctrl'));
+  }
+  img.src = dataUrl;
+  box.classList.add('filled');
+  box.onclick = null;
+  box.style.minHeight = '200px';
+  if (save) persistMedia(id, dataUrl);
+}
+
+function mbLoadImg(id, inp) {
+  if (!inp.files || !inp.files[0]) return;
+  const ph = document.getElementById('ph-'+id);
+  if (ph) ph.querySelector('p').textContent = '저장 중…';
+  const r = new FileReader();
+  r.onload = ev => _applyImg(id, ev.target.result, true);
+  r.readAsDataURL(inp.files[0]);
+}
+
+// ── YouTube DOM 적용 ──
+function _applyYt(id, embedUrl, save) {
+  const box = document.getElementById('mb-'+id);
+  if (!box) return;
+  const ph = document.getElementById('ph-'+id);
+  if (ph) ph.style.display = 'none';
+  let ifr = box.querySelector('iframe');
+  if (!ifr) {
+    ifr = document.createElement('iframe');
+    ifr.style.cssText = 'width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px';
+    ifr.allow = 'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';
+    ifr.allowFullscreen = true;
+    box.insertBefore(ifr, box.querySelector('.mctrl'));
+  }
+  ifr.src = embedUrl;
+  box.classList.add('filled');
+  box.style.minHeight = '220px';
+  box.onclick = null;
+  if (save) persistMedia(id, 'yt:'+embedUrl);
+}
+
+// ── YouTube 모달 ──
+function ytOpen(id) { cur=id; document.getElementById('yti').value=''; document.getElementById('ytm').style.display='flex'; setTimeout(()=>document.getElementById('yti').focus(),80); }
+function ytClose()  { document.getElementById('ytm').style.display='none'; cur=null; }
+function ytEmbed(url) {
+  try {
+    const u = new URL(url); let vid='';
+    if (u.hostname.includes('youtu.be')) vid = u.pathname.slice(1).split('?')[0];
+    else vid = u.searchParams.get('v') || '';
+    return vid ? 'https://www.youtube.com/embed/'+vid+'?rel=0&autoplay=1' : null;
+  } catch(e) { return null; }
+}
+function ytOk() {
+  const url = document.getElementById('yti').value.trim();
+  const em  = ytEmbed(url);
+  if (!em) { alert('올바른 YouTube 링크를 입력해 주세요.\n예: https://www.youtube.com/watch?v=XXXXXXXXXXX'); return; }
+  _applyYt(cur, em, true);
+  ytClose();
+}
+
+// ════════════════════
+// ── SNS 링크 모달 ──
+// ════════════════════
+const snsMeta = {
+  yt: {label:'YouTube',    desc:'YouTube 채널 또는 영상 링크를 입력하세요.',      ph:'https://www.youtube.com/@channel'},
+  ig: {label:'Instagram',  desc:'Instagram 프로필 또는 게시물 링크를 입력하세요.',ph:'https://www.instagram.com/username'},
+  tt: {label:'TikTok',     desc:'TikTok 프로필 또는 영상 링크를 입력하세요.',     ph:'https://www.tiktok.com/@username'},
+  th: {label:'Threads',    desc:'Threads 프로필 또는 게시물 링크를 입력하세요.',   ph:'https://www.threads.net/@username'},
+  xb: {label:'X (Twitter)',desc:'X(트위터) 프로필 또는 게시물 링크를 입력하세요.',ph:'https://x.com/username'},
+  fb: {label:'Facebook',   desc:'Facebook 페이지 또는 게시물 링크를 입력하세요.', ph:'https://www.facebook.com/page'}
+};
+const snsLinks = {};
+let curSns = null;
+
+function snsOpen(id) {
+  curSns = id;
+  const m = snsMeta[id];
+  document.getElementById('sns-modal-title').textContent = m.label+' 링크 설정';
+  document.getElementById('sns-modal-desc').textContent  = m.desc;
+  const inp = document.getElementById('sns-url-input');
+  inp.placeholder = m.ph;
+  inp.value = snsLinks[id] || '';
+  inp.style.borderColor = 'var(--bdr)';
+  snsUpdateSavedBar();
+  document.getElementById('sns-modal').style.display = 'flex';
+  setTimeout(() => inp.focus(), 80);
+}
+
+function snsUpdateSavedBar() {
+  const id  = curSns;
+  const bar = document.getElementById('sns-saved-bar');
+  const lnk = document.getElementById('sns-saved-link');
+  if (snsLinks[id]) {
+    bar.style.display = 'flex';
+    lnk.href = snsLinks[id];
+    lnk.textContent = snsLinks[id];
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+function snsClearSaved() {
+  if (!curSns) return;
+  const id = curSns;
+  delete snsLinks[id];
+  document.getElementById('sns-url-input').value = '';
+  const btn = document.querySelector('.snsbtn.'+id);
+  if (btn) { btn.classList.remove('has-link'); btn.onclick=()=>snsOpen(id); btn.ondblclick=null; btn.title=''; }
+  removeSns(id);
+  snsUpdateSavedBar();
+}
+
+function snsSave() {
+  const url = document.getElementById('sns-url-input').value.trim();
+  if (!url) { alert('링크를 입력해 주세요.'); return; }
+  let finalUrl = url;
+  if (!/^https?:\/\//i.test(finalUrl)) finalUrl = 'https://'+finalUrl;
+  const id = curSns;
+  snsLinks[id] = finalUrl;
+  const btn = document.querySelector('.snsbtn.'+id);
+  if (btn) {
+    btn.classList.add('has-link');
+    btn.onclick    = () => window.open(snsLinks[id],'_blank','noopener,noreferrer');
+    btn.ondblclick = e  => { e.preventDefault(); snsOpen(id); };
+    btn.title = '클릭: 링크 열기 | 더블클릭: 링크 변경';
+  }
+  // SNS 링크 영구 저장
+  persistSns(id, finalUrl);
+  snsUpdateSavedBar();
+  setTimeout(() => snsClose(), 300);
+}
+
+function snsClose() {
+  document.getElementById('sns-modal').style.display = 'none';
+  curSns = null;
+}
+
+document.addEventListener('keydown', e => { if (e.key==='Escape') { ytClose(); snsClose(); } });
+document.getElementById('yti').addEventListener('keydown', e => { if (e.key==='Enter') ytOk(); });
+
+// ── 페이지 로드 시 서버에서 전체 복원 ──
+restoreAll();
+</script>

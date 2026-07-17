@@ -1,0 +1,102 @@
+╔══════════════════════════════════════════════════════════════╗
+║  IssueLens EP.10 (English) — SEO MASTER FILE                ║
+║  Target: US / Global English Audience                          ║
+║  Goal: 1 Million Subscribers in 30 Days                        ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━━━ 1. META TAGS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Title (≤60 chars):    Election Sovereignty — China's Digital Assault on Voting Sys
+Description (≤160):   Five Eyes joint warnings, Volt Typhoon pre-positioned malware, Salt Typhoon telecom wiretaps, U.S. voting machine supply chain risks — a full investigation into
+OG Title:             Election Sovereignty — China's Digital Assault on the Ballot Box | IssueLens EP.10
+OG Description:       Five Eyes warnings · Volt Typhoon · Salt Typhoon · U.S. voting machine supply chain — the full picture of China's cyber operations targeting American elections
+
+━━━━━ 2. PRIMARY KEYWORDS (high-volume, Google/YouTube) ━━━━━━━
+  • China election interference
+  • Volt Typhoon election infrastructure
+  • Salt Typhoon wiretap
+  • Five Eyes China warning
+  • CISA election security
+  • voting machine supply chain China
+  • election sovereignty
+  • Chinese cyber threat democracy
+  • US election security
+  • APT41 election hack
+
+━━━━━ 3. LONG-TAIL KEYWORDS (low competition, high intent) ━━━━━
+  • China election interference 2026
+  • is China election interference dangerous
+  • how to protect yourself from Volt Typhoon election infrastructure
+  • Salt Typhoon wiretap explained simply
+  • what the FBI says about China election interference
+  • Five Eyes China warning threat to democracy
+  • should I be worried about Volt Typhoon election infrastructure
+  • China election interference vs privacy rights
+  • government warning Salt Typhoon wiretap
+  • CISA election security national security risk
+
+━━━━━ 4. YOUTUBE-SPECIFIC SEARCH TERMS ━━━━━━━━━━━━━━━━━━━━━━━━
+  • China election interference explained video
+  • Volt Typhoon election infrastructure documentary 2026
+  • China election interference should i be worried
+  • Salt Typhoon wiretap full breakdown
+
+━━━━━ 5. INSTAGRAM / TIKTOK HASHTAG STRATEGY ━━━━━━━━━━━━━━━━━━
+[Tier 1 — Mega (>1M posts, broad reach)]
+#news #viral #fyp #trending #politics #technology #security
+
+[Tier 2 — Mid (100K–1M, targeted)]
+#Chinaelectioninterference #VoltTyphoonelectioninfrastructure #SaltTyphoonwiretap #FiveEyesChinawarning #CISAelectionsecurity #votingmachinesupplychainChina #electionsovereignty #Chinesecyberthreatdemocracy
+
+[Tier 3 — Niche (exact match, high conversion)]
+#USelectionsecurity #APT41electionhack
+
+[Brand]
+#IssueLens #IssueLensEP10 #DailyDeepDive
+
+━━━━━ 6. PLATFORM PUBLISHING SCHEDULE ━━━━━━━━━━━━━━━━━━━━━━━━━
+[Blog Posts]
+  • SubStack:   8:00 AM EST (newsletter open-rate peak)
+  • WordPress:  8:30 AM EST
+  • Tistory:    7:00 AM KST
+  • Naver Blog: 8:00 AM KST
+
+[Video]
+  • YouTube Longform: 9:00 AM EST (Thu/Fri best for subscribers)
+  • YouTube Shorts:   12:00 PM EST (lunch scroll)
+
+[Social]
+  • Instagram: 7–9 PM local (Tue/Thu/Sun best)
+  • TikTok:    7–10 PM local (Tue/Thu/Sat best)
+  • Threads:   8 PM local
+  • X:         8:30 PM local
+  • Facebook:  9 PM local
+
+━━━━━ 7. CONTROVERSIAL TOPICS — PRO/CON BALANCE NOTE ━━━━━━━━━━
+Per IssueLens editorial policy:
+  ✅ Political topics → ALWAYS show PRO and CON equally
+  ✅ All statistics → cite source inline (italic, -2pt)
+  ✅ YouTube video embeds → Source: [URL]
+  ✅ No speculative content — verified facts only
+  ✅ No named individuals without documented evidence
+
+━━━━━ 8. 30-DAY GROWTH ROADMAP ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Week 1 — Foundation
+  • Publish EP.01–03 across all 11 platforms
+  • Optimize YouTube channel: banner, description, playlist
+  • Unify all accounts: @IssueLens everywhere
+
+Week 2 — Cross-promotion
+  • Each platform drives to others
+  • Reply to EVERY comment within 2 hours (algorithm signal)
+  • Tag relevant accounts (researchers, journalists, NGOs)
+
+Week 3 — Viral amplification
+  • Identify best-performing format → double down
+  • Shorts/Reels drive traffic → blog/YouTube
+  • Pitch to newsletters in your niche
+
+Week 4 — Scale
+  • Press release to tech/security journalists
+  • Guest post on Medium / Substack in same niche
+  • EP.13 finale — special long-form
+  • Begin EP.14+ planning

@@ -1,0 +1,74 @@
+╔══════════════════════════════════════════════════════╗
+║  IssueLens EP.02 — Instagram CAROUSEL  (10 slides) ║
+╚══════════════════════════════════════════════════════╝
+
+━━━ SLIDE 1 — COVER
+Headline: Your Router May Already Be Spying on You | IssueLe
+Subhead:  "Swipe to find out →"
+Style: IssueLens Red (#C8001A) + Dark gradient
+Badge: EP.02 top-left | @IssueLens bottom-right
+Size: 1080×1080px
+
+━━━ SLIDE 2 — THE SHOCKING NUMBERS
+Title: "By the Numbers"
+Content:
+  📊 65% — TP-Link's share ofU.S. home routers
+  📊 12M+ — Hikvision camerasin U.S. homes & biz
+  📊 Kill Switch — Remote shutdownconfirmed in firmware
+
+━━━ SLIDE 3 — THE PROBLEM
+Title: "Why Deleting the App Doesn't Fix Anything — The Firmware Backdoor Threat"
+Body: "In EP.01, we told you to delete Temu, AliExpress, and Shein. But what about the TP-Link router next to your TV? The Hikvision camera watching your front door? The Xiaomi phone on your kid's nightstand..."
+Visual: Relevant infographic / icon
+
+━━━ SLIDE 4 — HOW IT WORKS
+Title: "How This Actually Happens"
+Body: Data flow / process breakdown
+Visual: Step-by-step diagram (arrows)
+
+━━━ SLIDE 5 — THE DATA
+Title: "The Hard Numbers"
+  • #1 — TP-Link holds approximately 65% of the U.S. home and small-business router market
+  • 449 — Censorship keywords found in Xiaomi Mi 10T firmware — inactive but remotely activatable at any time
+
+━━━ SLIDE 6 — America Already Acted — The Huawei, ZTE 
+Body: [Content from section 2]
+Source citation (italic, -2pt): *Source: [Publication], [Date], [Author]*
+
+━━━ SLIDE 7 — Is Your Living Room Being Watched? Xiaom
+Body: [Content from section 3]
+
+━━━ SLIDE 8 — PRO vs. CON  (if politically contested)
+PRO side: [Argument in favor]
+CON side: [Argument against]
+⚖️ Balanced — both sides shown equally
+
+━━━ SLIDE 9 — ACTION ITEMS
+Title: "What You Can Do RIGHT NOW"
+  1. Check Your Router
+  2. Audit Your Cameras
+  3. Kill Your Smart TV Mic
+  4. Demand Consumer Protection
+
+━━━ SLIDE 10 — CTA
+"Save this. Share it. Follow @IssueLens."
+Subtext: "New deep-dive every single day."
+Visual: All platform icons
+
+━━━ CAPTION  (≤2200 chars) ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your Router May Already Be Spying on You | IssueLens EP.02 🚨
+
+Think deleting Temu fixed everything? Your TP-Link router, Hikvision camera, and Xiaomi phone may already be transmitting your data to Chinese servers. The FBI and FCC are sounding the alarm. Here's the hardware inside your home they haven't told you about.
+
+💬 ""Deleting the app is locking the window.
+        But if the front door — the hardware itself — is already open,
+        it doesn't matter.""
+
+👉 Full breakdown at link in bio — IssueLens EP.02
+🔔 Follow @IssueLens for a new deep-dive EVERY DAY.
+
+#isTP-Linksafe2026 #TP-LinkrouterbanUS #Chineseroutersecurityrisk #HuaweibannedUS #HikvisionbannedUSgovernment #ChinesecamerasspyingonAmericans #isXiaomisafe #smartTVlisteningtoyou #firmwarebackdoorrouter #Chinesedevicesspy #TP-LinkFBIinvestigation #killswitchChinesetech #ZTEsecurityrisk #Chinesehardwaresupplychainthreat #FCCnationalsecuritybanChinese #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth
+
+━━━ HASHTAGS (comment drop — 30 max) ━━━━━━━━━━━━━━━
+#isTP-Linksafe2026 #TP-LinkrouterbanUS #Chineseroutersecurityrisk #HuaweibannedUS #HikvisionbannedUSgovernment #ChinesecamerasspyingonAmericans #isXiaomisafe #smartTVlisteningtoyou #firmwarebackdoorrouter #Chinesedevicesspy #TP-LinkFBIinvestigation #killswitchChinesetech #ZTEsecurityrisk #Chinesehardwaresupplychainthreat #FCCnationalsecuritybanChinese #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth

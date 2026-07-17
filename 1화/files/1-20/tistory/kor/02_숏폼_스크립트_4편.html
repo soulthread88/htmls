@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>숏폼 스크립트 4편 — YouTube 숏츠 · TikTok · Reels</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yt:#ff0000; --tk:#010101; --ig:#c13584;
+  --navy:#1a2a4a; --ink:#1e1e1e; --muted:#666;
+  --cream:#faf8f4; --border:#e2ddd4;
+  --sans:'Noto Sans KR',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#f5f0e8;font-family:var(--sans);color:var(--ink);font-size:15px;}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 24px 80px;}
+
+.header{background:linear-gradient(135deg,#ff6b00,#ff0000);border-radius:16px;padding:32px 36px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden;}
+.header::after{content:'⚡';position:absolute;right:30px;top:50%;transform:translateY(-50%);font-size:100px;opacity:.1;}
+.header-badge{font-size:11px;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.75);text-transform:uppercase;margin-bottom:8px;}
+.header h1{font-family:'Noto Serif KR',serif;font-size:24px;font-weight:900;margin-bottom:8px;}
+.header p{font-size:13px;color:rgba(255,255,255,.75);}
+.header-chips{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.chip{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;}
+
+/* 플랫폼 범례 */
+.platform-legend{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap;}
+.plat-chip{display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;}
+.plat-dot{width:10px;height:10px;border-radius:50%;}
+
+/* 카드 그리드 */
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:720px){.cards-grid{grid-template-columns:1fr;}}
+
+/* 숏폼 카드 */
+.short-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.07);}
+.card-header{padding:18px 22px;color:#fff;position:relative;}
+.card-header-num{font-size:11px;font-weight:700;letter-spacing:.12em;opacity:.75;text-transform:uppercase;margin-bottom:4px;}
+.card-header-title{font-size:17px;font-weight:900;line-height:1.35;}
+.card-header-meta{font-size:12px;opacity:.7;margin-top:6px;}
+.card-plats{position:absolute;top:16px;right:16px;display:flex;gap:5px;}
+.card-plat{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;}
+
+/* 카드 색상 */
+.c1 .card-header{background:linear-gradient(135deg,#ff0000,#cc0000);}
+.c2 .card-header{background:linear-gradient(135deg,#ff6b00,#e05000);}
+.c3 .card-header{background:linear-gradient(135deg,#1a2a4a,#2c4470);}
+.c4 .card-header{background:linear-gradient(135deg,#c13584,#8b1a5a);}
+
+.card-body{padding:22px;}
+
+/* 스크립트 파트 */
+.script-part{margin-bottom:16px;}
+.part-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.part-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.part-label.hook{color:#ff0000;}
+.part-label.body{color:var(--navy);}
+.part-label.cta{color:#22c55e;}
+
+.script-text{font-size:15px;line-height:1.9;color:var(--ink);white-space:pre-line;word-break:keep-all;background:var(--cream);border-radius:8px;padding:14px 16px;}
+.action{color:#999;font-style:italic;font-size:12px;display:block;margin:3px 0;}
+.emph{font-weight:700;color:var(--navy);}
+.big{font-size:18px;font-weight:900;}
+
+/* 타이밍 바 */
+.timing-bar{display:flex;gap:4px;margin:14px 0 16px;}
+.timing-seg{height:6px;border-radius:3px;flex:1;}
+.timing-seg.hook-seg{background:#ff0000;}
+.timing-seg.body-seg{background:var(--navy);}
+.timing-seg.cta-seg{background:#22c55e;}
+.timing-legend{display:flex;gap:14px;font-size:11px;color:var(--muted);margin-bottom:12px;flex-wrap:wrap;}
+.timing-legend span{display:flex;align-items:center;gap:5px;}
+.legend-dot{width:8px;height:8px;border-radius:50%;}
+
+/* 해시태그 */
+.hashtags{margin-top:12px;font-size:12px;color:#4a7fb5;font-weight:600;line-height:1.9;}
+
+/* 업로드 팁 */
+.upload-tip{background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--muted);line-height:1.7;}
+.upload-tip strong{color:var(--navy);}
+
+/* 복사 버튼 */
+.copy-btn{display:inline-flex;align-items:center;gap:5px;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:11px;font-weight:700;cursor:pointer;margin-top:10px;font-family:var(--sans);transition:opacity .15s;}
+.copy-btn:hover{opacity:.85;}
+.copy-btn.copied{background:#22c55e;}
+
+/* 공통 촬영 가이드 */
+.guide-box{background:#fff;border-radius:14px;padding:24px 28px;margin-top:28px;border:1.5px solid var(--border);}
+.guide-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.guide-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+@media(max-width:600px){.guide-grid{grid-template-columns:1fr;}}
+.guide-item{background:var(--cream);border-radius:10px;padding:14px 16px;}
+.guide-item-icon{font-size:22px;margin-bottom:6px;}
+.guide-item-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.guide-item-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="header-badge">⚡ 숏폼 콘텐츠</div>
+    <h1>YouTube 숏츠 · TikTok · Instagram Reels<br>스크립트 4편 완성본</h1>
+    <p>Ep.01 "AI란 무엇인가?" 원고 기반 · 밝고 경쾌한 유튜버 톤 · 각 45~60초</p>
+    <div class="header-chips">
+      <span class="chip">📐 세로 9:16 촬영</span>
+      <span class="chip">⏱ 각 45~60초</span>
+      <span class="chip">🎵 배경음악 필수</span>
+      <span class="chip">✍️ 자막 크게</span>
+    </div>
+  </div>
+
+  <!-- 플랫폼 범례 -->
+  <div class="platform-legend">
+    <div class="plat-chip"><div class="plat-dot" style="background:#ff0000"></div>YouTube 숏츠</div>
+    <div class="plat-chip"><div class="plat-dot" style="background:#69c9d0"></div>TikTok</div>
+    <div class="plat-chip"><div class="plat-dot" style="background:#c13584"></div>Instagram Reels</div>
+    <div class="plat-chip" style="border-color:#22c55e;color:#16a34a">✅ 3개 플랫폼 공용 사용 가능</div>
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- ── 숏폼 #1 ── -->
+    <div class="short-card c1" id="s1">
+      <div class="card-header">
+        <div class="card-header-num">SHORTS #01 · 50초</div>
+        <div class="card-header-title">📱 "스마트폰 쓰시죠?<br>그럼 이미 AI 쓰고 계신 거예요!"</div>
+        <div class="card-header-meta">주제: 우리는 이미 AI를 쓴다 · 반전 포인트 활용</div>
+        <div class="card-plats">
+          <div class="card-plat" style="background:#ff0000">YT</div>
+          <div class="card-plat" style="background:#010101">TK</div>
+          <div class="card-plat" style="background:#c13584">IG</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="timing-bar">
+          <div class="timing-seg hook-seg" style="flex:2"></div>
+          <div class="timing-seg body-seg" style="flex:5"></div>
+          <div class="timing-seg cta-seg" style="flex:1"></div>
+        </div>
+        <div class="timing-legend">
+          <span><div class="legend-dot" style="background:#ff0000"></div>훅 0~3초</span>
+          <span><div class="legend-dot" style="background:var(--navy)"></div>본론 3~45초</span>
+          <span><div class="legend-dot" style="background:#22c55e"></div>CTA 45~50초</span>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label hook">🔥 훅 — 첫 1~3초 (시선 고정 필수!)</div>
+          <div class="script-text"><span class="big">"스마트폰 쓰시죠?<br>그럼 이미 AI 쓰고 계신 거예요!!"</span>
+<span class="action">[화면: 스마트폰 화면 클로즈업 → 진행자 등장]</span></div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label body">📱 본론</div>
+          <div class="script-text">믿기지 않으시죠? 진짜예요! 😆
+
+<span class="emph">① 유튜브 추천 영상</span> → AI가 골라 준 거예요!
+<span class="emph">② 스마트폰 얼굴 인식</span> → AI 기술이에요!
+<span class="emph">③ 네이버 자동완성</span> → AI 데이터 분석이에요!
+
+<span class="action">[손가락으로 하나씩 꼽으며 경쾌하게]</span>
+
+알고 보면 우리 모두 이미 AI 전문가예요! 😄</div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label cta">✅ CTA</div>
+          <div class="script-text">AI 더 궁금하시면 구독! 🔔
+매주 쉽게 알려 드려요~</div>
+        </div>
+
+        <div class="hashtags">#AI란 #인공지능 #시니어AI #AI쉬운설명 #스마트폰AI #AI입문 #디지털문해력</div>
+        <div class="upload-tip"><strong>📌 촬영 팁:</strong> "이미 AI 쓰고 계신 거예요!" 부분에서 과장된 놀란 표정 필수! 공감 유발 → 끝까지 시청 유도</div>
+        <button class="copy-btn" onclick="copyScript(this,'s1')">📋 스크립트 복사</button>
+      </div>
+    </div>
+
+    <!-- ── 숏폼 #2 ── -->
+    <div class="short-card c2" id="s2">
+      <div class="card-header">
+        <div class="card-header-num">SHORTS #02 · 45초</div>
+        <div class="card-header-title">🤖 "AI가 뭔지<br>10초 만에 설명해 드릴게요!"</div>
+        <div class="card-header-meta">주제: AI 정의 · 임팩트 있는 한 줄 설명</div>
+        <div class="card-plats">
+          <div class="card-plat" style="background:#ff0000">YT</div>
+          <div class="card-plat" style="background:#010101">TK</div>
+          <div class="card-plat" style="background:#c13584">IG</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="timing-bar">
+          <div class="timing-seg hook-seg" style="flex:2"></div>
+          <div class="timing-seg body-seg" style="flex:5"></div>
+          <div class="timing-seg cta-seg" style="flex:1"></div>
+        </div>
+        <div class="timing-legend">
+          <span><div class="legend-dot" style="background:#ff0000"></div>훅 0~3초</span>
+          <span><div class="legend-dot" style="background:var(--navy)"></div>본론 3~40초</span>
+          <span><div class="legend-dot" style="background:#22c55e"></div>CTA 40~45초</span>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label hook">🔥 훅</div>
+          <div class="script-text"><span class="big">"AI가 뭔지 10초 만에<br>설명해 드릴게요!"</span>
+<span class="action">[타이머 카운트다운 10초 자막 등장]</span></div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label body">🤖 본론</div>
+          <div class="script-text"><span class="emph">AI = 인공지능</span>
+= 컴퓨터가 사람처럼 생각하는 기술!
+
+<span class="action">[화면: 고양이 사진 100만 장 숫자 애니메이션]</span>
+
+고양이 사진 100만 장 보여 주면~
+AI가 스스로 분석해서~
+새 사진 딱 보여 줬을 때
+
+<span class="emph">"이건 고양이!" 정확히 맞춰요! 🎉</span>
+
+사람이 경험으로 배우듯
+AI는 데이터로 배우는 거예요!
+이걸 머신러닝이라고 해요!</div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label cta">✅ CTA</div>
+          <div class="script-text">이제 AI가 뭔지 아셨죠? 👍
+구독하면 더 쉽게 배울 수 있어요!</div>
+        </div>
+
+        <div class="hashtags">#AI뜻 #인공지능이란 #머신러닝 #AI입문 #AI쉬운설명 #인공지능공부 #ChatGPT란</div>
+        <div class="upload-tip"><strong>📌 촬영 팁:</strong> "10초 만에!" 훅 이후 실제로 빠른 템포로 진행. 자막에 타이머 효과 넣으면 몰입도 UP!</div>
+        <button class="copy-btn" onclick="copyScript(this,'s2')">📋 스크립트 복사</button>
+      </div>
+    </div>
+
+    <!-- ── 숏폼 #3 ── -->
+    <div class="short-card c3" id="s3">
+      <div class="card-header">
+        <div class="card-header-num">SHORTS #03 · 55초</div>
+        <div class="card-header-title">👴👵 "시니어 분들,<br>AI 이렇게 쓰면 진짜 편해요!"</div>
+        <div class="card-header-meta">주제: 시니어 AI 활용법 5가지 · 공감 유발</div>
+        <div class="card-plats">
+          <div class="card-plat" style="background:#ff0000">YT</div>
+          <div class="card-plat" style="background:#010101">TK</div>
+          <div class="card-plat" style="background:#c13584">IG</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="timing-bar">
+          <div class="timing-seg hook-seg" style="flex:2"></div>
+          <div class="timing-seg body-seg" style="flex:6"></div>
+          <div class="timing-seg cta-seg" style="flex:1"></div>
+        </div>
+        <div class="timing-legend">
+          <span><div class="legend-dot" style="background:#ff0000"></div>훅 0~3초</span>
+          <span><div class="legend-dot" style="background:var(--navy)"></div>본론 3~50초</span>
+          <span><div class="legend-dot" style="background:#22c55e"></div>CTA 50~55초</span>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label hook">🔥 훅</div>
+          <div class="script-text"><span class="big">"시니어 분들!<br>AI 이렇게만 쓰면<br>진짜 편해요!"</span>
+<span class="action">[밝은 미소로 직접 응시]</span></div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label body">👴 본론</div>
+          <div class="script-text"><span class="action">[손가락 꼽으며 경쾌하게]</span>
+
+<span class="emph">1️⃣ 편지·문자 대신 써 줘요!</span>
+"아들 생일 축하 문자 써줘" → 바로 완성!
+
+<span class="emph">2️⃣ 외국어 번역!</span>
+메뉴판 사진 찍으면 → 바로 번역!
+
+<span class="emph">3️⃣ 뭐든 검색 가능!</span>
+"서울 가볼 만한 곳 알려줘" → 즉시 답변!
+
+<span class="emph">4️⃣ 사진 자동 정리!</span>
+손자 사진 → 얼굴 인식으로 자동 분류!
+
+<span class="emph">5️⃣ 앱 사용법 안내!</span>
+"카카오톡 프로필 바꾸는 법" → 단계별 설명!
+
+스마트폰만 있으면 다 돼요! 😊</div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label cta">✅ CTA</div>
+          <div class="script-text">AI, 어렵지 않아요!
+같이 배워요~ 구독 꾹! 🔔</div>
+        </div>
+
+        <div class="hashtags">#시니어AI #50대AI #60대AI #70대AI #AI활용 #디지털문해력 #스마트폰활용 #액티브시니어</div>
+        <div class="upload-tip"><strong>📌 촬영 팁:</strong> 5가지 나열 시 실제로 손가락 꼽는 동작 + 각 항목마다 밝은 표정 변화. TikTok은 배경음악 트렌디한 곡 활용 추천</div>
+        <button class="copy-btn" onclick="copyScript(this,'s3')">📋 스크립트 복사</button>
+      </div>
+    </div>
+
+    <!-- ── 숏폼 #4 ── -->
+    <div class="short-card c4" id="s4">
+      <div class="card-header">
+        <div class="card-header-num">SHORTS #04 · 60초</div>
+        <div class="card-header-title">🐱 "AI가 고양이를<br>알아보는 방법, 아세요?"</div>
+        <div class="card-header-meta">주제: 머신러닝 원리 · 귀여운 소재로 쉽게 설명</div>
+        <div class="card-plats">
+          <div class="card-plat" style="background:#ff0000">YT</div>
+          <div class="card-plat" style="background:#010101">TK</div>
+          <div class="card-plat" style="background:#c13584">IG</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="timing-bar">
+          <div class="timing-seg hook-seg" style="flex:2"></div>
+          <div class="timing-seg body-seg" style="flex:6"></div>
+          <div class="timing-seg cta-seg" style="flex:1"></div>
+        </div>
+        <div class="timing-legend">
+          <span><div class="legend-dot" style="background:#ff0000"></div>훅 0~3초</span>
+          <span><div class="legend-dot" style="background:var(--navy)"></div>본론 3~55초</span>
+          <span><div class="legend-dot" style="background:#22c55e"></div>CTA 55~60초</span>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label hook">🔥 훅</div>
+          <div class="script-text"><span class="big">"AI가 고양이를<br>알아보는 방법,<br>아세요? 🐱"</span>
+<span class="action">[고양이 사진 화면에 등장 → 진행자 얼굴 PIP]</span></div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label body">🐱 본론</div>
+          <div class="script-text"><span class="action">[숫자 애니메이션과 함께]</span>
+
+AI한테 고양이 사진을 보여 줘요.
+몇 장이냐고요?
+
+<span class="emph">100만 장이요!!! 😲</span>
+
+강아지 사진도 100만 장!
+
+AI는 이걸 보면서 스스로 분석해요.
+귀가 이렇게 생기면 고양이~
+코가 저렇게 생기면 강아지~
+
+<span class="action">[화면: 새로운 고양이 사진 짠~ 등장]</span>
+
+그리고 새 사진을 딱 보여 주면?
+
+<span class="emph">"이것은 고양이입니다!!" 🎉</span>
+
+정확하게 맞춰요!
+
+이게 바로 머신러닝, 기계 학습이에요!
+AI가 학교 다니는 게 아니라
+데이터로 배우는 거예요~ 신기하죠? 😄</div>
+        </div>
+
+        <div class="script-part">
+          <div class="part-label cta">✅ CTA</div>
+          <div class="script-text">AI 원리가 궁금하면 구독! 🔔
+매주 이렇게 쉽게 알려 드려요!</div>
+        </div>
+
+        <div class="hashtags">#머신러닝이란 #AI학습 #인공지능원리 #AI뜻 #ChatGPT란 #인공지능공부 #AI입문 #AI쉬운설명</div>
+        <div class="upload-tip"><strong>📌 촬영 팁:</strong> 고양이/강아지 사진을 실제로 화면에 보여 주며 진행하면 시각적 효과 UP. "100만 장!!" 부분에서 눈 크게 뜨는 리액션 필수!</div>
+        <button class="copy-btn" onclick="copyScript(this,'s4')">📋 스크립트 복사</button>
+      </div>
+    </div>
+
+  </div><!-- /cards-grid -->
+
+  <!-- 공통 촬영·편집 가이드 -->
+  <div class="guide-box">
+    <div class="guide-title">🎬 공통 촬영 &amp; 편집 가이드</div>
+    <div class="guide-grid">
+      <div class="guide-item">
+        <div class="guide-item-icon">📐</div>
+        <div class="guide-item-title">촬영 설정</div>
+        <div class="guide-item-desc">세로 9:16 비율 필수. 해상도 1080×1920. 밝은 자연광 또는 링라이트 사용. 배경 깔끔하게 정리.</div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-item-icon">✍️</div>
+        <div class="guide-item-title">자막 스타일</div>
+        <div class="guide-item-desc">글자 크기 크게 (시니어 시청자 고려). 굵은 고딕 폰트. 핵심 단어는 색상 강조. 화면 중앙~하단 배치.</div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-item-icon">🎵</div>
+        <div class="guide-item-title">배경음악</div>
+        <div class="guide-item-desc">밝고 경쾌한 무저작권 음악 사용. 유튜브 오디오 라이브러리, 픽사베이 추천. 볼륨은 목소리보다 낮게.</div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-item-icon">⏱</div>
+        <div class="guide-item-title">편집 속도</div>
+        <div class="guide-item-desc">첫 3초 안에 훅 등장 필수. 말이 끊기는 부분 컷 편집. 숏츠는 45~60초 유지. 너무 빠르지 않게 (시니어 시청자).</div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-item-icon">🏷️</div>
+        <div class="guide-item-title">플랫폼별 해시태그</div>
+        <div class="guide-item-desc">YouTube: 3~5개. TikTok: 5~8개. Instagram Reels: 10~15개. 각 카드 하단 해시태그 활용.</div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-item-icon">📅</div>
+        <div class="guide-item-title">업로드 최적 시간</div>
+        <div class="guide-item-desc">YouTube 숏츠: 오전 8~10시, 오후 7~9시. TikTok: 오후 6~9시. Reels: 오전 11시~12시, 오후 6~8시.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function copyScript(btn, id) {
+  const card = document.getElementById(id);
+  const parts = card.querySelectorAll('.script-text');
+  let text = '';
+  parts.forEach(p => { text += p.innerText + '\n\n'; });
+  const tags = card.querySelector('.hashtags');
+  if(tags) text += '\n' + tags.innerText;
+  navigator.clipboard.writeText(text.trim()).then(() => {
+    btn.textContent = '✅ 복사됐어요!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 스크립트 복사'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

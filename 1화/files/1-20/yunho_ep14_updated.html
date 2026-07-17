@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤호와 함께하는 AI 이야기 - Episode 14</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Noto Sans KR', Arial, sans-serif; 
+            line-height: 1.35; 
+            color: #000; 
+            background: #FFF9E6; 
+            font-size: 28px;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .left-margin {
+            width: 12.5%;
+            background: #FFF9E6;
+        }
+        
+        .content-wrapper {
+            width: 60%;
+            background: #FFF9E6;
+            padding: 30px 0;
+        }
+        
+        .sidebar {
+            width: 15%;
+            background: #f5f5f5;
+            padding: 30px 15px;
+            position: sticky;
+            top: 0;
+            height: fit-content;
+        }
+        
+        .right-margin {
+            width: 12.5%;
+            background: #FFF9E6;
+        }
+        
+        .wysiwyg-editor {
+            background: #2C3E50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .editor-title {
+            color: #ECF0F1;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .editor-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .editor-btn {
+            background: #3498DB;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .editor-btn:hover {
+            background: #2980B9;
+            transform: translateY(-2px);
+        }
+        
+        .editor-btn.active {
+            background: #E74C3C;
+        }
+        
+        .editor-info {
+            color: #BDC3C7;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        [contenteditable="true"] {
+            outline: 2px dashed transparent;
+            transition: outline 0.3s;
+        }
+        
+        [contenteditable="true"]:hover {
+            outline-color: #3498DB;
+        }
+        
+        [contenteditable="true"]:focus {
+            outline-color: #E74C3C;
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        .sidebar-item {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-title {
+            background: #0066CC;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+        }
+        
+        .sidebar-content {
+            padding: 20px 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .ad-space {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            padding-top: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+        }
+        
+        .ad-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .calendar {
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .calendar-month {
+            font-size: 18px;
+            font-weight: 900;
+            color: #0066CC;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day {
+            padding: 8px 4px;
+            font-size: 13px;
+            text-align: center;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .popular-post {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .popular-post:hover {
+            color: #0066CC;
+        }
+        
+        .popular-post:last-child {
+            border-bottom: none;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #0066CC;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .keyword-tag:hover {
+            background: #0066CC;
+            color: white;
+        }
+        
+        .search-box {
+            padding: 15px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #0066CC;
+        }
+        
+        .container {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 52px;
+            margin: 0 0 18px 0;
+            color: #0066CC;
+            font-weight: 900;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 40px;
+            margin: 42px 0 20px 0;
+            color: #FF6B35;
+            font-weight: 900;
+            padding-left: 15px;
+            border-left: 8px solid #FF6B35;
+        }
+        
+        h3 {
+            font-size: 36px;
+            margin: 25px 0 25px 0;
+            color: #E65100;
+            font-weight: 900;
+        }
+        
+        h4 {
+            font-size: 32px;
+            margin: 15px 0 25px 0;
+            color: #00796B;
+            font-weight: 900;
+        }
+        
+        p {
+            font-size: 28px;
+            line-height: 1.49;
+            margin-bottom: 15px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #00BCD4 0%, #4DD0E1 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 27px;
+            text-align: center;
+        }
+        
+        .episode {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+            color: #FFFFFF;
+        }
+        
+        .hero-section h1 {
+            color: #FFFFFF;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            font-size: 52px;
+            margin: 0;
+            font-weight: 900;
+        }
+        
+        .intro-box,
+        .tip-box,
+        .example-box,
+        .summary-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #FF6B35;
+        }
+        
+        .intro-box h3,
+        .tip-box h3,
+        .example-box h3,
+        .summary-box h3 {
+            color: #1A237E;
+        }
+        
+        .intro-box p,
+        .tip-box p,
+        .example-box p,
+        .summary-box p {
+            color: #212121;
+        }
+        
+        .song-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #4CAF50;
+        }
+        
+        .song-box h3 {
+            color: #1B5E20;
+        }
+        
+        .song-box p {
+            color: #212121;
+        }
+        
+        .song-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #1B5E20;
+            margin-bottom: 15px;
+        }
+        
+        .song-lyrics {
+            font-size: 26px;
+            line-height: 1.6;
+            color: #212121;
+            white-space: pre-line;
+        }
+        
+        .language-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .lang-tab {
+            background: #81C784;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .lang-tab:hover {
+            background: #66BB6A;
+            transform: translateY(-2px);
+        }
+        
+        .lang-tab.active {
+            background: #2E7D32;
+        }
+        
+        .lyrics-content {
+            display: none;
+        }
+        
+        .lyrics-content.active {
+            display: block;
+        }
+        
+        .audio-player-box {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #E91E63;
+        }
+        
+        .audio-upload-section {
+            background: #FFFFFF;
+            border: 3px dashed #E91E63;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .audio-upload-btn {
+            background: #E91E63;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .audio-upload-btn:hover {
+            background: #C2185B;
+            transform: scale(1.05);
+        }
+        
+        .audio-player {
+            background: #FFFFFF;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .play-btn, .pause-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #E91E63;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .play-btn:hover, .pause-btn:hover {
+            background: #C2185B;
+            transform: scale(1.1);
+        }
+        
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 15px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 3px;
+        }
+        
+        .pause-icon {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .pause-bar {
+            width: 4px;
+            height: 18px;
+            background: white;
+        }
+        
+        .progress-container {
+            flex: 1;
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #E91E63 0%, #F06292 100%);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .time-display {
+            font-size: 16px;
+            font-weight: 700;
+            color: #E91E63;
+            min-width: 100px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .story-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #2196F3;
+        }
+        
+        .story-box h3 {
+            color: #0D47A1;
+        }
+        
+        .story-box p {
+            color: #212121;
+        }
+        
+        .proverb-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 25px 0 27px 0;
+            text-align: center;
+            border: 4px solid #FBC02D;
+            box-shadow: 0 8px 25px rgba(251, 192, 45, 0.3);
+        }
+        
+        .proverb-chinese {
+            font-size: 56px;
+            font-weight: 900;
+            color: #E65100;
+            margin-bottom: 18px;
+            letter-spacing: 8px;
+        }
+        
+        .proverb-korean {
+            font-size: 32px;
+            font-weight: 700;
+            color: #BF360C;
+            margin-bottom: 25px;
+        }
+        
+        .proverb-meaning {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0D47A1;
+            margin-bottom: 18px;
+        }
+        
+        .proverb-detail {
+            font-size: 26px;
+            color: #212121;
+            line-height: 1.5;
+        }
+        
+        .image-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .image-placeholder {
+            background: #FFFFFF;
+            border: 3px dashed #9C27B0;
+            border-radius: 10px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .image-upload-btn {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .image-upload-btn:hover {
+            background: #7B1FA2;
+            transform: scale(1.05);
+        }
+        
+        .image-description {
+            font-size: 24px;
+            color: #212121;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .image-caption-box {
+            background: #1565C0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #0D47A1;
+            margin-top: 15px;
+        }
+        
+        .image-caption {
+            font-size: 24px;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .chat-bubble {
+            background: #F5F5F5;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0 27px 0;
+            position: relative;
+            font-size: 28px;
+            line-height: 1.49;
+        }
+        
+        .chat-bubble.yunho {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 6px solid #0066CC;
+        }
+        
+        .chat-bubble.yunho p {
+            color: #212121;
+        }
+        
+        .chat-bubble.grandpa {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left: 6px solid #FF9800;
+        }
+        
+        .chat-bubble.grandpa p {
+            color: #212121;
+        }
+        
+        .chat-bubble.grandma {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .chat-bubble.grandma p {
+            color: #212121;
+        }
+        
+        .chat-bubble.dad {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            border-left: 6px solid #3F51B5;
+        }
+        
+        .chat-bubble.dad p {
+            color: #212121;
+        }
+        
+        .speaker-name {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 11px;
+            line-height: 1.2;
+        }
+        
+        .speech-text {
+            font-size: 28px;
+            color: #FF1744;
+            font-weight: 900;
+            line-height: 1.49;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            padding: 35px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #3F51B5;
+            text-align: center;
+        }
+        
+        .quote-english {
+            font-size: 40px;
+            font-weight: 900;
+            font-style: italic;
+            color: #1A237E;
+            margin-bottom: 20px;
+        }
+        
+        .quote-korean {
+            font-size: 32px;
+            color: #283593;
+            font-weight: 700;
+        }
+        
+        .quiz-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border: 3px solid #FF6B35;
+        }
+        
+        .quiz-question {
+            font-size: 32px;
+            font-weight: 900;
+            color: #BF360C;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-options {
+            margin: 20px 0;
+        }
+        
+        .quiz-option {
+            background: white;
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #FFE0B2;
+            font-size: 26px;
+            color: #212121;
+        }
+        
+        .quiz-option:hover {
+            background: #FFF3E0;
+            border-color: #FF6B35;
+            transform: translateX(5px);
+        }
+        
+        .next-episode {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border: 3px solid #3F51B5;
+        }
+        
+        .next-episode h3 {
+            color: #1A237E;
+            margin-top: 0;
+        }
+        
+        .next-episode p {
+            color: #212121;
+        }
+        
+        .answer-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #4CAF50;
+        }
+        
+        .answer-box h3 {
+            color: #1B5E20;
+        }
+        
+        .answer-box p {
+            color: #212121;
+        }
+        
+        .reversed-text {
+            display: inline-block;
+            transform: scaleX(-1);
+            font-weight: 900;
+            color: #2E7D32;
+        }
+        
+        .grammar-checker-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .grammar-checker-box h2 {
+            color: #4A148C;
+        }
+        
+        .grammar-checker-box p {
+            color: #212121;
+        }
+        
+        .grammar-checker-box a {
+            color: #6A1B9A;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid #9C27B0;
+            transition: all 0.3s;
+        }
+        
+        .grammar-checker-box a:hover {
+            color: #4A148C;
+            border-bottom-color: #4A148C;
+        }
+        
+        .emphasis {
+            color: #FF1744;
+            font-weight: 900;
+        }
+        
+        .proper-name {
+            color: #FF1744;
+            font-weight: 900;
+        }
+        
+        .checkmark {
+            font-weight: 900;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #FF0000;
+        }
+        
+        .warning-box h3 {
+            color: #B71C1C;
+        }
+        
+        .warning-box p,
+        .warning-box ul {
+            color: #212121;
+        }
+        
+        .warning-box ul {
+            margin-left: 25px;
+        }
+        
+        .warning-box li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 1400px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .left-margin,
+            .right-margin {
+                display: none;
+            }
+            
+            .content-wrapper {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-margin"></div>
+    
+    <div class="content-wrapper">
+        <div class="wysiwyg-editor">
+            <div class="editor-title">🖊️ WYSIWYG 편집기</div>
+            <div class="editor-controls">
+                <button class="editor-btn" onclick="toggleEdit()">✏️ 편집 모드</button>
+                <button class="editor-btn" onclick="document.execCommand('bold')">B 굵게</button>
+                <button class="editor-btn" onclick="document.execCommand('italic')">I 기울임</button>
+                <button class="editor-btn" onclick="document.execCommand('underline')">U 밑줄</button>
+                <button class="editor-btn" onclick="changeFontSize('increase')">A+ 크게</button>
+                <button class="editor-btn" onclick="changeFontSize('decrease')">A- 작게</button>
+                <button class="editor-btn" onclick="changeColor()">🎨 색상</button>
+            </div>
+            <div class="editor-info">💡 편집 모드를 활성화하고 텍스트를 클릭하여 직접 수정하세요</div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-section">
+                <div class="episode" contenteditable="true">Episode 14</div>
+                <h1 contenteditable="true">은행 앱으로 송금해요!</h1>
+            </div>
+
+            <div class="proverb-box">
+                <div class="proverb-chinese" contenteditable="true">便利快捷</div>
+                <div class="proverb-korean" contenteditable="true">(편리쾌첩)</div>
+                <div class="proverb-meaning" contenteditable="true">편리하고 빠르다</div>
+                <div class="proverb-detail" contenteditable="true">은행 앱은 집에서 편리하고 빠르게 송금할 수 있게 해줍니다. 은행에 가지 않아도 되니 시간도 절약되고, 언제든지 필요할 때 바로 송금할 수 있습니다.</div>
+            </div>
+
+            <div class="intro-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🎬 오늘의 이야기</h3>
+                <p contenteditable="true">오늘은 <span class="proper-name">윤호</span>가 <span class="proper-name">할아버지</span>와 <span class="proper-name">할머니</span>에게 <span class="emphasis">은행 앱</span>으로 <span class="emphasis">송금</span>하는 방법을 알려드립니다. 집에서 편하게 돈을 보낼 수 있는 방법, 함께 배워볼까요?</p>
+            </div>
+
+            <h2 contenteditable="true">🎵 오늘의 동요</h2>
+            
+            <div class="song-box">
+                <div class="song-title" contenteditable="true">은행 앱 동요</div>
+                
+                <div class="language-tabs">
+                    <button class="lang-tab active" onclick="switchLanguage('ko')">🇰🇷 한국어</button>
+                    <button class="lang-tab" onclick="switchLanguage('en')">🇺🇸 English</button>
+                    <button class="lang-tab" onclick="switchLanguage('ja')">🇯🇵 日本語</button>
+                </div>
+                
+                <div id="lyrics-ko" class="lyrics-content active">
+                    <div class="song-lyrics" contenteditable="true">은행 가지 않아도
+앱으로 송금해요
+
+계좌번호 입력하고
+금액 쓰면 끝이에요
+
+지문으로 확인하고
+비밀번호도 쳐요
+
+안전하게 송금하면
+바로바로 도착해요!</div>
+                </div>
+                
+                <div id="lyrics-en" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">No need to go to bank
+Send money with an app
+
+Enter account number
+Write amount and you're done
+
+Confirm with fingerprint
+Type password carefully
+
+Transfer safely done
+Money arrives right away!</div>
+                </div>
+                
+                <div id="lyrics-ja" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">銀行に行かなくても
+アプリで送金します
+
+口座番号を入力して
+金額を書けば終わり
+
+指紋で確認して
+暗証番号も入力
+
+安全に送金すれば
+すぐに到着します!</div>
+                </div>
+            </div>
+
+            <div class="audio-player-box">
+                <div class="audio-upload-section">
+                    <button class="audio-upload-btn" onclick="alert('오디오 파일 업로드 기능')">🎵 동요 음악 삽입</button>
+                    <p style="font-size: 18px; color: #C2185B; margin-top: 10px;">MP3, WAV 파일을 업로드하세요</p>
+                </div>
+                
+                <div class="audio-player">
+                    <div class="player-controls">
+                        <button class="play-btn" onclick="togglePlay()">
+                            <div class="play-icon"></div>
+                        </button>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" onclick="seek(event)">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="time-display" id="timeDisplay">0:00 / 3:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">💰 할아버지의 불편함</h2>
+
+            <div class="chat-bubble grandpa">
+                <div class="speaker-name" style="color: #FF9800;" contenteditable="true">👴 할아버지:</div>
+                <p class="speech-text" contenteditable="true">"윤호야, 할아버지가 <span class="emphasis">손주</span>들한테 <span class="emphasis">용돈</span> 보내려고 하는데... <span class="emphasis">은행</span> 가려니까 줄도 길고 멀고... 다른 방법 없을까?"</p>
+            </div>
+
+            <div class="chat-bubble yunho">
+                <div class="speaker-name" style="color: #0066CC;" contenteditable="true">👦 윤호 선생님:</div>
+                <p class="speech-text" contenteditable="true">"할아버지! <span class="emphasis">은행 앱</span> 쓰세요! 😊 집에서 스마트폰으로 <span class="emphasis">송금</span> 할 수 있어요! 은행 갈 필요 없이 몇 번만 누르면 돼요!"</p>
+            </div>
+
+            <div class="chat-bubble grandma">
+                <div class="speaker-name" style="color: #9C27B0;" contenteditable="true">👵 할머니:</div>
+                <p class="speech-text" contenteditable="true">"그런데 돈 보내는 거 안전한가요? <span class="emphasis">계좌번호</span> 잘못 입력하면 어떡하죠?"</p>
+            </div>
+
+            <div class="chat-bubble dad">
+                <div class="speaker-name" style="color: #3F51B5;" contenteditable="true">👨‍🔬 아빠:</div>
+                <p class="speech-text" contenteditable="true">"걱정 마세요! 여러 번 확인하니까 안전해요! 😊 <span class="emphasis">지문</span>이나 <span class="emphasis">비밀번호</span>로 본인 확인도 하고요. 차근차근 알려드릴게요!"</p>
+            </div>
+
+            <h2 contenteditable="true">🏦 은행 앱 시작하기</h2>
+
+            <div class="tip-box">
+                <h3 style="margin-top: 0;" contenteditable="true">1️⃣ 은행 앱 다운로드</h3>
+                <p contenteditable="true"><strong>주요 은행 앱:</strong></p>
+                <p contenteditable="true">🏦 <span class="emphasis">KB국민은행</span><br>
+                🏦 <span class="emphasis">신한은행</span><br>
+                🏦 <span class="emphasis">우리은행</span><br>
+                🏦 <span class="emphasis">하나은행</span><br>
+                🏦 <span class="emphasis">NH농협</span></p>
+                <p contenteditable="true"><strong>다운로드 방법:</strong><br>
+                1. 플레이스토어 열기<br>
+                2. 자기 <span class="emphasis">은행 이름</span> 검색<br>
+                3. 다운로드 누르기<br>
+                4. 설치 완료!</p>
+                <p contenteditable="true">⚠️ 처음엔 <span class="emphasis">자녀</span>와 함께 설정하세요!</p>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">플레이스토어에서 은행 앱을 검색하는 화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"자기 은행 앱을 찾아보세요!"</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h3 style="margin-top: 0;" contenteditable="true">2️⃣ 앱 첫 설정</h3>
+                <p contenteditable="true"><strong>필요한 정보:</strong></p>
+                <p contenteditable="true">📝 <span class="emphasis">계좌번호</span><br>
+                📝 <span class="emphasis">비밀번호</span> (4자리)<br>
+                📝 <span class="emphasis">주민등록번호</span><br>
+                📝 <span class="emphasis">보안카드</span> 또는 <span class="emphasis">OTP</span></p>
+                <p contenteditable="true"><strong>본인 인증:</strong><br>
+                → <span class="emphasis">휴대폰</span> 인증<br>
+                → <span class="emphasis">지문</span> 등록<br>
+                → <span class="emphasis">간편 비밀번호</span> 설정</p>
+                <p contenteditable="true">⚠️ 이 정보는 절대 남에게 알려주면 안 돼요!</p>
+            </div>
+
+            <div class="tip-box">
+                <h3 style="margin-top: 0;" contenteditable="true">3️⃣ 송금하는 방법</h3>
+                <p contenteditable="true"><strong>기본 송금 순서:</strong></p>
+                <p contenteditable="true">1. 은행 앱 열기<br>
+                2. <span class="emphasis">이체</span> 또는 <span class="emphasis">송금</span> 메뉴<br>
+                3. 받는 사람 <span class="emphasis">은행</span> 선택<br>
+                4. <span class="emphasis">계좌번호</span> 입력<br>
+                5. <span class="emphasis">금액</span> 입력<br>
+                6. 받는 사람 이름 확인<br>
+                7. <span class="emphasis">비밀번호</span> 입력<br>
+                8. 송금 완료!</p>
+                <p contenteditable="true">✅ 받는 사람 <span class="emphasis">이름</span> 꼭 확인하세요!</p>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">은행 앱에서 송금하는 과정을 보여주는 화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"차근차근 따라하면 쉬워요!"</div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">💡 편리한 추가 기능</h2>
+
+            <div class="example-box">
+                <h3 style="margin-top: 0;" contenteditable="true">⚡ 더 쉽게 보내는 방법</h3>
+                <p contenteditable="true"><strong>1. 자주 보내는 계좌 등록</strong><br>
+                → <span class="emphasis">즐겨찾기</span> 기능<br>
+                → 손주들 계좌 미리 저장<br>
+                → 다음엔 클릭 한 번!</p>
+                <p contenteditable="true"><strong>2. 카카오페이로 송금</strong><br>
+                → <span class="emphasis">카카오톡</span>으로 보내기<br>
+                → 계좌번호 몰라도 OK<br>
+                → 이름만 알면 가능!</p>
+                <p contenteditable="true"><strong>3. 예약 이체</strong><br>
+                → 매달 같은 날 자동 송금<br>
+                → <span class="emphasis">용돈</span>, <span class="emphasis">연금</span> 이체에 편리</p>
+                <p contenteditable="true"><strong>4. 잔액 확인</strong><br>
+                → 내 <span class="emphasis">계좌</span> 얼마 있는지<br>
+                → 언제든 확인 가능!</p>
+            </div>
+
+            <h2 contenteditable="true">👉 오늘의 실습</h2>
+
+            <div class="story-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🎯 은행 앱 송금 연습!</h3>
+                <p contenteditable="true"><strong>1단계:</strong> 자기 <span class="emphasis">은행 앱</span> 열기 (KB, 신한, 우리 등)</p>
+                <p contenteditable="true"><strong>2단계:</strong> <span class="emphasis">이체</span> 또는 <span class="emphasis">송금</span> 메뉴 찾기</p>
+                <p contenteditable="true"><strong>3단계:</strong> 받는 사람 <span class="emphasis">은행</span> 선택하기</p>
+                <p contenteditable="true"><strong>4단계:</strong> <span class="emphasis">계좌번호</span> 입력하기 (천천히 정확하게!)</p>
+                <p contenteditable="true"><strong>5단계:</strong> 받는 사람 <span class="emphasis">이름</span> 확인! (다르면 다시 확인!)</p>
+                <p contenteditable="true" style="margin-top: 20px; text-align: center; font-weight: 900;">⚠️ 처음엔 <span class="emphasis">자녀</span>와 함께 해보세요!<br>🎉 송금 성공하면 완료! 🎉</p>
+            </div>
+
+            <h2 contenteditable="true">⚠️ 절대 주의할 점!</h2>
+
+            <div class="warning-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🚨 금융 사기 주의!</h3>
+                <ul contenteditable="true">
+                    <li><span class="emphasis">비밀번호</span> 절대 남에게 알려주지 마세요!</li>
+                    <li><span class="emphasis">보안카드</span> 번호 전체 말하지 마세요!</li>
+                    <li>전화로 <span class="emphasis">계좌번호</span> 물어보면 100% 사기!</li>
+                    <li>"<span class="emphasis">검찰</span>", "<span class="emphasis">경찰</span>"이라며 돈 요구하면 사기!</li>
+                    <li>송금 전에 <span class="emphasis">받는 사람</span> 꼭 확인!</li>
+                    <li>모르는 링크 누르지 마세요!</li>
+                    <li>의심되면 <span class="emphasis">자녀</span>에게 먼저 연락!</li>
+                    <li><span class="emphasis">은행</span>은 절대 비밀번호 안 물어봐요!</li>
+                </ul>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">보이스피싱 주의 경고 이미지</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"사기 전화 조심하세요!"</div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">📱 은행 앱 기타 기능</h2>
+
+            <div class="story-box">
+                <h3 style="margin-top: 0;" contenteditable="true">💼 이것도 할 수 있어요!</h3>
+                <ul contenteditable="true">
+                    <li><span class="emphasis">잔액</span> 조회</li>
+                    <li><span class="emphasis">거래 내역</span> 확인</li>
+                    <li><span class="emphasis">공과금</span> 자동 이체</li>
+                    <li><span class="emphasis">정기 예금</span> 가입</li>
+                    <li><span class="emphasis">대출</span> 상환</li>
+                    <li><span class="emphasis">신용카드</span> 대금 납부</li>
+                    <li>가까운 <span class="emphasis">ATM</span> 찾기</li>
+                </ul>
+            </div>
+
+            <div class="chat-bubble grandpa">
+                <div class="speaker-name" style="color: #FF9800;" contenteditable="true">👴 할아버지:</div>
+                <p class="speech-text" contenteditable="true">"와! 이렇게 편리한 게 있었구나! 이제 집에서 편하게 손주들한테 <span class="emphasis">용돈</span> 보낼 수 있겠네!"</p>
+            </div>
+
+            <div class="chat-bubble grandma">
+                <div class="speaker-name" style="color: #9C27B0;" contenteditable="true">👵 할머니:</div>
+                <p class="speech-text" contenteditable="true">"윤호야, 정말 고맙구나! 그런데 처음엔 좀 무서우니까 너희 아빠랑 같이 연습해볼게!"</p>
+            </div>
+
+            <div class="chat-bubble yunho">
+                <div class="speaker-name" style="color: #0066CC;" contenteditable="true">👦 윤호 선생님:</div>
+                <p class="speech-text" contenteditable="true">"좋아요! 처음엔 <span class="emphasis">천천히</span> 연습하세요. 곧 익숙해지실 거예요! 언제든지 궁금한 거 있으면 물어보세요!"</p>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-english" contenteditable="true">"Technology makes life easier."</div>
+                <div class="quote-korean" contenteditable="true">(기술은 삶을 더 편리하게 만듭니다.)</div>
+            </div>
+
+            <h2 contenteditable="true">📖 편리쾌첩(便利快捷)의 의미</h2>
+
+            <div class="story-box">
+                <h3 style="margin-top: 0;" contenteditable="true">💫 기술의 발전</h3>
+                <p contenteditable="true"><span class="emphasis">편리쾌첩(便利快捷)</span>은 편리하고 빠르다는 뜻입니다.</p>
+                <p contenteditable="true"><span class="proper-name">은행 앱</span>은 우리의 생활을 더욱 <span class="emphasis">편리</span>하고 <span class="emphasis">빠르게</span> 만들어줍니다.</p>
+                <p contenteditable="true">집에서 편하게, 언제든지 필요한 금융 업무를 볼 수 있게 되었습니다.</p>
+                <p contenteditable="true">하지만 편리함과 함께 <span class="emphasis">보안</span>도 중요하다는 것을 잊지 말아야 합니다!</p>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">윤호가 할아버지, 할머니에게 은행 앱을 가르쳐드리는 따뜻한 장면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"함께 배우면 더 즐거워요!"</div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">💡 오늘의 퀴즈</h2>
+
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 1. 은행 앱에서 송금할 때 반드시 확인해야 하는 것은?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① 날씨</div>
+                    <div class="quiz-option" contenteditable="true">② 받는 사람 이름</div>
+                    <div class="quiz-option" contenteditable="true">③ 시간</div>
+                    <div class="quiz-option" contenteditable="true">④ 배터리 잔량</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 2. 전화로 비밀번호나 보안카드 번호를 물어보면?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① 친절하게 알려준다</div>
+                    <div class="quiz-option" contenteditable="true">② 100% 사기이므로 끊는다</div>
+                    <div class="quiz-option" contenteditable="true">③ 일부만 알려준다</div>
+                    <div class="quiz-option" contenteditable="true">④ 은행에 가서 확인한다</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 3. 은행 앱에서 할 수 없는 것은?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① 송금</div>
+                    <div class="quiz-option" contenteditable="true">② 잔액 조회</div>
+                    <div class="quiz-option" contenteditable="true">③ 현금 인출</div>
+                    <div class="quiz-option" contenteditable="true">④ 거래 내역 확인</div>
+                </div>
+            </div>
+
+            <div class="next-episode">
+                <h3 contenteditable="true">Episode 15: 할머니, AI로 취미 생활 즐겨요!</h3>
+                <p contenteditable="true">다음 이야기에서는 <span class="proper-name">윤호</span>가 <span class="proper-name">할머니</span>에게 <span class="emphasis">AI</span>를 활용해서 취미 생활을 더 즐겁게 하는 방법을 알려드립니다.</p>
+                <p contenteditable="true"><span class="emphasis">그림 그리기</span>, <span class="emphasis">음악 만들기</span>, <span class="emphasis">요리 레시피</span> 찾기 등 AI로 할 수 있는 재미있는 것들을 배워봅시다!</p>
+            </div>
+
+            <div class="answer-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🎯 퀴즈 정답</h3>
+                <p contenteditable="true">
+                    <span class="emphasis">1.</span> <span class="reversed-text">②</span><br>
+                    <span class="emphasis">2.</span> <span class="reversed-text">②</span><br>
+                    <span class="emphasis">3.</span> <span class="reversed-text">③</span>
+                </p>
+            </div>
+
+            <div class="grammar-checker-box">
+                <h2 style="margin-top: 0;" contenteditable="true">📚 한글 학습 도구</h2>
+                <p style="font-size: 24px; line-height: 1.6;" contenteditable="true">
+                    <span class="emphasis">한글이 궁금하신가요?</span><br><br>
+                    📖 <a href="https://stdict.korean.go.kr/main/main.do" target="_blank">표준국어대사전</a><br>
+                    📝 <a href="https://nara-speller.co.kr/old_speller/" target="_blank">부산대 맞춤법 검사기</a><br><br>
+                    정확한 한글 사용을 위한 도구입니다!
+                </p>
+            </div>
+
+            <div class="comments-section" style="background: white; padding: 29px; border-radius: 15px; margin: 25px 0;">
+                <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 28px;" contenteditable="true">💬 댓글</h2>
+                <div style="display: flex; gap: 15px;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 900; flex-shrink: 0;">나</div>
+                    <div style="flex: 1;">
+                        <input type="text" placeholder="댓글 추가..." style="width: 100%; padding: 12px 15px; font-size: 18px; border: none; border-bottom: 2px solid #ddd; font-family: 'Noto Sans KR', sans-serif; outline: none;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="sidebar">
+        <div class="sidebar-item">
+            <div class="sidebar-title">📅 달력</div>
+            <div class="sidebar-content calendar">
+                <div class="calendar-month" id="calendar-month">2025년 12월</div>
+                <div class="calendar-grid" id="calendar-grid"></div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="sidebar-title">🔥 인기글</div>
+            <div class="sidebar-content">
+                <div class="popular-post">1. AI 기초 완벽 가이드</div>
+                <div class="popular-post">2. 시니어를 위한 스마트폰</div>
+                <div class="popular-post">3. 윤호의 AI 시리즈</div>
+                <div class="popular-post">4. 머신러닝 입문</div>
+                <div class="popular-post">5. 챗봇 활용하기</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 1<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 2<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 3<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 4<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 5<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 6<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 7<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="sidebar-title">🏷️ 키워드</div>
+            <div class="sidebar-content">
+                <span class="keyword-tag">#편리쾌첩</span>
+                <span class="keyword-tag">#은행앱</span>
+                <span class="keyword-tag">#송금</span>
+                <span class="keyword-tag">#모바일뱅킹</span>
+                <span class="keyword-tag">#보이스피싱</span>
+                <span class="keyword-tag">#금융사기</span>
+                <span class="keyword-tag">#안전한송금</span>
+                <span class="keyword-tag">#윤호선생님</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="sidebar-title">🔍 검색</div>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="검색어를 입력하세요...">
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-margin"></div>
+    
+    <script>
+        let editMode = false;
+        let isPlaying = false;
+        let currentTime = 0;
+        let duration = 180;
+        let playInterval;
+        
+        function toggleEdit() {
+            editMode = !editMode;
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            const btn = event.target;
+            
+            editableElements.forEach(el => {
+                el.contentEditable = editMode;
+            });
+            
+            if (editMode) {
+                btn.classList.add('active');
+                btn.textContent = '✅ 편집 중';
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '✏️ 편집 모드';
+            }
+        }
+        
+        function changeFontSize(action) {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            
+            if (action === 'increase') {
+                span.style.fontSize = '1.2em';
+            } else {
+                span.style.fontSize = '0.9em';
+            }
+            
+            range.surroundContents(span);
+        }
+        
+        function changeColor() {
+            const color = prompt('색상을 입력하세요 (예: red, #FF0000):');
+            if (color) {
+                document.execCommand('foreColor', false, color);
+            }
+        }
+        
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.lyrics-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('lyrics-' + lang).classList.add('active');
+        }
+        
+        function togglePlay() {
+            const playBtn = document.querySelector('.play-btn');
+            
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+                startPlayback();
+            } else {
+                isPlaying = false;
+                playBtn.innerHTML = '<div class="play-icon"></div>';
+                stopPlayback();
+            }
+        }
+        
+        function startPlayback() {
+            playInterval = setInterval(() => {
+                if (currentTime < duration) {
+                    currentTime++;
+                    updateProgress();
+                } else {
+                    togglePlay();
+                    currentTime = 0;
+                    updateProgress();
+                }
+            }, 1000);
+        }
+        
+        function stopPlayback() {
+            clearInterval(playInterval);
+        }
+        
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const timeDisplay = document.getElementById('timeDisplay');
+            
+            const percentage = (currentTime / duration) * 100;
+            progressFill.style.width = percentage + '%';
+            
+            const currentMin = Math.floor(currentTime / 60);
+            const currentSec = currentTime % 60;
+            const durationMin = Math.floor(duration / 60);
+            const durationSec = duration % 60;
+            
+            timeDisplay.textContent = 
+                `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${durationMin}:${durationSec.toString().padStart(2, '0')}`;
+        }
+        
+        function seek(event) {
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const percentage = x / rect.width;
+            
+            currentTime = Math.floor(duration * percentage);
+            updateProgress();
+        }
+        
+        updateProgress();
+        
+        const holidays = {
+            2025: {
+                1: [1],
+                2: [28, 29, 30],
+                3: [1, 3],
+                5: [5, 15],
+                6: [6],
+                8: [15],
+                9: [28, 29, 30],
+                10: [3, 9],
+                12: [25]
+            }
+        };
+        
+        const holidayNames = {
+            2025: {
+                '1-1': '신정',
+                '2-28': '설날',
+                '2-29': '설날',
+                '2-30': '설날',
+                '3-1': '삼일절',
+                '3-3': '대체휴일',
+                '5-5': '어린이날',
+                '5-15': '석가탄신일',
+                '6-6': '현충일',
+                '8-15': '광복절',
+                '9-28': '추석',
+                '9-29': '추석',
+                '9-30': '추석',
+                '10-3': '개천절',
+                '10-9': '한글날',
+                '12-25': '성탄절'
+            }
+        };
+        
+        function generateCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            
+            document.getElementById('calendar-month').textContent = 
+                year + '년 ' + (month + 1) + '월';
+            
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            
+            const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+            weekDays.forEach((day, index) => {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+                dayCell.style.fontWeight = '900';
+                if (index === 0) {
+                    dayCell.style.color = '#D32F2F';
+                }
+                grid.appendChild(dayCell);
+            });
+            
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const firstDayOfWeek = firstDay.getDay();
+            const lastDate = lastDay.getDate();
+            
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day';
+                emptyCell.style.opacity = '0.3';
+                grid.appendChild(emptyCell);
+            }
+            
+            const monthHolidays = (holidays[year] && holidays[year][month + 1]) || [];
+            const monthHolidayNames = holidayNames[year] || {};
+            
+            for (let date = 1; date <= lastDate; date++) {
+                const dateCell = document.createElement('div');
+                dateCell.className = 'calendar-day';
+                
+                const currentDate = new Date(year, month, date);
+                const dayOfWeek = currentDate.getDay();
+                
+                if (dayOfWeek === 0) {
+                    dateCell.style.color = '#D32F2F';
+                }
+                
+                const isHoliday = monthHolidays.includes(date);
+                const holidayKey = (month + 1) + '-' + date;
+                const holidayName = monthHolidayNames[holidayKey];
+                
+                if (isHoliday && holidayName) {
+                    dateCell.style.color = '#D32F2F';
+                    dateCell.style.fontWeight = '900';
+                    dateCell.innerHTML = date + '<br><span style="font-size: 9px;">' + holidayName + '</span>';
+                } else {
+                    dateCell.textContent = date;
+                }
+                
+                if (date === now.getDate() && month === now.getMonth() && year === now.getFullYear()) {
+                    dateCell.style.background = '#0066CC';
+                    dateCell.style.color = 'white';
+                    dateCell.style.fontWeight = '900';
+                }
+                
+                grid.appendChild(dateCell);
+            }
+        }
+        
+        generateCalendar();
+    </script>
+</body>
+</html>

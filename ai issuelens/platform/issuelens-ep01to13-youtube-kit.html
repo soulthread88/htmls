@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens EP.01~13 — 유튜브 롱폼 제작 키트 완전판</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --red: #C8001A;
+  --redbg: #FFF0F3;
+  --ink: #0A0A0A;
+  --ink2: #1F2937;
+  --ink3: #4B5563;
+  --bg: #F7F9FC;
+  --white: #fff;
+  --bdr: #E2E8F0;
+  --amber: #B45309;
+  --ambbg: #FFFBEB;
+  --blu: #1E3A8A;
+  --blubg: #EFF6FF;
+  --grn: #065F46;
+  --grnbg: #ECFDF5;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+a { color: var(--red); }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.topbar-logo {
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dot { width: 10px; height: 10px; background: #fff; border-radius: 50%; opacity: .85; display: inline-block; }
+.topbar-badge {
+  background: rgba(255,255,255,.18);
+  border: 1.5px solid rgba(255,255,255,.35);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ── NAV ── */
+.nav {
+  background: var(--white);
+  border-bottom: 2px solid var(--bdr);
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.nav-btn {
+  padding: 14px 22px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink3);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+}
+.nav-btn:hover { color: var(--red); }
+.nav-btn.active { color: var(--red); border-bottom-color: var(--red); }
+
+/* ── PAGES ── */
+.page { display: none; max-width: 880px; margin: 0 auto; padding: 32px 20px 60px; }
+.page.active { display: block; }
+
+/* ── SECTION ── */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--bdr);
+}
+.sec-head h2 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -.02em;
+}
+.sec-icon {
+  font-size: 1.5rem;
+}
+.badge {
+  background: var(--redbg);
+  color: var(--red);
+  border: 1.5px solid #FFCCD5;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 12px;
+  white-space: nowrap;
+}
+
+/* ── COPY BOX ── */
+.copy-wrap {
+  margin-bottom: 22px;
+  position: relative;
+}
+.copy-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink3);
+  margin-bottom: 6px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.copy-box {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 12px;
+  padding: 18px 18px 50px;
+  white-space: pre-wrap;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink2);
+  position: relative;
+  min-height: 60px;
+}
+.copy-box.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  background: #0D1117;
+  color: #C9D1D9;
+  border-color: #30363D;
+}
+.copy-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+  z-index: 2;
+}
+.copy-btn:hover { background: #a30016; transform: translateY(-1px); }
+.copy-btn.ok { background: var(--grn); }
+
+/* ── CHAPTER TABLE ── */
+.ch-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+}
+.ch-table th {
+  background: var(--ink2);
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: left;
+}
+.ch-table th:first-child { border-radius: 8px 0 0 0; }
+.ch-table th:last-child { border-radius: 0 8px 0 0; }
+.ch-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--bdr);
+  font-size: 14px;
+  vertical-align: top;
+}
+.ch-table tr:nth-child(even) td { background: var(--bg); }
+.ch-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+.ch-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+.ch-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  color: var(--red);
+  white-space: nowrap;
+}
+.ch-title { font-weight: 700; color: var(--ink); }
+.ch-desc { color: var(--ink3); font-size: 13px; margin-top: 3px; }
+
+/* ── THUMBNAIL CARD ── */
+.thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.thumb-card {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transition: box-shadow .2s, transform .2s;
+}
+.thumb-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.12); transform: translateY(-3px); }
+.thumb-preview {
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.thumb-preview.v1 { background: #0A0A0A; }
+.thumb-preview.v2 { background: #1E3A8A; }
+.thumb-preview.v3 { background: #7F1D1D; }
+.thumb-main-text {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  z-index: 1;
+}
+.thumb-main-text .accent { color: #FF4444; }
+.thumb-main-text .accent2 { color: #FFD700; }
+.thumb-main-text .accent3 { color: #FF6B35; }
+.thumb-sub-text {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,.7);
+  font-weight: 600;
+  z-index: 1;
+}
+.thumb-ep-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--red);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: .06em;
+}
+.thumb-info {
+  padding: 14px 16px;
+  border-top: 1.5px solid var(--bdr);
+}
+.thumb-info h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.thumb-spec-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.thumb-spec {
+  background: var(--bg);
+  border: 1px solid var(--bdr);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink3);
+  padding: 3px 9px;
+}
+
+/* ── SCRIPT SECTION ── */
+.script-section {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.script-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--ink2);
+  color: #fff;
+  cursor: pointer;
+  transition: background .15s;
+}
+.script-header:hover { background: var(--ink); }
+.script-num {
+  background: var(--red);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  flex-shrink: 0;
+}
+.script-header-title {
+  font-weight: 700;
+  font-size: 15px;
+  flex: 1;
+}
+.script-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  opacity: .7;
+}
+.script-toggle { font-size: 1.1rem; transition: transform .25s; }
+.script-body {
+  padding: 20px 22px;
+  display: none;
+  border-top: 1.5px solid var(--bdr);
+}
+.script-body.open { display: block; }
+.script-body p {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--ink2);
+  margin-bottom: 16px;
+}
+.script-body p:last-child { margin-bottom: 0; }
+.s-dir {
+  color: var(--ink3);
+  font-style: italic;
+  font-size: 13px;
+  background: var(--bg);
+  border-left: 3px solid var(--bdr);
+  padding: 8px 12px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 12px;
+}
+.s-hl { color: var(--red); font-weight: 700; }
+.s-data {
+  background: var(--ambbg);
+  border: 1.5px solid #FDE68A;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 0;
+  font-size: 14px;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+/* ── TIPS ── */
+.tip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.tip-card {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 12px;
+  padding: 16px 16px;
+}
+.tip-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.tip-card p {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.75;
+}
+.tip-card.warn { border-color: #FDE68A; background: var(--ambbg); }
+.tip-card.ok { border-color: #A7F3D0; background: var(--grnbg); }
+.tip-card.info { border-color: #BFDBFE; background: var(--blubg); }
+
+/* ── CHECKLIST ── */
+.checklist {
+  list-style: none;
+  margin-bottom: 22px;
+}
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bdr);
+  font-size: 15px;
+  color: var(--ink2);
+}
+.checklist li:last-child { border-bottom: none; }
+.ch-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--bdr);
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.ch-box.done {
+  background: var(--grn);
+  border-color: var(--grn);
+  color: #fff;
+}
+
+/* ── PROGRESS ── */
+.progress-wrap {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink3);
+  margin-bottom: 10px;
+}
+.progress-bar {
+  background: var(--bg);
+  border-radius: 8px;
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid var(--bdr);
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #C8001A, #FF4A6A);
+  border-radius: 8px;
+  width: 0%;
+  transition: width .4s ease;
+}
+
+/* ── UTIL ── */
+.info-box {
+  background: var(--blubg);
+  border: 1.5px solid #BFDBFE;
+  border-left: 5px solid var(--blu);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: #1E3A8A;
+  line-height: 1.75;
+}
+.warn-box {
+  background: var(--ambbg);
+  border: 1.5px solid #FDE68A;
+  border-left: 5px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--amber);
+  line-height: 1.75;
+}
+.divider {
+  border: none;
+  border-top: 2px solid var(--bdr);
+  margin: 28px 0;
+}
+
+
+/* ── EP NAV (EP.02~13) ── */
+.ep-nav{background:var(--white);border-bottom:2px solid var(--bdr);overflow-x:auto;position:sticky;top:0;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.ep-nav-inner{display:flex;gap:0;min-width:max-content}
+.ep-btn{padding:13px 18px;background:none;border:none;border-bottom:3px solid transparent;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:700;color:var(--ink3);cursor:pointer;white-space:nowrap;transition:all .2s}
+.ep-btn:hover{color:var(--red)}
+.ep-btn.active{color:var(--red);border-bottom-color:var(--red)}
+.ep-page{display:none;max-width:860px;margin:0 auto;padding:28px 20px 60px}
+.ep-page.active{display:block}
+.ep-header{background:var(--white);border:1.5px solid var(--bdr);border-top:6px solid var(--red);border-radius:0 0 14px 14px;padding:22px 24px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.ep-num{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.ep-title{font-size:1.4rem;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.3;margin-bottom:8px}
+.ep-sub{font-size:14px;color:var(--ink3);line-height:1.75}
+.ep-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.ep-tag{background:var(--bg);border:1px solid var(--bdr);border-radius:14px;font-size:12px;font-weight:700;color:var(--ink3);padding:3px 10px}
+.sec-lbl{font-size:12px;font-weight:700;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin:22px 0 8px;display:flex;align-items:center;gap:8px}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.thumb-preview.dark{background:#0A0A0A}
+.thumb-preview.navy{background:#1E3A8A}
+.thumb-preview.deep{background:#4C1D95}
+.thumb-ep{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.05em}
+.thumb-main{font-size:clamp(.9rem,2.5vw,1.2rem);font-weight:900;color:#fff;line-height:1.25;letter-spacing:-.01em}
+.thumb-main .r{color:#FF4444}
+.thumb-main .y{color:#FFD700}
+.thumb-main .o{color:#FF9500}
+.thumb-sub{font-size:.7rem;color:rgba(255,255,255,.65);font-weight:600}
+.thumb-info{padding:12px 14px;border-top:1px solid var(--bdr)}
+.thumb-info h4{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.thumb-info p{font-size:12px;color:var(--ink3);line-height:1.6}
+.spec-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.spec{background:var(--bg);border:1px solid var(--bdr);border-radius:5px;font-size:11px;font-weight:600;color:var(--ink3);padding:2px 8px}
+.tip{background:var(--white);border:1.5px solid var(--bdr);border-radius:10px;padding:14px}
+.tip h4{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.tip p{font-size:12px;color:var(--ink3);line-height:1.7}
+.tip.warn{border-color:#FDE68A;background:var(--ambbg)}
+.tip.ok{border-color:#A7F3D0;background:var(--grnbg)}
+.tip.info{border-color:#BFDBFE;background:var(--blubg)}
+
+/* ── TWO-LEVEL NAV CONTAINER ── */
+.main-nav-section { background: var(--white); border-bottom: 2px solid var(--bdr); box-shadow: 0 2px 8px rgba(0,0,0,.06); position: sticky; top: 0; z-index: 100; }
+.episode-nav-row { overflow-x: auto; display: flex; background: #f0f4f8; border-top: 1px solid var(--bdr); }
+.section-nav-row { display: flex; gap: 0; overflow-x: auto; }
+.ep-section-label { font-size: 11px; font-weight: 700; color: var(--ink3); padding: 6px 16px; background: #f0f4f8; white-space: nowrap; display: flex; align-items: center; border-right: 1px solid var(--bdr); letter-spacing: .06em; text-transform: uppercase; }
+
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo"><span class="dot"></span>IssueLens — 유튜브 롱폼 제작 키트</div>
+  <span class="topbar-badge">📹 EP.01~13 완전판</span>
+</div>
+
+<!-- MAIN EP SELECTOR -->
+<div class="main-nav-section">
+  <div class="section-nav-row">
+    <span class="ep-section-label">에피소드 선택</span>
+    <button class="nav-btn main-ep-btn active" onclick="showMainSection('ep01')" style="font-size:13px;padding:13px 20px">📝 EP.01 — 알리·테무 개인정보</button>
+    <button class="nav-btn main-ep-btn" onclick="showMainSection('ep02to13')" style="font-size:13px;padding:13px 20px">📦 EP.02~13 — 시리즈 전편</button>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- EP.01 SECTION -->
+<!-- ================================================================ -->
+<div id="ep01-section">
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showPage('script')">📝 대본 (스크립트)</button>
+  <button class="nav-btn" onclick="showPage('meta')">🏷️ 제목·설명·태그</button>
+  <button class="nav-btn" onclick="showPage('chapters')">⏱️ 챕터 구성</button>
+  <button class="nav-btn" onclick="showPage('thumbnail')">🖼️ 썸네일 가이드</button>
+  <button class="nav-btn" onclick="showPage('checklist')">✅ 업로드 체크리스트</button>
+</nav>
+
+<!-- ================================================================ -->
+<!-- PAGE 1: SCRIPT -->
+<!-- ================================================================ -->
+<div id="page-script" class="page active">
+
+  <div class="sec-head">
+    <span class="sec-icon">📝</span>
+    <h2>유튜브 롱폼 대본 (나레이션 스크립트)</h2>
+    <span class="badge">약 15~20분 분량</span>
+  </div>
+
+  <div class="info-box">
+    💡 <strong>사용 방법:</strong> 각 섹션을 클릭하면 대본이 펼쳐집니다. 오른쪽 하단 [복사] 버튼을 눌러 전체 대본을 복사하세요. [ ] 안의 내용은 영상 편집 디렉션입니다.
+  </div>
+
+  <!-- FULL COPY -->
+  <div class="copy-wrap">
+    <div class="copy-label">📋 전체 대본 한번에 복사</div>
+    <div class="copy-box" id="full-script" style="max-height:180px;overflow:hidden;padding-bottom:18px">여기를 클릭하면 전체 대본을 복사할 수 있습니다 →</div>
+    <button class="copy-btn" onclick="copyFull()">전체 복사</button>
+  </div>
+
+  <!-- INTRO -->
+  <div class="script-section">
+    <div class="script-header" onclick="toggleScript(this)">
+      <span class="script-num">00</span>
+      <span class="script-header-title">인트로 / 훅 (Hook)</span>
+      <span class="script-time">00:00 – 01:30</span>
+      <span class="script-toggle">▼</span>
+    </div>
+    <div class="script-body open">
+      <div class="s-dir">[배경: 알리·테무 앱 화면 or 쇼핑 영상 B-roll / 긴박한 배경음]</div>
+      <p>여러분, 솔직히 물어볼게요.<br>
+지난 한 달, 알리익스프레스나 테무에서 뭔가 하나쯤 사지 않으셨나요?</p>
+      <p>500원짜리 양말, 3,000원짜리 폰케이스, 2만원도 안 하는 무선이어폰.<br>
+저도 솔직히 삽니다. 근데 오늘 이 영상 보고 나면... 조금 달라질 수 있어요.</p>
+      <div class="s-dir">[화면: 숫자 강조 그래픽 — "₩20억"]</div>
+      <p>2024년 7월, 개인정보보호위원회가 <span class="s-hl">알리익스프레스에 과징금 20억 원</span>을 부과했습니다.<br>
+이유요? 우리 이용자들의 개인정보를, 해외 판매자 <span class="s-hl">18만 곳</span>에 넘기면서 제대로 고지조차 안 했기 때문입니다.</p>
+      <p>18만 곳이요. 18만.</p>
+      <p>오늘 이 영상에서, 저는 한 가지 질문에 답할 겁니다.<br>
+<span class="s-hl">"내가 아낀 몇천 원이, 실제로 어디로 가고 있는가?"</span></p>
+      <div class="s-dir">[타이틀 카드: IssueLens EP.01 | 당신의 '0원 결제', 그 뒤에 숨겨진 데이터 주권의 현주소]</div>
+    </div>
+  </div>
+
+  <!-- SEC 1 -->
+  <div class="script-section">
+    <div class="script-header" onclick="toggleScript(this)">
+      <span class="script-num">01</span>
+      <span class="script-header-title">500원짜리 양말에 담긴 '개인정보 상납'의 진실</span>
+      <span class="script-time">01:30 – 05:30</span>
+      <span class="script-toggle">▼</span>
+    </div>
+    <div class="script-body">
+      <div class="s-dir">[화면: 앱 설치 → 회원가입 화면 캡처 → 권한 요청 화면]</div>
+      <p>알리나 테무 앱을 처음 설치할 때를 떠올려보세요.<br>
+이름, 이메일, 전화번호를 입력합니다.<br>
+앱이 위치, 카메라, 연락처 접근 권한을 요청합니다.<br>
+우리는 그냥 '허용'을 누릅니다.</p>
+      <p>그 순간부터 수집이 시작됩니다.<br>
+단순히 이름과 주소만이 아닙니다.</p>
+      <div class="s-data">
+        📊 수집되는 정보 목록: 이름·주소·전화번호 / 결제 카드 정보 / 구매 패턴·검색 기록 / 기기 정보·IP 주소 / 위치 데이터 / 앱 사용 시간과 행동 패턴
+      </div>
+      <div class="s-dir">[화면: 데이터 흐름 인포그래픽 — 앱 → 서버 → 해외 판매자]</div>
+      <p>개인정보보호위원회의 2024년 발표에 따르면, 알리익스프레스는 이 정보를 <span class="s-hl">해외 판매자 18만 곳</span>에 전달했습니다.<br>
+고지? 동의? 없었습니다.</p>
+      <p>이게 왜 문제냐고요?</p>
+      <p>생각해보세요. 여러분의 이름, 주소, 구매 기록이 한국 기업에 넘어간다면 우리는 분노합니다. 고소하고, 불매하고, 뉴스에 나옵니다.<br>
+그런데 그게 해외 서버를 통해, 해외 판매자 18만 곳에 넘어갔을 때 — 우리가 할 수 있는 게 뭐가 있을까요?</p>
+      <p>거의 없습니다.</p>
+      <div class="s-dir">[화면: "삭제 요청" → 응답 없음 시나리오 시각화]</div>
+      <p>실제로 이용자가 개인정보 삭제를 요청해도, 해외 서버에 있는 데이터는 국내 법 집행이 실질적으로 어렵습니다.<br>
+당신의 데이터는... 이미 어딘가에 있습니다. 그리고 돌아오지 않을 수 있습니다.</p>
+    </div>
+  </div>
+
+  <!-- SEC 2 -->
+  <div class="script-section">
+    <div class="script-header" onclick="toggleScript(this)">
+      <span class="script-num">02</span>
+      <span class="script-header-title">해외 서버 전송은 왜 안보 위협이 되는가</span>
+      <span class="script-time">05:30 – 10:00</span>
+      <span class="script-toggle">▼</span>
+    </div>
+    <div class="script-body">
+      <div class="s-dir">[화면: 법 조문 자막 — 국가정보법 제7조]</div>
+      <p>자, 여기서 한 가지 법을 보겠습니다.<br>
+2017년 특정 국가에서 제정된 법률, 국가정보법 제7조입니다.</p>
+      <p>내용은 이렇습니다: <span class="s-hl">"모든 조직과 시민은 국가 정보 활동을 지지·보조·협조해야 한다."</span></p>
+      <p>'모든 조직'이라는 말, 기억해두세요.</p>
+      <div class="s-dir">[화면: 알리·테무·쉬인 로고 → 해당국 국기 연결 그래픽]</div>
+      <p>알리익스프레스는 알리바바 그룹 소속. 중국 기업입니다.<br>
+테무는 핀둬둬 홀딩스 산하. 역시 중국 기업입니다.<br>
+쉬인도 설립은 중국이고, 지금도 핵심 운영 기반은 중국에 있습니다.</p>
+      <p>이 기업들이 수집한 한국 이용자의 데이터가 중국 서버에 저장될 때, 이 법에 따라 중국 정부는 언제든 이 데이터에 접근을 요구할 수 있는 구조가 됩니다.</p>
+      <p>여러분의 쇼핑 기록이요?<br>
+그게 뭐 대수냐고 생각할 수 있습니다.<br>
+근데 한번 다르게 생각해보죠.</p>
+      <div class="s-dir">[화면: 인포그래픽 — 개인 데이터 → 패턴 분석 → 집단 정보 → 국가 정보자산]</div>
+      <p>수억 명의 쇼핑 패턴을 모으면, 어느 지역에 사람이 몇 명 사는지, 어떤 상품을 소비하는지, 경제 수준은 어떤지 추정이 가능합니다.<br>
+군인, 공무원, 기업 임원이 어디서 뭘 사는지도 나옵니다.</p>
+      <p>이것은 단순한 소비 데이터가 아닙니다.<br>
+<span class="s-hl">집합적 국가 정보</span>입니다.</p>
+      <div class="s-data">
+        ⚡ 개인정보보호위원회·FTC 발표 기반 주요 지적사항: 개인정보 수집 범위 — 광범위 / 이용자 삭제 요청 어려움 — 높음 / 해외 서버 이전 위험 — 높음 / 제3자 공유 고지 미흡 — 중간
+      </div>
+      <p>미국은 이미 행동에 나서고 있습니다.<br>
+미 의회 청문회에서 틱톡 CEO를 불러 5시간 동안 심문했고, 일부 주에서는 정부 기기에서 틱톡을 금지했습니다.<br>
+같은 논리가 알리, 테무, 쉬인에도 적용되고 있습니다.</p>
+      <p>한국은 지금 어디 있을까요?</p>
+    </div>
+  </div>
+
+  <!-- SEC 3 -->
+  <div class="script-section">
+    <div class="script-header" onclick="toggleScript(this)">
+      <span class="script-num">03</span>
+      <span class="script-header-title">상호주의 없는 시장 개방 — 누가 이득을 보는가</span>
+      <span class="script-time">10:00 – 14:00</span>
+      <span class="script-toggle">▼</span>
+    </div>
+    <div class="script-body">
+      <div class="s-dir">[화면: 방화장성(Great Firewall) 이미지 or 그래픽 / 차단된 사이트 목록]</div>
+      <p>여기서 정말 화가 나는 부분을 말씀드릴게요.</p>
+      <p>중국에서 구글 쓸 수 있나요? 안 됩니다.<br>
+유튜브는요? 차단입니다.<br>
+인스타그램은요? 역시 차단.<br>
+카카오톡이나 네이버는요? 당연히 안 되죠.</p>
+      <p>중국은 자국의 인터넷을 '만리방화벽(Great Firewall)'으로 철저히 통제합니다.<br>
+한국 기업이 중국에서 자유롭게 데이터를 수집하고 영업하는 것은 사실상 불가능합니다.</p>
+      <div class="s-dir">[화면: 대비 그래픽 — 왼쪽 중국(차단), 오른쪽 한국(개방)]</div>
+      <p>그런데요.<br>
+알리익스프레스는 한국에서 연간 수조 원의 매출을 올립니다.<br>
+테무는 불과 2년 만에 한국 이커머스 상위권에 진입했습니다.<br>
+이들은 우리 이용자 수억 건의 개인정보를 자유롭게 수집합니다.</p>
+      <p><span class="s-hl">일방향적 개방은 곧 일방향적 착취입니다.</span></p>
+      <p>경제적 피해도 있습니다.<br>
+국내 소상공인, 제조업체, 이커머스 플랫폼이 피해를 입는 동안 — 우리 소비자들은 데이터로 비용을 지불하고 있는 셈입니다.</p>
+      <div class="s-data">
+        💬 핵심 질문: "당신이 오늘 아낀 몇천 원이, 내일 대한민국의 경쟁력을 약화시키는 실탄이 될 수 있습니다."
+      </div>
+      <p>저는 소비자를 탓하는 게 아닙니다.<br>
+비싼 걸 사라는 것도 아닙니다.</p>
+      <p>다만, 우리가 무엇을 지불하고 있는지는 알아야 한다고 생각합니다.<br>
+돈을 아끼는 대신, 우리는 데이터를 주고 있습니다.<br>
+그 데이터가 어디로 가는지는, 이제 알았을 겁니다.</p>
+    </div>
+  </div>
+
+  <!-- OUTRO -->
+  <div class="script-section">
+    <div class="script-header" onclick="toggleScript(this)">
+      <span class="script-num">04</span>
+      <span class="script-header-title">아웃트로 + 실천 강령 + CTA</span>
+      <span class="script-time">14:00 – 16:30</span>
+      <span class="script-toggle">▼</span>
+    </div>
+    <div class="script-body">
+      <div class="s-dir">[화면: 4가지 실천 카드 순서대로 등장]</div>
+      <p>그렇다면 우리가 할 수 있는 건 뭘까요?<br>
+네 가지를 말씀드릴게요.</p>
+      <p><span class="s-hl">첫째, 해외 직구 앱을 점검하세요.</span><br>
+당장 삭제가 어렵다면, 최소한 앱 권한 설정에 들어가서 위치, 연락처, 카메라 권한을 꺼두세요.<br>
+가능하면 개인정보 삭제 요청도 해보세요. 앱 내 '내 정보 삭제' 기능이 있습니다.</p>
+      <p><span class="s-hl">둘째, 국내 플랫폼을 의식적으로 이용해주세요.</span><br>
+쿠팡, 네이버쇼핑, 무신사 등 국내 플랫폼을 이용하는 것이 국내 개인정보 보호 법체계 안에서 데이터를 지키는 방법입니다.<br>
+소비 선택 하나하나가 데이터 주권의 투표입니다.</p>
+      <p><span class="s-hl">셋째, 이 내용을 공유해주세요.</span><br>
+알아야 지킬 수 있습니다. 가족, 친구, 동료에게 이 영상을 보내주세요.<br>
+특히 부모님 세대, 디지털 환경에 익숙하지 않은 분들께 더 필요한 정보입니다.</p>
+      <p><span class="s-hl">넷째, 정책적 관심을 가져주세요.</span><br>
+데이터 안보를 진지하게 다루는 정치인과 정책에 목소리를 내주세요.<br>
+디지털 주권은 21세기 민주주의의 새로운 전선입니다.</p>
+      <div class="s-dir">[화면: IssueLens 로고 + 구독 버튼 CTA]</div>
+      <p>오늘 이 영상이 조금이라도 도움이 됐다면, 구독과 좋아요 부탁드립니다.<br>
+IssueLens는 앞으로도 우리 일상과 연결된 이슈들을 데이터와 팩트로 풀어드릴 예정입니다.</p>
+      <p>다음 에피소드에서 뵙겠습니다. 감사합니다.</p>
+      <div class="s-dir">[엔딩 카드: 구독 / 다음 영상 / 커뮤니티 링크]</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE 2: META -->
+<!-- ================================================================ -->
+<div id="page-meta" class="page">
+
+  <div class="sec-head">
+    <span class="sec-icon">🏷️</span>
+    <h2>제목 · 설명 · 태그</h2>
+    <span class="badge">유튜브 업로드용 복붙</span>
+  </div>
+
+  <div class="info-box">
+    💡 아래 각 항목의 [복사] 버튼을 눌러 유튜브 업로드 화면에 그대로 붙여넣기 하세요.
+  </div>
+
+  <!-- 제목 옵션 -->
+  <div class="copy-wrap">
+    <div class="copy-label">🎯 제목 옵션 A (권장 — 검색 최적화)</div>
+    <div class="copy-box" id="title-a">알리·테무 개인정보 유출의 진실 | 내 정보는 어디로? 데이터 주권 완전 분석 【IssueLens EP.01】</div>
+    <button class="copy-btn" onclick="copyEl('title-a',this)">복사</button>
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">🎯 제목 옵션 B (감성 훅 강조)</div>
+    <div class="copy-box" id="title-b">당신의 '500원 양말'이 국가 안보를 위협한다고? | 알리·테무 초저가 앱의 숨겨진 진실 【IssueLens EP.01】</div>
+    <button class="copy-btn" onclick="copyEl('title-b',this)">복사</button>
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">🎯 제목 옵션 C (궁금증 유발형)</div>
+    <div class="copy-box" id="title-c">테무 설치하면 생기는 일 | 개인정보 18만 곳 유출, 과징금 20억의 진실 【IssueLens EP.01】</div>
+    <button class="copy-btn" onclick="copyEl('title-c',this)">복사</button>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 설명 -->
+  <div class="copy-wrap">
+    <div class="copy-label">📄 영상 설명 (Description) — 전체 복사 권장</div>
+    <div class="copy-box" id="desc-full">▶ 오늘 다룰 이야기 ━━━━━━━━━━━━━━━━━━━━
+알리익스프레스, 테무, 쉬인, 미니소 — 초저가 해외 직구 플랫폼.
+우리가 몇 천 원 아끼는 동안, 정작 우리 개인정보는 어디로 가고 있을까요?
+
+2024년 7월, 개인정보보호위원회는 알리익스프레스에 과징금 20억 원을 부과했습니다.
+이유: 이용자 개인정보를 해외 판매자 18만 곳에 이전하면서 고지 의무를 위반.
+
+이번 에피소드에서는 이 문제를 3가지 관점으로 분석합니다.
+
+━━━ 목차 (챕터) ━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 훅
+01:30 [CH.1] 500원 양말에 담긴 개인정보 상납의 진실
+05:30 [CH.2] 해외 서버 전송은 왜 안보 위협이 되는가
+10:00 [CH.3] 상호주의 없는 시장 개방, 누가 이득 보는가
+14:00 [CH.4] 실천 강령 + 마무리
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• 알리익스프레스 과징금: 20억 원 (2024년 7월, 개인정보보호위원회)
+• 개인정보 이전 해외 판매자 수: 18만 곳
+• 관련 법: 국가정보법 제7조 (중국, 2017년 제정)
+
+━━━ 참고 및 출처 ━━━━━━━━━━━━━━━━━━━━━━
+• 개인정보보호위원회 제재 결정 (2024)
+• 미 FTC 보고서
+• 미 의회 청문회 (틱톡 CEO 청문)
+
+━━━ IssueLens 채널 소개 ━━━━━━━━━━━━━━━━━━━
+데이터와 팩트로 풀어보는 한국 사회 이슈 분석 채널.
+우리 일상과 연결된 복잡한 문제를 쉽고 날카롭게 다룹니다.
+
+📌 구독 | 좋아요 | 알림 설정 부탁드립니다!
+
+━━━ 면책 공고 ━━━━━━━━━━━━━━━━━━━━━━━━━━
+본 영상은 국내외 공신력 있는 언론 보도 및 정부 기관 발표 자료를 바탕으로 한 공익적 논평입니다.
+특정 기업 비방 의도 없음. 대한민국 시청자의 알 권리 및 데이터 주권 보호를 목적으로 합니다.
+
+#알리익스프레스개인정보 #테무개인정보유출 #해외직구앱위험 #데이터주권 #IssueLens</div>
+    <button class="copy-btn" onclick="copyEl('desc-full',this)">복사</button>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 태그 -->
+  <div class="copy-wrap">
+    <div class="copy-label">🔖 태그 (Tags) — 쉼표 구분, 그대로 붙여넣기</div>
+    <div class="copy-box" id="tags">알리익스프레스 개인정보, 테무 개인정보 유출, 해외직구 앱 위험, 데이터 주권, 초저가 직구 앱, 개인정보보호, 해외직구 개인정보, 알리 테무 위험, 미니소 데이터, 쉬인 개인정보, 직구앱 삭제, 해외앱 보안, 개인정보 침해, 알리 과징금, 데이터 안보, 개인정보보호위원회, 국가정보법, 중국 앱 위험, 해외직구 위험성, 테무 위험, 알리 위험, 쉬인 위험, 개인정보 유출 피해, IssueLens, 이슈렌즈, 데이터 주권 한국</div>
+    <button class="copy-btn" onclick="copyEl('tags',this)">복사</button>
+  </div>
+
+  <!-- 카테고리 & 설정 -->
+  <div class="tip-grid">
+    <div class="tip-card info">
+      <h4>📁 카테고리</h4>
+      <p><strong>뉴스 및 정치</strong> 또는 <strong>교육</strong> 선택 권장.<br>알고리즘 노출에 유리.</p>
+    </div>
+    <div class="tip-card ok">
+      <h4>🌍 언어 설정</h4>
+      <p>영상 언어: <strong>한국어</strong><br>자막 언어: 한국어 (수동 업로드 권장)</p>
+    </div>
+    <div class="tip-card warn">
+      <h4>⏰ 업로드 시간</h4>
+      <p>한국 시간 기준 <strong>오후 6시 ~ 8시</strong> 업로드가 초기 조회수에 유리합니다.</p>
+    </div>
+    <div class="tip-card info">
+      <h4>📌 고정 댓글</h4>
+      <p>업로드 직후 챕터 타임스탬프 + 출처 링크를 댓글로 달고 고정하세요.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE 3: CHAPTERS -->
+<!-- ================================================================ -->
+<div id="page-chapters" class="page">
+
+  <div class="sec-head">
+    <span class="sec-icon">⏱️</span>
+    <h2>챕터 구성표 (타임스탬프)</h2>
+    <span class="badge">약 16분 30초 기준</span>
+  </div>
+
+  <div class="info-box">
+    💡 유튜브 영상 설명란에 아래 형식을 그대로 붙여넣으면 자동으로 챕터가 생성됩니다. 첫 챕터는 반드시 <strong>00:00</strong> 으로 시작해야 합니다.
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">📋 챕터 타임스탬프 — 복사 후 설명란에 붙여넣기</div>
+    <div class="copy-box mono" id="timestamps">00:00 인트로 — 알리·테무, 우리 정보는 어디로?
+01:30 [CH.1] 500원 양말에 담긴 개인정보 상납의 진실
+03:00 데이터 흐름: 앱 → 해외 서버 → 18만 판매자
+05:30 [CH.2] 해외 서버 전송이 안보 위협이 되는 이유
+07:00 국가정보법 제7조란 무엇인가
+08:30 미국·유럽의 대응과 한국의 현실
+10:00 [CH.3] 상호주의 없는 시장 개방
+11:30 만리방화벽 vs 한국의 개방 구조
+13:00 데이터는 21세기의 석유다
+14:00 [CH.4] 지금 당장 할 수 있는 4가지 실천
+15:30 마무리 + 다음 에피소드 예고</div>
+    <button class="copy-btn" onclick="copyEl('timestamps',this)">복사</button>
+  </div>
+
+  <hr class="divider">
+
+  <table class="ch-table">
+    <thead>
+      <tr>
+        <th style="width:110px">타임스탬프</th>
+        <th>섹션 제목</th>
+        <th>편집 포인트 / 비주얼 제안</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="ch-time">00:00</span></td>
+        <td><span class="ch-title">인트로 / 훅</span><div class="ch-desc">시청자를 즉시 사로잡는 질문으로 시작</div></td>
+        <td>알리·테무 앱 화면 B-roll + ₩20억 숫자 그래픽</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">01:30</span></td>
+        <td><span class="ch-title">CH.1 — 개인정보 상납의 진실</span><div class="ch-desc">과징금 사실 + 데이터 흐름 설명</div></td>
+        <td>앱 권한 요청 화면 캡처 / 데이터 흐름 인포그래픽</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">03:00</span></td>
+        <td><span class="ch-title">데이터 흐름 시각화</span><div class="ch-desc">앱→서버→18만 판매자 경로</div></td>
+        <td>모션그래픽 또는 슬라이드 인포그래픽</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">05:30</span></td>
+        <td><span class="ch-title">CH.2 — 안보 위협의 구조</span><div class="ch-desc">국가정보법 제7조 설명</div></td>
+        <td>법 조문 자막 풀스크린 / 중국 앱 기업 로고 그래픽</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">07:00</span></td>
+        <td><span class="ch-title">국가정보법 제7조</span><div class="ch-desc">조문 인용 + 의미 해설</div></td>
+        <td>법 조문 텍스트 애니메이션</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">08:30</span></td>
+        <td><span class="ch-title">미국·유럽의 대응</span><div class="ch-desc">틱톡 청문회, EU 규제 사례</div></td>
+        <td>청문회 관련 자료화면 / 뉴스 헤드라인 스크린샷</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">10:00</span></td>
+        <td><span class="ch-title">CH.3 — 상호주의 없는 개방</span><div class="ch-desc">만리방화벽 vs 한국 개방 대비</div></td>
+        <td>차단 사이트 목록 vs 한국 내 중국 앱 대비 그래픽</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">11:30</span></td>
+        <td><span class="ch-title">만리방화벽 설명</span><div class="ch-desc">비대칭 구도의 시각화</div></td>
+        <td>양쪽 비교 슬라이드 / 아이콘 그래픽</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">13:00</span></td>
+        <td><span class="ch-title">데이터 = 21세기의 석유</span><div class="ch-desc">핵심 메시지 강조 구간</div></td>
+        <td>임팩트 자막 풀스크린 처리</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">14:00</span></td>
+        <td><span class="ch-title">CH.4 — 실천 강령 4가지</span><div class="ch-desc">시청자 행동 유도 + CTA</div></td>
+        <td>카드 4장 순서대로 등장 / 구독 버튼 CTA</td>
+      </tr>
+      <tr>
+        <td><span class="ch-time">15:30</span></td>
+        <td><span class="ch-title">마무리 + 예고</span><div class="ch-desc">엔딩 카드 + 다음 에피소드</div></td>
+        <td>IssueLens 엔딩 카드 (구독/다음영상/SNS)</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE 4: THUMBNAIL -->
+<!-- ================================================================ -->
+<div id="page-thumbnail" class="page">
+
+  <div class="sec-head">
+    <span class="sec-icon">🖼️</span>
+    <h2>썸네일 가이드</h2>
+    <span class="badge">3가지 컨셉 제안</span>
+  </div>
+
+  <div class="info-box">
+    💡 썸네일은 <strong>1280×720px (16:9)</strong>으로 제작하세요. 아래 3가지 컨셉 중 하나를 선택해 Canva, Photoshop, 미리캔버스 등으로 제작하시면 됩니다.
+  </div>
+
+  <div class="thumb-grid">
+    <!-- V1 -->
+    <div class="thumb-card">
+      <div class="thumb-preview v1">
+        <span class="thumb-ep-badge">EP.01</span>
+        <div class="thumb-main-text">내 정보<br><span class="accent">중국</span>으로<br>팔렸다?</div>
+        <div class="thumb-sub-text">알리·테무 과징금 20억의 진실</div>
+      </div>
+      <div class="thumb-info">
+        <h3>컨셉 A — 임팩트 블랙 (권장)</h3>
+        <p style="font-size:13px;color:var(--ink3);line-height:1.7">검은 배경 + 빨간 강조 텍스트. 심각성과 신뢰도를 동시에 표현. 뉴스 채널 느낌.</p>
+        <div class="thumb-spec-row">
+          <span class="thumb-spec">배경: #0A0A0A</span>
+          <span class="thumb-spec">강조: #FF4444</span>
+          <span class="thumb-spec">폰트: 굵은 고딕</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- V2 -->
+    <div class="thumb-card">
+      <div class="thumb-preview v2">
+        <span class="thumb-ep-badge">EP.01</span>
+        <div class="thumb-main-text">알리·테무<br>설치하면<br><span class="accent2">일어나는 일</span></div>
+        <div class="thumb-sub-text">개인정보 18만 곳 유출 분석</div>
+      </div>
+      <div class="thumb-info">
+        <h3>컨셉 B — 경고 블루</h3>
+        <p style="font-size:13px;color:var(--ink3);line-height:1.7">진한 네이비 배경 + 금색 포인트. 안보·경고 이미지 강조. 권위감 있는 느낌.</p>
+        <div class="thumb-spec-row">
+          <span class="thumb-spec">배경: #1E3A8A</span>
+          <span class="thumb-spec">강조: #FFD700</span>
+          <span class="thumb-spec">폰트: 굵은 고딕</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- V3 -->
+    <div class="thumb-card">
+      <div class="thumb-preview v3">
+        <span class="thumb-ep-badge">EP.01</span>
+        <div class="thumb-main-text">₩500 양말<br>사면<br><span class="accent3">생기는 일</span></div>
+        <div class="thumb-sub-text">데이터 주권 / 해외직구 앱 위험</div>
+      </div>
+      <div class="thumb-info">
+        <h3>컨셉 C — 위험 레드</h3>
+        <p style="font-size:13px;color:var(--ink3);line-height:1.7">딥레드 배경 + 주황 강조. 위험·긴박감 표현. 클릭률 높은 감성 훅 방식.</p>
+        <div class="thumb-spec-row">
+          <span class="thumb-spec">배경: #7F1D1D</span>
+          <span class="thumb-spec">강조: #FF6B35</span>
+          <span class="thumb-spec">폰트: 굵은 고딕</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="copy-wrap">
+    <div class="copy-label">🎨 썸네일 제작 지시서 (디자이너 or AI 프롬프트용)</div>
+    <div class="copy-box" id="thumb-brief">【썸네일 제작 지시서 — IssueLens EP.01】
+
+■ 사이즈: 1280 × 720 px (16:9)
+■ 파일 형식: JPG 또는 PNG (2MB 이하)
+■ 해상도: 72dpi 이상
+
+■ 선택 컨셉: A (임팩트 블랙) — 권장
+   · 배경: 완전한 검정 (#0A0A0A) 또는 어두운 그라디언트
+   · 메인 텍스트 (상단 2/3): "내 정보 / 중국으로 / 팔렸다?" — 흰색, 매우 굵은 고딕
+   · 강조 단어 "중국으로" 또는 "팔렸다" — 빨간색 (#FF4444) 또는 빨간 배경
+   · 하단 보조 텍스트: "알리·테무 과징금 20억의 진실" — 회색 (#888888)
+   · 왼쪽 상단 EP.01 뱃지: 빨간 배경 흰 글씨
+   · 오른쪽 하단 또는 상단: IssueLens 로고 (선택)
+
+■ 금지 사항:
+   · 복잡한 배경 이미지 (텍스트가 안 보이면 안 됨)
+   · 너무 많은 텍스트 (핵심 3~5단어만)
+   · 연한 색상 (모바일 작은 화면에서 안 보임)
+
+■ 폰트 추천:
+   · Noto Sans KR Black (무료)
+   · Noto Sans KR ExtraBold
+   · Pretendard ExtraBold (무료)
+
+■ Canva 사용 시:
+   유튜브 썸네일 템플릿 → 검정 배경 선택 → 텍스트만 교체</div>
+    <button class="copy-btn" onclick="copyEl('thumb-brief',this)">복사</button>
+  </div>
+
+</div>
+
+<!-- ================================================================ -->
+<!-- PAGE 5: CHECKLIST -->
+<!-- ================================================================ -->
+<div id="page-checklist" class="page">
+
+  <div class="sec-head">
+    <span class="sec-icon">✅</span>
+    <h2>업로드 전 체크리스트</h2>
+    <span class="badge">클릭해서 완료 표시</span>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>전체 진행률</span>
+      <span id="progress-text">0 / 20 완료</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ 각 항목을 클릭하면 완료 처리됩니다. 영상 업로드 전 모든 항목을 확인하세요.
+  </div>
+
+  <div style="font-weight:700;color:var(--ink);margin-bottom:10px;font-size:15px">📹 영상 제작</div>
+  <ul class="checklist" id="cl-production">
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>대본 완성 및 최종 검토</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>녹화 완료 (조명, 음질 확인)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>영상 편집 완료</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>자막 삽입 완료 (한국어)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>배경음악 저작권 확인</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>인용 자료 및 출처 화면 표시</li>
+  </ul>
+
+  <div style="font-weight:700;color:var(--ink);margin-bottom:10px;font-size:15px">🖼️ 썸네일</div>
+  <ul class="checklist">
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>썸네일 제작 완료 (1280×720px)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>모바일에서 텍스트 가독성 확인</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>파일 크기 2MB 이하 확인</li>
+  </ul>
+
+  <div style="font-weight:700;color:var(--ink);margin-bottom:10px;font-size:15px">🏷️ 메타데이터</div>
+  <ul class="checklist">
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>영상 제목 입력 (검색어 포함)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>영상 설명 입력 (챕터 타임스탬프 포함)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>태그 25개 이상 입력</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>카테고리 선택 (뉴스/교육)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>언어 설정 — 한국어</li>
+  </ul>
+
+  <div style="font-weight:700;color:var(--ink);margin-bottom:10px;font-size:15px">📤 업로드 후</div>
+  <ul class="checklist">
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>썸네일 업로드 확인</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>챕터 자동 생성 확인 (영상 설명 타임스탬프)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>고정 댓글 작성 (챕터 + 출처 링크)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>카드/최종화면에 구독 버튼 추가</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>SNS 공유 (인스타그램, X, 스레드 등)</li>
+    <li onclick="toggleCheck(this)"><span class="ch-box">✓</span>커뮤니티 탭에 업로드 공지</li>
+  </ul>
+
+  <hr class="divider">
+
+  <div class="tip-grid">
+    <div class="tip-card ok">
+      <h4>✅ 좋은 영상 길이</h4>
+      <p>유튜브 알고리즘상 <strong>10~20분</strong>이 롱폼에 최적. 너무 짧으면 광고 수익 감소, 너무 길면 이탈률 증가.</p>
+    </div>
+    <div class="tip-card warn">
+      <h4>⚠️ 첫 48시간이 핵심</h4>
+      <p>업로드 후 <strong>48시간 내</strong> 조회수·좋아요·댓글이 알고리즘 노출을 결정합니다. 이 기간에 SNS 공유 집중하세요.</p>
+    </div>
+    <div class="tip-card info">
+      <h4>💬 댓글 응답 필수</h4>
+      <p>업로드 후 <strong>1~3시간</strong> 내 달리는 댓글에 적극 응답하면 알고리즘 참여도 점수가 높아집니다.</p>
+    </div>
+    <div class="tip-card ok">
+      <h4>📊 분석 확인</h4>
+      <p>업로드 후 <strong>72시간 뒤</strong> 유튜브 스튜디오에서 시청 지속률 그래프를 확인하세요. 이탈 구간이 개선 포인트입니다.</p>
+    </div>
+  </div>
+
+</div>
+
+
+
+</div>
+
+<!-- ================================================================ -->
+<!-- EP.02~13 SECTION -->
+<!-- ================================================================ -->
+<div id="ep02to13-section" style="display:none">
+
+<nav class="ep-nav">
+  <div class="ep-nav-inner">
+    <button class="ep-btn active" onclick="showEp('ep02',this)">EP.02</button>
+    <button class="ep-btn" onclick="showEp('ep03',this)">EP.03</button>
+    <button class="ep-btn" onclick="showEp('ep04',this)">EP.04</button>
+    <button class="ep-btn" onclick="showEp('ep05',this)">EP.05</button>
+    <button class="ep-btn" onclick="showEp('ep06',this)">EP.06</button>
+    <button class="ep-btn" onclick="showEp('ep07',this)">EP.07</button>
+    <button class="ep-btn" onclick="showEp('ep08',this)">EP.08</button>
+    <button class="ep-btn" onclick="showEp('ep09',this)">EP.09</button>
+    <button class="ep-btn" onclick="showEp('ep10',this)">EP.10</button>
+    <button class="ep-btn" onclick="showEp('ep11',this)">EP.11</button>
+    <button class="ep-btn" onclick="showEp('ep12',this)">EP.12</button>
+    <button class="ep-btn" onclick="showEp('ep13',this)">EP.13</button>
+  </div>
+</nav>
+
+<!-- ═══ EP.02 ═══ -->
+<div id="ep02" class="ep-page active">
+  <div class="ep-header">
+    <div class="ep-num">EP.02 · 데이터 주권 시리즈</div>
+    <div class="ep-title">앱 삭제로는 부족합니다 — 스마트폰·공유기·CCTV가 도청 장치가 되는 순간</div>
+    <div class="ep-sub">화웨이·샤오미·하이크비전·TP-Link. 앱을 지워도 기기 자체가 감시 도구라면? 펌웨어 백도어와 하드웨어 공급망 위협의 실체를 추적합니다.</div>
+    <div class="ep-tags"><span class="ep-tag">#중국스마트폰보안</span><span class="ep-tag">#화웨이보안위협</span><span class="ep-tag">#공유기해킹</span><span class="ep-tag">#CCTV도청</span><span class="ep-tag">#하드웨어공급망</span><span class="ep-tag">#펌웨어백도어</span><span class="ep-tag">#IoT보안</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep02-t1">앱 삭제해도 소용없다 — 공유기·CCTV·스마트TV가 이미 도청 장치인 이유 【IssueLens EP.02】</div><button class="copy-btn" onclick="cp('ep02-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep02-t2">화웨이·샤오미·TP-Link의 진실 | 당신 집 기기가 감시 도구인지 확인하는 법 【IssueLens EP.02】</div><button class="copy-btn" onclick="cp('ep02-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명 (Description)</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep02-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+EP.01에서 알리·테무 앱을 삭제하라고 했습니다.
+그런데 지금 당신 거실의 공유기, CCTV, 스마트TV는 괜찮을까요?
+
+앱 삭제 = 안전? 아닙니다.
+기기에 내장된 '펌웨어(firmware)'는 삭제할 수 없습니다.
+그리고 그 안에 '킬스위치'가 숨어 있을 수 있습니다.
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 앱 삭제로는 부족한 이유
+01:30 [CH.1] 펌웨어 백도어의 실체 — TP-Link 사례
+05:00 [CH.2] 파이브아이즈는 이미 행동했다 — 화웨이·ZTE·Hikvision 퇴출
+09:00 [CH.3] 당신의 거실이 감시당하고 있다 — 샤오미·CCTV·스마트TV
+13:00 [CH.4] 지금 당장 할 수 있는 기기 보안 점검법
+15:00 마무리 + EP.03 예고
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• TP-Link: 미 상무부·FBI 국가안보 관련 조사 (2024)
+• 샤오미 Mi10T: 리투아니아 NCSC, 검열 키워드 449개 내장 확인 (2021)
+• 화웨이·ZTE·Hikvision: 미 NDAA 2019 기준 연방 통신망 사용 전면 금지
+• 파이브아이즈 참여국 전면 교체 완료
+
+━━━ 참고 출처 ━━━━━━━━━━━━━━━━━━━━━━━━
+• 미국 FCC 국가안보 지정 문서
+• 리투아니아 NCSC 공식 보고서 (2021)
+• 영국 NCSC 화웨이 평가 보고서
+• 미국 법무부 공식 발표 (2020.02)
+
+━━━ IssueLens 채널 ━━━━━━━━━━━━━━━━━━━━━
+데이터와 팩트로 풀어보는 한국 사회 이슈 분석.
+📌 구독 | 좋아요 | 알림 설정!
+
+#화웨이보안위협 #중국스마트폰보안 #공유기해킹 #CCTV도청 #하드웨어공급망 #펌웨어백도어 #IoT보안 #스마트TV도청 #데이터주권 #IssueLens</div><button class="copy-btn" onclick="cp('ep02-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep02-ts">00:00 인트로 — 앱 삭제로는 부족한 이유
+01:30 [CH.1] 펌웨어 백도어의 실체 — TP-Link FBI 조사
+05:00 [CH.2] 파이브아이즈의 행동 — 화웨이·ZTE·Hikvision 퇴출
+09:00 [CH.3] 당신 거실이 감시당하는 법 — 샤오미·CCTV·스마트TV
+13:00 [CH.4] 기기 보안 점검법 4단계
+15:00 마무리 + EP.03 예고</div><button class="copy-btn" onclick="cp('ep02-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일 가이드</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.02</span><div class="thumb-main">앱 삭제해도<br><span class="r">소용없다</span></div><div class="thumb-sub">공유기·CCTV·TV가 이미 도청 중</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>검정 배경 + 빨간 강조. "소용없다" 충격 메시지.</p><div class="spec-row"><span class="spec">#0A0A0A</span><span class="spec">강조:#FF4444</span></div></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.02</span><div class="thumb-main">당신 집<br>공유기가<br><span class="y">스파이</span>입니다</div><div class="thumb-sub">TP-Link·화웨이·샤오미 실체</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>네이비 + 금색. 경고 분위기 강조.</p><div class="spec-row"><span class="spec">#1E3A8A</span><span class="spec">강조:#FFD700</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep02-tags">화웨이 보안 위협, 중국 스마트폰 보안, 공유기 해킹, CCTV 도청, 하드웨어 공급망, 펌웨어 백도어, IoT 보안, 스마트TV 도청, TP-Link 보안, 샤오미 개인정보, 하이크비전 보안, 중국 기기 위험, 파이브아이즈 화웨이, 화웨이 5G 위험, 데이터 주권, IssueLens, 이슈렌즈, 국가 안보 기기, 중국산 공유기, 리투아니아 샤오미</div><button class="copy-btn" onclick="cp('ep02-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.03 ═══ -->
+<div id="ep03" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.03 · 글로벌 지정학 시리즈</div>
+    <div class="ep-title">일대일로, 개발의 꿈인가 채무의 덫인가</div>
+    <div class="ep-sub">152개국을 연결한 시진핑의 세기적 인프라 프로젝트. 스리랑카·인도네시아·라오스·파키스탄… 항구와 철도를 얻고 주권을 잃은 나라들의 기록.</div>
+    <div class="ep-tags"><span class="ep-tag">#일대일로BRI</span><span class="ep-tag">#부채함정외교</span><span class="ep-tag">#스리랑카함반토타</span><span class="ep-tag">#인도네시아고속철도</span><span class="ep-tag">#디지털주권</span><span class="ep-tag">#중국개발금융</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep03-t1">일대일로의 진실 — 공짜 인프라를 받은 나라들이 잃은 것 【IssueLens EP.03】</div><button class="copy-btn" onclick="cp('ep03-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep03-t2">스리랑카는 항구를 99년 잃었다 | 중국 일대일로 부채 함정의 실체 완전 분석 【IssueLens EP.03】</div><button class="copy-btn" onclick="cp('ep03-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep03-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+2013년, 시진핑이 발표한 세기의 프로젝트 — 일대일로(BRI).
+152개국, 6조 달러 이상의 인프라 투자.
+그런데 그 청구서를 받은 나라들의 이야기는 다릅니다.
+
+스리랑카는 항구를 99년간 잃었고,
+인도네시아는 연간 이자가 매출을 초과하고,
+라오스는 전력망을 통째로 넘겼습니다.
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 공짜 인프라는 없다
+01:30 [CH.1] 일대일로란 무엇인가 — 육상·해상 실크로드
+04:00 [CH.2] 부채 함정의 늪 — 스리랑카·인도네시아·파키스탄·캄보디아
+09:00 [CH.3] 보이지 않는 침투 — 디지털·데이터 주권 위기
+13:00 [CH.4] 흔들리는 일대일로 — 이탈, 재편, 한국의 시사점
+15:30 마무리 + EP.04 예고
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• 일대일로 참여국: 152개국 (전 세계 인구 63%, GDP 29%)
+• 스리랑카 함반토타항: 99년 운영권 이전 (2017)
+• 인도네시아 고속철도: 연이자 1,700억원 > 연매출 1,500억원 (2026)
+• AidData: 대출의 약 35%가 '숨겨진 부채'
+
+━━━ 참고 출처 ━━━━━━━━━━━━━━━━━━━━━━━━
+• AidData, "Banking on the Belt and Road" (2021)
+• Lowy Institute BRI 분석 보고서
+• IMF 각국 Article IV 보고서
+
+#일대일로 #부채함정외교 #스리랑카항구 #BRI #중국인프라 #데이터주권 #IssueLens</div><button class="copy-btn" onclick="cp('ep03-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep03-ts">00:00 인트로 — 공짜 인프라는 없다
+01:30 [CH.1] 일대일로란 무엇인가
+04:00 [CH.2] 부채 함정의 늪 — 4개국 사례
+09:00 [CH.3] 디지털·데이터 주권 위기
+13:00 [CH.4] 흔들리는 일대일로, 한국의 교훈
+15:30 마무리 + EP.04 예고</div><button class="copy-btn" onclick="cp('ep03-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.03</span><div class="thumb-main">항구 받고<br><span class="r">주권 잃은</span><br>나라들</div><div class="thumb-sub">일대일로 부채 함정의 진실</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>검정 배경 + 항구 이미지. 99년 임팩트 숫자 활용.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.03</span><div class="thumb-main">중국 돈 빌린<br>나라들의<br><span class="y">99년 결말</span></div><div class="thumb-sub">BRI 부채 함정 외교 완전 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>네이비 + 금색 "99년" 강조.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep03-tags">일대일로, 부채 함정 외교, BRI 실패, 스리랑카 함반토타, 일대일로 한국, 중국 인프라 투자, 부채 함정, 인도네시아 고속철도 부채, 파키스탄 과다르 항구, 라오스 전력망 중국, 캄보디아 해군기지, 잠비아 디폴트, 디지털 실크로드, 중국 개발 금융, AidData BRI, 데이터 주권, IssueLens, 이슈렌즈</div><button class="copy-btn" onclick="cp('ep03-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.04 ═══ -->
+<div id="ep04" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.04 · 경제 안보 시리즈</div>
+    <div class="ep-title">중국 저가 공습 — 한국 시장이 무너지고 있다</div>
+    <div class="ep-sub">100원 볼펜이 동네 문구점을 죽이는 구조. 알리·테무·쉬인의 약탈적 저가 전략과 디지털 실크로드가 한국 경제를 어떻게 해체하는가.</div>
+    <div class="ep-tags"><span class="ep-tag">#중국저가공습</span><span class="ep-tag">#알리테무한국시장</span><span class="ep-tag">#한국제조업위기</span><span class="ep-tag">#산업공동화</span><span class="ep-tag">#디지털실크로드</span><span class="ep-tag">#자영업붕괴</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep04-t1">100원 볼펜이 동네 문구점을 죽이는 법 | 중국 저가 공습으로 무너지는 한국 경제 【IssueLens EP.04】</div><button class="copy-btn" onclick="cp('ep04-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep04-t2">알리·테무가 한국 자영업을 박살내는 구조 — 약탈적 저가 전략의 진실 【IssueLens EP.04】</div><button class="copy-btn" onclick="cp('ep04-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep04-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+알리·테무·쉬인의 초저가는 단순한 가격 경쟁력이 아닙니다.
+국가 보조금 + 규제 비대칭 + 세금 우회가 결합된 구조적 약탈입니다.
+
+100원 볼펜이 팔릴 때마다 동네 문구점 하나가 닫힙니다.
+그리고 그 일자리와 세수는 대한민국으로 돌아오지 않습니다.
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 이것은 공정한 경쟁이 아니다
+01:30 [CH.1] 약탈적 저가 전략의 3가지 구조
+05:00 [CH.2] 산업 공동화 — 어느 업종이 먼저 무너지나
+09:00 [CH.3] 디지털 실크로드와 한국 — 이미 포위됐나?
+13:00 [CH.4] 소비자가 할 수 있는 것들
+15:00 마무리 + EP.05 예고
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• 알리+테무 국내 MAU 합산 1,700만 명 (2024 상반기)
+• 생활용품 국내 중소기업 매출 감소율 (중소벤처기업부)
+• 150달러 이하 면세 혜택 — 국내 기업과 세금 역차별 구조
+• 디지털 실크로드: 화웨이 5G 채택 138개국
+
+#중국저가공습 #알리테무한국 #한국제조업위기 #산업공동화 #디지털실크로드 #자영업붕괴 #IssueLens</div><button class="copy-btn" onclick="cp('ep04-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep04-ts">00:00 인트로 — 이것은 공정한 경쟁이 아니다
+01:30 [CH.1] 약탈적 저가 전략의 3가지 구조
+05:00 [CH.2] 산업 공동화 — 업종별 피해 분석
+09:00 [CH.3] 디지털 실크로드 — 한국은 이미 포위됐나?
+13:00 [CH.4] 지금 할 수 있는 것들
+15:00 마무리 + EP.05 예고</div><button class="copy-btn" onclick="cp('ep04-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.04</span><div class="thumb-main"><span class="r">100원</span> 볼펜이<br>한국 경제를<br>죽인다</div><div class="thumb-sub">알리·테무 저가 공습의 진실</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>충격적 수치 "100원"을 강조. 경제 위기 분위기.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview deep"><span class="thumb-ep">EP.04</span><div class="thumb-main">MAU<br><span class="y">1,700만</span><br>한국이 포위됐다</div><div class="thumb-sub">중국 저가 플랫폼 시장 잠식 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>데이터 기반 숫자 강조형. 신뢰감 있는 분석 채널 이미지.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep04-tags">중국 저가 상품, 알리 테무 한국 시장, 한국 제조업 위기, 자영업 붕괴, 산업 공동화, 중국 경제 침투, 디지털 실크로드, 데이터 주권, 중국 저가 공습, 일대일로 한국, 알리익스프레스 한국 피해, 테무 한국 자영업, 150달러 면세, 중소기업 피해, 알리 테무 규제, IssueLens, 이슈렌즈, 한국 경제 위기</div><button class="copy-btn" onclick="cp('ep04-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.05 ═══ -->
+<div id="ep05" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.05 · 경제 안보 시리즈</div>
+    <div class="ep-title">보이지 않는 주주 — 텐센트·앤트그룹이 한국 산업을 사들이고 있다</div>
+    <div class="ep-sub">넷마블 17.5%, 크래프톤 13.7%, 카카오페이 32%, 시프트업 35%. 중국 자본이 한국 게임·콘텐츠·핀테크 산업의 핵심 주주가 되어 있습니다. VIE 구조의 비밀을 해부합니다.</div>
+    <div class="ep-tags"><span class="ep-tag">#텐센트한국지분</span><span class="ep-tag">#카카오페이앤트그룹</span><span class="ep-tag">#넷마블텐센트</span><span class="ep-tag">#크래프톤중국</span><span class="ep-tag">#VIE구조</span><span class="ep-tag">#중국자본한국</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep05-t1">당신이 매일 하는 게임·결제의 주인은 중국입니다 | 텐센트·앤트그룹의 한국 지분 실체 【IssueLens EP.05】</div><button class="copy-btn" onclick="cp('ep05-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep05-t2">넷마블·크래프톤·카카오페이 대주주가 중국인 이유 — VIE 구조의 비밀 【IssueLens EP.05】</div><button class="copy-btn" onclick="cp('ep05-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep05-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+주가 창은 빨간색이지만, 진짜 빨간 신호는 주주 명부에 있습니다.
+
+• 넷마블 → 텐센트 17.5% 보유
+• 크래프톤(배틀그라운드) → 텐센트 13.7% 보유
+• 시프트업(니케·스텔라블레이드) → 텐센트 35% 보유
+• 카카오페이 → 앤트그룹(알리바바) 32% 보유
+
+총 한 방 쏘지 않고도 중국 자본은 한국 산업 핵심부에 앉았습니다.
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 주주 명부의 빨간 신호
+01:30 [CH.1] 텐센트의 한국 기업 지분 지도
+05:00 [CH.2] VIE 구조의 비밀 — 싱가포르를 통한 우회 투자
+09:00 [CH.3] 카카오페이 앤트그룹 32% — 금융 데이터 위험
+13:00 [CH.4] 찬반 균형 시각 + 한국의 선택
+15:30 마무리 + EP.06 예고
+
+━━━ 핵심 데이터 (DART 공시 기준) ━━━━━━━━━━━━
+• 텐센트 전 세계 지분 보유 게임·IT 기업: 100개 이상 (2024)
+• 텐센트, 글로벌 매출 기준 세계 최대 게임 회사
+• 중국 국가정보법 제7조: 모든 조직은 국가정보 활동에 협조 의무
+
+#텐센트한국 #넷마블텐센트 #카카오페이앤트그룹 #크래프톤중국 #VIE구조 #중국자본한국 #IssueLens</div><button class="copy-btn" onclick="cp('ep05-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep05-ts">00:00 인트로 — 주주 명부의 빨간 신호
+01:30 [CH.1] 텐센트의 한국 기업 지분 지도
+05:00 [CH.2] VIE 구조 — 중국 자본의 우회 침투 방식
+09:00 [CH.3] 카카오페이·앤트그룹 — 금융 데이터 위험
+13:00 [CH.4] 찬반 균형 + 한국의 선택
+15:30 마무리 + EP.06 예고</div><button class="copy-btn" onclick="cp('ep05-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.05</span><div class="thumb-main">넷마블·카카오<br>주인이<br><span class="r">중국</span>이었다</div><div class="thumb-sub">텐센트·앤트그룹 한국 지분 실체</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>친숙한 브랜드명으로 클릭률 유도.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.05</span><div class="thumb-main">카카오페이<br><span class="y">32%</span><br>중국 것이다</div><div class="thumb-sub">앤트그룹·텐센트 한국 지분 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>"32%" 숫자 강조. 결제 앱 관심층 타깃.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep05-tags">텐센트 한국 지분, 카카오페이 앤트그룹, 중국 자본 한국, 넷마블 텐센트, 크래프톤 중국, JTBC 텐센트, 한국 게임 중국, VIE 구조, 시프트업 텐센트, 앤트그룹 카카오, 중국 지분 구조, 데이터 주권, IssueLens, 이슈렌즈, 중국 투자 한국, 한국 게임 중국 자본, 카카오 중국 주주</div><button class="copy-btn" onclick="cp('ep05-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.06 ═══ -->
+<div id="ep06" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.06 · 경제 안보 시리즈</div>
+    <div class="ep-title">서방의 경고와 반격 — 중국에 맞서 싸운 나라들</div>
+    <div class="ep-sub">미국·영국이 한국에 이례적 경고를 보내고 있습니다. 동시에 호주·리투아니아·캐나다는 중국의 경제 보복에 굴복하지 않고 이겨냈습니다. 핀란드화 경고와 저항의 교훈.</div>
+    <div class="ep-tags"><span class="ep-tag">#호주중국무역보복</span><span class="ep-tag">#리투아니아중국</span><span class="ep-tag">#서방경고한국</span><span class="ep-tag">#핀란드화경고</span><span class="ep-tag">#VDem한국</span><span class="ep-tag">#중국경제보복</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep06-t1">미국이 한국에 경고를 보내고 있다 | 호주는 어떻게 중국 보복을 이겼나 【IssueLens EP.06】</div><button class="copy-btn" onclick="cp('ep06-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep06-t2">중국 경제 보복에 맞서 싸운 나라들의 전략 — 한국은 어느 길을 선택할 것인가 【IssueLens EP.06】</div><button class="copy-btn" onclick="cp('ep06-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep06-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+동맹국이 동맹국에 경고를 보내는 일은 외교적으로 매우 이례적입니다.
+그러나 미국 국무부(2026.01)와 V-Dem 보고서는 공개적으로 한국을 지목했습니다.
+
+동시에, 중국의 강력한 경제 보복에도 굴복하지 않고 이겨낸 나라들이 있습니다.
+호주는 3년의 혹독한 보복 끝에 관세 전면 철폐를 이끌어냈고,
+리투아니아는 EU 전체의 반강압 메커니즘을 만들어냈습니다.
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 동맹이 경고한다는 것의 의미
+01:30 [CH.1] 미국·영국의 이례적 경고 신호 — V-Dem·핀란드화
+05:30 [CH.2] 호주 — 3년 보복, WTO 전략으로 이긴 법
+10:00 [CH.3] 리투아니아 — 인구 280만이 EU를 바꾼 방법
+14:00 [CH.4] 캐나다·영국의 화웨이 배제 전략
+16:00 마무리 + EP.07 예고
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• 호주: 중국 보복 기간 3년, 보복 철폐 (2023~2024)
+• 리투아니아: 대중 수출 중단 대가 감수 → EU ACI 입법 견인
+• V-Dem 2025~2026: 한국 민주주의 지표 하락
+• 핀란드화(Finlandization): 엘브리지 콜비 경고
+
+#호주중국무역전쟁 #리투아니아타이완 #서방경고한국 #핀란드화 #중국경제보복 #IssueLens</div><button class="copy-btn" onclick="cp('ep06-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep06-ts">00:00 인트로 — 동맹이 경고한다는 것의 의미
+01:30 [CH.1] 미국·영국의 이례적 경고 — V-Dem·핀란드화
+05:30 [CH.2] 호주 — WTO 전략으로 중국 보복을 이긴 법
+10:00 [CH.3] 리투아니아 — EU를 바꾼 소국의 저항
+14:00 [CH.4] 캐나다·영국의 전략
+16:00 마무리 + EP.07 예고</div><button class="copy-btn" onclick="cp('ep06-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.06</span><div class="thumb-main">미국이<br>한국에<br><span class="r">경고했다</span></div><div class="thumb-sub">서방의 신호 + 중국 보복 극복 전략</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>"경고" 메시지로 강한 클릭 유도.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.06</span><div class="thumb-main">호주는<br><span class="y">3년</span> 버텨서<br>이겼다</div><div class="thumb-sub">중국 경제 보복 극복 전략 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>"3년 버텨서 이겼다" — 희망적 메시지 강조.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep06-tags">호주 중국 무역 보복, 리투아니아 중국, 서방 경고 한국, 핀란드화 한국, V-Dem 한국 민주주의, 중국 경제 보복, CFIUS 한국, WTO 제소 전략, 호주 화웨이 배제, 엘브리지 콜비 한국, 미국 국무부 한국 경고, 데이터 주권, IssueLens, 이슈렌즈, 중국 보복 사례</div><button class="copy-btn" onclick="cp('ep06-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.07 ═══ -->
+<div id="ep07" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.07 · 경제 안보 시리즈</div>
+    <div class="ep-title">디지털 실크로드 — AI·반도체·5G로 완성되는 기술 종속의 덫</div>
+    <div class="ep-sub">화웨이 5G 백도어, 딥시크(DeepSeek) AI, SMIC 반도체, 알리바바 클라우드. 4개 전선에서 한국의 기술 주권을 겨냥하는 중국 디지털 실크로드의 전모.</div>
+    <div class="ep-tags"><span class="ep-tag">#화웨이5G백도어</span><span class="ep-tag">#딥시크AI위험</span><span class="ep-tag">#SMIC반도체</span><span class="ep-tag">#디지털실크로드</span><span class="ep-tag">#기술주권</span><span class="ep-tag">#알리바바클라우드</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep07-t1">화웨이 5G·딥시크 AI·중국 반도체 — 기술 종속의 4개 전선 완전 분석 【IssueLens EP.07】</div><button class="copy-btn" onclick="cp('ep07-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep07-t2">딥시크 써도 되나요? 화웨이 5G는? 중국 디지털 실크로드의 진짜 위험 【IssueLens EP.07】</div><button class="copy-btn" onclick="cp('ep07-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep07-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+총성 없는 기술 전쟁이 이미 시작됐습니다.
+
+전선 ①: 5G — 화웨이 기지국 속 잠자는 백도어
+전선 ②: AI — 딥시크(DeepSeek)가 빨아들이는 한국인 데이터
+전선 ③: 반도체 — 수출 규제를 뚫은 SMIC의 역습
+전선 ④: 클라우드 — 알리바바 클라우드에 저장된 한국 기업 데이터
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 디지털 실크로드란 무엇인가
+02:00 [전선 ①] 화웨이 5G — 백도어 실체와 각국의 대응
+06:00 [전선 ②] 딥시크 AI — 데이터 어디로 가나?
+10:00 [전선 ③] SMIC 반도체 — 수출 규제 우회의 진실
+13:30 [전선 ④] 알리바바 클라우드 — 국내 데이터 현지화 위험
+16:00 마무리 + EP.08 예고
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• 화웨이 5G 채택 국가: 170개국 이상, 글로벌 점유율 28%
+• 미 법무부: 화웨이 백도어 인터페이스 기소장 공개 (2020.02)
+• SMIC: 수출 규제 우회 7nm 공정 생산 성공
+• CFR: 디지털 실크로드 138개국 기술 인프라 수출
+
+#화웨이5G #딥시크AI #SMIC반도체 #디지털실크로드 #기술주권 #IssueLens</div><button class="copy-btn" onclick="cp('ep07-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep07-ts">00:00 인트로 — 디지털 실크로드란 무엇인가
+02:00 [전선①] 화웨이 5G 백도어 — 각국의 대응
+06:00 [전선②] 딥시크 AI — 데이터는 어디로?
+10:00 [전선③] SMIC 반도체 — 수출 규제 우회의 진실
+13:30 [전선④] 알리바바 클라우드 — 한국 데이터 현지화 위험
+16:00 마무리 + EP.08 예고</div><button class="copy-btn" onclick="cp('ep07-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.07</span><div class="thumb-main">딥시크<br>써도<br><span class="r">됩니까?</span></div><div class="thumb-sub">AI·5G·반도체 기술 종속 4개 전선</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>딥시크 이슈가 가장 뜨거움. 질문형으로 클릭 유도.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.07</span><div class="thumb-main"><span class="y">4개 전선</span>에서<br>한국 기술이<br>포위됐다</div><div class="thumb-sub">화웨이·딥시크·SMIC·알리클라우드</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>"4개 전선" 구조적 분석 강조형.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep07-tags">화웨이 5G 백도어, 딥시크 AI 위험, SMIC 반도체, 디지털 실크로드, 기술 주권 한국, 알리바바 클라우드, 중국 AI 감시, 반도체 공급망, 데이터 현지화, 중국 국가정보법, 화웨이 배제, 5G 보안 위협, 딥시크 개인정보, IssueLens, 이슈렌즈, 기술 종속, 중국 기술 패권</div><button class="copy-btn" onclick="cp('ep07-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.08 ═══ -->
+<div id="ep08" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.08 · 대한민국 주권 시리즈</div>
+    <div class="ep-title">텐센트의 한국 장악 — 게임·콘텐츠·핀테크로 완성되는 자본 종속의 3중 덫</div>
+    <div class="ep-sub">시프트업 35%, 카카오페이 앤트그룹 32%, 넷마블 17.5%, 크래프톤 13.7%. 총 한 방 쏘지 않고도, 당신이 매일 하는 게임·결제·드라마에 중국 자본이 앉아 있습니다.</div>
+    <div class="ep-tags"><span class="ep-tag">#텐센트한국장악</span><span class="ep-tag">#시프트업텐센트</span><span class="ep-tag">#카카오페이앤트그룹</span><span class="ep-tag">#한국게임중국자본</span><span class="ep-tag">#자본종속</span><span class="ep-tag">#피크차이나</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep08-t1">니케·배그·카카오페이의 진짜 주인 | 텐센트 한국 장악의 전모 【IssueLens EP.08】</div><button class="copy-btn" onclick="cp('ep08-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep08-t2">당신이 하는 게임, 쓰는 결제앱 — 중국이 35% 갖고 있습니다 【IssueLens EP.08】</div><button class="copy-btn" onclick="cp('ep08-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep08-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+EP.07에서 기술 인프라 위협을 살펴봤습니다.
+이번에는 더 조용하고, 더 깊숙이 파고든 위협입니다.
+바로 자본(지분)을 통한 내부 장악.
+
+• 시프트업(니케·스텔라블레이드) → 텐센트 35%
+• 카카오페이 → 앤트그룹 32%
+• 넷마블 → 텐센트 17.5%
+• 크래프톤(배틀그라운드) → 텐센트 13.7%
+• 카카오 → 텐센트 5.9%
+• SLL(JTBC스튜디오) → 텐센트 직접 투자
+
+이들은 주요 주주로서 이사회 정보, 전략 데이터, 유저 행동 데이터에 접근합니다.
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 총 없이 점령하는 법
+01:30 [CH.1] 텐센트는 어떻게 한국을 골랐나 — 투자 전략 해부
+05:00 [CH.2] 공시로 확인하는 지분 현황 (DART 기준)
+09:00 [CH.3] 카카오페이 앤트그룹 32% — 결제 데이터의 위험
+13:00 [CH.4] 데이터가 중국으로 가면 어떻게 되나
+15:30 마무리 + EP.09 예고
+
+#텐센트한국 #시프트업텐센트 #카카오페이앤트그룹 #넷마블크래프톤 #한국게임중국 #IssueLens</div><button class="copy-btn" onclick="cp('ep08-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep08-ts">00:00 인트로 — 총 없이 점령하는 법
+01:30 [CH.1] 텐센트의 투자 전략 해부
+05:00 [CH.2] DART 공시로 보는 지분 현황
+09:00 [CH.3] 카카오페이 앤트그룹 32% — 결제 데이터 위험
+13:00 [CH.4] 데이터가 중국으로 가면?
+15:30 마무리 + EP.09 예고</div><button class="copy-btn" onclick="cp('ep08-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.08</span><div class="thumb-main">니케·배그<br>진짜 주인은<br><span class="r">중국</span>이다</div><div class="thumb-sub">텐센트 35% 한국 게임 장악 실체</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>게임 유저들이 바로 반응할 친숙한 타이틀 활용.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview deep"><span class="thumb-ep">EP.08</span><div class="thumb-main">카카오페이<br><span class="y">결제 데이터</span><br>중국 간다</div><div class="thumb-sub">앤트그룹 32% — 금융 주권 위기</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>결제 앱 사용자 타깃. 실생활 연결 강조.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep08-tags">텐센트 한국 지분, 시프트업 텐센트, 카카오페이 앤트그룹, 넷마블 텐센트, 크래프톤 중국, 한국 게임 중국 자본, 카카오 중국 주주, SLL JTBC 텐센트, 자본 종속, 데이터 주권, IssueLens, 이슈렌즈, 배틀그라운드 중국, 니케 중국, 스텔라블레이드 중국</div><button class="copy-btn" onclick="cp('ep08-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.09 ═══ -->
+<div id="ep09" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.09 · 대한민국 주권 시리즈</div>
+    <div class="ep-title">일대일로의 함정 — 아프리카·중남미·동남아 현지인의 증언</div>
+    <div class="ep-sub">스리랑카 항구 99년, 라오스 전력망 통째 상납, 에콰도르 7천 균열 댐, 케냐 철도 압류 위기. "우리 땅에서 우리가 이방인이 됐다" — 공짜 인프라의 진짜 청구서.</div>
+    <div class="ep-tags"><span class="ep-tag">#일대일로부채함정</span><span class="ep-tag">#스리랑카함반토타</span><span class="ep-tag">#라오스전력망중국</span><span class="ep-tag">#에콰도르댐균열</span><span class="ep-tag">#케냐철도압류</span><span class="ep-tag">#BRI실패</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep09-t1">"우리 땅에서 이방인이 됐다" — 일대일로에 무너진 나라들의 현지 증언 【IssueLens EP.09】</div><button class="copy-btn" onclick="cp('ep09-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep09-t2">스리랑카·라오스·에콰도르·케냐 — 중국 인프라 공짜로 받고 주권 잃은 나라들 【IssueLens EP.09】</div><button class="copy-btn" onclick="cp('ep09-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep09-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+공짜 인프라는 없습니다.
+청구서는 반드시 돌아옵니다.
+
+스리랑카 → 항구 99년간 상실
+라오스 → 전력망 주권 상실 (EDL-T 90% 매각)
+에콰도르 → 7천 균열 댐 + 석유 선불 헌납
+케냐 → 철도 압류 위기 (나이로비-몸바사)
+몬테네그로 → GDP 25% 부채 하이웨이
+잠비아 → 아프리카 첫 BRI 연계 디폴트
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 공짜 인프라의 진짜 청구서
+01:30 [CH.1] 부채 함정 외교란 — AidData 데이터 분석
+04:00 [CH.2] 스리랑카 — 어부들이 쫓겨난 항구
+07:00 [CH.3] 라오스 — 전력망을 팔아야 했던 가난한 나라
+10:00 [CH.4] 에콰도르·케냐·몬테네그로·잠비아의 기록
+14:00 [CH.5] 한국에 주는 교훈
+16:00 마무리 + EP.10 예고
+
+#일대일로부채함정 #스리랑카항구 #라오스전력망 #에콰도르댐 #케냐철도 #BRI실패 #IssueLens</div><button class="copy-btn" onclick="cp('ep09-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep09-ts">00:00 인트로 — 공짜 인프라의 진짜 청구서
+01:30 [CH.1] 부채 함정 외교란 무엇인가
+04:00 [CH.2] 스리랑카 — 어부들이 쫓겨난 항구
+07:00 [CH.3] 라오스 — 전력망을 팔아야 했던 나라
+10:00 [CH.4] 에콰도르·케냐·몬테네그로·잠비아
+14:00 [CH.5] 한국에 주는 교훈
+16:00 마무리 + EP.10 예고</div><button class="copy-btn" onclick="cp('ep09-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.09</span><div class="thumb-main">항구 받고<br><span class="r">99년</span><br>이방인 됐다</div><div class="thumb-sub">BRI 부채 함정 현지 증언</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>"이방인" 감성 + "99년" 충격 숫자 결합.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.09</span><div class="thumb-main">댐에<br><span class="y">균열 7천개</span><br>중국이 지었다</div><div class="thumb-sub">에콰도르·라오스·케냐의 기록</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>"균열 7천개" 충격적 구체 수치 강조.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep09-tags">일대일로 부채 함정, 스리랑카 함반토타, 라오스 전력망 중국, 에콰도르 댐 균열, 케냐 SGR 철도, 중국 신식민주의, BRI 실패, 아프리카 중국 부채, 중남미 일대일로, 잠비아 디폴트, 몬테네그로 부채, 피크차이나, AidData BRI, IssueLens, 이슈렌즈, 부채 함정 외교</div><button class="copy-btn" onclick="cp('ep09-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.10 ═══ -->
+<div id="ep10" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.10 · 대한민국 주권 시리즈</div>
+    <div class="ep-title">선거 주권 — 중국산 소프트웨어·개표 시스템의 보안 위협</div>
+    <div class="ep-sub">파이브아이즈 경고, Volt Typhoon, Salt Typhoon, 선거장비 공급망 안보. 투표함을 노리는 중국의 디지털 공작 — 한국은 안전한가?</div>
+    <div class="ep-tags"><span class="ep-tag">#중국선거개입</span><span class="ep-tag">#파이브아이즈경고</span><span class="ep-tag">#VoltTyphoon</span><span class="ep-tag">#SaltTyphoon</span><span class="ep-tag">#개표시스템보안</span><span class="ep-tag">#CISA선거보안</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep10-t1">Volt Typhoon이 개표 시스템에 숨어 있다 | 파이브아이즈 선거 보안 경고 완전 분석 【IssueLens EP.10】</div><button class="copy-btn" onclick="cp('ep10-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep10-t2">투표함을 노리는 중국 해킹의 진실 — Salt Typhoon·Volt Typhoon 실체 【IssueLens EP.10】</div><button class="copy-btn" onclick="cp('ep10-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep10-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+민주주의의 최후 방어선은 투표함입니다.
+그런데 그 투표함을 세고, 전송하고, 집계하는 시스템의 공급망에
+중국의 손이 뻗치고 있다면 어떻게 될까요?
+
+• Volt Typhoon: 미국 핵심 인프라에 수년째 잠복 — 선거 인프라 포함
+• Salt Typhoon: 선거 관리 공무원·캠프 통신 도청 (FBI 확인)
+• 파이브아이즈 공동 경고: "선거 과정에 개입할 의지와 역량 보유"
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 투표함이 노려진다
+01:30 [CH.1] 파이브아이즈의 공식 경고 — 원문 + 번역
+05:00 [CH.2] Volt Typhoon vs Salt Typhoon — 역할 구분
+09:00 [CH.3] 선거장비 공급망 안보 — 어디가 약한가?
+13:00 [CH.4] 한국 선거 인프라는 안전한가?
+15:30 마무리 + EP.11 예고
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• CISA·FBI·ODNI 공동 성명 (2024): 중국 선거 인프라 위협 공식 확인
+• FBI 카쉬 파텔: "Volt Typhoon, 핵심 인프라에 킬스위치 심어놨다" (2025)
+• CISA AA25-071A: Salt Typhoon, 선거 캠프 통신 도청 (2025.03)
+• 파이브아이즈 공동 사이버 권고문 (2024.02)
+
+#중국선거개입 #VoltTyphoon #SaltTyphoon #파이브아이즈 #CISA #선거보안 #IssueLens</div><button class="copy-btn" onclick="cp('ep10-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep10-ts">00:00 인트로 — 투표함이 노려진다
+01:30 [CH.1] 파이브아이즈 공식 경고 — 원문·번역
+05:00 [CH.2] Volt Typhoon vs Salt Typhoon
+09:00 [CH.3] 선거장비 공급망 안보
+13:00 [CH.4] 한국 선거 인프라는 안전한가?
+15:30 마무리 + EP.11 예고</div><button class="copy-btn" onclick="cp('ep10-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.10</span><div class="thumb-main">투표함이<br><span class="r">해킹됐다</span><br>Volt Typhoon</div><div class="thumb-sub">파이브아이즈 선거 보안 경고 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>"투표함 해킹" — 가장 강한 클릭 유도. 선거 관심층 타깃.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.10</span><div class="thumb-main">개표기 안에<br><span class="y">중국 코드</span>가<br>있다?</div><div class="thumb-sub">선거 공급망 보안 위협 완전 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>공급망 이슈 부각. 기술적 관심층 타깃.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep10-tags">중국 선거 개입, 파이브아이즈 경고, Volt Typhoon, Salt Typhoon, 개표 시스템 보안, CISA 선거 보안, 한국 선거 장비, 선거 공급망, 디지털 선거 위협, FBI 중국 해킹, 트럼프 중국 해킹, 선거 인프라 보안, IssueLens, 이슈렌즈, 민주주의 사이버 위협</div><button class="copy-btn" onclick="cp('ep10-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.11 ═══ -->
+<div id="ep11" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.11 · 대한민국 주권 시리즈</div>
+    <div class="ep-title">유통 주권 — 알리·테무·미니소가 한국 소상공인 생태계를 사막화하는 방식</div>
+    <div class="ep-sub">피크 차이나 디플레이션 수출 + 온오프라인 C-커머스 협공. 중국발 직구 6.5조원(2025), 전체 해외직구의 60% 돌파. 한국 소상공인과 다이소 공급망은 어디까지 무너졌나.</div>
+    <div class="ep-tags"><span class="ep-tag">#피크차이나</span><span class="ep-tag">#소상공인위기</span><span class="ep-tag">#미니소요요소</span><span class="ep-tag">#다이소공급망</span><span class="ep-tag">#C커머스</span><span class="ep-tag">#디플레이션수출</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep11-t1">미니소가 한국 소상공인을 죽이는 방법 | 피크차이나 디플레이션 수출의 진실 【IssueLens EP.11】</div><button class="copy-btn" onclick="cp('ep11-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep11-t2">중국발 직구 6.5조원 — 알리·테무·미니소가 한국 유통 생태계를 사막화하는 법 【IssueLens EP.11】</div><button class="copy-btn" onclick="cp('ep11-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep11-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+번화가를 걷다 보면 한글 간판 뒤에 중국 자본이 숨어 있습니다.
+이것은 단순히 싼 가게가 늘어난 이야기가 아닙니다.
+
+피크 차이나(Peak China) — 중국 경제의 구조적 위기가
+한국 유통망 전체를 전쟁터로 바꾸고 있습니다.
+
+• 중국발 직구: 2025년 6.5조원 (전년比 35% 증가)
+• 전체 해외직구 중 중국 비중: 60% 돌파
+• 패션 중소기업 매출 감소 응답률: 극심
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 번화가의 낯익은 풍경
+01:30 [CH.1] 피크 차이나 — 멈출 수 없는 과잉생산 기관차
+05:00 [CH.2] 온라인 전선 — 알리·테무의 중개 무역 종말
+09:00 [CH.3] 오프라인 침투 — 미니소·요요소의 '위장 한류' 전략
+13:00 [CH.4] 다이소 공급망 위기 + 실천 방법
+15:30 마무리 + EP.12 예고
+
+#피크차이나 #소상공인위기 #미니소요요소 #다이소공급망 #C커머스 #유통주권 #IssueLens</div><button class="copy-btn" onclick="cp('ep11-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep11-ts">00:00 인트로 — 번화가의 낯익은 풍경
+01:30 [CH.1] 피크 차이나 — 과잉생산 기관차
+05:00 [CH.2] 온라인 전선 — 알리·테무의 중개 종말
+09:00 [CH.3] 오프라인 침투 — 미니소·요요소 위장 한류
+13:00 [CH.4] 다이소 공급망 + 실천
+15:30 마무리 + EP.12 예고</div><button class="copy-btn" onclick="cp('ep11-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.11</span><div class="thumb-main">미니소<br><span class="r">한국 기업</span><br>아닙니다</div><div class="thumb-sub">C-커머스 유통 주권 침식 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>많은 한국인이 모르는 사실 — 강한 정보성 클릭 유도.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.11</span><div class="thumb-main">중국발 직구<br><span class="y">6.5조원</span><br>소상공인 사망</div><div class="thumb-sub">피크 차이나 디플레이션 수출 분석</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>"6.5조원" 숫자 + "사망" 강한 표현으로 위기감 전달.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep11-tags">피크 차이나, 소상공인 위기, 미니소 요요소, 다이소 공급망, 제조업 공동화, 디플레이션 수출, 장바구니 주권, C커머스, 알리 테무 소상공인, 중국 유통 침투, 위장 한류, 미니소 중국 기업, 요요소 중국, IssueLens, 이슈렌즈, 중국 직구 피해</div><button class="copy-btn" onclick="cp('ep11-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.12 ═══ -->
+<div id="ep12" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.12 · 대한민국 주권 시리즈</div>
+    <div class="ep-title">에너지·항만 주권 — 부산항·인천항에 중국 자본이 들어온다면</div>
+    <div class="ep-sub">함반토타 99년, 피레우스 COSCO 67%, 지부티 군사기지화, 과다르 CPEC. 진주목걸이 전략의 글로벌 패턴이 동북아로 향한다면 — 세계 5위 부산항은 안전한가?</div>
+    <div class="ep-tags"><span class="ep-tag">#부산항위기</span><span class="ep-tag">#인천항안보</span><span class="ep-tag">#부채함정외교</span><span class="ep-tag">#진주목걸이전략</span><span class="ep-tag">#COSCO</span><span class="ep-tag">#일대일로BRI</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep12-t1">부산항이 위험하다 — 중국이 전 세계 항구를 장악하는 진주목걸이 전략의 진실 【IssueLens EP.12】</div><button class="copy-btn" onclick="cp('ep12-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep12-t2">항구를 빼앗기면 나라를 잃는다 | 함반토타·피레우스·지부티, 다음은 부산? 【IssueLens EP.12】</div><button class="copy-btn" onclick="cp('ep12-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep12-desc">▶ 이번 에피소드 핵심 ━━━━━━━━━━━━━━━━━━━━
+항구를 빼앗기면 나라를 잃습니다.
+
+스리랑카 → 함반토타항 99년 임대
+그리스 → 피레우스항 COSCO 67% 장악
+지부티 → 중국 최초 해외 군사기지
+파키스탄 → 과다르항 CPEC 종속
+
+이 패턴이 동북아에서 반복되지 않으리라는 보장이 있을까요?
+세계 5위 컨테이너 항만 부산, 한중 물류 관문 인천 — 한국의 심장부에 중국 자본이 들어올 경우 어떤 일이 벌어질지 추적합니다.
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 항구를 빼앗기면 나라를 잃는다
+01:30 [CH.1] 진주목걸이 전략 — 글로벌 항만 장악 로드맵
+05:00 [CH.2] 글로벌 사례 — 함반토타·피레우스·지부티·과다르
+11:00 [CH.3] 부산항·인천항 — 한국은 안전한가?
+14:00 [CH.4] 항만 주권 수호를 위한 제도적 방어막
+16:00 마무리 + EP.13 예고
+
+━━━ 핵심 데이터 ━━━━━━━━━━━━━━━━━━━━━━━
+• 중국 자본 투자 항만: 전 세계 129개 이상 (2024, AidData)
+• 함반토타항: 99년 운영권 이전 (2017)
+• 피레우스항: COSCO 지분 67% (2021)
+• 미 국방부 2025.01: COSCO 중국군 연계 기업 명단 등재
+
+#부산항위기 #진주목걸이전략 #COSCO #함반토타 #피레우스 #일대일로 #IssueLens</div><button class="copy-btn" onclick="cp('ep12-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep12-ts">00:00 인트로 — 항구를 빼앗기면 나라를 잃는다
+01:30 [CH.1] 진주목걸이 전략 — 3단계 패턴
+05:00 [CH.2] 글로벌 사례 — 함반토타·피레우스·지부티·과다르
+11:00 [CH.3] 부산항·인천항 — 한국은 안전한가?
+14:00 [CH.4] 항만 주권 수호 방안
+16:00 마무리 + EP.13 예고</div><button class="copy-btn" onclick="cp('ep12-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.12</span><div class="thumb-main">부산항<br>다음 표적은<br><span class="r">대한민국?</span></div><div class="thumb-sub">중국 진주목걸이 항만 장악 전략</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>"부산항" + "대한민국?" 직접적 위협감 전달.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.12</span><div class="thumb-main">항구 잃으면<br><span class="y">나라 잃는다</span><br>129개 사례</div><div class="thumb-sub">COSCO·함반토타·지부티 실체</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>"129개" 압도적 수치 + 경구형 메시지.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep12-tags">부산항 위기, 인천항 안보, 부채 함정 외교, 일대일로 BRI, 에너지 주권, 진주목걸이 전략, COSCO, 함반토타 항구, 피레우스항 중국, 지부티 군사기지, 과다르 항구, 중국 항만 투자, AidData 항만, IssueLens, 이슈렌즈, 항만 주권</div><button class="copy-btn" onclick="cp('ep12-tags',this)">복사</button></div>
+</div>
+
+<!-- ═══ EP.13 ═══ -->
+<div id="ep13" class="ep-page">
+  <div class="ep-header">
+    <div class="ep-num">EP.13 · 대한민국 주권 시리즈 (피날레)</div>
+    <div class="ep-title">저항의 기록 — 호주·리투아니아·인도가 중국에 맞서 싸운 법</div>
+    <div class="ep-sub">중국의 경제 보복에 굴복하지 않은 세 나라의 실제 전략과 공식. 호주 WTO 승리, 인도 321개 앱 차단, 리투아니아 EU 견인 — 한국은 무엇을 배워야 하는가?</div>
+    <div class="ep-tags"><span class="ep-tag">#중국경제보복</span><span class="ep-tag">#호주무역전쟁</span><span class="ep-tag">#리투아니아타이완</span><span class="ep-tag">#인도갈완충돌</span><span class="ep-tag">#WTO제소전략</span><span class="ep-tag">#디지털디커플링</span></div>
+  </div>
+
+  <div class="sec-lbl">🎯 제목 옵션</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep13-t1">중국 보복에 굴복하지 않은 3개국의 전략 — 호주·리투아니아·인도가 이긴 법 【IssueLens EP.13】</div><button class="copy-btn" onclick="cp('ep13-t1',this)">복사</button></div>
+  <div class="copy-wrap"><div class="copy-box" id="ep13-t2">인도는 중국 앱 321개를 차단했다 | 저항의 기록 — 한국의 선택은? 【IssueLens EP.13 피날레】</div><button class="copy-btn" onclick="cp('ep13-t2',this)">복사</button></div>
+
+  <div class="sec-lbl">📄 영상 설명</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep13-desc">▶ IssueLens 시리즈 피날레 ━━━━━━━━━━━━━━━━━━
+EP.01부터 EP.12까지, 우리는 중국의 전방위 공세를 추적했습니다.
+데이터·기기·일대일로·자본·선거·항만·유통까지.
+
+그렇다면 어떻게 싸울 것인가?
+답은 이미 존재합니다. 세 나라가 보여줬습니다.
+
+━━━ 호주의 공식 ━━━━━━━━━━━━━━━━━━━━━━━
+• 2020: 코로나 기원 조사 요구 → 중국 9개 품목 전방위 보복
+• 보복: 보리 80.5% 관세, 와인 218% 관세, 총 피해 50억 호주달러
+• 전략: WTO 제소 + 수출 다변화 + 원칙 유지
+• 결과: 보리(2023.08)·와인(2024.03) 관세 전면 철폐
+
+━━━ 리투아니아의 공식 ━━━━━━━━━━━━━━━━━━━
+• 2021: 타이완 대표처 개설 → 중국 전면 무역봉쇄
+• EU 연대 + ACI(반강압 수단) 입법 → 국제적 지지 확산
+• 2026.02: 현 정부 "전략적 실수" 인정 — 복잡한 현실도 직시
+
+━━━ 인도의 공식 ━━━━━━━━━━━━━━━━━━━━━━━━
+• 2020.06: 갈완 계곡 충돌 → 틱톡 포함 321개 중국 앱 즉각 차단
+• 중국 제조업 대체 공급망 구축 + 인도산 제품 소비 운동
+
+━━━ 목차 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 인트로 — 시리즈 총정리 + 질문: 어떻게 싸울 것인가
+02:00 [CH.1] 호주 — WTO로 중국을 무릎 꿇린 법
+07:00 [CH.2] 리투아니아 — EU를 바꾼 280만 소국 (그리고 2026 반전)
+12:00 [CH.3] 인도 — 비대칭 디지털 반격 321개 앱 차단
+16:00 [CH.4] 한국에 주는 교훈 — 원칙·동맹·다변화의 삼각형
+19:00 IssueLens 시리즈 마무리 + 앞으로의 방향
+
+#중국경제보복 #호주무역전쟁 #리투아니아타이완 #인도갈완 #WTO제소 #321앱차단 #IssueLens</div><button class="copy-btn" onclick="cp('ep13-desc',this)">복사</button></div>
+
+  <div class="sec-lbl">⏱️ 챕터 타임스탬프</div>
+  <div class="copy-wrap"><div class="copy-box mono" id="ep13-ts">00:00 인트로 — 시리즈 총정리 + 핵심 질문
+02:00 [CH.1] 호주 — WTO로 중국을 이긴 법
+07:00 [CH.2] 리투아니아 — EU를 바꾼 소국 (2026 반전 포함)
+12:00 [CH.3] 인도 — 321개 앱 차단 비대칭 반격
+16:00 [CH.4] 한국의 교훈 — 원칙·동맹·다변화
+19:00 IssueLens 시리즈 마무리</div><button class="copy-btn" onclick="cp('ep13-ts',this)">복사</button></div>
+
+  <div class="sec-lbl">🖼️ 썸네일</div>
+  <div class="thumb-grid">
+    <div class="thumb-card">
+      <div class="thumb-preview dark"><span class="thumb-ep">EP.13 피날레</span><div class="thumb-main">중국 보복에<br><span class="r">이긴 나라들</span><br>공식은?</div><div class="thumb-sub">호주·리투아니아·인도 저항의 기록</div></div>
+      <div class="thumb-info"><h4>컨셉 A (권장)</h4><p>"피날레" 강조. 시리즈 완결 편 느낌. 희망적 메시지.</p></div>
+    </div>
+    <div class="thumb-card">
+      <div class="thumb-preview navy"><span class="thumb-ep">EP.13 피날레</span><div class="thumb-main">인도는<br><span class="y">앱 321개</span>를<br>차단했다</div><div class="thumb-sub">비대칭 반격 전략 — 한국의 선택</div></div>
+      <div class="thumb-info"><h4>컨셉 B</h4><p>"321개" 구체 수치 + 인도 결단력 이미지.</p></div>
+    </div>
+  </div>
+
+  <div class="sec-lbl">🔖 태그</div>
+  <div class="copy-wrap"><div class="copy-box" id="ep13-tags">중국 경제 보복, 호주 무역 전쟁, 리투아니아 타이완, 인도 갈완 충돌, WTO 제소 전략, 공급망 다변화, 디지털 디커플링, 대중국 전략, 한국의 선택, 중국 앱 차단, 인도 321앱, 호주 WTO 승리, EU 반강압 수단, IssueLens, 이슈렌즈, 중국 보복 저항</div><button class="copy-btn" onclick="cp('ep13-tags',this)">복사</button></div>
+
+  <hr class="divider">
+  <div class="info-box">
+    🎉 <strong>IssueLens EP.02~13 제작 키트 완료!</strong><br>
+    EP.01 키트(issuelens-ep1-youtube-kit.html)와 함께 사용하세요. 각 탭의 [복사] 버튼으로 유튜브 스튜디오에 바로 붙여넣기 하실 수 있습니다.
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// ── SECTION NAV (EP.01 tabs) ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── EP NAV (EP.02~13) ──
+function showEp(id, btn) {
+  document.querySelectorAll('.ep-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── MAIN EP NAV ──
+function showMainSection(section) {
+  const ep1Section = document.getElementById('ep01-section');
+  const ep2to13Section = document.getElementById('ep02to13-section');
+  document.querySelectorAll('.main-ep-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  if (section === 'ep01') {
+    ep1Section.style.display = 'block';
+    ep2to13Section.style.display = 'none';
+  } else {
+    ep1Section.style.display = 'none';
+    ep2to13Section.style.display = 'block';
+  }
+  window.scrollTo(0, 0);
+}
+
+// ── SCRIPT TOGGLE ──
+function toggleScript(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.script-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+// ── COPY FUNCTIONS ──
+function copyEl(id, btn) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.innerText || el.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ 복사됨';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
+  });
+}
+
+function cp(id, btn) { copyEl(id, btn); }
+
+function copyFull() {
+  const fullText = `[IssueLens EP.01 — 유튜브 롱폼 대본]
+
+=== 00 인트로 / 훅 (00:00 – 01:30) ===
+
+여러분, 솔직히 물어볼게요.
+지난 한 달, 알리익스프레스나 테무에서 뭔가 하나쯤 사지 않으셨나요?
+
+500원짜리 양말, 3,000원짜리 폰케이스, 2만원도 안 하는 무선이어폰.
+저도 솔직히 삽니다. 근데 오늘 이 영상 보고 나면... 조금 달라질 수 있어요.
+
+2024년 7월, 개인정보보호위원회가 알리익스프레스에 과징금 20억 원을 부과했습니다.
+이유요? 우리 이용자들의 개인정보를, 해외 판매자 18만 곳에 넘기면서 제대로 고지조차 안 했기 때문입니다.
+
+18만 곳이요. 18만.
+
+오늘 이 영상에서, 저는 한 가지 질문에 답할 겁니다.
+"내가 아낀 몇천 원이, 실제로 어디로 가고 있는가?"`;
+
+  navigator.clipboard.writeText(fullText).then(() => {
+    const btn = event.target;
+    btn.textContent = '✓ 전체 복사 완료!';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = '전체 복사'; btn.classList.remove('ok'); }, 2500);
+  });
+}
+
+// ── CHECKLIST ──
+function toggleCheck(li) {
+  const box = li.querySelector('.ch-box');
+  const isDone = box.classList.contains('done');
+  if (isDone) {
+    box.classList.remove('done');
+    box.style.background = '';
+  } else {
+    box.classList.add('done');
+  }
+  updateProgress();
+}
+
+function updateProgress() {
+  const allItems = document.querySelectorAll('.checklist li');
+  const doneItems = document.querySelectorAll('.checklist li .ch-box.done');
+  const total = allItems.length;
+  const done = doneItems.length;
+  const pct = Math.round((done / total) * 100);
+  const fill = document.getElementById('progress-fill');
+  const text = document.getElementById('progress-text');
+  if (fill) fill.style.width = pct + '%';
+  if (text) text.textContent = done + ' / ' + total + ' 완료';
+}
+
+</script>
+</body>
+</html>

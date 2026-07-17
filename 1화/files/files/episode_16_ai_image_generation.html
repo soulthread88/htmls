@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episode 16: AI로 이미지 생성하기 - 윤호와 함께하는 AI 이야기</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<style>
+/* ================================================
+   윤호와 함께하는 AI 이야기 - Episode 16
+   티스토리 최적화 CSS (중복 제거 완료!)
+   ================================================ */
+
+/* 1. 사이드바 완전 제거 */
+#sidebar, .sidebar, #blogMenu, .blog_menu, #blogProfile, 
+.blog-profile, #rightMenu, .right-menu, .side_blogger, 
+.another_category, #mCategory, .category-wrapper, .widget, 
+.blog-widget, aside, [class*="sidebar"], [id*="sidebar"],
+.side-area, #side-area, .blog-side {
+    display: none !important;
+    width: 0 !important;
+    visibility: hidden !important;
+}
+
+/* 2. 전체 레이아웃 100% */
+body, html, #wrap, #wrapper, #container, #main, #content,
+.wrap, .wrapper, .main, .content, #tt-body-page, #mArticle {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 3. 글 내용 영역 95% */
+.tt_article_useless_p_margin, .article-view, .entry-content,
+.article-content, .post-content, article, .post, .entry {
+    width: 95% !important;
+    max-width: 95% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+/* 4. 기본 스타일 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Noto Sans KR', Arial, sans-serif; 
+    line-height: 2; 
+    color: #000; 
+    background: #FFF9E6; 
+    font-size: 28px; 
+}
+
+/* 5. Hero Section */
+.hero-section {
+    width: 95% !important;
+    max-width: 95% !important;
+    margin: 30px auto !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    padding: 80px 40px !important;
+    border-radius: 30px !important;
+    text-align: center !important;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3) !important;
+    border: 8px solid #5a67d8 !important;
+}
+
+.hero-section h1 {
+    font-size: 72px !important;
+    color: #FFFFFF !important;
+    font-weight: 900 !important;
+    margin-bottom: 30px !important;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.3) !important;
+}
+
+.hero-section .subtitle {
+    font-size: 38px !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    margin: 20px 0 !important;
+}
+
+.hero-section p {
+    color: #FFFFFF !important;
+    font-size: 32px !important;
+}
+
+/* 6. Container */
+.container {
+    width: 95% !important;
+    max-width: 1400px !important;
+    margin: 30px auto !important;
+    padding: 50px !important;
+    background: white !important;
+    border-radius: 30px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1) !important;
+}
+
+/* 7. 박스들 */
+.intro-box {
+    background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%) !important;
+    padding: 60px !important;
+    margin: 50px 0 !important;
+    border-radius: 25px !important;
+    border-left: 15px solid #FDD835 !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+
+.tip-box {
+    background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%) !important;
+    padding: 50px !important;
+    margin: 60px 0 !important;
+    border-radius: 25px !important;
+    border-left: 15px solid #4CAF50 !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+
+.warning-box {
+    background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%) !important;
+    padding: 50px !important;
+    margin: 60px 0 !important;
+    border-radius: 25px !important;
+    border-left: 15px solid #D32F2F !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+
+.practice-box {
+    background: linear-gradient(135deg, #E1BEE7 0%, #CE93D8 100%) !important;
+    padding: 50px !important;
+    margin: 60px 0 !important;
+    border-radius: 25px !important;
+    border-left: 15px solid #9C27B0 !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+}
+
+/* 8. 대화 버블 */
+.chat-bubble {
+    background: white !important;
+    padding: 30px 40px !important;
+    margin: 30px 0 !important;
+    border-radius: 25px !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1) !important;
+    font-size: 32px !important;
+    line-height: 2 !important;
+}
+
+.chat-bubble.yunho {
+    border-left: 10px solid #667eea !important;
+}
+
+.chat-bubble.grandpa {
+    border-left: 10px solid #FF9800 !important;
+}
+
+/* 9. 키워드 */
+.keyword {
+    color: #FF0000 !important;
+    font-weight: 900 !important;
+    background: #FFEB3B !important;
+    padding: 3px 10px !important;
+    border-radius: 8px !important;
+}
+
+/* 10. 제목들 */
+h2 {
+    font-size: 52px !important;
+    color: #667eea !important;
+    margin: 70px 0 40px !important;
+    padding-bottom: 20px !important;
+    border-bottom: 8px solid #667eea !important;
+    font-weight: 900 !important;
+}
+
+h3 {
+    font-size: 42px !important;
+    color: #2E7D32 !important;
+    margin: 50px 0 30px !important;
+    font-weight: 900 !important;
+}
+
+h4 {
+    font-size: 38px !important;
+    margin: 30px 0 20px !important;
+    font-weight: 900 !important;
+}
+
+/* 11. 기타 */
+.step-card {
+    background: white !important;
+    padding: 40px !important;
+    margin: 30px 0 !important;
+    border-radius: 20px !important;
+    border-left: 10px solid #667eea !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1) !important;
+}
+
+.example-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 30px !important;
+    margin: 40px 0 !important;
+}
+
+.example-card {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%) !important;
+    padding: 30px !important;
+    border-radius: 20px !important;
+    border: 5px solid #0066CC !important;
+    text-align: center !important;
+}
+
+/* 12. 반응형 */
+@media (max-width: 768px) {
+    .hero-section h1 { font-size: 48px !important; }
+    .hero-section .subtitle { font-size: 28px !important; }
+    h2 { font-size: 38px !important; }
+    h3 { font-size: 32px !important; }
+    body { font-size: 24px !important; }
+    .chat-bubble { font-size: 26px !important; }
+}
+</style>
+
+    <div class="hero-section">
+        <h1>🎨 Episode 16<br>AI로 이미지 생성하기</h1>
+        <p class="subtitle">말로 그림을 그리는 신기한 마법! ✨</p>
+        <p style="font-size: 32px; margin-top: 30px; color: white;">
+            윤호와 함께하는 AI 이야기 📖
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="intro-box">
+            <h2 style="color: #F57C00; margin-top: 0; border: none;">💡 오늘 배울 내용</h2>
+            <p style="font-size: 32px; line-height: 2.2;">
+                <strong>말로 그림을 그리는 AI 세계!</strong><br><br>
+                
+                ✅ <span class="keyword">DALL-E</span>로 이미지 만들기<br>
+                ✅ <span class="keyword">좋은 설명 작성법</span> 배우기<br>
+                ✅ <span class="keyword">무료 AI 그림 도구</span> 활용하기<br>
+                ✅ <span class="keyword">실전 예제</span>로 바로 실습!<br><br>
+                
+                이제 그림 솜씨 없어도<br>
+                말만 하면 AI가 그려줍니다! 🎨
+            </p>
+        </div>
+
+        <h2>🌟 윤호와 할아버지의 이야기</h2>
+
+        <div class="chat-bubble grandpa">
+            <strong style="color: #FF9800; font-size: 36px;">👴 할아버지:</strong><br>
+            "윤호야, 할아버지가 어릴 적 꿈이 화가였단다. 그런데 그림 재능이 없어서 포기했지. 지금은 AI가 그림도 그려준다며?"
+        </div>
+
+        <div class="chat-bubble yunho">
+            <strong style="color: #667eea; font-size: 36px;">👦 윤호:</strong><br>
+            "맞아요 할아버지! 이제는 말로만 설명하면 AI가 원하는 그림을 그려줘요. 할아버지가 상상하는 그림을 바로 만들 수 있어요!"
+        </div>
+
+        <div class="chat-bubble grandpa">
+            <strong style="color: #FF9800; font-size: 36px;">👴 할아버지:</strong><br>
+            "정말? 그럼 할아버지가 고향 풍경을 설명하면 그려줄 수 있을까?"
+        </div>
+
+        <div class="chat-bubble yunho">
+            <strong style="color: #667eea; font-size: 36px;">👦 윤호:</strong><br>
+            "물론이죠! 같이 배워볼까요? 생각보다 아주 쉬워요! 😊"
+        </div>
+
+        <h2>🎨 1. AI 이미지 생성이란?</h2>
+
+        <div class="intro-box">
+            <h3 style="margin-top: 0; color: #F57C00;">AI가 그림을 그리는 원리</h3>
+            <p style="font-size: 32px; line-height: 2.2;">
+                <span class="keyword">텍스트로 설명</span> → AI가 이해 → <span class="keyword">이미지 생성</span><br><br>
+                
+                마치 화가에게 주문하는 것처럼!<br>
+                "눈 내리는 한옥 마을, 석양빛"<br>
+                이렇게 말하면 AI가 그려줍니다! 🖼️
+            </p>
+        </div>
+
+        <h3>대표적인 AI 이미지 생성 도구</h3>
+
+        <div class="example-grid">
+            <div class="example-card">
+                <h4 style="color: #0066CC; margin-top: 0;">🤖 DALL-E 3</h4>
+                <p style="font-size: 28px;">
+                    ChatGPT에 내장<br>
+                    매우 쉬운 사용<br>
+                    자연스러운 결과
+                </p>
+            </div>
+            
+            <div class="example-card">
+                <h4 style="color: #0066CC; margin-top: 0;">🎨 Midjourney</h4>
+                <p style="font-size: 28px;">
+                    예술적인 그림<br>
+                    디스코드 사용<br>
+                    유료 서비스
+                </p>
+            </div>
+            
+            <div class="example-card">
+                <h4 style="color: #0066CC; margin-top: 0;">🆓 Bing Image Creator</h4>
+                <p style="font-size: 28px;">
+                    무료로 사용<br>
+                    마이크로소프트<br>
+                    간편한 접근
+                </p>
+            </div>
+        </div>
+
+        <h2>📝 2. ChatGPT로 이미지 만들기</h2>
+
+        <div class="step-card">
+            <h4 style="color: #667eea;">Step 1: ChatGPT 열기</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                1. <span class="keyword">chat.openai.com</span> 접속<br>
+                2. 로그인하기<br>
+                3. ChatGPT Plus 구독 필요 (월 $20)<br>
+                4. 또는 무료 Bing Image Creator 사용!
+            </p>
+        </div>
+
+        <div class="step-card">
+            <h4 style="color: #667eea;">Step 2: 그림 설명하기</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                예시 1: <span class="keyword">"한옥 마을에 눈이 내리는 겨울 풍경을 그려줘"</span><br><br>
+                
+                예시 2: <span class="keyword">"할아버지와 손자가 공원에서 산책하는 따뜻한 그림"</span><br><br>
+                
+                예시 3: <span class="keyword">"빈티지 스타일의 우리 가족 사진, 1970년대 느낌"</span>
+            </p>
+        </div>
+
+        <div class="step-card">
+            <h4 style="color: #667eea;">Step 3: 결과 확인하고 수정</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                1. AI가 그림을 생성 (약 30초 소요)<br>
+                2. 마음에 안 들면 수정 요청<br>
+                3. "더 밝게", "사람을 더 크게" 등<br>
+                4. 마음에 들 때까지 조정!
+            </p>
+        </div>
+
+        <h2>✍️ 3. 좋은 이미지 설명 작성법</h2>
+
+        <div class="tip-box">
+            <h4 style="color: #2E7D32; margin-top: 0;">💡 핵심 포인트 5가지</h4>
+            <p style="font-size: 32px; line-height: 2.2;">
+                <strong>1. 주제를 명확하게</strong><br>
+                ❌ "예쁜 풍경"<br>
+                ✅ "한옥 마을의 봄날 풍경"<br><br>
+                
+                <strong>2. 분위기 설명 추가</strong><br>
+                "따뜻한", "평화로운", "활기찬"<br><br>
+                
+                <strong>3. 색상 언급</strong><br>
+                "파스텔 톤", "따뜻한 색감", "선명한 색"<br><br>
+                
+                <strong>4. 구도 지정</strong><br>
+                "정면에서 본", "위에서 내려다본"<br><br>
+                
+                <strong>5. 스타일 명시</strong><br>
+                "사진 같은", "수채화", "만화 스타일"
+            </p>
+        </div>
+
+        <h3>실전 예제 - 전/후 비교</h3>
+
+        <div class="practice-box">
+            <h4 style="color: #9C27B0; margin-top: 0;">❌ 부족한 설명</h4>
+            <p style="font-size: 30px;">
+                "고양이 그려줘"
+            </p>
+        </div>
+
+        <div class="practice-box">
+            <h4 style="color: #9C27B0; margin-top: 0;">✅ 좋은 설명</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                "창가에 앉아 밖을 바라보는 흰색 페르시안 고양이, 따뜻한 오후 햇살, 부드러운 분위기, 수채화 스타일"
+            </p>
+        </div>
+
+        <h2>🆓 4. 무료 도구: Bing Image Creator</h2>
+
+        <div class="step-card">
+            <h4 style="color: #667eea;">완전 무료로 시작하기!</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                <strong>1단계:</strong> <span class="keyword">bing.com/create</span> 접속<br><br>
+                
+                <strong>2단계:</strong> 마이크로소프트 계정으로 로그인<br>
+                (없으면 무료 가입)<br><br>
+                
+                <strong>3단계:</strong> 상단 입력창에 한글로 설명 입력<br><br>
+                
+                <strong>4단계:</strong> "만들기" 버튼 클릭!<br><br>
+                
+                <strong>5단계:</strong> 결과 확인 (4장 생성됨)<br><br>
+                
+                <strong>6단계:</strong> 마음에 드는 이미지 다운로드
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <h4 style="color: #2E7D32; margin-top: 0;">💡 Bing의 장점</h4>
+            <p style="font-size: 32px; line-height: 2.2;">
+                ✅ <span class="keyword">완전 무료</span><br>
+                ✅ <span class="keyword">한글 지원</span> 완벽<br>
+                ✅ <span class="keyword">빠른 생성</span> (1-2분)<br>
+                ✅ <span class="keyword">회원가입만</span>으로 사용<br>
+                ✅ <span class="keyword">제한 없음</span> (일정량까지)
+            </p>
+        </div>
+
+        <h2>🎯 5. 실전 연습 - 따라해보기!</h2>
+
+        <div class="practice-box">
+            <h4 style="color: #9C27B0; margin-top: 0;">연습 1: 가족 사진 만들기</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                <strong>설명문:</strong><br>
+                "3대가 함께 식탁에 둘러앉아 따뜻한 저녁 식사를 하는 모습, 할아버지, 아빠, 손자가 함께, 따뜻한 조명, 행복한 분위기, 사실적인 스타일"<br><br>
+                
+                <strong>→ Bing에 입력하고 결과 확인!</strong>
+            </p>
+        </div>
+
+        <div class="practice-box">
+            <h4 style="color: #9C27B0; margin-top: 0;">연습 2: 추억의 장소</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                <strong>설명문:</strong><br>
+                "1970년대 한국의 시골 마을, 초가집과 돌담길, 아이들이 뛰어노는 모습, 석양빛, 향수를 불러일으키는 따뜻한 색감, 빈티지 사진 느낌"<br><br>
+                
+                <strong>→ 여러분만의 추억을 설명해보세요!</strong>
+            </p>
+        </div>
+
+        <div class="practice-box">
+            <h4 style="color: #9C27B0; margin-top: 0;">연습 3: 선물용 카드</h4>
+            <p style="font-size: 30px; line-height: 2;">
+                <strong>설명문:</strong><br>
+                "생일 축하 카드, 아름다운 꽃다발과 케이크, 파스텔 컬러, 수채화 스타일, 따뜻하고 부드러운 느낌, 텍스트 공간 있게"<br><br>
+                
+                <strong>→ 손주에게 보낼 카드 만들기!</strong>
+            </p>
+        </div>
+
+        <h2>⚠️ 6. 주의사항</h2>
+
+        <div class="warning-box">
+            <h4 style="color: #D32F2F; margin-top: 0;">꼭 기억하세요!</h4>
+            <p style="font-size: 32px; line-height: 2.2;">
+                <strong>1. 저작권 확인</strong><br>
+                생성한 이미지도 상업적 사용 전 확인 필요<br><br>
+                
+                <strong>2. 실존 인물 주의</strong><br>
+                유명인이나 실제 사람 이름 사용 자제<br><br>
+                
+                <strong>3. 완벽하지 않아요</strong><br>
+                손가락, 얼굴이 이상할 수 있음<br>
+                여러 번 시도해보기!<br><br>
+                
+                <strong>4. 개인정보 보호</strong><br>
+                집 주소, 전화번호 등 포함 금지
+            </p>
+        </div>
+
+        <h2>🎁 7. 활용 아이디어</h2>
+
+        <div class="example-grid">
+            <div class="example-card">
+                <h4 style="color: #0066CC; margin-top: 0;">🎂 생일 카드</h4>
+                <p style="font-size: 26px;">
+                    손주에게 보낼<br>
+                    특별한 생일 카드<br>
+                    직접 만들기
+                </p>
+            </div>
+            
+            <div class="example-card">
+                <h4 style="color: #0066CC; margin-top: 0;">📖 자서전 삽화</h4>
+                <p style="font-size: 26px;">
+                    내 인생 이야기에<br>
+                    어울리는 그림<br>
+                    추가하기
+                </p>
+            </div>
+            
+            <div class="example-card">
+                <h4 style="color: #0066CC; margin-top: 0;">🏠 인테리어 아이디어</h4>
+                <p style="font-size: 26px;">
+                    집 꾸미기 전<br>
+                    미리 시뮬레이션<br>
+                    해보기
+                </p>
+            </div>
+            
+            <div class="example-card">
+                <h4 style="color: #0066CC; margin-top: 0;">🎨 취미 활동</h4>
+                <p style="font-size: 26px;">
+                    상상을 현실로<br>
+                    예술 작품<br>
+                    만들기
+                </p>
+            </div>
+        </div>
+
+        <h2>📚 오늘의 정리</h2>
+
+        <div class="intro-box">
+            <h3 style="margin-top: 0; color: #F57C00;">핵심 요약!</h3>
+            <p style="font-size: 32px; line-height: 2.2;">
+                <strong>1. AI 이미지 생성</strong><br>
+                → 말로 설명하면 그림 그려줌<br><br>
+                
+                <strong>2. 주요 도구</strong><br>
+                → DALL-E (ChatGPT), Bing (무료!)<br><br>
+                
+                <strong>3. 좋은 설명법</strong><br>
+                → 구체적으로, 분위기+색상+스타일<br><br>
+                
+                <strong>4. 실습</strong><br>
+                → Bing에서 바로 시작 가능<br><br>
+                
+                <strong>5. 활용</strong><br>
+                → 카드, 추억, 선물 등 무궁무진!
+            </p>
+        </div>
+
+        <h2>💬 마무리 대화</h2>
+
+        <div class="chat-bubble grandpa">
+            <strong style="color: #FF9800; font-size: 36px;">👴 할아버지:</strong><br>
+            "윤호야, 정말 신기하구나! 할아버지 고향 마을을 AI로 그려봤더니 정말 비슷하게 나왔어!"
+        </div>
+
+        <div class="chat-bubble yunho">
+            <strong style="color: #667eea; font-size: 36px;">👦 윤호:</strong><br>
+            "대박! 할아버지 그거 프린트해서 액자에 걸어요! 다음 시간엔 AI로 글쓰기 배워볼까요?"
+        </div>
+
+        <div class="chat-bubble grandpa">
+            <strong style="color: #FF9800; font-size: 36px;">👴 할아버지:</strong><br>
+            "좋아! 할아버지 자서전도 AI 도움받아서 써보고 싶구나. 기대되네!"
+        </div>
+
+        <div class="tip-box">
+            <h4 style="color: #2E7D32; margin-top: 0;">🎯 다음 시간 예고</h4>
+            <p style="font-size: 32px; line-height: 2.2;">
+                <strong>Episode 17: AI로 글쓰기 마스터</strong><br><br>
+                
+                블로그, 편지, 자서전까지!<br>
+                AI가 글쓰기 도우미가 되어드립니다.<br><br>
+                
+                기대해주세요! 📝✨
+            </p>
+        </div>
+    </div>
+</body>
+</html>

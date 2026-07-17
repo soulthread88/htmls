@@ -1,0 +1,121 @@
+╔══════════════════════════════════════════════════════════╗
+║  IssueLens EP.13 — AI 이미지 생성 프롬프트 가이드       ║
+║  지원 도구: DALL-E 3, Midjourney v6, Adobe Firefly        ║
+╚══════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  섹션 1 이미지 (s1i) — 데이터 수집 개념
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[DALL-E 3 프롬프트]
+A sleek smartphone screen showing a shopping app with a sinister data collection interface.
+Digital data streams flowing out of the phone into dark servers labeled with lock icons.
+Red warning symbols. Dark, moody atmosphere. Infographic style.
+Korean text elements subtly integrated. High contrast red and dark navy color scheme.
+16:9 ratio, editorial illustration style.
+
+[Midjourney 프롬프트]
+/imagine smartphone data privacy breach visualization, Korean shopping app, red danger signals,
+data streams flowing to overseas servers, editorial infographic style, dark dramatic lighting,
+red #C8001A and navy #1E3A8A color palette, 16:9 --ar 16:9 --v 6 --style raw
+
+[Adobe Firefly]
+사용자 스마트폰에서 빨간색 데이터 스트림이 해외 서버로 흘러가는 모습,
+경고 아이콘과 자물쇠 아이콘 포함, 다크 에디토리얼 스타일, 16:9
+
+[무료 대안 — Unsplash 검색어]
+"data privacy smartphone" / "personal data security" / "digital surveillance"
+추천 사진 키워드: https://unsplash.com/s/photos/data-privacy-security
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  섹션 1 영상 (s1v) — YouTube 검색어
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YouTube 검색어로 관련 영상 찾기:
+  • "AliExpress personal data collection explained"
+  • "알리익스프레스 개인정보 수집"
+  • "Temu data privacy concerns"
+  • "PIPC fine AliExpress Korea 2024"
+  • "개인정보보호위원회 알리 과징금"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  섹션 2 이미지 (s2i) — 국가정보법 개념
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[DALL-E 3 프롬프트]
+An ominous government building with surveillance cameras, connected by glowing red data lines
+to smartphones and shopping bags. Legal document with Article 7 highlighted in red.
+Map of Asia with data flow arrows. Authoritarian surveillance aesthetic.
+Editorial news illustration style. Dark blue and red color scheme.
+
+[Midjourney]
+/imagine government surveillance data law article 7, Asia map, smartphones connected to
+government servers, red warning lines, legal document, editorial news style,
+dark atmospheric --ar 16:9 --v 6
+
+[Unsplash 검색어]
+"surveillance camera" / "government building digital" / "cybersecurity law"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  섹션 2 영상 (s2v) — YouTube 검색어
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • "China National Intelligence Law explained"
+  • "중국 국가정보법 설명"
+  • "Chinese tech companies data government access"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  섹션 3 이미지 (s3i) — 비대칭 구도
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[DALL-E 3 프롬프트]
+An asymmetric balance scale infographic. One side: Great Firewall blocking Google, YouTube,
+Instagram logos with red X marks. Other side: AliExpress and Temu logos freely flowing
+data from Korea. Conceptual editorial illustration. Blue and red contrast.
+Flat design infographic style, 16:9.
+
+[Midjourney]
+/imagine asymmetric trade data, great firewall vs open market, balance scale concept,
+flat infographic design, editorial style, red and blue contrast --ar 16:9 --v 6
+
+[Unsplash 검색어]
+"trade imbalance infographic" / "internet censorship" / "data asymmetry"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  섹션 3 영상 (s3v) — YouTube 검색어
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • "Great Firewall China internet censorship"
+  • "China app Korea data collection"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  썸네일 이미지 (YouTube / 블로그 대표 이미지)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[DALL-E 3 프롬프트 — 유튜브 썸네일]
+YouTube thumbnail, ultra high contrast, red background, shocked Asian person holding phone
+showing AliExpress/Temu app, large bold white Korean text overlay space on left side,
+red warning icons, dark dramatic lighting, 1280x720px.
+Text space for: "알리·테무 개인정보" (top) "내 정보 어디로?" (bottom)
+
+[Canva 썸네일 가이드]
+크기: 1280×720px
+배경색: #C8001A (IssueLens 레드) → #0A0A0A (검정) 그라디언트
+메인 텍스트: "알리·테무 개인정보" (Pretendard Black, 흰색, 90pt)
+서브 텍스트: "내 정보 어디로?" (Pretendard Bold, 노란색, 60pt)
+아이콘: 자물쇠 깨지는 이미지 + 스마트폰
+IssueLens EP.01 뱃지: 왼쪽 상단
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  인스타그램 캐러셀 슬라이드 이미지 (10장)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+크기: 1080×1080px (정방형) 권장
+디자인 도구: Canva / Adobe Express / Figma
+색상 팔레트: #C8001A, #1E3A8A, #FFFFFF, #0A0A0A
+폰트: Noto Sans KR (Bold, Black)
+템플릿 스타일: 미니멀 뉴스 카드
+
+Canva 검색어: "news card template Korean"
+Adobe Express 검색어: "infographic dark editorial"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  무료 이미지 소스 정리
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Unsplash (unsplash.com) — 고품질 무료, 상업 사용 가능
+2. Pexels (pexels.com) — 무료 스톡 사진/영상
+3. Pixabay (pixabay.com) — 무료, 저작권 불필요
+4. Freepik (freepik.com) — 일부 무료 (출처 표기 필요)
+5. Flaticon (flaticon.com) — 아이콘

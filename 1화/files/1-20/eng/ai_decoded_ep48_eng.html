@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Decoded for Seniors Ep.48 — AI Legal Help | with Jake & Grandpa Bob</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,700;0,900;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+/* ================================================================
+   AI DECODED FOR SENIORS — EP.48 SPECIAL EDITION
+   🇺🇸 "THE COURTROOM" THEME  — Charcoal + Crimson + Parchment
+   Deep legal drama energy × senior-friendly clarity
+   NO SCRIPT TAGS in saved output — blog-safe ✅
+================================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; }
+
+body {
+    font-family: 'DM Sans', sans-serif !important;
+    line-height: 1.85 !important;
+    color: #1c1c2e !important;
+    background: #f5f0e8 !important;
+}
+
+.ts-wrap {
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 24px 18px 100px 18px;
+    background: #f5f0e8;
+}
+
+img, video, iframe { max-width: 100% !important; height: auto !important; }
+.gap    { display: block; height: 14pt; }
+.gap-sm { display: block; height: 7pt; }
+.br-11pt { display: block; height: 11pt; }
+
+[contenteditable="true"] { outline: none; border-radius: 4px; cursor: text; }
+[contenteditable="true"]:hover  { background: rgba(180,0,0,0.07); box-shadow: 0 0 0 2px rgba(180,0,0,0.25); }
+[contenteditable="true"]:focus  { background: rgba(180,0,0,0.12); box-shadow: 0 0 0 2px #b71c1c; }
+
+/* ── SAVE BAR ── */
+.save-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(20,10,10,0.97);
+    padding: 10px 20px;
+    display: flex; justify-content: center; gap: 12px;
+    z-index: 9999; border-top: 3px solid #b71c1c;
+}
+.save-bar button {
+    background: linear-gradient(135deg,#b71c1c,#7f0000);
+    color: #fff; border: none;
+    padding: 11px 34px; border-radius: 30px;
+    font-size: 15pt; font-weight: 700; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 18px rgba(183,28,28,0.5);
+}
+.save-bar button:hover { background: linear-gradient(135deg,#d32f2f,#b71c1c); }
+
+/* ════════════════════════════
+   ★ HERO BANNER — COURTROOM EDITION
+════════════════════════════ */
+.hero-banner {
+    background: linear-gradient(160deg, #1c1c2e 0%, #2d1b1b 55%, #1c1c2e 100%);
+    border-radius: 0;
+    padding: 0;
+    margin: 0 0 0 0;
+    position: relative;
+    overflow: hidden;
+    border-left: 8px solid #b71c1c;
+    border-right: 8px solid #b71c1c;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+}
+/* Gavel watermark */
+.hero-banner::before {
+    content: '⚖️';
+    position: absolute;
+    right: -10px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 200pt;
+    opacity: 0.05;
+    line-height: 1;
+}
+/* Top red ticker bar */
+.hero-ticker {
+    background: #b71c1c;
+    padding: 6px 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14pt;
+    color: #fff;
+    letter-spacing: 0.25em;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    overflow: hidden;
+}
+.hero-ticker-label {
+    background: #fff;
+    color: #b71c1c;
+    font-size: 11pt;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+}
+.hero-content { padding: 28px 30px 26px 30px; }
+
+.hero-series-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14pt;
+    color: #e57373;
+    letter-spacing: 0.3em;
+    margin-bottom: 10px;
+}
+.hero-ep-badge {
+    display: inline-block;
+    background: #b71c1c;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14pt;
+    padding: 4px 20px;
+    border-radius: 4px;
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+}
+.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 46pt;
+    color: #ffffff;
+    line-height: 1.05;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.02em;
+}
+.hero-title .red { color: #ef5350; }
+.hero-title .gold { color: #ffd54f; }
+.hero-subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    color: #b0b8d0;
+    line-height: 1.6;
+    margin: 0 0 18px 0;
+    font-style: italic;
+}
+.hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+}
+.hero-tag {
+    background: rgba(183,28,28,0.2);
+    border: 1.5px solid rgba(239,83,80,0.4);
+    color: #ef9a9a;
+    font-size: 11pt; font-weight: 700;
+    padding: 4px 14px; border-radius: 4px;
+    letter-spacing: 0.05em;
+}
+.hero-hosts {
+    margin-top: 18px;
+    display: flex; gap: 14px; flex-wrap: wrap;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+}
+.host-badge {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    color: #e8ecf5;
+    font-size: 12pt; font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 6px;
+    display: flex; align-items: center; gap: 6px;
+}
+
+/* ════════════════════════════
+   ★ SECTION TITLES
+════════════════════════════ */
+.section-accent {
+    display: flex; align-items: center; gap: 12px;
+    margin: 22px 0 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 3px double #b71c1c;
+}
+.section-accent .acc-icon {
+    font-size: 20pt;
+    background: #b71c1c;
+    width: 46px; height: 46px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(183,28,28,0.4);
+}
+.section-accent .acc-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 23pt; color: #1c1c2e;
+    line-height: 1.2; letter-spacing: 0.04em;
+}
+.section-accent .acc-label small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11pt; font-weight: 400;
+    color: #6b6b80; letter-spacing: 0;
+}
+
+.title-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30pt; text-align: center;
+    color: #1c1c2e; padding: 16px 0 10px 0;
+    border-bottom: 5px solid #b71c1c;
+    line-height: 1.3; margin: 0 0 6px 0;
+    letter-spacing: 0.04em;
+}
+.title-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22pt; color: #b71c1c;
+    border-left: 8px solid #b71c1c; padding-left: 14px;
+    margin: 22px 0 6px 0; line-height: 1.4;
+    letter-spacing: 0.05em;
+}
+.title-minor {
+    font-size: 18pt; font-weight: 700; color: #2d1b1b;
+    border-left: 5px solid #ef9a9a; padding-left: 10px;
+    margin: 18px 0 5px 0; line-height: 1.45;
+}
+
+/* ── BODY TEXT ── */
+.content-body {
+    font-size: 17pt; line-height: 1.9;
+    text-align: left; color: #1c1c2e;
+    margin-bottom: 0;
+}
+.content-body + .content-body { margin-top: 10px; }
+
+/* ── COLOR CLASSES ── */
+.speaker     { color: #b71c1c; font-weight: 800; font-size: 17pt; }
+.ai-name     { color: #1565c0; font-weight: bold; }
+.hook-tag    { color: #b71c1c; font-weight: bold; }
+.term-name   { color: #1a237e; font-weight: bold; }
+.emphasis    { color: #b71c1c; font-weight: bold; }
+.gold-text   { color: #e65100; font-weight: bold; }
+.law-term    { color: #4a148c; font-weight: bold; background: rgba(74,20,140,0.06); padding: 1px 4px; border-radius: 3px; }
+
+/* ════════════════════════════
+   ★ BOXES
+════════════════════════════ */
+/* SAYING / PROVERB BOX */
+.saying-box {
+    background: linear-gradient(160deg, #1c1c2e 0%, #2d1b1b 100%);
+    border: none;
+    border-left: 8px solid #ffd54f;
+    padding: 24px 28px; border-radius: 0 16px 16px 0;
+    margin: 14px 0;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+    position: relative; overflow: hidden;
+}
+.saying-box::after {
+    content: '"';
+    position: absolute; top: -20px; right: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 160pt; color: rgba(255,213,79,0.08);
+    line-height: 1;
+}
+.saying-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 24pt; font-weight: 900; color: #ffd54f;
+    margin: 6px 0 10px 0; line-height: 1.4;
+}
+.saying-meaning {
+    font-size: 17pt; font-weight: 600; color: #e8ecf5;
+    margin: 8px 0; line-height: 1.65;
+}
+.saying-tag {
+    display: inline-block;
+    background: rgba(255,213,79,0.15);
+    border: 1.5px solid rgba(255,213,79,0.4);
+    color: #ffd54f;
+    font-size: 11pt; font-weight: 700;
+    padding: 3px 14px; border-radius: 4px;
+    margin-top: 6px; letter-spacing: 0.08em;
+}
+
+/* DIALOG BOX */
+.dialog-box {
+    background: #fff;
+    border: none;
+    border-top: 5px solid #1c1c2e;
+    border-bottom: 3px solid #1c1c2e;
+    padding: 20px 24px; border-radius: 0;
+    margin: 14px 0;
+    box-shadow: 4px 4px 0 #1c1c2e;
+}
+.dialog-row { margin-bottom: 14px; line-height: 1.9; }
+.dialog-row:last-child { margin-bottom: 0; }
+.dialog-speaker { color: #b71c1c; font-weight: 900; font-size: 17pt; display: inline; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.06em; }
+.dialog-content { font-size: 17pt; line-height: 1.9; display: inline; color: #1c1c2e; }
+
+/* TIP BOX */
+.tip-box {
+    background: #fffbf0;
+    border: 3px solid #ffd54f;
+    border-left: 8px solid #e65100;
+    padding: 20px 24px; border-radius: 0 12px 12px 0;
+    margin: 14px 0;
+    box-shadow: 0 4px 16px rgba(230,81,0,0.1);
+}
+.tip-number-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #b71c1c; color: #fff;
+    font-weight: 900; font-size: 13pt;
+    width: 30px; height: 30px; border-radius: 50%;
+    margin-right: 8px; flex-shrink: 0; vertical-align: middle;
+}
+
+/* AI BOX */
+.ai-box-single {
+    background: #fff;
+    border: 3px solid #1c1c2e;
+    padding: 20px 24px; border-radius: 12px;
+    margin: 14px 0;
+    box-shadow: 5px 5px 0 #b71c1c;
+}
+.ai-section-item {
+    margin-bottom: 18px; padding-bottom: 18px;
+    border-bottom: 2px dashed #ccc;
+}
+.ai-section-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+/* AI ITEM LABEL BADGES */
+.ai-item-label {
+    display: inline-block;
+    background: #b71c1c;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12pt;
+    padding: 3px 12px;
+    border-radius: 4px;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+}
+
+/* IMAGE UPLOAD AREAS */
+.img-area {
+    width: 100%; min-height: 400px;
+    background: #e8e0d0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24pt; color: #555;
+    border-radius: 12px; border: 3px dashed #7d6e5a;
+    cursor: pointer; position: relative; overflow: hidden;
+    margin: 12px 0; transition: all 0.2s;
+}
+.img-area:hover { background: #ddd5c0; border-color: #4a3728; }
+.img-area .upload-label {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 10px; color: #5a4a3a; font-size: 18pt;
+    user-select: none; text-align: center; padding: 15px;
+}
+.img-area .upload-icon { font-size: 48pt; }
+.img-area img, .img-area video { width:100%; height:auto; border-radius:10px; display:block; }
+
+.ai-img-area {
+    background: #e8e0d0;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; border: 3px dashed #7d6e5a;
+    cursor: pointer; position: relative; overflow: hidden;
+    aspect-ratio: 1/1; transition: all 0.2s;
+}
+.ai-img-area:hover { background: #ddd5c0; }
+.ai-img-area .upload-label {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; color: #5a4a3a; font-size: 17pt;
+    user-select: none; text-align: center; padding: 10px;
+}
+.ai-img-area .upload-icon { font-size: 36pt; }
+.ai-img-area img, .ai-img-area video { width:100%; height:auto; border-radius:8px; display:block; }
+.ai-img-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 12px 0; }
+
+.media-overlay { position: absolute; top: 8px; right: 8px; display: none; gap: 6px; z-index: 10; }
+.img-area:hover .media-overlay, .ai-img-area:hover .media-overlay { display: flex; }
+.media-btn {
+    background: rgba(20,10,10,0.8); color: white; border: none;
+    border-radius: 6px; padding: 5px 12px;
+    font-size: 13pt; cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.media-btn:hover { background: rgba(183,28,28,0.9); }
+
+.source-tag { font-size: 12pt; font-style: italic; color: #7a6a5a; text-align: right; margin: 2px 0 12px 0; }
+
+/* HUMOR BOX */
+.humor-box {
+    background: #fff8e1;
+    border: 3px solid #ffc107;
+    border-top: 7px solid #ff6f00;
+    padding: 20px 24px; border-radius: 12px;
+    margin: 14px 0; position: relative;
+}
+.humor-box::before {
+    content: '😂';
+    position: absolute; top: -16px; left: 20px;
+    font-size: 24pt; background: #fff8e1; padding: 0 6px; border-radius: 6px;
+}
+
+/* QUIZ BOX */
+.quiz-box {
+    background: #fff;
+    border: 3px solid #1c1c2e;
+    border-top: 7px solid #b71c1c;
+    padding: 20px 24px; border-radius: 12px;
+    margin: 14px 0; position: relative;
+}
+.quiz-number { color: #b71c1c; font-weight: 900; font-size: 17pt; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; }
+
+/* SAYING DEEP DIVE */
+.saying-study-box {
+    background: #fff;
+    border: 3px solid #1c1c2e;
+    padding: 22px 26px; border-radius: 12px;
+    margin: 14px 0;
+    box-shadow: 6px 6px 0 #1c1c2e;
+}
+.saying-study-title { font-family: 'Bebas Neue', sans-serif; font-size: 21pt; color: #1c1c2e; margin-bottom:12px; letter-spacing: 0.05em; }
+.saying-study-full { font-family: 'Playfair Display', serif; font-size:24pt; font-weight:900; color:#b71c1c; line-height:1.5; margin:8px 0; }
+.saying-word-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:14px 0; }
+.saying-word-card {
+    background: #f5f0e8;
+    border: 2px solid #1c1c2e;
+    border-radius: 8px; padding: 12px 8px; text-align: center;
+    box-shadow: 3px 3px 0 #1c1c2e;
+}
+.word-main { font-family: 'Playfair Display', serif; font-size:18pt; font-weight:900; color:#b71c1c; line-height:1.3; display:block; }
+.word-type { font-size:11pt; font-weight:700; color:#6b6b80; line-height:1.3; display:block; margin-top:2px; font-style:italic; }
+.word-def  { font-size:12pt; color:#3a3a4a; line-height:1.4; display:block; margin-top:5px; }
+.saying-story-box { background:#f5f0e8; border-left:6px solid #b71c1c; padding:14px 18px; margin:12px 0; }
+.saying-apply-box { background:#fce4ec; border:2px dashed #b71c1c; border-radius:10px; padding:16px 18px; margin-top:14px; }
+
+/* ANSWER BOX */
+.answer-box {
+    background: linear-gradient(135deg,#e8f5e9,#c8e6c9);
+    border: 4px solid #2e7d32;
+    padding: 16px 22px; border-radius: 12px;
+    margin: 14px 0; opacity: 0.06; cursor: pointer; transition: opacity 0.3s;
+}
+.answer-box:hover { opacity: 0.3; }
+.answer-box.revealed { opacity: 1; }
+.hidden-title { opacity:0.06; cursor:pointer; transition:opacity 0.3s; }
+.hidden-title:hover { opacity:0.3; }
+.hidden-title.revealed { opacity:1; }
+
+/* WORD POWER BOX */
+.wordpower-box {
+    background: #1c1c2e;
+    border: none;
+    border-left: 8px solid #ef5350;
+    padding: 22px 26px; border-radius: 0 12px 12px 0;
+    margin: 14px 0;
+    color: #e8ecf5;
+}
+.wordpower-box .wp-item-title { color: #ffd54f; font-weight: 900; }
+
+/* KEYWORD PILLS */
+.keyword-section { display:grid; grid-template-columns:1fr 1fr; gap:8px 12px; margin-bottom:10pt; }
+.keyword-pill {
+    background: #1c1c2e;
+    color: #ffd54f;
+    padding: 9px 16px; border-radius: 6px;
+    font-size: 13pt; font-weight: 700;
+    transition: all 0.2s; display: block;
+    text-decoration: none;
+    border: 2px solid #b71c1c;
+    letter-spacing: 0.03em;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+}
+.keyword-pill:hover {
+    background: #b71c1c; color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(183,28,28,0.4);
+}
+
+/* FOOTER */
+.footer-section { margin-top: 24px; padding-top: 18px; border-top: 3px solid #7d6e5a; }
+.footer-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20pt; color: #1c1c2e;
+    margin-bottom: 10px; letter-spacing: 0.06em;
+}
+
+/* RECAP / SUMMARY BOX */
+.summary-box {
+    background: linear-gradient(160deg, #1c1c2e 0%, #2d1b1b 100%);
+    border: none;
+    border-left: 8px solid #ef5350;
+    border-right: 8px solid #ef5350;
+    padding: 24px 26px; border-radius: 12px;
+    margin: 14px 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+.summary-title { font-family: 'Bebas Neue', sans-serif; font-size:24pt; color:#ffd54f; margin-bottom:16px; text-align:center; letter-spacing: 0.08em; }
+.summary-item { font-size:16pt; line-height:1.9; margin-bottom:14pt; padding-left:16px; border-left:5px solid #ef5350; color:#e8ecf5; }
+.summary-item:last-child { margin-bottom:0; }
+.summary-item b { color: #ffd54f; }
+
+/* VISUAL STORY PANELS */
+.comic-wrap {
+    background: #fff; border-radius: 12px;
+    box-shadow: 6px 6px 0 #1c1c2e;
+    overflow: hidden; margin: 14px 0;
+    border: 3px solid #1c1c2e;
+}
+.comic-header {
+    background: linear-gradient(135deg, #1c1c2e, #2d1b1b);
+    color: #ffd54f; padding: 12px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16pt; letter-spacing: 0.12em;
+    display: flex; align-items: center; gap: 10px;
+}
+.comic-single {
+    position: relative; width: 100%; aspect-ratio: 1/1;
+    cursor: pointer; overflow: hidden;
+}
+.comic-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: #f5f0e8; border: none;
+    gap: 14px; padding: 20px; box-sizing: border-box;
+}
+.comic-single-overlay {
+    position: absolute; inset: 0;
+    background: rgba(28,28,46,0.65);
+    display: none; align-items: center; justify-content: center;
+    gap: 12px; flex-direction: column; z-index: 5;
+}
+.comic-single:hover .comic-single-overlay { display: flex; }
+.comic-mob {
+    background: rgba(183,28,28,0.85); color: #fff; border: none;
+    border-radius: 6px; padding: 6px 14px;
+    font-size: 14pt; cursor: pointer; font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+}
+.comic-mob:hover { background: #b71c1c; }
+
+/* TRENDING BANNER */
+.trending-banner {
+    background: #b71c1c;
+    color: #fff; padding: 10px 20px; border-radius: 6px;
+    font-size: 14pt; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+    margin: 12px 0; letter-spacing: 0.02em; flex-wrap: wrap;
+    font-family: 'DM Sans', sans-serif;
+}
+.trending-banner .tb-label {
+    background: #ffd54f; color: #b71c1c;
+    padding: 2px 12px; border-radius: 4px;
+    font-size: 11pt; font-weight: 900; white-space: nowrap;
+}
+
+/* "DID YOU KNOW" CALLOUT */
+.did-you-know {
+    background: #e8eaf6;
+    border-left: 8px solid #3949ab;
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px; margin: 14px 0;
+}
+.dyk-label { font-family: 'Bebas Neue', sans-serif; font-size:14pt; color:#1a237e; letter-spacing:0.15em; margin-bottom:4px; }
+.dyk-body  { font-size:17pt; color:#1c1c2e; line-height:1.8; }
+
+/* GRANDPA'S CORNER */
+.grandpa-box {
+    background: #fff8e1;
+    border: 3px solid #ffc107;
+    border-top: 7px solid #ff8f00;
+    padding: 20px 24px; border-radius: 12px;
+    margin: 14px 0; position: relative;
+}
+.grandpa-box::before {
+    content: '👴';
+    position: absolute; top: -16px; left: 20px;
+    font-size: 24pt; background: #fff8e1; padding: 0 6px; border-radius: 8px;
+}
+
+/* SPOTLIGHT CARD */
+.spotlight-card {
+    background: linear-gradient(160deg, #1c1c2e, #2d1b1b);
+    border-radius: 12px; padding: 20px 24px; margin: 14px 0;
+    display: flex; gap: 16px; align-items: flex-start;
+    border: 2px solid rgba(255,213,79,0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.spotlight-icon {
+    font-size: 36pt; flex-shrink: 0;
+    background: rgba(183,28,28,0.2);
+    width: 70px; height: 70px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+}
+.spotlight-content { flex: 1; }
+.spotlight-title { font-family: 'Bebas Neue', sans-serif; font-size:18pt; color:#ffd54f; letter-spacing: 0.1em; margin-bottom:6px; }
+.spotlight-body  { font-size:15pt; color:#b0b8d0; line-height:1.7; }
+
+/* WARNING / SAFETY BOX */
+.safety-box {
+    background: #fff3e0;
+    border: 3px solid #ff6d00;
+    border-left: 8px solid #bf360c;
+    padding: 16px 20px; border-radius: 0 12px 12px 0;
+    margin: 14px 0;
+}
+
+/* DAD'S NOTE (replaces 윤호 아빠 한마디) */
+.dad-note {
+    background: #e8f5e9;
+    border: 3px solid #2e7d32;
+    border-top: 7px solid #1b5e20;
+    padding: 20px 24px; border-radius: 12px;
+    margin: 14px 0; position: relative;
+}
+.dad-note::before {
+    content: '💼';
+    position: absolute; top: -16px; left: 20px;
+    font-size: 22pt; background: #e8f5e9; padding: 0 6px; border-radius: 8px;
+}
+
+/* COURT DOCKET HEADER (decorative section divider) */
+.court-docket {
+    text-align: center;
+    padding: 10px 0;
+    margin: 20px 0 10px 0;
+    position: relative;
+}
+.court-docket::before, .court-docket::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0;
+    width: 42%; height: 2px;
+    background: linear-gradient(90deg, transparent, #b71c1c);
+    transform: translateY(-50%);
+}
+.court-docket::after { left: auto; right: 0; background: linear-gradient(90deg, #b71c1c, transparent); }
+.court-docket-label {
+    display: inline-block;
+    background: #b71c1c;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13pt;
+    padding: 5px 20px;
+    border-radius: 4px;
+    letter-spacing: 0.2em;
+}
+
+/* RESPONSIVE */
+@media (max-width:600px) {
+    .hero-title { font-size: 30pt; }
+    .title-main { font-size: 22pt; }
+    .title-sub  { font-size: 18pt; }
+    .content-body, .dialog-content { font-size: 15pt; }
+    .saying-word-grid, .ai-img-grid, .keyword-section { grid-template-columns: repeat(2,1fr); }
+    .spotlight-card { flex-direction: column; }
+    .hero-hosts { flex-direction: column; }
+}
+    </style>
+</head>
+<body>
+<div class="ts-wrap">
+
+<!-- ① HERO BANNER -->
+<div class="hero-banner">
+    <div class="hero-ticker">
+        <span class="hero-ticker-label">🔴 LIVE</span>
+        ChatGPT Legal · AI for Seniors · Claude AI · Gemini · Perplexity · Legal AI 2025 · AI Law Help · ChatGPT for Legal Questions · AI Rights &amp; Law · Free Legal AI Tools
+    </div>
+    <div class="hero-content" contenteditable="true">
+        <div class="hero-series-label">🤖 AI DECODED FOR SENIORS — SPECIAL EDITION</div>
+        <div class="hero-ep-badge">EPISODE 48</div>
+        <div class="hero-title">
+            <span class="red">AI AS YOUR</span><br>
+            <span class="gold">LEGAL SIDEKICK</span>
+        </div>
+        <div class="hero-subtitle">Inheritance disputes, tenant rights, consumer scams — Jake shows Grandpa Bob how to use ChatGPT &amp; Claude to understand the law before calling a lawyer 💼⚖️</div>
+        <div class="hero-tags">
+            <span class="hero-tag">#ChatGPT</span>
+            <span class="hero-tag">#AILegalHelp</span>
+            <span class="hero-tag">#AIForSeniors</span>
+            <span class="hero-tag">#LegalAI2025</span>
+            <span class="hero-tag">#ChatGPTLaw</span>
+            <span class="hero-tag">#ClaudeAI</span>
+            <span class="hero-tag">#AITools2025</span>
+            <span class="hero-tag">#LearnAI</span>
+        </div>
+        <div class="hero-hosts">
+            <div class="host-badge">👦 Jake — Your AI Guide</div>
+            <div class="host-badge">👴 Grandpa Bob — Just Like You!</div>
+        </div>
+    </div>
+</div>
+<div class="gap-sm"></div>
+
+<div class="trending-banner">
+    <span class="tb-label">🔥 TRENDING NOW</span>
+    ChatGPT · Claude · Gemini · Copilot · Grok · Legal AI · AI Law Help · Perplexity AI · AI for Seniors · ChatGPT Legal Questions
+</div>
+<div class="gap"></div>
+
+<!-- ② TODAY'S AMERICAN SAYING -->
+<div class="section-accent">
+    <div class="acc-icon">💬</div>
+    <div class="acc-label">Today's American Saying
+        <small>Ancient wisdom that connects perfectly to AI — every episode!</small>
+    </div>
+</div>
+
+<div class="saying-box">
+    <div class="saying-main" contenteditable="true">"Keep a cool head and a clear conscience."</div>
+    <div class="saying-meaning" contenteditable="true">No matter how frustrating or upsetting a situation gets — the person who stays calm and thinks clearly always comes out ahead.</div>
+    <div class="gap-sm"></div>
+    <div class="content-body" contenteditable="true"
+        style="text-align:left;color:#b0c4e8;font-size:16pt;">
+        🤖 When a legal problem hits, emotions run hot. But AI tools like <b style="color:#ffd54f;">ChatGPT</b> and <b style="color:#ffd54f;">Claude</b> never lose their cool — they give you calm, clear information every single time. That's exactly what "keep a cool head" looks like in the age of AI!
+    </div>
+    <div class="gap-sm"></div>
+    <span class="saying-tag">⚖️ AI Connection</span>
+</div>
+
+<!-- ③ INTRO SECTION -->
+<div class="section-accent">
+    <div class="acc-icon">🚀</div>
+    <div class="acc-label">AI As Your Legal Sidekick
+        <small>This week's big topic — and it could save you thousands of dollars!</small>
+    </div>
+</div>
+
+<div class="content-body" contenteditable="true">
+    Hey, welcome back to <b>AI Decoded for Seniors</b> — America's favorite AI classroom for the generation that built this country! Your guide is <span class="speaker">Jake</span>, and today Grandpa Bob brought a big one to the table. 🎉
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    Whether you've heard of <span class="term-name">ChatGPT</span>, <span class="term-name">Google Gemini</span>, or <span class="term-name">Claude by Anthropic</span> — or maybe those names still sound like science fiction — <b>this series is built for YOU.</b> No tech degree required. We go step by step, together, every time.
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    Today's episode hits close to home for millions of American seniors. <b>Inheritance disputes. Landlord problems. Getting scammed online and not knowing your rights.</b> Going to a lawyer can cost $300–$500 per hour — before you've even said "hello." Legal jargon feels like a foreign language. And just Googling the question often makes things <em>more</em> confusing, not less.<br><br>
+    Here's the good news: <span class="emphasis">AI is your free, 24/7 legal study buddy.</span> It won't replace your attorney — but it will help you walk into that office informed, prepared, and confident. Let's dive in!
+</div>
+<div class="gap-sm"></div>
+<div class="safety-box" contenteditable="true">
+    <span style="font-size:16pt;font-weight:900;color:#bf360c;">⚠️ Important Disclaimer:</span> AI tools provide <b>legal information</b>, NOT <b>legal advice</b>. They cannot replace a licensed attorney. For major legal decisions, always consult a qualified lawyer. Do NOT enter your full name, Social Security number, or account numbers into any AI chat.
+</div>
+<div class="gap"></div>
+
+<!-- ★ Intro Image 1 -->
+<div class="img-area" id="area-1"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-1').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-1">
+        <span class="upload-icon">🖼️</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:13pt;color:#7a6a5a;">[Intro image — ChatGPT / Claude legal chat interface example]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-1').click()">🔄 Replace</button>
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-1').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-1').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-1" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>';}document.getElementById('area-1').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT / Claude AI interface — reference image for legal chat example</em></div>
+
+<div class="content-body" contenteditable="true">Grandpa Bob is sitting at the kitchen table, staring at a thick manila envelope. His brow is furrowed. <b>"My brother passed without a will. I have no idea how this is supposed to work — do I just call a lawyer?"</b> Jake pulls up a chair and opens his laptop. <b>"Grandpa, let's ask ChatGPT first. We'll get the basics down, and then you'll know exactly what questions to ask a real attorney. It'll save you time AND money."</b></div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 1 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 PANEL 1 — "Grandpa Bob Gets a Legal Problem"</div>
+  <div class="comic-single" id="panel-comic-1"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-1').click()">
+    <div id="pd-comic-1" class="comic-placeholder">
+      <div style="font-size:56px">🎬</div>
+      <div style="font-size:16pt;font-weight:900;color:#1c1c2e;text-align:center;">Grandpa Bob Gets a Legal Problem</div>
+      <div style="font-size:13pt;color:#7a6a5a;text-align:center;">Grandpa holding a legal envelope, Jake bringing in the laptop — 4-panel visual story</div>
+      <div style="margin-top:8px;background:#b71c1c;color:#fff;font-size:14pt;font-weight:900;padding:10px 28px;border-radius:6px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:#ffd54f;font-size:16pt;font-weight:800;">🎬 Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-1').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-1','comic-1')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-1" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-1','pd-comic-1','comic-1')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ④ JAKE & BOB CONVERSATION -->
+<div class="section-accent">
+    <div class="acc-icon">🗣️</div>
+    <div class="acc-label">Jake &amp; Grandpa Bob Talk Law &amp; AI
+        <small>A real kitchen-table conversation — no law degree needed!</small>
+    </div>
+</div>
+
+<div class="dialog-box" contenteditable="true">
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "Jake, your great-uncle passed without leaving a will. Nobody knows how his assets are supposed to be split. Do I really need to spend thousands on a lawyer just to understand the basics?"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Jake:</span>
+        <span class="dialog-content"> "Grandpa, let's ask ChatGPT first! Type something like: <b>'What happens to someone's estate when they die without a will in [your state]?'</b> You'll get the core framework in plain English — right now, for free."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "But what if the AI gets it wrong? I don't want bad legal advice messing everything up even more."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Jake:</span>
+        <span class="dialog-content"> "That's exactly the right instinct, Grandpa! AI can absolutely make mistakes — that's why you never skip the real lawyer for final decisions. But using AI first means you go into that $400/hour consultation <em>already knowing the vocabulary.</em> You ask smarter questions. You don't waste time. Think of it as doing your homework before a big exam. 📚"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "Oh — like studying before the test! So I learn the basics from AI, then the lawyer handles the hard stuff. That I can definitely do!"</span>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑤ AI CRASH COURSE TIPS -->
+<div class="title-minor" contenteditable="true">⚡ Using AI for Legal Questions — The 3-Step System</div>
+<div class="gap-sm"></div>
+
+<div class="did-you-know" contenteditable="true">
+    <div class="dyk-label">💡 Did You Know?</div>
+    <div class="dyk-body">The average American attorney charges <b>$150–$500 per hour</b>. Getting your legal basics from AI first means you can cut consultation time dramatically — and save real money. Over <b>40% of Americans</b> now say they've used AI to research legal or medical questions!</div>
+</div>
+
+<div class="tip-box" contenteditable="true">
+    <div class="content-body">
+        <span class="tip-number-badge">1</span>
+        <b>STEP 1 — Describe your situation specifically, then ask for the legal concept</b><br>
+        <span style="padding-left:38px;display:block;">Try prompts like: <b>"My father passed away without a will. There are 3 children and a surviving spouse in [State]. How does intestate succession work?"</b> or <b>"My landlord hasn't returned my security deposit after 45 days. What are my rights in [State]?"</b> The more specific you are, the more useful the answer. ⚠️ Never type your full name, SSN, address, or account numbers!</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="tip-number-badge">2</span>
+        <b>STEP 2 — Ask the AI to explain confusing legal terms in plain English</b><br>
+        <span style="padding-left:38px;display:block;">Ask things like: <b>"What does 'intestate succession' mean?"</b>, <b>"What's the difference between a will and a trust?"</b>, or <b>"What is a demand letter and how do I write one?"</b> AI will translate legal jargon into everyday language. This prep work makes your actual lawyer consultation far more productive. AI is your personal legal tutor — available 24 hours a day, 7 days a week! 📖</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="tip-number-badge">3</span>
+        <b>STEP 3 — Ask AI where to find FREE legal help near you</b><br>
+        <span style="padding-left:38px;display:block;">Ask <b>"What free legal aid resources exist in [your city or state]?"</b> or <b>"How do I file a complaint with my state's consumer protection office?"</b> The AI will point you to free resources like <b>Legal Aid societies</b>, your state's <b>Bar Association Referral Service</b>, <b>AARP's Legal Counsel for the Elderly</b>, and the <b>FTC Consumer Protection Bureau (1-877-FTC-HELP)</b>. Help is out there — and AI knows where to find it! 📞</span>
+    </div>
+</div>
+
+<!-- ★ Spotlight Card -->
+<div class="spotlight-card" contenteditable="true">
+    <div class="spotlight-icon">⚖️</div>
+    <div class="spotlight-content">
+        <div class="spotlight-title">🔦 Best AI Tools for Legal Research</div>
+        <div class="spotlight-body">
+            <b style="color:#ffd54f;">ChatGPT · Claude · Gemini · Perplexity · Microsoft Copilot</b><br>
+            All of these can help you research legal questions in plain English. <b style="color:#ffd54f;">Perplexity AI</b> is especially strong because it cites its sources — great for verifying legal information. This episode's focus: using AI as your <b style="color:#ffd54f;">legal prep tool</b> before meeting a real attorney.
+        </div>
+    </div>
+</div>
+
+<!-- ★ Concept Image 2 -->
+<div class="img-area" id="area-2"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-2').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-2">
+        <span class="upload-icon">🖼️</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:13pt;color:#7a6a5a;">[Concept image — Legal Aid / Consumer Protection / Free legal resources]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-2').click()">🔄 Replace</button>
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-2').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-2').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-2" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>';}document.getElementById('area-2').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Legal Aid Society / FTC Consumer Protection official reference images</em></div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 2 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 PANEL 2 — "Grandpa Bob Asks AI: 'Send My Brother to Jail!'"</div>
+  <div class="comic-single" id="panel-comic-2"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-2').click()">
+    <div id="pd-comic-2" class="comic-placeholder">
+      <div style="font-size:56px">🎬</div>
+      <div style="font-size:16pt;font-weight:900;color:#1c1c2e;text-align:center;">Grandpa Bob Asks AI: "Send My Brother to Jail!"</div>
+      <div style="font-size:13pt;color:#7a6a5a;text-align:center;">Grandpa demanding justice, AI calmly explaining civil law, Jake laughing — 4-panel visual story</div>
+      <div style="margin-top:8px;background:#b71c1c;color:#fff;font-size:14pt;font-weight:900;padding:10px 28px;border-radius:6px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:#ffd54f;font-size:16pt;font-weight:800;">🎬 Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-2').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-2','comic-2')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-2" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-2','pd-comic-2','comic-2')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑥ AI IN YOUR DAILY LIFE -->
+<div class="section-accent">
+    <div class="acc-icon">🌟</div>
+    <div class="acc-label" contenteditable="true">4 Real Legal Situations AI Can Help You With
+        <small>Situations that millions of American seniors actually face</small>
+    </div>
+</div>
+<div class="content-body" contenteditable="true"><span class="speaker">Jake:</span> "Grandpa, I'm going to walk you through the four most common legal headaches that seniors deal with. AI makes all of these so much less scary — let's break them down!"</div>
+<div class="gap-sm"></div>
+
+<div class="ai-box-single">
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <div class="ai-item-label">🏠 TENANT RIGHTS</div>
+            <b>Landlord Problems — Security Deposits &amp; Lease Disputes</b><br>
+            If your landlord refuses to return your security deposit, AI can explain your state's <span class="law-term">security deposit law</span>, typical deadlines for return, and how to write a <span class="law-term">demand letter</span>. Ask ChatGPT: <b>"My landlord in [State] hasn't returned my deposit after 60 days. What steps can I take?"</b> You'll also learn key phrases like <span class="law-term">constructive eviction</span>, <span class="law-term">habitability standards</span>, and your right to <span class="law-term">withhold rent</span> in certain situations. 🏠
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <div class="ai-item-label">📜 INHERITANCE &amp; WILLS</div>
+            <b>Estate Disputes — What Happens Without a Will</b><br>
+            When a loved one passes without a will (<span class="law-term">intestate</span>), state law decides who gets what. AI can explain the typical order: spouse first, then children, then other relatives. Ask: <b>"What's the difference between probate and a living trust?"</b> or <b>"What does 'executor of an estate' mean?"</b> Understanding terms like <span class="law-term">probate</span>, <span class="law-term">beneficiary</span>, and <span class="law-term">power of attorney</span> before consulting an estate attorney will save you serious time and money. 📜
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <div class="ai-item-label">🛒 CONSUMER PROTECTION</div>
+            <b>Scams, Refunds &amp; Online Fraud</b><br>
+            Got a defective product and the store won't give a refund? Fell victim to an online scam? Ask AI: <b>"How do I file a complaint with the FTC about an online scam?"</b> or <b>"What is a chargeback and how do I request one from my credit card company?"</b> AI can also walk you through reporting <span class="law-term">Medicare fraud</span>, <span class="law-term">Social Security scams</span>, and <span class="law-term">romance scams</span> — all increasingly common among seniors. Key number: <b>FTC: 1-877-FTC-HELP (382-4357)</b>. 🛒
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <div class="ai-item-label">👨‍👩‍👧‍👦 FAMILY &amp; ELDER LAW</div>
+            <b>Guardianship, Medicare &amp; Senior-Specific Rights</b><br>
+            Wondering about setting up a <span class="law-term">healthcare proxy</span> or <span class="law-term">living will</span>? Concerned about a family member's <span class="law-term">conservatorship</span> needs due to memory issues? AI can explain these concepts clearly. Ask: <b>"What is the difference between a power of attorney and a guardianship?"</b> or <b>"How do I set up a living will before I lose capacity?"</b> Understanding your options in advance is one of the most powerful gifts you can give your family. 👨‍👩‍👧‍👦
+        </div>
+    </div>
+</div>
+
+<!-- ★ AI Item Image Grid -->
+<div class="ai-img-grid">
+    <div class="ai-img-area" id="ai-area-1" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-1').click()}">
+        <div class="upload-label" id="ai-img-display-1"><span class="upload-icon">🏠</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-1').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-1').innerHTML='<span class=\'upload-icon\'>🏠</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:8px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:8px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-2" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-2').click()}">
+        <div class="upload-label" id="ai-img-display-2"><span class="upload-icon">📜</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-2').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-2').innerHTML='<span class=\'upload-icon\'>📜</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:8px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:8px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-3" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-3').click()}">
+        <div class="upload-label" id="ai-img-display-3"><span class="upload-icon">🛒</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-3').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-3').innerHTML='<span class=\'upload-icon\'>🛒</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:8px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:8px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-4" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-4').click()}">
+        <div class="upload-label" id="ai-img-display-4"><span class="upload-icon">👨‍👩‍👧‍👦</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-4').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-4').innerHTML='<span class=\'upload-icon\'>👨‍👩‍👧‍👦</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-4');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:8px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:8px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑦ AI LAUGH BREAK -->
+<div class="section-accent">
+    <div class="acc-icon">😂</div>
+    <div class="acc-label">AI Laugh Break!
+        <small>Because learning should always come with a smile 🎉</small>
+    </div>
+</div>
+
+<div class="humor-box" contenteditable="true">
+    <div class="title-minor" style="margin-top:10px;">🎭 Grandpa Bob's First AI Legal Consultation!</div>
+    <div class="gap-sm"></div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "ChatGPT, my brother took all of Dad's money and won't share a dime. Can you help me have him arrested? Like, immediately?"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">ChatGPT:</span>
+        <span class="dialog-content"> "Inheritance disputes are typically civil matters, not criminal ones. Rather than an arrest, you'd likely want to pursue a probate court filing for estate distribution. Would you like me to walk you through the general steps?"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "No jail time? Hmph. Fine. But I still want JUSTICE. Tell me about this... probate thing."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">ChatGPT:</span>
+        <span class="dialog-content"> "Of course! Probate is the legal process where a court oversees the distribution of a deceased person's assets. If there's no will, the court follows your state's intestacy laws. You'll need to identify all heirs, inventory the assets, and typically file a petition at your county courthouse. Your local Legal Aid society may also help for free."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "(nodding slowly) Well I'll be — this AI is calmer than my lawyer AND cheaper. Jake, this thing's got a 'cool head and a clear conscience' if I ever saw one! 😂"</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body" style="text-align:center;font-style:italic;color:#bf360c;">When emotions run hot, AI stays stone-cold professional ⚖️ — and somehow, Grandpa Bob got a free law school crash course! 😄</div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑧ AI TRIVIA CHALLENGE -->
+<div class="section-accent">
+    <div class="acc-icon">🧠</div>
+    <div class="acc-label">AI Trivia Challenge!
+        <small>Test your new legal AI knowledge — answers below 👇</small>
+    </div>
+</div>
+
+<div class="quiz-box" contenteditable="true">
+    <div class="content-body" style="font-size:19pt;font-weight:900;color:#b71c1c;margin-bottom:10px;">🏆 Can You Answer These?</div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q1.</span> What should you NEVER type into an AI chat when asking about a legal matter?<br>
+        <span style="color:#7a6a5a;font-size:15pt;">💡 Hint: It's the same information identity thieves are always after...</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q2.</span> What is the toll-free number for the FTC (Federal Trade Commission) to report consumer fraud?<br>
+        <span style="color:#7a6a5a;font-size:15pt;">💡 Hint: It spells out FTC-HELP on a phone keypad!</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q3.</span> What does "intestate" mean in legal terms?<br>
+        <span style="color:#7a6a5a;font-size:15pt;">💡 Hint: Think of what someone didn't leave behind when they passed away...</span>
+    </div>
+</div>
+
+<div class="content-body hidden-title" style="text-align:center;font-size:15pt;color:#888;margin:6px 0;"
+    onclick="this.classList.toggle('revealed');document.getElementById('answer-reveal').classList.toggle('revealed')">
+    👆 Tap / hover here to reveal answers!
+</div>
+<div class="answer-box" id="answer-reveal"
+    onclick="this.classList.toggle('revealed');document.querySelector('.hidden-title').classList.toggle('revealed')"
+    contenteditable="true">
+    <div class="content-body">
+        <b style="color:#1b5e20;font-size:19pt;">✅ Answers</b><br>
+        <b>A1:</b> Never type your full name, Social Security number (SSN), home address, bank account numbers, or passwords into any AI chatbot.<br>
+        <b>A2:</b> 1-877-FTC-HELP (1-877-382-4357) — free, available Monday–Friday.<br>
+        <b>A3:</b> "Intestate" means dying without a valid will. When someone dies intestate, the state's laws determine how their estate is distributed.
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑨ SAYING DEEP DIVE -->
+<div class="section-accent">
+    <div class="acc-icon">📖</div>
+    <div class="acc-label">Saying Deep Dive
+        <small>Understand every word — and connect it to AI!</small>
+    </div>
+</div>
+
+<div class="saying-study-box">
+    <div class="saying-study-title" contenteditable="true">🔍 Breaking Down Today's Saying</div>
+    <div class="saying-study-full" contenteditable="true">"Keep a cool head and a clear conscience."</div>
+
+    <div class="saying-word-grid">
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">Cool</span>
+            <span class="word-type" contenteditable="true">(adjective)</span>
+            <span class="word-def" contenteditable="true">Calm, not emotional; able to think clearly under pressure</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">Head</span>
+            <span class="word-type" contenteditable="true">(noun / idiom)</span>
+            <span class="word-def" contenteditable="true">Your mind and judgment; the seat of rational thinking</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">Clear</span>
+            <span class="word-type" contenteditable="true">(adjective)</span>
+            <span class="word-def" contenteditable="true">Free from guilt or confusion; transparent and honest</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">Conscience</span>
+            <span class="word-type" contenteditable="true">(noun)</span>
+            <span class="word-def" contenteditable="true">Your inner moral compass — the voice that knows right from wrong</span>
+        </div>
+    </div>
+
+    <div class="saying-story-box" contenteditable="true">
+        <div class="content-body">
+            <b>📌 Word-for-word meaning:</b><div class="br-11pt"></div>
+            "Keep a cool head" = don't let your emotions take over your thinking. "Clear conscience" = act in a way you're not ashamed of, so you feel no guilt. Together, this phrase means: <em>stay calm and act with integrity, no matter what pressure you're under.</em>
+        </div>
+        <div class="gap"></div>
+        <div class="content-body">
+            <b>📌 In plain English:</b><div class="br-11pt"></div>
+            When something stressful happens — a legal dispute, a family conflict, a financial problem — the instinct is to panic or get angry. But the people who handle these situations best are the ones who take a breath, think clearly, and act with honesty. That's what this saying is all about.
+        </div>
+        <div class="gap"></div>
+        <div class="content-body">
+            <b>📌 Real-life analogy:</b><div class="br-11pt"></div>
+            Imagine you're driving and someone cuts you off. You can react with road rage and make the situation dangerous — or you can take a breath, stay in your lane, and arrive safely. The law is the same way: react emotionally and you often make your case worse. Stay calm, gather the facts, and you almost always end up in a better position. That's "cool head, clear conscience" in action!
+        </div>
+    </div>
+
+    <div class="saying-apply-box" contenteditable="true">
+        <div class="content-body" style="font-weight:800;color:#b71c1c;">
+            🤖 Connect It to AI!
+        </div>
+        <div class="gap-sm"></div>
+        <div class="content-body">
+            AI tools like ChatGPT and Claude are the ultimate "cool head" machines. When you're furious at a landlord or overwhelmed by estate paperwork, <em>you</em> might not be in a state to think clearly — but the AI always is. It doesn't get angry, it doesn't panic, and it doesn't take sides. It gives you calm, objective information every single time. Using AI first — before you react, before you argue, before you spend money — is exactly what "keep a cool head and a clear conscience" looks like in 2025.<div class="br-11pt"></div>
+            <b style="color:#b71c1c;">"Keep a cool head and a clear conscience"</b> — this saying was practically written for AI! 🌟
+        </div>
+    </div>
+
+    <div class="gap-sm"></div>
+    <div class="content-body" contenteditable="true"
+        style="background:#e8f0ff;padding:14px 18px;border-radius:10px;border-left:5px solid #1a237e;">
+        🧠 <b>Memory Tip!</b> Think of a courtroom judge — calm, never emotional, always fair. That's what <b>"cool head, clear conscience"</b> looks like in practice. Example sentence: <em>"Instead of calling my brother in anger, I kept a cool head, asked ChatGPT about intestate law first, and had a much more productive conversation."</em>
+    </div>
+</div>
+
+<!-- ★ Image 3 -->
+<div class="img-area" id="area-3"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-3').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-3">
+        <span class="upload-icon">🖼️</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:13pt;color:#7a6a5a;">[Saying / wrap-up image — courtroom, scales of justice, or AI imagery]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-3').click()">🔄 Replace</button>
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-3').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-3').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-3" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>';}document.getElementById('area-3').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Wikimedia Commons / Pexels — scales of justice / courtroom reference image</em></div>
+
+<div class="content-body" contenteditable="true" style="margin-top:10px;">
+    <span class="speaker">Jake:</span> "Grandpa, the biggest mistake people make in legal disputes is letting emotions drive the bus. Use AI to get calm, get informed, and THEN meet with a lawyer. You'll be amazed at how much more control you feel. 😊"
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    <span class="speaker">Grandpa Bob:</span> "Cool head, clear conscience... yep, that's the move. No more firing off angry phone calls before I understand what I'm even dealing with. Jake, this AI thing just saved me from making some really dumb decisions. I owe you one!"
+</div>
+<div class="gap"></div>
+
+<!-- ⑩ SEARCH KEYWORDS -->
+<div class="footer-section">
+    <div class="footer-title" contenteditable="true">🔍 Top AI &amp; Legal Search Keywords — Try These!</div>
+    <div class="content-body" style="font-size:14pt;color:#7a6a5a;margin-bottom:10px;" contenteditable="true">
+        These are the hottest AI and legal terms Americans are Googling RIGHT NOW. Click any keyword to search!</div>
+    <div class="keyword-section">
+        <a href="https://www.google.com/search?q=ChatGPT+legal+questions" target="_blank" class="keyword-pill">ChatGPT Legal Questions</a>
+        <a href="https://www.google.com/search?q=AI+for+legal+help+seniors" target="_blank" class="keyword-pill">AI Legal Help for Seniors</a>
+        <a href="https://www.google.com/search?q=free+legal+aid+near+me" target="_blank" class="keyword-pill">Free Legal Aid Near Me</a>
+        <a href="https://www.google.com/search?q=FTC+consumer+protection+report" target="_blank" class="keyword-pill">FTC Consumer Protection</a>
+        <a href="https://www.google.com/search?q=what+happens+when+someone+dies+without+a+will" target="_blank" class="keyword-pill">Dying Without a Will (Intestate)</a>
+        <a href="https://www.google.com/search?q=security+deposit+tenant+rights" target="_blank" class="keyword-pill">Security Deposit Rights</a>
+        <a href="https://www.google.com/search?q=AARP+legal+counsel+for+elderly" target="_blank" class="keyword-pill">AARP Free Legal Help</a>
+        <a href="https://www.google.com/search?q=power+of+attorney+vs+guardianship" target="_blank" class="keyword-pill">Power of Attorney vs Guardianship</a>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑪ AMERICAN ENGLISH WORD POWER -->
+<div class="section-accent">
+    <div class="acc-icon">📝</div>
+    <div class="acc-label">American English Word Power
+        <small>Essential legal + AI vocabulary every senior should know!</small>
+    </div>
+</div>
+
+<div class="wordpower-box" contenteditable="true">
+    <div class="content-body" style="font-size:18pt;font-weight:900;color:#ffd54f;margin-bottom:12px;">🇺🇸 Legal &amp; AI Vocabulary — Top 3 This Episode</div>
+    <div class="gap-sm"></div>
+    <div class="content-body" style="color:#e8ecf5;">
+        <b class="wp-item-title">1. "Intestate" (in-TES-tate) — adjective</b><br>
+        <span style="color:#b0c4e8;">When a person dies <em>intestate</em>, they died without leaving a valid will. In this case, state law — not the deceased person's wishes — decides how their estate is divided. Example: <em>"Because Grandma died intestate, the probate court had to follow state succession law."</em></span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body" style="color:#e8ecf5;">
+        <b class="wp-item-title">2. "Fiduciary" (fih-DOO-shee-air-ee) — noun / adjective</b><br>
+        <span style="color:#b0c4e8;">A fiduciary is a person or organization that is legally obligated to act in YOUR best interests — not their own. Attorneys, financial advisors, and estate executors are often fiduciaries. Example: <em>"My financial advisor is a fiduciary, which means she's legally required to put my interests first, not her commission."</em></span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body" style="color:#e8ecf5;">
+        <b class="wp-item-title">3. "Hallucinate" — what AI sometimes does</b><br>
+        <span style="color:#b0c4e8;">In AI terminology, "hallucinate" means the AI confidently gives you an answer that is factually incorrect or made up. This is a critical word for using AI safely for legal research. Example: <em>"ChatGPT hallucinated a court case that doesn't actually exist — always verify AI legal information with a licensed attorney or official government source."</em></span>
+    </div>
+</div>
+
+<!-- Merriam-Webster resource -->
+<div class="footer-section">
+    <div class="footer-title" contenteditable="true">📚 Free American English Dictionary</div>
+    <div style="background:#fff;border:3px solid #1c1c2e;border-left:8px solid #b71c1c;border-radius:0 12px 12px 0;padding:16px 20px;font-size:15pt;line-height:1.6;text-align:center;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:20pt;color:#1c1c2e;letter-spacing:0.08em;">Merriam-Webster Online Dictionary</span>
+        <div class="br-11pt"></div>
+        👉 <a href="https://www.merriam-webster.com/" target="_blank" style="color:#b71c1c;font-weight:bold;">https://www.merriam-webster.com/</a>
+        <div style="font-size:13pt;color:#7a6a5a;margin-top:6px;">America's most trusted dictionary — free, fast, always up to date. Look up any legal term you hear today!</div>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 3 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 PANEL 3 — "Grandpa Bob's Cool Head Legal Victory!"</div>
+  <div class="comic-single" id="panel-comic-3"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-3').click()">
+    <div id="pd-comic-3" class="comic-placeholder">
+      <div style="font-size:56px">🎬</div>
+      <div style="font-size:16pt;font-weight:900;color:#1c1c2e;text-align:center;">Grandpa Bob's Cool Head Legal Victory!</div>
+      <div style="font-size:13pt;color:#7a6a5a;text-align:center;">Grandpa, calm and informed, walks into the attorney's office — 4-panel resolution story</div>
+      <div style="margin-top:8px;background:#b71c1c;color:#fff;font-size:14pt;font-weight:900;padding:10px 28px;border-radius:6px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:#ffd54f;font-size:16pt;font-weight:800;">🎬 Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-3').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-3','comic-3')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-3" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-3','pd-comic-3','comic-3')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Grandpa's Corner -->
+<div class="grandpa-box" contenteditable="true" style="margin-top:12px;">
+    <b style="font-size:17pt;">👴 Grandpa Bob's Corner:</b><br>
+    <span style="font-size:17pt;font-style:italic;">"Seventy-two years old and I just learned words like 'intestate' and 'fiduciary' from a computer. My own lawyer uses those words and I never once asked what they meant! From now on, before any legal meeting, I'm doing my homework with ChatGPT first. It's like having a law student in the family — and this one never charges by the hour!"</span>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Dad's Safety Note -->
+<div class="dad-note" contenteditable="true">
+    <b style="font-size:17pt;">💼 Jake's Dad's Safety Note:</b><br>
+    <span style="font-size:17pt;">"Dad (and everyone reading this) — AI is a fantastic first step, but never the final step on legal matters. AI can and does make mistakes on legal specifics, especially state-by-state laws. Start with ChatGPT or Claude to learn the vocabulary and framework, then connect with <b>AARP's Legal Counsel for the Elderly (1-888-687-2277)</b> or your local <b>Legal Aid Society</b> for actual advice. And whatever you do — never type your SSN or financial account details into any AI chat. Keep a cool head, and you'll be just fine. 💙"</span>
+</div>
+<div class="gap"></div>
+
+<!-- ⑭ TODAY'S RECAP -->
+<div class="summary-box">
+    <div class="summary-title" contenteditable="true">📚 TODAY'S RECAP — LET'S REVIEW!</div>
+    <div class="br-11pt"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>① The 3-Step AI Legal System</b><br>
+        Step 1: Describe your situation to AI → learn the legal framework. Step 2: Ask AI to define confusing terms → build your legal vocabulary. Step 3: Use AI to find FREE legal resources near you → then meet a real attorney informed and ready.
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>② Free Legal Help Resources for American Seniors</b><br>
+        AARP Legal Counsel: <b>1-888-687-2277</b> · FTC Consumer Help: <b>1-877-382-4357</b> · Legal Aid Society (search your city) · State Bar Association Referral Service · Medicare Rights Center: <b>1-800-333-4114</b> — all FREE or very low cost!
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>③ The 4 Golden Rules of AI Legal Research</b><br>
+        ① Never enter your SSN, full name, address, or bank details into AI ② AI answers are <em>information</em>, not legal advice — no legal effect ③ Always verify with a licensed attorney for final decisions ④ Keep a cool head — let AI be your calm, rational research partner ⚖️
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true" style="border-left-color:#ffd54f;">
+        <b>④ Today's American Saying</b><br>
+        <b style="color:#ffd54f;">"Keep a cool head and a clear conscience."</b> — When legal trouble strikes, panic and anger are your enemies. AI gives you the calm, clear information you need to think straight, act right, and come out ahead. That's wisdom as old as America itself — and as new as ChatGPT! ⚖️✨
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="content-body" contenteditable="true"
+        style="text-align:center;color:#ffd54f;font-family:'Bebas Neue',sans-serif;font-size:22pt;letter-spacing:0.06em;">
+        🎉 GREAT WORK TODAY! SEE YOU NEXT EPISODE! 🤖⚖️
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Closing message -->
+<div class="content-body" contenteditable="true" style="text-align:center;">
+    📝 This post is made especially for seniors exploring AI for the very first time.<br>
+    Got questions? Drop a comment below — Jake reads every single one! 💬
+</div>
+<div class="gap-sm"></div>
+
+<!-- ★ Subscribe CTA -->
+<div style="background:linear-gradient(160deg,#1c1c2e,#2d1b1b);border:3px solid #b71c1c;border-radius:12px;padding:22px 26px;text-align:center;margin:14px 0;box-shadow:6px 6px 0 #b71c1c;" contenteditable="true">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:26pt;color:#ffd54f;letter-spacing:0.06em;line-height:1.2;">
+        🔔 NEVER MISS AN EPISODE!
+    </div>
+    <div style="font-size:15pt;color:#e8ecf5;margin-top:8px;line-height:1.7;">
+        Subscribe · Bookmark · Share with a friend who deserves to learn AI!<br>
+        <b style="color:#ffd54f;">New episode every week — always free, always senior-friendly, always powerful.</b>
+    </div>
+    <div style="margin-top:14px;font-size:12pt;color:#ef9a9a;font-weight:700;letter-spacing:0.05em;">
+        #AIDecodedForSeniors &nbsp;|&nbsp; #ChatGPT &nbsp;|&nbsp; #AIForSeniors &nbsp;|&nbsp; #LegalAI &nbsp;|&nbsp; #LearnAI &nbsp;|&nbsp; #AILegalHelp
+    </div>
+</div>
+<div class="gap-sm"></div>
+
+<!-- ⑮ FOOTER -->
+<div class="content-body" contenteditable="true"
+    style="text-align:center;font-size:16pt;color:#4a3a2a;font-weight:500;line-height:1.6;">
+    This post is part of <span class="emphasis">AI Decoded for Seniors</span> — an educational series dedicated to making <span class="emphasis">Artificial Intelligence</span> accessible, understandable, and useful for every American.
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true"
+    style="text-align:center;font-size:14pt;color:#7a6a5a;font-weight:600;line-height:1.5;">
+    © 2026 AI Decoded for Seniors | All rights reserved
+</div>
+
+</div><!-- /ts-wrap -->
+
+<!-- JS — IndexedDB persistent storage + panel upload/delete -->
+<script>
+var SADB_NAME='ai-decoded-ep-media', SADB_VER=1, SADB_STORE='media';
+function sadbOpen(cb){var req=indexedDB.open(SADB_NAME,SADB_VER);req.onupgradeneeded=function(e){e.target.result.createObjectStore(SADB_STORE)};req.onsuccess=function(e){cb(e.target.result)};req.onerror=function(){cb(null)}}
+function sadbSave(key,data){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).put(data,key);})}
+function sadbLoad(key,cb){sadbOpen(function(db){if(!db){cb(null);return}var req=db.transaction(SADB_STORE,'readonly').objectStore(SADB_STORE).get(key);req.onsuccess=function(e){cb(e.target.result||null)};req.onerror=function(){cb(null)};})}
+function sadbDelete(key){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).delete(key);})}
+window.addEventListener('DOMContentLoaded',function(){
+  ['comic-1','comic-2','comic-3'].forEach(function(id){
+    sadbLoad(id,function(data){
+      if(!data)return;
+      var el=document.getElementById('pd-'+id);if(!el)return;
+      el.innerHTML=data.startsWith('data:video')
+        ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+        :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    });
+  });
+});
+function comicUpload(inputId,panelId,dbKey){
+  var inp=document.getElementById(inputId);if(!inp)return;
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var data=ev.target.result;
+    var el=document.getElementById(panelId);if(!el)return;
+    el.innerHTML=f.type.startsWith('video/')
+      ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+      :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    sadbSave(dbKey,data);
+  };
+  r.readAsDataURL(f);
+}
+function comicDelete(panelId,dbKey){
+  var el=document.getElementById(panelId);if(!el)return;
+  el.innerHTML='<div class="comic-placeholder"><div style="font-size:56px">&#127916;</div><div style="font-size:14pt;color:#7a6a5a;text-align:center;">Click to Upload Image or Video</div></div>';
+  sadbDelete(dbKey);
+}
+</script>
+
+<!-- SAVE BUTTON BAR -->
+<div class="save-bar">
+<button onclick="(function(){
+  var epNum='48';
+  var clone=document.body.cloneNode(true);
+  var sb=clone.querySelector('.save-bar');if(sb)sb.parentNode.removeChild(sb);
+  clone.querySelectorAll('input[type=file]').forEach(function(i){i.value='';});
+  clone.querySelectorAll('script').forEach(function(s){s.parentNode.removeChild(s);});
+  var html='<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n'
+    +'<meta charset=\'UTF-8\'>\n'
+    +'<meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0\'>\n'
+    +'<link rel=\'preconnect\' href=\'https://fonts.googleapis.com\'>\n'
+    +'<link rel=\'preconnect\' href=\'https://fonts.gstatic.com\' crossorigin>\n'
+    +'<link href=\'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,700;0,900;1,400&family=Playfair+Display:wght@700;900&display=swap\' rel=\'stylesheet\'>\n'
+    +document.querySelector('style').outerHTML+'\n'
+    +'</head>\n<body>\n'
+    +clone.innerHTML
+    +'\n</body>\n</html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ai_decoded_ep48_eng.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){alert('✅ EP.48 saved!\n\nPaste the saved <body> content into your blog\'s HTML tab.\n(Scripts removed — blog-safe output)');},300);
+})()">💾 Save HTML (Images Included)</button>
+</div>
+
+</body>
+</html>

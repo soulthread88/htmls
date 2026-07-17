@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤호와 함께하는 AI 이야기 - Episode 10</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Noto Sans KR', Arial, sans-serif; 
+            line-height: 1.35; 
+            color: #000; 
+            background: #FFF9E6; 
+            font-size: 28px;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .left-margin { width: 12.5%; background: #FFF9E6; }
+        .content-wrapper { width: 60%; background: #FFF9E6; padding: 30px 0; }
+        .sidebar { width: 15%; background: #f5f5f5; padding: 30px 15px; position: sticky; top: 0; height: fit-content; }
+        .right-margin { width: 12.5%; background: #FFF9E6; }
+        
+        /* WYSIWYG 에디터 */
+        .wysiwyg-editor {
+            background: #2C3E50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .editor-title {
+            color: #ECF0F1;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .editor-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .editor-btn {
+            background: #3498DB;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .editor-btn:hover { background: #2980B9; transform: translateY(-2px); }
+        .editor-btn.active { background: #E74C3C; }
+        
+        .editor-info {
+            color: #BDC3C7;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        [contenteditable="true"] {
+            outline: 2px dashed transparent;
+            transition: outline 0.3s;
+        }
+        
+        [contenteditable="true"]:hover { outline-color: #3498DB; }
+        [contenteditable="true"]:focus { outline-color: #E74C3C; background: rgba(52, 152, 219, 0.05); }
+        
+        /* 사이드바 */
+        .sidebar-item {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-title {
+            background: #0066CC;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+        }
+        
+        .sidebar-content {
+            padding: 20px 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .ad-space {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            padding-top: 100%;
+            position: relative;
+            border: 2px dashed #ccc;
+        }
+        
+        .ad-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .calendar {
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .calendar-month {
+            font-size: 18px;
+            font-weight: 900;
+            color: #0066CC;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day {
+            padding: 8px 4px;
+            font-size: 13px;
+            text-align: center;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .popular-post {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .popular-post:hover { color: #0066CC; }
+        .popular-post:last-child { border-bottom: none; }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #0066CC;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .keyword-tag:hover { background: #0066CC; color: white; }
+        
+        .search-box { padding: 15px; }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .search-input:focus { outline: none; border-color: #0066CC; }
+        
+        /* 콘텐츠 */
+        .container {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #F8BBD0 0%, #F06292 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 4px solid #E91E63;
+        }
+        
+        .hero-section .episode {
+            font-size: 26px;
+            color: #880E4F;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        
+        .hero-section h1 {
+            font-size: 52px;
+            color: #FFFFFF;
+            font-weight: 900;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section .subtitle {
+            font-size: 32px;
+            color: #FFFFFF;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        h2 {
+            font-size: 40px;
+            margin: 42px 0 20px 0;
+            color: #FF6B35;
+            font-weight: 900;
+            padding-left: 15px;
+            border-left: 8px solid #FF6B35;
+        }
+        
+        h3 {
+            font-size: 34px;
+            margin: 32px 0 16px 0;
+            color: #7B68EE;
+            font-weight: 900;
+        }
+        
+        h4 {
+            font-size: 30px;
+            margin: 24px 0 14px 0;
+            font-weight: 900;
+        }
+        
+        p {
+            font-size: 28px;
+            line-height: 1.8;
+            margin: 16px 0;
+            color: #333;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .intro-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #FF6F00;
+            box-shadow: 0 4px 15px rgba(255, 111, 0, 0.1);
+        }
+        
+        .intro-box h3 { color: #E65100; margin-top: 0; margin-bottom: 20px; }
+        .intro-box p { font-size: 28px; line-height: 1.8; word-wrap: break-word; }
+        
+        .chat-bubble {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 28px;
+            margin: 25px 0;
+            border-radius: 20px;
+            border-left: 6px solid #0066CC;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.1);
+            font-size: 28px;
+            line-height: 1.8;
+        }
+        
+        .chat-bubble.dad {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left-color: #FF9800;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.1);
+        }
+        
+        .chat-bubble.yunho {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            border-left-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 28px;
+            margin: 25px 0;
+            border-radius: 20px;
+            border-left: 6px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);
+        }
+        
+        .step-card h4 { font-size: 30px; color: #2E7D32; margin: 0 0 15px 0; font-weight: 900; }
+        .step-card p { font-size: 26px; line-height: 1.7; margin: 10px 0; word-wrap: break-word; }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);
+        }
+        
+        .tip-box h4 { font-size: 32px; color: #2E7D32; margin: 0 0 18px 0; font-weight: 900; }
+        .tip-box p { font-size: 26px; line-height: 1.8; word-wrap: break-word; }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #D32F2F;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.1);
+        }
+        
+        .warning-box h4 { font-size: 32px; color: #D32F2F; margin: 0 0 18px 0; font-weight: 900; }
+        .warning-box p { font-size: 26px; line-height: 1.8; word-wrap: break-word; }
+        
+        .keyword {
+            background: linear-gradient(135deg, #FFE082 0%, #FFD54F 100%);
+            color: #F57F17;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 900;
+            white-space: normal;
+        }
+        
+        /* 이미지 박스 */
+        .image-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 3px solid #9C27B0;
+        }
+        
+        .image-placeholder {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            border: 2px dashed #999;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-upload-btn {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .image-upload-btn:hover { background: #7B1FA2; transform: scale(1.05); }
+        
+        .image-description {
+            font-size: 24px;
+            color: #212121;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .image-caption-box {
+            background: #1565C0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #0D47A1;
+            margin-top: 15px;
+        }
+        
+        .image-caption {
+            font-size: 24px;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* 노래 박스 */
+        .song-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 4px solid #F57F17;
+        }
+        
+        .song-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #F57F17;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .language-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .lang-tab {
+            background: #FFF;
+            border: 2px solid #FBC02D;
+            color: #F57F17;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .lang-tab:hover { background: #FFFDE7; }
+        .lang-tab.active { background: #F57F17; color: white; border-color: #F57F17; }
+        
+        .lyrics-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #FDD835;
+        }
+        
+        .lyrics-content.active { display: block; }
+        
+        .song-lyrics {
+            font-size: 26px;
+            line-height: 2;
+            color: #212121;
+            white-space: pre-wrap;
+        }
+        
+        /* 오디오 플레이어 */
+        .audio-player-box {
+            background: linear-gradient(135deg, #E1BEE7 0%, #CE93D8 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 3px solid #9C27B0;
+        }
+        
+        .audio-upload-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .audio-upload-btn {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.3s;
+        }
+        
+        .audio-upload-btn:hover { background: #7B1FA2; transform: scale(1.05); }
+        
+        .audio-player {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #9C27B0;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .play-btn:hover { background: #7B1FA2; transform: scale(1.1); }
+        
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 15px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 3px;
+        }
+        
+        .pause-icon {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .pause-bar {
+            width: 5px;
+            height: 20px;
+            background: white;
+        }
+        
+        .progress-container { flex: 1; }
+        
+        .progress-bar {
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #9C27B0;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .time-display {
+            font-size: 16px;
+            color: #424242;
+            font-weight: 700;
+            min-width: 100px;
+            text-align: right;
+        }
+        
+        /* 퀴즈 */
+        .quiz-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 3px solid #FF6B35;
+        }
+        
+        .quiz-question {
+            font-size: 32px;
+            font-weight: 900;
+            color: #BF360C;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-options { margin: 20px 0; }
+        
+        .quiz-option {
+            background: white;
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #FFE0B2;
+            font-size: 26px;
+            color: #212121;
+        }
+        
+        .quiz-option:hover {
+            background: #FFF3E0;
+            border-color: #FF6B35;
+            transform: translateX(5px);
+        }
+        
+        /* 정답 박스 */
+        .answer-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 6px solid #4CAF50;
+        }
+        
+        .answer-box h3 { color: #1B5E20; }
+        .answer-box p { color: #212121; }
+        
+        .reversed-text {
+            display: inline-block;
+            transform: scaleX(-1);
+            font-weight: 900;
+            color: #2E7D32;
+        }
+        
+        /* 문법 검사기 */
+        .grammar-checker-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .grammar-checker-box h2 { color: #4A148C; }
+        .grammar-checker-box p { color: #212121; }
+        
+        .grammar-checker-box a {
+            color: #6A1B9A;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid #9C27B0;
+            transition: all 0.3s;
+        }
+        
+        .grammar-checker-box a:hover {
+            color: #4A148C;
+            border-bottom-color: #4A148C;
+        }
+        
+        /* 댓글 */
+        .comments-section {
+            background: white;
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+        
+        .emphasis { color: #FF1744; font-weight: 900; }
+        .proper-name { color: #FF1744; font-weight: 900; }
+        strong { font-weight: 900; color: inherit; }
+        
+        .next-episode {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 20px;
+            text-align: center;
+            border: 4px solid #9C27B0;
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.2);
+        }
+        
+        .next-episode h2 { border: none; padding: 0; margin: 0 0 20px 0; color: #9C27B0; }
+        .next-episode p { font-size: 30px; line-height: 1.8; margin: 15px 0; color: #4A148C; }
+    </style>
+</head>
+<body>
+    <div class="left-margin"></div>
+    
+    <div class="content-wrapper">
+        <!-- WYSIWYG 에디터 -->
+        <div class="wysiwyg-editor">
+            <div class="editor-title">✏️ WYSIWYG 편집 도구</div>
+            <div class="editor-controls">
+                <button class="editor-btn" onclick="toggleEdit()">✏️ 편집 모드</button>
+                <button class="editor-btn" onclick="changeFontSize('increase')">🔍 글자 크게</button>
+                <button class="editor-btn" onclick="changeFontSize('decrease')">🔎 글자 작게</button>
+                <button class="editor-btn" onclick="changeColor()">🎨 색상 변경</button>
+                <button class="editor-btn" onclick="document.execCommand('bold')">📝 굵게</button>
+                <button class="editor-btn" onclick="document.execCommand('italic')">📐 기울임</button>
+            </div>
+            <div class="editor-info">💡 편집 모드를 활성화하고 원하는 텍스트를 수정하세요!</div>
+        </div>
+        
+        <div class="container">
+            <!-- Hero 섹션 (핑크 박스) -->
+            <div class="hero-section">
+                <div class="episode" contenteditable="true">Episode 10</div>
+                <h1 contenteditable="true">AI가 그림도 그려요? 🎨</h1>
+                <div class="subtitle" contenteditable="true">AI 이미지 생성의 신기한 세계!</div>
+            </div>
+
+            <div class="intro-box">
+                <h3 contenteditable="true">🎬 오늘 배울 내용</h3>
+                <p contenteditable="true">
+                    오늘은 AI로 그림을 그리는 방법을 배워봅니다!<br>
+                    말로만 설명하면 AI가 멋진 그림을 만들어줘요.<br>
+                    상상하는 모든 것을 그림으로 표현할 수 있답니다!
+                </p>
+            </div>
+
+            <!-- 오늘의 동요 -->
+            <h2 contenteditable="true">🎵 오늘의 동요</h2>
+            
+            <div class="song-box">
+                <div class="song-title" contenteditable="true">AI 화가 동요</div>
+                
+                <!-- 언어 탭 -->
+                <div class="language-tabs">
+                    <button class="lang-tab active" onclick="switchLanguage('ko')">🇰🇷 한국어</button>
+                    <button class="lang-tab" onclick="switchLanguage('en')">🇺🇸 English</button>
+                    <button class="lang-tab" onclick="switchLanguage('ja')">🇯🇵 日本語</button>
+                    <button class="lang-tab" onclick="switchLanguage('zh')">🇨🇳 简体中文</button>
+                    <button class="lang-tab" onclick="switchLanguage('es')">🇪🇸 Español</button>
+                    <button class="lang-tab" onclick="switchLanguage('fr')">🇫🇷 Français</button>
+                    <button class="lang-tab" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                </div>
+                
+                <!-- 한국어 가사 -->
+                <div id="lyrics-ko" class="lyrics-content active">
+                    <div class="song-lyrics" contenteditable="true">1절
+말만 하면 그림 그려
+AI 화가 신기해요
+고양이 그려주세요
+우주선도 그려줘요
+
+후렴
+상상하는 모든 것을
+AI가 만들어요
+우리 모두 예술가
+꿈을 그림으로 펼쳐요
+
+2절
+색칠도 척척척
+배경도 쓱싹쓱싹
+내가 원하는 대로
+멋진 작품 완성이야</div>
+                </div>
+                
+                <!-- 영어 가사 -->
+                <div id="lyrics-en" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Verse 1
+Just say words and draw it comes
+AI artist amazing
+Draw a cat please for me
+Spaceship too draw it now
+
+Chorus
+Everything we can imagine
+AI creates it all
+We are all artists
+Dreams unfold in pictures
+
+Verse 2
+Colors fill so quickly
+Backgrounds done so neatly
+Just the way I want it
+Masterpiece is ready</div>
+                </div>
+                
+                <!-- 일본어 가사 -->
+                <div id="lyrics-ja" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">1番
+言葉だけで絵を描く
+AI画家すごいね
+猫を描いてください
+宇宙船も描いてね
+
+サビ
+想像することすべて
+AIが作ってくれる
+みんな芸術家
+夢を絵で広げよう
+
+2番
+色も塗ってサッサッ
+背景もシャシャッ
+私の望むままに
+素敵な作品完成だ</div>
+                </div>
+                
+                <!-- 중국어 가사 -->
+                <div id="lyrics-zh" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">第一段
+只需说话就画画
+AI画家真神奇
+请画一只猫
+宇宙飞船也画吧
+
+副歌
+想象的一切
+AI都能创造
+我们都是艺术家
+用画展开梦想
+
+第二段
+涂色刷刷刷
+背景唰唰唰
+按我想要的
+精彩作品完成啦</div>
+                </div>
+                
+                <!-- 스페인어 가사 -->
+                <div id="lyrics-es" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Verso 1
+Solo habla y dibuja viene
+Artista AI increíble
+Dibuja un gato por favor
+Nave espacial también dibuja
+
+Coro
+Todo lo que imaginamos
+AI lo crea todo
+Todos somos artistas
+Sueños en cuadros despliegan
+
+Verso 2
+Colores llenan rápido
+Fondos hechos ordenados
+Justo como lo quiero
+Obra maestra está lista</div>
+                </div>
+                
+                <!-- 프랑스어 가사 -->
+                <div id="lyrics-fr" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Couplet 1
+Juste parle et dessin vient
+Artiste IA incroyable
+Dessine un chat s'il te plaît
+Vaisseau spatial aussi dessine
+
+Refrain
+Tout ce qu'on imagine
+IA crée tout ça
+Nous sommes tous artistes
+Rêves en images déploient
+
+Couplet 2
+Couleurs remplissent vite
+Arrière-plans faits proprement
+Exactement comme je veux
+Chef-d'œuvre est prêt</div>
+                </div>
+                
+                <!-- 독일어 가사 -->
+                <div id="lyrics-de" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Strophe 1
+Nur sprechen und Bild kommt
+KI-Künstler erstaunlich
+Zeichne bitte eine Katze
+Raumschiff auch zeichne
+
+Refrain
+Alles was wir vorstellen
+KI erschafft es alles
+Wir sind alle Künstler
+Träume in Bildern entfalten
+
+Strophe 2
+Farben füllen schnell
+Hintergründe ordentlich gemacht
+Genau wie ich es will
+Meisterwerk ist fertig</div>
+                </div>
+            </div>
+
+            <!-- 오디오 플레이어 -->
+            <div class="audio-player-box">
+                <div class="audio-upload-section">
+                    <button class="audio-upload-btn" onclick="alert('오디오 파일 업로드 기능')">🎵 동요 음악 삽입</button>
+                    <p style="font-size: 18px; color: #6A1B9A; margin-top: 10px;">MP3, WAV 파일을 업로드하세요</p>
+                </div>
+                
+                <div class="audio-player">
+                    <div class="player-controls">
+                        <button class="play-btn" onclick="togglePlay()">
+                            <div class="play-icon"></div>
+                        </button>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" onclick="seek(event)">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="time-display" id="timeDisplay">0:00 / 3:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">🎨 아빠와의 대화</h2>
+
+            <div class="chat-bubble dad">
+                <strong style="color: #FF9800; font-size: 32px;" contenteditable="true">👨‍🔬 아빠:</strong><br>
+                <span contenteditable="true">"윤호야, 요즘 AI가 그림도 그릴 수 있다던데 정말이야?"</span>
+            </div>
+
+            <div class="chat-bubble yunho">
+                <strong style="color: #667eea; font-size: 32px;" contenteditable="true">👦 윤호:</strong><br>
+                <span contenteditable="true">"네! <span class="keyword">AI 이미지 생성</span>이에요! 말로만 설명하면 AI가 그림을 그려줘요! '우주에 있는 고양이 그려줘'라고 하면 정말 그려요!"</span>
+            </div>
+
+            <!-- 이미지 박스 1 -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">AI가 그린 우주 고양이 그림 예시</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"말만 하면 AI가 그려줘요!"</div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">🖼️ AI 이미지 생성 도구</h2>
+
+            <div class="tip-box">
+                <h4 contenteditable="true">1️⃣ 대표적인 AI 이미지 생성 서비스</h4>
+                <p contenteditable="true">
+                    <strong>DALL-E (달리)</strong><br>
+                    → OpenAI에서 만든 AI 화가<br><br>
+                    
+                    <strong>Midjourney (미드저니)</strong><br>
+                    → 예술적인 그림에 특화<br><br>
+                    
+                    <strong>Stable Diffusion</strong><br>
+                    → 무료로 사용 가능<br><br>
+                    
+                    <strong>뤼튼, 빙 이미지 생성</strong><br>
+                    → 한국어로 사용하기 쉬운 도구
+                </p>
+            </div>
+
+            <!-- 이미지 박스 2-4 -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">DALL-E 사용 화면 예시</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"DALL-E로 그림 만들기"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">Midjourney 작품 예시</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"예술적인 Midjourney"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">Stable Diffusion 인터페이스</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"무료로 사용 가능!"</div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">✍️ AI에게 그림 주문하는 방법</h2>
+
+            <div class="step-card">
+                <h4 contenteditable="true">📝 구체적으로 설명하기</h4>
+                <p contenteditable="true">
+                    "강아지" 보다 "푸들 강아지가 공원에서 노는 모습"
+                </p>
+            </div>
+
+            <div class="step-card">
+                <h4 contenteditable="true">🎨 스타일 지정하기</h4>
+                <p contenteditable="true">
+                    "수채화 스타일", "만화 스타일", "사진처럼"
+                </p>
+            </div>
+
+            <div class="step-card">
+                <h4 contenteditable="true">🌈 색상 언급하기</h4>
+                <p contenteditable="true">
+                    "따뜻한 색감", "파스텔톤", "밝고 화사하게"
+                </p>
+            </div>
+
+            <div class="step-card">
+                <h4 contenteditable="true">📐 분위기 추가하기</h4>
+                <p contenteditable="true">
+                    "밝고 즐거운", "신비로운", "평화로운"
+                </p>
+            </div>
+
+            <h2 contenteditable="true">👉 오늘의 실습</h2>
+
+            <div class="tip-box">
+                <h4 contenteditable="true">🎯 AI로 첫 그림 만들기!</h4>
+                <p contenteditable="true">
+                    <strong>1단계:</strong> 빙 이미지 생성 접속 (bing.com/create)<br><br>
+                    <strong>2단계:</strong> 마이크로소프트 계정으로 로그인<br><br>
+                    <strong>3단계:</strong> "해변에서 노는 강아지" 입력<br><br>
+                    <strong>4단계:</strong> AI가 그린 그림 4개 확인<br><br>
+                    <strong>5단계:</strong> 마음에 드는 그림 다운로드
+                </p>
+            </div>
+
+            <!-- 이미지 박스 5-9 (실습 과정) -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">빙 이미지 생성 시작 화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"1단계: 사이트 접속"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">로그인 화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"2단계: 계정 로그인"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">텍스트 입력 화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"3단계: 원하는 그림 설명 입력"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">AI가 생성한 4개의 그림 결과</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"4단계: 생성된 그림 확인"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">다운로드 완료 화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"5단계: 그림 저장 완료!"</div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">💡 실생활 활용 예시</h2>
+
+            <div class="tip-box">
+                <h4 contenteditable="true">🎁 이럴 때 활용하세요!</h4>
+                <p contenteditable="true">
+                    <strong>🎂 생일 카드 만들기</strong><br>
+                    → 손주 얼굴 묘사해서 특별한 카드<br><br>
+                    
+                    <strong>📱 배경화면 제작</strong><br>
+                    → 나만의 특별한 스마트폰 배경<br><br>
+                    
+                    <strong>🎁 선물용 그림</strong><br>
+                    → 가족 추억을 그림으로<br><br>
+                    
+                    <strong>📚 동화책 삽화</strong><br>
+                    → 손주에게 들려줄 이야기 그림
+                </p>
+            </div>
+
+            <!-- 이미지 박스 10-13 (활용 예시) -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">AI로 만든 생일 카드 디자인</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"특별한 생일 축하 카드"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">AI가 만든 배경화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"나만의 스마트폰 배경"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">가족 추억을 그린 선물용 그림</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"추억을 담은 선물"</div>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">동화책 삽화 예시</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"이야기를 풍성하게!"</div>
+                </div>
+            </div>
+
+            <h2 contenteditable="true">⚠️ 주의할 점</h2>
+
+            <div class="warning-box">
+                <h4 contenteditable="true">🚨 꼭 기억하세요!</h4>
+                <p contenteditable="true">
+                    <strong>1. 저작권 확인</strong><br>
+                    → AI가 만든 그림의 저작권 확인하기<br><br>
+                    
+                    <strong>2. 유명인 얼굴 금지</strong><br>
+                    → 유명인 얼굴은 생성하지 마세요<br><br>
+                    
+                    <strong>3. 부적절한 내용</strong><br>
+                    → 부적절한 내용은 AI가 거부해요<br><br>
+                    
+                    <strong>4. 여러 번 시도</strong><br>
+                    → 원하는 결과 나올 때까지 시도<br><br>
+                    
+                    <strong>5. 상업적 이용</strong><br>
+                    → 상업적 이용 전 이용약관 확인
+                </p>
+            </div>
+
+            <h2 contenteditable="true">💡 오늘의 퀴즈</h2>
+            
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 1. DALL-E를 만든 회사는?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① OpenAI</div>
+                    <div class="quiz-option" contenteditable="true">② Google</div>
+                    <div class="quiz-option" contenteditable="true">③ Microsoft</div>
+                    <div class="quiz-option" contenteditable="true">④ Meta</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 2. AI 이미지 생성 시 중요한 것은?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① 구체적인 설명</div>
+                    <div class="quiz-option" contenteditable="true">② 스타일 지정</div>
+                    <div class="quiz-option" contenteditable="true">③ 색상과 분위기</div>
+                    <div class="quiz-option" contenteditable="true">④ 위의 모두</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 3. 무료로 사용 가능한 AI 이미지 생성 도구는?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① Stable Diffusion</div>
+                    <div class="quiz-option" contenteditable="true">② 빙 이미지 생성</div>
+                    <div class="quiz-option" contenteditable="true">③ 뤼튼</div>
+                    <div class="quiz-option" contenteditable="true">④ 위의 모두</div>
+                </div>
+            </div>
+
+            <!-- 정답 박스 -->
+            <div class="answer-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🎯 퀴즈 정답</h3>
+                <p contenteditable="true">
+                    <span class="emphasis">1.</span> <span class="reversed-text">①</span><br>
+                    <span class="emphasis">2.</span> <span class="reversed-text">④</span><br>
+                    <span class="emphasis">3.</span> <span class="reversed-text">④</span>
+                </p>
+            </div>
+
+            <h2 contenteditable="true">📚 오늘의 정리</h2>
+
+            <div class="intro-box">
+                <h3 style="margin-top: 0; color: #E65100;" contenteditable="true">핵심 요약!</h3>
+                <p style="font-size: 28px; line-height: 1.8;" contenteditable="true">
+                    <strong>1. AI 이미지 생성</strong><br>
+                    → 말로 설명하면 AI가 그림 그려줌<br><br>
+                    
+                    <strong>2. 주요 도구</strong><br>
+                    → DALL-E, Midjourney, Stable Diffusion, 빙<br><br>
+                    
+                    <strong>3. 잘 주문하는 법</strong><br>
+                    → 구체적 설명 + 스타일 + 색상 + 분위기<br><br>
+                    
+                    <strong>4. 활용법</strong><br>
+                    → 카드, 배경화면, 선물, 동화책<br><br>
+                    
+                    <strong>5. 주의사항</strong><br>
+                    → 저작권, 유명인, 이용약관 확인
+                </p>
+            </div>
+
+            <h2 contenteditable="true">💬 마무리 대화</h2>
+
+            <div class="chat-bubble dad">
+                <strong style="color: #FF9800; font-size: 32px;" contenteditable="true">👨‍🔬 아빠:</strong><br>
+                <span contenteditable="true">"윤호야, 정말 신기하구나! 아빠도 한번 만들어봐야겠어!"</span>
+            </div>
+
+            <div class="chat-bubble yunho">
+                <strong style="color: #667eea; font-size: 32px;" contenteditable="true">👦 윤호:</strong><br>
+                <span contenteditable="true">"네! 아빠도 꼭 해보세요! 다음엔 AI 음성 비서에 대해 배워볼까요?"</span>
+            </div>
+
+            <!-- 다음 편 예고 -->
+            <div class="next-episode">
+                <h2 contenteditable="true">🎬 다음 편 예고</h2>
+                <p contenteditable="true">
+                    <strong style="font-size: 42px; color: #C2185B;">Episode 11</strong><br>
+                    <span style="font-size: 36px;">"AI 음성 비서와 대화하기"</span>
+                </p>
+                <p style="font-size: 28px; margin-top: 20px;" contenteditable="true">
+                    시리, 빅스비, 구글 어시스턴트!<br>
+                    말로 명령하는 신기한 AI 친구들을 만나요!<br><br>
+                    기대해주세요! 🎙️✨
+                </p>
+            </div>
+
+            <!-- 한글 학습 도구 -->
+            <div class="grammar-checker-box">
+                <h2 style="margin-top: 0;" contenteditable="true">📚 한글 학습 도구</h2>
+                <p style="font-size: 24px; line-height: 1.6;" contenteditable="true">
+                    <span class="emphasis">한글이 궁금하신가요?</span><br><br>
+                    📖 <a href="https://stdict.korean.go.kr/main/main.do" target="_blank">표준국어대사전</a><br>
+                    🔍 <a href="https://nara-speller.co.kr/old_speller/" target="_blank">부산대 맞춤법 검사기</a><br><br>
+                    정확한 한글 사용을 위한 도구입니다!
+                </p>
+            </div>
+
+            <!-- 댓글 섹션 -->
+            <div class="comments-section">
+                <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 28px;" contenteditable="true">💬 댓글</h2>
+                <div style="display: flex; gap: 15px;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 900; flex-shrink: 0;">나</div>
+                    <div style="flex: 1;">
+                        <input type="text" placeholder="댓글 추가..." style="width: 100%; padding: 12px 15px; font-size: 18px; border: none; border-bottom: 2px solid #ddd; font-family: 'Noto Sans KR', sans-serif; outline: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sidebar">
+        <!-- 달력 -->
+        <div class="sidebar-item">
+            <div class="sidebar-title">📅 달력</div>
+            <div class="sidebar-content">
+                <div class="calendar">
+                    <div id="calendar-month" class="calendar-month"></div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 광고 1-7 -->
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 1<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="sidebar-title">🔥 인기글</div>
+            <div class="sidebar-content">
+                <div class="popular-post">1. AI 기초 완벽 가이드</div>
+                <div class="popular-post">2. 시니어를 위한 스마트폰</div>
+                <div class="popular-post">3. 윤호의 AI 시리즈</div>
+                <div class="popular-post">4. ChatGPT 200% 활용법</div>
+                <div class="popular-post">5. 클로드 vs ChatGPT 비교</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 2<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 3<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 4<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 5<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 6<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 7<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <!-- 키워드 -->
+        <div class="sidebar-item">
+            <div class="sidebar-title">🏷️ 키워드</div>
+            <div class="sidebar-content">
+                <span class="keyword-tag">#AI이미지</span>
+                <span class="keyword-tag">#DALL-E</span>
+                <span class="keyword-tag">#그림AI</span>
+                <span class="keyword-tag">#AI화가</span>
+                <span class="keyword-tag">#이미지생성</span>
+                <span class="keyword-tag">#윤호선생님</span>
+            </div>
+        </div>
+        
+        <!-- 검색 -->
+        <div class="sidebar-item">
+            <div class="sidebar-title">🔍 검색</div>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="검색어를 입력하세요...">
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-margin"></div>
+    
+    <script>
+        let editMode = false;
+        let isPlaying = false;
+        let currentTime = 0;
+        let duration = 180;
+        let playInterval;
+        
+        function toggleEdit() {
+            editMode = !editMode;
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            const btn = event.target;
+            
+            editableElements.forEach(el => {
+                el.contentEditable = editMode;
+            });
+            
+            if (editMode) {
+                btn.classList.add('active');
+                btn.textContent = '✅ 편집 중';
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '✏️ 편집 모드';
+            }
+        }
+        
+        function changeFontSize(action) {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            
+            if (action === 'increase') {
+                span.style.fontSize = '1.2em';
+            } else {
+                span.style.fontSize = '0.9em';
+            }
+            
+            range.surroundContents(span);
+        }
+        
+        function changeColor() {
+            const color = prompt('색상을 입력하세요 (예: red, #FF0000):');
+            if (color) {
+                document.execCommand('foreColor', false, color);
+            }
+        }
+        
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.lyrics-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('lyrics-' + lang).classList.add('active');
+        }
+        
+        function togglePlay() {
+            const playBtn = document.querySelector('.play-btn');
+            
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+                startPlayback();
+            } else {
+                isPlaying = false;
+                playBtn.innerHTML = '<div class="play-icon"></div>';
+                stopPlayback();
+            }
+        }
+        
+        function startPlayback() {
+            playInterval = setInterval(() => {
+                if (currentTime < duration) {
+                    currentTime++;
+                    updateProgress();
+                } else {
+                    togglePlay();
+                    currentTime = 0;
+                    updateProgress();
+                }
+            }, 1000);
+        }
+        
+        function stopPlayback() {
+            clearInterval(playInterval);
+        }
+        
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const timeDisplay = document.getElementById('timeDisplay');
+            
+            const percentage = (currentTime / duration) * 100;
+            progressFill.style.width = percentage + '%';
+            
+            const currentMin = Math.floor(currentTime / 60);
+            const currentSec = currentTime % 60;
+            const durationMin = Math.floor(duration / 60);
+            const durationSec = duration % 60;
+            
+            timeDisplay.textContent = 
+                `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${durationMin}:${durationSec.toString().padStart(2, '0')}`;
+        }
+        
+        function seek(event) {
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const percentage = x / rect.width;
+            
+            currentTime = Math.floor(duration * percentage);
+            updateProgress();
+        }
+        
+        updateProgress();
+        
+        // 달력 생성
+        const holidays = {
+            2025: {
+                1: [1],
+                2: [28, 29, 30],
+                3: [1, 3],
+                5: [5, 15],
+                6: [6],
+                8: [15],
+                9: [28, 29, 30],
+                10: [3, 9],
+                12: [25]
+            }
+        };
+        
+        const holidayNames = {
+            2025: {
+                '1-1': '신정',
+                '2-28': '설날',
+                '2-29': '설날',
+                '2-30': '설날',
+                '3-1': '삼일절',
+                '3-3': '대체휴일',
+                '5-5': '어린이날',
+                '5-15': '석가탄신일',
+                '6-6': '현충일',
+                '8-15': '광복절',
+                '9-28': '추석',
+                '9-29': '추석',
+                '9-30': '추석',
+                '10-3': '개천절',
+                '10-9': '한글날',
+                '12-25': '성탄절'
+            }
+        };
+        
+        function generateCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            
+            document.getElementById('calendar-month').textContent = 
+                year + '년 ' + (month + 1) + '월';
+            
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            
+            const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+            weekDays.forEach((day, index) => {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+                dayCell.style.fontWeight = '900';
+                if (index === 0) {
+                    dayCell.style.color = '#D32F2F';
+                }
+                grid.appendChild(dayCell);
+            });
+            
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const firstDayOfWeek = firstDay.getDay();
+            const lastDate = lastDay.getDate();
+            
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day';
+                emptyCell.style.opacity = '0.3';
+                grid.appendChild(emptyCell);
+            }
+            
+            const monthHolidays = (holidays[year] && holidays[year][month + 1]) || [];
+            const monthHolidayNames = holidayNames[year] || {};
+            
+            for (let date = 1; date <= lastDate; date++) {
+                const dateCell = document.createElement('div');
+                dateCell.className = 'calendar-day';
+                
+                const currentDate = new Date(year, month, date);
+                const dayOfWeek = currentDate.getDay();
+                
+                if (dayOfWeek === 0) {
+                    dateCell.style.color = '#D32F2F';
+                }
+                
+                const isHoliday = monthHolidays.includes(date);
+                const holidayKey = (month + 1) + '-' + date;
+                const holidayName = monthHolidayNames[holidayKey];
+                
+                if (isHoliday && holidayName) {
+                    dateCell.style.color = '#D32F2F';
+                    dateCell.style.fontWeight = '900';
+                    dateCell.innerHTML = date + '<br><span style="font-size: 9px;">' + holidayName + '</span>';
+                } else {
+                    dateCell.textContent = date;
+                }
+                
+                if (date === now.getDate() && month === now.getMonth() && year === now.getFullYear()) {
+                    dateCell.style.background = '#0066CC';
+                    dateCell.style.color = 'white';
+                    dateCell.style.fontWeight = '900';
+                }
+                
+                grid.appendChild(dateCell);
+            }
+        }
+        
+        generateCalendar();
+    </script>
+</body>
+</html>

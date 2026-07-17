@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens Shorts — Template Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── Editor Shell ── */
+:root{
+  --red:#CC0000;
+  --yellow:#FFD700;
+  --dark:#0a0a0a;
+  --panel:#111118;
+  --border:rgba(255,255,255,.08);
+  --label:rgba(255,255,255,.45);
+  --input-bg:#1a1a26;
+  --input-border:rgba(255,255,255,.12);
+  --radius:8px;
+}
+html,body{height:100%;background:var(--dark);color:#fff;font-family:'Noto Sans KR',sans-serif;}
+body{display:flex;min-height:100vh;overflow-x:hidden;}
+
+/* ── Left: Editor Panel ── */
+.editor{
+  width:360px;min-width:320px;flex-shrink:0;
+  background:var(--panel);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;height:100vh;overflow:hidden;
+}
+.editor-header{
+  padding:20px 20px 16px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.editor-header h1{
+  font-size:13px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red);margin-bottom:3px;
+}
+.editor-header p{font-size:11px;color:var(--label);letter-spacing:.04em;}
+.editor-scroll{flex:1;overflow-y:auto;padding:18px 20px 32px;}
+.editor-scroll::-webkit-scrollbar{width:4px;}
+.editor-scroll::-webkit-scrollbar-track{background:transparent;}
+.editor-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px;}
+
+/* Section headers */
+.sec-title{
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--label);margin:20px 0 10px;border-top:1px solid var(--border);padding-top:14px;
+}
+.sec-title:first-child{margin-top:0;border-top:none;padding-top:0;}
+
+/* Field */
+.field{margin-bottom:12px;}
+.field label{
+  display:block;font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--label);margin-bottom:5px;
+}
+.field input[type=text],.field textarea,.field select{
+  width:100%;background:var(--input-bg);border:1px solid var(--input-border);
+  border-radius:var(--radius);color:#fff;font-family:'Noto Sans KR',sans-serif;
+  font-size:13px;font-weight:700;padding:8px 10px;
+  outline:none;transition:border-color .15s;resize:none;
+}
+.field input[type=text]:focus,.field textarea:focus,.field select:focus{
+  border-color:rgba(204,0,0,.6);box-shadow:0 0 0 2px rgba(204,0,0,.12);
+}
+.field select option{background:#1a1a26;}
+.field textarea{height:60px;line-height:1.5;}
+
+/* Color row */
+.color-row{display:flex;gap:8px;align-items:center;}
+.color-row input[type=color]{
+  width:36px;height:36px;border-radius:6px;border:1px solid var(--input-border);
+  padding:2px;background:var(--input-bg);cursor:pointer;flex-shrink:0;
+}
+.color-row .hex{
+  flex:1;background:var(--input-bg);border:1px solid var(--input-border);
+  border-radius:var(--radius);color:#fff;font-family:'JetBrains Mono',monospace;
+  font-size:12px;padding:8px 10px;outline:none;
+}
+.color-row .hex:focus{border-color:rgba(204,0,0,.6);}
+
+/* Toggle row */
+.toggle-row{display:flex;gap:6px;flex-wrap:wrap;}
+.toggle-btn{
+  padding:5px 11px;border-radius:20px;border:1px solid var(--input-border);
+  background:var(--input-bg);color:var(--label);font-size:11px;font-weight:700;
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.toggle-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+
+/* Export btn */
+.export-wrap{padding:14px 20px 18px;border-top:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:8px;}
+.btn{
+  width:100%;padding:11px;border-radius:var(--radius);border:none;
+  font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:900;
+  cursor:pointer;letter-spacing:.04em;transition:opacity .15s;
+}
+.btn:hover{opacity:.85;}
+.btn-primary{background:var(--red);color:#fff;}
+.btn-secondary{background:var(--input-bg);color:rgba(255,255,255,.6);border:1px solid var(--input-border);}
+
+/* ── Right: Preview ── */
+.preview{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:28px 24px 40px;overflow-y:auto;gap:20px;
+}
+.preview-label{
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--label);align-self:flex-start;
+}
+
+/* ── CARD ── */
+.card{
+  position:relative;width:390px;height:693px;
+  overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.9);
+  display:flex;flex-direction:column;flex-shrink:0;
+}
+
+/* Top Bar */
+.top-bar{
+  width:100%;height:160px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;overflow:hidden;
+}
+.top-bar::after{content:'';position:absolute;right:-30px;top:-40px;width:130px;height:220px;background:rgba(255,255,255,.07);transform:rotate(18deg);}
+.top-bar::before{content:'';position:absolute;left:-20px;bottom:-30px;width:100px;height:160px;background:rgba(0,0,0,.15);transform:rotate(18deg);}
+.top-text{
+  font-size:50px;font-weight:900;color:#fff;
+  text-align:center;text-shadow:2px 3px 0 rgba(0,0,0,.45);
+  letter-spacing:-.02em;line-height:1.18;padding:0 18px;
+  word-break:keep-all;position:relative;z-index:2;
+}
+
+/* Mid */
+.mid{
+  flex:1;position:relative;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;
+}
+.deco-circle{
+  position:absolute;width:210px;height:210px;border-radius:50%;
+  top:50%;left:10%;transform:translateY(-50%);
+  opacity:.35;pointer-events:none;
+}
+.deco-rect{
+  position:absolute;width:160px;height:240px;
+  top:6%;right:-20px;transform:rotate(11deg);
+  opacity:.18;pointer-events:none;
+}
+
+/* Phone */
+.phone{
+  position:absolute;top:50%;left:6%;
+  transform:translateY(-52%) rotate(-7deg);
+  width:130px;height:185px;
+  background:linear-gradient(145deg,#182038,#0c1222);
+  border:2.5px solid #243255;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:9px;padding:14px;
+  box-shadow:0 8px 28px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);
+  pointer-events:none;z-index:2;
+}
+.ph-b{width:80%;height:26px;background:#28407a;border-radius:5px}
+.ph-btn{width:68%;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center}
+.ph-btn-i{width:14px;height:14px;border:2.5px solid rgba(0,0,0,.38);border-radius:50%}
+.ph-b2{width:80%;height:22px;background:#1a55a8;border-radius:5px}
+.ph-ln{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:68%}
+.ph-ln2{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:50%}
+.tap-ring{
+  position:absolute;
+  width:36px;height:36px;border-radius:50%;
+  top:calc(50% - 38px);left:calc(6% + 46px);
+  transform:translateY(-52%);
+  z-index:3;pointer-events:none;
+}
+
+/* Illustration — alternative types */
+.illus-lock{
+  position:absolute;top:50%;left:6%;
+  transform:translateY(-52%) rotate(-5deg);
+  width:110px;height:130px;pointer-events:none;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:0;
+}
+.lock-body{
+  width:80px;height:68px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.lock-shackle{
+  width:46px;height:36px;border:8px solid;
+  border-bottom:none;border-radius:23px 23px 0 0;margin-bottom:-4px;
+}
+.lock-keyhole{
+  width:14px;height:20px;border-radius:50% 50% 0 0;
+  position:relative;top:2px;
+}
+.lock-keyhole::after{
+  content:'';width:6px;height:12px;border-radius:0 0 3px 3px;
+  position:absolute;top:8px;left:50%;transform:translateX(-50%);
+}
+
+.illus-eye{
+  position:absolute;top:50%;left:6%;
+  transform:translateY(-52%);
+  width:140px;height:80px;pointer-events:none;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+}
+.eye-outer{
+  width:130px;height:70px;border-radius:50%;border:3px solid;
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.eye-iris{width:40px;height:40px;border-radius:50%;border:2px solid;}
+.eye-pupil{
+  width:18px;height:18px;border-radius:50%;
+  position:absolute;
+}
+
+.illus-chart{
+  position:absolute;top:50%;left:4%;
+  transform:translateY(-52%);
+  width:140px;height:110px;pointer-events:none;z-index:2;
+  display:flex;align-items:flex-end;gap:10px;padding:0 8px;
+}
+.bar{border-radius:4px 4px 0 0;}
+
+/* Main text block */
+.main-block{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;margin-left:28px;
+}
+.m-line{
+  font-size:56px;font-weight:900;letter-spacing:-.02em;line-height:1.12;
+  text-shadow:3px 3px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);
+  word-break:keep-all;
+}
+
+/* Bottom bar */
+.bot-bar{
+  width:100%;height:160px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;flex-shrink:0;position:relative;overflow:hidden;
+}
+.bot-bar::before{content:'';position:absolute;left:-30px;top:-30px;width:120px;height:200px;background:rgba(255,255,255,.06);transform:rotate(18deg);}
+.bot-line{
+  font-size:32px;font-weight:900;color:#fff;
+  text-shadow:2px 2px 0 rgba(0,0,0,.45);
+  text-align:center;letter-spacing:-.02em;line-height:1.28;
+  padding:0 12px;word-break:keep-all;position:relative;z-index:2;
+}
+.bot-line .acc{color:var(--yellow);}
+
+/* Badge */
+.ep-badge{
+  position:absolute;top:14px;right:14px;
+  background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.18);
+  border-radius:20px;padding:4px 12px;
+  font-size:11px;font-weight:900;color:rgba(255,255,255,.7);
+  letter-spacing:.1em;z-index:20;pointer-events:none;
+}
+
+/* ── Responsive ── */
+@media(max-width:820px){
+  body{flex-direction:column;}
+  .editor{width:100%;height:auto;min-height:0;}
+  .preview{padding:20px 16px 40px;}
+}
+
+/* ── Export overlay ── */
+#export-info{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);
+  align-items:center;justify-content:center;z-index:999;
+}
+#export-info.show{display:flex;}
+.export-box{
+  background:#1a1a26;border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;padding:28px 32px;max-width:340px;width:90%;
+  text-align:center;
+}
+.export-box h3{font-size:15px;font-weight:900;margin-bottom:10px;}
+.export-box p{font-size:12px;color:var(--label);line-height:1.7;margin-bottom:18px;}
+.export-box .btn{margin-top:4px;}
+</style>
+</head>
+<body>
+
+<!-- ===== EDITOR PANEL ===== -->
+<div class="editor">
+  <div class="editor-header">
+    <h1>IssueLens · Template</h1>
+    <p>Shorts 카드 실시간 편집기</p>
+  </div>
+  <div class="editor-scroll">
+
+    <!-- 배지 -->
+    <div class="sec-title">배지 (EP / 번호)</div>
+    <div class="field">
+      <label>배지 텍스트</label>
+      <input type="text" id="f-badge" value="EP01-1" placeholder="EP01-1">
+    </div>
+
+    <!-- 상단 바 -->
+    <div class="sec-title">상단 바</div>
+    <div class="field">
+      <label>배경색</label>
+      <div class="color-row">
+        <input type="color" id="cp-top" value="#CC0000">
+        <input type="text" class="hex" id="ch-top" value="#CC0000" maxlength="7">
+      </div>
+    </div>
+    <div class="field">
+      <label>텍스트 (줄바꿈 = \n)</label>
+      <textarea id="f-top" rows="2" placeholder="결제 버튼\n누른 순간">결제 버튼\n누른 순간</textarea>
+    </div>
+
+    <!-- 중앙 일러스트 -->
+    <div class="sec-title">중앙 일러스트</div>
+    <div class="field">
+      <label>유형</label>
+      <div class="toggle-row" id="illus-toggle">
+        <button class="toggle-btn active" data-v="phone">📱 스마트폰</button>
+        <button class="toggle-btn" data-v="lock">🔒 자물쇠</button>
+        <button class="toggle-btn" data-v="eye">👁 눈</button>
+        <button class="toggle-btn" data-v="chart">📊 차트</button>
+        <button class="toggle-btn" data-v="none">없음</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>일러스트 강조색</label>
+      <div class="color-row">
+        <input type="color" id="cp-illus" value="#D99000">
+        <input type="text" class="hex" id="ch-illus" value="#D99000" maxlength="7">
+      </div>
+    </div>
+
+    <!-- 중앙 배경 -->
+    <div class="sec-title">중앙 배경</div>
+    <div class="field">
+      <label>그라디언트 왼쪽 컬러</label>
+      <div class="color-row">
+        <input type="color" id="cp-mg1" value="#AA5A00">
+        <input type="text" class="hex" id="ch-mg1" value="#AA5A00" maxlength="7">
+      </div>
+    </div>
+    <div class="field">
+      <label>그라디언트 오른쪽 컬러</label>
+      <div class="color-row">
+        <input type="color" id="cp-mg2" value="#14287a">
+        <input type="text" class="hex" id="ch-mg2" value="#14287a" maxlength="7">
+      </div>
+    </div>
+
+    <!-- 메인 텍스트 -->
+    <div class="sec-title">중앙 메인 텍스트 (3줄)</div>
+    <div class="field">
+      <label>1번째 줄</label>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="text" id="f-m1" value="상품 말고" style="flex:1">
+        <div class="toggle-row" id="mc1-toggle" style="flex-shrink:0">
+          <button class="toggle-btn active" data-v="yellow">🟡</button>
+          <button class="toggle-btn" data-v="white">⚪</button>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>2번째 줄</label>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="text" id="f-m2" value="다른 걸" style="flex:1">
+        <div class="toggle-row" id="mc2-toggle" style="flex-shrink:0">
+          <button class="toggle-btn" data-v="yellow">🟡</button>
+          <button class="toggle-btn active" data-v="white">⚪</button>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>3번째 줄</label>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="text" id="f-m3" value="팔았습니다" style="flex:1">
+        <div class="toggle-row" id="mc3-toggle" style="flex-shrink:0">
+          <button class="toggle-btn active" data-v="yellow">🟡</button>
+          <button class="toggle-btn" data-v="white">⚪</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 하단 바 -->
+    <div class="sec-title">하단 바</div>
+    <div class="field">
+      <label>배경색</label>
+      <div class="color-row">
+        <input type="color" id="cp-bot" value="#CC0000">
+        <input type="text" class="hex" id="ch-bot" value="#CC0000" maxlength="7">
+      </div>
+    </div>
+    <div class="field">
+      <label>1번째 줄 (강조 단어는 [대괄호]로)</label>
+      <input type="text" id="f-b1" value="당신의 [정보]는" placeholder="당신의 [정보]는">
+    </div>
+    <div class="field">
+      <label>2번째 줄</label>
+      <input type="text" id="f-b2" value="이미 팔렸습니다">
+    </div>
+    <div class="field">
+      <label>강조 색상</label>
+      <div class="color-row">
+        <input type="color" id="cp-acc" value="#FFD700">
+        <input type="text" class="hex" id="ch-acc" value="#FFD700" maxlength="7">
+      </div>
+    </div>
+
+  </div><!-- /editor-scroll -->
+
+  <div class="export-wrap">
+    <button class="btn btn-primary" onclick="exportHTML()">HTML 파일로 저장</button>
+    <button class="btn btn-secondary" onclick="copyHTML()">HTML 코드 복사</button>
+  </div>
+</div>
+
+<!-- ===== PREVIEW ===== -->
+<div class="preview">
+  <div class="preview-label">미리보기 — 390 × 693</div>
+
+  <div class="card" id="card">
+    <div class="top-bar" id="c-top">
+      <div class="top-text" id="c-top-text">결제 버튼<br>누른 순간</div>
+    </div>
+    <div class="mid" id="c-mid">
+      <div class="deco-circle" id="c-circle"></div>
+      <div class="deco-rect" id="c-rect"></div>
+
+      <!-- Phone illus (default) -->
+      <div class="phone" id="illus-phone">
+        <div class="ph-b"></div>
+        <div class="ph-btn" id="ph-btn-el"><div class="ph-btn-i"></div></div>
+        <div class="ph-b2"></div>
+        <div class="ph-ln"></div>
+        <div class="ph-ln2"></div>
+      </div>
+      <div class="tap-ring" id="illus-tap"></div>
+
+      <!-- Lock illus -->
+      <div class="illus-lock" id="illus-lock" style="display:none">
+        <div class="lock-shackle" id="lock-shackle-el"></div>
+        <div class="lock-body" id="lock-body-el">
+          <div class="lock-keyhole" id="lock-kh-el"></div>
+        </div>
+      </div>
+
+      <!-- Eye illus -->
+      <div class="illus-eye" id="illus-eye" style="display:none">
+        <div class="eye-outer" id="eye-outer-el">
+          <div class="eye-iris" id="eye-iris-el">
+            <div class="eye-pupil" id="eye-pupil-el"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart illus -->
+      <div class="illus-chart" id="illus-chart" style="display:none">
+        <div class="bar" id="bar1" style="width:26px;height:40px;"></div>
+        <div class="bar" id="bar2" style="width:26px;height:65px;"></div>
+        <div class="bar" id="bar3" style="width:26px;height:50px;"></div>
+        <div class="bar" id="bar4" style="width:26px;height:90px;"></div>
+      </div>
+
+      <div class="main-block">
+        <div class="m-line yellow" id="c-m1">상품 말고</div>
+        <div class="m-line white"  id="c-m2">다른 걸</div>
+        <div class="m-line yellow" id="c-m3">팔았습니다</div>
+      </div>
+    </div>
+    <div class="bot-bar" id="c-bot">
+      <div class="bot-line" id="c-b1">당신의 <span class="acc">정보</span>는</div>
+      <div class="bot-line" id="c-b2">이미 팔렸습니다</div>
+    </div>
+    <div class="ep-badge" id="c-badge">EP01-1</div>
+  </div>
+</div>
+
+<!-- Export overlay -->
+<div id="export-info">
+  <div class="export-box">
+    <h3>HTML 복사 완료!</h3>
+    <p>클립보드에 복사되었습니다.<br>텍스트 에디터에 붙여넣기(Ctrl+V)해서<br><strong>.html</strong> 파일로 저장하세요.</p>
+    <button class="btn btn-primary" onclick="document.getElementById('export-info').classList.remove('show')">확인</button>
+  </div>
+</div>
+
+<script>
+/* ── State ── */
+const S = {
+  badge: 'EP01-1',
+  topColor: '#CC0000',
+  topText: '결제 버튼\\n누른 순간',
+  illusType: 'phone',
+  illusColor: '#D99000',
+  mg1: '#AA5A00',
+  mg2: '#14287a',
+  m1: '상품 말고', mc1: 'yellow',
+  m2: '다른 걸',   mc2: 'white',
+  m3: '팔았습니다',mc3: 'yellow',
+  botColor: '#CC0000',
+  b1: '당신의 [정보]는',
+  b2: '이미 팔렸습니다',
+  accColor: '#FFD700',
+};
+
+/* ── Bind inputs ── */
+function bind(id, key, cb){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('input', ()=>{ S[key]=el.value; render(); if(cb) cb(); });
+}
+function bindColor(cpId, chId, key){
+  const cp = document.getElementById(cpId);
+  const ch = document.getElementById(chId);
+  cp.addEventListener('input',()=>{ ch.value=cp.value; S[key]=cp.value; render(); });
+  ch.addEventListener('input',()=>{
+    if(/^#[0-9a-fA-F]{6}$/.test(ch.value)){ cp.value=ch.value; S[key]=ch.value; render(); }
+  });
+}
+function bindToggleGroup(groupId, key){
+  const btns = document.querySelectorAll(`#${groupId} .toggle-btn`);
+  btns.forEach(b=>{
+    b.addEventListener('click',()=>{
+      btns.forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      S[key]=b.dataset.v;
+      render();
+    });
+  });
+}
+
+bind('f-badge','badge');
+bindColor('cp-top','ch-top','topColor');
+bind('f-top','topText');
+bindColor('cp-illus','ch-illus','illusColor');
+bindColor('cp-mg1','ch-mg1','mg1');
+bindColor('cp-mg2','ch-mg2','mg2');
+bind('f-m1','m1'); bind('f-m2','m2'); bind('f-m3','m3');
+bindColor('cp-bot','ch-bot','botColor');
+bind('f-b1','b1'); bind('f-b2','b2');
+bindColor('cp-acc','ch-acc','accColor');
+bindToggleGroup('illus-toggle','illusType');
+bindToggleGroup('mc1-toggle','mc1');
+bindToggleGroup('mc2-toggle','mc2');
+bindToggleGroup('mc3-toggle','mc3');
+
+/* ── Render ── */
+function render(){
+  // badge
+  document.getElementById('c-badge').textContent = S.badge;
+
+  // top bar
+  document.getElementById('c-top').style.background = S.topColor;
+  document.getElementById('c-top-text').innerHTML = S.topText.replace(/\\n/g,'<br>');
+
+  // mid background
+  const mid = document.getElementById('c-mid');
+  const hex2rgba = (h,a) => {
+    const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
+    return `rgba(${r},${g},${b},${a})`;
+  };
+  mid.style.background = `
+    radial-gradient(ellipse 60% 45% at 18% 58%, ${hex2rgba(S.mg1,.55)} 0%, transparent 68%),
+    radial-gradient(ellipse 65% 55% at 82% 35%, ${hex2rgba(S.mg2,.6)} 0%, transparent 70%),
+    #080812`;
+
+  // deco circle color
+  document.getElementById('c-circle').style.background = hex2rgba(S.illusColor,.5);
+  document.getElementById('c-rect').style.background = 'rgba(10,16,50,.9)';
+
+  // illus type
+  const types = ['phone','lock','eye','chart'];
+  types.forEach(t=>{
+    const el = document.getElementById('illus-'+t);
+    if(el) el.style.display = (S.illusType===t) ? '' : 'none';
+  });
+  document.getElementById('illus-tap').style.display = (S.illusType==='phone') ? '' : 'none';
+
+  // illus color apply
+  const ic = S.illusColor;
+  // phone btn
+  const pb = document.getElementById('ph-btn-el');
+  if(pb) pb.style.background = ic;
+  // tap ring
+  const tr = document.getElementById('illus-tap');
+  if(tr){ tr.style.border=`2.5px solid ${ic}88`; tr.style.boxShadow=`0 0 12px ${ic}55`; }
+  // lock
+  const ls = document.getElementById('lock-shackle-el');
+  const lb = document.getElementById('lock-body-el');
+  const lk = document.getElementById('lock-kh-el');
+  const lka = document.getElementById('lock-kh-el');
+  if(ls){ ls.style.borderColor = ic; ls.style.border = `8px solid ${ic}`; ls.style.borderBottom='none'; ls.style.borderRadius='23px 23px 0 0'; }
+  if(lb){ lb.style.background = ic; }
+  if(lk){ lk.style.background = '#0a0a0a'; }
+  if(lka){ lka.style.setProperty('--lc', ic); }
+  // eye
+  const eo = document.getElementById('eye-outer-el');
+  const ei = document.getElementById('eye-iris-el');
+  const ep = document.getElementById('eye-pupil-el');
+  if(eo) eo.style.borderColor = ic;
+  if(ei){ ei.style.borderColor = ic; ei.style.background='none'; }
+  if(ep){ ep.style.background = ic; ep.style.width='18px'; ep.style.height='18px'; ep.style.position='absolute'; }
+  // chart bars
+  ['bar1','bar2','bar3','bar4'].forEach((bid,i)=>{
+    const bar = document.getElementById(bid);
+    if(bar) bar.style.background = i%2===0 ? ic : ic+'99';
+  });
+
+  // main text lines
+  const mLines = ['m1','m2','m3'];
+  mLines.forEach(k=>{
+    const el = document.getElementById('c-'+k);
+    el.textContent = S[k];
+    el.className = 'm-line ' + S[k+'c'];
+    if(S[k+'c']==='yellow') el.style.color = S.accColor;
+    else el.style.color = '#fff';
+  });
+
+  // bot bar
+  document.getElementById('c-bot').style.background = S.botColor;
+  // parse [bracket] for accent
+  const parseAcc = (txt, accColor) => {
+    return txt.replace(/\[([^\]]+)\]/g, `<span style="color:${accColor}">$1</span>`);
+  };
+  document.getElementById('c-b1').innerHTML = parseAcc(S.b1, S.accColor);
+  document.getElementById('c-b2').innerHTML = parseAcc(S.b2, S.accColor);
+}
+
+render();
+
+/* ── Export ── */
+function buildHTML(){
+  const topText = S.topText.replace(/\\n/g,'<br>');
+  const hex2rgba=(h,a)=>{const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return `rgba(${r},${g},${b},${a})`;};
+  const parseAcc=(t,c)=>t.replace(/\[([^\]]+)\]/g,`<span class="acc" style="color:${c}">$1</span>`);
+
+  const illusHTML = ()=>{
+    if(S.illusType==='phone') return `
+    <div class="phone">
+      <div class="ph-b"></div>
+      <div class="ph-btn" style="background:${S.illusColor}"><div class="ph-btn-i"></div></div>
+      <div class="ph-b2"></div>
+      <div class="ph-ln"></div>
+      <div class="ph-ln2"></div>
+    </div>
+    <div class="tap-ring" style="border:2.5px solid ${S.illusColor}88;box-shadow:0 0 12px ${S.illusColor}55"></div>`;
+
+    if(S.illusType==='lock') return `
+    <div class="illus-lock">
+      <div class="lock-shackle" style="border:8px solid ${S.illusColor};border-bottom:none;border-radius:23px 23px 0 0;width:46px;height:36px;"></div>
+      <div class="lock-body" style="background:${S.illusColor};width:80px;height:68px;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <div style="width:14px;height:20px;background:#0a0a0a;border-radius:50% 50% 0 0;position:relative;top:2px;"></div>
+      </div>
+    </div>`;
+
+    if(S.illusType==='eye') return `
+    <div class="illus-eye">
+      <div class="eye-outer" style="border-color:${S.illusColor};width:130px;height:70px;border-radius:50%;border:3px solid;display:flex;align-items:center;justify-content:center;position:relative;">
+        <div style="width:40px;height:40px;border-radius:50%;border:2px solid ${S.illusColor};display:flex;align-items:center;justify-content:center;">
+          <div style="width:18px;height:18px;border-radius:50%;background:${S.illusColor};"></div>
+        </div>
+      </div>
+    </div>`;
+
+    if(S.illusType==='chart') return `
+    <div class="illus-chart" style="position:absolute;top:50%;left:4%;transform:translateY(-52%);width:140px;height:110px;pointer-events:none;z-index:2;display:flex;align-items:flex-end;gap:10px;padding:0 8px;">
+      <div style="width:26px;height:40px;background:${S.illusColor};border-radius:4px 4px 0 0;"></div>
+      <div style="width:26px;height:65px;background:${S.illusColor}99;border-radius:4px 4px 0 0;"></div>
+      <div style="width:26px;height:50px;background:${S.illusColor};border-radius:4px 4px 0 0;"></div>
+      <div style="width:26px;height:90px;background:${S.illusColor}99;border-radius:4px 4px 0 0;"></div>
+    </div>`;
+
+    return '';
+  };
+
+  const mColor=(k)=> S[k]==='yellow' ? S.accColor : '#fff';
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens ${S.badge}</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:40px 16px;}
+.card{position:relative;width:390px;height:693px;overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.9);display:flex;flex-direction:column;}
+.top-bar{width:100%;background:${S.topColor};height:160px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden;}
+.top-bar::after{content:'';position:absolute;right:-30px;top:-40px;width:130px;height:220px;background:rgba(255,255,255,.07);transform:rotate(18deg);}
+.top-bar::before{content:'';position:absolute;left:-20px;bottom:-30px;width:100px;height:160px;background:rgba(0,0,0,.15);transform:rotate(18deg);}
+.top-text{font-size:50px;font-weight:900;color:#fff;text-align:center;text-shadow:2px 3px 0 rgba(0,0,0,.45);letter-spacing:-.02em;line-height:1.18;padding:0 18px;word-break:keep-all;position:relative;z-index:2;}
+.mid{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;background:radial-gradient(ellipse 60% 45% at 18% 58%,${hex2rgba(S.mg1,.55)} 0%,transparent 68%),radial-gradient(ellipse 65% 55% at 82% 35%,${hex2rgba(S.mg2,.6)} 0%,transparent 70%),#080812;}
+.deco-circle{position:absolute;width:210px;height:210px;border-radius:50%;top:50%;left:10%;transform:translateY(-50%);background:${hex2rgba(S.illusColor,.5)};opacity:.35;pointer-events:none;}
+.deco-rect{position:absolute;width:160px;height:240px;top:6%;right:-20px;transform:rotate(11deg);background:rgba(10,16,50,.9);opacity:.18;pointer-events:none;}
+.phone{position:absolute;top:50%;left:6%;transform:translateY(-52%) rotate(-7deg);width:130px;height:185px;background:linear-gradient(145deg,#182038,#0c1222);border:2.5px solid #243255;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:14px;box-shadow:0 8px 28px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);pointer-events:none;z-index:2;}
+.ph-b{width:80%;height:26px;background:#28407a;border-radius:5px}
+.ph-btn{width:68%;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center}
+.ph-btn-i{width:14px;height:14px;border:2.5px solid rgba(0,0,0,.38);border-radius:50%}
+.ph-b2{width:80%;height:22px;background:#1a55a8;border-radius:5px}
+.ph-ln{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:68%}
+.ph-ln2{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:50%}
+.tap-ring{position:absolute;width:36px;height:36px;border-radius:50%;top:calc(50% - 38px);left:calc(6% + 46px);transform:translateY(-52%);z-index:3;pointer-events:none;}
+.illus-lock{position:absolute;top:50%;left:6%;transform:translateY(-52%) rotate(-5deg);pointer-events:none;z-index:2;display:flex;flex-direction:column;align-items:center;}
+.illus-eye{position:absolute;top:50%;left:6%;transform:translateY(-52%);pointer-events:none;z-index:2;}
+.main-block{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;margin-left:28px;}
+.m-line{font-size:56px;font-weight:900;letter-spacing:-.02em;line-height:1.12;text-shadow:3px 3px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);word-break:keep-all;}
+.bot-bar{width:100%;background:${S.botColor};height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex-shrink:0;position:relative;overflow:hidden;}
+.bot-bar::before{content:'';position:absolute;left:-30px;top:-30px;width:120px;height:200px;background:rgba(255,255,255,.06);transform:rotate(18deg);}
+.bot-line{font-size:32px;font-weight:900;color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,.45);text-align:center;letter-spacing:-.02em;line-height:1.28;padding:0 12px;word-break:keep-all;position:relative;z-index:2;}
+.ep-badge{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:900;color:rgba(255,255,255,.7);letter-spacing:.1em;z-index:20;pointer-events:none;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-bar"><div class="top-text">${topText}</div></div>
+  <div class="mid">
+    <div class="deco-circle"></div>
+    <div class="deco-rect"></div>
+    ${illusHTML()}
+    <div class="main-block">
+      <div class="m-line" style="color:${mColor('mc1')}">${S.m1}</div>
+      <div class="m-line" style="color:${mColor('mc2')}">${S.m2}</div>
+      <div class="m-line" style="color:${mColor('mc3')}">${S.m3}</div>
+    </div>
+  </div>
+  <div class="bot-bar">
+    <div class="bot-line">${parseAcc(S.b1,S.accColor)}</div>
+    <div class="bot-line">${parseAcc(S.b2,S.accColor)}</div>
+  </div>
+  <div class="ep-badge">${S.badge}</div>
+</div>
+</body>
+</html>`;
+}
+
+function exportHTML(){
+  const html = buildHTML();
+  const blob = new Blob([html],{type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `issuelens_${S.badge.replace(/[^a-zA-Z0-9가-힣]/g,'_')}.html`;
+  a.click();
+}
+
+function copyHTML(){
+  navigator.clipboard.writeText(buildHTML()).then(()=>{
+    document.getElementById('export-info').classList.add('show');
+  });
+}
+</script>
+</body>
+</html>

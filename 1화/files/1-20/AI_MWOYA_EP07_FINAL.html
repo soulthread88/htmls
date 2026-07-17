@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤호와 함께하는 AI 이야기 - Episode 07</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Noto Sans KR', Arial, sans-serif; 
+            line-height: 1.35; 
+            color: #000; 
+            background: #FFF9E6; 
+            font-size: 28px;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .left-margin {
+            width: 12.5%;
+            background: #FFF9E6;
+        }
+        
+        .content-wrapper {
+            width: 60%;
+            background: #FFF9E6;
+            padding: 30px 0;
+        }
+        
+        .sidebar {
+            width: 15%;
+            background: #f5f5f5;
+            padding: 30px 15px;
+            position: sticky;
+            top: 0;
+            height: fit-content;
+        }
+        
+        .right-margin {
+            width: 12.5%;
+            background: #FFF9E6;
+        }
+        
+        /* WYSIWYG 에디터 */
+        .wysiwyg-editor {
+            background: #2C3E50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .editor-title {
+            color: #ECF0F1;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .editor-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .editor-btn {
+            background: #3498DB;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .editor-btn:hover {
+            background: #2980B9;
+            transform: translateY(-2px);
+        }
+        
+        .editor-btn.active {
+            background: #E74C3C;
+        }
+        
+        .editor-info {
+            color: #BDC3C7;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        [contenteditable="true"] {
+            outline: 2px dashed transparent;
+            transition: outline 0.3s;
+        }
+        
+        [contenteditable="true"]:hover {
+            outline-color: #3498DB;
+        }
+        
+        [contenteditable="true"]:focus {
+            outline-color: #E74C3C;
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        /* 사이드바 스타일 */
+        .sidebar-item {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-title {
+            background: #0066CC;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+        }
+        
+        .sidebar-content {
+            padding: 20px 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .ad-space {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            padding-top: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+        }
+        
+        .ad-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .calendar {
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .calendar-month {
+            font-size: 18px;
+            font-weight: 900;
+            color: #0066CC;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day {
+            padding: 8px 4px;
+            font-size: 13px;
+            text-align: center;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .popular-post {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .popular-post:hover {
+            color: #0066CC;
+        }
+        
+        .popular-post:last-child {
+            border-bottom: none;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #0066CC;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .keyword-tag:hover {
+            background: #0066CC;
+            color: white;
+        }
+        
+        .search-box {
+            padding: 15px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #0066CC;
+        }
+        
+        /* 콘텐츠 영역 */
+        .container {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 52px;
+            margin: 0 0 18px 0;
+            color: #0066CC;
+            font-weight: 900;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 40px;
+            margin: 42px 0 20px 0;
+            color: #FF6B35;
+            font-weight: 900;
+            padding-left: 15px;
+            border-left: 8px solid #FF6B35;
+        }
+        
+        h3 {
+            font-size: 36px;
+            margin: 25px 0 25px 0;
+            color: #E65100;
+            font-weight: 900;
+        }
+        
+        h4 {
+            font-size: 32px;
+            margin: 15px 0 25px 0;
+            color: #00796B;
+            font-weight: 900;
+        }
+        
+        p {
+            font-size: 28px;
+            line-height: 1.49;
+            margin-bottom: 15px;
+        }
+        
+        /* Hero 섹션 */
+        .hero-section {
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 27px;
+            text-align: center;
+        }
+        
+        .episode {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+            color: #FFFFFF;
+        }
+        
+        .hero-section h1 {
+            color: #FFFFFF;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            font-size: 52px;
+            margin: 0;
+            font-weight: 900;
+        }
+        
+        /* 박스 스타일 */
+        .intro-box,
+        .tip-box,
+        .example-box,
+        .summary-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #FF6B35;
+        }
+        
+        .intro-box h3,
+        .tip-box h3,
+        .example-box h3,
+        .summary-box h3 {
+            color: #1A237E;
+        }
+        
+        .intro-box p,
+        .tip-box p,
+        .example-box p,
+        .summary-box p {
+            color: #212121;
+        }
+        
+        .song-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #4CAF50;
+        }
+        
+        .song-box h3 {
+            color: #1B5E20;
+        }
+        
+        .song-box p {
+            color: #212121;
+        }
+        
+        .song-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #1B5E20;
+            margin-bottom: 15px;
+        }
+        
+        .song-lyrics {
+            font-size: 26px;
+            line-height: 1.6;
+            color: #212121;
+            white-space: pre-line;
+        }
+        
+        /* 언어 탭 */
+        .language-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .lang-tab {
+            background: #81C784;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .lang-tab:hover {
+            background: #66BB6A;
+            transform: translateY(-2px);
+        }
+        
+        .lang-tab.active {
+            background: #2E7D32;
+        }
+        
+        .lyrics-content {
+            display: none;
+        }
+        
+        .lyrics-content.active {
+            display: block;
+        }
+        
+        /* 오디오 플레이어 박스 */
+        .audio-player-box {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #E91E63;
+        }
+        
+        .audio-upload-section {
+            background: #FFFFFF;
+            border: 3px dashed #E91E63;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .audio-upload-btn {
+            background: #E91E63;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .audio-upload-btn:hover {
+            background: #C2185B;
+            transform: scale(1.05);
+        }
+        
+        .audio-player {
+            background: #FFFFFF;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .play-btn, .pause-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #E91E63;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .play-btn:hover, .pause-btn:hover {
+            background: #C2185B;
+            transform: scale(1.1);
+        }
+        
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 15px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 3px;
+        }
+        
+        .pause-icon {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .pause-bar {
+            width: 4px;
+            height: 18px;
+            background: white;
+        }
+        
+        .progress-container {
+            flex: 1;
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #E91E63 0%, #F06292 100%);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .time-display {
+            font-size: 16px;
+            font-weight: 700;
+            color: #E91E63;
+            min-width: 100px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .story-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #2196F3;
+        }
+        
+        .story-box h3 {
+            color: #0D47A1;
+        }
+        
+        .story-box p {
+            color: #212121;
+        }
+        
+        .proverb-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 25px 0 27px 0;
+            text-align: center;
+            border: 4px solid #FBC02D;
+            box-shadow: 0 8px 25px rgba(251, 192, 45, 0.3);
+        }
+        
+        .proverb-chinese {
+            font-size: 56px;
+            font-weight: 900;
+            color: #E65100;
+            margin-bottom: 18px;
+            letter-spacing: 8px;
+        }
+        
+        .proverb-korean {
+            font-size: 32px;
+            font-weight: 700;
+            color: #BF360C;
+            margin-bottom: 25px;
+        }
+        
+        .proverb-meaning {
+            font-size: 36px;
+            font-weight: 900;
+            color: #0D47A1;
+            margin-bottom: 18px;
+        }
+        
+        .proverb-detail {
+            font-size: 26px;
+            color: #212121;
+            line-height: 1.5;
+        }
+        
+        /* 이미지 박스 */
+        .image-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .image-placeholder {
+            background: #FFFFFF;
+            border: 3px dashed #9C27B0;
+            border-radius: 10px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .image-upload-btn {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .image-upload-btn:hover {
+            background: #7B1FA2;
+            transform: scale(1.05);
+        }
+        
+        .image-description {
+            font-size: 24px;
+            color: #212121;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .image-caption-box {
+            background: #1565C0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #0D47A1;
+            margin-top: 15px;
+        }
+        
+        .image-caption {
+            font-size: 24px;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* 대화 버블 */
+        .chat-bubble {
+            background: #F5F5F5;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0 27px 0;
+            position: relative;
+            font-size: 28px;
+            line-height: 1.49;
+        }
+        
+        .chat-bubble.yunho {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 6px solid #0066CC;
+        }
+        
+        .chat-bubble.yunho p {
+            color: #212121;
+        }
+        
+        .chat-bubble.grandpa {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left: 6px solid #FF9800;
+        }
+        
+        .chat-bubble.grandpa p {
+            color: #212121;
+        }
+        
+        .chat-bubble.grandma {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .chat-bubble.grandma p {
+            color: #212121;
+        }
+        
+        .speaker-name {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 11px;
+            line-height: 1.2;
+        }
+        
+        .speech-text {
+            font-size: 28px;
+            color: #FF1744;
+            font-weight: 900;
+            line-height: 1.49;
+        }
+        
+        /* 영어 Quote 박스 */
+        .quote-box {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            padding: 35px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #3F51B5;
+            text-align: center;
+        }
+        
+        .quote-english {
+            font-size: 40px;
+            font-weight: 900;
+            font-style: italic;
+            color: #1A237E;
+            margin-bottom: 20px;
+        }
+        
+        .quote-korean {
+            font-size: 32px;
+            color: #283593;
+            font-weight: 700;
+        }
+        
+        /* 퀴즈 박스 */
+        .quiz-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border: 3px solid #FF6B35;
+        }
+        
+        .quiz-question {
+            font-size: 32px;
+            font-weight: 900;
+            color: #BF360C;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-options {
+            margin: 20px 0;
+        }
+        
+        .quiz-option {
+            background: white;
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #FFE0B2;
+            font-size: 26px;
+            color: #212121;
+        }
+        
+        .quiz-option:hover {
+            background: #FFF3E0;
+            border-color: #FF6B35;
+            transform: translateX(5px);
+        }
+        
+        /* 다음 편 박스 */
+        .next-episode {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border: 3px solid #3F51B5;
+        }
+        
+        .next-episode h3 {
+            color: #1A237E;
+            margin-top: 0;
+        }
+        
+        .next-episode p {
+            color: #212121;
+        }
+        
+        /* 정답 박스 */
+        .answer-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #4CAF50;
+        }
+        
+        .answer-box h3 {
+            color: #1B5E20;
+        }
+        
+        .answer-box p {
+            color: #212121;
+        }
+        
+        .reversed-text {
+            display: inline-block;
+            transform: scaleX(-1);
+            font-weight: 900;
+            color: #2E7D32;
+        }
+        
+        /* 한글 학습 도구 박스 */
+        .grammar-checker-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0 27px 0;
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .grammar-checker-box h2 {
+            color: #4A148C;
+        }
+        
+        .grammar-checker-box p {
+            color: #212121;
+        }
+        
+        .grammar-checker-box a {
+            color: #6A1B9A;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid #9C27B0;
+            transition: all 0.3s;
+        }
+        
+        .grammar-checker-box a:hover {
+            color: #4A148C;
+            border-bottom-color: #4A148C;
+        }
+        
+        /* 강조 텍스트 */
+        .emphasis {
+            color: #FF1744;
+            font-weight: 900;
+        }
+        
+        .proper-name {
+            color: #FF1744;
+            font-weight: 900;
+        }
+        
+        .checkmark {
+            font-weight: 900;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 1400px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .left-margin,
+            .right-margin {
+                display: none;
+            }
+            
+            .content-wrapper {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-margin"></div>
+    
+    <div class="content-wrapper">
+        <!-- WYSIWYG 에디터 -->
+        <div class="wysiwyg-editor">
+            <div class="editor-title">📝 WYSIWYG 편집기</div>
+            <div class="editor-controls">
+                <button class="editor-btn" onclick="toggleEdit()">✏️ 편집 모드</button>
+                <button class="editor-btn" onclick="document.execCommand('bold')">B 굵게</button>
+                <button class="editor-btn" onclick="document.execCommand('italic')">I 기울임</button>
+                <button class="editor-btn" onclick="document.execCommand('underline')">U 밑줄</button>
+                <button class="editor-btn" onclick="changeFontSize('increase')">A+ 크게</button>
+                <button class="editor-btn" onclick="changeFontSize('decrease')">A- 작게</button>
+                <button class="editor-btn" onclick="changeColor()">🎨 색상</button>
+            </div>
+            <div class="editor-info">💡 편집 모드를 활성화하고 텍스트를 클릭하여 직접 수정하세요</div>
+        </div>
+        
+        <div class="container">
+            <!-- Hero 섹션 -->
+            <div class="hero-section">
+                <div class="episode" contenteditable="true">Episode 07</div>
+                <h1 contenteditable="true">할머니, AI한테 물어보면 다 알려줘요!</h1>
+            </div>
+
+            <!-- 사자성어 -->
+            <div class="proverb-box">
+                <div class="proverb-chinese" contenteditable="true">不恥下問</div>
+                <div class="proverb-korean" contenteditable="true">(불치하문)</div>
+                <div class="proverb-meaning" contenteditable="true">아랫사람에게 묻는 것을 부끄러워하지 않는다</div>
+                <div class="proverb-detail" contenteditable="true">모르는 것을 배우기 위해 누구에게나 묻는 것을 부끄러워하지 않는다는 뜻입니다</div>
+            </div>
+
+            <!-- 인트로 -->
+            <div class="intro-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🎬 오늘의 이야기</h3>
+                <p contenteditable="true">오늘은 <span class="proper-name">윤호</span>가 <span class="proper-name">할머니</span>와 <span class="proper-name">할아버지</span>에게 <span class="emphasis">ChatGPT</span> 사용법을 가르쳐 드립니다!</p>
+            </div>
+
+            <!-- 오늘의 동요 -->
+            <h2 contenteditable="true">🎵 오늘의 동요</h2>
+            
+            <div class="song-box">
+                <div class="song-title" contenteditable="true">궁금해요 AI 선생님 (Ask AI Teacher)</div>
+                
+                <!-- 언어 탭 -->
+                <div class="language-tabs">
+                    <button class="lang-tab active" onclick="switchLanguage('ko')">🇰🇷 한국어</button>
+                    <button class="lang-tab" onclick="switchLanguage('en')">🇺🇸 English</button>
+                    <button class="lang-tab" onclick="switchLanguage('ja')">🇯🇵 日本語</button>
+                    <button class="lang-tab" onclick="switchLanguage('zh')">🇨🇳 简体中文</button>
+                    <button class="lang-tab" onclick="switchLanguage('es')">🇪🇸 Español</button>
+                    <button class="lang-tab" onclick="switchLanguage('fr')">🇫🇷 Français</button>
+                    <button class="lang-tab" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+                </div>
+                
+                <!-- 한국어 가사 -->
+                <div id="lyrics-ko" class="lyrics-content active">
+                    <div class="song-lyrics" contenteditable="true">1절
+궁금한 게 생겼어요
+AI한테 물어봐요
+레시피 건강 정보
+다 알려주는 친구예요
+
+2절
+김치찌개 끓이는 법
+혈압에 좋은 음식
+할머니도 쉽게 쉽게
+AI가 대답해요!</div>
+                </div>
+                
+                <!-- 영어 가사 -->
+                <div id="lyrics-en" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Verse 1
+When I wonder what to know
+Ask the AI and it will show
+Recipes and health info too
+AI friend will help me through
+
+Verse 2
+How to make kimchi stew today
+Foods for blood pressure they say
+Grandma asks so easily
+AI answers helpfully!</div>
+                </div>
+                
+                <!-- 일본어 가사 -->
+                <div id="lyrics-ja" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">1番
+気になることができたよ
+AIに聞いてみるよ
+レシピと健康情報
+全部教えてくれる友達だよ
+
+2番
+キムチチゲの作り方
+血圧にいい食べ物
+おばあちゃんも簡単に
+AIが答えてくれるよ!</div>
+                </div>
+                
+                <!-- 중국어 가사 -->
+                <div id="lyrics-zh" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">第一段
+有了好奇的事情
+问AI吧
+食谱和健康信息
+都告诉我的朋友
+
+第二段
+泡菜汤的做法
+对血压好的食物
+奶奶也很容易
+AI来回答!</div>
+                </div>
+                
+                <!-- 스페인어 가사 -->
+                <div id="lyrics-es" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Verso 1
+Cuando me pregunto qué saber
+Pregunta al AI y te mostrará
+Recetas e información de salud también
+Amigo AI me ayudará bien
+
+Verso 2
+Cómo hacer guiso kimchi hoy
+Alimentos para presión dicen ahoy
+Abuela pregunta fácilmente
+AI responde útilmente!</div>
+                </div>
+                
+                <!-- 프랑스어 가사 -->
+                <div id="lyrics-fr" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Couplet 1
+Quand je me demande quoi savoir
+Demande à l'IA et il montrera
+Recettes et infos santé aussi
+Ami IA m'aidera oui
+
+Couplet 2
+Comment faire ragoût kimchi aujourd'hui
+Aliments pour tension ils ont dit
+Grand-mère demande facilement
+IA répond utilement!</div>
+                </div>
+                
+                <!-- 독일어 가사 -->
+                <div id="lyrics-de" class="lyrics-content">
+                    <div class="song-lyrics" contenteditable="true">Strophe 1
+Wenn ich mich frage was zu wissen
+Frag die KI und sie wird's nicht missen
+Rezepte und Gesundheitsinfo auch
+KI Freund hilft mir im Brauch
+
+Strophe 2
+Wie man Kimchi Eintopf macht heut
+Lebensmittel für Blutdruck erfreut
+Oma fragt so leicht gemacht
+KI antwortet hilfsbereit bei Nacht!</div>
+                </div>
+            </div>
+
+            <!-- 오디오 플레이어 -->
+            <div class="audio-player-box">
+                <div class="audio-upload-section">
+                    <button class="audio-upload-btn" onclick="alert('오디오 파일 업로드 기능')">🎵 동요 음악 삽입</button>
+                    <p style="font-size: 18px; color: #C2185B; margin-top: 10px;">MP3, WAV 파일을 업로드하세요</p>
+                </div>
+                
+                <div class="audio-player">
+                    <div class="player-controls">
+                        <button class="play-btn" onclick="togglePlay()">
+                            <div class="play-icon"></div>
+                        </button>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" onclick="seek(event)">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="time-display" id="timeDisplay">0:00 / 3:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 본문 시작 -->
+            <h2 contenteditable="true">📱 할머니의 고민</h2>
+            
+            <p contenteditable="true">어느 날, <span class="proper-name">할머니</span>께서 김치찌개를 만들려고 <span class="emphasis">네이버</span>에서 레시피를 검색했어요.</p>
+            <p contenteditable="true">그런데 너무 많은 결과가 나와서 어떤 것을 봐야 할지 모르겠다고 하셨어요.</p>
+
+            <!-- 이미지 박스 1 -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">할머니가 스마트폰으로 검색하는 장면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"검색 결과가 너무 많아요!"</div>
+                </div>
+            </div>
+
+            <div class="chat-bubble grandma">
+                <div class="speaker-name" style="color: #9C27B0;" contenteditable="true">👵 할머니:</div>
+                <p class="speech-text" contenteditable="true">"윤호야, 할머니가 <span class="emphasis">네이버</span>에서 <span class="emphasis">김치찌개 레시피</span> 검색했는데 너무 많이 나와서 뭘 봐야 할지 모르겠어..."</p>
+            </div>
+
+            <div class="chat-bubble yunho">
+                <div class="speaker-name" style="color: #0066CC;" contenteditable="true">👦 윤호 선생님:</div>
+                <p class="speech-text" contenteditable="true">"할머니! 검색하는 방법을 알려드릴게요! 쉬운 방법이 있어요!"</p>
+            </div>
+
+            <div class="chat-bubble grandpa">
+                <div class="speaker-name" style="color: #FF9800;" contenteditable="true">👴 할아버지:</div>
+                <p class="speech-text" contenteditable="true">"나도 궁금하다! <span class="emphasis">병원</span> 찾는 건 어떻게 해?"</p>
+            </div>
+
+            <!-- 검색의 비밀 -->
+            <h2 contenteditable="true">🎯 윤호가 알려주는 검색의 3가지 비밀</h2>
+
+            <!-- 이미지 박스 2 -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">네이버 검색창 화면</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"검색의 비밀을 알려드려요!"</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h3 style="margin-top: 0;" contenteditable="true">1️⃣ 짧고 명확하게!</h3>
+                <p contenteditable="true"><span class="emphasis">나쁜 예:</span> "김치찌개를 맛있게 끓이려면 어떻게 해야 하나요?"</p>
+                <p contenteditable="true"><span class="emphasis">좋은 예:</span> <span class="proper-name">"김치찌개 레시피"</span></p>
+                <p style="font-weight: 900; font-size: 32px; margin-top: 15px;" contenteditable="true">➡️ 핵심만 검색하세요!</p>
+            </div>
+
+            <div class="tip-box">
+                <h3 style="margin-top: 0;" contenteditable="true">2️⃣ 띄어쓰기 정확하게!</h3>
+                <p contenteditable="true"><span class="emphasis">나쁜 예:</span> "감기몸살병원"</p>
+                <p contenteditable="true"><span class="emphasis">좋은 예:</span> <span class="proper-name">"감기 몸살 병원"</span></p>
+                <p style="font-weight: 900; font-size: 32px; margin-top: 15px;" contenteditable="true">➡️ 단어마다 띄어쓰기!</p>
+            </div>
+
+            <div class="tip-box">
+                <h3 style="margin-top: 0;" contenteditable="true">3️⃣ 지역 이름 추가하기!</h3>
+                <p contenteditable="true"><span class="emphasis">일반 검색:</span> "맛집"</p>
+                <p contenteditable="true"><span class="emphasis">좋은 검색:</span> <span class="proper-name">"강남 맛집"</span> 또는 <span class="proper-name">"판교 맛집"</span></p>
+                <p style="font-weight: 900; font-size: 32px; margin-top: 15px;" contenteditable="true">➡️ 내가 있는 곳 이름을 넣어요!</p>
+            </div>
+
+            <!-- 실습 -->
+            <h2 contenteditable="true">💻 윤호와 함께 실습하기</h2>
+
+            <div class="story-box">
+                <h3 style="margin-top: 0;" contenteditable="true">📍 실습 1: 병원 찾기</h3>
+                <p contenteditable="true"><span class="proper-name">할아버지</span>가 감기에 걸리셔서 병원을 찾아야 해요.</p>
+                <p style="margin-top: 15px;" contenteditable="true"><span class="emphasis">검색어:</span> <span class="proper-name">"강남구 내과"</span></p>
+                <p contenteditable="true">➡️ 지역 + 병원 종류</p>
+            </div>
+
+            <!-- 이미지 박스 3 -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">네이버 지도에서 병원 검색 결과</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"지도에서 가까운 병원을 찾아요!"</div>
+                </div>
+            </div>
+
+            <div class="chat-bubble grandpa">
+                <div class="speaker-name" style="color: #FF9800;" contenteditable="true">👴 할아버지:</div>
+                <p class="speech-text" contenteditable="true">"오! 우리 집 근처 병원들이 쭉 나오네!"</p>
+            </div>
+
+            <div class="story-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🍲 실습 2: 레시피 찾기</h3>
+                <p contenteditable="true"><span class="proper-name">할머니</span>가 김치찌개 레시피를 찾고 싶어하세요.</p>
+                <p style="margin-top: 15px;" contenteditable="true"><span class="emphasis">검색어:</span> <span class="proper-name">"김치찌개 레시피 백종원"</span></p>
+                <p contenteditable="true">➡️ 요리 이름 + 레시피 + 유명 요리사 이름</p>
+            </div>
+
+            <!-- 이미지 박스 4 -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">김치찌개 레시피 검색 결과</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"맛있는 레시피를 찾았어요!"</div>
+                </div>
+            </div>
+
+            <div class="chat-bubble grandma">
+                <div class="speaker-name" style="color: #9C27B0;" contenteditable="true">👵 할머니:</div>
+                <p class="speech-text" contenteditable="true">"이제 알겠어! 유명한 요리사 이름을 넣으니까 훨씬 좋은 레시피가 나오네!"</p>
+            </div>
+
+            <!-- 음성 검색 -->
+            <h2 contenteditable="true">🎤 음성 검색도 편해요</h2>
+
+            <div class="example-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🗣️ 윤호의 팁: 음성으로 검색하기</h3>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> <span class="emphasis">마이크 버튼</span>을 누르세요</p>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> 천천히 또박또박 말하세요</p>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> "강남역 맛집"처럼 짧게 말하세요</p>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> 조용한 곳에서 하면 더 잘 돼요</p>
+            </div>
+
+            <div class="chat-bubble yunho">
+                <div class="speaker-name" style="color: #0066CC;" contenteditable="true">👦 윤호 선생님:</div>
+                <p class="speech-text" contenteditable="true">"타이핑이 어려우시면 <span class="emphasis">음성 검색</span>을 쓰세요! 말만 하면 검색돼요!"</p>
+            </div>
+
+            <!-- 이미지 박스 5 -->
+            <div class="image-box">
+                <div class="image-placeholder">
+                    <button class="image-upload-btn" onclick="alert('이미지 업로드 기능')">📷 이미지 삽입</button>
+                    <div class="image-description" contenteditable="true">할머니가 음성 검색을 사용하는 모습</div>
+                </div>
+                <div class="image-caption-box">
+                    <div class="image-caption" contenteditable="true">"음성으로도 검색할 수 있어요!"</div>
+                </div>
+            </div>
+
+            <!-- 정리 -->
+            <h2 contenteditable="true">📚 윤호의 검색 정리</h2>
+            
+            <div class="summary-box">
+                <h3 style="margin-top: 0;" contenteditable="true">💫 검색왕 되는 법</h3>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> <span class="emphasis">짧고 간단하게:</span> 핵심 단어만 사용</p>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> <span class="emphasis">띄어쓰기 정확히:</span> 단어마다 띄어쓰기</p>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> <span class="emphasis">지역 이름 추가:</span> 내 동네 이름을 넣기</p>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> <span class="emphasis">음성 검색 활용:</span> 말로도 할 수 있어요</p>
+                
+                <p contenteditable="true"><span class="checkmark">✓</span> <span class="emphasis">결과 잘 보기:</span> 블로그, 카페, 뉴스 탭 확인</p>
+            </div>
+
+            <div class="chat-bubble grandma">
+                <div class="speaker-name" style="color: #9C27B0;" contenteditable="true">👵 할머니:</div>
+                <p class="speech-text" contenteditable="true">"윤호야, 정말 고맙다! 이제 검색이 재미있어졌어!"</p>
+            </div>
+
+            <div class="chat-bubble grandpa">
+                <div class="speaker-name" style="color: #FF9800;" contenteditable="true">👴 할아버지:</div>
+                <p class="speech-text" contenteditable="true">"우리 손자가 정말 훌륭한 선생님이구나!"</p>
+            </div>
+
+            <!-- 영어 Quote -->
+            <div class="quote-box">
+                <div class="quote-english" contenteditable="true">"He who asks a question is a fool for five minutes; he who does not ask remains a fool forever."</div>
+                <div class="quote-korean" contenteditable="true">(질문하는 사람은 5분간 바보이지만, 질문하지 않는 사람은 영원히 바보다.)</div>
+            </div>
+
+            <!-- 불치하문의 의미 -->
+            <h2 contenteditable="true">📖 불치하문(不恥下問)의 의미</h2>
+            
+            <p contenteditable="true"><span class="emphasis">불치하문(不恥下問)</span>은 아랫사람에게 묻는 것을 부끄러워하지 않는다는 뜻입니다.</p>
+
+            <div class="story-box">
+                <h3 style="margin-top: 0;" contenteditable="true">💫 오늘의 교훈</h3>
+                <p contenteditable="true"><span class="proper-name">할머니</span>와 <span class="proper-name">할아버지</span>는 오늘 <span class="emphasis">ChatGPT</span>에게 질문하는 법을 배우셨어요.</p>
+                <p contenteditable="true">모르는 것을 부끄러워하지 않고 <span class="emphasis">AI</span>에게 물어보면 친절하게 가르쳐 줍니다.</p>
+                <p contenteditable="true">나이가 많으신 분이 <span class="proper-name">윤호</span>에게 배우고, <span class="emphasis">AI</span>라는 새로운 기술에게 배우는 것을 전혀 부끄러워하지 않으셨어요.</p>
+                <p contenteditable="true">누구에게나 배움을 구하는 겸손한 자세, 바로 <span class="emphasis">불치하문</span>입니다!</p>
+            </div>
+
+            <!-- 오늘의 퀴즈 -->
+            <h2 contenteditable="true">💡 오늘의 퀴즈</h2>
+            
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 1. ChatGPT에게 질문하는 방법은?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① 평소에 말하듯이 자연스럽게 질문한다</div>
+                    <div class="quiz-option" contenteditable="true">② 어려운 전문 용어로 질문한다</div>
+                    <div class="quiz-option" contenteditable="true">③ 외국어로만 질문한다</div>
+                    <div class="quiz-option" contenteditable="true">④ 단어 하나만 입력한다</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 2. ChatGPT로 할 수 있는 것은?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① 레시피 물어보기</div>
+                    <div class="quiz-option" contenteditable="true">② 건강 정보 찾기</div>
+                    <div class="quiz-option" contenteditable="true">③ 글 작성 도움받기</div>
+                    <div class="quiz-option" contenteditable="true">④ 모두 가능하다</div>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question" contenteditable="true">퀴즈 3. ChatGPT 답변이 마음에 안 들면?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" contenteditable="true">① 포기한다</div>
+                    <div class="quiz-option" contenteditable="true">② 다시 질문하거나 더 자세히 물어본다</div>
+                    <div class="quiz-option" contenteditable="true">③ 화를 낸다</div>
+                    <div class="quiz-option" contenteditable="true">④ 컴퓨터를 끈다</div>
+                </div>
+            </div>
+
+            <!-- 다음 편 예고 -->
+            <h2 contenteditable="true">📺 다음 편 예고</h2>
+            <div class="next-episode">
+                <h3 contenteditable="true">Episode 08: 할아버지, AI가 번역도 해줘요!</h3>
+                <p contenteditable="true">다음 이야기에서는 <span class="proper-name">윤호</span>가 <span class="proper-name">할아버지</span>에게 <span class="emphasis">AI 번역</span> 기능을 보여드립니다!</p>
+                <p contenteditable="true"><span class="emphasis">구글 번역</span>, <span class="emphasis">파파고</span>로 외국어를 쉽게! 🌍</p>
+            </div>
+
+            <!-- 정답 박스 -->
+            <div class="answer-box">
+                <h3 style="margin-top: 0;" contenteditable="true">🎯 퀴즈 정답</h3>
+                <p contenteditable="true">
+                    <span class="emphasis">1.</span> <span class="reversed-text">①</span><br>
+                    <span class="emphasis">2.</span> <span class="reversed-text">④</span><br>
+                    <span class="emphasis">3.</span> <span class="reversed-text">②</span>
+                </p>
+            </div>
+
+            <!-- 한글 학습 도구 -->
+            <div class="grammar-checker-box">
+                <h2 style="margin-top: 0;" contenteditable="true">📚 한글 학습 도구</h2>
+                <p style="font-size: 24px; line-height: 1.6;" contenteditable="true">
+                    <span class="emphasis">한글이 궁금하신가요?</span><br><br>
+                    📖 <a href="https://stdict.korean.go.kr/main/main.do" target="_blank">표준국어대사전</a><br>
+                    🔍 <a href="https://nara-speller.co.kr/old_speller/" target="_blank">부산대 맞춤법 검사기</a><br><br>
+                    정확한 한글 사용을 위한 도구입니다!
+                </p>
+            </div>
+
+            <!-- 댓글 섹션 -->
+            <div class="comments-section" style="background: white; padding: 29px; border-radius: 15px; margin: 25px 0;">
+                <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 28px;" contenteditable="true">💬 댓글</h2>
+                <div style="display: flex; gap: 15px;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 900; flex-shrink: 0;">나</div>
+                    <div style="flex: 1;">
+                        <input type="text" placeholder="댓글 추가..." style="width: 100%; padding: 12px 15px; font-size: 18px; border: none; border-bottom: 2px solid #ddd; font-family: 'Noto Sans KR', sans-serif; outline: none;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- 사이드바 -->
+    <div class="sidebar">
+        <!-- 달력 -->
+        <div class="sidebar-item">
+            <div class="sidebar-title">📅 달력</div>
+            <div class="sidebar-content calendar">
+                <div class="calendar-month" id="calendar-month">2025년 12월</div>
+                <div class="calendar-grid" id="calendar-grid"></div>
+            </div>
+        </div>
+        
+        <!-- 인기글 -->
+        <div class="sidebar-item">
+            <div class="sidebar-title">🔥 인기글</div>
+            <div class="sidebar-content">
+                <div class="popular-post">1. AI 기초 완벽 가이드</div>
+                <div class="popular-post">2. 시니어를 위한 스마트폰</div>
+                <div class="popular-post">3. 윤호의 AI 시리즈</div>
+                <div class="popular-post">4. 머신러닝 입문</div>
+                <div class="popular-post">5. 챗봇 활용하기</div>
+            </div>
+        </div>
+        
+        <!-- 광고 영역 1-7 -->
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 1<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 2<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 3<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 4<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 5<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 6<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역 7<br>(정사각형)</div>
+            </div>
+        </div>
+        
+        <!-- 키워드 -->
+        <div class="sidebar-item">
+            <div class="sidebar-title">🏷️ 키워드</div>
+            <div class="sidebar-content">
+                <span class="keyword-tag">#불치하문</span>
+                <span class="keyword-tag">#ChatGPT</span>
+                <span class="keyword-tag">#AI질문</span>
+                <span class="keyword-tag">#레시피</span>
+                <span class="keyword-tag">#건강정보</span>
+                <span class="keyword-tag">#윤호선생님</span>
+                <span class="keyword-tag">#AI대화</span>
+                <span class="keyword-tag">#스마트폰</span>
+            </div>
+        </div>
+        
+        <!-- 검색어 -->
+        <div class="sidebar-item">
+            <div class="sidebar-title">🔍 검색</div>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="검색어를 입력하세요...">
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-margin"></div>
+    
+    <script>
+        let editMode = false;
+        let isPlaying = false;
+        let currentTime = 0;
+        let duration = 180;
+        let playInterval;
+        
+        function toggleEdit() {
+            editMode = !editMode;
+            const editableElements = document.querySelectorAll('[contenteditable]');
+            const btn = event.target;
+            
+            editableElements.forEach(el => {
+                el.contentEditable = editMode;
+            });
+            
+            if (editMode) {
+                btn.classList.add('active');
+                btn.textContent = '✅ 편집 중';
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '✏️ 편집 모드';
+            }
+        }
+        
+        function changeFontSize(action) {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            
+            if (action === 'increase') {
+                span.style.fontSize = '1.2em';
+            } else {
+                span.style.fontSize = '0.9em';
+            }
+            
+            range.surroundContents(span);
+        }
+        
+        function changeColor() {
+            const color = prompt('색상을 입력하세요 (예: red, #FF0000):');
+            if (color) {
+                document.execCommand('foreColor', false, color);
+            }
+        }
+        
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.lyrics-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('lyrics-' + lang).classList.add('active');
+        }
+        
+        function togglePlay() {
+            const playBtn = document.querySelector('.play-btn');
+            
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+                startPlayback();
+            } else {
+                isPlaying = false;
+                playBtn.innerHTML = '<div class="play-icon"></div>';
+                stopPlayback();
+            }
+        }
+        
+        function startPlayback() {
+            playInterval = setInterval(() => {
+                if (currentTime < duration) {
+                    currentTime++;
+                    updateProgress();
+                } else {
+                    togglePlay();
+                    currentTime = 0;
+                    updateProgress();
+                }
+            }, 1000);
+        }
+        
+        function stopPlayback() {
+            clearInterval(playInterval);
+        }
+        
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const timeDisplay = document.getElementById('timeDisplay');
+            
+            const percentage = (currentTime / duration) * 100;
+            progressFill.style.width = percentage + '%';
+            
+            const currentMin = Math.floor(currentTime / 60);
+            const currentSec = currentTime % 60;
+            const durationMin = Math.floor(duration / 60);
+            const durationSec = duration % 60;
+            
+            timeDisplay.textContent = 
+                `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${durationMin}:${durationSec.toString().padStart(2, '0')}`;
+        }
+        
+        function seek(event) {
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const percentage = x / rect.width;
+            
+            currentTime = Math.floor(duration * percentage);
+            updateProgress();
+        }
+        
+        updateProgress();
+        
+        // 달력 생성
+        const holidays = {
+            2025: {
+                1: [1],
+                2: [28, 29, 30],
+                3: [1, 3],
+                5: [5, 15],
+                6: [6],
+                8: [15],
+                9: [28, 29, 30],
+                10: [3, 9],
+                12: [25]
+            }
+        };
+        
+        const holidayNames = {
+            2025: {
+                '1-1': '신정',
+                '2-28': '설날',
+                '2-29': '설날',
+                '2-30': '설날',
+                '3-1': '삼일절',
+                '3-3': '대체휴일',
+                '5-5': '어린이날',
+                '5-15': '석가탄신일',
+                '6-6': '현충일',
+                '8-15': '광복절',
+                '9-28': '추석',
+                '9-29': '추석',
+                '9-30': '추석',
+                '10-3': '개천절',
+                '10-9': '한글날',
+                '12-25': '성탄절'
+            }
+        };
+        
+        function generateCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            
+            document.getElementById('calendar-month').textContent = 
+                year + '년 ' + (month + 1) + '월';
+            
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            
+            const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+            weekDays.forEach((day, index) => {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+                dayCell.style.fontWeight = '900';
+                if (index === 0) {
+                    dayCell.style.color = '#D32F2F';
+                }
+                grid.appendChild(dayCell);
+            });
+            
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const firstDayOfWeek = firstDay.getDay();
+            const lastDate = lastDay.getDate();
+            
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day';
+                emptyCell.style.opacity = '0.3';
+                grid.appendChild(emptyCell);
+            }
+            
+            const monthHolidays = (holidays[year] && holidays[year][month + 1]) || [];
+            const monthHolidayNames = holidayNames[year] || {};
+            
+            for (let date = 1; date <= lastDate; date++) {
+                const dateCell = document.createElement('div');
+                dateCell.className = 'calendar-day';
+                
+                const currentDate = new Date(year, month, date);
+                const dayOfWeek = currentDate.getDay();
+                
+                if (dayOfWeek === 0) {
+                    dateCell.style.color = '#D32F2F';
+                }
+                
+                const isHoliday = monthHolidays.includes(date);
+                const holidayKey = (month + 1) + '-' + date;
+                const holidayName = monthHolidayNames[holidayKey];
+                
+                if (isHoliday && holidayName) {
+                    dateCell.style.color = '#D32F2F';
+                    dateCell.style.fontWeight = '900';
+                    dateCell.innerHTML = date + '<br><span style="font-size: 9px;">' + holidayName + '</span>';
+                } else {
+                    dateCell.textContent = date;
+                }
+                
+                if (date === now.getDate() && month === now.getMonth() && year === now.getFullYear()) {
+                    dateCell.style.background = '#0066CC';
+                    dateCell.style.color = 'white';
+                    dateCell.style.fontWeight = '900';
+                }
+                
+                grid.appendChild(dateCell);
+            }
+        }
+        
+        generateCalendar();
+    </script>
+</body>
+</html>

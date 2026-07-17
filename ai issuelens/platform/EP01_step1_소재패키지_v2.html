@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens EP.01 — STEP 1 소재 패키지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #C8001A;
+  --redbg: #FFF0F3;
+  --ink: #0A0A0A;
+  --ink2: #1F2937;
+  --ink3: #4B5563;
+  --bg: #F7F9FC;
+  --white: #fff;
+  --bdr: #E2E8F0;
+  --amber: #B45309;
+  --ambbg: #FFFBEB;
+  --blu: #1E3A8A;
+  --blubg: #EFF6FF;
+  --grn: #065F46;
+  --grnbg: #ECFDF5;
+  --pur: #6D28D9;
+  --purbg: #EDE9FE;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* ── TOP ── */
+.topbar {
+  background: var(--ink);
+  color: #fff;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.topbar-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: .1em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; }
+.step-badge {
+  background: var(--red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  letter-spacing: .06em;
+}
+
+/* ── NAV ── */
+.tab-nav {
+  background: var(--white);
+  border-bottom: 2px solid var(--bdr);
+  display: flex;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.tab-btn {
+  padding: 14px 22px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink3);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab-btn:hover { color: var(--red); }
+.tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+.tab-num {
+  background: var(--bg);
+  border: 1px solid var(--bdr);
+  border-radius: 10px;
+  font-size: 11px;
+  padding: 1px 7px;
+  color: var(--ink3);
+}
+.tab-btn.active .tab-num { background: var(--redbg); border-color: #FFCCD5; color: var(--red); }
+
+/* ── PAGES ── */
+.page { display: none; max-width: 900px; margin: 0 auto; padding: 36px 24px 80px; }
+.page.active { display: block; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--bdr);
+}
+.page-header .eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.page-header h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  margin-bottom: 8px;
+}
+.page-header p {
+  font-size: 14px;
+  color: var(--ink3);
+}
+
+/* ── COPY BOX ── */
+.copy-wrap { position: relative; margin-bottom: 20px; }
+.copy-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink3);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.copy-box {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 12px;
+  padding: 18px 18px 52px;
+  white-space: pre-wrap;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--ink2);
+  position: relative;
+  min-height: 60px;
+}
+.copy-box.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  background: #0D1117;
+  color: #C9D1D9;
+  border-color: #30363D;
+  line-height: 1.75;
+}
+.copy-box.mono .cmt { color: #6E7681; }
+.copy-box.mono .kw { color: #FF7B72; }
+.copy-box.mono .str { color: #A5D6FF; }
+.copy-box.mono .num { color: #FFA657; }
+.copy-box.mono .fn { color: #D2A8FF; }
+
+.copy-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  z-index: 2;
+}
+.copy-btn:hover { background: #a30016; transform: translateY(-1px); }
+.copy-btn.ok { background: var(--grn); }
+
+/* ── SCENE CARD ── */
+.scene-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.scene-card {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-left: 5px solid var(--bdr);
+  border-radius: 0 12px 12px 0;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.scene-card.sec0 { border-left-color: #6D28D9; }
+.scene-card.sec1 { border-left-color: #C8001A; }
+.scene-card.sec2 { border-left-color: #1E3A8A; }
+.scene-card.sec3 { border-left-color: #B45309; }
+.scene-card.sec4 { border-left-color: #065F46; }
+.scene-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink3);
+  padding-top: 2px;
+}
+.scene-body h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.scene-body p { font-size: 13px; color: var(--ink3); line-height: 1.7; }
+.scene-tag {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid var(--bdr);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink3);
+  padding: 2px 8px;
+  margin-top: 6px;
+  margin-right: 4px;
+}
+.scene-tag.galaxy { background: #EDE9FE; border-color: #C4B5FD; color: var(--pur); }
+.scene-tag.screen { background: var(--blubg); border-color: #BFDBFE; color: var(--blu); }
+.scene-tag.record { background: var(--grnbg); border-color: #A7F3D0; color: var(--grn); }
+.scene-tag.graphic { background: var(--ambbg); border-color: #FDE68A; color: var(--amber); }
+
+/* ── PROMPT CARD ── */
+.prompt-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+.prompt-card {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.prompt-card-head {
+  background: var(--ink2);
+  color: #fff;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.prompt-card-head .scene-id {
+  background: var(--red);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: .06em;
+}
+.prompt-card-head .scene-title {
+  font-size: 14px;
+  font-weight: 700;
+  flex: 1;
+}
+.prompt-card-head .model-badge {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.prompt-card-body { padding: 16px 18px 48px; position: relative; }
+.prompt-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--ink2);
+  white-space: pre-wrap;
+}
+.prompt-hint {
+  font-size: 12px;
+  color: var(--ink3);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bdr);
+  line-height: 1.6;
+}
+
+/* ── INFO / WARN BOX ── */
+.info-box {
+  background: var(--blubg);
+  border: 1.5px solid #BFDBFE;
+  border-left: 5px solid var(--blu);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--blu);
+  line-height: 1.75;
+}
+.warn-box {
+  background: var(--ambbg);
+  border: 1.5px solid #FDE68A;
+  border-left: 5px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--amber);
+  line-height: 1.75;
+}
+.tip-box {
+  background: var(--grnbg);
+  border: 1.5px solid #A7F3D0;
+  border-left: 5px solid var(--grn);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--grn);
+  line-height: 1.75;
+}
+
+/* ── CHECKLIST ── */
+.check-group { margin-bottom: 28px; }
+.check-group-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink2);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.check-group-title::after { content:''; flex:1; height:1px; background:var(--bdr); }
+.cl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bdr);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink2);
+  transition: color .15s;
+}
+.cl-item:last-child { border-bottom: none; }
+.cl-item:hover { color: var(--ink); }
+.cl-box {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--bdr);
+  border-radius: 5px;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all .15s;
+}
+.cl-box.done { background: var(--grn); border-color: var(--grn); color: #fff; }
+.cl-item.done-item .cl-text { text-decoration: line-through; color: var(--ink3); }
+
+/* ── PROGRESS ── */
+.progress-wrap {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+}
+.progress-top { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--ink3); margin-bottom: 10px; }
+.prog-bar { background: var(--bg); border-radius: 8px; height: 10px; overflow: hidden; border: 1px solid var(--bdr); }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--red), #FF4A6A); border-radius: 8px; width: 0%; transition: width .4s ease; }
+
+/* ── DATA TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+.data-table th { background: var(--ink2); color: #fff; padding: 10px 14px; text-align: left; }
+.data-table th:first-child { border-radius: 8px 0 0 0; }
+.data-table th:last-child { border-radius: 0 8px 0 0; }
+.data-table td { padding: 10px 14px; border-bottom: 1px solid var(--bdr); vertical-align: top; }
+.data-table tr:nth-child(even) td { background: var(--bg); }
+.data-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+.data-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+.data-num { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--red); }
+.data-src { color: var(--ink3); font-size: 12px; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--bdr); margin: 28px 0; }
+
+/* ── GALAXY GUIDE ── */
+.gx-banner {
+  background: linear-gradient(135deg, #1a0533 0%, #2d1060 60%, #1a0533 100%);
+  border: 2px solid #7C3AED;
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 28px;
+  color: #fff;
+}
+.gx-banner-title {
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: -.01em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gx-banner-title .gx-logo {
+  background: #7C3AED;
+  border-radius: 8px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.gx-banner p { font-size: 13px; color: #C4B5FD; line-height: 1.7; margin-bottom: 0; }
+
+.gx-tool-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.gx-tool-card {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-top: 4px solid var(--pur);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.gx-tool-card.video { border-top-color: #C8001A; }
+.gx-tool-card.voice { border-top-color: #065F46; }
+.gx-tool-card.thumb { border-top-color: #B45309; }
+.gx-tool-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gx-tool-desc { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+.gx-tool-where {
+  margin-top: 8px;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink3);
+}
+.gx-tool-where span { color: var(--pur); }
+.gx-tool-card.video .gx-tool-where span { color: var(--red); }
+.gx-tool-card.voice .gx-tool-where span { color: var(--grn); }
+.gx-tool-card.thumb .gx-tool-where span { color: var(--amber); }
+
+.gx-step-flow {
+  background: var(--white);
+  border: 1.5px solid var(--bdr);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 28px;
+}
+.gx-step-flow-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gx-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.gx-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  position: relative;
+}
+.gx-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 30px;
+  bottom: 0;
+  width: 2px;
+  background: var(--bdr);
+}
+.gx-step-num {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  background: var(--pur);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.gx-step-content h5 { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.gx-step-content p { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+.gx-step-content .gx-tip {
+  display: inline-block;
+  margin-top: 4px;
+  background: var(--purbg);
+  border: 1px solid #C4B5FD;
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 11px;
+  color: var(--pur);
+  font-weight: 700;
+}
+
+.gx-action-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #1a0533;
+  color: #C4B5FD;
+  border: 1px solid #7C3AED;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  margin-top: 8px;
+  letter-spacing: .04em;
+}
+.gx-action-badge.img { background: #0D1830; color: #93C5FD; border-color: #3B82F6; }
+.gx-action-badge.vid { background: #1a0000; color: #FCA5A5; border-color: #EF4444; }
+.gx-action-badge.voice { background: #052e16; color: #6EE7B7; border-color: #059669; }
+
+.scene-tool-guide {
+  background: #f5f0ff;
+  border: 1.5px solid #C4B5FD;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #4c1d95;
+  line-height: 1.7;
+}
+.scene-tool-guide strong { color: var(--pur); }
+
+.prompt-how {
+  background: #1a0533;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 14px;
+  color: #C4B5FD;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.prompt-how .how-title {
+  color: #a78bfa;
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.prompt-how ol { padding-left: 18px; }
+.prompt-how ol li { margin-bottom: 4px; }
+.prompt-how .how-tip {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #3b2067;
+  color: #818cf8;
+  font-size: 11px;
+}
+
+/* ── FOLDER TREE ── */
+.folder-tree {
+  background: #0D1117;
+  border: 1.5px solid #30363D;
+  border-radius: 12px;
+  padding: 20px 22px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: #C9D1D9;
+  line-height: 2;
+  margin-bottom: 20px;
+}
+.ft-dir { color: #79C0FF; font-weight: 600; }
+.ft-file { color: #A5D6FF; }
+.ft-note { color: #6E7681; font-size: 12px; }
+.ft-new { color: #56D364; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo"><span class="logo-dot"></span>IssueLens EP.01 — STEP 1 소재 패키지</div>
+  <span class="step-badge">📦 대본 + 프롬프트 + 체크리스트 | Galaxy.ai → Filmora 순서</span>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('script',this)">📝 완성 대본 <span class="tab-num">TXT</span></button>
+  <button class="tab-btn" onclick="showTab('data',this)">📊 핵심 데이터 <span class="tab-num">8건</span></button>
+  <button class="tab-btn" onclick="showTab('scenes',this)">🎬 씬 구성표 <span class="tab-num">11씬</span></button>
+  <button class="tab-btn" onclick="showTab('prompts',this)">✨ Galaxy.ai 프롬프트 <span class="tab-num">9개</span></button>
+  <button class="tab-btn" onclick="showTab('folder',this)">📁 폴더 구조</button>
+  <button class="tab-btn" onclick="showTab('checklist',this)">✅ 소재 체크리스트</button>
+</nav>
+
+<!-- ================================================================ -->
+<!-- TAB 1: 완성 대본 -->
+<!-- ================================================================ -->
+<div id="tab-script" class="page active">
+  <div class="page-header">
+    <div class="eyebrow">EP.01 · 완성 대본 (나레이션 스크립트)</div>
+    <h2>알리·테무 개인정보 유출의 진실</h2>
+    <p>총 분량 약 16분 30초 | 섹션 5개 | 아래 [복사] 버튼으로 각 섹션 또는 전체를 복사하세요.</p>
+  </div>
+
+  <div class="info-box">
+    💡 <strong>사용법:</strong> 각 섹션을 개별 복사하거나 [전체 대본 복사] 버튼으로 한 번에 가져가세요. <span style="color:var(--red);font-weight:700;">[편집 디렉션]</span>은 촬영·편집 메모이며 나레이션에는 포함하지 않습니다.
+  </div>
+
+  <!-- 전체 복사 -->
+  <div class="copy-wrap">
+    <div class="copy-label">📋 전체 대본 한 번에 복사</div>
+    <div class="copy-box" id="full-script" style="max-height:100px;overflow:hidden;font-size:13px;color:var(--ink3);">▶ 전체 대본 (약 3,200자) — 아래 버튼으로 복사</div>
+    <button class="copy-btn" onclick="copyFull()">전체 복사</button>
+  </div>
+
+  <!-- SEC 00 -->
+  <div class="copy-wrap">
+    <div class="copy-label" style="color:var(--pur)">🎬 SEC.00 — 인트로 / 훅 &nbsp;|&nbsp; 00:00 – 01:30</div>
+    <div class="copy-box" id="sec00">여러분, 솔직히 물어볼게요.
+지난 한 달, 알리익스프레스나 테무에서 뭔가 하나쯤 사지 않으셨나요?
+
+500원짜리 양말, 3,000원짜리 폰케이스, 2만원도 안 하는 무선이어폰.
+저도 솔직히 삽니다. 근데 오늘 이 영상 보고 나면... 조금 달라질 수 있어요.
+
+[화면: 숫자 강조 그래픽 — "₩20억"]
+
+2024년 7월, 개인정보보호위원회가 알리익스프레스에 과징금 20억 원을 부과했습니다.
+이유요? 우리 이용자들의 개인정보를, 해외 판매자 18만 곳에 넘기면서 제대로 고지조차 안 했기 때문입니다.
+
+18만 곳이요. 18만.
+
+오늘 이 영상에서, 저는 한 가지 질문에 답할 겁니다.
+"내가 아낀 몇천 원이, 실제로 어디로 가고 있는가?"
+
+[타이틀 카드: IssueLens EP.01 | 당신의 '0원 결제', 그 뒤에 숨겨진 데이터 주권의 현주소]</div>
+    <button class="copy-btn" onclick="cp('sec00',this)">복사</button>
+  </div>
+
+  <!-- SEC 01 -->
+  <div class="copy-wrap">
+    <div class="copy-label" style="color:var(--red)">📦 SEC.01 — 개인정보 상납의 진실 &nbsp;|&nbsp; 01:30 – 05:30</div>
+    <div class="copy-box" id="sec01">알리나 테무 앱을 처음 설치할 때를 떠올려보세요.
+이름, 이메일, 전화번호를 입력합니다.
+앱이 위치, 카메라, 연락처 접근 권한을 요청합니다.
+우리는 그냥 '허용'을 누릅니다.
+
+그 순간부터 수집이 시작됩니다.
+단순히 이름과 주소만이 아닙니다.
+
+[화면: 데이터 수집 목록 인포그래픽]
+수집 정보: 이름·주소·전화번호 / 결제 카드 정보 / 구매 패턴·검색 기록 /
+기기 정보·IP 주소 / 위치 데이터 / 앱 사용 시간과 행동 패턴
+
+[화면: 데이터 흐름 인포그래픽 — 앱 → 서버 → 해외 판매자]
+
+개인정보보호위원회의 2024년 발표에 따르면, 알리익스프레스는 이 정보를
+해외 판매자 18만 곳에 전달했습니다.
+고지? 동의? 없었습니다.
+
+이게 왜 문제냐고요?
+
+생각해보세요. 여러분의 이름, 주소, 구매 기록이 한국 기업에 넘어간다면 우리는 분노합니다.
+고소하고, 불매하고, 뉴스에 나옵니다.
+그런데 그게 해외 서버를 통해, 해외 판매자 18만 곳에 넘어갔을 때 —
+우리가 할 수 있는 게 뭐가 있을까요?
+
+거의 없습니다.
+
+[화면: "삭제 요청" → 응답 없음 시나리오 시각화]
+
+실제로 이용자가 개인정보 삭제를 요청해도, 해외 서버에 있는 데이터는
+국내 법 집행이 실질적으로 어렵습니다.
+당신의 데이터는... 이미 어딘가에 있습니다. 그리고 돌아오지 않을 수 있습니다.</div>
+    <button class="copy-btn" onclick="cp('sec01',this)">복사</button>
+  </div>
+
+  <!-- SEC 02 -->
+  <div class="copy-wrap">
+    <div class="copy-label" style="color:var(--blu)">🔐 SEC.02 — 해외 서버 전송과 안보 위협 &nbsp;|&nbsp; 05:30 – 10:00</div>
+    <div class="copy-box" id="sec02">자, 여기서 한 가지 법을 보겠습니다.
+2017년 중국에서 제정된 법률, 국가정보법 제7조입니다.
+
+내용은 이렇습니다.
+"모든 조직과 시민은 국가 정보 활동을 지지·보조·협조해야 한다."
+
+'모든 조직'이라는 말, 기억해두세요.
+
+[화면: 알리·테무·쉬인 로고 → 중국 국기 연결 그래픽]
+
+알리익스프레스는 알리바바 그룹 소속. 중국 기업입니다.
+테무는 핀둬둬 홀딩스 산하. 역시 중국 기업입니다.
+쉬인도 설립은 중국이고, 지금도 핵심 운영 기반은 중국에 있습니다.
+
+이 기업들이 수집한 한국 이용자의 데이터가 중국 서버에 저장될 때,
+이 법에 따라 중국 정부는 언제든 이 데이터에 접근을 요구할 수 있는 구조가 됩니다.
+
+여러분의 쇼핑 기록이요?
+그게 뭐 대수냐고 생각할 수 있습니다.
+근데 한번 다르게 생각해보죠.
+
+[화면: 인포그래픽 — 개인 데이터 → 패턴 분석 → 집단 정보 → 국가 정보자산]
+
+수억 명의 쇼핑 패턴을 모으면,
+어느 지역에 사람이 몇 명 사는지, 어떤 상품을 소비하는지, 경제 수준은 어떤지 추정이 가능합니다.
+군인, 공무원, 기업 임원이 어디서 뭘 사는지도 나옵니다.
+
+이것은 단순한 소비 데이터가 아닙니다.
+집합적 국가 정보입니다.
+
+미국은 이미 행동에 나서고 있습니다.
+미 의회 청문회에서 틱톡 CEO를 불러 5시간 동안 심문했고,
+일부 주에서는 정부 기기에서 틱톡을 금지했습니다.
+같은 논리가 알리, 테무, 쉬인에도 적용되고 있습니다.
+
+한국은 지금 어디 있을까요?</div>
+    <button class="copy-btn" onclick="cp('sec02',this)">복사</button>
+  </div>
+
+  <!-- SEC 03 -->
+  <div class="copy-wrap">
+    <div class="copy-label" style="color:var(--amber)">⚖️ SEC.03 — 상호주의 없는 시장 개방 &nbsp;|&nbsp; 10:00 – 14:00</div>
+    <div class="copy-box" id="sec03">여기서 정말 화가 나는 부분을 말씀드릴게요.
+
+중국에서 구글 쓸 수 있나요? 안 됩니다.
+유튜브는요? 차단입니다.
+인스타그램은요? 역시 차단.
+카카오톡이나 네이버는요? 당연히 안 되죠.
+
+중국은 자국의 인터넷을 '만리방화벽(Great Firewall)'으로 철저히 통제합니다.
+한국 기업이 중국에서 자유롭게 데이터를 수집하고 영업하는 것은 사실상 불가능합니다.
+
+[화면: 대비 그래픽 — 왼쪽 중국(차단), 오른쪽 한국(개방)]
+
+그런데요.
+알리익스프레스는 한국에서 연간 수조 원의 매출을 올립니다.
+테무는 불과 2년 만에 한국 이커머스 상위권에 진입했습니다.
+이들은 우리 이용자 수억 건의 개인정보를 자유롭게 수집합니다.
+
+일방향적 개방은 곧 일방향적 착취입니다.
+
+경제적 피해도 있습니다.
+국내 소상공인, 제조업체, 이커머스 플랫폼이 피해를 입는 동안 —
+우리 소비자들은 데이터로 비용을 지불하고 있는 셈입니다.
+
+저는 소비자를 탓하는 게 아닙니다.
+비싼 걸 사라는 것도 아닙니다.
+
+다만, 우리가 무엇을 지불하고 있는지는 알아야 한다고 생각합니다.
+돈을 아끼는 대신, 우리는 데이터를 주고 있습니다.
+그 데이터가 어디로 가는지는, 이제 알았을 겁니다.</div>
+    <button class="copy-btn" onclick="cp('sec03',this)">복사</button>
+  </div>
+
+  <!-- SEC 04 -->
+  <div class="copy-wrap">
+    <div class="copy-label" style="color:var(--grn)">🎯 SEC.04 — 아웃트로 + 실천 강령 + CTA &nbsp;|&nbsp; 14:00 – 16:30</div>
+    <div class="copy-box" id="sec04">그렇다면 우리가 할 수 있는 건 뭘까요?
+네 가지를 말씀드릴게요.
+
+[화면: 4가지 실천 카드 순서대로 등장]
+
+첫째, 해외 직구 앱을 점검하세요.
+당장 삭제가 어렵다면, 최소한 앱 권한 설정에 들어가서
+위치, 연락처, 카메라 권한을 꺼두세요.
+가능하면 개인정보 삭제 요청도 해보세요. 앱 내 '내 정보 삭제' 기능이 있습니다.
+
+둘째, 국내 플랫폼을 의식적으로 이용해주세요.
+쿠팡, 네이버쇼핑, 무신사 등 국내 플랫폼을 이용하는 것이
+국내 개인정보 보호 법체계 안에서 데이터를 지키는 방법입니다.
+소비 선택 하나하나가 데이터 주권의 투표입니다.
+
+셋째, 이 내용을 공유해주세요.
+알아야 지킬 수 있습니다. 가족, 친구, 동료에게 이 영상을 보내주세요.
+특히 부모님 세대, 디지털 환경에 익숙하지 않은 분들께 더 필요한 정보입니다.
+
+넷째, 정책적 관심을 가져주세요.
+데이터 안보를 진지하게 다루는 정치인과 정책에 목소리를 내주세요.
+디지털 주권은 21세기 민주주의의 새로운 전선입니다.
+
+[화면: IssueLens 로고 + 구독 버튼 CTA]
+
+오늘 이 영상이 조금이라도 도움이 됐다면, 구독과 좋아요 부탁드립니다.
+IssueLens는 앞으로도 우리 일상과 연결된 이슈들을 데이터와 팩트로 풀어드릴 예정입니다.
+
+다음 에피소드에서 뵙겠습니다. 감사합니다.
+
+[엔딩 카드: 구독 / 다음 영상 / 커뮤니티 링크]</div>
+    <button class="copy-btn" onclick="cp('sec04',this)">복사</button>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 2: 핵심 데이터 -->
+<!-- ================================================================ -->
+<div id="tab-data" class="page">
+  <div class="page-header">
+    <div class="eyebrow">EP.01 · 팩트 & 수치</div>
+    <h2>핵심 데이터 레퍼런스 시트</h2>
+    <p>영상 제작 중 자막·인포그래픽에 직접 쓸 수 있는 검증된 수치들입니다. 출처와 함께 정리했습니다.</p>
+  </div>
+
+  <div class="warn-box">⚠️ 영상에서 수치를 인용할 때는 반드시 "출처: [기관명] [연도]" 자막을 함께 표시하세요. 신뢰도가 핵심입니다.</div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>분류</th>
+        <th>수치 / 팩트</th>
+        <th>출처</th>
+        <th>영상 활용 위치</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>과징금</strong></td>
+        <td><span class="data-num">₩20억</span><br>알리익스프레스 과징금 확정</td>
+        <td class="data-src">개인정보보호위원회<br>2024년 7월</td>
+        <td>인트로 훅 / 자막 풀스크린</td>
+      </tr>
+      <tr>
+        <td><strong>유출 규모</strong></td>
+        <td><span class="data-num">18만 곳</span><br>개인정보 무단 전달된 해외 판매자 수</td>
+        <td class="data-src">개인정보보호위원회<br>2024년 발표</td>
+        <td>SEC.01 / 반복 강조</td>
+      </tr>
+      <tr>
+        <td><strong>법률</strong></td>
+        <td><span class="data-num">제7조</span><br>중국 국가정보법 — "모든 조직·시민은 국가 정보활동에 협조해야"</td>
+        <td class="data-src">중국 국가정보법<br>2017년 제정</td>
+        <td>SEC.02 / 법 조문 자막</td>
+      </tr>
+      <tr>
+        <td><strong>수집 정보</strong></td>
+        <td><span class="data-num">6가지</span><br>이름·주소·전화번호 / 결제카드 / 구매패턴 / 기기정보 / 위치 / 행동패턴</td>
+        <td class="data-src">FTC 보고서 + 개보위<br>2024년</td>
+        <td>SEC.01 / 리스트 인포그래픽</td>
+      </tr>
+      <tr>
+        <td><strong>미국 조치</strong></td>
+        <td><span class="data-num">5시간</span><br>틱톡 CEO 미 의회 청문회 심문 시간</td>
+        <td class="data-src">미 의회 청문회<br>2023년 3월</td>
+        <td>SEC.02 / 비교 사례</td>
+      </tr>
+      <tr>
+        <td><strong>市場 규모</strong></td>
+        <td><span class="data-num">1,700만 명</span><br>알리+테무 국내 월간활성이용자(MAU) 합산</td>
+        <td class="data-src">중소벤처기업부 / 앱 통계<br>2024년 상반기</td>
+        <td>SEC.03 / 규모 강조</td>
+      </tr>
+      <tr>
+        <td><strong>면세 기준</strong></td>
+        <td><span class="data-num">150달러</span><br>해외직구 면세 한도 — 국내 기업과 세금 역차별 구조</td>
+        <td class="data-src">관세청 고시<br>현행</td>
+        <td>SEC.03 / 역차별 설명</td>
+      </tr>
+      <tr>
+        <td><strong>알리 매출</strong></td>
+        <td><span class="data-num">수조 원</span><br>알리익스프레스 한국 연간 매출 규모</td>
+        <td class="data-src">업계 추정치<br>2024년</td>
+        <td>SEC.03 / 비대칭 강조</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <div class="page-header" style="margin-top:0">
+    <h2 style="font-size:1.1rem">영상 자막용 수치 — 복사해서 바로 사용</h2>
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">💬 인트로 훅 자막 텍스트</div>
+    <div class="copy-box" id="caption1">과징금 ₩20억
+개인정보 유출 → 해외 판매자 18만 곳
+출처: 개인정보보호위원회 2024.07</div>
+    <button class="copy-btn" onclick="cp('caption1',this)">복사</button>
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">💬 국가정보법 자막 텍스트</div>
+    <div class="copy-box" id="caption2">중국 국가정보법 제7조 (2017)
+"모든 조직과 시민은 국가 정보 활동을
+지지·보조·협조해야 한다"</div>
+    <button class="copy-btn" onclick="cp('caption2',this)">복사</button>
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">💬 수집 정보 리스트 자막</div>
+    <div class="copy-box" id="caption3">【앱이 수집하는 정보】
+✓ 이름 · 주소 · 전화번호
+✓ 결제 카드 정보
+✓ 구매 패턴 · 검색 기록
+✓ 기기 정보 · IP 주소
+✓ 위치 데이터 (GPS)
+✓ 앱 사용 시간 · 행동 패턴</div>
+    <button class="copy-btn" onclick="cp('caption3',this)">복사</button>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 3: 씬 구성표 -->
+<!-- ================================================================ -->
+<div id="tab-scenes" class="page">
+  <div class="page-header">
+    <div class="eyebrow">EP.01 · 편집 가이드</div>
+    <h2>씬 구성표 (Shot List)</h2>
+    <p>각 씬별로 필요한 소재 유형과 Galaxy.ai 생성 여부를 정리했습니다.</p>
+  </div>
+
+  <div class="info-box">
+    🟣 <strong>Galaxy.ai 생성</strong> — AI로 만들 소재 &nbsp;|&nbsp;
+    🔵 <strong>스크린 캡처</strong> — 앱/사이트 직접 캡처 &nbsp;|&nbsp;
+    🟡 <strong>그래픽 직접 제작</strong> — Filmora 타이틀 기능 &nbsp;|&nbsp;
+    🟢 <strong>직접 촬영</strong> — 얼굴/손 촬영 (선택)
+  </div>
+
+  <div class="gx-banner" style="margin-bottom:20px">
+    <div class="gx-banner-title"><span class="gx-logo">✦ 작업 순서 안내</span> 씬 구성표를 보면서 Galaxy.ai 프롬프트 탭으로 이동하세요</div>
+    <p>이 표는 "어떤 씬에서 무슨 소재가 필요한지" 전체 흐름을 보여줍니다. 🟣 태그가 붙은 씬은 <strong>✨ Galaxy.ai 프롬프트 탭</strong>에서 순서대로 생성하세요. 🟡 태그는 Filmora에서 직접 만드는 부분이라 Galaxy.ai 불필요.</p>
+  </div>
+
+  <div class="scene-list">
+    <div class="scene-card sec0">
+      <div class="scene-time">00:00<br>~01:30<br>인트로</div>
+      <div class="scene-body">
+        <h4>🎬 씬 1 — 오프닝 훅</h4>
+        <p>알리·테무 앱 쇼핑 화면 B-roll + 긴박한 배경음. "₩20억" 숫자 풀스크린 등장. IssueLens 타이틀 카드.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 앱 쇼핑 분위기 클립</span>
+        <span class="scene-tag screen">앱 화면 스크린캡처</span>
+        <span class="scene-tag graphic">₩20억 타이틀 카드</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Video (Kling)</strong> 사용 → 프롬프트 탭 [씬 1] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec1">
+      <div class="scene-time">01:30<br>~03:00<br>CH.1-A</div>
+      <div class="scene-body">
+        <h4>📱 씬 2 — 앱 설치 & 권한 요청</h4>
+        <p>알리 앱 설치 → 회원가입 → 권한 요청 화면 순서대로. 실제 스마트폰 화면 녹화가 가장 자연스러움.</p>
+        <span class="scene-tag screen">앱 화면 직접 녹화</span>
+        <span class="scene-tag graphic">권한 항목 강조 표시</span>
+        <div class="scene-tool-guide" style="background:#eff6ff; border-color:#BFDBFE; color:#1E3A8A;">🔵 <strong>Galaxy.ai 불필요</strong> — 스마트폰에서 직접 녹화. 알리익스프레스 앱 설치 → 권한 팝업 화면을 화면녹화(안드로이드: 빠른설정 → 화면녹화 / iPhone: 제어센터 → 화면기록)로 촬영.</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec1">
+      <div class="scene-time">03:00<br>~04:00<br>CH.1-B</div>
+      <div class="scene-body">
+        <h4>📊 씬 3 — 수집 정보 인포그래픽</h4>
+        <p>"6가지 수집 정보" 항목이 하나씩 나타나는 애니메이션 카드. Filmora 타이틀 기능 또는 Galaxy.ai 이미지 생성.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 인포그래픽 배경</span>
+        <span class="scene-tag graphic">Filmora 텍스트 카드 애니메이션</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Image (Ideogram)</strong> → PNG 배경 생성 후 Filmora에서 텍스트 올리기 | 프롬프트 탭 [씬 3] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec1">
+      <div class="scene-time">04:00<br>~05:30<br>CH.1-C</div>
+      <div class="scene-body">
+        <h4>🔄 씬 4 — 데이터 흐름 인포그래픽</h4>
+        <p>"앱 → 중국 서버 → 해외 판매자 18만 곳"으로 데이터가 이동하는 화살표 애니메이션.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 데이터 흐름 배경 이미지</span>
+        <span class="scene-tag graphic">Filmora 화살표 모션 그래픽</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Video (Hailuo)</strong> → MP4 클립 생성 | 프롬프트 탭 [씬 4] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec2">
+      <div class="scene-time">05:30<br>~07:00<br>CH.2-A</div>
+      <div class="scene-body">
+        <h4>⚖️ 씬 5 — 국가정보법 제7조</h4>
+        <p>법 조문 텍스트 풀스크린 + "모든 조직" 강조. 어두운 배경에 흰 텍스트로 위압감 표현.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 법령 문서 분위기 배경</span>
+        <span class="scene-tag graphic">Filmora 법 조문 자막 카드</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Image (Ideogram)</strong> → 어두운 배경 PNG 생성 | 프롬프트 탭 [씬 5] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec2">
+      <div class="scene-time">07:00<br>~08:30<br>CH.2-B</div>
+      <div class="scene-body">
+        <h4>🏢 씬 6 — 알리바바·핀둬둬 기업 정보</h4>
+        <p>"알리 = 알리바바 = 중국기업" 연결 그래픽. 기업 로고는 사용 불가이므로 텍스트 카드로 대체.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 디지털 네트워크 배경</span>
+        <span class="scene-tag graphic">Filmora 텍스트 연결 그래픽</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Image (Ideogram)</strong> → 네트워크 배경 PNG 생성 | 프롬프트 탭 [씬 6] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec2">
+      <div class="scene-time">08:30<br>~10:00<br>CH.2-C</div>
+      <div class="scene-body">
+        <h4>🌐 씬 7 — 개인→집단→국가 정보 피라미드</h4>
+        <p>"수억 명의 데이터 → 국가 정보자산" 변환 과정을 시각화. 피라미드 또는 흐름도.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 데이터 집합 추상 이미지</span>
+        <span class="scene-tag graphic">Filmora 피라미드 모션 그래픽</span>
+        <div class="scene-tool-guide">⭐ <strong>Galaxy.ai Text to Video (Kling 1.6 Pro) — 최우선 생성!</strong> 영상의 핵심 씬. 크레딧 아끼지 말고 최고 품질로 | 프롬프트 탭 [씬 7] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec3">
+      <div class="scene-time">10:00<br>~12:00<br>CH.3-A</div>
+      <div class="scene-body">
+        <h4>🧱 씬 8 — 만리방화벽 vs 한국 개방</h4>
+        <p>왼쪽: 차단된 사이트 목록(구글·유튜브·인스타 등) / 오른쪽: 한국에서 자유로운 알리·테무. 대비 구도.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 방화벽/장벽 분위기 이미지</span>
+        <span class="scene-tag graphic">Filmora 좌우 분할 화면 + 텍스트</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Image (Ideogram)</strong> → 좌우 대비 배경 PNG 생성 | 프롬프트 탭 [씬 8] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec3">
+      <div class="scene-time">12:00<br>~14:00<br>CH.3-B</div>
+      <div class="scene-body">
+        <h4>💸 씬 9 — 경제 피해 시각화</h4>
+        <p>"소비자 지갑 → 중국 기업 매출 → 한국 소상공인 피해" 흐름. 금액 수치 강조.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 돈 흐름 추상 이미지</span>
+        <span class="scene-tag graphic">수치 강조 텍스트 카드</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Video (Hailuo)</strong> → 돈 흐름 MP4 클립 생성 | 프롬프트 탭 [씬 9] 참고</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec4">
+      <div class="scene-time">14:00<br>~16:00<br>CH.4</div>
+      <div class="scene-body">
+        <h4>✅ 씬 10 — 4가지 실천 카드</h4>
+        <p>카드 4장이 순서대로 등장. 각 카드마다 번호 + 핵심 행동 텍스트. 깔끔하고 임팩트 있게.</p>
+        <span class="scene-tag graphic">Filmora 카드 애니메이션 × 4</span>
+        <div class="scene-tool-guide" style="background:#f0fdf4; border-color:#A7F3D0; color:#065F46;">🟡 <strong>Galaxy.ai 불필요</strong> — Filmora에서 직접 제작. [타이틀] → [기본 자막 카드] 템플릿 4번 반복 사용.</div>
+      </div>
+    </div>
+
+    <div class="scene-card sec4">
+      <div class="scene-time">16:00<br>~16:30<br>아웃트로</div>
+      <div class="scene-body">
+        <h4>🎬 씬 11 — 엔딩 카드</h4>
+        <p>IssueLens 로고 + 구독 버튼 + 다음 에피소드 예고 텍스트. 채널 아이덴티티 강화.</p>
+        <span class="scene-tag galaxy">Galaxy.ai — 엔딩 배경 이미지</span>
+        <span class="scene-tag graphic">Filmora 엔딩 카드 템플릿</span>
+        <div class="scene-tool-guide">🟣 <strong>Galaxy.ai Text to Image (Ideogram)</strong> → 깔끔한 엔딩 배경 PNG 생성 | 프롬프트 탭 [씬 11] 참고 (이미지 씬 중 마지막으로 해도 무방)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 4: Galaxy.ai 프롬프트 -->
+<!-- ================================================================ -->
+<div id="tab-prompts" class="page">
+  <div class="page-header">
+    <div class="eyebrow">EP.01 · Galaxy.ai</div>
+    <h2>AI 이미지·영상 생성 프롬프트 9개</h2>
+    <p>각 씬에 맞는 프롬프트를 복사해서 Galaxy.ai에 바로 붙여넣으세요. 영어 프롬프트가 결과물이 더 좋습니다.</p>
+  </div>
+
+  <!-- ★ Galaxy.ai 입문 가이드 -->
+  <div class="gx-banner">
+    <div class="gx-banner-title">
+      <span class="gx-logo">✦ GALAXY.AI</span>
+      Filmora 편집 전, 이 탭에서 모든 AI 소재를 만듭니다
+    </div>
+    <p>galaxy.ai 에 접속 → 로그인 → 아래 순서대로 각 씬 프롬프트를 하나씩 생성하세요. 완전 초보도 복사+붙여넣기만 하면 됩니다.</p>
+  </div>
+
+  <!-- 어떤 툴을 쓰나? -->
+  <div class="page-header" style="margin-bottom:16px; padding-bottom:12px">
+    <h2 style="font-size:1rem">🛠️ Galaxy.ai 안에서 어떤 툴을 쓰나요?</h2>
+  </div>
+  <div class="gx-tool-row">
+    <div class="gx-tool-card">
+      <div class="gx-tool-name">🖼️ Text to Image</div>
+      <div class="gx-tool-desc">프롬프트 문장을 입력하면 정지 이미지(PNG/JPG)를 생성합니다. 씬 배경 이미지로 사용.</div>
+      <div class="gx-tool-where">메뉴: <span>Create → Text to Image</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">추천 모델: <span>Ideogram V2</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">출력: <span>PNG 파일 다운로드</span></div>
+    </div>
+    <div class="gx-tool-card video">
+      <div class="gx-tool-name">🎬 Text to Video</div>
+      <div class="gx-tool-desc">프롬프트로 5~10초 영상 클립을 생성합니다. 배경 B-roll, 데이터 흐름 애니메이션에 사용.</div>
+      <div class="gx-tool-where">메뉴: <span>Create → Text to Video</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">추천 모델: <span>Kling 1.6 / Hailuo</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">출력: <span>MP4 파일 다운로드</span></div>
+    </div>
+    <div class="gx-tool-card voice">
+      <div class="gx-tool-name">🎙️ AI Voice (TTS)</div>
+      <div class="gx-tool-desc">대본을 붙여넣으면 한국어 AI 나레이션을 생성합니다. 직접 녹음이 어려울 때 대안.</div>
+      <div class="gx-tool-where">메뉴: <span>Create → Text to Speech</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">추천 목소리: <span>Korean — 남성/여성 선택</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">출력: <span>MP3 파일 다운로드</span></div>
+    </div>
+    <div class="gx-tool-card thumb">
+      <div class="gx-tool-name">🖼️ 썸네일 생성</div>
+      <div class="gx-tool-desc">유튜브 썸네일 배경 이미지를 생성합니다. Text to Image와 동일한 방식으로 사용.</div>
+      <div class="gx-tool-where">메뉴: <span>Create → Text to Image</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">해상도: <span>1280×720 (16:9) 선택</span></div>
+      <div class="gx-tool-where" style="margin-top:4px">출력: <span>PNG → Filmora에서 텍스트 추가</span></div>
+    </div>
+  </div>
+
+  <!-- 한 번만 읽는 전체 사용 흐름 -->
+  <div class="gx-step-flow">
+    <div class="gx-step-flow-title">📋 Galaxy.ai 기본 사용 흐름 (처음 한 번만 읽어두세요)</div>
+    <div class="gx-steps">
+      <div class="gx-step">
+        <div class="gx-step-num">1</div>
+        <div class="gx-step-content">
+          <h5>galaxy.ai 접속 & 로그인</h5>
+          <p>브라우저에서 <strong>galaxy.ai</strong> 입력 → 구글 계정으로 로그인. 무료 크레딧으로 시작 가능.</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num">2</div>
+        <div class="gx-step-content">
+          <h5>툴 선택</h5>
+          <p>왼쪽 메뉴 또는 상단 <strong>[Create]</strong> 버튼 클릭 → 아래 프롬프트 카드에 표시된 툴 선택 (Text to Image 또는 Text to Video)</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num">3</div>
+        <div class="gx-step-content">
+          <h5>프롬프트 붙여넣기</h5>
+          <p>아래 각 씬 카드의 <strong>[복사]</strong> 버튼 클릭 → Galaxy.ai 프롬프트 입력창에 <strong>Ctrl+V (붙여넣기)</strong></p>
+          <span class="gx-tip">⚠️ 영어 프롬프트 그대로 사용 — 한글로 바꾸지 마세요</span>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num">4</div>
+        <div class="gx-step-content">
+          <h5>모델 & 설정 선택</h5>
+          <p>각 카드 오른쪽 위의 <strong>모델명</strong> 참고. 비율은 <strong>16:9</strong> 선택. 영상은 5~8초면 충분.</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num">5</div>
+        <div class="gx-step-content">
+          <h5>생성 & 다운로드</h5>
+          <p><strong>[Generate]</strong> 클릭 → 대기 (이미지: 10~30초, 영상: 1~3분) → 결과물 우클릭 또는 다운로드 버튼으로 저장</p>
+          <span class="gx-tip">💾 파일명: 카드에 적힌 이름으로 저장 (예: sc01_opening_shopping.mp4)</span>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num">6</div>
+        <div class="gx-step-content">
+          <h5>폴더에 정리</h5>
+          <p>다운로드된 파일을 <strong>01_galaxy_clips/</strong> 폴더로 이동. 폴더 탭에서 구조 확인 가능.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    💡 <strong>크레딧 절약 팁:</strong> 영상(Text to Video)이 이미지보다 크레딧을 많이 소비합니다. 씬 7 (피라미드 애니메이션)을 <strong>최우선</strong>으로 먼저 생성하고, 나머지 영상 씬(씬1, 씬4, 씬9)을 순서대로 생성하세요. 이미지(씬3, 5, 6, 8, 11)는 크레딧 소모가 적으니 나중에 해도 됩니다.
+  </div>
+
+  <div class="prompt-grid">
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 1</span>
+        <span class="scene-title">오프닝 훅 — 쇼핑 앱 B-roll 클립</span>
+        <span class="model-badge">Text → Video | Kling</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p1" style="padding-bottom:46px">A smartphone screen showing an online shopping app with cheap products, dollar signs and product listings scrolling rapidly. Dark atmosphere, ominous red glow in background. Numbers flying: "20억", "18만". Korean text overlays. Cinematic news documentary style. 4K quality.</div>
+          <button class="copy-btn" onclick="cp('p1',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 생성 후 → Filmora 타임라인 인트로 구간(00:00~01:30)에 배치. 나레이션 오디오 위에 올리기.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 1</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Video</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Kling 1.6</strong> 선택 / 비율: <strong>16:9</strong> / 길이: <strong>5초</strong></li>
+            <li><strong>[Generate]</strong> 클릭 → 약 2~3분 대기</li>
+            <li>결과 영상 <strong>[Download]</strong> → 파일명: <code>sc01_opening_shopping.mp4</code></li>
+          </ol>
+          <div class="how-tip">⏭️ 다음: 씬 7 (피라미드) → 씬 4 (데이터 흐름) → 씬 9 (돈 흐름) 순으로 영상 생성 후 이미지 씬으로 넘어가세요.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 3</span>
+        <span class="scene-title">수집 정보 인포그래픽 배경</span>
+        <span class="model-badge">Text → Image | Ideogram</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p2" style="padding-bottom:46px">Dark digital background with flowing data streams, binary code, and glowing blue-red connection nodes. Abstract visualization of personal data being collected: icons for phone, location pin, credit card, eye. Clean infographic style. Space for text overlay. No text in image. 16:9 ratio.</div>
+          <button class="copy-btn" onclick="cp('p2',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 정적 이미지(PNG)로 다운로드 → Filmora에서 배경으로 배치 후 텍스트 카드 자막 레이어 위에 올리기.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 3</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Image</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Ideogram V2</strong> 선택 / 비율: <strong>16:9</strong> (Landscape)</li>
+            <li><strong>[Generate]</strong> 클릭 → 약 15~30초 대기</li>
+            <li>마음에 드는 이미지 우클릭 → <strong>이미지 다른 이름으로 저장</strong> → 파일명: <code>sc03_data_infographic_bg.png</code></li>
+          </ol>
+          <div class="how-tip">💡 여러 장 생성됩니다. 가장 어둡고 텍스트 공간이 넓은 이미지를 선택하세요.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 4</span>
+        <span class="scene-title">데이터 흐름 — 앱→서버→18만 판매자</span>
+        <span class="model-badge">Text → Video | Hailuo</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p3" style="padding-bottom:46px">Animated data flow visualization: glowing particles flowing from a smartphone icon, through server nodes, spreading out to hundreds of destination points. Dark background, red and orange color palette. The flow accelerates to show mass data transfer. Cinematic, dramatic. No text.</div>
+          <button class="copy-btn" onclick="cp('p3',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 영상 클립(MP4) 다운로드 → 씬 4 구간 배경으로 사용. Filmora에서 "앱 → 중국 서버 → 18만 판매자" 텍스트 오버레이 추가.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 4</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Video</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Hailuo</strong> 선택 / 비율: <strong>16:9</strong> / 길이: <strong>6초</strong></li>
+            <li><strong>[Generate]</strong> 클릭 → 약 2~3분 대기</li>
+            <li>결과 영상 <strong>[Download]</strong> → 파일명: <code>sc04_data_flow.mp4</code></li>
+          </ol>
+          <div class="how-tip">💡 Hailuo는 흐르는 파티클 애니메이션에 강합니다. Kling 결과가 마음에 안 들면 Hailuo로 재시도.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 5</span>
+        <span class="scene-title">국가정보법 법령 문서 배경</span>
+        <span class="model-badge">Text → Image | Ideogram</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p4" style="padding-bottom:46px">Dark dramatic background suggesting official government document or law text. Deep black with subtle red glow at edges. Minimalist, authoritative atmosphere. Blurred abstract legal document texture in background. Space for large white text overlay in center. No readable text in image. Cinematic aspect ratio 16:9.</div>
+          <button class="copy-btn" onclick="cp('p4',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 배경 이미지로 사용 → Filmora에서 "중국 국가정보법 제7조" 법 조문 자막 카드를 위에 배치. 텍스트 컬러: 흰색/빨간 강조.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 5</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Image</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Ideogram V2</strong> / 비율: <strong>16:9</strong></li>
+            <li><strong>[Generate]</strong> → 가장 어둡고 권위적인 느낌의 이미지 선택</li>
+            <li>저장 → 파일명: <code>sc05_law_bg.png</code></li>
+          </ol>
+          <div class="how-tip">💡 이미지에 텍스트가 없어야 합니다. 텍스트가 생성되면 재생성(Re-generate) 클릭.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 6</span>
+        <span class="scene-title">기업 연결 네트워크 그래픽</span>
+        <span class="model-badge">Text → Image | Ideogram</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p5" style="padding-bottom:46px">Abstract corporate network visualization. Multiple corporate nodes connected by glowing lines on dark background. Red and dark blue color scheme. Shows hierarchy and ownership connections between companies. Clean minimal style, no logos, no identifiable brand elements. Space for text labels. 16:9.</div>
+          <button class="copy-btn" onclick="cp('p5',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 배경으로 사용 → Filmora 텍스트로 "알리익스프레스 = 알리바바 그룹 = 중국" 연결 관계 직접 레이어링.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 6</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Image</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Ideogram V2</strong> / 비율: <strong>16:9</strong></li>
+            <li><strong>[Generate]</strong> → 노드/연결선이 명확히 보이는 이미지 선택</li>
+            <li>저장 → 파일명: <code>sc06_corp_network.png</code></li>
+          </ol>
+          <div class="how-tip">💡 로고나 실제 브랜드 이미지가 생성되면 반드시 재생성하세요. 추상적인 네트워크 그래픽만 사용.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 7</span>
+        <span class="scene-title">개인→국가 정보 피라미드 (애니메이션)</span>
+        <span class="model-badge">Text → Video | Kling</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p6" style="padding-bottom:46px">Animated visualization: thousands of individual data points (small dots representing people) flowing upward and merging into larger clusters, then into a massive glowing orb at the top representing national intelligence. Deep space dark background, warm orange-red glow. Abstract, no faces. The transformation shows individual → collective → strategic value. Dramatic camera pull-back.</div>
+          <button class="copy-btn" onclick="cp('p6',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 씬 7 "집합적 국가 정보" 구간 배경 클립으로 사용. 가장 임팩트 있는 장면이므로 최고 품질 모델 선택 권장.</div>
+        <div class="prompt-how">
+          <div class="how-title">⭐ Galaxy.ai 조작 순서 — 씬 7 【최우선 생성】</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Video</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Kling 1.6 Pro</strong> (가장 고품질) / 비율: <strong>16:9</strong> / 길이: <strong>8초</strong></li>
+            <li><strong>[Generate]</strong> 클릭 → 약 3~5분 대기 (Pro 모델은 조금 더 걸림)</li>
+            <li>결과 영상 <strong>[Download]</strong> → 파일명: <code>sc07_data_pyramid.mp4</code></li>
+          </ol>
+          <div class="how-tip">⭐ 이 씬은 영상의 핵심 메시지입니다. 결과가 마음에 안 들면 2~3번 재생성해서 최고 결과물을 선택하세요. 크레딧을 여기에 집중 투자할 가치 있음.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 8</span>
+        <span class="scene-title">만리방화벽 — 장벽 이미지</span>
+        <span class="model-badge">Text → Image | Ideogram</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p7" style="padding-bottom:46px">Abstract digital wall or barrier dividing two spaces. Left side: dark, blocked, restricted — red warning symbols, blocked connection icons. Right side: open, flowing, connected — blue data streams. Clean split-screen concept. Dark background with high contrast. Metaphor for internet censorship. No text, no flags, no identifiable symbols. 16:9.</div>
+          <button class="copy-btn" onclick="cp('p7',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 좌우 분할 화면 배경으로 사용 → Filmora에서 왼쪽에 "차단: Google·YouTube·Instagram" 오른쪽에 "개방: 알리·테무·쉬인" 텍스트 오버레이.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 8</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Image</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Ideogram V2</strong> / 비율: <strong>16:9</strong></div></li>
+            <li><strong>[Generate]</strong> → 좌우가 명확히 구분된 이미지 선택</li>
+            <li>저장 → 파일명: <code>sc08_firewall.png</code></li>
+          </ol>
+          <div class="how-tip">💡 왼쪽(어둡고 막힌 느낌)과 오른쪽(밝고 열린 느낌)이 대비되는 이미지를 선택하세요.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 9</span>
+        <span class="scene-title">경제 피해 — 돈 흐름 시각화</span>
+        <span class="model-badge">Text → Video | Hailuo</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p8" style="padding-bottom:46px">Animated visualization of money and value flowing one direction. Korean currency symbols (₩) and data packets flowing from multiple individual users toward a single large destination, leaving the source depleted. Dark background, gold and red colors. Shows economic extraction concept. Abstract, no faces, no identifiable elements. Slow dramatic camera movement.</div>
+          <button class="copy-btn" onclick="cp('p8',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 경제적 착취 구조 설명 구간 배경. Filmora에서 "₩수조 원 매출" "국내 소상공인 피해" 자막 추가.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 9</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Video</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Hailuo</strong> / 비율: <strong>16:9</strong> / 길이: <strong>6초</strong></li>
+            <li><strong>[Generate]</strong> 클릭 → 약 2~3분 대기</li>
+            <li>결과 영상 <strong>[Download]</strong> → 파일명: <code>sc09_money_flow.mp4</code></li>
+          </ol>
+          <div class="how-tip">💡 금색과 빨간색 흐름이 선명하게 나오는 결과물을 선택. 너무 복잡하면 단순한 것 선택.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-head">
+        <span class="scene-id">씬 11</span>
+        <span class="scene-title">엔딩 카드 배경</span>
+        <span class="model-badge">Text → Image | Ideogram</span>
+      </div>
+      <div class="prompt-card-body">
+        <div class="copy-wrap" style="margin-bottom:0">
+          <div class="copy-box mono" id="p9" style="padding-bottom:46px">Clean professional news channel ending card background. Dark charcoal background with subtle red accent line at top. Minimalist design. Space for channel logo, subscribe button text, and next episode preview in center and lower thirds. Modern Korean news media aesthetic. No text in image. 16:9.</div>
+          <button class="copy-btn" onclick="cp('p9',this)">복사</button>
+        </div>
+        <div class="prompt-hint">📌 엔딩 15~30초 배경 이미지. Filmora 엔딩 카드 템플릿과 레이어링해서 구독 버튼 CTA 완성.</div>
+        <div class="prompt-how">
+          <div class="how-title">🟣 Galaxy.ai 조작 순서 — 씬 11 (마지막으로 해도 OK)</div>
+          <ol>
+            <li>galaxy.ai → <strong>Create → Text to Image</strong> 클릭</li>
+            <li>위 프롬프트 <strong>[복사]</strong> → 입력창에 붙여넣기</li>
+            <li>모델: <strong>Ideogram V2</strong> / 비율: <strong>16:9</strong></li>
+            <li><strong>[Generate]</strong> → 깔끔하고 전문적인 느낌의 이미지 선택</li>
+            <li>저장 → 파일명: <code>sc11_ending_bg.png</code></li>
+          </ol>
+          <div class="how-tip">✅ 이 씬까지 완료하면 Galaxy.ai 작업 종료! 모든 파일을 01_galaxy_clips/ 폴더에 정리 후 체크리스트 탭에서 확인하세요.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── AI 나레이션 (TTS) 선택 안내 ── -->
+  <hr>
+  <div class="page-header" style="margin-bottom:16px; padding-bottom:12px; margin-top:0">
+    <div class="eyebrow">선택 사항</div>
+    <h2 style="font-size:1rem">🎙️ 직접 녹음이 어렵다면 — Galaxy.ai AI Voice (TTS)</h2>
+  </div>
+  <div class="info-box">
+    💡 목소리 녹음이 부담스러우면 Galaxy.ai의 <strong>Text to Speech</strong> 기능으로 한국어 AI 나레이션을 생성할 수 있습니다. 단, 직접 녹음이 영상 신뢰도와 개성에 훨씬 유리합니다.
+  </div>
+  <div class="gx-step-flow">
+    <div class="gx-step-flow-title">🎙️ Galaxy.ai AI Voice 사용법</div>
+    <div class="gx-steps">
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#065F46">1</div>
+        <div class="gx-step-content">
+          <h5>galaxy.ai → Create → Text to Speech 클릭</h5>
+          <p>왼쪽 메뉴 또는 상단 Create 버튼에서 <strong>Text to Speech</strong> 선택.</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#065F46">2</div>
+        <div class="gx-step-content">
+          <h5>대본 탭 → 섹션별 텍스트 복사 → 붙여넣기</h5>
+          <p>한 번에 전체 대본을 넣거나, SEC.00~04를 나눠서 넣기. 너무 길면 섹션별로 분할 권장.</p>
+          <span class="gx-tip">⚠️ [편집 디렉션] 표시 텍스트([화면: ...])는 삭제 후 붙여넣기</span>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#065F46">3</div>
+        <div class="gx-step-content">
+          <h5>언어: Korean / 목소리 선택 / 속도 조절</h5>
+          <p>Language: <strong>Korean</strong> → 남성/여성 목소리 미리듣기 후 선택. 속도(Speed)는 <strong>0.95~1.0</strong> 권장 (너무 빠르면 부자연스러움).</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#065F46">4</div>
+        <div class="gx-step-content">
+          <h5>Generate → Download MP3</h5>
+          <p>생성 완료 후 <strong>[Download]</strong> → 파일명: <code>narration_full.mp3</code> → <code>03_audio/</code> 폴더에 저장.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ================================================================ -->
+<div id="tab-folder" class="page">
+  <div class="page-header">
+    <div class="eyebrow">EP.01 · 파일 관리</div>
+    <h2>권장 폴더 구조</h2>
+    <p>이 구조대로 파일을 정리하면 Filmora 편집 시 소재를 찾는 시간을 줄일 수 있습니다.</p>
+  </div>
+
+  <div class="warn-box">⚠️ 파일명에 한글 대신 영문+숫자를 사용하면 Filmora 임포트 오류가 줄어듭니다.</div>
+
+  <div class="folder-tree">
+<span class="ft-dir">📁 IssueLens_EP01/</span>
+│
+<span class="ft-dir">├── 📁 00_script/</span>
+│   <span class="ft-new">├── EP01_script_full.txt</span>         <span class="ft-note">← 이 패키지 대본 탭에서 복사</span>
+│   <span class="ft-new">├── EP01_data_reference.txt</span>       <span class="ft-note">← 핵심 데이터 탭에서 복사</span>
+│   └── EP01_shot_list.txt                <span class="ft-note">← 씬 구성표 탭 참고</span>
+│
+<span class="ft-dir">├── 📁 01_galaxy_clips/</span>             <span class="ft-note">← Galaxy.ai 생성 결과물</span>
+│   ├── <span class="ft-file">sc01_opening_shopping.mp4</span>     <span class="ft-note">씬1 프롬프트 결과</span>
+│   ├── <span class="ft-file">sc03_data_infographic_bg.png</span>  <span class="ft-note">씬3 프롬프트 결과</span>
+│   ├── <span class="ft-file">sc04_data_flow.mp4</span>            <span class="ft-note">씬4 프롬프트 결과</span>
+│   ├── <span class="ft-file">sc05_law_bg.png</span>               <span class="ft-note">씬5 프롬프트 결과</span>
+│   ├── <span class="ft-file">sc06_corp_network.png</span>         <span class="ft-note">씬6 프롬프트 결과</span>
+│   ├── <span class="ft-file">sc07_data_pyramid.mp4</span>         <span class="ft-note">씬7 프롬프트 결과 ★핵심</span>
+│   ├── <span class="ft-file">sc08_firewall.png</span>             <span class="ft-note">씬8 프롬프트 결과</span>
+│   ├── <span class="ft-file">sc09_money_flow.mp4</span>           <span class="ft-note">씬9 프롬프트 결과</span>
+│   └── <span class="ft-file">sc11_ending_bg.png</span>            <span class="ft-note">씬11 프롬프트 결과</span>
+│
+<span class="ft-dir">├── 📁 02_screen_captures/</span>           <span class="ft-note">← 직접 캡처한 소재</span>
+│   ├── <span class="ft-file">aliexpress_app_install.mp4</span>    <span class="ft-note">앱 설치 화면 녹화</span>
+│   ├── <span class="ft-file">aliexpress_permissions.png</span>    <span class="ft-note">권한 요청 화면</span>
+│   └── <span class="ft-file">temu_app_signup.mp4</span>          <span class="ft-note">테무 회원가입 화면</span>
+│
+<span class="ft-dir">├── 📁 03_audio/</span>
+│   ├── <span class="ft-file">narration_full.mp3</span>            <span class="ft-note">완성 나레이션 녹음</span>
+│   └── <span class="ft-file">bgm_track.mp3</span>                <span class="ft-note">Filmora 내장 라이브러리</span>
+│
+<span class="ft-dir">├── 📁 04_thumbnail/</span>
+│   ├── <span class="ft-file">thumbnail_concept_a.png</span>       <span class="ft-note">Galaxy.ai 생성 배경</span>
+│   └── <span class="ft-file">thumbnail_final_1280x720.jpg</span>  <span class="ft-note">완성 썸네일</span>
+│
+<span class="ft-dir">└── 📁 05_filmora_project/</span>
+    ├── <span class="ft-file">EP01_edit_v1.flp</span>             <span class="ft-note">Filmora 프로젝트 파일</span>
+    └── <span class="ft-new">EP01_final_1080p.mp4</span>          <span class="ft-note">← 최종 내보내기 결과물</span>
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">📋 폴더 생성 명령어 (Windows PowerShell)</div>
+    <div class="copy-box mono" id="folder-cmd">mkdir IssueLens_EP01
+cd IssueLens_EP01
+mkdir 00_script, 01_galaxy_clips, 02_screen_captures, 03_audio, 04_thumbnail, 05_filmora_project</div>
+    <button class="copy-btn" onclick="cp('folder-cmd',this)">복사</button>
+  </div>
+
+  <div class="copy-wrap">
+    <div class="copy-label">📋 폴더 생성 명령어 (Mac Terminal)</div>
+    <div class="copy-box mono" id="folder-cmd-mac">mkdir -p IssueLens_EP01/{00_script,01_galaxy_clips,02_screen_captures,03_audio,04_thumbnail,05_filmora_project}</div>
+    <button class="copy-btn" onclick="cp('folder-cmd-mac',this)">복사</button>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 6: 소재 체크리스트 -->
+<!-- ================================================================ -->
+<div id="tab-checklist" class="page">
+  <div class="page-header">
+    <div class="eyebrow">EP.01 · STEP 1 완료 확인</div>
+    <h2>소재 수집 체크리스트</h2>
+    <p>Filmora 편집(STEP 3)을 시작하기 전에 모든 소재가 준비됐는지 확인하세요.</p>
+  </div>
+
+  <div class="gx-banner" style="margin-bottom:24px">
+    <div class="gx-banner-title"><span class="gx-logo">✦ GALAXY.AI</span> 생성 완료 기준 — 이 기준으로 체크하세요</div>
+    <p>
+      🎬 <strong>영상 클립(MP4)</strong>: 씬 1, 4, 7, 9 → 각각 <strong>5~8초</strong> 분량, 배경 화면에 빈 공간이 있어야 함<br>
+      🖼️ <strong>이미지(PNG)</strong>: 씬 3, 5, 6, 8, 11 → <strong>이미지 내 텍스트 없음</strong>, 16:9 비율 확인<br>
+      💾 <strong>파일 저장 위치</strong>: IssueLens_EP01 → 01_galaxy_clips/ 폴더 안에 모두 보관
+    </p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span>STEP 1 완료율</span>
+      <span id="prog-text">0 / 20 완료</span>
+    </div>
+    <div class="prog-bar">
+      <div class="prog-fill" id="prog-fill"></div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">📝 대본 준비</div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">EP.01 전체 대본 TXT 파일 저장 완료 (대본 탭 → 전체 복사)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">섹션별 대본 분리 저장 (SEC.00~04)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">핵심 데이터 레퍼런스 시트 저장 (데이터 탭)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">자막용 수치 텍스트 3종 복사 완료</span></div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">✨ Galaxy.ai 생성 소재 (영상 클립 4개)</div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬1 — 오프닝 쇼핑 B-roll 클립 (sc01_opening_shopping.mp4)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬4 — 데이터 흐름 애니메이션 클립 (sc04_data_flow.mp4)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬7 — 개인→국가 피라미드 클립 ★최우선 (sc07_data_pyramid.mp4)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬9 — 경제 피해 돈 흐름 클립 (sc09_money_flow.mp4)</span></div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">🖼️ Galaxy.ai 생성 소재 (이미지 5개)</div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬3 — 데이터 수집 인포그래픽 배경 PNG</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬5 — 법령 문서 분위기 배경 PNG</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬6 — 기업 연결 네트워크 배경 PNG</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬8 — 만리방화벽 분할 이미지 PNG</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">씬11 — 엔딩 카드 배경 PNG</span></div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">📱 직접 캡처 소재</div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">알리익스프레스 앱 설치→권한 요청 화면 녹화 (스마트폰)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">테무 앱 회원가입 화면 스크린샷</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">앱 권한 요청 팝업 스크린샷 (위치/연락처/카메라)</span></div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">🎙️ 오디오</div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">나레이션 녹음 완료 (마이크 품질 확인)</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">배경음악 선정 (Filmora 내장 라이브러리 — 뉴스/긴박한 분위기)</span></div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">📁 파일 정리</div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">IssueLens_EP01 폴더 구조 생성 완료</span></div>
+    <div class="cl-item" onclick="toggleCl(this)"><span class="cl-box">✓</span><span class="cl-text">모든 소재 파일명 영문으로 변경 후 해당 폴더 이동</span></div>
+  </div>
+
+  <div class="tip-box" style="margin-top:24px">
+    ✅ <strong>모든 항목 체크 완료 시 → STEP 2 (Galaxy.ai 최종 검토) 또는 STEP 3 (Filmora 편집) 진행 가능합니다.</strong>
+  </div>
+
+  <div class="gx-step-flow" style="margin-top:20px">
+    <div class="gx-step-flow-title">🗺️ 전체 작업 흐름 요약 (Galaxy.ai → Filmora)</div>
+    <div class="gx-steps">
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#7C3AED">A</div>
+        <div class="gx-step-content">
+          <h5>📝 대본 탭 → 복사</h5>
+          <p>각 섹션(SEC.00~04) 복사 → <code>EP01_script_full.txt</code>로 저장. 나레이션 녹음 시 이 파일 열어서 읽기.</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#7C3AED">B</div>
+        <div class="gx-step-content">
+          <h5>✨ Galaxy.ai 프롬프트 탭 → 소재 생성 (이 탭)</h5>
+          <p>생성 권장 순서: <strong>씬7(영상) → 씬1(영상) → 씬4(영상) → 씬9(영상) → 씬3(이미지) → 씬5 → 씬6 → 씬8 → 씬11</strong></p>
+          <span class="gx-tip">각 씬 프롬프트 카드의 [Galaxy.ai 조작 순서] 박스를 보면서 하나씩 따라하기</span>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#1E3A8A">C</div>
+        <div class="gx-step-content">
+          <h5>📱 직접 캡처 → 씬 2 스마트폰 녹화</h5>
+          <p>알리익스프레스 앱 설치 화면 + 권한 요청 팝업 → 화면녹화로 저장. 씬 구성표 탭 [씬 2] 참고.</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#B45309">D</div>
+        <div class="gx-step-content">
+          <h5>🎙️ 나레이션 녹음</h5>
+          <p>대본 탭 → SEC.00~04 복사 → 마이크로 녹음 → <code>narration_full.mp3</code>로 저장. (또는 Galaxy.ai TTS 활용)</p>
+        </div>
+      </div>
+      <div class="gx-step">
+        <div class="gx-step-num" style="background:#065F46">E</div>
+        <div class="gx-step-content">
+          <h5>✅ 이 체크리스트에서 전부 체크 → Filmora(STEP 3) 진행</h5>
+          <p>위 체크리스트를 모두 완료한 뒤 <strong>Filmora에서 타임라인 편집</strong> 시작. 소재가 없으면 편집 불가!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 탭 전환 ──
+function showTab(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── 복사 ──
+function cp(id, btn) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.innerText || el.textContent).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ 복사됨';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
+  });
+}
+
+function copyFull() {
+  const text = `[IssueLens EP.01 — 완성 대본]
+알리·테무 개인정보 유출의 진실 | 데이터 주권 완전 분석
+총 분량: 약 16분 30초
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SEC.00 — 인트로 / 훅 (00:00 – 01:30)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+여러분, 솔직히 물어볼게요.
+지난 한 달, 알리익스프레스나 테무에서 뭔가 하나쯤 사지 않으셨나요?
+
+500원짜리 양말, 3,000원짜리 폰케이스, 2만원도 안 하는 무선이어폰.
+저도 솔직히 삽니다. 근데 오늘 이 영상 보고 나면... 조금 달라질 수 있어요.
+
+[화면: 숫자 강조 그래픽 — "₩20억"]
+
+2024년 7월, 개인정보보호위원회가 알리익스프레스에 과징금 20억 원을 부과했습니다.
+이유요? 우리 이용자들의 개인정보를, 해외 판매자 18만 곳에 넘기면서 제대로 고지조차 안 했기 때문입니다.
+
+18만 곳이요. 18만.
+
+오늘 이 영상에서, 저는 한 가지 질문에 답할 겁니다.
+"내가 아낀 몇천 원이, 실제로 어디로 가고 있는가?"
+
+[타이틀 카드: IssueLens EP.01 | 당신의 '0원 결제', 그 뒤에 숨겨진 데이터 주권의 현주소]
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SEC.01 — 개인정보 상납의 진실 (01:30 – 05:30)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+알리나 테무 앱을 처음 설치할 때를 떠올려보세요.
+이름, 이메일, 전화번호를 입력합니다.
+앱이 위치, 카메라, 연락처 접근 권한을 요청합니다.
+우리는 그냥 '허용'을 누릅니다.
+
+그 순간부터 수집이 시작됩니다.
+단순히 이름과 주소만이 아닙니다.
+
+[화면: 데이터 수집 목록 인포그래픽]
+수집 정보: 이름·주소·전화번호 / 결제 카드 정보 / 구매 패턴·검색 기록 /
+기기 정보·IP 주소 / 위치 데이터 / 앱 사용 시간과 행동 패턴
+
+[화면: 데이터 흐름 인포그래픽 — 앱 → 서버 → 해외 판매자]
+
+개인정보보호위원회의 2024년 발표에 따르면, 알리익스프레스는 이 정보를
+해외 판매자 18만 곳에 전달했습니다.
+고지? 동의? 없었습니다.
+
+이게 왜 문제냐고요?
+
+생각해보세요. 여러분의 이름, 주소, 구매 기록이 한국 기업에 넘어간다면 우리는 분노합니다.
+고소하고, 불매하고, 뉴스에 나옵니다.
+그런데 그게 해외 서버를 통해, 해외 판매자 18만 곳에 넘어갔을 때 —
+우리가 할 수 있는 게 뭐가 있을까요?
+
+거의 없습니다.
+
+[화면: "삭제 요청" → 응답 없음 시나리오 시각화]
+
+실제로 이용자가 개인정보 삭제를 요청해도, 해외 서버에 있는 데이터는
+국내 법 집행이 실질적으로 어렵습니다.
+당신의 데이터는... 이미 어딘가에 있습니다. 그리고 돌아오지 않을 수 있습니다.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SEC.02 — 해외 서버 전송과 안보 위협 (05:30 – 10:00)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+자, 여기서 한 가지 법을 보겠습니다.
+2017년 중국에서 제정된 법률, 국가정보법 제7조입니다.
+
+내용은 이렇습니다.
+"모든 조직과 시민은 국가 정보 활동을 지지·보조·협조해야 한다."
+
+'모든 조직'이라는 말, 기억해두세요.
+
+[화면: 알리·테무·쉬인 로고 → 중국 국기 연결 그래픽]
+
+알리익스프레스는 알리바바 그룹 소속. 중국 기업입니다.
+테무는 핀둬둬 홀딩스 산하. 역시 중국 기업입니다.
+쉬인도 설립은 중국이고, 지금도 핵심 운영 기반은 중국에 있습니다.
+
+이 기업들이 수집한 한국 이용자의 데이터가 중국 서버에 저장될 때,
+이 법에 따라 중국 정부는 언제든 이 데이터에 접근을 요구할 수 있는 구조가 됩니다.
+
+여러분의 쇼핑 기록이요?
+그게 뭐 대수냐고 생각할 수 있습니다.
+근데 한번 다르게 생각해보죠.
+
+[화면: 인포그래픽 — 개인 데이터 → 패턴 분석 → 집단 정보 → 국가 정보자산]
+
+수억 명의 쇼핑 패턴을 모으면,
+어느 지역에 사람이 몇 명 사는지, 어떤 상품을 소비하는지, 경제 수준은 어떤지 추정이 가능합니다.
+군인, 공무원, 기업 임원이 어디서 뭘 사는지도 나옵니다.
+
+이것은 단순한 소비 데이터가 아닙니다.
+집합적 국가 정보입니다.
+
+미국은 이미 행동에 나서고 있습니다.
+미 의회 청문회에서 틱톡 CEO를 불러 5시간 동안 심문했고,
+일부 주에서는 정부 기기에서 틱톡을 금지했습니다.
+같은 논리가 알리, 테무, 쉬인에도 적용되고 있습니다.
+
+한국은 지금 어디 있을까요?
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SEC.03 — 상호주의 없는 시장 개방 (10:00 – 14:00)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+여기서 정말 화가 나는 부분을 말씀드릴게요.
+
+중국에서 구글 쓸 수 있나요? 안 됩니다.
+유튜브는요? 차단입니다.
+인스타그램은요? 역시 차단.
+카카오톡이나 네이버는요? 당연히 안 되죠.
+
+중국은 자국의 인터넷을 '만리방화벽(Great Firewall)'으로 철저히 통제합니다.
+한국 기업이 중국에서 자유롭게 데이터를 수집하고 영업하는 것은 사실상 불가능합니다.
+
+[화면: 대비 그래픽 — 왼쪽 중국(차단), 오른쪽 한국(개방)]
+
+그런데요.
+알리익스프레스는 한국에서 연간 수조 원의 매출을 올립니다.
+테무는 불과 2년 만에 한국 이커머스 상위권에 진입했습니다.
+이들은 우리 이용자 수억 건의 개인정보를 자유롭게 수집합니다.
+
+일방향적 개방은 곧 일방향적 착취입니다.
+
+경제적 피해도 있습니다.
+국내 소상공인, 제조업체, 이커머스 플랫폼이 피해를 입는 동안 —
+우리 소비자들은 데이터로 비용을 지불하고 있는 셈입니다.
+
+저는 소비자를 탓하는 게 아닙니다.
+비싼 걸 사라는 것도 아닙니다.
+
+다만, 우리가 무엇을 지불하고 있는지는 알아야 한다고 생각합니다.
+돈을 아끼는 대신, 우리는 데이터를 주고 있습니다.
+그 데이터가 어디로 가는지는, 이제 알았을 겁니다.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SEC.04 — 아웃트로 + 실천 강령 + CTA (14:00 – 16:30)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+그렇다면 우리가 할 수 있는 건 뭘까요?
+네 가지를 말씀드릴게요.
+
+[화면: 4가지 실천 카드 순서대로 등장]
+
+첫째, 해외 직구 앱을 점검하세요.
+당장 삭제가 어렵다면, 최소한 앱 권한 설정에 들어가서
+위치, 연락처, 카메라 권한을 꺼두세요.
+가능하면 개인정보 삭제 요청도 해보세요. 앱 내 '내 정보 삭제' 기능이 있습니다.
+
+둘째, 국내 플랫폼을 의식적으로 이용해주세요.
+쿠팡, 네이버쇼핑, 무신사 등 국내 플랫폼을 이용하는 것이
+국내 개인정보 보호 법체계 안에서 데이터를 지키는 방법입니다.
+소비 선택 하나하나가 데이터 주권의 투표입니다.
+
+셋째, 이 내용을 공유해주세요.
+알아야 지킬 수 있습니다. 가족, 친구, 동료에게 이 영상을 보내주세요.
+특히 부모님 세대, 디지털 환경에 익숙하지 않은 분들께 더 필요한 정보입니다.
+
+넷째, 정책적 관심을 가져주세요.
+데이터 안보를 진지하게 다루는 정치인과 정책에 목소리를 내주세요.
+디지털 주권은 21세기 민주주의의 새로운 전선입니다.
+
+[화면: IssueLens 로고 + 구독 버튼 CTA]
+
+오늘 이 영상이 조금이라도 도움이 됐다면, 구독과 좋아요 부탁드립니다.
+IssueLens는 앞으로도 우리 일상과 연결된 이슈들을 데이터와 팩트로 풀어드릴 예정입니다.
+
+다음 에피소드에서 뵙겠습니다. 감사합니다.
+
+[엔딩 카드: 구독 / 다음 영상 / 커뮤니티 링크]`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = '✓ 전체 복사 완료!';
+    btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = '전체 복사'; btn.classList.remove('ok'); }, 2500);
+  });
+}
+
+// ── 체크리스트 ──
+function toggleCl(item) {
+  const box = item.querySelector('.cl-box');
+  const done = box.classList.contains('done');
+  box.classList.toggle('done', !done);
+  item.classList.toggle('done-item', !done);
+  updateProg();
+}
+
+function updateProg() {
+  const total = document.querySelectorAll('.cl-item').length;
+  const done = document.querySelectorAll('.cl-box.done').length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = done + ' / ' + total + ' 완료';
+}
+</script>
+</body>
+</html>

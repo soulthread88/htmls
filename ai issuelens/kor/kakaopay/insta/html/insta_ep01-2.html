@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens INSTA EP.01-2</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#111;font-family:'Noto Sans KR',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:24px;
+}
+.card{
+  position:relative;width:390px;height:390px;
+  overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.95);
+  flex-shrink:0;
+}
+
+.bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 65% 55% at 80% 60%, rgba(160,0,0,.65) 0%, transparent 62%),
+    radial-gradient(ellipse 55% 50% at 18% 28%, rgba(10,30,100,.7) 0%, transparent 68%),
+    #060810;
+}
+
+.corner-tl{
+  position:absolute;top:0;left:0;width:0;height:0;
+  border-style:solid;border-width:100px 100px 0 0;
+  border-color:#CC0000 transparent transparent transparent;z-index:2;
+}
+.corner-br{
+  position:absolute;bottom:0;right:0;width:0;height:0;
+  border-style:solid;border-width:0 0 80px 80px;
+  border-color:transparent transparent #CC0000 transparent;z-index:2;
+}
+
+.ep-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:10px;font-weight:900;color:rgba(255,255,255,.9);
+  letter-spacing:.14em;z-index:10;text-shadow:1px 1px 0 rgba(0,0,0,.6);
+}
+.handle{
+  position:absolute;bottom:8px;right:12px;
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.7);
+  letter-spacing:.06em;z-index:10;
+}
+
+/* 과징금 스탬프 */
+.stamp-wrap{
+  position:absolute;left:14px;top:50%;
+  transform:translateY(-50%) rotate(-8deg);
+  z-index:3;
+}
+.stamp{
+  width:120px;height:120px;border-radius:50%;
+  border:4px solid #CC0000;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:rgba(10,0,0,.75);
+  box-shadow:0 0 0 2px rgba(204,0,0,.35),0 8px 24px rgba(0,0,0,.8);
+  gap:1px;padding:10px;
+}
+.stamp-kr{font-size:10px;font-weight:900;color:#CC0000;letter-spacing:.12em;text-align:center}
+.stamp-num{font-size:32px;font-weight:900;color:#FF4444;line-height:1;text-shadow:0 0 12px rgba(255,50,50,.6)}
+.stamp-unit{font-size:13px;font-weight:900;color:#ff8888;letter-spacing:.06em}
+.stamp-sub{font-size:9px;font-weight:700;color:rgba(255,100,100,.7);letter-spacing:.06em}
+
+.main{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  width:200px;text-align:center;z-index:10;
+}
+.label{
+  display:inline-block;background:#CC0000;
+  font-size:10px;font-weight:900;color:#fff;
+  letter-spacing:.12em;padding:3px 10px;border-radius:3px;margin-bottom:10px;
+}
+.m-line{
+  font-weight:900;letter-spacing:-.03em;line-height:1.1;
+  word-break:keep-all;
+  text-shadow:2px 2px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);
+}
+.m-yellow{color:#FFD700;font-size:40px}
+.m-white{color:#fff;font-size:28px}
+.badge-18{
+  background:rgba(204,0,0,.25);border:1px solid rgba(204,0,0,.6);
+  border-radius:6px;padding:4px 10px;
+  font-size:11px;font-weight:900;color:#ff9999;
+  margin-top:6px;letter-spacing:.02em;display:inline-block;
+}
+
+.strip{
+  position:absolute;bottom:0;left:0;right:0;height:48px;
+  background:#CC0000;
+  display:flex;align-items:center;justify-content:center;z-index:5;
+}
+.strip-text{font-size:15px;font-weight:900;color:#fff;letter-spacing:-.02em;text-shadow:1px 1px 0 rgba(0,0,0,.4);}
+.strip-text .acc{color:#FFD700}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="bg"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+  <div class="ep-badge">EP.01 · #2</div>
+  <div class="handle">@issuelens</div>
+  <div class="stamp-wrap">
+    <div class="stamp">
+      <div class="stamp-kr">과 징 금</div>
+      <div class="stamp-num">20억</div>
+      <div class="stamp-unit">원</div>
+      <div class="stamp-sub">개보위 제재</div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="label">알리익스프레스</div>
+    <div class="m-line m-yellow">4천만 명</div>
+    <div class="m-line m-white">개인정보</div>
+    <div class="m-line m-yellow">넘어갔다!</div>
+    <div class="badge-18">해외 18만 곳 무단 이전</div>
+  </div>
+  <div class="strip">
+    <div class="strip-text">정부가 알리에 <span class="acc">20억</span> 때린 이유</div>
+  </div>
+</div>
+</body>
+</html>

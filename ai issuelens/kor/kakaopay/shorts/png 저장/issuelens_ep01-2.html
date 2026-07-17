@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens EP.01-2 — 과징금 20억, 18만 곳에 팔린 정보</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#0a0a0a;font-family:'Noto Sans KR',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:40px 16px;
+}
+.card{
+  position:relative;width:390px;height:693px;
+  overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.9);
+  display:flex;flex-direction:column;
+}
+
+/* 상단 바 */
+.top-bar{
+  width:100%;background:#CC0000;height:160px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;overflow:hidden;
+}
+.top-bar::after{content:'';position:absolute;right:-30px;top:-40px;width:130px;height:220px;background:rgba(255,255,255,.07);transform:rotate(18deg);}
+.top-bar::before{content:'';position:absolute;left:-20px;bottom:-30px;width:100px;height:160px;background:rgba(0,0,0,.15);transform:rotate(18deg);}
+.top-text{
+  font-size:46px;font-weight:900;color:#fff;
+  text-align:center;text-shadow:2px 3px 0 rgba(0,0,0,.45);
+  letter-spacing:-.02em;line-height:1.18;padding:0 18px;
+  word-break:keep-all;position:relative;z-index:2;
+}
+
+/* 중앙 */
+.mid{
+  flex:1;position:relative;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;
+  background:
+    radial-gradient(ellipse 55% 50% at 80% 60%, rgba(140,0,0,.6) 0%, transparent 68%),
+    radial-gradient(ellipse 60% 45% at 20% 30%, rgba(10,35,100,.65) 0%, transparent 70%),
+    #060810;
+}
+.deco-circle{
+  position:absolute;width:210px;height:210px;border-radius:50%;
+  top:50%;right:10%;transform:translateY(-50%);
+  background:rgba(180,0,0,.5);opacity:.35;pointer-events:none;
+}
+.deco-rect{
+  position:absolute;width:160px;height:240px;
+  top:6%;left:-20px;transform:rotate(-11deg);
+  background:rgba(50,10,10,.9);opacity:.18;pointer-events:none;
+}
+
+/* 과징금 스탬프 */
+.stamp-wrap{
+  position:absolute;top:50%;left:5%;
+  transform:translateY(-52%) rotate(-8deg);
+  z-index:2;pointer-events:none;
+}
+.stamp{
+  width:130px;height:130px;border-radius:50%;
+  border:4px solid #CC0000;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:rgba(10,0,0,.7);
+  box-shadow:0 0 0 2px rgba(204,0,0,.3),0 8px 24px rgba(0,0,0,.7);
+  gap:2px;
+  padding:10px;
+}
+.stamp-kr{font-size:11px;font-weight:900;color:#CC0000;letter-spacing:.12em;text-align:center}
+.stamp-num{font-size:34px;font-weight:900;color:#FF4444;line-height:1;text-shadow:0 0 10px rgba(255,50,50,.5)}
+.stamp-unit{font-size:14px;font-weight:900;color:#ff8888;letter-spacing:.06em}
+.stamp-sub{font-size:10px;font-weight:700;color:rgba(255,100,100,.7);letter-spacing:.06em}
+
+/* 메인 텍스트 */
+.main-block{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;margin-left:24px;
+}
+.m-line{
+  font-size:56px;font-weight:900;letter-spacing:-.02em;line-height:1.12;
+  text-shadow:3px 3px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);
+  word-break:keep-all;
+}
+.m-line.yellow{color:#FFD700}
+.m-line.white{color:#fff}
+
+/* 18만 뱃지 */
+.badge-18{
+  background:rgba(204,0,0,.25);
+  border:1.5px solid rgba(204,0,0,.6);
+  border-radius:8px;
+  padding:4px 14px;
+  font-size:14px;font-weight:900;
+  color:#ff9999;
+  margin-top:6px;
+  letter-spacing:.02em;
+}
+
+/* 하단 바 */
+.bot-bar{
+  width:100%;background:#CC0000;height:160px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;flex-shrink:0;position:relative;overflow:hidden;
+}
+.bot-bar::before{content:'';position:absolute;left:-30px;top:-30px;width:120px;height:200px;background:rgba(255,255,255,.06);transform:rotate(18deg);}
+.bot-line{
+  font-size:32px;font-weight:900;color:#fff;
+  text-shadow:2px 2px 0 rgba(0,0,0,.45);
+  text-align:center;letter-spacing:-.02em;line-height:1.28;
+  padding:0 12px;word-break:keep-all;position:relative;z-index:2;
+}
+.bot-line .acc{color:#FFD700}
+
+.ep-badge{
+  position:absolute;top:14px;right:14px;
+  background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.18);
+  border-radius:20px;padding:4px 12px;
+  font-size:11px;font-weight:900;color:rgba(255,255,255,.7);
+  letter-spacing:.1em;z-index:20;pointer-events:none;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-bar">
+    <div class="top-text">정부가 알리에<br>20억 때린 이유</div>
+  </div>
+  <div class="mid">
+    <div class="deco-circle"></div>
+    <div class="deco-rect"></div>
+    <div class="stamp-wrap">
+      <div class="stamp">
+        <div class="stamp-kr">과 징 금</div>
+        <div class="stamp-num">20억</div>
+        <div class="stamp-unit">원</div>
+        <div class="stamp-sub">개보위 제재</div>
+      </div>
+    </div>
+    <div class="main-block">
+      <div class="m-line yellow">4천만 명</div>
+      <div class="m-line white">개인정보가</div>
+      <div class="m-line yellow">넘어갔다!</div>
+      <div class="badge-18">해외 판매자 18만 곳 무단 이전</div>
+    </div>
+  </div>
+  <div class="bot-bar">
+    <div class="bot-line">4천만 명 <span class="acc">개인정보</span>가</div>
+    <div class="bot-line">넘어갔다!</div>
+  </div>
+  <div class="ep-badge">EP.01 · #2</div>
+</div>
+
+<style>
+.dl-btn{
+  position:fixed;bottom:20px;right:20px;z-index:999;
+  background:#CC0000;color:#fff;border:none;border-radius:10px;
+  padding:12px 22px;font-family:'Noto Sans KR',sans-serif;
+  font-size:15px;font-weight:900;cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.5);letter-spacing:.04em;
+  transition:opacity .15s;
+}
+.dl-btn:hover{opacity:.85}
+.dl-btn:active{transform:scale(.97)}
+</style>
+<button class="dl-btn" id="dlBtn">📥 PNG 저장</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+document.getElementById("dlBtn").addEventListener("click",function(){
+  var btn=this;btn.textContent="캡처 중...";btn.disabled=true;
+  var card=document.querySelector(".card");
+  html2canvas(card,{
+    scale:3,
+    useCORS:true,
+    backgroundColor:null,
+    width:card.offsetWidth,
+    height:card.offsetHeight,
+    logging:false
+  }).then(function(canvas){
+    var a=document.createElement("a");
+    a.download=document.title.replace(/\s+/g,"_")+".png";
+    a.href=canvas.toDataURL("image/png");
+    a.click();
+    btn.textContent="📥 PNG 저장";btn.disabled=false;
+  });
+});
+</script>
+</body>
+</html>

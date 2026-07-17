@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Decoded for Seniors Ep.42 — AI Art Generator: Turn YOUR Photo Into a Masterpiece! | Jake & Grandpa Bob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   AI DECODED FOR SENIORS — EP.42 ENGLISH EDITION
+   🎨 THEME: "STREET ART MEETS LATE-NIGHT TV"
+   Aesthetic: Neon-Noir Graffiti Studio — spray paint energy,
+   electric palettes, bold type, senior-friendly sizing
+   Never done before. Completely unhinged. Totally viral.
+================================================================ */
+
+:root {
+  --void: #08070d;
+  --near-black: #0f0e1a;
+  --panel: #13121f;
+  --spray-pink: #ff2d78;
+  --spray-cyan: #00e5ff;
+  --spray-gold: #ffd600;
+  --spray-lime: #76ff03;
+  --spray-orange: #ff6d00;
+  --spray-purple: #d500f9;
+  --ink: #f0eeff;
+  --ink-muted: #a09ec0;
+  --tag-bg: rgba(255,255,255,0.06);
+  --shadow-glow-pink: 0 0 28px rgba(255,45,120,0.4);
+  --shadow-glow-cyan: 0 0 28px rgba(0,229,255,0.4);
+  --shadow-glow-gold: 0 0 28px rgba(255,214,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--void);
+  color: var(--ink);
+  line-height: 1.75;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.6;
+}
+
+/* ── WRAPPER ── */
+.wrap {
+  width: 100%; max-width: 900px;
+  margin: 0 auto;
+  padding: 0 0 120px 0;
+  position: relative; z-index: 1;
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+.gap    { height: 18px; display: block; }
+.gap-sm { height: 9px;  display: block; }
+
+/* ── EDITABLE HINTS ── */
+[contenteditable="true"] { outline: none; border-radius: 3px; cursor: text; }
+[contenteditable="true"]:hover { background: rgba(255,214,0,0.07); box-shadow: 0 0 0 1px rgba(255,214,0,0.4); }
+[contenteditable="true"]:focus { background: rgba(255,214,0,0.12); box-shadow: 0 0 0 2px var(--spray-gold); }
+
+/* ── SAVE BAR ── */
+.save-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(8,7,13,0.97);
+  padding: 10px 20px;
+  display: flex; justify-content: center; gap: 12px;
+  z-index: 9999;
+  border-top: 2px solid var(--spray-gold);
+}
+.save-bar button {
+  background: linear-gradient(90deg, var(--spray-gold), var(--spray-orange));
+  color: var(--void); border: none;
+  padding: 12px 36px; border-radius: 2px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18pt; letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255,214,0,0.4);
+  transition: all 0.2s;
+}
+.save-bar button:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,214,0,0.5); }
+
+/* ════════════════════════════════════
+   ★ HERO — FULL-BLEED SPRAY WALL
+════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 580px;
+  background: var(--near-black);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+
+/* animated spray blobs */
+.hero-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.blob-1 { width: 500px; height: 400px; top: -100px; left: -100px; background: rgba(255,45,120,0.28); animation: drift1 10s ease-in-out infinite alternate; }
+.blob-2 { width: 400px; height: 500px; top: 50px; right: -80px; background: rgba(0,229,255,0.22); animation: drift2 12s ease-in-out infinite alternate; }
+.blob-3 { width: 350px; height: 350px; bottom: -60px; left: 30%; background: rgba(255,214,0,0.16); animation: drift3 9s ease-in-out infinite alternate; }
+.blob-4 { width: 300px; height: 300px; bottom: 20px; right: 20%; background: rgba(118,255,3,0.12); animation: drift4 11s ease-in-out infinite alternate; }
+
+@keyframes drift1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(60px,40px) scale(1.15); } }
+@keyframes drift2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-50px,60px) scale(1.1); } }
+@keyframes drift3 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(40px,-50px) scale(1.2); } }
+@keyframes drift4 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-60px,30px) scale(0.9); } }
+
+/* grid lines overlay */
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* scanlines */
+.hero-scan {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.08) 3px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative; z-index: 5;
+  padding: 40px 36px 36px 36px;
+}
+
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11pt; font-weight: 700;
+  color: var(--spray-cyan);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 40px; height: 2px;
+  background: var(--spray-cyan);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.hero-ep {
+  display: inline-block;
+  background: var(--spray-pink);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13pt; letter-spacing: 0.15em;
+  padding: 4px 18px;
+  margin-bottom: 16px;
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
+  box-shadow: var(--shadow-glow-pink);
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36pt, 7vw, 60pt);
+  line-height: 1.0;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+  text-shadow: 4px 4px 0 rgba(255,45,120,0.5), 8px 8px 0 rgba(0,0,0,0.3);
+}
+.hero-title .gold  { color: var(--spray-gold); text-shadow: 4px 4px 0 rgba(255,150,0,0.5); }
+.hero-title .cyan  { color: var(--spray-cyan);  text-shadow: 4px 4px 0 rgba(0,150,200,0.5); }
+
+.hero-sub {
+  font-size: 16pt; font-weight: 300; color: rgba(240,238,255,0.85);
+  line-height: 1.6; max-width: 660px;
+  margin-bottom: 22px;
+}
+
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--ink-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; padding: 4px 12px;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.hero-tag:hover { background: rgba(255,214,0,0.12); border-color: var(--spray-gold); color: var(--spray-gold); }
+
+.hero-hosts {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px;
+}
+.host-chip {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 7px 18px;
+  font-size: 14pt; font-weight: 700; color: var(--ink);
+  border-radius: 2px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* TRENDING TICKER */
+.ticker-wrap {
+  background: var(--spray-pink);
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(255,45,120,0.35);
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 30s linear infinite;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16pt; letter-spacing: 0.12em;
+  color: #fff;
+}
+.ticker-inner span { margin: 0 28px; }
+.ticker-inner .dot { color: var(--void); opacity: 0.7; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ════════════════════════════════════
+   ★ SECTION SYSTEM
+════════════════════════════════════ */
+.section {
+  padding: 0 28px;
+}
+
+/* spray-paint section headers */
+.sec-head {
+  display: flex; align-items: center; gap: 16px;
+  margin: 36px 0 14px 0;
+  position: relative;
+}
+.sec-icon {
+  width: 52px; height: 52px; flex-shrink: 0;
+  background: var(--spray-gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22pt;
+  clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
+  box-shadow: var(--shadow-glow-gold);
+}
+.sec-title-group { flex: 1; }
+.sec-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26pt; letter-spacing: 0.05em;
+  color: #fff; line-height: 1.1;
+}
+.sec-sublabel {
+  font-size: 12pt; font-weight: 300; color: var(--ink-muted);
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.04em;
+}
+.sec-line {
+  flex: 1; height: 2px;
+  background: linear-gradient(90deg, var(--spray-gold), transparent);
+  margin-left: 12px;
+}
+
+/* ── Body text ── */
+.body-text {
+  font-size: 17pt; line-height: 1.9; color: var(--ink);
+  margin-bottom: 10px;
+}
+.body-text b { color: var(--spray-gold); }
+
+/* ── Color roles ── */
+.spk-jake { color: var(--spray-cyan); font-weight: 900; }
+.spk-bob  { color: var(--spray-gold); font-weight: 900; }
+.ai-name  { color: var(--spray-pink); font-weight: 700; }
+.term     { color: var(--spray-cyan); font-weight: 700; }
+.em       { color: var(--spray-pink); font-weight: 700; }
+.gold-em  { color: var(--spray-gold); font-weight: 700; }
+.lime-em  { color: var(--spray-lime); font-weight: 700; }
+
+/* ════════════════════════════════════
+   ★ SAYING BOX — NEON BILLBOARD
+════════════════════════════════════ */
+.saying-billboard {
+  background: var(--panel);
+  border: 2px solid var(--spray-gold);
+  padding: 30px 32px;
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.saying-billboard::before {
+  content: '';
+  position: absolute; inset: 4px;
+  border: 1px solid rgba(255,214,0,0.2);
+  pointer-events: none;
+}
+/* corner sparks */
+.saying-billboard::after {
+  content: '★';
+  position: absolute; top: 12px; right: 18px;
+  font-size: 48pt; color: rgba(255,214,0,0.05);
+  pointer-events: none;
+}
+.saying-glow-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--spray-pink), var(--spray-gold), var(--spray-cyan));
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.saying-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; letter-spacing: 0.2em;
+  color: var(--spray-gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.saying-main {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20pt, 4vw, 30pt);
+  font-style: italic;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  text-shadow: 0 0 30px rgba(255,214,0,0.2);
+}
+.saying-meaning {
+  font-size: 17pt; font-weight: 700;
+  color: var(--spray-gold);
+  line-height: 1.6; margin-bottom: 10px;
+}
+.saying-ai-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,45,120,0.15);
+  border: 1px solid rgba(255,45,120,0.5);
+  color: var(--spray-pink);
+  font-size: 12pt; font-weight: 700;
+  padding: 5px 18px;
+  margin-top: 6px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.06em;
+}
+
+/* ════════════════════════════════════
+   ★ DIALOG BOX — TV SCRIPT STYLE
+════════════════════════════════════ */
+.dialog-panel {
+  background: var(--panel);
+  border-left: 5px solid var(--spray-cyan);
+  padding: 24px 26px;
+  margin: 14px 0;
+  position: relative;
+  box-shadow: -4px 0 20px rgba(0,229,255,0.15);
+}
+.dialog-panel::before {
+  content: '💬 ON AIR';
+  position: absolute; top: -1px; right: 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; font-weight: 700;
+  color: var(--spray-cyan);
+  background: var(--panel);
+  padding: 0 10px;
+  letter-spacing: 0.15em;
+  border-bottom: 2px solid var(--spray-cyan);
+}
+.d-row { margin-bottom: 14px; line-height: 1.85; }
+.d-row:last-child { margin-bottom: 0; }
+.d-spk { font-size: 17pt; font-weight: 900; display: inline; }
+.d-txt { font-size: 17pt; color: var(--ink); display: inline; }
+
+/* ════════════════════════════════════
+   ★ TIP BOX — NEON RECEIPT / TICKET
+════════════════════════════════════ */
+.tip-ticket {
+  background: var(--panel);
+  border: 2px dashed rgba(255,214,0,0.4);
+  padding: 24px 26px;
+  margin: 14px 0;
+  position: relative;
+}
+.tip-ticket::before {
+  content: '🎟️ YOUR CRASH COURSE TICKET';
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; font-weight: 700;
+  color: var(--spray-gold); letter-spacing: 0.15em;
+  text-align: center;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(255,214,0,0.3);
+}
+.tip-row { margin-bottom: 18px; }
+.tip-row:last-child { margin-bottom: 0; }
+.tip-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--spray-gold);
+  color: var(--void); font-weight: 900; font-size: 12pt;
+  width: 28px; height: 28px;
+  margin-right: 10px; vertical-align: middle; flex-shrink: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%);
+  font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;
+}
+
+/* ════════════════════════════════════
+   ★ AI DAILY LIFE BOX
+════════════════════════════════════ */
+.ai-life-box {
+  background: var(--panel);
+  border: 2px solid rgba(0,229,255,0.3);
+  padding: 22px 26px;
+  margin: 14px 0;
+  position: relative;
+}
+.ai-life-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--spray-cyan), var(--spray-purple), var(--spray-pink));
+}
+.ai-item { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.ai-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+/* ════════════════════════════════════
+   ★ IMAGE AREAS — GRAFFITI CANVAS
+════════════════════════════════════ */
+.img-outer {
+  margin: 16px 0;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--spray-pink), var(--spray-gold), var(--spray-cyan), var(--spray-purple));
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.img-area {
+  width: 100%; min-height: 380px;
+  background: var(--near-black);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.img-area:hover { background: #1a1930; }
+.upload-label {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  color: var(--ink-muted); font-size: 15pt; text-align: center; padding: 20px;
+  font-family: 'Space Mono', monospace;
+}
+.upload-icon { font-size: 48pt; }
+.upload-cta {
+  background: linear-gradient(90deg, var(--spray-gold), var(--spray-orange));
+  color: var(--void); font-family: 'Bebas Neue', sans-serif;
+  font-size: 16pt; letter-spacing: 0.1em;
+  padding: 10px 30px; margin-top: 10px;
+  border: none; cursor: pointer;
+  clip-path: polygon(0 0, 96% 0, 100% 30%, 96% 100%, 0 100%, 4% 70%);
+}
+.media-overlay {
+  position: absolute; top: 10px; right: 10px;
+  display: none; gap: 8px; z-index: 10;
+}
+.img-area:hover .media-overlay { display: flex; }
+.media-btn {
+  background: rgba(8,7,13,0.85); color: var(--spray-gold);
+  border: 1px solid rgba(255,214,0,0.4);
+  padding: 5px 12px; font-size: 13pt; cursor: pointer;
+  font-family: 'Space Mono', monospace;
+}
+.source-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11pt; color: var(--ink-muted);
+  text-align: right; margin: 4px 0 12px 0;
+  opacity: 0.7;
+}
+
+/* 4-square grid */
+.ai-img-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; margin: 12px 0; }
+.ai-sq {
+  aspect-ratio: 1/1;
+  background: var(--panel);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.ai-sq:hover { border-color: var(--spray-gold); }
+.ai-sq .upload-label { font-size: 13pt; gap: 6px; }
+.ai-sq .upload-icon  { font-size: 30pt; }
+.ai-sq img, .ai-sq video { width:100%; height:100%; object-fit:cover; }
+
+/* ════════════════════════════════════
+   ★ COMIC PANELS — EXHIBIT FRAMES
+════════════════════════════════════ */
+.exhibit-frame {
+  margin: 16px 0;
+  border: 3px solid var(--void);
+  box-shadow: 6px 6px 0 var(--spray-gold);
+  background: var(--near-black);
+}
+.exhibit-header {
+  background: var(--void);
+  border-bottom: 2px solid var(--spray-gold);
+  padding: 10px 18px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17pt; letter-spacing: 0.1em;
+  color: var(--spray-gold);
+  display: flex; align-items: center; gap: 10px;
+}
+.exhibit-cell {
+  position: relative; width: 100%; aspect-ratio: 1/1;
+  cursor: pointer; overflow: hidden;
+}
+.exhibit-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--near-black);
+  gap: 16px; padding: 24px;
+}
+.exhibit-overlay {
+  position: absolute; inset: 0;
+  background: rgba(8,7,13,0.75);
+  display: none; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px; z-index: 5;
+}
+.exhibit-cell:hover .exhibit-overlay { display: flex; }
+.ex-btn {
+  background: rgba(255,214,0,0.9); color: var(--void);
+  border: none; padding: 7px 18px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 15pt; letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+/* ════════════════════════════════════
+   ★ HUMOR BOX — LATE NIGHT SHOW
+════════════════════════════════════ */
+.laugh-box {
+  background: linear-gradient(135deg, #1a0f00, #2a1800);
+  border: 2px solid var(--spray-orange);
+  padding: 22px 26px;
+  margin: 14px 0;
+  position: relative;
+  box-shadow: 4px 4px 0 rgba(255,109,0,0.3);
+}
+.laugh-box::before {
+  content: '😂 LAUGH BREAK — DO NOT SKIP';
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; font-weight: 700;
+  color: var(--spray-orange); letter-spacing: 0.12em;
+  margin-bottom: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,109,0,0.3);
+}
+
+/* ════════════════════════════════════
+   ★ QUIZ BOX — ARCADE MACHINE
+════════════════════════════════════ */
+.quiz-arcade {
+  background: var(--panel);
+  border: 3px solid var(--spray-lime);
+  padding: 22px 26px;
+  margin: 14px 0;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(118,255,3,0.2), 4px 4px 0 rgba(118,255,3,0.3);
+}
+.quiz-arcade::before {
+  content: '🕹️ TRIVIA CHALLENGE — INSERT BRAIN';
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; font-weight: 700;
+  color: var(--spray-lime); letter-spacing: 0.1em;
+  margin-bottom: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(118,255,3,0.3);
+}
+.q-num { color: var(--spray-lime); font-weight: 900; font-size: 17pt; }
+
+/* answer box */
+.answer-panel {
+  background: linear-gradient(135deg, #0a1f0a, #0e280e);
+  border: 2px solid var(--spray-lime);
+  padding: 18px 24px;
+  margin: 14px 0;
+  opacity: 0.06; cursor: pointer;
+  transition: opacity 0.35s;
+}
+.answer-panel.revealed, .answer-panel:hover { opacity: 1; }
+.reveal-hint {
+  text-align: center; font-size: 13pt;
+  color: var(--ink-muted); margin: 6px 0;
+  cursor: pointer; font-family: 'Space Mono', monospace;
+  opacity: 0.6;
+}
+.reveal-hint:hover { opacity: 1; color: var(--spray-lime); }
+
+/* ════════════════════════════════════
+   ★ SAYING DEEP DIVE — MUSEUM PLAQUE
+════════════════════════════════════ */
+.plaque-box {
+  background: linear-gradient(160deg, #13100a, #1a1508);
+  border: 2px solid var(--spray-gold);
+  padding: 26px 28px;
+  margin: 14px 0;
+  box-shadow: 6px 6px 0 rgba(255,214,0,0.15);
+}
+.plaque-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20pt; letter-spacing: 0.08em;
+  color: var(--spray-gold); margin-bottom: 14px;
+}
+.plaque-saying {
+  font-family: 'Playfair Display', serif;
+  font-size: 26pt; font-style: italic;
+  color: #fff; line-height: 1.35;
+  margin-bottom: 18px;
+  text-shadow: 0 0 40px rgba(255,214,0,0.2);
+}
+/* 4-word grid */
+.word-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 14px 0; }
+.word-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,214,0,0.3);
+  border-top: 3px solid var(--spray-gold);
+  padding: 12px 8px; text-align: center;
+}
+.w-main { font-family: 'Bebas Neue', sans-serif; font-size: 18pt; color: var(--spray-cyan); display: block; letter-spacing: 0.05em; }
+.w-type { font-family: 'Space Mono', monospace; font-size: 10pt; color: var(--spray-pink); display: block; margin-top: 3px; font-style: italic; }
+.w-def  { font-size: 12pt; color: var(--ink-muted); display: block; margin-top: 5px; line-height: 1.4; }
+.story-block {
+  background: rgba(255,255,255,0.03);
+  border-left: 4px solid var(--spray-gold);
+  padding: 14px 18px; margin: 12px 0;
+}
+.ai-connect-block {
+  background: rgba(0,229,255,0.05);
+  border: 1px dashed rgba(0,229,255,0.35);
+  padding: 16px 18px; margin-top: 14px;
+}
+.memory-tip {
+  background: rgba(255,214,0,0.06);
+  border-left: 4px solid var(--spray-gold);
+  padding: 12px 16px; margin-top: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 13pt;
+}
+
+/* ════════════════════════════════════
+   ★ KEYWORDS — GRAFFITI TAGS
+════════════════════════════════════ */
+.kw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0 14px 0; }
+.kw-pill {
+  display: block; text-align: center; text-decoration: none;
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--spray-gold);
+  font-family: 'Space Mono', monospace;
+  font-size: 12pt; font-weight: 700;
+  padding: 9px 14px;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+.kw-pill:hover {
+  background: var(--spray-gold); color: var(--void);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,214,0,0.35);
+}
+
+/* ════════════════════════════════════
+   ★ WORD POWER BOX
+════════════════════════════════════ */
+.wordpower-box {
+  background: var(--panel);
+  border: 2px solid var(--spray-pink);
+  border-top: 5px solid var(--spray-pink);
+  padding: 22px 26px;
+  margin: 14px 0;
+  box-shadow: 0 0 0 1px rgba(255,45,120,0.1), 4px 4px 0 rgba(255,45,120,0.2);
+}
+.wordpower-box::before {
+  content: '🇺🇸 WORD POWER ACTIVATED';
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; font-weight: 700;
+  color: var(--spray-pink); letter-spacing: 0.15em;
+  margin-bottom: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,45,120,0.25);
+}
+
+/* ════════════════════════════════════
+   ★ GRANDPA BOX — VINYL RECORD
+════════════════════════════════════ */
+.grandpa-vinyl {
+  background: linear-gradient(135deg, #0f0e00, #1a1800);
+  border: 2px solid var(--spray-gold);
+  border-radius: 0;
+  padding: 22px 26px;
+  margin: 14px 0;
+  position: relative;
+  box-shadow: 4px 4px 0 rgba(255,214,0,0.25);
+}
+.grandpa-vinyl::before {
+  content: '👴 GRANDPA BOB SAYS...';
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; font-weight: 700;
+  color: var(--spray-gold); letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+/* ════════════════════════════════════
+   ★ RECAP / SUMMARY — MARQUEE BOARD
+════════════════════════════════════ */
+.recap-board {
+  background: var(--near-black);
+  border: 3px solid var(--spray-gold);
+  padding: 6px;
+  margin: 14px 0;
+  box-shadow: var(--shadow-glow-gold);
+}
+.recap-inner {
+  background: var(--void);
+  padding: 28px 30px;
+  border: 1px solid rgba(255,214,0,0.15);
+}
+.recap-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28pt; letter-spacing: 0.08em;
+  color: var(--spray-gold);
+  text-align: center; margin-bottom: 20px;
+  text-shadow: 0 0 30px rgba(255,214,0,0.4);
+}
+.recap-item {
+  font-size: 16pt; line-height: 1.85;
+  margin-bottom: 14px;
+  padding-left: 16px;
+  border-left: 4px solid var(--spray-cyan);
+  color: var(--ink);
+}
+.recap-item:last-child { margin-bottom: 0; }
+.recap-item b { color: var(--spray-gold); }
+
+/* DID YOU KNOW */
+.dyk {
+  background: linear-gradient(135deg, #071a07, #0a240a);
+  border-left: 6px solid var(--spray-lime);
+  padding: 16px 20px; margin: 14px 0;
+}
+.dyk-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10pt; font-weight: 700;
+  color: var(--spray-lime); letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.dyk-body { font-size: 17pt; color: var(--ink); line-height: 1.8; }
+
+/* SPOTLIGHT CARD */
+.spotlight {
+  background: linear-gradient(135deg, var(--void), var(--near-black));
+  border: 1px solid rgba(255,45,120,0.3);
+  padding: 20px 24px; margin: 14px 0;
+  display: flex; gap: 18px; align-items: flex-start;
+}
+.spot-icon {
+  font-size: 32pt; flex-shrink: 0;
+  width: 64px; height: 64px;
+  background: rgba(255,45,120,0.12);
+  display: flex; align-items: center; justify-content: center;
+}
+.spot-content { flex: 1; }
+.spot-title { font-family: 'Bebas Neue', sans-serif; font-size: 18pt; color: var(--spray-pink); margin-bottom: 6px; letter-spacing: 0.06em; }
+.spot-body { font-size: 15pt; color: var(--ink-muted); line-height: 1.7; }
+
+/* CTA SECTION */
+.cta-bomb {
+  background: linear-gradient(135deg, var(--spray-pink), var(--spray-orange), var(--spray-gold));
+  padding: 4px; margin: 16px 0;
+  box-shadow: 0 8px 40px rgba(255,45,120,0.4);
+}
+.cta-inner {
+  background: var(--void);
+  padding: 30px 28px; text-align: center;
+}
+.cta-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32pt; letter-spacing: 0.06em;
+  color: #fff; margin-bottom: 8px;
+  text-shadow: 0 0 30px rgba(255,214,0,0.3);
+}
+.cta-body { font-size: 16pt; color: var(--ink-muted); line-height: 1.65; margin-bottom: 18px; }
+.cta-tags { font-family: 'Space Mono', monospace; font-size: 11pt; color: rgba(255,214,0,0.5); letter-spacing: 0.06em; margin-top: 16px; }
+
+/* FOOTER */
+.footer-txt { font-size: 15pt; color: var(--ink-muted); line-height: 1.6; text-align: center; padding: 12px 28px 4px 28px; }
+.footer-copy { font-family: 'Space Mono', monospace; font-size: 11pt; color: rgba(255,255,255,0.2); text-align: center; padding: 4px 28px 20px 28px; letter-spacing: 0.08em; }
+.divider-rainbow {
+  height: 3px;
+  background: linear-gradient(90deg, var(--spray-pink), var(--spray-gold), var(--spray-lime), var(--spray-cyan), var(--spray-purple));
+  margin: 20px 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero-title { font-size: 30pt; }
+  .hero-content { padding: 28px 18px 26px 18px; }
+  .section { padding: 0 14px; }
+  .saying-main { font-size: 18pt; }
+  .word-grid { grid-template-columns: repeat(2,1fr); }
+  .ai-img-grid { grid-template-columns: repeat(2,1fr); }
+  .kw-grid { grid-template-columns: 1fr; }
+  .spotlight { flex-direction: column; }
+  .plaque-saying { font-size: 19pt; }
+  .dialog-panel, .tip-ticket, .ai-life-box, .laugh-box, .quiz-arcade,
+  .plaque-box, .wordpower-box, .grandpa-vinyl, .recap-inner { padding: 16px 16px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ════════════════════════════════
+     ① HERO BANNER
+════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+  <div class="hero-blob blob-4"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-content" contenteditable="true">
+    <div class="hero-eyebrow">🤖 AI DECODED FOR SENIORS</div>
+    <div class="hero-ep">EPISODE 42</div>
+    <div class="hero-title">
+      <span class="gold">AI ART GENERATOR:</span><br>
+      <span class="cyan">TURN YOUR PHOTO</span><br>
+      INTO A MASTERPIECE!
+    </div>
+    <div class="hero-sub">
+      Jake shows Grandpa Bob how one smartphone photo — ANY photo — becomes a Monet, a Van Gogh, or a Renaissance painting in under 5 minutes. No art degree. No expensive software. Totally FREE.
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">#AIArtGenerator</span>
+      <span class="hero-tag">#AIImageGenerator</span>
+      <span class="hero-tag">#ChatGPTDALLE</span>
+      <span class="hero-tag">#MidjourneyFree</span>
+      <span class="hero-tag">#AIForSeniors</span>
+      <span class="hero-tag">#ArtificialIntelligence</span>
+      <span class="hero-tag">#AITools2025</span>
+      <span class="hero-tag">#BingImageCreator</span>
+      <span class="hero-tag">#CanvaAI</span>
+      <span class="hero-tag">#LearnAI</span>
+      <span class="hero-tag">#AIPhotos</span>
+      <span class="hero-tag">#AIArt</span>
+    </div>
+    <div class="hero-hosts">
+      <div class="host-chip">👦 Jake — Your AI Guide</div>
+      <div class="host-chip">👴 Grandpa Bob — Just Like You!</div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔥 TRENDING TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>🔥 TRENDING NOW</span>
+    <span class="dot">◆</span>
+    <span>AI Art Generator</span><span class="dot">·</span>
+    <span>ChatGPT Image</span><span class="dot">·</span>
+    <span>Midjourney Free</span><span class="dot">·</span>
+    <span>DALL-E 3</span><span class="dot">·</span>
+    <span>Adobe Firefly</span><span class="dot">·</span>
+    <span>Canva AI</span><span class="dot">·</span>
+    <span>Grok Image</span><span class="dot">·</span>
+    <span>Bing Image Creator</span><span class="dot">·</span>
+    <span>Stable Diffusion</span><span class="dot">·</span>
+    <span>AI Photo to Painting</span><span class="dot">·</span>
+    <span>Sora Video AI</span><span class="dot">·</span>
+    <span>Gemini Image</span><span class="dot">·</span>
+    <span>AI Masterpiece</span><span class="dot">·</span>
+    <span>AI Monet Style</span>
+    <!-- duplicate for seamless scroll -->
+    <span>🔥 TRENDING NOW</span>
+    <span class="dot">◆</span>
+    <span>AI Art Generator</span><span class="dot">·</span>
+    <span>ChatGPT Image</span><span class="dot">·</span>
+    <span>Midjourney Free</span><span class="dot">·</span>
+    <span>DALL-E 3</span><span class="dot">·</span>
+    <span>Adobe Firefly</span><span class="dot">·</span>
+    <span>Canva AI</span><span class="dot">·</span>
+    <span>Grok Image</span><span class="dot">·</span>
+    <span>Bing Image Creator</span><span class="dot">·</span>
+    <span>Stable Diffusion</span><span class="dot">·</span>
+    <span>AI Photo to Painting</span><span class="dot">·</span>
+    <span>Sora Video AI</span><span class="dot">·</span>
+    <span>Gemini Image</span><span class="dot">·</span>
+    <span>AI Masterpiece</span><span class="dot">·</span>
+    <span>AI Monet Style</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ② TODAY'S AMERICAN SAYING
+════════════════════════════════ -->
+<div class="section">
+<div class="sec-head">
+  <div class="sec-icon">💬</div>
+  <div class="sec-title-group">
+    <div class="sec-label">Today's American Saying</div>
+    <div class="sec-sublabel">// wisdom meets AI — every episode</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="saying-billboard">
+  <div class="saying-glow-line"></div>
+  <div class="saying-kicker">⭐ EPISODE 42 PROVERB</div>
+  <div class="saying-main" contenteditable="true">"A picture is worth a thousand words."</div>
+  <div class="saying-meaning" contenteditable="true">One powerful image can tell a whole story that would take a thousand words to explain.</div>
+  <div class="gap-sm"></div>
+  <div class="body-text" contenteditable="true" style="text-align:center;color:var(--ink-muted);">
+    🤖 <b>AI Connection:</b> With AI art generators, your photo doesn't just say a thousand words — it becomes a priceless masterpiece hanging in your digital gallery. The AI paints the story YOUR way!
+  </div>
+  <div class="gap-sm"></div>
+  <div class="saying-ai-tag">🤖 AI ART CONNECTION</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════
+     ③ INTRO
+════════════════════════════════ -->
+<div class="section">
+<div class="sec-head">
+  <div class="sec-icon">🚀</div>
+  <div class="sec-title-group">
+    <div class="sec-label">AI Art Generator</div>
+    <div class="sec-sublabel">// this week's jaw-dropping topic</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="body-text" contenteditable="true">
+  Hey there, welcome back to <b>AI Decoded for Seniors</b> — the show where your guide <span class="spk-jake">Jake</span> breaks down the world's hottest AI tools so simply, even <span class="spk-bob">Grandpa Bob</span> gets it on the first try! 🎉
+</div>
+<div class="gap-sm"></div>
+<div class="body-text" contenteditable="true">
+  This episode is one of the most <span class="em">exciting</span> we've ever done. We're talking about <b>AI Art Generators</b> — the technology that Americans are absolutely OBSESSED with right now. Tools like <span class="term">ChatGPT's DALL-E 3</span>, <span class="term">Midjourney</span>, <span class="term">Adobe Firefly</span>, <span class="term">Bing Image Creator</span>, and <span class="term">Canva AI</span> can take any photo you have — your grandkids, your dog, your old vacation pic — and turn it into a stunning painting in the style of Monet, Van Gogh, Picasso, or a Renaissance master.
+</div>
+<div class="gap-sm"></div>
+<div class="body-text" contenteditable="true">
+  The best part? <span class="lime-em">Completely FREE. No art skills needed. No expensive software. Just your phone and 5 minutes.</span> Let's go!
+</div>
+<div class="gap"></div>
+
+<div class="img-outer" id="frame-outer-1">
+  <div class="img-area" id="area-1"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-1').click()}" style="cursor:pointer;">
+    <div class="upload-label" id="img-display-1">
+      <span class="upload-icon">🖼️</span>
+      <span>Click to Insert Image or Video</span>
+      <span style="font-size:12pt;color:var(--ink-muted);">[Intro: AI art transformation — photo becoming a masterpiece]</span>
+      <div class="upload-cta">📁 UPLOAD NOW</div>
+    </div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-1').click()">🔄 Replace</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-1').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-1').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-1" accept="image/*,video/*" style="display:none"
+      onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;display:block;\'></video>';}document.getElementById('area-1').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+  </div>
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT DALL-E 3 / Adobe Firefly Official Demo</em></div>
+
+<div class="body-text" contenteditable="true">
+  📌 <b>Above:</b> Grandpa Bob went from "AI draws pictures?!" to jaw-dropping speechless the moment he saw his granddaughter's photo transformed into a Monet-style watercolor painting. That exact reaction is what this episode is all about — and YOU can do this today!
+</div>
+<div class="gap"></div>
+
+<!-- VISUAL PANEL 1 -->
+<div class="exhibit-frame">
+  <div class="exhibit-header">🎬 SCENE 1 — Grandpa Bob Walks Into the AI Art Studio!</div>
+  <div class="exhibit-cell" id="panel-comic-1"
+    onclick="if(!event.target.closest('.exhibit-overlay'))document.getElementById('up-comic-1').click()">
+    <div id="pd-comic-1" class="exhibit-placeholder">
+      <div style="font-size:56px">🎨</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:0.06em;color:#fff;text-align:center;">GRANDPA BOB WALKS INTO THE AI ART STUDIO!</div>
+      <div style="font-family:'Space Mono',monospace;font-size:12pt;color:var(--ink-muted);text-align:center;">Upload: Grandpa amazed by AI painting transformation</div>
+      <div class="upload-cta" style="border:none;cursor:pointer;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="exhibit-overlay">
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:17pt;color:var(--spray-gold);letter-spacing:0.08em;">🎬 CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="ex-btn" onclick="event.stopPropagation();document.getElementById('up-comic-1').click()">🔄 Replace</button>
+        <button class="ex-btn" onclick="event.stopPropagation();comicDelete('pd-comic-1','comic-1')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-1" accept="image/*,video/*" style="display:none"
+      onchange="comicUpload('up-comic-1','pd-comic-1','comic-1')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════════════════════
+     ④ JAKE & BOB CONVERSATION
+════════════════════════════════ -->
+<div class="sec-head">
+  <div class="sec-icon">🗣️</div>
+  <div class="sec-title-group">
+    <div class="sec-label">Jake & Grandpa Bob Talk AI Art</div>
+    <div class="sec-sublabel">// a real convo — just like your kitchen table</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="dialog-panel" contenteditable="true">
+  <div class="d-row"><span class="d-spk spk-bob">Grandpa Bob:</span> <span class="d-txt">"Jake, I heard on the news they're saying AI can paint pictures. Does that mean a computer has a paintbrush somewhere?"</span></div>
+  <div class="d-row"><span class="d-spk spk-jake">Jake:</span> <span class="d-txt">"Ha! No paintbrush, Grandpa. You just upload a photo — like that one of you and Grandma at Niagara Falls — and tell the AI: 'Make this look like a Van Gogh painting.' And boom. It does it. In about 30 seconds."</span></div>
+  <div class="d-row"><span class="d-spk spk-bob">Grandpa Bob:</span> <span class="d-txt">"You're pulling my leg. What does it look like? Does it look… real?"</span></div>
+  <div class="d-row"><span class="d-spk spk-jake">Jake:</span> <span class="d-txt">"Grandpa, it looks so good people will ask you which gallery you bought it from. And the best part — it's 100% FREE. Microsoft's Bing Image Creator, Canva AI — you don't pay a single cent."</span></div>
+  <div class="d-row"><span class="d-spk spk-bob">Grandpa Bob:</span> <span class="d-txt">"Well shoot, if it's free, I want to make one of your Grandma right now! She'd flip!"</span></div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════════════════════
+     ⑤ AI CRASH COURSE TIPS
+════════════════════════════════ -->
+<div class="sec-head">
+  <div class="sec-icon">⚡</div>
+  <div class="sec-title-group">
+    <div class="sec-label">AI Art: Your 3-Step Beginner's Guide</div>
+    <div class="sec-sublabel">// zero experience required — guaranteed</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="dyk">
+  <div class="dyk-label">💡 Did You Know?</div>
+  <div class="dyk-body">Over <b style="color:var(--spray-lime);">180 million Americans</b> have already used an AI art tool in 2025 — it's the fastest-growing tech trend in the US right now. You're not behind. You're right on time!</div>
+</div>
+
+<div class="tip-ticket" contenteditable="true">
+  <div class="tip-row">
+    <div class="body-text">
+      <span class="tip-num">1</span><b style="color:var(--spray-gold);">Pick Your FREE Tool — Start Here</b><br>
+      <span style="display:block;padding-left:38px;">
+        🥇 <b>Easiest (Microsoft):</b> <span class="term">Bing Image Creator</span> — Google "Bing Image Creator" and it's right there. Sign in with your Microsoft or Outlook account.<br>
+        🥈 <b>Most Beautiful Results:</b> <span class="term">Canva AI</span> — go to canva.com, free account, click "Magic Media."<br>
+        🥉 <b>Best for Full Control:</b> <span class="term">ChatGPT (DALL-E 3)</span> — if you already have a ChatGPT account, just type "create an image" and you're rolling!
+      </span>
+    </div>
+  </div>
+  <div class="tip-row">
+    <div class="body-text">
+      <span class="tip-num">2</span><b style="color:var(--spray-gold);">Pick Your Photo &amp; Upload It</b><br>
+      <span style="display:block;padding-left:38px;">
+        📱 Open your phone's photo gallery → pick ANY photo you love<br>
+        ✅ <b>Works great:</b> family portraits, pet photos, landscape shots, old black-and-white photos!<br>
+        ⚠️ <b>Tips:</b> well-lit photos give the best results. Blurry or very dark photos may look rough.
+      </span>
+    </div>
+  </div>
+  <div class="tip-row">
+    <div class="body-text">
+      <span class="tip-num">3</span><b style="color:var(--spray-gold);">Type Your Magic Prompt — Choose a Style!</b><br>
+      <span style="display:block;padding-left:38px;">
+        🎨 <b>Oil Painting:</b> "Transform this photo into a Van Gogh-style oil painting"<br>
+        💧 <b>Watercolor:</b> "Make this photo look like a Monet impressionist watercolor"<br>
+        🖊️ <b>Pencil Sketch:</b> "Convert this to a detailed black-and-white pencil sketch"<br>
+        🏛️ <b>Renaissance:</b> "Repaint this as a classical Leonardo da Vinci Renaissance portrait"<br>
+        🌸 <b>Comic Book:</b> "Turn this into a bright, colorful Marvel comic book illustration"
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="spotlight">
+  <div class="spot-icon">🤖</div>
+  <div class="spot-content">
+    <div class="spot-title">🔦 Top AI Art Tools — Americans Are Searching RIGHT NOW</div>
+    <div class="spot-body">
+      <b style="color:var(--spray-gold);">Bing Image Creator · DALL-E 3 · Midjourney · Adobe Firefly · Canva AI · Stable Diffusion · Grok · Gemini Image</b><br>
+      This episode focuses on turning YOUR photos into masterpieces using the FREE tools first!
+    </div>
+  </div>
+</div>
+
+<div class="img-outer" id="frame-outer-2">
+  <div class="img-area" id="area-2"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-2').click()}" style="cursor:pointer;">
+    <div class="upload-label" id="img-display-2">
+      <span class="upload-icon">🎨</span>
+      <span>Click to Insert Image or Video</span>
+      <span style="font-size:12pt;color:var(--ink-muted);">[Step-by-step: Bing Image Creator / Canva AI walkthrough]</span>
+      <div class="upload-cta" style="border:none;cursor:pointer;">📁 UPLOAD NOW</div>
+    </div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-2').click()">🔄 Replace</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-2').innerHTML='<span class=\'upload-icon\'>🎨</span><span>Click to Insert Image or Video</span>';document.getElementById('area-2').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-2" accept="image/*,video/*" style="display:none"
+      onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;display:block;\'></video>';}document.getElementById('area-2').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+  </div>
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Bing Image Creator / Canva AI / Adobe Firefly Official</em></div>
+<div class="gap"></div>
+
+<!-- VISUAL PANEL 2 -->
+<div class="exhibit-frame">
+  <div class="exhibit-header">🎬 SCENE 2 — AI Is Already America's Favorite Digital Artist!</div>
+  <div class="exhibit-cell" id="panel-comic-2"
+    onclick="if(!event.target.closest('.exhibit-overlay'))document.getElementById('up-comic-2').click()">
+    <div id="pd-comic-2" class="exhibit-placeholder">
+      <div style="font-size:56px">🖌️</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:0.06em;color:#fff;text-align:center;">AI IS AMERICA'S FAVORITE DIGITAL ARTIST!</div>
+      <div style="font-family:'Space Mono',monospace;font-size:12pt;color:var(--ink-muted);text-align:center;">Upload: Bing Creator, Canva, DALL-E in action</div>
+      <div class="upload-cta" style="border:none;cursor:pointer;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="exhibit-overlay">
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:17pt;color:var(--spray-gold);letter-spacing:0.08em;">🎬 CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="ex-btn" onclick="event.stopPropagation();document.getElementById('up-comic-2').click()">🔄 Replace</button>
+        <button class="ex-btn" onclick="event.stopPropagation();comicDelete('pd-comic-2','comic-2')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-2" accept="image/*,video/*" style="display:none"
+      onchange="comicUpload('up-comic-2','pd-comic-2','comic-2')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════════════════════
+     ⑥ AI IN YOUR DAILY LIFE
+════════════════════════════════ -->
+<div class="sec-head">
+  <div class="sec-icon">🌟</div>
+  <div class="sec-title-group">
+    <div class="sec-label" contenteditable="true">AI Art Can Do THIS for You!</div>
+    <div class="sec-sublabel">// real, practical, American everyday life</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+<div class="body-text" contenteditable="true"><span class="spk-jake">Jake:</span> "Grandpa, AI art isn't just a toy — here are four REAL ways you can use it starting today. Each one will genuinely blow your family's minds!"</div>
+<div class="gap-sm"></div>
+
+<div class="ai-life-box" contenteditable="true">
+  <div class="ai-item">
+    <div class="body-text"><b style="color:var(--spray-cyan);">1. 🎁 The Ultimate Personalized Gift</b><br>
+    Transform a cherished family photo into an oil painting → print it on canvas through Amazon, Walmart, or Walgreens → frame it → DONE. You've just made a one-of-a-kind, priceless gift for a birthday, Mother's Day, Father's Day, or anniversary. People will cry happy tears when they see it. Canvas prints start at around $15!</div>
+  </div>
+  <div class="ai-item">
+    <div class="body-text"><b style="color:var(--spray-cyan);">2. 📱 Level Up Your Facebook &amp; Email Profile Photo</b><br>
+    Take your current profile photo, run it through Canva AI, choose "watercolor portrait" — and suddenly your Facebook profile looks like it belongs in a gallery. Friends and family will blow up your notifications asking "WHO took that photo?!" It's conversation-starting magic.</div>
+  </div>
+  <div class="ai-item">
+    <div class="body-text"><b style="color:var(--spray-cyan);">3. 🏠 Free Home Décor &amp; Wall Art</b><br>
+    Turn your old vacation photos or family portraits into Renaissance-style paintings. Print them on your home printer or at CVS/Walgreens photo center. Frame them and hang them up. Your living room becomes an instant gallery — for basically nothing. Guests will be convinced you bought expensive art.</div>
+  </div>
+  <div class="ai-item">
+    <div class="body-text"><b style="color:var(--spray-cyan);">4. ✉️ Stunning Holiday Cards &amp; Party Invitations</b><br>
+    AI-generated art makes your Christmas cards, birthday invitations, and anniversary announcements look absolutely professional. Use Canva AI to create a custom illustrated background, then add your text. Send them by email or text — completely free, completely unforgettable.</div>
+  </div>
+</div>
+
+<!-- AI ICON GRID -->
+<div class="ai-img-grid">
+  <div class="ai-sq" id="ai-area-1" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-1').click()}">
+    <div class="upload-label" id="ai-img-display-1"><span class="upload-icon">🎁</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-1').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-1').innerHTML='<span class=\'upload-icon\'>🎁</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls></video>';}};r.readAsDataURL(f);})(event)">
+  </div>
+  <div class="ai-sq" id="ai-area-2" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-2').click()}">
+    <div class="upload-label" id="ai-img-display-2"><span class="upload-icon">📱</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-2').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-2').innerHTML='<span class=\'upload-icon\'>📱</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls></video>';}};r.readAsDataURL(f);})(event)">
+  </div>
+  <div class="ai-sq" id="ai-area-3" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-3').click()}">
+    <div class="upload-label" id="ai-img-display-3"><span class="upload-icon">🏠</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-3').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-3').innerHTML='<span class=\'upload-icon\'>🏠</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls></video>';}};r.readAsDataURL(f);})(event)">
+  </div>
+  <div class="ai-sq" id="ai-area-4" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-4').click()}">
+    <div class="upload-label" id="ai-img-display-4"><span class="upload-icon">✉️</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-4').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-4').innerHTML='<span class=\'upload-icon\'>✉️</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-4');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls></video>';}};r.readAsDataURL(f);})(event)">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════════════════════
+     ⑦ AI LAUGH BREAK
+════════════════════════════════ -->
+<div class="sec-head">
+  <div class="sec-icon">😂</div>
+  <div class="sec-title-group">
+    <div class="sec-label">AI Laugh Break!</div>
+    <div class="sec-sublabel">// because learning should always be fun 🎉</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="laugh-box" contenteditable="true">
+  <div class="body-text" style="font-family:'Bebas Neue',sans-serif;font-size:22pt;letter-spacing:0.06em;color:var(--spray-orange);">🎭 Grandpa Bob Meets the AI Painter!</div>
+  <div class="gap-sm"></div>
+  <div class="d-row"><span class="d-spk spk-bob">Grandpa Bob:</span> <span class="d-txt">"Jake, I asked the AI to make me look like the Mona Lisa."</span></div>
+  <div class="d-row"><span class="d-spk spk-jake">Jake:</span> <span class="d-txt">"Oh yeah? How did it turn out?"</span></div>
+  <div class="d-row"><span class="d-spk spk-bob">Grandpa Bob:</span> <span class="d-txt">"Well, the Mona Lisa has that mysterious smile. My portrait has a look of pure confusion."</span></div>
+  <div class="d-row"><span class="d-spk spk-jake">Jake:</span> <span class="d-txt">"Grandpa… did you type 'confused old man' in the description?"</span></div>
+  <div class="d-row"><span class="d-spk spk-bob">Grandpa Bob:</span> <span class="d-txt">"…I was trying to describe the AI to your grandmother."</span></div>
+  <div class="gap-sm"></div>
+  <div class="body-text" style="text-align:center;font-style:italic;color:var(--spray-orange);">
+    😂 <b>Pro Tip: The AI takes your words LITERALLY. Describe the result you WANT — not how you feel about it! 🎨</b>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════════════════════
+     ⑧ AI TRIVIA CHALLENGE
+════════════════════════════════ -->
+<div class="sec-head">
+  <div class="sec-icon">🧠</div>
+  <div class="sec-title-group">
+    <div class="sec-label">AI Trivia Challenge!</div>
+    <div class="sec-sublabel">// test your new AI art knowledge — answers below 👇</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="quiz-arcade" contenteditable="true">
+  <div class="body-text" style="font-family:'Bebas Neue',sans-serif;font-size:22pt;letter-spacing:0.06em;color:var(--spray-lime);">🏆 CAN YOU ANSWER THESE?</div>
+  <div class="gap-sm"></div>
+  <div class="body-text">
+    <span class="q-num">Q1.</span> What is the name of Microsoft's completely FREE AI image creator that you can find by Googling "Bing Image Creator"?<br>
+    <span style="color:var(--ink-muted);font-size:14pt;">💡 Hint: It's powered by the same AI as ChatGPT's image feature!</span>
+  </div>
+  <div class="gap-sm"></div>
+  <div class="body-text">
+    <span class="q-num">Q2.</span> What do we call the written instruction you give to an AI tool — like "Make this photo look like a Van Gogh oil painting"?<br>
+    <span style="color:var(--ink-muted);font-size:14pt;">💡 Hint: It starts with the letter "P" and rhymes with "comment."</span>
+  </div>
+  <div class="gap-sm"></div>
+  <div class="body-text">
+    <span class="q-num">Q3.</span> Today's American saying was "A picture is worth a thousand words." How does this connect to AI art generators?<br>
+    <span style="color:var(--ink-muted);font-size:14pt;">💡 Hint: Think about what happens when your photo gets transformed into a masterpiece!</span>
+  </div>
+  <div class="gap-sm"></div>
+  <div class="body-text" style="text-align:center;color:var(--spray-lime);font-weight:700;">Drop your answers in the comments! Jake reads every single one! 🎨</div>
+</div>
+
+<div class="reveal-hint" onclick="this.classList.toggle('revealed');document.getElementById('answer-reveal').classList.toggle('revealed')">
+  👆 Tap / hover here to reveal the answers!
+</div>
+<div class="answer-panel" id="answer-reveal" onclick="this.classList.toggle('revealed')" contenteditable="true">
+  <div class="body-text">
+    <b style="color:var(--spray-lime);font-size:19pt;">✅ ANSWERS</b><br>
+    <b>A1:</b> <span class="term">Bing Image Creator</span> by Microsoft — also called "Microsoft Designer." Completely free, powered by DALL-E 3.<br>
+    <b>A2:</b> A <span class="term">Prompt</span> — your typed instruction telling the AI exactly what you want it to create.<br>
+    <b>A3:</b> AI turns your one photo into a thousand-word story painted in vivid artistic styles — your image literally becomes worth more than words!
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════════════════════
+     ⑨ SAYING DEEP DIVE
+════════════════════════════════ -->
+<div class="sec-head">
+  <div class="sec-icon">📖</div>
+  <div class="sec-title-group">
+    <div class="sec-label">Saying Deep Dive</div>
+    <div class="sec-sublabel">// understand every word + connect it to AI</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="plaque-box">
+  <div class="plaque-title" contenteditable="true">🔍 BREAKING DOWN TODAY'S SAYING</div>
+  <div class="plaque-saying" contenteditable="true">"A picture is worth a thousand words."</div>
+
+  <div class="word-grid">
+    <div class="word-card">
+      <span class="w-main" contenteditable="true">PICTURE</span>
+      <span class="w-type" contenteditable="true">(noun)</span>
+      <span class="w-def" contenteditable="true">A photograph, drawing, painting, or any visual image</span>
+    </div>
+    <div class="word-card">
+      <span class="w-main" contenteditable="true">WORTH</span>
+      <span class="w-type" contenteditable="true">(adj / verb)</span>
+      <span class="w-def" contenteditable="true">Having a value equal to; deserving of</span>
+    </div>
+    <div class="word-card">
+      <span class="w-main" contenteditable="true">THOUSAND</span>
+      <span class="w-type" contenteditable="true">(number)</span>
+      <span class="w-def" contenteditable="true">The number 1,000 — used here to mean "a huge amount"</span>
+    </div>
+    <div class="word-card">
+      <span class="w-main" contenteditable="true">WORDS</span>
+      <span class="w-type" contenteditable="true">(noun, plural)</span>
+      <span class="w-def" contenteditable="true">Written or spoken language used to communicate ideas</span>
+    </div>
+  </div>
+
+  <div class="story-block" contenteditable="true">
+    <div class="body-text"><b style="color:var(--spray-gold);">📌 Word-for-word meaning:</b><br>
+    "One single image (a picture) can communicate (is worth) as much information as one thousand written or spoken words." It would take you pages and pages to describe in words what a single photograph shows instantly.</div>
+    <div class="gap"></div>
+    <div class="body-text"><b style="color:var(--spray-gold);">📌 In plain English:</b><br>
+    Images communicate faster and more powerfully than words. When you see a photo of someone crying at a wedding, you instantly understand the joy, the love, the moment — no explanation needed. That's the power of a picture.</div>
+    <div class="gap"></div>
+    <div class="body-text"><b style="color:var(--spray-gold);">📌 Real-life American analogy:</b><br>
+    Think about a news story. You can read three paragraphs describing a hurricane's damage — OR you can see one aerial photo of a flooded city. Which hits harder? That's why news photographers exist. One image instantly tells the whole story.</div>
+  </div>
+
+  <div class="ai-connect-block" contenteditable="true">
+    <div class="body-text" style="font-weight:800;color:var(--spray-cyan);">🤖 Connect It to AI Art!</div>
+    <div class="gap-sm"></div>
+    <div class="body-text">
+      AI art generators take this saying to the next level. Your old photo — a thousand memories — gets painted by AI into a masterpiece that says a MILLION things. <span class="term">DALL-E 3</span>, <span class="term">Midjourney</span>, and <span class="term">Adobe Firefly</span> don't just show a picture — they transform it into emotional art that moves people to tears.<br><br>
+      <b style="color:var(--spray-gold);">"A picture is worth a thousand words"</b> — and an AI-painted masterpiece? Worth a million. 🌟
+    </div>
+  </div>
+
+  <div class="memory-tip" contenteditable="true">
+    🧠 <b>Memory Tip!</b> Next time you see a beautiful photo, say to yourself: "That's worth a thousand words — and with AI, it could be worth a thousand paintings!" Try this sentence: "My granddaughter's smile is a picture worth a thousand words — so I turned it into a Van Gogh!" 😊
+  </div>
+</div>
+
+<!-- IMAGE 3 -->
+<div class="img-outer" id="frame-outer-3">
+  <div class="img-area" id="area-3"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-3').click()}" style="cursor:pointer;">
+    <div class="upload-label" id="img-display-3">
+      <span class="upload-icon">🏛️</span>
+      <span>Click to Insert Image or Video</span>
+      <span style="font-size:12pt;color:var(--ink-muted);">[Before/After: Original photo vs. AI masterpiece comparison]</span>
+      <div class="upload-cta" style="border:none;cursor:pointer;">📁 UPLOAD NOW</div>
+    </div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-3').click()">🔄 Replace</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-3').innerHTML='<span class=\'upload-icon\'>🏛️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-3').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-3" accept="image/*,video/*" style="display:none"
+      the f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;display:block;\'></video>';}document.getElementById('area-3').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+  </div>
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT DALL-E 3 / Midjourney Official Examples</em></div>
+
+<div class="body-text" contenteditable="true" style="margin-top:10px;">
+  <span class="spk-jake">Jake:</span> "Grandpa, just like today's saying — your photo already tells a thousand words. But with AI, we can turn it into a masterpiece that tells a MILLION. Go try Bing Image Creator tonight!"
+</div>
+<div class="gap-sm"></div>
+<div class="body-text" contenteditable="true">
+  <span class="spk-bob">Grandpa Bob:</span> "You know what, Jake? I do have that photo of your grandma from our honeymoon in 1968. I think I'm gonna make her a Monet for our anniversary. Might just be the best gift I've ever given her. Ha!"
+</div>
+<div class="gap"></div>
+
+<!-- VISUAL PANEL 3 -->
+<div class="exhibit-frame">
+  <div class="exhibit-header">🎬 SCENE 3 — Grandpa Bob's First AI Masterpiece Challenge!</div>
+  <div class="exhibit-cell" id="panel-comic-3"
+    onclick="if(!event.target.closest('.exhibit-overlay'))document.getElementById('up-comic-3').click()">
+    <div id="pd-comic-3" class="exhibit-placeholder">
+      <div style="font-size:56px">🏆</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:0.06em;color:#fff;text-align:center;">GRANDPA'S FIRST AI MASTERPIECE CHALLENGE!</div>
+      <div style="font-family:'Space Mono',monospace;font-size:12pt;color:var(--ink-muted);text-align:center;">Upload: Wedding photo transformed into a Monet watercolor masterpiece</div>
+      <div class="upload-cta" style="border:none;cursor:pointer;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="exhibit-overlay">
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:17pt;color:var(--spray-gold);letter-spacing:0.08em;">🎬 CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="ex-btn" onclick="event.stopPropagation();document.getElementById('up-comic-3').click()">🔄 Replace</button>
+        <button class="ex-btn" onclick="event.stopPropagation();comicDelete('pd-comic-3','comic-3')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-3" accept="image/*,video/*" style="display:none"
+      onchange="comicUpload('up-comic-3','pd-comic-3','comic-3')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- SEARCH KEYWORDS -->
+<div class="divider-rainbow"></div>
+<div style="padding:0 28px;">
+<div class="body-text" style="font-family:'Bebas Neue',sans-serif;font-size:22pt;letter-spacing:0.06em;color:#fff;">🔍 Top AI Art Search Keywords — Try These NOW!</div>
+<div class="body-text" style="font-size:13pt;color:var(--ink-muted);font-family:'Space Mono',monospace;margin-bottom:12px;">These are the hottest terms Americans are Googling RIGHT NOW. Click any to search!</div>
+<div class="kw-grid">
+  <a href="https://www.google.com/search?q=AI+art+generator+free" target="_blank" class="kw-pill">AI Art Generator Free</a>
+  <a href="https://www.google.com/search?q=Bing+Image+Creator+how+to+use" target="_blank" class="kw-pill">Bing Image Creator How To</a>
+  <a href="https://www.google.com/search?q=ChatGPT+DALL-E+image+generator" target="_blank" class="kw-pill">ChatGPT DALL-E Image</a>
+  <a href="https://www.google.com/search?q=Midjourney+free+alternative" target="_blank" class="kw-pill">Midjourney Free Alternative</a>
+  <a href="https://www.google.com/search?q=Canva+AI+image+generator" target="_blank" class="kw-pill">Canva AI Image Generator</a>
+  <a href="https://www.google.com/search?q=Adobe+Firefly+free+AI+art" target="_blank" class="kw-pill">Adobe Firefly Free AI Art</a>
+  <a href="https://www.google.com/search?q=AI+photo+to+painting+converter" target="_blank" class="kw-pill">AI Photo to Painting</a>
+  <a href="https://www.google.com/search?q=AI+Van+Gogh+style+photo" target="_blank" class="kw-pill">AI Van Gogh Photo Style</a>
+</div>
+</div>
+<div class="gap"></div>
+
+<!-- WORD POWER -->
+<div class="section">
+<div class="sec-head">
+  <div class="sec-icon">📝</div>
+  <div class="sec-title-group">
+    <div class="sec-label">American English Word Power</div>
+    <div class="sec-sublabel">// essential AI vocabulary every senior should know!</div>
+  </div>
+  <div class="sec-line"></div>
+</div>
+
+<div class="wordpower-box" contenteditable="true">
+  <div class="body-text"><b>1. PROMPT</b> <span style="font-family:'Space Mono',monospace;font-size:12pt;color:var(--spray-pink);">(noun/verb)</span><br>
+  The written instruction you type to tell an AI what to create. Think of it like placing your order at a restaurant — the more specific you are, the better the result. <em>Example: "Transform my photo into a Monet watercolor painting with soft pastel colors."</em></div>
+  <div class="gap-sm"></div>
+  <div class="body-text"><b>2. GENERATE</b> <span style="font-family:'Space Mono',monospace;font-size:12pt;color:var(--spray-pink);">(verb)</span><br>
+  When AI "generates" something, it creates it from scratch. "AI-generated image" = an image AI created from your prompt. Like asking a master artist who never sleeps!</div>
+  <div class="gap-sm"></div>
+  <div class="body-text"><b>3. STYLE TRANSFER</b> <span style="font-family:'Space Mono',monospace;font-size:12pt;color:var(--spray-pink);">(noun phrase)</span><br>
+  The AI technique that takes your photo and applies the visual style of a famous artist. Your face stays YOUR face — but the painting technique becomes Van Gogh, Monet, or Picasso!</div>
+</div>
+
+<div style="background:var(--panel);border:1px solid rgba(0,229,255,0.25);padding:18px 22px;margin:14px 0;text-align:center;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:20pt;color:var(--spray-cyan);letter-spacing:0.06em;">📚 America's Best Free Online Dictionary</div>
+  <div class="gap-sm"></div>
+  👉 <a href="https://www.merriam-webster.com/" target="_blank" style="color:var(--spray-cyan);font-weight:700;font-size:16pt;">www.merriam-webster.com</a>
+  <div style="font-family:'Space Mono',monospace;font-size:12pt;color:var(--ink-muted);margin-top:6px;">America's most trusted dictionary — free, fast, and always current!</div>
+</div>
+<div class="gap"></div>
+
+<!-- GRANDPA BOX -->
+<div class="grandpa-vinyl" contenteditable="true">
+  <b style="font-size:17pt;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em;color:var(--spray-gold);">MY PERSONAL TAKE ON ALL OF THIS:</b><br>
+  <span style="font-size:17pt;font-style:italic;color:var(--ink);">"I'm not gonna lie — when Jake first showed me this AI art business, I thought it was smoke and mirrors. But he took our wedding photo from 1968 — the black-and-white one where I've got all my hair — and turned it into a full-color Monet watercolor. My wife cried. I may have gotten a little something in my eye too. If that's what AI can do… count me in, Jake. Count. Me. In."</span>
+</div>
+<div class="gap"></div>
+
+<!-- RECAP -->
+<div class="recap-board">
+  <div class="recap-inner">
+    <div class="recap-title" contenteditable="true">📚 TODAY'S RECAP — LET'S REVIEW!</div>
+    <div class="recap-item" contenteditable="true">
+      <b>① AI Art Tools (All FREE!)</b><br>
+      <span class="term">Bing Image Creator</span>, <span class="term">Canva AI</span>, <span class="term">ChatGPT DALL-E 3</span>, <span class="term">Adobe Firefly</span> — on your phone or computer. No downloads. No credit card. No excuses!
+    </div>
+    <div class="recap-item" contenteditable="true">
+      <b>② Your 3-Step Process</b><br>
+      ① Pick your FREE tool → ② Upload your photo → ③ Type your prompt ("Make this look like a Monet watercolor") → Hit enter → Watch the magic happen in 30 seconds!
+    </div>
+    <div class="recap-item" contenteditable="true">
+      <b>③ 4 Real Ways to Use It Today</b><br>
+      ① Personalized canvas gift ($15!) ② Stunning social media profile ③ Free gallery-worthy wall art ④ Professional holiday cards &amp; invitations
+    </div>
+    <div class="recap-item" contenteditable="true" style="border-left-color:var(--spray-gold);">
+      <b>④ Today's American Saying</b><br>
+      <b style="color:var(--spray-gold);">"A picture is worth a thousand words."</b> — With AI art, your picture is worth a million. One prompt + one photo = a masterpiece that moves people to tears. 🌟
+    </div>
+    <div class="gap-sm"></div>
+    <div class="body-text" contenteditable="true" style="text-align:center;color:var(--spray-gold);font-family:'Bebas Neue',sans-serif;font-size:24pt;letter-spacing:0.06em;">
+      🎉 AMAZING WORK TODAY! SEE YOU NEXT EPISODE! 🤖✨
+    </div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- CTA -->
+<div id="subscribe-cta" class="cta-bomb">
+  <div class="cta-inner" contenteditable="true">
+    <div class="cta-title">🔔 NEVER MISS AN EPISODE!</div>
+    <div class="cta-body">
+      Bookmark this page · Share it with a friend who deserves to learn AI · Subscribe for weekly drops!<br>
+      <b style="color:var(--spray-gold);">New episode every week — always free, always simple, always fun.</b>
+    </div>
+    <div class="cta-tags">#AIDecodedForSeniors &nbsp;|&nbsp; #AIArtGenerator &nbsp;|&nbsp; #ChatGPT &nbsp;|&nbsp; #DALLE &nbsp;|&nbsp; #AIForSeniors &nbsp;|&nbsp; #LearnAI &nbsp;|&nbsp; #ArtificialIntelligence</div>
+  </div>
+</div>
+
+<div class="gap-sm"></div>
+<div class="footer-txt" contenteditable="true">
+  📝 This post is made especially for seniors exploring AI for the very first time.<br>
+  Got questions? Drop a comment below — <b style="color:var(--spray-cyan);">Jake reads every single one!</b> 💬
+</div>
+<div class="gap-sm"></div>
+<div class="divider-rainbow"></div>
+<div class="footer-txt" contenteditable="true">
+  This post is part of <span class="em">AI Decoded for Seniors</span> — an educational series designed to make Artificial Intelligence accessible to every American.
+</div>
+<div class="footer-copy">© 2026 AI DECODED FOR SENIORS | ALL RIGHTS RESERVED</div>
+
+</div><!-- /section -->
+</div><!-- /wrap -->
+
+<script>
+var SADB_NAME='ai-decoded-ep42-eng', SADB_VER=1, SADB_STORE='media';
+function sadbOpen(cb){var req=indexedDB.open(SADB_NAME,SADB_VER);req.onupgradeneeded=function(e){e.target.result.createObjectStore(SADB_STORE)};req.onsuccess=function(e){cb(e.target.result)};req.onerror=function(){cb(null)};}
+function sadbSave(key,data){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).put(data,key);})}
+function sadbLoad(key,cb){sadbOpen(function(db){if(!db){cb(null);return}var req=db.transaction(SADB_STORE,'readonly').objectStore(SADB_STORE).get(key);req.onsuccess=function(e){cb(e.target.result||null)};req.onerror=function(){cb(null)};});}
+function sadbDelete(key){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).delete(key);})}
+window.addEventListener('DOMContentLoaded',function(){
+  ['comic-1','comic-2','comic-3'].forEach(function(id){
+    sadbLoad(id,function(data){
+      if(!data)return;
+      var el=document.getElementById('pd-'+id);if(!el)return;
+      el.innerHTML=data.startsWith('data:video')
+        ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+        :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    });
+  });
+});
+function comicUpload(inputId,panelId,dbKey){
+  var inp=document.getElementById(inputId);if(!inp)return;
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var data=ev.target.result;
+    var el=document.getElementById(panelId);if(!el)return;
+    el.innerHTML=f.type.startsWith('video/')
+      ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+      :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    sadbSave(dbKey,data);
+  };
+  r.readAsDataURL(f);
+}
+function comicDelete(panelId,dbKey){
+  var el=document.getElementById(panelId);if(!el)return;
+  el.innerHTML='<div class="exhibit-placeholder"><div style="font-size:56px">🎨</div><div style="font-family:Bebas Neue,sans-serif;font-size:16pt;color:#fff;text-align:center;">Click to Upload</div></div>';
+  sadbDelete(dbKey);
+}
+</script>
+
+<div class="save-bar">
+<button onclick="(function(){
+  var clone=document.body.cloneNode(true);
+  var sb=clone.querySelector('.save-bar');if(sb)sb.parentNode.removeChild(sb);
+  clone.querySelectorAll('input[type=file]').forEach(function(i){i.value='';});
+  clone.querySelectorAll('script').forEach(function(s){s.parentNode.removeChild(s);});
+  var html='<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n<meta charset=\'UTF-8\'>\n<meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0\'>\n<link rel=\'preconnect\' href=\'https://fonts.googleapis.com\'>\n<link rel=\'preconnect\' href=\'https://fonts.gstatic.com\' crossorigin>\n<link href=\'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,900;1,700&family=Space+Mono:wght@400;700&display=swap\' rel=\'stylesheet\'>\n'+document.querySelector('style').outerHTML+'\n</head>\n<body>\n'+clone.innerHTML+'\n</body>\n</html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ai_decoded_ep42_eng.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){alert('EP.42 saved! Paste body into your blog HTML tab.');},300);
+})()">💾 SAVE HTML — IMAGES INCLUDED</button>
+</div>
+
+</body>
+</html>

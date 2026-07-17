@@ -1,0 +1,170 @@
+╔══════════════════════════════════════════════════════════════╗
+║  IssueLens EP.02 — YouTube LONG-FORM Script (English)      ║
+║  Target Runtime: 12–18 minutes · US / Global Audience        ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🎬 TITLE A/B/C TESTS (pick highest CTR)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+A. Your Router May Already Be Spying on You | IssueLens EP.02
+B. Deleting the App
+        Isn't Enough
+        — Your Devices Know Everything — FULL BREAKDOWN [2026]
+C. The Truth They Don't Want You to Know: The FBI flagged TP-Link. The FCC banned Huawei. Hikvision cameras are in your ap... | IssueLens EP.02
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🎤 HOOK  (0:00–0:35) — Pattern Interrupt
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[SCREEN: fast-cut montage relevant to topic]
+
+NARRATION:
+"Think deleting Temu fixed everything? Your TP-Link router, Hikvision camera, and Xiaomi phone may already be transmitting your data to Chinese servers. The FBI and FCC are sounding the alarm. Here's t
+
+In the next 12 minutes, I'm going to show you exactly what's happening,
+what the data says, and — most importantly — what you can do about it.
+
+If you find this useful, hit subscribe. New episode every single day."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📋 CHAPTER CARD  (0:35–1:00)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"Here's what we're covering today:
+
+  ① Why Deleting the App Doesn't Fix Anything — The Firmware Backdoor Threat
+  ② America Already Acted — The Huawei, ZTE & Hikvision Bans Explained
+  ③ Is Your Living Room Being Watched? Xiaomi, Hikvision & the Smart TV Problem
+  ④ The Law Protects Federal Buildings — Not Your Home. Here's the Gap.
+  ⑤ What you can do RIGHT NOW
+
+Let's get into it."
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📌 SECTION 1: Why Deleting the App Doesn't Fix Anything — The Firmware Backdoor Threat
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[SCREEN: relevant B-roll / data graphic]
+
+NARRATION:
+"Let's talk about why deleting the app doesn't fix anything — the firmware backdoor threat. 
+
+The FBI flagged TP-Link. The FCC banned Huawei. Hikvision cameras are in your apartment building. Here's what the hardware inside your home is doing right now.
+
+[ADD YOUR SOURCED CONTENT HERE — see SEO master file for talking points]
+
+Source your data on-screen:
+  Italic caption: Source: [Publication], [Date], [Author]"
+
+[DATA CALLOUT CARD: #1 — TP-Link holds approximately 65% of the U.S. home and small-business router market]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📌 SECTION 2: America Already Acted — The Huawei, ZTE & Hikvision Bans Explained
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[SCREEN: relevant B-roll / data graphic]
+
+NARRATION:
+"Let's talk about america already acted — the huawei, zte & hikvision bans explained. 
+
+This is where it gets really serious.
+
+[ADD YOUR SOURCED CONTENT HERE — see SEO master file for talking points]
+
+Source your data on-screen:
+  Italic caption: Source: [Publication], [Date], [Author]"
+
+[DATA CALLOUT CARD: 449 — Censorship keywords found in Xiaomi Mi 10T firmware — inactive but remotely activatable at any time]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📌 SECTION 3: Is Your Living Room Being Watched? Xiaomi, Hikvision & the Smart TV Problem
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[SCREEN: relevant B-roll / data graphic]
+
+NARRATION:
+"Let's talk about is your living room being watched? xiaomi, hikvision & the smart tv problem. 
+
+This is where it gets really serious.
+
+[ADD YOUR SOURCED CONTENT HERE — see SEO master file for talking points]
+
+Source your data on-screen:
+  Italic caption: Source: [Publication], [Date], [Author]"
+
+[DATA CALLOUT CARD: No data — ]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📌 SECTION 4: The Law Protects Federal Buildings — Not Your Home. Here's the Gap.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[SCREEN: relevant B-roll / data graphic]
+
+NARRATION:
+"Let's talk about the law protects federal buildings — not your home. here's the gap.. 
+
+This is where it gets really serious.
+
+[ADD YOUR SOURCED CONTENT HERE — see SEO master file for talking points]
+
+Source your data on-screen:
+  Italic caption: Source: [Publication], [Date], [Author]"
+
+[DATA CALLOUT CARD: No data — ]
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🛡️ ACTION ITEMS + CLOSE  (last 2 min)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NARRATION:
+"So what do you actually DO with all of this? Here's your action plan:
+
+  Step 1: Check Your Router — Is your home router a TP-Link, Huawei, or ZTE product? If so, seriously consider replacing it with a
+  Step 2: Audit Your Cameras — Check whether your home or apartment security cameras are Hikvision or Dahua products. Change defaul
+  Step 3: Kill Your Smart TV Mic — Go into your smart TV's privacy settings and disable the microphone, camera, and ACR data collection
+  Step 4: Demand Consumer Protection — The NDAA protects federal buildings. It doesn't protect your living room. Contact your Senators and 
+
+
+I'll leave you with this:
+
+""Deleting the app is locking the window.
+        But if the front door — the hardware itself — is already open,
+        it doesn't matter.""
+
+If this episode opened your eyes, subscribe and share it with someone who needs to hear this.
+I publish a new deep-dive EVERY DAY. See you tomorrow — IssueLens."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📝 YOUTUBE DESCRIPTION  (copy-paste ready)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+The FBI flagged TP-Link. The FCC banned Huawei. Hikvision cameras are in your apartment building. Here's what the hardware inside your home is doing right now.
+
+Think deleting Temu fixed everything? Your TP-Link router, Hikvision camera, and Xiaomi phone may already be transmitting your data to Chinese servers. The FBI and FCC are sounding the alarm. Here's the hardware inside your home they haven't told you about.
+
+📌 TIMESTAMPS:
+0:00 Hook
+0:35 Overview
+~3:00 Why Deleting the App Doesn't Fix Anything — The Firmware Backdoor Threat
+~6:00 America Already Acted — The Huawei, ZTE & Hikvision Bans Explained
+~9:00 Is Your Living Room Being Watched? Xiaomi, Hikvision & the Smart TV Problem
+~12:00 The Law Protects Federal Buildings — Not Your Home. Here's the Gap.
+Final: Action Plan + Close
+
+🔔 Subscribe for a new deep-dive EVERY DAY: https://www.youtube.com/@IssueLens
+📱 Instagram: https://www.instagram.com/issuelens
+🎵 TikTok: https://www.tiktok.com/@issuelens
+🧵 Threads: https://www.threads.net/@issuelens
+🐦 X: https://x.com/issuelens
+📘 Facebook: https://www.facebook.com/issuelens
+
+⚠️ DISCLAIMER: All information is based on official government reports, credible journalism, and peer-reviewed sources. This is factual public-interest journalism. Sources cited on-screen throughout.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🏷️ YOUTUBE TAGS  (500-char limit)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+is TP-Link safe 2026, TP-Link router ban US, Chinese router security risk, Huawei banned US, Hikvision banned US government, Chinese cameras spying on Americans, is Xiaomi safe, smart TV listening to you, firmware backdoor router, Chinese devices spy, TP-Link FBI investigation, kill switch Chinese tech, ZTE security risk, Chinese hardware supply chain threat, FCC national security ban Chinese, NDAA Huawei ZTE Hikvision ban, router hacked China, Hikvision camera vulnerability, Chinese IoT spyware, smart TV microphone always on, ACR smart TV data collection, should I replace TP-Link router, is Huawei dangerous, Chinese surveillance cameras home, TP-Link Congress ban 2026
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🎨 THUMBNAIL GUIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Size: 1280×720px
+Background: #C8001A → #0A0A0A gradient (left to right)
+Main text: Bold white caps — e.g. "YOUR ROUTER MAY ALREADY BE SPY..."
+Sub text:  Bright yellow — "THE TRUTH [2025]"
+Accent: IssueLens EP.02 badge (top-left)
+Face/reaction: Optional — shocked expression for emotional CTR

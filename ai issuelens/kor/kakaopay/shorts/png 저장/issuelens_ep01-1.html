@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens EP.01-1 — 결제 버튼 누른 순간</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#0a0a0a;
+  font-family:'Noto Sans KR',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:40px 16px;
+}
+.card{
+  position:relative;width:390px;height:693px;
+  overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.9);
+  display:flex;flex-direction:column;
+}
+
+/* 상단 바 */
+.top-bar{
+  width:100%;background:#CC0000;height:160px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;overflow:hidden;
+}
+.top-bar::after{content:'';position:absolute;right:-30px;top:-40px;width:130px;height:220px;background:rgba(255,255,255,.07);transform:rotate(18deg);}
+.top-bar::before{content:'';position:absolute;left:-20px;bottom:-30px;width:100px;height:160px;background:rgba(0,0,0,.15);transform:rotate(18deg);}
+.top-text{
+  font-size:50px;font-weight:900;color:#fff;
+  text-align:center;text-shadow:2px 3px 0 rgba(0,0,0,.45);
+  letter-spacing:-.02em;line-height:1.18;padding:0 18px;
+  word-break:keep-all;position:relative;z-index:2;
+}
+
+/* 중앙 */
+.mid{
+  flex:1;position:relative;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;
+  background:
+    radial-gradient(ellipse 60% 45% at 18% 58%, rgba(170,90,0,.55) 0%, transparent 68%),
+    radial-gradient(ellipse 65% 55% at 82% 35%, rgba(20,45,130,.6) 0%, transparent 70%),
+    #080812;
+}
+.deco-circle{
+  position:absolute;width:210px;height:210px;border-radius:50%;
+  top:50%;left:10%;transform:translateY(-50%);
+  background:rgba(210,110,0,.5);opacity:.35;pointer-events:none;
+}
+.deco-rect{
+  position:absolute;width:160px;height:240px;
+  top:6%;right:-20px;transform:rotate(11deg);
+  background:rgba(10,16,50,.9);opacity:.18;pointer-events:none;
+}
+
+/* 스마트폰 일러스트 */
+.phone{
+  position:absolute;top:50%;left:6%;
+  transform:translateY(-52%) rotate(-7deg);
+  width:130px;height:185px;
+  background:linear-gradient(145deg,#182038,#0c1222);
+  border:2.5px solid #243255;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:9px;padding:14px;
+  box-shadow:0 8px 28px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);
+  pointer-events:none;z-index:2;
+}
+.ph-b{width:80%;height:26px;background:#28407a;border-radius:5px}
+.ph-btn{width:68%;height:24px;background:#D99000;border-radius:5px;display:flex;align-items:center;justify-content:center}
+.ph-btn-i{width:14px;height:14px;border:2.5px solid rgba(0,0,0,.38);border-radius:50%}
+.ph-b2{width:80%;height:22px;background:#1a55a8;border-radius:5px}
+.ph-ln{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:68%}
+.ph-ln2{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:50%}
+
+/* 손가락 클릭 효과 */
+.tap-ring{
+  position:absolute;
+  width:36px;height:36px;border-radius:50%;
+  border:2.5px solid rgba(217,144,0,.7);
+  top:calc(50% - 38px);left:calc(6% + 46px);
+  transform:translateY(-52%);
+  z-index:3;pointer-events:none;
+  box-shadow:0 0 12px rgba(217,144,0,.4);
+}
+
+/* 메인 텍스트 */
+.main-block{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;margin-left:28px;
+}
+.m-line{
+  font-size:56px;font-weight:900;letter-spacing:-.02em;line-height:1.12;
+  text-shadow:3px 3px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);
+  word-break:keep-all;
+}
+.m-line.yellow{color:#FFD700}
+.m-line.white{color:#fff}
+
+/* 하단 바 */
+.bot-bar{
+  width:100%;background:#CC0000;height:160px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;flex-shrink:0;position:relative;overflow:hidden;
+}
+.bot-bar::before{content:'';position:absolute;left:-30px;top:-30px;width:120px;height:200px;background:rgba(255,255,255,.06);transform:rotate(18deg);}
+.bot-line{
+  font-size:32px;font-weight:900;color:#fff;
+  text-shadow:2px 2px 0 rgba(0,0,0,.45);
+  text-align:center;letter-spacing:-.02em;line-height:1.28;
+  padding:0 12px;word-break:keep-all;position:relative;z-index:2;
+}
+.bot-line .acc{color:#FFD700}
+
+/* 배지 */
+.ep-badge{
+  position:absolute;top:14px;right:14px;
+  background:rgba(0,0,0,.55);border:1.5px solid rgba(255,255,255,.18);
+  border-radius:20px;padding:4px 12px;
+  font-size:11px;font-weight:900;color:rgba(255,255,255,.7);
+  letter-spacing:.1em;z-index:20;pointer-events:none;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-bar">
+    <div class="top-text">결제 버튼<br>누른 순간</div>
+  </div>
+  <div class="mid">
+    <div class="deco-circle"></div>
+    <div class="deco-rect"></div>
+    <div class="phone">
+      <div class="ph-b"></div>
+      <div class="ph-btn"><div class="ph-btn-i"></div></div>
+      <div class="ph-b2"></div>
+      <div class="ph-ln"></div>
+      <div class="ph-ln2"></div>
+    </div>
+    <div class="tap-ring"></div>
+    <div class="main-block">
+      <div class="m-line yellow">상품 말고</div>
+      <div class="m-line white">다른 걸</div>
+      <div class="m-line yellow">팔았습니다</div>
+    </div>
+  </div>
+  <div class="bot-bar">
+    <div class="bot-line">당신의 <span class="acc">정보</span>는</div>
+    <div class="bot-line">이미 팔렸습니다</div>
+  </div>
+  <div class="ep-badge">EP.01 · #1</div>
+</div>
+
+<style>
+.dl-btn{
+  position:fixed;bottom:20px;right:20px;z-index:999;
+  background:#CC0000;color:#fff;border:none;border-radius:10px;
+  padding:12px 22px;font-family:'Noto Sans KR',sans-serif;
+  font-size:15px;font-weight:900;cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,.5);letter-spacing:.04em;
+  transition:opacity .15s;
+}
+.dl-btn:hover{opacity:.85}
+.dl-btn:active{transform:scale(.97)}
+</style>
+<button class="dl-btn" id="dlBtn">📥 PNG 저장</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+document.getElementById("dlBtn").addEventListener("click",function(){
+  var btn=this;btn.textContent="캡처 중...";btn.disabled=true;
+  var card=document.querySelector(".card");
+  html2canvas(card,{
+    scale:3,
+    useCORS:true,
+    backgroundColor:null,
+    width:card.offsetWidth,
+    height:card.offsetHeight,
+    logging:false
+  }).then(function(canvas){
+    var a=document.createElement("a");
+    a.download=document.title.replace(/\s+/g,"_")+".png";
+    a.href=canvas.toDataURL("image/png");
+    a.click();
+    btn.textContent="📥 PNG 저장";btn.disabled=false;
+  });
+});
+</script>
+</body>
+</html>

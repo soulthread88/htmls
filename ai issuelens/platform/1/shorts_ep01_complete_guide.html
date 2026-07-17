@@ -1,0 +1,412 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans,sans-serif)}
+.wrap{padding:1.5rem 0;max-width:720px}
+.section{margin-bottom:2.5rem}
+.sec-title{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:.5px solid var(--color-border-tertiary)}
+.step-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.step-num{min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.step-num.red{background:#FCEBEB;color:#A32D2D}
+.step-num.blue{background:#E6F1FB;color:#185FA5}
+.step-num.teal{background:#E1F5EE;color:#0F6E56}
+.step-num.amber{background:#FAEEDA;color:#854F0B}
+.step-num.purple{background:#EEEDFE;color:#534AB7}
+.step-body{flex:1}
+.step-label{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.step-sub{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.tool-badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;margin-bottom:6px}
+.tb-galaxy{background:#EEEDFE;color:#534AB7}
+.tb-filmora{background:#E6F1FB;color:#185FA5}
+.tb-platform{background:#E1F5EE;color:#0F6E56}
+.tb-you{background:#FAEEDA;color:#854F0B}
+.card{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem}
+.card-body{font-size:13px;color:var(--color-text-secondary);line-height:1.7}
+.highlight{background:#FCEBEB;color:#A32D2D;padding:1px 6px;border-radius:4px;font-size:12px;font-weight:500}
+.highlight.blue{background:#E6F1FB;color:#185FA5}
+.highlight.teal{background:#E1F5EE;color:#0F6E56}
+.scene-block{border-left:3px solid #E24B4A;padding-left:12px;margin-bottom:14px}
+.scene-tag{font-size:11px;font-weight:500;color:#A32D2D;margin-bottom:3px}
+.scene-text{font-size:13px;color:var(--color-text-primary);line-height:1.65;margin-bottom:4px}
+.scene-sub{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.img-prompt{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:6px;padding:6px 10px;font-size:12px;color:var(--color-text-secondary);margin-top:4px;font-style:italic}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kw-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:.5rem}
+.kw{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:20px;font-size:12px;padding:3px 10px;color:var(--color-text-secondary)}
+.thumb-box{background:#111;border-radius:10px;aspect-ratio:9/16;max-width:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;position:relative;overflow:hidden}
+.thumb-red{font-size:10px;font-weight:700;color:#ff4444;text-align:center;line-height:1.3;margin-bottom:6px}
+.thumb-white{font-size:9px;font-weight:600;color:#fff;text-align:center;line-height:1.4;margin-bottom:4px}
+.thumb-gray{font-size:8px;color:#aaa;text-align:center}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:2rem 0}
+.timeline{display:flex;gap:0;margin-bottom:1.5rem;border-radius:8px;overflow:hidden;height:36px}
+.tl-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#fff}
+.alert{background:#FAEEDA;border:.5px solid #EF9F27;border-radius:8px;padding:.75rem 1rem;font-size:13px;color:#633806;margin-bottom:1rem;line-height:1.6}
+</style>
+<div class="wrap">
+
+<div class="section">
+  <div class="sec-title">전체 제작 순서 한눈에</div>
+  <div class="timeline">
+    <div class="tl-seg" style="background:#534AB7;flex:1.5">기획</div>
+    <div class="tl-seg" style="background:#185FA5;flex:2">Galaxy.ai</div>
+    <div class="tl-seg" style="background:#0F6E56;flex:3">Filmora</div>
+    <div class="tl-seg" style="background:#A32D2D;flex:1.5">업로드</div>
+  </div>
+  <div style="display:flex;gap:8px;font-size:11px;color:var(--color-text-secondary);margin-bottom:1.5rem">
+    <span style="flex:1.5;text-align:center">STEP 1–2</span>
+    <span style="flex:2;text-align:center">STEP 3</span>
+    <span style="flex:3;text-align:center">STEP 4–8</span>
+    <span style="flex:1.5;text-align:center">STEP 9–10</span>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num purple">1</div>
+    <div class="step-body">
+      <span class="tool-badge tb-you">직접 작업</span>
+      <div class="step-label">YouTube Shorts 프로젝트 폴더 만들기</div>
+      <div class="step-sub">바탕화면에 폴더 생성: <strong>IssueLens_EP01_Shorts</strong><br>안에 하위 폴더: 📁images &nbsp;📁audio &nbsp;📁export</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num purple">2</div>
+    <div class="step-body">
+      <span class="tool-badge tb-you">직접 작업</span>
+      <div class="step-label">나레이션 녹음 (선택) 또는 Filmora TTS 준비</div>
+      <div class="step-sub">직접 녹음 시: 스마트폰 기본 녹음 앱 사용 → audio 폴더에 저장<br>TTS 사용 시: Filmora에서 바로 생성 (STEP 6에서 진행)</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num blue">3</div>
+    <div class="step-body">
+      <span class="tool-badge tb-galaxy">Galaxy.ai</span>
+      <div class="step-label">씬별 이미지 9장 생성</div>
+      <div class="step-sub">Galaxy.ai 접속 → Image Generation 선택 → 비율: 9:16 (세로) 선택<br>아래 대본의 각 씬 [이미지 프롬프트] 복사 → 영어 입력 → 생성 → images 폴더 저장</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num teal">4</div>
+    <div class="step-body">
+      <span class="tool-badge tb-filmora">Filmora</span>
+      <div class="step-label">새 프로젝트 세팅</div>
+      <div class="step-sub">Filmora 실행 → 새 프로젝트 → 비율: 9:16 선택 → 해상도: 1080×1920 → 30fps</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num teal">5</div>
+    <div class="step-body">
+      <span class="tool-badge tb-filmora">Filmora</span>
+      <div class="step-label">이미지 불러오기 & 타임라인 배치</div>
+      <div class="step-sub">파일 가져오기 → images 폴더 전체 선택 → 타임라인에 순서대로 드래그<br>각 이미지 클립 길이: 나레이션 길이에 맞게 조정 (평균 4–7초)</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num teal">6</div>
+    <div class="step-body">
+      <span class="tool-badge tb-filmora">Filmora</span>
+      <div class="step-label">나레이션 & TTS 추가</div>
+      <div class="step-sub">직접 녹음: 오디오 트랙 → 파일 가져오기 → audio 폴더 음성 추가<br>TTS: 텍스트 → 음성변환 → 아래 대본 나레이션 텍스트 붙여넣기 → 한국어 여성 목소리 선택</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num teal">7</div>
+    <div class="step-body">
+      <span class="tool-badge tb-filmora">Filmora</span>
+      <div class="step-label">자막 추가 (AI 자동 자막)</div>
+      <div class="step-sub">상단 메뉴 → 자막 → AI 자동 자막 → 언어: 한국어 선택 → 자동 생성<br>글꼴: Pretendard Bold / 크기: 48pt / 색상: 흰색 / 외곽선: 검정 3px / 위치: 하단</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num teal">8</div>
+    <div class="step-body">
+      <span class="tool-badge tb-filmora">Filmora</span>
+      <div class="step-label">효과음 & BGM 추가</div>
+      <div class="step-sub">스톡 오디오 → 검색: "suspense" → 나레이션 볼륨 100 기준 BGM 15로 설정<br>씬 01 시작: 긴장감 있는 효과음 / 씬 08 액션: 업비트 효과음</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num red">9</div>
+    <div class="step-body">
+      <span class="tool-badge tb-platform">플랫폼 업로드</span>
+      <div class="step-label">내보내기 → YouTube Shorts 업로드</div>
+      <div class="step-sub">내보내기: MP4 / 1080×1920 / 30fps / 최고화질<br>YouTube Studio → 업로드 → Shorts 자동 인식 (세로형 + 60초 이내) or #Shorts 태그</div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-num red">10</div>
+    <div class="step-body">
+      <span class="tool-badge tb-platform">플랫폼 설정</span>
+      <div class="step-label">제목 / 설명 / 해시태그 / 썸네일 설정</div>
+      <div class="step-sub">아래 섹션에서 제목·설명·해시태그 복사 붙여넣기</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-title">썸네일 — 디자인 & 제작 가이드</div>
+  <div class="alert">썸네일은 YouTube Shorts에서도 클릭률(CTR)을 결정하는 핵심입니다. Filmora에서 원하는 씬을 캡처하거나, Galaxy.ai로 별도 이미지를 생성하세요.</div>
+
+  <div class="grid2">
+    <div>
+      <div class="card">
+        <div class="card-title">썸네일 텍스트 (메인)</div>
+        <div class="card-body" style="font-size:15px;font-weight:500;color:#E24B4A;line-height:1.5">
+          "알리·테무 결제<br>그 순간 털렸다"
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">썸네일 서브텍스트</div>
+        <div class="card-body">당신의 이름·주소·카드번호가<br>18만 곳으로 넘어갔다</div>
+      </div>
+      <div class="card">
+        <div class="card-title">채널 뱃지</div>
+        <div class="card-body"><span class="highlight">IssueLens</span> &nbsp;EP.01</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <div class="thumb-box">
+        <div style="width:40px;height:40px;border-radius:50%;background:#E24B4A;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:18px">📱</div>
+        <div class="thumb-red">알리·테무 결제<br>그 순간 털렸다</div>
+        <div class="thumb-white">당신의 정보<br>18만 곳으로</div>
+        <div class="thumb-gray">IssueLens EP.01</div>
+      </div>
+      <div style="font-size:11px;color:var(--color-text-secondary);text-align:center">썸네일 미리보기<br>(9:16 세로형)</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:10px">
+    <div class="card-title">Galaxy.ai 썸네일 이미지 프롬프트 (영문)</div>
+    <div class="card-body" style="font-family:var(--font-mono,monospace);font-size:12px;line-height:1.8;color:var(--color-text-primary)">
+      A dark dramatic scene: a hand holding a smartphone with Korean shopping app on screen, red data particles flowing out of the phone like smoke, dark background with subtle red glow, cinematic style, vertical 9:16 format, no text, high contrast, ominous atmosphere, data security concept
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Filmora 썸네일 제작 방법</div>
+    <div class="card-body">
+      1. Galaxy.ai 이미지 생성 후 Filmora에서 열기<br>
+      2. 텍스트 추가 → "알리·테무 결제 그 순간 털렸다" 입력<br>
+      3. 글꼴: Pretendard ExtraBold / 크기: 70pt / 색상: #FF3333<br>
+      4. 서브텍스트: 흰색 40pt<br>
+      5. 스냅샷 → PNG 저장 → YouTube 썸네일 업로드
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-title">Short Form 대본 — 버전 1 (충격 폭로형) 완전판</div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 01 · 훅 · 0~4초 · Galaxy.ai 이미지 ①</div>
+    <div class="scene-text">🎙 나레이션: "알리에서 결제 눌렀을 때, 진짜로 팔린 게 뭔지 아세요?"</div>
+    <div class="scene-text">📌 자막: 「알리·테무에서 결제한 그 순간」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: Smartphone screen showing Korean shopping app with 999 won price tag, dramatic red lighting, dark background, vertical format, cinematic, no text overlay</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 02 · 핵심 충격 · 4~10초 · Galaxy.ai 이미지 ②</div>
+    <div class="scene-text">🎙 나레이션: "이름, 주소, 카드번호, 오늘 아침 검색어까지. 당신이 결제한 건 상품만이 아니었습니다."</div>
+    <div class="scene-text">📌 자막: 「상품이 아니라 '당신'이 팔렸다」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: Personal data icons (name, address, credit card, search history) floating out of a smartphone into dark void, red particles, data breach visualization, vertical 9:16, no text</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 03 · 공식 근거 · 10~16초 · Galaxy.ai 이미지 ③</div>
+    <div class="scene-text">🎙 나레이션: "실제로 2024년, 알리익스프레스는 한국 개인정보보호위원회로부터 20억 원 과징금을 맞았습니다. 공식 행정 제재입니다."</div>
+    <div class="scene-text">📌 자막: 「2024년 과징금 20억 원 — 공식 확인」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: Official government document with red stamp seal, Korean bureaucratic style, dramatic lighting, fine of 2 billion won concept, serious and authoritative, vertical format, dark tones</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 04 · 충격 수치 · 16~23초 · Galaxy.ai 이미지 ④</div>
+    <div class="scene-text">🎙 나레이션: "이유요? 한국 이용자 개인정보를 해외 판매자 18만 곳에 넘겼기 때문입니다. 18만 개의 낯선 업체가 지금 당신 이름과 주소를 갖고 있습니다."</div>
+    <div class="scene-text">📌 자막: 「내 정보 → 18만 곳 해외 업체로」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: World map with 180,000 red dots spreading across continents from Korea, data flow visualization, dark background, ominous global network, vertical 9:16 format</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 05 · 안보 위협 · 23~31초 · Galaxy.ai 이미지 ⑤</div>
+    <div class="scene-text">🎙 나레이션: "더 무서운 건 이겁니다. 이 기업들의 본국 법에는, 수집한 데이터를 정부 정보 활동에 제공해야 한다는 조항이 있습니다. 쇼핑 기록이 국가 정보 자산이 될 수 있습니다."</div>
+    <div class="scene-text">📌 자막: 「법으로 규정된 '정부 제공 의무'」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: Legal document text glowing red on dark screen, authoritarian surveillance concept, data flowing from shopping cart icon into government building silhouette, dramatic and ominous, vertical format</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 06 · 불공정 구도 · 31~38초 · Galaxy.ai 이미지 ⑥</div>
+    <div class="scene-text">🎙 나레이션: "그리고 지금 이 순간, 구글과 유튜브는 그 나라에서 완전히 차단되어 있습니다. 우리만 열려있습니다. 이게 공정한 거래입니까?"</div>
+    <div class="scene-text">📌 자막: 「그들 나라선 우리 앱 차단 / 우리는 무방비」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: Split screen concept: left side shows blocked apps with red X marks (Google, YouTube), right side shows AliExpress and Temu freely available, imbalance and unfairness theme, dark dramatic style, vertical 9:16</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 07 · 글로벌 대응 · 38~46초 · Galaxy.ai 이미지 ⑦</div>
+    <div class="scene-text">🎙 나레이션: "인도는 이미 중국 앱 321개를 차단했습니다. EU는 테무·쉬인에 강력한 규제를 시행 중입니다. 미국은 청문회를 열었습니다. 대한민국은 지금 어디 있습니까?"</div>
+    <div class="scene-text">📌 자막: 「인도 321개 차단 · EU 규제 · 미국 청문회 — 한국은?」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: India, EU, USA flags with shield protection icons, versus China app logos being blocked, global regulatory response concept, dark background, serious political tone, vertical format</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 08 · 액션 · 46~55초 · Galaxy.ai 이미지 ⑧</div>
+    <div class="scene-text">🎙 나레이션: "지금 당장 세 가지만 하세요. 하나, 스마트폰 설정에서 해외 직구 앱 마이크·카메라·연락처 권한 차단. 둘, 개인정보 삭제 요청. 셋, 이 영상 부모님께 공유."</div>
+    <div class="scene-text">📌 자막: 「지금 바로: 설정→앱→권한→마이크·카메라·연락처 OFF」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: Smartphone settings screen showing app permissions being turned off, protective shield appearing over phone, empowerment concept, clean and clear visual, vertical 9:16, hopeful tone with red to green color transition</div>
+  </div>
+
+  <div class="scene-block">
+    <div class="scene-tag">씬 09 · CTA · 55~60초 · Galaxy.ai 이미지 ⑨</div>
+    <div class="scene-text">🎙 나레이션: "12분 풀분석은 채널에 있습니다. 구독하고 알림 설정하면 EP.02도 놓치지 않습니다. 알아야 지킬 수 있습니다."</div>
+    <div class="scene-text">📌 자막: 「IssueLens | 알아야 지킬 수 있습니다」</div>
+    <div class="img-prompt">Galaxy.ai 프롬프트: Clean dark background with glowing text logo concept, data sovereignty and protection theme, Korean flag colors subtly incorporated, professional news channel branding feel, vertical 9:16</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-title">YouTube 제목 (클릭률 최적화 — A/B 테스트용 3개)</div>
+  <div class="card">
+    <div class="card-title" style="color:#E24B4A">추천 ① — 감정 자극형</div>
+    <div class="card-body" style="font-size:15px;font-weight:500;color:var(--color-text-primary)">알리·테무 결제 그 순간 당신 정보가 18만 곳으로 털렸다 | 충격 실제 제재 사실 #Shorts</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:#185FA5">추천 ② — 궁금증 유발형</div>
+    <div class="card-body" style="font-size:15px;font-weight:500;color:var(--color-text-primary)">천 원짜리 양말의 진짜 가격이 뭔지 아세요? 알리·테무의 숨겨진 진실 #Shorts</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:#0F6E56">추천 ③ — 팩트 강조형</div>
+    <div class="card-body" style="font-size:15px;font-weight:500;color:var(--color-text-primary)">2024년 실제 과징금 20억·18만 곳 무단 이전 — 알리·테무 개인정보 충격 사실 #Shorts</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-title">영상 설명란 (복사 붙여넣기용)</div>
+  <div class="card">
+    <div class="card-body" style="font-size:13px;line-height:2">
+      ⚠️ 알리·테무에서 결제한 순간, 당신의 정보는 이미 18만 곳으로 넘어갔습니다.<br>
+      2024년 공식 과징금 20억 원 — 이건 추측이 아닙니다.<br><br>
+      📌 지금 바로 할 것: 설정 → 앱 → 권한 → 마이크·카메라·연락처 OFF<br><br>
+      🎬 12분 완전 분석 풀버전 → 채널에서 확인<br>
+      🔔 구독 + 알림설정 → EP.02 (하드웨어 위협편) 놓치지 마세요<br><br>
+      #알리익스프레스 #테무 #쉬인 #개인정보 #데이터주권 #알리개인정보 #테무위험 #해외직구위험 #데이터유출 #사이버보안 #개인정보보호 #직구앱삭제 #알리충격 #테무충격 #IssueLens #Shorts
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-title">해시태그 — 검색 최적화 풀세트</div>
+  <div class="kw-wrap">
+    <span class="kw">#알리익스프레스</span><span class="kw">#테무</span><span class="kw">#쉬인</span>
+    <span class="kw">#알리충격</span><span class="kw">#테무충격</span><span class="kw">#개인정보유출</span>
+    <span class="kw">#데이터주권</span><span class="kw">#해외직구위험</span><span class="kw">#직구앱삭제</span>
+    <span class="kw">#개인정보보호</span><span class="kw">#사이버보안</span><span class="kw">#데이터유출</span>
+    <span class="kw">#알리개인정보</span><span class="kw">#테무위험</span><span class="kw">#쉬인위험</span>
+    <span class="kw">#직구앱개인정보</span><span class="kw">#국가정보법</span><span class="kw">#미니소위험</span>
+    <span class="kw">#인터넷보안</span><span class="kw">#스마트폰보안</span><span class="kw">#IssueLens</span>
+    <span class="kw">#Shorts</span><span class="kw">#알리결제</span><span class="kw">#테무결제</span>
+    <span class="kw">#개인정보침해</span><span class="kw">#해외앱위험</span><span class="kw">#중국앱위험</span>
+    <span class="kw">#디지털보안</span><span class="kw">#데이터보안</span><span class="kw">#앱보안</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-title">Filmora 자막 설정 체크리스트</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">기본 자막</div>
+      <div class="card-body">
+        글꼴: Pretendard Bold<br>
+        크기: 48pt<br>
+        색상: 흰색 #FFFFFF<br>
+        외곽선: 검정 3px<br>
+        위치: 하단 20%<br>
+        배경: 없음
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">강조 자막 (키워드)</div>
+      <div class="card-body">
+        글꼴: Pretendard ExtraBold<br>
+        크기: 56pt<br>
+        색상: 빨강 #FF3333<br>
+        외곽선: 검정 4px<br>
+        애니메이션: 팝업 효과<br>
+        사용: 숫자·핵심 단어
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">BGM 설정</div>
+      <div class="card-body">
+        스타일: suspense / dark news<br>
+        나레이션 볼륨: 100%<br>
+        BGM 볼륨: 12~15%<br>
+        페이드인: 씬 01 시작<br>
+        페이드아웃: 씬 09 종료
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">내보내기 설정</div>
+      <div class="card-body">
+        포맷: MP4 (H.264)<br>
+        해상도: 1080×1920<br>
+        프레임: 30fps<br>
+        비트레이트: 최고화질<br>
+        파일명: EP01_Shorts_v1.mp4
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="sec-title">1백만 구독 달성을 위한 업로드 전략</div>
+  <div class="step-row">
+    <div class="step-num red">A</div>
+    <div class="step-body">
+      <div class="step-label">첫 48시간이 전부입니다</div>
+      <div class="step-sub">업로드 후 48시간 내 조회수·클릭률이 알고리즘 노출을 결정합니다.<br>업로드 직후 카카오톡 오픈채팅·네이버 카페·커뮤니티에 직접 공유하세요.</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num red">B</div>
+    <div class="step-body">
+      <div class="step-label">3개 플랫폼 동시 업로드</div>
+      <div class="step-sub">YouTube Shorts → Instagram Reels → TikTok 동일 파일로 당일 업로드<br>각 플랫폼 알고리즘이 독립적으로 확산시켜 교차 유입이 발생합니다.</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num red">C</div>
+    <div class="step-body">
+      <div class="step-label">댓글 참여 유도 질문</div>
+      <div class="step-sub">영상 설명란 + 첫 댓글에 직접 작성: "지금 알리·테무 앱 설치되어 있으신 분? 댓글로 알려주세요"<br>댓글 수가 많을수록 알고리즘 추천 빈도가 높아집니다.</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num red">D</div>
+    <div class="step-body">
+      <div class="step-label">버전 3개 A/B 테스트</div>
+      <div class="step-sub">버전 1·2·3 대본으로 각각 편집 → 3일 간격으로 업로드<br>가장 조회수 높은 버전 스타일로 EP.02부터 통일</div>
+    </div>
+  </div>
+</div>
+
+</div>

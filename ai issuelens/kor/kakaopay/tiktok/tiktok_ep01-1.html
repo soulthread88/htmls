@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens TikTok EP.01-1</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#0a0a0a;font-family:'Noto Sans KR',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:40px 16px;
+}
+.card{
+  position:relative;width:390px;height:693px;
+  overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.9);
+}
+
+/* 배경 — 더 강렬한 그라디언트 */
+.bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 80%, rgba(210,60,0,.7) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 90% 20%, rgba(0,20,160,.7) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(80,0,0,.5) 0%, transparent 70%),
+    #04020e;
+}
+
+/* 스캔라인 텍스처 */
+.scanlines{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.08) 3px,rgba(0,0,0,.08) 4px);
+  pointer-events:none;z-index:1;
+}
+
+/* 사선 줄무늬 상단 */
+.stripe-top{
+  position:absolute;top:0;left:0;right:0;height:8px;
+  background:repeating-linear-gradient(90deg,#CC0000 0,#CC0000 24px,#000 24px,#000 36px);
+  z-index:10;
+}
+
+/* TikTok 브랜드 바 (최상단) */
+.tt-bar{
+  position:absolute;top:8px;left:0;right:0;
+  height:56px;
+  background:linear-gradient(180deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.0) 100%);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;z-index:20;
+}
+.tt-logo{
+  font-size:13px;font-weight:900;color:#fff;
+  letter-spacing:.06em;
+  display:flex;align-items:center;gap:6px;
+}
+.tt-logo .dot{width:6px;height:6px;border-radius:50%;background:#CC0000}
+.tt-ep{
+  font-size:11px;font-weight:700;color:rgba(255,255,255,.7);
+  letter-spacing:.1em;
+}
+
+/* 메인 타이틀 영역 (사선 배치) */
+.title-block{
+  position:absolute;
+  top:85px;left:0;right:0;
+  display:flex;flex-direction:column;
+  padding:0 18px;
+  z-index:15;
+}
+.t-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#CC0000;
+  font-size:11px;font-weight:900;color:#fff;
+  letter-spacing:.12em;padding:5px 14px;border-radius:0;
+  margin-bottom:10px;align-self:flex-start;
+  text-transform:uppercase;
+}
+.t-main{
+  font-size:72px;font-weight:900;
+  color:#FFD700;letter-spacing:-.04em;line-height:.92;
+  text-shadow:4px 4px 0 rgba(0,0,0,1),-2px -2px 0 rgba(204,0,0,.7),6px 6px 0 rgba(0,0,0,.5);
+  word-break:keep-all;
+  transform:skewX(-3deg);
+}
+.t-sub{
+  font-size:46px;font-weight:900;color:#fff;
+  letter-spacing:-.03em;line-height:1;
+  text-shadow:3px 3px 0 rgba(0,0,0,1);
+  word-break:keep-all;
+  margin-top:6px;
+}
+.t-accent{
+  font-size:54px;font-weight:900;color:#FFD700;
+  letter-spacing:-.03em;line-height:1;
+  text-shadow:4px 4px 0 rgba(0,0,0,1),-2px -2px 0 rgba(204,0,0,.6);
+  word-break:keep-all;
+  margin-top:2px;
+}
+
+/* 폰 일러스트 (중앙 우측, 크게) */
+.phone{
+  position:absolute;right:-10px;bottom:220px;
+  width:170px;height:240px;
+  background:linear-gradient(145deg,#1e2e52,#0c1422);
+  border:3px solid #2e4580;border-radius:20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;padding:18px;
+  box-shadow:0 12px 40px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.08);
+  transform:rotate(8deg);z-index:5;
+}
+.ph-b{width:80%;height:28px;background:#2a407a;border-radius:6px}
+.ph-btn{
+  width:70%;height:30px;background:#D99000;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+}
+.ph-btn-i{width:16px;height:16px;border:3px solid rgba(0,0,0,.4);border-radius:50%}
+.ph-b2{width:80%;height:26px;background:#1a55a8;border-radius:6px}
+.ph-ln{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:68%}
+.ph-ln2{height:3px;background:rgba(255,255,255,.2);border-radius:2px;width:50%}
+
+/* 탭 링 강조 */
+.tap-ring{
+  position:absolute;right:72px;bottom:358px;
+  width:46px;height:46px;border-radius:50%;
+  border:3px solid rgba(255,200,0,.9);
+  z-index:6;
+  box-shadow:0 0 20px rgba(255,200,0,.6),0 0 40px rgba(255,200,0,.3);
+}
+.tap-ring2{
+  position:absolute;right:80px;bottom:366px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,200,0,.15);
+  border:2px solid rgba(255,200,0,.5);
+  z-index:6;
+}
+
+/* 글리치 강조선 */
+.glitch-line{
+  position:absolute;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,#CC0000,#FFD700,transparent);
+  z-index:8;
+}
+.gl1{top:310px}
+.gl2{top:314px;opacity:.4}
+
+/* 경고 텍스트 블록 */
+.warn-block{
+  position:absolute;bottom:190px;left:16px;right:16px;
+  z-index:12;
+}
+.warn-label{
+  font-size:10px;font-weight:900;color:#CC0000;
+  letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.warn-text{
+  font-size:30px;font-weight:900;color:rgba(255,255,255,.92);
+  letter-spacing:-.02em;line-height:1.15;
+  word-break:keep-all;
+  text-shadow:2px 2px 0 rgba(0,0,0,.9);
+}
+.warn-text .hl{color:#FFD700}
+
+/* TikTok 하단 캡션 바 */
+.caption-bar{
+  position:absolute;bottom:0;left:0;right:0;
+  min-height:180px;
+  background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.96) 30%,#000 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:16px 16px 24px;
+  z-index:20;
+}
+.caption-handle{
+  font-size:14px;font-weight:900;color:#fff;
+  letter-spacing:.04em;margin-bottom:4px;
+}
+.caption-handle .at{color:#CC0000}
+.caption-main{
+  font-size:18px;font-weight:900;color:#fff;
+  letter-spacing:-.01em;line-height:1.3;
+  word-break:keep-all;
+}
+.caption-main .acc{color:#FFD700}
+.caption-tags{
+  font-size:12px;font-weight:700;color:rgba(100,150,255,.8);
+  margin-top:6px;letter-spacing:.02em;
+}
+
+/* 사이드 버튼 (TikTok UI 느낌) */
+.side-btns{
+  position:absolute;right:10px;bottom:220px;
+  display:flex;flex-direction:column;gap:18px;
+  align-items:center;z-index:25;
+}
+.side-btn{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+}
+.side-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.side-count{font-size:10px;font-weight:700;color:rgba(255,255,255,.7)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="bg"></div>
+  <div class="scanlines"></div>
+  <div class="stripe-top"></div>
+
+  <div class="tt-bar">
+    <div class="tt-logo"><div class="dot"></div>IssueLens</div>
+    <div class="tt-ep">EP.01 · #1</div>
+  </div>
+
+  <div class="title-block">
+    <div class="t-tag">🚨 결제 순간의 진실</div>
+    <div class="t-main">상품</div>
+    <div class="t-sub">말고 다른 걸</div>
+    <div class="t-accent">팔았습니다</div>
+  </div>
+
+  <div class="phone">
+    <div class="ph-b"></div>
+    <div class="ph-btn"><div class="ph-btn-i"></div></div>
+    <div class="ph-b2"></div>
+    <div class="ph-ln"></div>
+    <div class="ph-ln2"></div>
+  </div>
+  <div class="tap-ring"></div>
+  <div class="tap-ring2"></div>
+
+  <div class="glitch-line gl1"></div>
+  <div class="glitch-line gl2"></div>
+
+  <div class="warn-block">
+    <div class="warn-label">⚠ WARNING</div>
+    <div class="warn-text">당신의 <span class="hl">정보</span>는<br>이미 팔렸습니다</div>
+  </div>
+
+  <div class="side-btns">
+    <div class="side-btn">
+      <div class="side-icon">♡</div>
+      <div class="side-count">12.4K</div>
+    </div>
+    <div class="side-btn">
+      <div class="side-icon">💬</div>
+      <div class="side-count">284</div>
+    </div>
+    <div class="side-btn">
+      <div class="side-icon">↗</div>
+      <div class="side-count">공유</div>
+    </div>
+  </div>
+
+  <div class="caption-bar">
+    <div class="caption-handle"><span class="at">@</span>issuelens</div>
+    <div class="caption-main">결제 버튼을 누른 순간 <span class="acc">당신의 정보</span>가 팔렸다 🔴</div>
+    <div class="caption-tags">#데이터주권 #개인정보 #알리 #틱톡보안</div>
+  </div>
+</div>
+</body>
+</html>

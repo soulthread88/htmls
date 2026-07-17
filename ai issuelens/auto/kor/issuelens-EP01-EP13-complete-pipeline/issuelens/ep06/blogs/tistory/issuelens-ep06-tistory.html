@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>IssueLens EP.06 | 서방의 경고와 반격 — 중국에 맞서 싸운 나라들</title>
+<meta name="description" content="미국·영국·EU가 한국을 향해 보내는 경고의 신호들. 그리고 호주·리투아니아·캐나다 등 중국의 경제 보복에 맞서 결국 이겨낸 나라들의 이야기.">
+<meta name="keywords" content="서방경고한국,호주중국경제보복,리투아니아중국,한국민주주의후퇴,핀란드화,CFIUS,중국경제제재,한국데이터주권,경제안보">
+<meta property="og:title" content="서방의 경고와 반격 | IssueLens EP.06">
+<meta property="og:description" content="미국·영국의 이례적 경고, 그리고 중국의 보복에 굴하지 않은 나라들의 교훈">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Do+Hyeon&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ft:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
+  --fb:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  --bg:#fff;--bg2:#F7F9FC;--bg3:#FFF8F0;
+  --ink:#0A0A0A;--ink2:#1F2937;--ink3:#4B5563;
+  --red:#C8001A;--redbg:#FFF0F3;--redl:#FFCCD5;
+  --amb:#B45309;--ambbg:#FFFBEB;
+  --grn:#065F46;--blu:#1E3A8A;--blubg:#EFF6FF;
+  --bdr:#CBD5E1;--rul:#E2E8F0;
+  --sh:0 2px 14px rgba(0,0,0,.07);
+  --shl:0 8px 32px rgba(0,0,0,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:20px;line-height:1.95;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:var(--red);text-decoration:none}
+
+/* ── 진행 바 ── */
+#pb{position:fixed;top:0;left:0;height:5px;background:var(--red);z-index:9999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(200,0,26,.5)}
+
+/* ── 마스트헤드 ── */
+.mh{background:var(--bg);border-bottom:3px solid var(--red)}
+.mh-top{background:var(--red);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:8px}
+.logo{font-family:var(--ft);font-size:clamp(1.1rem,3.5vw,1.3rem);font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.logo-dot{width:10px;height:10px;background:#fff;border-radius:50%;opacity:.85}
+.mh-meta{font-family:var(--fb);font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.88);font-weight:600}
+.mh-hero{padding:36px 20px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+.ep-lbl{font-family:var(--ft);font-size:clamp(13px,3.2vw,15px);font-weight:700;color:var(--red);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ep-lbl::before{content:'';width:22px;height:3px;background:var(--red);border-radius:2px;display:inline-block}
+.headline{font-family:var(--ft);font-size:clamp(1.85rem,6vw,3.6rem);font-weight:800;line-height:1.22;color:var(--ink);letter-spacing:-.03em}
+.headline .acc{color:var(--red);background:var(--redbg);padding:2px 8px;border-radius:5px;display:inline-block}
+.sub-hl{font-family:var(--fb);margin-top:14px;font-size:clamp(17px,3.5vw,20px);color:var(--ink3);line-height:1.82;font-weight:500}
+.stats{display:flex;flex-direction:column;gap:10px;min-width:155px}
+.stat{background:var(--redbg);border:2.5px solid var(--redl);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--sh)}
+.stat-n{font-family:var(--ft);font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--red);display:block;line-height:1;letter-spacing:-.02em}
+.stat-l{font-family:var(--fb);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);margin-top:4px;display:block;line-height:1.4}
+.tags{padding:10px 20px 14px;border-top:1.5px solid var(--rul);display:flex;gap:7px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.tag{font-family:var(--fb);font-size:clamp(13px,3vw,15px);font-weight:700;border:2px solid var(--bdr);color:var(--ink3);padding:4px 12px;border-radius:20px;cursor:pointer;transition:all .2s}
+.tag:hover,.tag.hot{border-color:var(--red);color:var(--red);background:var(--redbg)}
+
+/* ── 브랜드 스트립 ── */
+.brand-strip{background:var(--bg2);border-top:2px solid var(--rul);border-bottom:2px solid var(--rul);padding:22px 20px}
+.brand-strip-inner{max-width:920px;margin:0 auto}
+.brand-ttl{font-family:var(--ft);font-size:clamp(15px,3.5vw,17px);font-weight:800;color:var(--ink2);text-align:center;margin-bottom:18px;letter-spacing:.02em}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.bp{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 18px;border-radius:14px;border:2.5px solid var(--bdr);background:#fff;box-shadow:var(--sh);min-width:100px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:default}
+.bp:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:var(--red)}
+.bp-flag{font-size:2rem;line-height:1}
+.bp-name{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:var(--ink2)}
+.bp-sub{font-family:var(--fb);font-size:clamp(11px,2.5vw,13px);color:var(--ink3);font-weight:600}
+
+/* ── 면책 공고 ── */
+.disclaimer{max-width:860px;margin:30px auto 0;padding:16px 22px;background:var(--bg2);border:1.5px solid var(--bdr);border-left:6px solid var(--blu);border-radius:10px;font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);line-height:1.82}
+
+/* ── 아티클 바디 ── */
+.ab{max-width:860px;margin:0 auto;padding:36px 20px 56px}
+.intro{font-family:var(--fb);font-size:clamp(18px,3.8vw,21px);line-height:1.95;color:var(--ink2);background:var(--ambbg);border-left:6px solid #F59E0B;padding:20px 22px;border-radius:0 12px 12px 0;font-weight:500}
+.sec{margin-top:52px}
+.sec-ttl{font-family:var(--ft);font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:800;color:var(--ink);padding:16px 18px 16px 22px;border-left:7px solid var(--red);background:linear-gradient(90deg,var(--redbg) 0%,#fff 65%);border-radius:0 12px 12px 0;margin-bottom:22px;line-height:1.42;display:flex;align-items:center;gap:11px;box-shadow:var(--sh);letter-spacing:-.02em}
+.sec-ttl.b2{font-family:'Do Hyeon',sans-serif;font-size:clamp(1.3rem,4.5vw,1.7rem);font-weight:400;background:linear-gradient(90deg,var(--blubg) 0%,#fff 65%);border-left-color:var(--blu);color:var(--blu);letter-spacing:0}
+.sec-ttl .num{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:#fff;background:var(--red);border-radius:6px;padding:3px 11px;flex-shrink:0;letter-spacing:.06em}
+.sec-ttl.b2 .num{background:var(--blu)}
+.bt{font-family:var(--fb);font-size:clamp(18px,3.5vw,21px);line-height:2.0;color:var(--ink2);margin-bottom:20px}
+.hl-r{color:var(--red);font-weight:800}
+.hl-b{color:var(--blu);font-weight:800}
+.hl-a{color:var(--amb);font-weight:800}
+.hl-g{color:var(--grn);font-weight:800}
+
+/* ── 데이터 콜아웃 ── */
+.dcall{background:var(--redbg);border:2px solid var(--redl);border-top:6px solid var(--red);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.dcall-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--red);letter-spacing:.16em;margin-bottom:10px;display:flex;align-items:center;gap:7px;text-transform:uppercase}
+.dcall-lbl::before{content:'●';animation:blink 1.5s infinite;font-size:.65rem}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.12}}
+.bignum{font-family:var(--ft);font-size:clamp(2.4rem,7vw,3.8rem);font-weight:800;color:var(--red);display:block;line-height:1;margin:6px 0 5px;letter-spacing:-.03em}
+.biglbl{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);font-weight:700;margin-bottom:12px;display:block}
+.cbody{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);line-height:1.95;color:var(--ink2)}
+.cbody strong{color:var(--red);font-weight:800}
+
+.cctx{background:var(--blubg);border:2px solid #BFDBFE;border-top:6px solid var(--blu);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.cctx-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--blu);letter-spacing:.14em;margin-bottom:10px;text-transform:uppercase}
+.cctx .cbody strong{color:var(--blu)}
+
+/* ── 성공 사례 카드 ── */
+.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:28px 0}
+.case-card{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 20px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s,border-color .2s}
+.case-card:hover{transform:translateY(-4px);box-shadow:var(--shl);border-color:var(--grn)}
+.case-card.warn:hover{border-color:var(--red)}
+.case-flag{font-size:2.2rem;margin-bottom:10px;line-height:1}
+.case-country{font-family:var(--ft);font-size:clamp(15px,3vw,17px);font-weight:800;color:var(--ink);margin-bottom:6px}
+.case-tag{display:inline-block;font-family:var(--ft);font-size:clamp(11px,2.5vw,13px);font-weight:700;padding:3px 10px;border-radius:12px;margin-bottom:10px}
+.case-tag.win{background:#DCFCE7;color:#065F46}
+.case-tag.loss{background:#FEE2E2;color:#991B1B}
+.case-tag.watch{background:#FEF3C7;color:#92400E}
+.case-body{font-family:var(--fb);font-size:clamp(14px,2.9vw,16px);color:var(--ink3);line-height:1.85}
+
+/* ── 플로우 ── */
+.flow{margin:24px 0;background:#fff;border:2px solid var(--bdr);border-radius:16px;padding:24px 16px 20px;box-shadow:var(--sh)}
+.flow-ttl{font-family:var(--ft);font-size:clamp(15px,3.2vw,17px);font-weight:700;color:var(--ink);text-align:center;margin-bottom:20px}
+.flow-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.fs{flex:1;min-width:80px;max-width:120px;text-align:center}
+.fi{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.45rem;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.fi.s{background:#DCFCE7;border:3px solid #22C55E}
+.fi.w{background:#FEF3C7;border:3px solid #F59E0B}
+.fi.d{background:#FFE4E6;border:3px solid var(--red)}
+.fi.b{background:#EFF6FF;border:3px solid #3B82F6}
+.fs-lbl{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink);line-height:1.38}
+.fs-sub{font-family:var(--fb);font-size:clamp(11px,2.4vw,13px);color:var(--ink3);margin-top:2px;font-weight:600}
+.farrow{color:var(--red);font-size:1.45rem;flex-shrink:0;font-weight:900;animation:ap 1.9s infinite}
+@keyframes ap{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(4px);opacity:.3}}
+
+/* ── 법조항 박스 ── */
+.lq{border:2.5px solid #9CA3AF;border-radius:14px;padding:26px 26px;margin:26px 0;position:relative;background:var(--bg2);box-shadow:var(--sh)}
+.lq-bdg{position:absolute;top:-14px;left:18px;background:var(--ink);color:#fff;font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:3px 14px;border-radius:4px;letter-spacing:.04em;white-space:nowrap}
+.lq-txt{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);color:var(--ink2);line-height:2.0;margin-top:4px}
+.lq-txt strong{color:var(--red);font-weight:800}
+.lq-src{font-family:var(--fb);margin-top:10px;font-size:clamp(13px,2.8vw,15px);color:var(--ink3);text-align:right;font-weight:700}
+
+/* ── 타임라인 ── */
+.timeline{margin:28px 0}
+.tl-item{display:flex;gap:18px;margin-bottom:24px;align-items:flex-start}
+.tl-dot{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem;box-shadow:var(--sh)}
+.tl-dot.g{background:#DCFCE7;border:3px solid #22C55E}
+.tl-dot.r{background:#FEE2E2;border:3px solid var(--red)}
+.tl-dot.b{background:#EFF6FF;border:3px solid #3B82F6}
+.tl-dot.y{background:#FEF3C7;border:3px solid #F59E0B}
+.tl-content{flex:1}
+.tl-year{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);letter-spacing:.1em;margin-bottom:4px}
+.tl-title{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:6px;line-height:1.4}
+.tl-desc{font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:var(--ink3);line-height:1.85}
+
+/* ── 리스크 미터 ── */
+.rm{margin:26px 0;padding:24px 26px;background:#fff;border:2px solid var(--bdr);border-radius:16px;box-shadow:var(--sh)}
+.rm-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:700;color:var(--ink);margin-bottom:18px}
+.ri{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rl{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:800;width:160px;flex-shrink:0;color:var(--ink)}
+.rbg{flex:1;height:14px;background:#F1F5F9;border-radius:7px;overflow:hidden;border:1px solid var(--rul)}
+.rbf{height:100%;border-radius:7px;width:0;transition:width 1.5s cubic-bezier(.2,1,.3,1)}
+.rbf.h{background:linear-gradient(90deg,#F87171,var(--red))}
+.rbf.m{background:linear-gradient(90deg,#FCD34D,#D97706)}
+.rbf.l{background:linear-gradient(90deg,#6EE7B7,#059669)}
+.rp{font-family:var(--ft);font-size:clamp(15px,3vw,17px);font-weight:800;width:48px;text-align:right;flex-shrink:0}
+
+/* ── 미디어 박스 ── */
+.media-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+.mbox-wrap{position:relative}
+.mbox-label{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--ink3);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.mbox{position:relative;border-radius:14px;overflow:hidden;background:#F1F5F9;border:2.5px dashed var(--bdr);min-height:200px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.mbox:hover{border-color:var(--red);box-shadow:var(--shl)}
+.mbox-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);padding:20px;text-align:center;pointer-events:none;width:100%}
+.mbox-ph .ico{font-size:2.4rem;opacity:.45}
+.mbox-ph p{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:700;line-height:1.45;color:var(--ink3)}
+.mbox-ph .hint{font-size:clamp(12px,2.5vw,13px);color:#94A3B8;margin-top:2px}
+.mbox img.prev{width:100%;height:100%;min-height:200px;object-fit:cover;display:block;border-radius:12px}
+.mbox iframe{width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px}
+.mctrl{position:absolute;top:8px;right:8px;display:flex;gap:7px;opacity:0;transition:opacity .22s;pointer-events:none;z-index:20}
+.mbox:hover .mctrl{opacity:1;pointer-events:auto}
+.mbtn{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:6px 14px;border-radius:7px;border:none;cursor:pointer;backdrop-filter:blur(8px);transition:transform .15s;white-space:nowrap}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn.rep{background:rgba(255,255,255,.92);color:var(--ink)}
+.mbtn.del{background:rgba(200,0,26,.88);color:#fff}
+
+/* ── 인용구 ── */
+.pq{margin:26px 0 10px;padding:28px 22px;background:var(--bg3);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);text-align:center}
+.pq-txt{font-family:var(--ft);font-size:clamp(1.2rem,4vw,1.85rem);font-weight:800;color:var(--ink);line-height:1.62;letter-spacing:-.02em}
+.pq-txt em{color:var(--red);font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+
+/* ── 실천 강령 ── */
+.action{background:var(--bg2);border-top:3px solid var(--rul);padding:40px 20px;margin-top:0}
+.action-inner{max-width:860px;margin:0 auto}
+.action-ttl{font-family:var(--ft);font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em}
+.action-sub{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);margin-bottom:24px;font-weight:700}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ac{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s,border-color .2s}
+.ac:hover{border-color:var(--red);box-shadow:var(--shl);transform:translateY(-4px)}
+.ac-n{font-family:var(--ft);font-size:clamp(11px,2.5vw,13px);font-weight:700;color:var(--red);letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase}
+.ac-ico{font-size:1.9rem;margin-bottom:8px;line-height:1}
+.ac-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.42;letter-spacing:-.01em}
+.ac-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);line-height:1.85}
+
+/* ── 소셜 바 ── */
+.sb{max-width:860px;margin:0 auto;padding:24px 20px;border-top:1.5px solid var(--rul)}
+.sb-lbl{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sb-lbl::after{content:'';flex:1;height:1.5px;background:var(--rul)}
+.sb-btns{display:flex;flex-wrap:wrap;gap:9px}
+.snsbtn{display:inline-flex;align-items:center;gap:7px;font-family:var(--ft);font-size:clamp(13px,3vw,15px);font-weight:700;padding:9px 16px;border-radius:8px;border:2.5px solid;cursor:pointer;text-decoration:none;transition:background .18s,color .18s,transform .15s;white-space:nowrap;background:transparent;position:relative}
+.snsbtn.has-link::after{content:'✓';position:absolute;top:-7px;right:-7px;width:18px;height:18px;background:#22C55E;color:#fff;border-radius:50%;font-size:11px;font-weight:900;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.snsbtn svg{width:18px;height:18px;flex-shrink:0;transition:fill .18s}
+.snsbtn:hover{transform:translateY(-2px)}
+.snsbtn.yt{color:#CC0000;border-color:#CC0000}.snsbtn.yt svg{fill:#CC0000}.snsbtn.yt:hover{background:#CC0000;color:#fff}.snsbtn.yt:hover svg{fill:#fff}
+.snsbtn.ig{color:#C13584;border-color:#C13584}.snsbtn.ig svg{fill:#C13584}.snsbtn.ig:hover{background:#C13584;color:#fff}.snsbtn.ig:hover svg{fill:#fff}
+.snsbtn.tt{color:#010101;border-color:#010101}.snsbtn.tt svg{fill:#010101}.snsbtn.tt:hover{background:#010101;color:#fff}.snsbtn.tt:hover svg{fill:#fff}
+.snsbtn.th{color:#000;border-color:#000}.snsbtn.th svg{fill:#000}.snsbtn.th:hover{background:#000;color:#fff}.snsbtn.th:hover svg{fill:#fff}
+.snsbtn.xb{color:#14171A;border-color:#14171A}.snsbtn.xb svg{fill:#14171A}.snsbtn.xb:hover{background:#14171A;color:#fff}.snsbtn.xb:hover svg{fill:#fff}
+.snsbtn.fb{color:#1877F2;border-color:#1877F2}.snsbtn.fb svg{fill:#1877F2}.snsbtn.fb:hover{background:#1877F2;color:#fff}.snsbtn.fb:hover svg{fill:#fff}
+
+/* ── 푸터 ── */
+.ft{background:#0D0D0D;color:#9CA3AF;padding:32px 20px;text-align:center;border-top:4px solid var(--red)}
+.ft-brand{font-family:var(--ft);font-size:1.2rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:6px}
+.ft-dot{width:9px;height:9px;background:var(--red);border-radius:50%}
+.ft p{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);line-height:1.88;color:#6B7280;margin-top:6px}
+
+/* ── YouTube 모달 ── */
+.yt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.yt-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.yt-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.yt-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.yt-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.yt-inp:focus{border-color:var(--red)}
+.yt-btns{display:flex;gap:9px;margin-top:14px}
+.yt-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s}
+.yt-ok:hover{background:#a80018}
+.yt-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+
+/* ── SNS 모달 ── */
+.sns-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.sns-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.sns-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.sns-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.sns-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.sns-inp:focus{border-color:var(--red)}
+.sns-saved-bar{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:8px;font-family:var(--fb);font-size:13px;flex-wrap:wrap}
+.sns-saved-bar a{color:var(--grn);font-weight:700;word-break:break-all;flex:1}
+.sns-btns{display:flex;gap:9px;margin-top:14px}
+.sns-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer}
+.sns-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+
+/* ── 스크롤 reveal ── */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:none}
+
+/* ── 반응형 ── */
+@media(max-width:600px){
+  .mh-hero{grid-template-columns:1fr}
+  .stats{flex-direction:row;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px}
+  .sec-ttl{font-size:1.15rem}
+  .rl{width:120px;font-size:13px}
+  .media-pair{grid-template-columns:1fr}
+  .case-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<!-- ▶▶ 티스토리 발행 버전 | IssueLens EP.06 ◀◀ -->
+<div style="background:#1E3A8A;color:#fff;text-align:center;padding:10px 16px;font-family:'Pretendard Variable',sans-serif;font-size:14px;font-weight:700;letter-spacing:.05em">
+  📌 IssueLens EP.06 — 티스토리 공식 발행본 · 매일 새 에피소드 발행 중
+</div>
+
+<!-- YouTube 모달 -->
+<div class="yt-modal" id="ytm" style="display:none">
+  <div class="yt-box">
+    <div class="yt-ttl">📹 YouTube 영상 삽입</div>
+    <div class="yt-desc">관련 YouTube 영상 링크를 붙여넣으세요.<br>확인하면 영상이 이 섹션에 영구 삽입됩니다.</div>
+    <input class="yt-inp" id="yti" type="text" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="yt-btns">
+      <button class="yt-ok" onclick="ytOk()">✓ 삽입하기</button>
+      <button class="yt-cancel" onclick="ytClose()">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- SNS 링크 모달 -->
+<div class="sns-modal" id="sns-modal" style="display:none">
+  <div class="sns-box">
+    <div class="sns-ttl" id="sns-modal-title">SNS 링크 설정</div>
+    <div class="sns-desc" id="sns-modal-desc">링크를 입력하세요.</div>
+    <input class="sns-inp" id="sns-url-input" type="url" placeholder="https://...">
+    <div id="sns-saved-bar" class="sns-saved-bar" style="display:none">
+      <span style="color:var(--ink3);font-weight:700;white-space:nowrap">현재:</span>
+      <a id="sns-saved-link" href="#" target="_blank" rel="noopener"></a>
+      <button onclick="snsClearSaved()" style="font-family:var(--ft);font-size:12px;font-weight:700;background:none;border:1.5px solid #86EFAC;border-radius:6px;padding:3px 9px;cursor:pointer;color:#166534;flex-shrink:0">삭제</button>
+    </div>
+    <div class="sns-btns">
+      <button class="sns-ok" onclick="snsSave()">✓ 저장</button>
+      <button class="sns-cancel" onclick="snsClose()">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 마스트헤드 ═══ -->
+<header class="mh">
+  <div class="mh-top">
+    <div class="logo"><span class="logo-dot"></span>IssueLens</div>
+    <span class="mh-meta">EP.06 · 경제 안보 시리즈</span>
+    <span class="mh-meta">IssueLens 편집부</span>
+  </div>
+  <div class="mh-hero">
+    <div>
+      <div class="ep-lbl">EP.06 &nbsp;서방의 경고 · 저항의 교훈</div>
+      <h1 class="headline">
+        미국·영국이<br>
+        <span class="acc">한국</span>을 향해<br>
+        경고를 보내고 있다
+      </h1>
+      <p class="sub-hl">서방은 이미 한국에 붉은 신호를 보내고 있습니다.<br>그리고 호주·리투아니아·캐나다는 중국의 경제 보복을 이겨냈습니다.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="stat-n">3년</span><span class="stat-l">호주가 중국의<br>무역 보복을 버텨낸 기간</span></div>
+      <div class="stat"><span class="stat-n">21억€</span><span class="stat-l">리투아니아의 對중국<br>수출 중단 대가</span></div>
+      <div class="stat"><span class="stat-n">V-Dem</span><span class="stat-l">한국을 '민주주의<br>주의 국가'로 분류</span></div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag hot">#호주중국무역보복</span>
+    <span class="tag hot">#리투아니아중국</span>
+    <span class="tag hot">#서방경고한국</span>
+    <span class="tag hot">#핀란드화한국</span>
+    <span class="tag hot">#한국민주주의후퇴</span>
+    <span class="tag">#CFIUS한국</span>
+    <span class="tag">#중국경제보복</span>
+    <span class="tag">#경제안보</span>
+    <span class="tag">#데이터주권</span>
+    <span class="tag">#신식민지</span>
+  </div>
+</header>
+
+<!-- ═══ 브랜드 스트립 ═══ -->
+<div class="brand-strip rev">
+  <div class="brand-strip-inner">
+    <div class="brand-ttl">🌍 중국의 경제 보복에 맞서 싸운 나라들 — 그들의 선택과 결과</div>
+    <div class="brand-row">
+      <div class="bp">
+        <div class="bp-flag">🇦🇺</div>
+        <span class="bp-name">호주</span><span class="bp-sub">버텨서 이겼다</span>
+      </div>
+      <div class="bp">
+        <div class="bp-flag">🇱🇹</div>
+        <span class="bp-name">리투아니아</span><span class="bp-sub">대만 카드로 승부</span>
+      </div>
+      <div class="bp">
+        <div class="bp-flag">🇨🇦</div>
+        <span class="bp-name">캐나다</span><span class="bp-sub">화웨이 배제 완료</span>
+      </div>
+      <div class="bp">
+        <div class="bp-flag">🇬🇧</div>
+        <span class="bp-name">영국</span><span class="bp-sub">NSI법으로 차단</span>
+      </div>
+      <div class="bp">
+        <div class="bp-flag">🇰🇷</div>
+        <span class="bp-name">대한민국</span><span class="bp-sub">선택의 기로</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 기사 본문 ═══ -->
+<main>
+  <div class="disclaimer rev" style="margin:28px 20px 0;max-width:860px;margin-left:auto;margin-right:auto">
+    <strong style="color:var(--blu)">📌 알림 및 면책 공고</strong><br>
+    본 게시물은 미국 국무부 공식 보고서, V-Dem(민주주의 다양성 기구) 연차보고서, Reuters·BBC·The Guardian·Foreign Affairs 등 공신력 있는 국제 보도와 각국 정부 공식 발표를 바탕으로 작성된 공익적 논평입니다. 특정 정당이나 인물을 지지하거나 비방할 의도가 없으며, 대한민국 경제 주권과 민주주의 보호를 위한 시민의 알 권리 증진을 목적으로 합니다. 사실과 분석적 해석은 명확히 구분하였습니다.
+  </div>
+
+  <div class="ab">
+
+    <!-- 인트로 -->
+    <p class="intro rev" style="margin-top:28px">
+      EP.05에서 우리는 중국 자본이 한국의 게임·금융·미디어 산업 속 깊이 침투해 있음을 확인했습니다. 이제 EP.06에서는 시선을 밖으로 돌립니다 — <strong class="hl-r">미국과 영국은 왜 이례적으로 한국을 향해 경고를 보내고 있는가?</strong> 그리고 중국의 거대한 경제 보복 앞에서도 굴하지 않고 결국 이겨낸 나라들은 어떻게 싸웠는가? 그들의 교훈이 한국이 걸어가야 할 길을 보여줍니다.
+    </p>
+
+    <!-- ══════════ SECTION 1 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">01</span>미국·영국이 한국에 보내는 이례적 경고 신호</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "미국 한국 경고" · "한국 민주주의 후퇴" · "V-Dem 한국"
+      </div>
+
+      <p class="bt">
+        동맹국이 동맹국에 공개적으로 경고를 보내는 일은 외교 관례상 매우 이례적입니다. 그러나 2025~2026년 사이, 미국과 국제 민주주의 감시 기관들은 <strong class="hl-r">한국의 법치주의와 민주주의 수준에 대해 공개적인 우려</strong>를 표명하기 시작했습니다.
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">미국 국무부 전략 계획 보고서 (FY 2026–2030, 2026년 1월 공개)</div>
+        <p class="lq-txt">미국 국무부는 전략 계획 문서에서 한국의 특정 입법 움직임이 <strong>표현의 자유를 제한하고 외국 기업의 공정한 경쟁 환경을 침해할 수 있다</strong>고 공식 언급하며, 필요시 외교적 수단을 동원할 것을 시사했습니다. 동맹국에 대한 이러한 공개적 표현은 매우 이례적인 것으로 평가됩니다.</p>
+        <div class="lq-src">— 미국 국무부 공식 발표, 2026.01 / 조선일보·연합뉴스 보도 —</div>
+      </div>
+
+      <p class="bt">
+        미국의 경고는 단순한 외교적 수사가 아닙니다. <strong class="hl-r">한미 동맹의 근간은 단순한 군사 협력이 아니라 공유된 민주주의 가치</strong>에 기반합니다. 한국이 이 가치 기반에서 이탈하는 것으로 인식될 경우, 동맹의 신뢰성 자체가 흔들릴 수 있습니다.
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">V-Dem(민주주의 다양성 기구) 2025~2026 연차 보고서</div>
+        <p class="lq-txt">스웨덴 예테보리 대학교 산하 V-Dem 연구소는 세계 179개국의 민주주의 수준을 매년 측정합니다. 2025~2026년 보고서에서 한국은 <strong>입법부 권한 집중 및 사법부 독립성 저하 지표</strong>에서 하락세를 보이며, 관련 지표에서 주의 관찰 대상으로 분류되었다는 분석이 있습니다.</p>
+        <div class="lq-src">— V-Dem Institute Annual Democracy Report, 2025/2026 — <a href="https://www.v-dem.net" target="_blank" rel="noopener">v-dem.net</a></div>
+      </div>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">KEY ALERT · 핀란드화 (Finlandization) 경고</div>
+        <span class="bignum" style="font-size:clamp(1.8rem,5vw,2.8rem)">핀란드화</span>
+        <span class="biglbl">냉전 시대 핀란드가 소련의 눈치를 보며 자국 외교를 스스로 제약했던 현상 — 현재 한국에 적용되는 우려</span>
+        <p class="cbody">미국 전략가 <strong>엘브리지 콜비(Elbridge Colby)</strong> 전 국방부 부차관보는 "한국이 경제적 의존도를 이유로 중국의 정치·외교적 요구에 굴복하는 방향으로 가게 된다면, 이는 한미 동맹의 실효성 자체를 무너뜨리는 행위"라고 경고했습니다. 이는 자발적 중립이 아닌, 사실상의 주권 포기를 의미합니다. <em>— Foreign Affairs, 2025 —</em></p>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 찬반 균형 시각</div>
+        <p class="cbody" style="color:var(--ink2)">
+          <strong style="color:var(--grn)">균형 있는 외교론:</strong> 지리적으로 중국과 맞닿아 있는 한국이 미중 사이에서 실용적 균형 외교를 추구하는 것은 현실적 선택일 수 있습니다. 경제 규모 1위 교역국인 중국을 완전히 적대시하는 외교는 한국 경제에도 심각한 타격을 줄 수 있습니다.<br><br>
+          <strong style="color:var(--red)">주권 우선론:</strong> 반면, '균형'이라는 명목으로 동맹 가치를 희석시키고 위협적 강대국에 점진적으로 순응하는 것은 '핀란드화'의 전형적 패턴입니다. 경제적 실리를 위해 안보와 데이터 주권을 내주는 것은 장기적으로 더 큰 비용을 치르게 됩니다.
+        </p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: V-Dem 민주주의 지수 차트)</span></div>
+          <div class="mbox" id="mb-s1i" data-t="img" onclick="mbClick('s1i')">
+            <div class="mbox-ph" id="ph-s1i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s1i" accept="image/*" style="display:none" onchange="mbLoadImg('s1i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: Elbridge Colby Korea China alliance)</span></div>
+          <div class="mbox" id="mb-s1v" data-t="vid" onclick="mbClick('s1v')">
+            <div class="mbox-ph" id="ph-s1v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 1 -->
+
+    <!-- ══════════ SECTION 2 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">02</span>호주 — 3년의 혹독한 보복, 그리고 승리</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "호주 중국 무역 보복" · "Australia China trade war" · "호주 화웨이 배제"
+      </div>
+
+      <p class="bt">
+        호주의 사례는 중국의 경제 보복에 맞서 싸운 나라들 중 <strong class="hl-g">가장 극적인 승리의 서사</strong>를 가지고 있습니다. 중국이 내린 징벌은 가혹했지만, 호주는 굴복하지 않았고 결국 더 강해져서 돌아왔습니다.
+      </p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot b">🔬</div>
+          <div class="tl-content">
+            <div class="tl-year">2020년 4월</div>
+            <div class="tl-title">코로나19 기원 독립 조사 요구</div>
+            <div class="tl-desc">호주 정부가 코로나19의 발원지에 대한 독립적인 국제 조사를 공개적으로 요구합니다. 중국은 이를 내정 간섭으로 간주하고 즉각 보복에 나섭니다.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot r">🚫</div>
+          <div class="tl-content">
+            <div class="tl-year">2020~2021년</div>
+            <div class="tl-title">중국의 전방위 경제 보복 — 14개 분야 동시 타격</div>
+            <div class="tl-desc">중국은 호주산 <strong>보리에 80.5% 관세, 와인에 200% 관세</strong>를 부과하고, 쇠고기·석탄·목재·구리·설탕·면화·해산물 수입을 금지하거나 제한했습니다. 호주의 대중 수출액 중 약 <strong>200억 호주달러</strong>어치가 한순간에 차단됐습니다. — <em>출처: Australian Strategic Policy Institute (ASPI), 2021</em></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot y">💪</div>
+          <div class="tl-content">
+            <div class="tl-year">2021~2022년</div>
+            <div class="tl-title">호주의 선택 — 굴복 대신 다변화</div>
+            <div class="tl-desc">호주 정부는 보복에 굴복하지 않고 수출 시장 다변화에 나섰습니다. 인도, 동남아시아, 유럽으로 수출처를 전환했으며, 동시에 쿼드(QUAD) 협력과 AUKUS 안보 협약을 통해 안보 자주성을 강화했습니다.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot g">✅</div>
+          <div class="tl-content">
+            <div class="tl-year">2023~2024년</div>
+            <div class="tl-title">중국, 먼저 손을 내밀다 — 호주의 승리</div>
+            <div class="tl-desc">놀랍게도 중국이 먼저 관계 정상화를 요청했습니다. 호주산 와인과 쇠고기에 부과된 관세가 단계적으로 철폐됐습니다. 호주 수출업체들은 이미 새로운 시장을 개척한 뒤였습니다. — <em>출처: Reuters, "Australia-China trade normalization", 2024.03</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lq rev">
+        <div class="lq-bdg">호주전략정책연구소 (ASPI) — 핵심 교훈</div>
+        <p class="lq-txt">ASPI는 호주 사례를 분석하며 다음과 같이 결론 내렸습니다: <strong>"중국의 경제 보복은 고통스럽지만, 원칙을 지킨 나라가 결국 더 유리한 위치에 서게 된다. 굴복은 더 큰 요구로 이어질 뿐이다."</strong></p>
+        <div class="lq-src">— Australian Strategic Policy Institute (ASPI), 2023 / <a href="https://www.aspi.org.au" target="_blank" rel="noopener">aspi.org.au</a></div>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 호주-중국 무역 보복 타임라인)</span></div>
+          <div class="mbox" id="mb-s2i" data-t="img" onclick="mbClick('s2i')">
+            <div class="mbox-ph" id="ph-s2i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s2i" accept="image/*" style="display:none" onchange="mbLoadImg('s2i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: Australia China trade war result)</span></div>
+          <div class="mbox" id="mb-s2v" data-t="vid" onclick="mbClick('s2v')">
+            <div class="mbox-ph" id="ph-s2v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 2 -->
+
+    <!-- ══════════ SECTION 3 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">03</span>리투아니아 — 인구 280만의 작은 나라가 중국에 맞선 방법</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "리투아니아 대만 대표부" · "Lithuania Taiwan China" · "리투아니아 중국 단교"
+      </div>
+
+      <p class="bt">
+        인구 280만 명의 소국 리투아니아는 2021년, 전 세계에서 가장 대담한 외교적 결단 중 하나를 내렸습니다. <strong class="hl-r">수도 빌뉴스에 '타이완 대표부' 개설을 허용한 것</strong>입니다. 중국은 즉각 대사를 소환하고 리투아니아를 '하나의 중국 원칙 위반국'으로 규정했습니다.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">중국의 보복 — 완전한 무역 차단</div>
+        <span class="bignum">21억€</span>
+        <span class="biglbl">리투아니아의 對중국 연간 수출 규모 — 사실상 전량 차단됨 (2021~2022)</span>
+        <p class="cbody">중국은 리투아니아를 세관 시스템에서 삭제하는 초강수를 두어 사실상 <strong>무역 봉쇄</strong>를 단행했습니다. 독일 등 EU 기업들도 리투아니아 부품을 사용할 경우 중국 시장 진출이 어려워질 것이라는 압박을 받았습니다. — <em>출처: Reuters, "China blocks Lithuania imports", 2021.12</em></p>
+      </div>
+
+      <p class="bt">
+        그러나 리투아니아는 굴복하지 않았습니다. <strong class="hl-g">EU가 집단적으로 대응</strong>했고, 유럽사법재판소(ECJ)에 제소하는 절차가 진행됐습니다. 대만은 리투아니아와의 경제 협력 펀드를 조성했고, 미국은 무역 지원을 약속했습니다.
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">리투아니아 외교부 공식 입장 (2022)</div>
+        <p class="lq-txt">리투아니아 정부는 "우리는 경제적 협박에 굴복하지 않는다. 작은 나라가 원칙을 지키지 않으면, 큰 나라도 원칙을 지킬 이유가 없다. 우리의 결정은 <strong>민주주의와 인권이라는 가치에 기반한 것</strong>이며, 이 가치는 협상 대상이 아니다."라고 밝혔습니다.</p>
+        <div class="lq-src">— 리투아니아 외교부 공식 성명, 2022 / BBC News 보도 —</div>
+      </div>
+
+      <!-- 리스크 미터 -->
+      <div class="rm rev">
+        <div class="rm-ttl">🌐 중국 경제 보복에 맞선 나라들의 '저항 성공 지수'</div>
+        <div class="ri"><div class="rl">🇦🇺 호주</div><div class="rbg"><div class="rbf l" data-w="90"></div></div><div class="rp" style="color:var(--grn)">90%</div></div>
+        <div class="ri"><div class="rl">🇱🇹 리투아니아</div><div class="rbg"><div class="rbf l" data-w="78"></div></div><div class="rp" style="color:var(--grn)">78%</div></div>
+        <div class="ri"><div class="rl">🇨🇦 캐나다</div><div class="rbg"><div class="rbf l" data-w="72"></div></div><div class="rp" style="color:var(--grn)">72%</div></div>
+        <div class="ri"><div class="rl">🇯🇵 일본</div><div class="rbg"><div class="rbf m" data-w="60"></div></div><div class="rp" style="color:var(--amb)">60%</div></div>
+        <div class="ri"><div class="rl">🇰🇷 한국(THAAD)</div><div class="rbg"><div class="rbf h" data-w="28"></div></div><div class="rp" style="color:var(--red)">28%</div></div>
+        <p style="font-family:var(--fb);font-size:13px;color:var(--ink3);margin-top:12px">※ 저항 성공 지수는 '경제 보복에 대한 원칙 유지 + 대안 확보 + 중장기 피해 최소화' 항목의 전문가 정성 평가이며, 절대 수치가 아닙니다. 한국(THAAD) 사례에 대한 평가는 연구자·전문가마다 시각 차이가 있으며, 본 수치는 일부 전문가 의견을 반영한 것으로 확정적 결론이 아닙니다.</p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 리투아니아 대만 대표부 개설 뉴스)</span></div>
+          <div class="mbox" id="mb-s3i" data-t="img" onclick="mbClick('s3i')">
+            <div class="mbox-ph" id="ph-s3i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s3i" accept="image/*" style="display:none" onchange="mbLoadImg('s3i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: Lithuania Taiwan China trade war)</span></div>
+          <div class="mbox" id="mb-s3v" data-t="vid" onclick="mbClick('s3v')">
+            <div class="mbox-ph" id="ph-s3v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 3 -->
+
+    <!-- ══════════ SECTION 4 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">04</span>캐나다·영국의 교훈 — 화웨이 배제와 투자 심사 강화</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "캐나다 화웨이 배제" · "영국 NSI Act" · "Five Eyes 중국"
+      </div>
+
+      <p class="bt">
+        캐나다와 영국은 화웨이 문제를 통해 <strong class="hl-b">통신 인프라 주권이 곧 안보 주권</strong>임을 실증했습니다. 두 나라의 결단은 단기적 경제 비용을 감수한 장기 안보 투자였습니다.
+      </p>
+
+      <div class="flow rev">
+        <div class="flow-ttl">🇨🇦 캐나다의 화웨이 배제 과정</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi b">📡</div><div class="fs-lbl">5G 인프라<br>화웨이 참여</div><div class="fs-sub">초기 허용<br>논의 단계</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">🇺🇸</div><div class="fs-lbl">미국·영국<br>압박</div><div class="fs-sub">Five Eyes<br>동맹 요구</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">⚖️</div><div class="fs-lbl">맹화이(孟晩舟)<br>사건</div><div class="fs-sub">화웨이 CFO<br>캐나다 체포</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi s">✅</div><div class="fs-lbl">화웨이<br>완전 배제</div><div class="fs-sub">2022년<br>공식 결정</div></div>
+        </div>
+      </div>
+
+      <p class="bt">
+        캐나다는 화웨이 CFO 체포로 중국의 강력한 보복(캐나다인 2명 '인질 외교' 구금)을 경험했습니다. 그러나 <strong class="hl-r">결국 화웨이 배제를 완료</strong>했고, 중국은 구금한 캐나다인을 석방할 수밖에 없었습니다. — <em>출처: CBC News, 2021</em>
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">영국 · 국가안보투자법(NSI Act) — 2022년 시행</div>
+        <p class="lq-txt">영국은 2022년 국가안보투자법을 시행하여 반도체·AI·군사·통신 등 <strong>17개 전략 분야</strong>에서 외국 기업의 지분 25% 이상 취득 시 정부 신고를 의무화했습니다. 실제로 중국 자본의 영국 반도체 기업 <strong>Newport Wafer Fab 인수를 이 법에 따라 강제 취소</strong>시켰습니다. 한국이 참조해야 할 직접적인 입법 모델입니다.</p>
+        <div class="lq-src">— 영국 기업에너지산업부 공식 발표, 2022 / <a href="https://www.gov.uk/government/collections/national-security-and-investment-act" target="_blank" rel="noopener">gov.uk</a></div>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 한국에 주는 시사점</div>
+        <p class="cbody" style="color:var(--ink2)">
+          <strong style="color:var(--blu)">입법 공백:</strong> 한국은 현재 방위산업·원자력 등 일부 분야에서만 외국인 투자 심사가 이뤄집니다. 게임·금융·미디어·플랫폼 등 중국 자본이 이미 깊이 침투한 분야에는 심사 체계가 사실상 없습니다.<br><br>
+          <strong style="color:var(--red)">시급성:</strong> 영국이 NSI Act를 만든 것은 중국 자본이 들어온 뒤였습니다. 한국도 '이미 들어온' 상황이지만, 지금이라도 법적 장치를 만들지 않으면 추가 침투를 막을 수단이 없습니다.
+        </p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 영국 NSI Act 17개 분야 도표)</span></div>
+          <div class="mbox" id="mb-s4i" data-t="img" onclick="mbClick('s4i')">
+            <div class="mbox-ph" id="ph-s4i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s4i" accept="image/*" style="display:none" onchange="mbLoadImg('s4i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: Canada Huawei ban China retaliation)</span></div>
+          <div class="mbox" id="mb-s4v" data-t="vid" onclick="mbClick('s4v')">
+            <div class="mbox-ph" id="ph-s4v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 4 -->
+
+    <!-- ══════════ SECTION 5 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">05</span>한국은 어디에 있나 — THAAD의 교훈과 현재의 선택</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "사드 보복 한한령" · "한국 중국 경제 종속" · "클라이브 해밀턴 소리 없는 침공"
+      </div>
+
+      <p class="bt">
+        2017년, 한국은 중국의 <strong class="hl-r">사드(THAAD) 보복</strong>을 경험했습니다. 관광 금지, 한한령, 롯데마트 철수 압박. 당시 한국 정부의 대응은 호주·리투아니아와는 달랐습니다 — '3불(不)' 약속이라는 사실상의 외교 양보였습니다.
+      </p>
+
+      <div class="case-grid">
+        <div class="case-card warn">
+          <div class="case-flag">🇰🇷</div>
+          <div class="case-country">한국 — THAAD 사례 (2017)</div>
+          <span class="case-tag loss">교훈적 실패</span>
+          <div class="case-body">중국의 경제 보복(한한령·관광 금지)에 맞서 '3불 약속'(사드 추가 배치 않겠다, 미국 미사일 방어 참여 않겠다, 한미일 군사 동맹 않겠다)을 사실상 수락했습니다. 그러나 중국의 보복은 완전히 해제되지 않았고, 안보 자율성만 훼손됐습니다.</div>
+        </div>
+        <div class="case-card">
+          <div class="case-flag">🇦🇺</div>
+          <div class="case-country">호주 — 코로나 조사 요구 (2020)</div>
+          <span class="case-tag win">원칙 승리</span>
+          <div class="case-body">200억 호주달러의 수출 차단이라는 혹독한 대가를 치렀지만 굴복하지 않았습니다. 3년 뒤 중국이 먼저 손을 내밀었고, 호주는 새로운 수출 시장을 개척한 뒤였습니다. "원칙 있는 거부가 더 좋은 결과를 낳는다"는 것을 증명했습니다.</div>
+        </div>
+        <div class="case-card">
+          <div class="case-flag">🇱🇹</div>
+          <div class="case-country">리투아니아 — 대만 대표부 (2021)</div>
+          <span class="case-tag win">가치 외교 승리</span>
+          <div class="case-body">EU의 집단 대응과 대만·미국의 연대로 사실상 무역 봉쇄를 버텨냈습니다. 인구 280만의 소국이 보여준 원칙 외교는 전 세계에 "민주주의 가치는 협상 불가"라는 메시지를 남겼습니다.</div>
+        </div>
+      </div>
+
+      <p class="bt" style="margin-top:28px">
+        호주전략정책연구소(ASPI)와 영국 채텀하우스(Chatham House)는 공통적으로 <strong class="hl-r">한국이 중국과의 관계에서 '양보 → 더 큰 요구'의 패턴을 반복하고 있다</strong>고 지적합니다. 이 패턴에서 벗어나려면 더 이른 단계에서 명확한 원칙을 세우고 동맹과 연대해 대응해야 한다고 권고합니다.
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">클라이브 해밀턴 (Clive Hamilton), 《소리 없는 침공(Silent Invasion)》 2018</div>
+        <p class="lq-txt">호주의 정치학자 해밀턴은 이 책에서 중국이 어떻게 <strong>민주주의 국가의 정치권, 언론, 학계, 기업에 자본을 침투시켜 의사결정 구조를 왜곡</strong>하는지 상세히 분석했습니다. 중국이 직접 명령하지 않아도, 내부의 '협력자'들이 스스로 중국에 유리한 방향으로 움직이는 구조입니다. 한국의 상황이 이 분석의 연장선상에 있다는 우려가 제기됩니다.</p>
+        <div class="lq-src">— Clive Hamilton, <em>Silent Invasion: China's Influence in Australia</em>, Hardie Grant Books, 2018 —</div>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 사드 보복 한한령 피해 현황)</span></div>
+          <div class="mbox" id="mb-s5i" data-t="img" onclick="mbClick('s5i')">
+            <div class="mbox-ph" id="ph-s5i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s5i" accept="image/*" style="display:none" onchange="mbLoadImg('s5i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: Clive Hamilton Silent Invasion China)</span></div>
+          <div class="mbox" id="mb-s5v" data-t="vid" onclick="mbClick('s5v')">
+            <div class="mbox-ph" id="ph-s5v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 5 -->
+
+    <!-- 인용구 -->
+    <div class="pq rev">
+      <div class="pq-txt">
+        "굴복은 끝이 없고,<br>
+        원칙은 <em>반드시 보답받는다</em>."<br>
+        <span style="font-size:clamp(.95rem,3vw,1.3rem);font-weight:600;color:var(--ink3);display:block;margin-top:10px">— 호주·리투아니아의 경험이 한국에 보내는 메시지</span>
+      </div>
+    </div>
+
+  </div><!-- /ab -->
+
+  <!-- ═══ 실천 강령 ═══ -->
+  <div class="action">
+    <div class="action-inner">
+      <h2 class="action-ttl">🛡️ 한국이 지금 해야 할 것</h2>
+      <p class="action-sub">서방의 경고와 성공 사례가 알려주는 5가지 행동 원칙</p>
+      <div class="action-grid">
+        <div class="ac">
+          <div class="ac-n">입법 행동</div>
+          <div class="ac-ico">📜</div>
+          <div class="ac-ttl">한국판 NSI Act 도입</div>
+          <div class="ac-desc">영국의 국가안보투자법처럼, 게임·금융·플랫폼·통신 분야의 외국인 투자 심사를 의무화하는 법적 장치 마련이 시급합니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">동맹 강화</div>
+          <div class="ac-ico">🤝</div>
+          <div class="ac-ttl">가치 동맹 선명화</div>
+          <div class="ac-desc">미국·EU·일본과의 가치 기반 연대를 선명히 해야 합니다. 중국의 보복은 혼자 당할 때 가장 무섭습니다. 집단 대응이 해답입니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">공급망 전략</div>
+          <div class="ac-ico">🔄</div>
+          <div class="ac-ttl">수출·소싱 다변화</div>
+          <div class="ac-desc">호주처럼, 중국 의존도를 줄이고 인도·동남아·유럽 시장을 개척해야 합니다. 보복이 오기 전에 대안 경로를 먼저 만들어야 합니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">데이터 주권</div>
+          <div class="ac-ico">🔐</div>
+          <div class="ac-ttl">데이터 현지화 입법</div>
+          <div class="ac-desc">국내 이용자 데이터의 해외 서버 전송을 원칙적으로 금지하는 데이터 현지화 법률을 조속히 제정해야 합니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">시민 감시</div>
+          <div class="ac-ico">👁️</div>
+          <div class="ac-ttl">중국 자본 영향력 모니터링</div>
+          <div class="ac-desc">언론·정치·학계에서 중국 자본의 우회적 영향력 행사를 시민 사회가 지속적으로 모니터링하고 공론화해야 합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 소셜 바 ═══ -->
+  <div class="sb">
+    <div class="sb-lbl">Share &amp; Follow</div>
+    <div class="sb-btns">
+      <button class="snsbtn yt" onclick="snsOpen('yt')">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z"/></svg>YouTube
+      </button>
+      <button class="snsbtn ig" onclick="snsOpen('ig')">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+      </button>
+      <button class="snsbtn tt" onclick="snsOpen('tt')">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/></svg>TikTok
+      </button>
+      <button class="snsbtn xb" onclick="snsOpen('xb')">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>X
+      </button>
+      <button class="snsbtn fb" onclick="snsOpen('fb')">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+      </button>
+    </div>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="ft-brand"><span class="ft-dot"></span>IssueLens</div>
+  <div style="color:#9CA3AF;font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);margin-top:4px">경제 안보 시리즈 · EP.06</div>
+  <p>본 게시물은 공익 목적의 논평입니다. 미국 국무부·V-Dem·ASPI 등 공신력 있는 기관 발표와 언론 보도를 근거로 합니다.<br>Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+<script>
+// ── 진행 바 ──
+const d=document.documentElement;
+window.addEventListener('scroll',()=>{
+  const pct=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100;
+  document.getElementById('pb').style.width=pct+'%';
+});
+
+// ── 스크롤 reveal ──
+const revEls=document.querySelectorAll('.rev');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
+},{threshold:.1});
+revEls.forEach(el=>io.observe(el));
+
+// ── 리스크 바 ──
+const rbfEls=document.querySelectorAll('.rbf');
+const rbIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.width=(e.target.dataset.w||0)+'%';
+      rbIO.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+rbfEls.forEach(el=>rbIO.observe(el));
+
+// ── 미디어 박스 ──
+let cur=null;
+function mbClick(id){
+  const box=document.getElementById('mb-'+id);
+  if(box.dataset.t==='img'){
+    document.getElementById('fi-'+id).click();
+  } else {
+    ytOpen(id);
+  }
+}
+function mbReplace(id){
+  const box=document.getElementById('mb-'+id);
+  if(box.dataset.t==='img'){document.getElementById('fi-'+id).click();}
+  else{ytOpen(id);}
+}
+function mbDel(id){
+  const box=document.getElementById('mb-'+id);
+  const imgs=box.querySelectorAll('img.prev,iframe');
+  imgs.forEach(el=>el.remove());
+  box.classList.remove('filled');
+  box.style.minHeight='';
+  const ph=document.getElementById('ph-'+id);
+  if(ph)ph.style.display='';
+  const fi=document.getElementById('fi-'+id);
+  if(fi)fi.value='';
+}
+function mbLoadImg(id,inp){
+  if(!inp.files||!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const box=document.getElementById('mb-'+id);
+    const ph=document.getElementById('ph-'+id);
+    if(ph)ph.style.display='none';
+    const img=document.createElement('img');
+    img.src=ev.target.result;
+    img.className='prev';
+    box.insertBefore(img,box.querySelector('.mctrl'));
+    box.classList.add('filled');
+    box.onclick=null;
+    box.style.minHeight='200px';
+  };
+  r.readAsDataURL(inp.files[0]);
+}
+
+// ── YouTube 모달 ──
+function ytOpen(id){cur=id;document.getElementById('yti').value='';document.getElementById('ytm').style.display='flex';setTimeout(()=>document.getElementById('yti').focus(),80)}
+function ytClose(){document.getElementById('ytm').style.display='none';cur=null}
+function ytEmbed(url){
+  try{
+    const u=new URL(url);let id='';
+    if(u.hostname.includes('youtu.be')){id=u.pathname.slice(1)}
+    else{id=u.searchParams.get('v')||''}
+    return id?'https://www.youtube.com/embed/'+id+'?rel=0':null
+  }catch(e){return null}
+}
+function ytOk(){
+  const url=document.getElementById('yti').value.trim();
+  const em=ytEmbed(url);
+  if(!em){alert('올바른 YouTube 링크를 입력해 주세요.\n예: https://www.youtube.com/watch?v=XXXXXXXXXXX');return}
+  const box=document.getElementById('mb-'+cur);
+  const ph=document.getElementById('ph-'+cur);
+  if(ph)ph.style.display='none';
+  const ifr=document.createElement('iframe');
+  ifr.src=em;
+  ifr.style.cssText='width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px';
+  ifr.allow='accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';
+  ifr.allowFullscreen=true;
+  box.insertBefore(ifr,box.querySelector('.mctrl'));
+  box.classList.add('filled');
+  box.style.minHeight='220px';
+  box.onclick=null;
+  ytClose();
+}
+
+// ── SNS 링크 모달 ──
+const snsMeta={
+  yt:{label:'YouTube',desc:'YouTube 채널 또는 영상 링크를 입력하세요.',ph:'https://www.youtube.com/@channel'},
+  ig:{label:'Instagram',desc:'Instagram 프로필 또는 게시물 링크를 입력하세요.',ph:'https://www.instagram.com/username'},
+  tt:{label:'TikTok',desc:'TikTok 프로필 또는 영상 링크를 입력하세요.',ph:'https://www.tiktok.com/@username'},
+  th:{label:'Threads',desc:'Threads 프로필 또는 게시물 링크를 입력하세요.',ph:'https://www.threads.net/@username'},
+  xb:{label:'X (Twitter)',desc:'X(트위터) 프로필 또는 게시물 링크를 입력하세요.',ph:'https://x.com/username'},
+  fb:{label:'Facebook',desc:'Facebook 페이지 또는 게시물 링크를 입력하세요.',ph:'https://www.facebook.com/page'}
+};
+const snsLinks={};
+let curSns=null;
+
+function snsOpen(id){
+  curSns=id;
+  const m=snsMeta[id];
+  document.getElementById('sns-modal-title').textContent=m.label+' 링크 설정';
+  document.getElementById('sns-modal-desc').textContent=m.desc;
+  const inp=document.getElementById('sns-url-input');
+  inp.placeholder=m.ph;
+  inp.value=snsLinks[id]||'';
+  inp.style.borderColor='var(--bdr)';
+  snsUpdateSavedBar();
+  document.getElementById('sns-modal').style.display='flex';
+  setTimeout(()=>inp.focus(),80);
+}
+function snsUpdateSavedBar(){
+  const id=curSns;
+  const bar=document.getElementById('sns-saved-bar');
+  const lnk=document.getElementById('sns-saved-link');
+  if(snsLinks[id]){
+    bar.style.display='flex';
+    lnk.href=snsLinks[id];
+    lnk.textContent=snsLinks[id];
+  }else{
+    bar.style.display='none';
+  }
+}
+function snsClearSaved(){
+  if(!curSns)return;
+  delete snsLinks[curSns];
+  document.getElementById('sns-url-input').value='';
+  const btn=document.querySelector('.snsbtn.'+curSns);
+  if(btn){btn.classList.remove('has-link');btn.onclick=()=>snsOpen(curSns);btn.ondblclick=null;btn.title='';}
+  snsUpdateSavedBar();
+}
+function snsSave(){
+  const url=document.getElementById('sns-url-input').value.trim();
+  if(!url){alert('링크를 입력해 주세요.');return}
+  let finalUrl=url;
+  if(!/^https?:\/\//i.test(finalUrl))finalUrl='https://'+finalUrl;
+  const id=curSns;
+  snsLinks[id]=finalUrl;
+  const btn=document.querySelector('.snsbtn.'+id);
+  if(btn){
+    btn.classList.add('has-link');
+    btn.onclick=()=>window.open(snsLinks[id],'_blank','noopener,noreferrer');
+    btn.ondblclick=e=>{e.preventDefault();snsOpen(id)};
+    btn.title='클릭: 링크 열기 | 더블클릭: 링크 변경';
+  }
+  snsUpdateSavedBar();
+  setTimeout(()=>snsClose(),300);
+}
+function snsClose(){
+  document.getElementById('sns-modal').style.display='none';
+  curSns=null;
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){ytClose();snsClose()}});
+document.getElementById('yti').addEventListener('keydown',e=>{if(e.key==='Enter')ytOk()});
+document.getElementById('sns-url-input').addEventListener('keydown',e=>{if(e.key==='Enter')snsSave()});
+document.getElementById('sns-modal').addEventListener('click',function(e){if(e.target===this)snsClose()});
+</script>
+</body>
+</html>

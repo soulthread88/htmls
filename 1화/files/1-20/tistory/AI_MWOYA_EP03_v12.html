@@ -1,0 +1,840 @@
+<p data-ke-size="size16">&nbsp;</p>
+
+<style>
+/* ===== 시니어 AI 공부방 EP03 v12-r2 ===== */
+:root {
+  --e1-navy:  #1a2a4a;
+  --e1-gold:  #b8923a;
+  --e1-border:#ddd5c0;
+  --e1-red:   #c0392b;
+  --e1-green: #27ae60;
+}
+.e1-wrap * { box-sizing: border-box !important; }
+.e1-wrap ul, .e1-wrap li, .e1-wrap ol { list-style: none !important; padding: 0 !important; margin: 0 !important; }
+.e1-wrap li::before, .e1-wrap li::after { display: none !important; content: none !important; }
+
+/* ── 1100px 브레이크아웃 ── */
+.e1-breakout {
+  width: 1100px !important; position: relative !important;
+  left: 50% !important; transform: translateX(-50%) !important;
+  font-family: 'Noto Sans KR', sans-serif !important;
+  font-size: 19px !important; line-height: 1.8 !important; color: #333 !important;
+}
+.e1-main    { display: flex !important; gap: 28px !important; align-items: flex-start !important; }
+.e1-content { flex: 1 !important; min-width: 0 !important; }
+.e1-sidebar { width: 255px !important; flex-shrink: 0 !important; position: sticky !important; top: 20px !important; }
+
+/* ── 제목 ── */
+.e1-h1 { color: var(--e1-navy) !important; font-size: 26px !important; font-weight: bold !important; border-bottom: 3px solid var(--e1-navy) !important; padding-bottom: 12px !important; margin: 0 0 22px !important; line-height: 1.4 !important; }
+.e1-h2 { font-size: 21px !important; color: var(--e1-navy) !important; font-weight: bold !important; margin: 28px 0 12px !important; padding-left: 10px !important; border-left: 4px solid var(--e1-gold) !important; scroll-margin-top: 60px !important; }
+
+/* ── 대화 카드 ── */
+.e1-chat    { border: 1.5px solid var(--e1-border) !important; border-radius: 12px !important; margin-bottom: 15px !important; overflow: hidden !important; }
+.e1-chat-hd { background: var(--e1-navy) !important; padding: 9px 16px !important; }
+.e1-chat-hd span { color: #fff !important; font-weight: bold !important; font-size: 16px !important; }
+.e1-chat-bd { padding: 15px 20px !important; line-height: 1.85 !important; font-size: 18px !important; color: #333 !important; }
+.e1-hl  { color: var(--e1-navy) !important; font-weight: bold !important; }
+.e1-red { color: var(--e1-red)  !important; font-weight: bold !important; }
+
+/* ── 미디어 슬롯 ── */
+.e1-slot {
+  background: #f7f7f7 !important; border: 2px dashed #ccc !important;
+  border-radius: 10px !important; margin-bottom: 22px !important;
+  overflow: hidden !important; position: relative !important; min-height: 80px !important;
+  cursor: pointer !important; transition: border-color .2s, background .2s !important;
+}
+.e1-slot:hover { border-color: var(--e1-gold) !important; background: #f5f2ec !important; }
+.e1-slot-ph {
+  padding: 26px 15px !important; text-align: center !important;
+  color: #bbb !important; font-size: 15px !important; pointer-events: none !important;
+}
+.e1-slot-ph-icon { display: block !important; font-size: 28px !important; margin-bottom: 6px !important; }
+.e1-slot-ph-txt  { display: block !important; font-size: 13px !important; color: #aaa !important; }
+.e1-slot-disp { display: none !important; width: 100% !important; position: relative !important; }
+.e1-slot-disp img, .e1-slot-disp video { width: 100% !important; border-radius: 8px !important; display: block !important; }
+.e1-slot-disp.on { display: block !important; }
+.e1-slot-ctrl {
+  display: none !important; position: absolute !important;
+  bottom: 8px !important; right: 8px !important;
+  gap: 5px !important; flex-wrap: wrap !important;
+  opacity: 0 !important; transition: opacity .18s !important;
+}
+.e1-slot-disp.on + .e1-slot-ph { display: none !important; }
+.e1-slot.has-media .e1-slot-ctrl { display: flex !important; opacity: 0 !important; }
+.e1-slot.has-media:hover .e1-slot-ctrl { opacity: 1 !important; }
+.e1-slot.has-media { cursor: default !important; }
+.e1-slot.has-media:hover { border-color: #ccc !important; background: #f7f7f7 !important; }
+.e1-ctrl-btn {
+  padding: 5px 11px !important; border: none !important; border-radius: 5px !important;
+  font-size: 12px !important; font-weight: bold !important; cursor: pointer !important;
+  font-family: 'Noto Sans KR', sans-serif !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.25) !important;
+}
+.e1-ctrl-rep { background: #e67e22 !important; color: #fff !important; }
+.e1-ctrl-del { background: #e74c3c !important; color: #fff !important; }
+.e1-badge { display: none !important; font-size: 11px !important; color: var(--e1-green) !important; font-weight: bold !important; align-self: center !important; }
+
+/* ── 애드센스 슬롯 ── */
+.e1-ad {
+  background: #f5f2ec !important; border: 2px dashed var(--e1-border) !important;
+  border-radius: 12px !important; margin: 22px 0 !important; overflow: hidden !important;
+  min-height: 72px !important; cursor: pointer !important;
+  transition: border-color .2s !important;
+}
+.e1-ad:hover { border-color: var(--e1-gold) !important; }
+.e1-ad-inner { padding: 16px 22px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; }
+.e1-ad-label { font-size: 14px !important; color: #b0a898 !important; }
+.e1-ad-hint  { font-size: 12px !important; color: #c8bcac !important; font-style: italic !important; }
+.e1-ad-code  { display: none; padding: 14px 18px !important; background: #fff !important; border-top: 1px solid var(--e1-border) !important; cursor: default !important; }
+.e1-ad-code textarea { width: 100% !important; min-height: 90px !important; border: 1.5px solid var(--e1-border) !important; border-radius: 8px !important; padding: 10px 12px !important; font-size: 13px !important; font-family: 'Courier New', monospace !important; resize: vertical !important; outline: none !important; box-sizing: border-box !important; }
+.e1-ad-code textarea:focus { border-color: var(--e1-gold) !important; }
+.e1-ad-code-btns { display: flex !important; gap: 8px !important; margin-top: 10px !important; justify-content: flex-end !important; }
+.e1-ad-apply  { padding: 8px 18px !important; background: var(--e1-navy) !important; color: #fff !important; border: none !important; border-radius: 6px !important; font-size: 14px !important; font-weight: 700 !important; cursor: pointer !important; font-family: 'Noto Sans KR', sans-serif !important; }
+.e1-ad-apply:hover { background: #2c4a7a !important; }
+.e1-ad-cancel { padding: 8px 14px !important; background: #f0ebe0 !important; color: #555 !important; border: 1px solid var(--e1-border) !important; border-radius: 6px !important; font-size: 14px !important; cursor: pointer !important; font-family: 'Noto Sans KR', sans-serif !important; }
+.e1-ad-preview { padding: 0 18px 14px !important; }
+
+/* ── EP03 전용: 사자성어 박스 ── */
+.e1-proverb {
+  background: linear-gradient(135deg, #fefbef 0%, #fdf3c8 100%) !important;
+  border: 2px solid var(--e1-gold) !important;
+  border-radius: 14px !important;
+  padding: 28px 24px !important;
+  margin: 22px 0 !important;
+  text-align: center !important;
+}
+.e1-proverb-cn  { font-size: 44px !important; font-weight: 900 !important; color: var(--e1-red) !important; letter-spacing: 10px !important; margin-bottom: 6px !important; }
+.e1-proverb-ko  { font-size: 18px !important; font-weight: bold !important; color: #7a5a1a !important; margin-bottom: 8px !important; }
+.e1-proverb-def { font-size: 20px !important; font-weight: bold !important; color: var(--e1-navy) !important; margin-bottom: 8px !important; }
+.e1-proverb-desc{ font-size: 16px !important; color: #555 !important; line-height: 1.7 !important; }
+
+/* ── EP03 전용: 영어 명언 박스 ── */
+.e1-quote {
+  background: #f0f4fa !important;
+  border-left: 5px solid var(--e1-navy) !important;
+  border-radius: 0 12px 12px 0 !important;
+  padding: 22px 28px !important;
+  margin: 22px 0 !important;
+  text-align: center !important;
+}
+.e1-quote-en { font-size: 26px !important; font-weight: 900 !important; font-style: italic !important; color: var(--e1-navy) !important; margin-bottom: 8px !important; }
+.e1-quote-ko { font-size: 17px !important; color: #4a6fa5 !important; font-weight: bold !important; }
+
+/* ── EP03 전용: 팁 박스 ── */
+.e1-tip {
+  border: 1.5px solid var(--e1-border) !important;
+  border-radius: 12px !important;
+  margin-bottom: 14px !important;
+  overflow: hidden !important;
+}
+.e1-tip-hd { background: #f5f0e8 !important; padding: 9px 16px !important; border-bottom: 1px solid var(--e1-border) !important; }
+.e1-tip-hd span { color: var(--e1-navy) !important; font-weight: bold !important; font-size: 16px !important; }
+.e1-tip-bd { padding: 14px 20px !important; line-height: 1.85 !important; font-size: 18px !important; color: #333 !important; }
+
+/* ── 소셜 바 ── */
+.e1-social-bar   { margin-top: 30px !important; padding-top: 18px !important; border-top: 1px solid var(--e1-border) !important; }
+.e1-social-title { font-size: 12px !important; color: #aaa !important; letter-spacing: .1em !important; text-transform: uppercase !important; margin-bottom: 12px !important; font-weight: 600 !important; }
+.e1-social-row   { display: flex !important; gap: 8px !important; flex-wrap: wrap !important; }
+.e1-soc-item {
+  display: inline-flex !important; align-items: center !important; gap: 7px !important;
+  text-decoration: none !important; color: #444 !important;
+  background: #f5f2ec !important; border: 1px solid var(--e1-border) !important;
+  border-radius: 20px !important; padding: 5px 13px 5px 5px !important;
+  font-size: 13px !important; font-weight: 600 !important;
+  transition: background .15s, border-color .15s !important;
+}
+.e1-soc-item:hover { background: #f0e6cc !important; border-color: var(--e1-gold) !important; }
+.e1-soc-logo {
+  width: 26px !important; height: 26px !important; border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important; overflow: hidden !important;
+}
+.e1-soc-logo svg { width: 100% !important; height: 100% !important; display: block !important; }
+.e1-soc-lbl { white-space: nowrap !important; line-height: 1 !important; }
+.e1-soc-set {
+  display: none !important; position: absolute !important;
+  top: -7px !important; right: -7px !important;
+  width: 18px !important; height: 18px !important;
+  background: var(--e1-navy) !important; color: #fff !important;
+  border-radius: 50% !important; font-size: 10px !important;
+  align-items: center !important; justify-content: center !important;
+  cursor: pointer !important; z-index: 2 !important;
+  border: 1.5px solid #fff !important; line-height: 1 !important;
+  text-decoration: none !important;
+}
+.e1-soc-wrap { position: relative !important; display: inline-flex !important; }
+.e1-soc-wrap:hover .e1-soc-set { display: flex !important; }
+.e1-soc-popup {
+  display: none !important; position: fixed !important; z-index: 99999 !important;
+  background: #fff !important; border: 1.5px solid var(--e1-border) !important;
+  border-radius: 12px !important; padding: 16px 18px !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,.18) !important; min-width: 270px !important;
+}
+.e1-soc-popup.open { display: block !important; }
+.e1-soc-popup-title { font-size: 13px !important; font-weight: 700 !important; color: var(--e1-navy) !important; margin-bottom: 10px !important; font-family: 'Noto Sans KR', sans-serif !important; }
+.e1-soc-popup input {
+  width: 100% !important; padding: 8px 10px !important;
+  border: 1.5px solid var(--e1-border) !important; border-radius: 7px !important;
+  font-size: 13px !important; font-family: monospace !important;
+  outline: none !important; box-sizing: border-box !important; margin-bottom: 10px !important;
+}
+.e1-soc-popup input:focus { border-color: var(--e1-gold) !important; }
+.e1-soc-popup-btns { display: flex !important; gap: 7px !important; justify-content: flex-end !important; }
+.e1-soc-popup-save   { padding: 7px 16px !important; background: var(--e1-navy) !important; color: #fff !important; border: none !important; border-radius: 7px !important; font-size: 13px !important; font-weight: 700 !important; cursor: pointer !important; font-family: 'Noto Sans KR', sans-serif !important; }
+.e1-soc-popup-cancel { padding: 7px 12px !important; background: #f0ebe0 !important; color: #555 !important; border: 1px solid var(--e1-border) !important; border-radius: 7px !important; font-size: 13px !important; cursor: pointer !important; font-family: 'Noto Sans KR', sans-serif !important; }
+
+/* ── 사이드바 ── */
+.e1-sb { border: 1px solid var(--e1-border) !important; padding: 14px !important; margin-bottom: 16px !important; border-radius: 8px !important; background: #fff !important; }
+.e1-sb-t { font-size: 15px !important; font-weight: bold !important; color: var(--e1-navy) !important; border-bottom: 2px solid var(--e1-navy) !important; padding-bottom: 6px !important; margin-bottom: 10px !important; }
+.e1-toc-a { display: flex !important; align-items: center !important; gap: 7px !important; font-size: 14px !important; color: #333 !important; text-decoration: none !important; padding: 5px 4px !important; border-radius: 5px !important; transition: background .15s !important; margin-bottom: 2px !important; }
+.e1-toc-a:hover { background: #f5ead0 !important; color: var(--e1-navy) !important; }
+.e1-toc-num { display: inline-flex !important; align-items: center !important; justify-content: center !important; background: var(--e1-navy) !important; color: #fff !important; font-size: 11px !important; font-weight: 700 !important; width: 20px !important; height: 20px !important; border-radius: 50% !important; flex-shrink: 0 !important; }
+.e1-sb-a { display: block !important; font-size: 14px !important; color: var(--e1-navy) !important; text-decoration: none !important; padding: 6px 8px !important; border-radius: 6px !important; margin-bottom: 2px !important; transition: background .15s !important; }
+.e1-sb-a:hover { background: #f5ead0 !important; }
+.e1-sb-widget { background: #fff !important; border: 1.5px solid var(--e1-border) !important; border-radius: 12px !important; overflow: hidden !important; margin-bottom: 16px !important; }
+.e1-sb-widget-t { background: var(--e1-navy) !important; color: #fff !important; font-size: 14px !important; font-weight: 700 !important; padding: 11px 14px !important; }
+.e1-device-a { display: flex !important; align-items: center !important; gap: 8px !important; font-size: 14px !important; color: var(--e1-navy) !important; font-weight: 600 !important; text-decoration: none !important; padding: 9px 14px !important; border-bottom: 1px solid #f0ebe0 !important; transition: background .15s !important; }
+.e1-device-a:last-child { border-bottom: none !important; }
+.e1-device-a:hover { background: #f5ead0 !important; }
+.e1-device-a::after { content: '→' !important; margin-left: auto !important; color: var(--e1-gold) !important; font-size: 13px !important; }
+
+/* ── 반응형 ── */
+@media (max-width: 960px) {
+  .e1-breakout { width: 100% !important; left: 0 !important; transform: none !important; }
+  .e1-main { flex-direction: column !important; }
+  .e1-sidebar { width: 100% !important; position: static !important; }
+}
+</style>
+
+<div class="e1-breakout e1-wrap" id="e1Wrap">
+  <div class="e1-main">
+
+    <!-- ──────── 본문 ──────── -->
+    <article class="e1-content">
+
+      <h1 class="e1-h1">EP.03 할머니, 네이버에서 뭐든 찾을 수 있어요!</h1>
+
+      <!-- 상단 광고 -->
+      <div class="e1-ad" id="e1-ad-top" onclick="e1AdToggle(event,'e1-ad-top')">
+        <div class="e1-ad-inner">
+          <span class="e1-ad-label">📢 광고 영역 (애드센스)</span>
+          <span class="e1-ad-hint">클릭하여 코드 삽입 ▾</span>
+        </div>
+        <div class="e1-ad-code" id="e1-ad-top-code">
+          <textarea placeholder="애드센스 광고 코드를 붙여넣으세요"></textarea>
+          <div class="e1-ad-code-btns">
+            <button class="e1-ad-cancel" onclick="e1AdToggle(event,'e1-ad-top')">취소</button>
+            <button class="e1-ad-apply" onclick="e1AdApply(event,'e1-ad-top','adcode_top')">적용</button>
+          </div>
+        </div>
+        <div class="e1-ad-preview" id="e1-ad-top-preview"></div>
+      </div>
+
+      <!-- ── 섹션 1: 할머니의 고민 ── -->
+      <section id="sec-s1">
+        <h2 class="e1-h2">1. 📱 할머니의 고민</h2>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 윤호의 AI 교실 — 오늘의 첫 수업</span></div>
+          <div class="e1-chat-bd">
+            어느 날, <span class="e1-hl">할머니</span>께서 김치찌개를 만들려고 <span class="e1-hl">네이버</span>에서 레시피를 검색했어요.<br>
+            그런데 너무 많은 결과가 나와서 어떤 것을 봐야 할지 모르겠다고 하셨어요.<br><br>
+            <span class="e1-red">👵 할머니:</span> "윤호야, 할머니가 <span class="e1-hl">네이버</span>에서 <span class="e1-hl">김치찌개 레시피</span> 검색했는데 너무 많이 나와서 뭘 봐야 할지 모르겠어..."<br><br>
+            <span class="e1-hl">👦 윤호 선생님:</span> "할머니! 검색하는 방법을 알려드릴게요! 쉬운 방법이 있어요!"<br><br>
+            <span class="e1-red">👴 할아버지:</span> "나도 궁금하다! <span class="e1-hl">병원</span> 찾는 건 어떻게 해?"
+          </div>
+        </div>
+
+        <!-- 미디어 슬롯 1 -->
+        <div class="e1-slot" id="e1-area-1" onclick="e1SlotClick('area-1',event)">
+          <div class="e1-slot-disp" id="e1-area-1-d"></div>
+          <div class="e1-slot-ph" id="e1-area-1-ph">
+            <span class="e1-slot-ph-icon">📱</span>
+            <span class="e1-slot-ph-txt">할머니가 스마트폰으로 검색하는 장면 — 클릭하여 이미지 또는 영상 삽입</span>
+          </div>
+          <div class="e1-slot-ctrl">
+            <button class="e1-ctrl-btn e1-ctrl-rep" onclick="e1InsertChoice('area-1',event)">🔄 교체</button>
+            <button class="e1-ctrl-btn e1-ctrl-del" onclick="e1Del('area-1',event)">🗑️ 삭제</button>
+            <span class="e1-badge" id="e1-area-1-bx">✅</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 중간 광고 1 -->
+      <div class="e1-ad" id="e1-ad-mid1" onclick="e1AdToggle(event,'e1-ad-mid1')">
+        <div class="e1-ad-inner">
+          <span class="e1-ad-label">📢 광고 영역 (애드센스)</span>
+          <span class="e1-ad-hint">클릭하여 코드 삽입 ▾</span>
+        </div>
+        <div class="e1-ad-code" id="e1-ad-mid1-code">
+          <textarea placeholder="애드센스 광고 코드를 붙여넣으세요"></textarea>
+          <div class="e1-ad-code-btns">
+            <button class="e1-ad-cancel" onclick="e1AdToggle(event,'e1-ad-mid1')">취소</button>
+            <button class="e1-ad-apply" onclick="e1AdApply(event,'e1-ad-mid1','adcode_mid1')">적용</button>
+          </div>
+        </div>
+        <div class="e1-ad-preview" id="e1-ad-mid1-preview"></div>
+      </div>
+
+      <!-- ── 섹션 2: 검색의 3가지 비밀 ── -->
+      <section id="sec-s2">
+        <h2 class="e1-h2">2. 🎯 윤호가 알려주는 검색의 3가지 비밀</h2>
+
+        <!-- 미디어 슬롯 2 -->
+        <div class="e1-slot" id="e1-area-2" onclick="e1SlotClick('area-2',event)">
+          <div class="e1-slot-disp" id="e1-area-2-d"></div>
+          <div class="e1-slot-ph" id="e1-area-2-ph">
+            <span class="e1-slot-ph-icon">🖥️</span>
+            <span class="e1-slot-ph-txt">네이버 검색창 화면 — 클릭하여 이미지 또는 영상 삽입</span>
+          </div>
+          <div class="e1-slot-ctrl">
+            <button class="e1-ctrl-btn e1-ctrl-rep" onclick="e1InsertChoice('area-2',event)">🔄 교체</button>
+            <button class="e1-ctrl-btn e1-ctrl-del" onclick="e1Del('area-2',event)">🗑️ 삭제</button>
+            <span class="e1-badge" id="e1-area-2-bx">✅</span>
+          </div>
+        </div>
+
+        <div class="e1-tip">
+          <div class="e1-tip-hd"><span>1️⃣ 짧고 명확하게!</span></div>
+          <div class="e1-tip-bd">
+            <span class="e1-red">나쁜 예:</span> "김치찌개를 맛있게 끓이려면 어떻게 해야 하나요?"<br>
+            <span class="e1-hl">좋은 예:</span> "김치찌개 레시피"<br><br>
+            ➡️ <strong>핵심만 검색하세요!</strong>
+          </div>
+        </div>
+
+        <div class="e1-tip">
+          <div class="e1-tip-hd"><span>2️⃣ 띄어쓰기 정확하게!</span></div>
+          <div class="e1-tip-bd">
+            <span class="e1-red">나쁜 예:</span> "감기몸살병원"<br>
+            <span class="e1-hl">좋은 예:</span> "감기 몸살 병원"<br><br>
+            ➡️ <strong>단어마다 띄어쓰기!</strong>
+          </div>
+        </div>
+
+        <div class="e1-tip">
+          <div class="e1-tip-hd"><span>3️⃣ 지역 이름 추가하기!</span></div>
+          <div class="e1-tip-bd">
+            <span class="e1-red">일반 검색:</span> "맛집"<br>
+            <span class="e1-hl">좋은 검색:</span> "강남 맛집" 또는 "판교 맛집"<br><br>
+            ➡️ <strong>내가 있는 곳 이름을 넣어요!</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 섹션 3: 실습하기 ── -->
+      <section id="sec-s3">
+        <h2 class="e1-h2">3. 💻 윤호와 함께 실습하기</h2>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 윤호의 AI 교실 — 실습 1: 병원 찾기</span></div>
+          <div class="e1-chat-bd">
+            <span class="e1-hl">할아버지</span>가 감기에 걸리셔서 병원을 찾아야 해요.<br><br>
+            🔍 <span class="e1-hl">검색어:</span> "<strong>강남구 내과</strong>"<br>
+            ➡️ 지역 + 병원 종류<br><br>
+            <span class="e1-red">👴 할아버지:</span> "오! 우리 집 근처 병원들이 쭉 나오네!"
+          </div>
+        </div>
+
+        <!-- 미디어 슬롯 3 -->
+        <div class="e1-slot" id="e1-area-3" onclick="e1SlotClick('area-3',event)">
+          <div class="e1-slot-disp" id="e1-area-3-d"></div>
+          <div class="e1-slot-ph" id="e1-area-3-ph">
+            <span class="e1-slot-ph-icon">🗺️</span>
+            <span class="e1-slot-ph-txt">네이버 지도에서 병원 검색 결과 — 클릭하여 이미지 또는 영상 삽입</span>
+          </div>
+          <div class="e1-slot-ctrl">
+            <button class="e1-ctrl-btn e1-ctrl-rep" onclick="e1InsertChoice('area-3',event)">🔄 교체</button>
+            <button class="e1-ctrl-btn e1-ctrl-del" onclick="e1Del('area-3',event)">🗑️ 삭제</button>
+            <span class="e1-badge" id="e1-area-3-bx">✅</span>
+          </div>
+        </div>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 윤호의 AI 교실 — 실습 2: 레시피 찾기</span></div>
+          <div class="e1-chat-bd">
+            <span class="e1-hl">할머니</span>가 김치찌개 레시피를 찾고 싶어하세요.<br><br>
+            🔍 <span class="e1-hl">검색어:</span> "<strong>김치찌개 레시피 백종원</strong>"<br>
+            ➡️ 요리 이름 + 레시피 + 유명 요리사 이름<br><br>
+            <span class="e1-red">👵 할머니:</span> "이제 알겠어! 유명한 요리사 이름을 넣으니까 훨씬 좋은 레시피가 나오네!"
+          </div>
+        </div>
+      </section>
+
+      <!-- 중간 광고 2 -->
+      <div class="e1-ad" id="e1-ad-mid2" onclick="e1AdToggle(event,'e1-ad-mid2')">
+        <div class="e1-ad-inner">
+          <span class="e1-ad-label">📢 광고 영역 (애드센스)</span>
+          <span class="e1-ad-hint">클릭하여 코드 삽입 ▾</span>
+        </div>
+        <div class="e1-ad-code" id="e1-ad-mid2-code">
+          <textarea placeholder="애드센스 광고 코드를 붙여넣으세요"></textarea>
+          <div class="e1-ad-code-btns">
+            <button class="e1-ad-cancel" onclick="e1AdToggle(event,'e1-ad-mid2')">취소</button>
+            <button class="e1-ad-apply" onclick="e1AdApply(event,'e1-ad-mid2','adcode_mid2')">적용</button>
+          </div>
+        </div>
+        <div class="e1-ad-preview" id="e1-ad-mid2-preview"></div>
+      </div>
+
+      <!-- ── 섹션 4: 음성 검색 ── -->
+      <section id="sec-s4">
+        <h2 class="e1-h2">4. 🎤 음성 검색도 편해요</h2>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 윤호의 AI 교실 — 음성 검색 팁</span></div>
+          <div class="e1-chat-bd">
+            <span class="e1-hl">👦 윤호 선생님:</span> "타이핑이 어려우시면 <span class="e1-hl">음성 검색</span>을 쓰세요! 말만 하면 검색돼요!"<br><br>
+            ✔ <span class="e1-hl">마이크 버튼</span>을 누르세요<br>
+            ✔ 천천히 또박또박 말하세요<br>
+            ✔ "강남역 맛집"처럼 짧게 말하세요<br>
+            ✔ 조용한 곳에서 하면 더 잘 돼요
+          </div>
+        </div>
+
+        <!-- 미디어 슬롯 4 -->
+        <div class="e1-slot" id="e1-area-4" onclick="e1SlotClick('area-4',event)">
+          <div class="e1-slot-disp" id="e1-area-4-d"></div>
+          <div class="e1-slot-ph" id="e1-area-4-ph">
+            <span class="e1-slot-ph-icon">🎙️</span>
+            <span class="e1-slot-ph-txt">할머니가 음성 검색을 사용하는 모습 — 클릭하여 이미지 또는 영상 삽입</span>
+          </div>
+          <div class="e1-slot-ctrl">
+            <button class="e1-ctrl-btn e1-ctrl-rep" onclick="e1InsertChoice('area-4',event)">🔄 교체</button>
+            <button class="e1-ctrl-btn e1-ctrl-del" onclick="e1Del('area-4',event)">🗑️ 삭제</button>
+            <span class="e1-badge" id="e1-area-4-bx">✅</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 섹션 5: 핵심 정리 + quote + 사자성어 + 온고지신 + 퀴즈 ── -->
+      <section id="sec-s5">
+        <h2 class="e1-h2">5. ✅ 오늘의 검색왕 핵심 정리</h2>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 윤호의 AI 교실 — 오늘 배운 것</span></div>
+          <div class="e1-chat-bd">
+            ✔ <span class="e1-hl">짧고 간단하게:</span> 핵심 단어만 사용<br>
+            ✔ <span class="e1-hl">띄어쓰기 정확히:</span> 단어마다 띄어쓰기<br>
+            ✔ <span class="e1-hl">지역 이름 추가:</span> 내 동네 이름을 넣기<br>
+            ✔ <span class="e1-hl">음성 검색 활용:</span> 말로도 할 수 있어요<br>
+            ✔ <span class="e1-hl">결과 잘 보기:</span> 블로그, 카페, 뉴스 탭 확인<br><br>
+            <span class="e1-red">👵 할머니:</span> "윤호야, 정말 고맙다! 이제 검색이 재미있어졌어!"<br>
+            <span class="e1-red">👴 할아버지:</span> "우리 손자가 정말 훌륭한 선생님이구나!"
+          </div>
+        </div>
+
+        <!-- 미디어 슬롯 5 -->
+        <div class="e1-slot" id="e1-area-5" onclick="e1SlotClick('area-5',event)">
+          <div class="e1-slot-disp" id="e1-area-5-d"></div>
+          <div class="e1-slot-ph" id="e1-area-5-ph">
+            <span class="e1-slot-ph-icon">✅</span>
+            <span class="e1-slot-ph-txt">정리 이미지 / 만화 / 영상 삽입</span>
+          </div>
+          <div class="e1-slot-ctrl">
+            <button class="e1-ctrl-btn e1-ctrl-rep" onclick="e1InsertChoice('area-5',event)">🔄 교체</button>
+            <button class="e1-ctrl-btn e1-ctrl-del" onclick="e1Del('area-5',event)">🗑️ 삭제</button>
+            <span class="e1-badge" id="e1-area-5-bx">✅</span>
+          </div>
+        </div>
+
+        <!-- ── 영어 명언 박스 ── -->
+        <div class="e1-quote">
+          <div class="e1-quote-en">"Knowledge is power."</div>
+          <div class="e1-quote-ko">(아는 것이 힘이다.)</div>
+        </div>
+
+        <!-- ── 사자성어 박스 (quote와 온고지신의 의미 사이) ── -->
+        <div class="e1-proverb">
+          <div class="e1-proverb-cn">溫故知新</div>
+          <div class="e1-proverb-ko">(온고지신)</div>
+          <div class="e1-proverb-def">옛것을 익혀 새것을 안다</div>
+          <div class="e1-proverb-desc">지난 일을 잘 살펴 새로운 것을 깨닫는다는 뜻입니다.</div>
+        </div>
+
+        <!-- ── 온고지신의 의미 ── -->
+        <h2 class="e1-h2">📖 온고지신(溫故知新)의 의미</h2>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 윤호의 AI 교실 — 오늘의 교훈</span></div>
+          <div class="e1-chat-bd">
+            <span class="e1-hl">온고지신(溫故知新)</span>은 옛것을 익혀 새것을 안다는 뜻입니다.<br><br>
+            <span class="e1-hl">할머니</span>와 <span class="e1-hl">할아버지</span>는 예전 방식으로 정보를 찾던 경험이 있으셨어요.<br>
+            오늘 <span class="e1-hl">윤호</span>에게 <span class="e1-hl">인터넷 검색</span>이라는 새로운 방법을 배우셨습니다.<br>
+            옛 경험을 바탕으로 새로운 기술을 배우는 것, 바로 <span class="e1-red">온고지신</span>입니다!
+          </div>
+        </div>
+
+        <!-- ── 오늘의 퀴즈 ── -->
+        <h2 class="e1-h2">💡 오늘의 퀴즈</h2>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 퀴즈 1 — 검색할 때 가장 좋은 방법은?</span></div>
+          <div class="e1-chat-bd">
+            ① 긴 문장으로 자세하게 검색한다<br>
+            ② 짧고 간단한 핵심 단어로 검색한다<br>
+            ③ 띄어쓰기 없이 붙여서 검색한다<br>
+            ④ 아무 단어나 검색한다
+          </div>
+        </div>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 퀴즈 2 — 병원을 찾을 때 넣으면 좋은 것은?</span></div>
+          <div class="e1-chat-bd">
+            ① 지역 이름<br>
+            ② 날씨<br>
+            ③ 음식 이름<br>
+            ④ 영화 제목
+          </div>
+        </div>
+
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 퀴즈 3 — 음성 검색을 할 때 주의할 점은?</span></div>
+          <div class="e1-chat-bd">
+            ① 빠르게 말한다<br>
+            ② 천천히 또박또박 말한다<br>
+            ③ 시끄러운 곳에서 한다<br>
+            ④ 긴 문장으로 말한다
+          </div>
+        </div>
+
+        <!-- 다음 편 예고 -->
+        <h2 class="e1-h2">📺 다음 편 예고</h2>
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>💬 Episode 04 예고 — AI가 그림도 그려요?</span></div>
+          <div class="e1-chat-bd">
+            다음 이야기에서는 <span class="e1-hl">윤호</span>가 <span class="e1-hl">할아버지</span>에게 <span class="e1-hl">AI 그림 그리기</span>를 보여드립니다!<br>
+            <span class="e1-hl">미드저니</span>, <span class="e1-hl">달리</span> 같은 AI가 어떻게 그림을 그리는지 함께 알아봐요!
+          </div>
+        </div>
+
+        <!-- 퀴즈 정답 -->
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>🎯 퀴즈 정답</span></div>
+          <div class="e1-chat-bd">
+            <strong>1.</strong> <span style="display:inline-block;transform:scaleX(-1);font-weight:bold;color:var(--e1-green);">②</span> &nbsp;&nbsp;
+            <strong>2.</strong> <span style="display:inline-block;transform:scaleX(-1);font-weight:bold;color:var(--e1-green);">①</span> &nbsp;&nbsp;
+            <strong>3.</strong> <span style="display:inline-block;transform:scaleX(-1);font-weight:bold;color:var(--e1-green);">②</span>
+          </div>
+        </div>
+
+        <!-- 한글 학습 도구 -->
+        <div class="e1-chat">
+          <div class="e1-chat-hd"><span>📚 한글 학습 도구</span></div>
+          <div class="e1-chat-bd">
+            <span class="e1-hl">한글이 궁금하신가요?</span><br><br>
+            📖 <a href="https://stdict.korean.go.kr/main/main.do" target="_blank" style="color:var(--e1-navy);font-weight:bold;">표준국어대사전</a><br>
+            🔍 <a href="https://nara-speller.co.kr/old_speller/" target="_blank" style="color:var(--e1-navy);font-weight:bold;">부산대 맞춤법 검사기</a><br><br>
+            정확한 한글 사용을 위한 도구입니다!
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 소셜 미디어 바 -->
+      <div class="e1-social-bar">
+        <div class="e1-social-title">📲 Follow Us</div>
+        <div class="e1-social-row">
+
+          <div class="e1-soc-wrap">
+            <a class="e1-soc-item" id="e1-soc-yt" href="#" target="_blank" rel="noopener">
+              <div class="e1-soc-logo"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#FF0000"/><path d="M21.5 7.5s-.2-1.4-.8-2c-.8-.8-1.7-.8-2-.9C16.5 4.4 12 4.4 12 4.4s-4.5 0-6.7.2c-.4 0-1.2.1-2 .9-.6.6-.8 2-.8 2S2.3 9 2.3 10.5v1.4c0 1.5.2 3 .2 3s.2 1.4.8 2c.8.8 1.8.8 2.2.9C7 18 12 18 12 18s4.5 0 6.7-.2c.4 0 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.5.2-3v-1.4c0-1.5-.2-3-.2-3zM10 14.6V9.4l5.3 2.6-5.3 2.6z" fill="#fff"/></svg></div>
+              <span class="e1-soc-lbl">YouTube</span>
+            </a>
+            <span class="e1-soc-set" onclick="e1SocOpenPopup(event,'yt','YouTube')" title="링크 설정">🔗</span>
+          </div>
+
+          <div class="e1-soc-wrap">
+            <a class="e1-soc-item" id="e1-soc-ig" href="#" target="_blank" rel="noopener">
+              <div class="e1-soc-logo"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ig-g" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="6" fill="url(#ig-g)"/><rect x="6.5" y="6.5" width="11" height="11" rx="3.5" stroke="#fff" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="1.5" fill="none"/><circle cx="17" cy="7" r="1" fill="#fff"/></svg></div>
+              <span class="e1-soc-lbl">Instagram</span>
+            </a>
+            <span class="e1-soc-set" onclick="e1SocOpenPopup(event,'ig','Instagram')" title="링크 설정">🔗</span>
+          </div>
+
+          <div class="e1-soc-wrap">
+            <a class="e1-soc-item" id="e1-soc-tt" href="#" target="_blank" rel="noopener">
+              <div class="e1-soc-logo"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#010101"/><path d="M17 5.5c-.7-.8-1.1-1.8-1.1-2.9h-2.3v12.2c0 1.3-1 2.3-2.3 2.3s-2.3-1-2.3-2.3 1-2.3 2.3-2.3c.2 0 .4 0 .6.1V10c-.2 0-.4 0-.6 0-2.5 0-4.6 2.1-4.6 4.6s2.1 4.6 4.6 4.6 4.6-2.1 4.6-4.6V9.6c.9.7 2 1.1 3.1 1.1V8.4c-.7 0-1.4-.3-2-.9z" fill="#fff"/></svg></div>
+              <span class="e1-soc-lbl">TikTok</span>
+            </a>
+            <span class="e1-soc-set" onclick="e1SocOpenPopup(event,'tt','TikTok')" title="링크 설정">🔗</span>
+          </div>
+
+          <div class="e1-soc-wrap">
+            <a class="e1-soc-item" id="e1-soc-x" href="#" target="_blank" rel="noopener">
+              <div class="e1-soc-logo"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#000"/><path d="M17.75 4h-2.6L12 8.48 8.85 4H3.5l5.93 8.04L3.5 20H6.1l3.42-4.95L13 20h5.5l-6.1-8.28L17.75 4zM14.6 18.5l-7.8-11h1.8l7.8 11H14.6z" fill="#fff"/></svg></div>
+              <span class="e1-soc-lbl">X</span>
+            </a>
+            <span class="e1-soc-set" onclick="e1SocOpenPopup(event,'x','X')" title="링크 설정">🔗</span>
+          </div>
+
+          <div class="e1-soc-wrap">
+            <a class="e1-soc-item" id="e1-soc-th" href="#" target="_blank" rel="noopener">
+              <div class="e1-soc-logo"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#101010"/><path d="M16.3 11.2c-.1-.1-.3-.1-.4-.2-.1-1.8-1.1-2.8-2.7-2.9h-.1c-1 0-1.8.4-2.3 1.2l1 .7c.3-.5.8-.8 1.3-.8h.1c.7 0 1.2.4 1.4 1.1-.4-.1-.8-.1-1.2-.1-1.6 0-2.7.8-2.7 2 0 .6.3 1.2.8 1.5.4.3 1 .4 1.6.4.8 0 1.5-.3 2-.8.4-.5.6-1.1.6-1.8 0 0 0-.1 0-.1.4.3.7.7.7 1.2 0 1.2-1.2 2.5-3.3 2.5-2 0-3.4-1.3-3.4-3.5 0-2.2 1.4-3.6 3.5-3.6.8 0 1.5.2 2.1.6l.9-.9C15 7.4 14 7.1 12.8 7.1c-2.7 0-4.7 1.9-4.7 4.8 0 2.8 1.9 4.7 4.7 4.7 2.6 0 4.4-1.7 4.4-4 0-1-.4-1.9-1-2.4h.1zM12.4 14c-.8 0-1.3-.4-1.3-.9s.5-.9 1.3-.9c.5 0 1 .1 1.4.2-.1 1-.7 1.6-1.4 1.6z" fill="#fff"/></svg></div>
+              <span class="e1-soc-lbl">Threads</span>
+            </a>
+            <span class="e1-soc-set" onclick="e1SocOpenPopup(event,'th','Threads')" title="링크 설정">🔗</span>
+          </div>
+
+          <div class="e1-soc-wrap">
+            <a class="e1-soc-item" id="e1-soc-fb" href="#" target="_blank" rel="noopener">
+              <div class="e1-soc-logo"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 8H13.5V6.8c0-.5.3-.8.8-.8H15.5V4H13.5C11.6 4 10.5 5.2 10.5 7V8H9V10.5H10.5V20H13.5V10.5H15.2L15.5 8Z" fill="#fff"/></svg></div>
+              <span class="e1-soc-lbl">Facebook</span>
+            </a>
+            <span class="e1-soc-set" onclick="e1SocOpenPopup(event,'fb','Facebook')" title="링크 설정">🔗</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SNS 링크 설정 팝업 -->
+      <div class="e1-soc-popup" id="e1SocPopup">
+        <div class="e1-soc-popup-title" id="e1SocPopupTitle">링크 설정</div>
+        <input id="e1SocPopupUrl" type="url" placeholder="https://...">
+        <div class="e1-soc-popup-btns">
+          <button class="e1-soc-popup-cancel" onclick="e1SocClosePopup()">취소</button>
+          <button class="e1-soc-popup-save" onclick="e1SocSaveLink()">저장</button>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- ──────── 사이드바 ──────── -->
+    <aside class="e1-sidebar">
+
+      <!-- 목차 -->
+      <div class="e1-sb">
+        <div class="e1-sb-t">📋 이 글의 목차</div>
+        <a class="e1-toc-a" href="#sec-s1" onclick="e1ScrollTo('sec-s1');return false;"><span class="e1-toc-num">1</span>&nbsp;할머니의 고민</a>
+        <a class="e1-toc-a" href="#sec-s2" onclick="e1ScrollTo('sec-s2');return false;"><span class="e1-toc-num">2</span>&nbsp;검색의 3가지 비밀</a>
+        <a class="e1-toc-a" href="#sec-s3" onclick="e1ScrollTo('sec-s3');return false;"><span class="e1-toc-num">3</span>&nbsp;윤호와 함께 실습하기</a>
+        <a class="e1-toc-a" href="#sec-s4" onclick="e1ScrollTo('sec-s4');return false;"><span class="e1-toc-num">4</span>&nbsp;음성 검색도 편해요</a>
+        <a class="e1-toc-a" href="#sec-s5" onclick="e1ScrollTo('sec-s5');return false;"><span class="e1-toc-num">5</span>&nbsp;오늘의 핵심 정리</a>
+      </div>
+
+      <!-- AI 활용 추천 기기 -->
+      <div style="background:#fff;border:1.5px solid #ddd5c0;border-radius:12px;overflow:hidden;margin-bottom:16px;">
+        <div style="background:#1a2a4a;color:#fff;font-size:14px;font-weight:700;padding:11px 14px;">🛒 AI 활용 추천 기기</div>
+        <a href="https://www.coupang.com/vp/products/9294069897" style="display:block;font-size:14px;color:#1a2a4a;font-weight:600;text-decoration:none;padding:10px 14px;border-bottom:1px solid #f0ebe0;">💻 LG 그램 AI 노트북 →</a>
+        <a href="https://www.coupang.com/np/search?q=%EA%B0%A4%EB%9F%AD%EC%8B%9C%ED%83%AD+S10" style="display:block;font-size:14px;color:#1a2a4a;font-weight:600;text-decoration:none;padding:10px 14px;border-bottom:1px solid #f0ebe0;">📱 삼성 갤럭시탭 S10 Ultra →</a>
+        <a href="https://www.coupang.com/np/search?q=%EA%B0%A4%EB%9F%AD%EC%8B%9C+%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8F%B0" style="display:block;font-size:14px;color:#1a2a4a;font-weight:600;text-decoration:none;padding:10px 14px;">📲 삼성 갤럭시 S25 →</a>
+      </div>
+
+      <!-- 시니어 인기 질문 -->
+      <div style="border:1px solid #ddd5c0;padding:14px;margin-bottom:16px;border-radius:8px;background:#fff;">
+        <div style="font-size:15px;font-weight:bold;color:#1a2a4a;border-bottom:2px solid #1a2a4a;padding-bottom:6px;margin-bottom:10px;">🔥 시니어 인기 질문</div>
+        <a href="https://www.google.com/search?q=%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EA%B8%B0%EC%B4%88" style="display:block;font-size:14px;color:#1a2a4a;text-decoration:none;padding:6px 8px;border-radius:6px;margin-bottom:2px;">#인공지능기초</a>
+        <a href="https://chatgpt.com" style="display:block;font-size:14px;color:#1a2a4a;text-decoration:none;padding:6px 8px;border-radius:6px;margin-bottom:2px;">#ChatGPT무료사용</a>
+        <a href="https://www.google.com/search?q=AI%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8" style="display:block;font-size:14px;color:#1a2a4a;text-decoration:none;padding:6px 8px;border-radius:6px;margin-bottom:2px;">#AI개인정보보호</a>
+        <a href="https://www.google.com/search?q=%EC%8B%9C%EB%8B%88%EC%96%B4AI%EA%B5%90%EC%8B%A4" style="display:block;font-size:14px;color:#1a2a4a;text-decoration:none;padding:6px 8px;border-radius:6px;margin-bottom:2px;">#시니어AI교실</a>
+      </div>
+
+      <!-- 추천 AI 서비스 -->
+      <div style="border:1px solid #ddd5c0;padding:14px;margin-bottom:16px;border-radius:8px;background:#fff;">
+        <div style="font-size:15px;font-weight:bold;color:#1a2a4a;border-bottom:2px solid #1a2a4a;padding-bottom:6px;margin-bottom:10px;">🌐 추천 AI 서비스</div>
+
+        <a href="https://gemini.google.com" style="display:flex;align-items:center;gap:9px;font-size:14px;color:#1a2a4a;font-weight:600;text-decoration:none;padding:7px 6px;border-radius:6px;margin-bottom:4px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+            <defs><linearGradient id="gem1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4285F4"/><stop offset="100%" stop-color="#9C27B0"/></linearGradient></defs>
+            <path d="M12 2.5C12 2.5 13.8 8.5 19.5 12C13.8 15.5 12 21.5 12 21.5C12 21.5 10.2 15.5 4.5 12C10.2 8.5 12 2.5 12 2.5Z" fill="url(#gem1)"/>
+          </svg>
+          Google Gemini
+        </a>
+
+        <a href="https://chatgpt.com" style="display:flex;align-items:center;gap:9px;font-size:14px;color:#1a2a4a;font-weight:600;text-decoration:none;padding:7px 6px;border-radius:6px;margin-bottom:4px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+            <rect width="24" height="24" rx="5" fill="#10a37f"/>
+            <path d="M12 5.5a3 3 0 0 0-2.9 2.2 2.5 2.5 0 0 0 .4 5 2.5 2.5 0 0 0 2.1-1.2 3 3 0 0 0 2.8-2.1 2.5 2.5 0 0 0-.5-4.9zm0 1a1.5 1.5 0 0 1 1.4 1 2 2 0 0 1-1.4.5 2 2 0 0 1-1.4-.5 1.5 1.5 0 0 1 1.4-1zm-2 3.5a1.5 1.5 0 0 1-.5-1.1 3 3 0 0 0 1.2.7v1.5a1.5 1.5 0 0 1-.7-1.1zm2.7 1.1v-1.5a3 3 0 0 0 1.2-.7 1.5 1.5 0 0 1-.4 2.3zm-1.2.9v-1a2 2 0 0 0 1 0v1a1.5 1.5 0 0 1-1 0zm-1.7 1.3a1.5 1.5 0 0 1 .5-2.1l.5.9a.5.5 0 0 0-.2.7zm3.9-.8-.5.9a1.5 1.5 0 0 1 .5-2.1z" fill="white"/>
+          </svg>
+          OpenAI ChatGPT
+        </a>
+
+        <a href="https://grok.com" style="display:flex;align-items:center;gap:9px;font-size:14px;color:#1a2a4a;font-weight:600;text-decoration:none;padding:7px 6px;border-radius:6px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+            <rect width="24" height="24" rx="5" fill="#000000"/>
+            <path d="M5 5h3l4 5.5L8 16H5l4-5.5L5 5zm14 0h-3l-6.5 8 2 2.5 2-2.5L19 19h-3l-4-5 4-5h3V5z" fill="#ffffff"/>
+          </svg>
+          xAI Grok
+        </a>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<!-- 미디어 선택 다이얼로그 -->
+<div id="e1ChoiceBox" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.45);align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:14px;padding:24px 28px;min-width:260px;box-shadow:0 8px 32px rgba(0,0,0,.2);">
+    <div style="font-size:15px;font-weight:700;color:#1a2a4a;margin-bottom:16px;">무엇을 삽입할까요?</div>
+    <div style="display:flex;gap:10px;">
+      <button id="e1ChoiceImg" style="flex:1;padding:11px;background:#2c7be5;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">🖼️ 이미지</button>
+      <button id="e1ChoiceVid" style="flex:1;padding:11px;background:#1a2a4a;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">🎬 영상</button>
+    </div>
+    <button onclick="e1CloseChoice()" style="width:100%;margin-top:10px;padding:8px;background:#f0ebe0;color:#555;border:1px solid #ddd5c0;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">취소</button>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ── IndexedDB ── */
+var DB='aiEpTPLDB_v1',VER=1,ST='media',_db=null;
+function idb(cb){if(_db){cb(_db);return;}var r=indexedDB.open(DB,VER);r.onupgradeneeded=function(e){e.target.result.createObjectStore(ST);};r.onsuccess=function(e){_db=e.target.result;cb(_db);};}
+function dbSet(k,v,cb){idb(function(d){var tx=d.transaction(ST,'readwrite');tx.objectStore(ST).put(v,k);tx.oncomplete=function(){if(cb)cb();};});}
+function dbGet(k,cb){idb(function(d){var r=d.transaction(ST,'readonly').objectStore(ST).get(k);r.onsuccess=function(){cb(r.result||null);};r.onerror=function(){cb(null);};});}
+function dbDel(k,cb){idb(function(d){var tx=d.transaction(ST,'readwrite');tx.objectStore(ST).delete(k);tx.oncomplete=function(){if(cb)cb();};});}
+
+/* ── 렌더링 ── */
+function render(key,data){
+  if(!data) return;
+  var d=document.getElementById('e1-'+key+'-d'),p=document.getElementById('e1-'+key+'-ph'),slot=document.getElementById('e1-'+key);
+  if(!d)return; d.innerHTML='';
+  if(data.type==='image'){var i=document.createElement('img');i.src=data.src;i.style.cssText='width:100%;display:block;border-radius:8px;';d.appendChild(i);}
+  else{var v=document.createElement('video');v.src=data.src;v.controls=true;v.style.cssText='width:100%;display:block;border-radius:8px;';d.appendChild(v);}
+  d.classList.add('on'); if(p)p.style.display='none'; if(slot)slot.classList.add('has-media');
+}
+
+/* ── 복원 ── */
+function restore(){
+  ['area-1','area-2','area-3','area-4','area-5'].forEach(function(k){dbGet(k,function(d){if(d)render(k,d);});});
+  [['e1-ad-top','adcode_top'],['e1-ad-mid1','adcode_mid1'],['e1-ad-mid2','adcode_mid2']].forEach(function(p){
+    dbGet(p[1],function(d){
+      if(!d||!d.code)return;
+      var ta=document.querySelector('#'+p[0]+'-code textarea'); if(ta)ta.value=d.code;
+      e1AdInject(document.getElementById(p[0]+'-preview'),d.code);
+      var inner=document.querySelector('#'+p[0]+' .e1-ad-inner'); if(inner)inner.style.display='none';
+    });
+  });
+  /* 소셜 링크 복원 */
+  ['yt','ig','tt','x','th','fb'].forEach(function(id){
+    dbGet('soc_url_'+id,function(d){if(d&&d.url){var a=document.getElementById('e1-soc-'+id);if(a)a.href=d.url;}});
+  });
+}
+
+/* ── 배지 ── */
+function badge(key){var b=document.getElementById('e1-'+key+'-bx');if(!b)return;b.style.display='inline';setTimeout(function(){b.style.display='none';},2500);}
+
+/* ── 파일 삽입 공통 ── */
+function insertFile(key,type){
+  var ac=type==='image'?'image/*':'video/*';
+  var inp=document.createElement('input');inp.type='file';inp.accept=ac;
+  inp.onchange=function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(re){var data={type:type,src:re.target.result,name:f.name};dbSet(key,data,function(){render(key,data);badge(key);});};r.readAsDataURL(f);};inp.click();
+}
+
+/* ── 슬롯 클릭 ── */
+var _choiceKey=null;
+window.e1SlotClick=function(key,ev){
+  var slot=document.getElementById('e1-'+key);
+  if(slot&&slot.classList.contains('has-media')) return;
+  if(ev)ev.stopPropagation();
+  _choiceKey=key;
+  var box=document.getElementById('e1ChoiceBox');
+  box.style.display='flex';
+  document.getElementById('e1ChoiceImg').onclick=function(){e1CloseChoice();insertFile(key,'image');};
+  document.getElementById('e1ChoiceVid').onclick=function(){e1CloseChoice();insertFile(key,'video');};
+};
+window.e1CloseChoice=function(){document.getElementById('e1ChoiceBox').style.display='none';_choiceKey=null;};
+
+/* ── 교체 ── */
+window.e1InsertChoice=function(key,ev){
+  if(ev)ev.stopPropagation();
+  var box=document.getElementById('e1ChoiceBox');
+  box.style.display='flex';
+  document.getElementById('e1ChoiceImg').onclick=function(){e1CloseChoice();insertFile(key,'image');};
+  document.getElementById('e1ChoiceVid').onclick=function(){e1CloseChoice();insertFile(key,'video');};
+};
+
+/* ── 삭제 ── */
+window.e1Del=function(key,ev){
+  if(ev)ev.stopPropagation();
+  dbDel(key,function(){
+    var d=document.getElementById('e1-'+key+'-d'),p=document.getElementById('e1-'+key+'-ph'),slot=document.getElementById('e1-'+key);
+    if(d){d.innerHTML='';d.classList.remove('on');}if(p)p.style.display='block';if(slot)slot.classList.remove('has-media');
+  });
+};
+
+/* ── 목차 스크롤 ── */
+window.e1ScrollTo=function(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});};
+
+/* ── SNS 링크 설정 팝업 ── */
+var _socId=null;
+window.e1SocOpenPopup=function(ev,id,name){
+  ev.preventDefault(); ev.stopPropagation();
+  _socId=id;
+  var popup=document.getElementById('e1SocPopup');
+  var a=document.getElementById('e1-soc-'+id);
+  var cur=a&&a.href&&a.href!==location.href?a.href:'';
+  document.getElementById('e1SocPopupTitle').textContent=name+' 링크 설정';
+  document.getElementById('e1SocPopupUrl').value=cur==='#'?'':cur;
+  popup.style.top=(ev.clientY+window.scrollY+10)+'px';
+  popup.style.left=Math.min(ev.clientX+window.scrollX,window.innerWidth-300)+'px';
+  popup.classList.add('open');
+  setTimeout(function(){document.getElementById('e1SocPopupUrl').focus();},60);
+};
+window.e1SocClosePopup=function(){
+  document.getElementById('e1SocPopup').classList.remove('open');
+  _socId=null;
+};
+window.e1SocSaveLink=function(){
+  if(!_socId)return;
+  var url=document.getElementById('e1SocPopupUrl').value.trim();
+  if(!url){e1SocClosePopup();return;}
+  var a=document.getElementById('e1-soc-'+_socId);
+  if(a)a.href=url;
+  var req=indexedDB.open('aiEpTPLDB_v1',1);
+  req.onsuccess=function(e){
+    var tx=e.target.result.transaction('media','readwrite');
+    tx.objectStore('media').put({url:url},'soc_url_'+_socId);
+  };
+  e1SocClosePopup();
+};
+document.addEventListener('click',function(e){
+  var p=document.getElementById('e1SocPopup');
+  if(p&&p.classList.contains('open')&&!p.contains(e.target))e1SocClosePopup();
+});
+document.getElementById('e1SocPopupUrl').addEventListener('keydown',function(e){
+  if(e.key==='Enter')e1SocSaveLink();
+  if(e.key==='Escape')e1SocClosePopup();
+});
+
+document.getElementById('e1ChoiceBox').addEventListener('click',function(e){if(e.target===this)e1CloseChoice();});
+
+restore();
+})();
+
+/* ════ 애드센스 ════ */
+function e1AdInject(preview,code){
+  if(!preview||!code)return; preview.innerHTML=code;
+  preview.querySelectorAll('script').forEach(function(s){var ns=document.createElement('script');ns.textContent=s.textContent;if(s.src)ns.src=s.src;if(s.async)ns.async=true;s.replaceWith(ns);});
+}
+function e1AdToggle(ev,id){
+  if(ev){ev.preventDefault();ev.stopPropagation();}
+  var code=document.getElementById(id+'-code');
+  if(!code)return;
+  var isVisible=(window.getComputedStyle(code).display!=='none');
+  code.style.display=isVisible?'none':'block';
+  var inner=document.querySelector('#'+id+' .e1-ad-inner');
+  var preview=document.getElementById(id+'-preview');
+  if(!preview||!preview.innerHTML.trim()){
+    if(inner)inner.style.display=isVisible?'':'none';
+  }
+  if(!isVisible){setTimeout(function(){var ta=document.querySelector('#'+id+'-code textarea');if(ta)ta.focus();},60);}
+}
+function e1AdApply(ev,id,dbKey){
+  if(ev){ev.preventDefault();ev.stopPropagation();}
+  var ta=document.querySelector('#'+id+'-code textarea');
+  var preview=document.getElementById(id+'-preview');
+  if(!ta||!ta.value.trim()){e1AdToggle(null,id);return;}
+  var code=ta.value.trim();
+  e1AdInject(preview,code);
+  document.getElementById(id+'-code').style.display='none';
+  var inner=document.querySelector('#'+id+' .e1-ad-inner');
+  if(inner)inner.style.display='none';
+  var req=indexedDB.open('aiEpTPLDB_v1',1);
+  req.onsuccess=function(e){
+    var tx=e.target.result.transaction('media','readwrite');
+    tx.objectStore('media').put({code:code},dbKey);
+  };
+}
+</script>

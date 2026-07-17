@@ -1,0 +1,228 @@
+============================================================
+ISSUELENS EP.01 — YouTube Long Form Video Script
+"Is Temu ACTUALLY Spying on You? The Truth Behind Cheap"
+Target runtime: ~10 minutes | Pace: Fast, tense, urgent
+Approx. word count: ~1,750 words
+Voice direction: Male or female American VO, news-anchor urgency.
+Speak clearly but with intent — like a 60 Minutes investigative piece.
+============================================================
+
+[SECTION 1 — COLD OPEN / HOOK]
+[Voice direction: Fast, punchy. No music yet or low tense underscore.]
+
+Every day, over 50 million Americans open an app — and hand over something far more valuable than money.
+
+You've seen the ads. "Shop like a billionaire." Dollar gadgets. Two-dollar sneakers. Free stuff just for downloading.
+
+And you thought — what's the catch?
+
+Well. There is one.
+
+And it's bigger than you think.
+
+Today we're going deep on Temu, AliExpress, Shein, and the entire ecosystem of Chinese ultra-cheap shopping apps — what they're actually collecting, where your data actually goes, and why the FBI, the FTC, and twenty-one state attorneys general are sounding the alarm right now.
+
+I'm going to lay out the facts. No conspiracy theories. No hype. Just documented evidence — from court filings, government reports, and cybersecurity audits.
+
+Stay with me. Because by the end of this video, you will make a very different decision the next time you see one of those ads.
+
+[SECTION 2 — THE SETUP: HOW TEMU GOT INTO 50 MILLION PHONES]
+[Voice direction: Slightly slower, building context. Still urgent undertone.]
+
+Let's start at the beginning.
+
+Temu launched in the United States in September 2022. Within weeks, it became the most downloaded app in the country. By the 2024 Super Bowl, it dropped over twenty-one million dollars on ads during the game alone — offering fifteen million dollars in giveaways just to get you to tap that download button.
+
+And it worked.
+
+Temu now has over 240 million active users globally. In the U.S. alone, downloads are in the tens of millions. It's on more American phones right now than many major banks.
+
+So how does a company sell you a five-dollar blender and still make money?
+
+The simple answer that most people accept is: cheap Chinese manufacturing, short supply chains, no retail middlemen.
+
+But here's what the analysts, the cybersecurity firms, and the lawmakers are telling us: that explanation is incomplete.
+
+Because in 2022, over eighty percent of Temu's revenues didn't come from selling you products.
+
+They came from selling advertising services — to their network of third-party retailers.
+
+And to sell advertising, you need data. Lots and lots of data.
+
+Your data.
+
+[SECTION 3 — WHAT TEMU ACTUALLY COLLECTS]
+[Voice direction: Methodical, deliberate. Let each item land.]
+
+Now let's talk specifics — because this is where most articles stop at vague warnings and move on. We're not doing that.
+
+Here is what Temu's own privacy policy admits they collect:
+
+Your name, email, phone number, and shipping address. Standard. Every retailer does this.
+
+Your payment details, including card numbers and billing history. Also standard.
+
+Your purchase history and browsing behavior inside the app. Starting to feel familiar?
+
+Your location — precise, real-time, down to two hundred meters according to independent security audits.
+
+Your device fingerprint — screen resolution, battery level, installed fonts, even how fast your processor runs.
+
+Your behavioral biometrics — how fast you scroll, how hard you tap, how long you stare at a product before clicking away.
+
+Your contact list, if you use their referral program.
+
+And here's the one that stops cybersecurity experts cold: Temu's app uses a technique called dynamic code loading — meaning the app can update its own functionality on your device without you downloading an update. The National Testing Institute for Cybersecurity in Switzerland flagged this explicitly. The app can change what it does — silently — after you've already installed it.
+
+Grizzly Research, a prominent market intelligence firm, called Temu, and I'm quoting their report directly here, "the most dangerous app in wide circulation."
+
+Now — Temu denies all of this. They say they only collect what's necessary. They say your data is secure. They say they've never shared anything with the Chinese government.
+
+And maybe that's true today.
+
+But here's the legal problem that no denial can fix.
+
+[SECTION 4 — THE LAW THAT CHANGES EVERYTHING]
+[Voice direction: Slow down here. Let this breathe. This is the core argument.]
+
+In 2017, China passed the National Intelligence Law.
+
+Article Seven reads as follows: — "All organizations and citizens shall support, assist, and cooperate with national intelligence work in accordance with the law."
+
+There is no opt-out. There is no judicial review. There is no mechanism for a Chinese company to refuse a government request for data.
+
+Temu's parent company is PDD Holdings — a Chinese entity with subsidiaries primarily registered inside China. That means PDD Holdings is legally obligated to comply with Chinese intelligence requests. Period.
+
+This is not speculation. This is not anti-China rhetoric. This is the plain text of Chinese law — confirmed by the U.S.-China Economic and Security Review Commission, the Congressional Select Committee on the Chinese Communist Party, and cybersecurity attorneys at major firms across the country.
+
+Think about what that means for a moment.
+
+Your name. Your address. Your financial behavior. Your location history. Your device ID. Your shopping patterns — which, by the way, can be used to infer your income bracket, your health conditions, and your household composition with startling accuracy, according to a 2026 study published in Privacy and Security Review.
+
+All of that — sitting on servers that a foreign government can access. Legally. Without telling you.
+
+[SECTION 5 — WHAT THE U.S. GOVERNMENT IS DOING ABOUT IT]
+[Voice direction: Pick up pace again. Punchy. Facts rapid-fire.]
+
+So what is the U.S. government actually doing about this?
+
+More than most people realize — and less than most people need.
+
+In February 2026, the Texas Attorney General filed a lawsuit against Temu. He called the app, and again I'm quoting, "spyware disguised as a shopping app." The suit seeks over a million dollars in relief and an injunction against the company. Texas joins AGs from at least four other states filing similar actions.
+
+Before that — in January 2026 — the Federal Trade Commission issued its third formal warning letter to Temu over what it called "inadequate transparency in cross-border data transfers." Third warning. They've been watching this company since its launch.
+
+And in early 2026, the FBI issued a public advisory warning Americans that many of the most downloaded apps in the country are built and maintained by companies based in China — and that any app with servers in China is subject to laws enabling Chinese government access to user data.
+
+The FBI didn't name Temu by name. But the message was unmistakable.
+
+And here's the kicker. The U.S. still has no comprehensive federal data privacy law. That means outside of whatever state you live in — and only twenty states have passed privacy legislation — there's no law stopping Temu from doing exactly what it's doing.
+
+This is why twenty-one attorneys general wrote a letter demanding a full federal investigation. And Congress is still debating what to do.
+
+[SECTION 6 — THE DOUBLE STANDARD NO ONE TALKS ABOUT]
+[Voice direction: Slightly sardonic. Let the irony land.]
+
+Here's the part of this story that doesn't get enough attention.
+
+Google is banned in China. YouTube is banned. Instagram is banned. Facebook is banned. The New York Times — banned. The Washington Post — banned.
+
+China has erected what experts call the Great Firewall — a comprehensive system that blocks Western tech companies from accessing Chinese users and collecting Chinese data.
+
+Meanwhile — Temu, AliExpress, and TikTok operate completely freely inside the United States, collecting data from hundreds of millions of American users, every single day.
+
+That asymmetry — that profound, structural imbalance — is at the heart of what makes this a national security issue and not just a consumer privacy one.
+
+You are not just a shopper. You are a data point. And right now, the rules of engagement are wildly unequal.
+
+[SECTION 7 — THE PINDUODUO CONNECTION]
+[Voice direction: Lower register, investigative tone.]
+
+One more piece of this puzzle you need to know about.
+
+Temu's parent company — PDD Holdings — also owns Pinduoduo, China's second-largest e-commerce platform.
+
+In early 2023, multiple independent cybersecurity teams — from Asia, Europe, and the United States — confirmed that the Pinduoduo app contained aggressive, sophisticated malware. It exploited vulnerabilities in Android operating systems. It operated silently. It harvested data it had no business collecting.
+
+Google removed the Pinduoduo app from the Play Store.
+
+CNN reported that after PDD Holdings restructured following the Pinduoduo scandal — some of the developers who had worked on that app were moved to Temu's development team.
+
+Temu says they are completely separate. Temu says their app has never contained malware.
+
+But the lineage is there. The parent company is the same. The code architecture — overlapping. And the incentives — identical.
+
+You deserve to know that.
+
+[SECTION 8 — WHAT YOU CAN DO RIGHT NOW]
+[Voice direction: Warm up slightly. Direct address. Empowering.]
+
+Okay. So where does that leave you — a real person with these apps on your phone?
+
+Here's what I'd recommend, and what cybersecurity professionals across the board are recommending right now.
+
+Step one: delete the apps. Not just uninstall — go into your settings, revoke all permissions first, then delete. Temu, AliExpress, Shein — all of them. If you need cheap stuff, use their websites in a browser with a VPN instead.
+
+Step two: submit a data deletion request. Deleting the app does not delete your data from their servers. Every one of these platforms is required to offer a data deletion request under applicable state law. Use it. Go to their privacy settings page, find the data deletion or account deletion option, and submit the request in writing.
+
+Step three: lock down your permissions on every app you keep. Go to Settings — Apps — and check each app's permissions. Microphone, camera, contacts, location — revoke anything you didn't consciously grant.
+
+Step four — and this is the one most people skip — contact your Congressional representatives. Tell them you want a federal data privacy law. Tell them you've heard about Temu. Tell them you want action. The U.S. is one of the only developed democracies without comprehensive national privacy legislation. That needs to change.
+
+And step five: share this video. Not because I want the views — but because the people most vulnerable to these risks are often the least tech-savvy. Your parents, your grandparents, your neighbors who downloaded Temu because they saw a Super Bowl ad. They need to know this.
+
+[SECTION 9 — CLOSING]
+[Voice direction: Slower. Grave, but not alarmist. Anchoring tone.]
+
+Look — Temu hasn't been proven to be a government spy operation. Their lawyers would tell you there's no smoking gun. And they're not entirely wrong.
+
+But here is what we know for certain.
+
+Temu collects far more data than any shopping app needs. Their parent company is subject to Chinese law that compels cooperation with Chinese intelligence. The FBI has warned Americans about exactly this category of app. Twenty-one state attorneys general have demanded a federal investigation. A sitting Texas AG filed a lawsuit calling it spyware.
+
+And you — every time you bought a dollar pair of socks — were part of this system.
+
+You have the right to know that. And you have the right to make a different choice.
+
+Data is the oil of the 21st century. Countries that protect their citizens' data protect their futures. Countries that don't — are handing that future away, one bargain at a time.
+
+This has been IssueLens, Episode One: Data Sovereignty.
+
+If this mattered to you — like, subscribe, and share it with one person who uses these apps.
+
+Because the most powerful thing any of us can do right now — is simply wake up.
+
+I'll see you in the next one.
+
+[END CARD — 20 seconds]
+[Voice direction: Relaxed, direct.]
+
+If you want to read our full written analysis — the sources, the court filings, the government reports — the link is in the description. Everything in this video is documented. Check it yourself. That's the whole point.
+
+And if you have questions, leave them in the comments. We read all of them.
+
+This is IssueLens. See you next time.
+
+[END]
+
+============================================================
+PRODUCTION NOTES FOR VREW:
+- Total word count: ~1,750 words
+- Estimated runtime at fast/tense pace (~175 wpm): 10:00–10:30
+- Suggested BGM: Low tense underscore (investigative/documentary style)
+  · Cold open: Tense, low pulse
+  · Sections 2–5: Building intensity
+  · Section 6–7: Slightly ominous
+  · Section 8: Warmer, resolving
+  · Section 9: Slow, grave, fading out
+- B-roll suggestions per section:
+  · Section 1: Temu ads, app download animations
+  · Section 2: Super Bowl commercial clip (no copyright — use description)
+  · Section 3: Screen recording of app permissions
+  · Section 4: Text overlay of Article 7 law
+  · Section 5: News headlines about Texas lawsuit, FTC
+  · Section 6: Side-by-side map of China's Great Firewall
+  · Section 7: Pinduoduo news coverage
+  · Section 8: Screen walkthrough of deleting app + submitting deletion request
+  · Section 9: Clock, data visualization, globe
+============================================================

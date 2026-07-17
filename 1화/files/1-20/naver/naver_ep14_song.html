@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시니어 AI 공부 시리즈 - Episode 14 - Template V13</title>
+    <!-- 
+    ★★★ 철칙: 콘텐츠 작성 후 반드시 '부산대 맞춤법/문법 검사기'(https://nara-speller.co.kr/old_speller/)에서 검사 필수! ★★★
+    ★★★ 이것은 100% 필수 사항입니다! 절대 빠뜨리지 마세요! ★★★
+    -->
+    <style>
+        /* [PERMANENT CRITERIA - V13 최종 규격] */
+        body { font-family: 'Noto Sans KR', sans-serif !important; line-height: 1.6 !important; color: #000 !important; background: #FFF9E6 !important; margin: 0 !important; padding: 0 !important; }
+        .container { max-width: 100%; padding: 40px; background: #ffffff; margin: 0 auto; }
+        .title-main { font-size: 38pt; font-weight: 900; text-align: center; margin-bottom: 50px; line-height: 1.5; color: #1A237E; }
+        .title-sub { font-size: 34pt; font-weight: 700; color: #2E7D32; margin: 40px 0 0 0; }
+        .title-minor { font-size: 30pt; font-weight: 700; color: #D32F2F; margin: 40px 0 0 0; }
+        .content-body { font-size: 19pt; margin-bottom: 11pt; text-align: justify; word-break: keep-all; }
+        .space-11pt { height: 11pt; }
+        /* 섹션 박스 스타일 */
+        .ai-term-box, .song-box, .quiz-box, .grammar-box { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border: 4px solid #66BB6A; padding: 30px; border-radius: 20px; margin: 30px 0; }
+        .spell-checker-box { background: linear-gradient(135deg, #FFECB3 0%, #FFE082 100%); border: 4px solid #F57C00; padding: 30px; border-radius: 20px; margin: 30px 0; }
+        .copyright { text-align: center; font-size: 16pt; color: #666; margin-top: 60px; padding-top: 30px; border-top: 2px solid #E0E0E0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-main">
+            &lt;시니어 AI 공부 시리즈&gt;<br>
+            Episode 14<br>
+            제목 몰라도 노래 찾기 (허밍 검색 배우기)
+        </div>
+
+        <div class="title-sub">🌸 오늘은 뭘 공부할까요?</div>
+        <div class="space-11pt"></div>
+        <div class="content-body">
+            안녕하세요!<br>
+            &lt;시니어 AI 공부 시리즈&gt;의 든든한 가이드 <span style="color:blue; font-weight:bold;">윤호</span>입니다.<br>
+            "이 노래 아는데 제목이 생각 안 나네…" 이런 경험 있으셨죠?<br>
+            오늘은 <b>콧노래만으로 노래를 찾는 방법</b>을 배울 거예요!
+        </div>
+
+        <div class="title-sub">🌸 오늘의 사자성어</div>
+        <div class="space-11pt"></div>
+        <div style="background: #FCE4EC; border: 4px solid #E91E63; padding: 30px; border-radius: 20px;">
+            <div class="content-body" style="font-size: 30pt;">
+                <b>溫故知新<br>(온고지신)</b>
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body" style="color: #8B4513; font-weight: bold;">
+                옛것을 익히고 그것을 미루어서 새것을 앎.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                옛 노래를 기억 속에서 다시 꺼내 최신 AI 기술로 찾는 모습과 같습니다.
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 오늘의 AI 용어</div>
+        <div class="space-11pt"></div>
+        <div class="ai-term-box">
+            <div class="content-body" style="font-size: 30pt; text-align: center;"><b>음성 인식 (Speech Recognition)</b></div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                뜻: 사람의 음성, 즉 말을 컴퓨터가 이해하는 기술<br>
+                쉬운 설명: 내가 말하면 기계가 알아듣는 기능
+            </div>
+        </div>
+        <div class="ai-term-box">
+            <div class="content-body" style="font-size: 30pt; text-align: center;"><b>허밍 검색 (Hum to Search)</b></div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                뜻: 멜로디로 노래를 찾는 기능<br>
+                쉬운 설명: 가사 몰라도 "음~음~" 하면 찾을 수 있음
+            </div>
+        </div>
+        <div class="ai-term-box">
+            <div class="content-body" style="font-size: 30pt; text-align: center;"><b>알고리즘 (Algorithm)</b></div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                뜻: 문제를 해결하는 계산 방법<br>
+                쉬운 설명: 기계가 정답을 찾는 계산 규칙
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 노래 제목 모를 때 해결법</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border: 4px solid #FF9800; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body">
+                <b>문제 상황:</b> 노래는 아는데 제목이 기억 안 날 때
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>해결 방법:</b><br>
+                1. 유튜브 앱 실행 - 스마트폰의 YouTube 앱 (빨간 재생 버튼 아이콘)<br>
+                2. 검색창 마이크 버튼 - YouTube 앱 상단 검색창 (오른쪽의 마이크 모양 아이콘) 누르기<br>
+                3. 콧노래 - "음~음~" 또는 "라라라~" 식으로 멜로디만 부르기
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁:</b> 조용한 곳에서 하면 더 정확합니다
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 시니어 꿀팁!</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); border: 4px solid #9C27B0; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body">
+                <b>💡 꿀팁 1:</b> 노래 일부 가사 기억나면 - 스마트폰 마이크에 대고 (보통 스마트폰 하단에 위치) 말로 검색
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁 2:</b> 이어폰 끼면 인식률 상승
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁 3:</b> 반복 시도하면 더 정확
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 한글 맞춤법 / 문법 코너</div>
+        <div class="space-11pt"></div>
+        <div class="grammar-box" style="background: #E3F2FD; border-color: #2196F3;">
+            <div class="content-body">
+                <b>1. "어떻게"</b><br>
+                <span style="color:red;">X 틀린 것: 어떡해 찾나요?</span><br>
+                <span style="color:blue;">O 맞는 것: 어떻게 찾나요?</span><br>
+                해설: '어떻게'는 방법을 물을 때, '어떡해'는 '어떻게 해'의 줄임말입니다.<br>
+                예문: "이 문제를 어떻게 풀까요?" / "노래를 어떻게 찾을 수 있나요?"
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>2. "됐어요"</b><br>
+                <span style="color:red;">X 틀린 것: 됬어요</span><br>
+                <span style="color:blue;">O 맞는 것: 됐어요</span><br>
+                해설: '되다'의 과거형 '됐다'에 '어요'가 붙은 형태입니다.<br>
+                예문: "이제 준비 다 됐어요." / "검색 결과가 나왔어요, 됐어요."
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>3. "안 돼요"</b><br>
+                <span style="color:red;">X 틀린 것: 안되요</span><br>
+                <span style="color:blue;">O 맞는 것: 안 돼요</span><br>
+                해설: '안'은 '아니'의 준말로 뒤에 따라 오는 동사나 형용사를 부정하는 '부사'로 띄어 쓴다.<br>
+                예문: "그건 안 돼요." / "아직은 안 돼요, 조금만 기다려 주세요."
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 윤호의 깜짝 퀴즈</div>
+        <div class="space-11pt"></div>
+        <div class="quiz-box">
+            <div class="content-body">
+                <b>Q1. 콧노래로 찾는 기능 이름?</b> (ㅎㅁㄱㅅ)<br>
+                <div class="space-11pt"></div>
+                <b>Q2. 말소리를 이해하는 기술?</b> (ㅇㅅㅇㅅ)<br>
+                <div class="space-11pt"></div>
+                <b>Q3. 문제 해결 계산 규칙?</b> (ㅇㄱㄹㅈ)
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 오늘의 검색 키워드</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #FBE9E7 0%, #FFCCBC 100%); border: 4px solid #FF5722; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body" style="text-align: center;">
+                <b style="font-size: 24pt; color: #BF360C;">
+                    🔍 <a href="https://search.naver.com/search.naver?query=허밍+검색" target="_blank" style="color: #BF360C; text-decoration: none;">허밍 검색</a> | 
+                    <a href="https://search.naver.com/search.naver?query=음성+인식" target="_blank" style="color: #BF360C; text-decoration: none;">음성 인식</a> | 
+                    <a href="https://search.naver.com/search.naver?query=노래+찾기" target="_blank" style="color: #BF360C; text-decoration: none;">노래 찾기</a> | 
+                    <a href="https://search.naver.com/search.naver?query=유튜브+음악+검색" target="_blank" style="color: #BF360C; text-decoration: none;">유튜브 음악 검색</a> | 
+                    <a href="https://search.naver.com/search.naver?query=AI+음악+검색" target="_blank" style="color: #BF360C; text-decoration: none;">AI 음악 검색</a>
+                </b>
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                위 키워드를 클릭하면 네이버 검색으로 바로 연결됩니다!
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 오늘의 노래</div>
+        <div class="space-11pt"></div>
+        <div class="song-box">
+            <div style="font-size: 28pt; font-weight: bold; color: #2E7D32; text-align: center;">🎵 노래가 나를 부를 때</div>
+            <div class="space-11pt"></div>
+            <div class="content-body" style="text-align: center; color: #555; font-size: 16pt;">
+                <b>Style:</b> Korean ballad, slow tempo (70~80 bpm), emotional male or female vocal,<br>
+                soft piano and strings, warm reverb, sentimental atmosphere,<br>
+                style like Choi Bakho or Shim Subong
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body" style="text-align: left; font-size: 16px;">
+                <b style="font-size: 19pt;">&lt;Verse 1&gt;</b><br>
+                창가에 앉은 저녁빛이<br>
+                조용히 하루를 접어두면<br>
+                어디선가 들려오는 숨결 같은 선율<br>
+                내 이름을 부르듯 스친다<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Verse 2&gt;</b><br>
+                기억은 자꾸 멀어져도<br>
+                멜로디는 길을 잃지 않아<br>
+                입술 끝에 맺힌 작은 허밍 하나가<br>
+                잠든 시간을 깨운다<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Pre-Chorus&gt;</b><br>
+                또렷하지 않아도 괜찮아<br>
+                마음은 먼저 알고 있으니<br>
+                잊은 줄 알았던 날들이<br>
+                소리 따라 돌아온다<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Chorus&gt;</b><br>
+                노래가 나를 기억할 때<br>
+                멈춰 있던 계절이 흐르고<br>
+                닫혀 있던 마음의 문이<br>
+                조용히 빛을 들인다<br>
+                떠난 줄 알았던 순간들<br>
+                다시 내 안에 숨을 쉬고<br>
+                나는 그 멜로디 속에서<br>
+                조금 더 살아간다<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Verse 3&gt;</b><br>
+                낯선 바람 스치는 밤에도<br>
+                익숙한 온기가 머물고<br>
+                멀리 두고 온 시간의 골목이<br>
+                노랫결 따라 밝혀진다<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Bridge&gt;</b><br>
+                세월은 많은 걸 데려가도<br>
+                소리만은 남아서<br>
+                사람보다 오래 곁에 머물며<br>
+                가만히 등을 토닥인다<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Outro&gt;</b><br>
+                그래서 오늘 이 밤에도<br>
+                나는 귀를 기울인다<br>
+                다 지나간 줄 알았던 내가<br>
+                노래 속에서 다시 숨 쉰다
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 오늘의 퀴즈 정답</div>
+        <div class="space-11pt"></div>
+        <div class="quiz-box" style="background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%); border-color: #3F51B5;">
+            <div class="content-body">
+                <b>A1.</b> 허밍 검색 - 멜로디로 노래를 찾는 기능<br>
+                <div class="space-11pt"></div>
+                <b>A2.</b> 음성 인식 - 사람의 말을 컴퓨터가 이해하는 기술<br>
+                <div class="space-11pt"></div>
+                <b>A3.</b> 알고리즘 - 문제를 해결하는 계산 방법
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 오늘의 사자성어 풀이</div>
+        <div class="space-11pt"></div>
+        <div style="background: #FCE4EC; border: 4px solid #E91E63; padding: 30px; border-radius: 20px;">
+            <div class="content-body">
+                <b>溫故知新(온고지신)</b>을 풀어보면:<br>
+                <b>溫(온)</b>: 따뜻할 <b>온</b> - 옛것을 되새김<br>
+                <b>故(고)</b>: 옛 <b>고</b> - 지나간 것<br>
+                <b>知(지)</b>: 알 <b>지</b> - 깨달음<br>
+                <b>新(신)</b>: 새 <b>신</b> - 새로운 것
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>해석: 옛것을 익혀 새로운 것을 알다</b>는 뜻.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                오늘 우리가 배운 허밍 검색처럼, 옛 기억 속 노래를 새로운 AI 기술로 다시 찾아내는 것이 바로 온고지신의 현대적 의미입니다.
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 한글 맞춤법/문법/띄어쓰기</div>
+        <div class="space-11pt"></div>
+        <div class="spell-checker-box">
+            <div style="text-align: center; font-size: 22pt; font-weight: bold; color: #E65100; margin-bottom: 11pt;">
+                부산대 맞춤법/문법 검사기 도구<br>
+                <a href="https://nara-speller.co.kr/old_speller/" target="_blank" style="color: #E65100; font-size: 18pt;">https://nara-speller.co.kr/old_speller/</a>
+            </div>
+            <div class="content-body" style="font-size: 16pt; color: #555; text-align: center;">아래 상자에 글을 입력하고 버튼을 누르면 검사기로 연결됩니다.</div>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <textarea id="spellInput" style="flex: 1; height: 120px; font-size: 18pt; padding: 15px; border: 2px solid #F57C00; border-radius: 10px;" placeholder="검사할 내용을 입력하세요..."></textarea>
+                <button onclick="openSpellChecker()" style="padding: 20px; font-size: 18pt; background: #F57C00; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 150px;">맞춤법<br>검사하기</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <div style="font-size: 34pt; font-weight: 700; color: #2E7D32; margin-bottom: 11pt;">🌸 오늘의 한 줄 요약</div>
+            <div class="content-body" style="text-align: center; color: #0066CC; font-weight: bold; font-size: 24pt;">"기억이 흐려져도 노래는 우리를 기억합니다."</div>
+        </div>
+
+        <div class="copyright"><strong>© 2026 시니어 AI 공부방 | All rights reserved</strong></div>
+    </div>
+    <script>
+        function openSpellChecker() {
+            const text = document.getElementById('spellInput').value;
+            if (text.trim() === '') { alert('문장을 입력해주세요!'); return; }
+            navigator.clipboard.writeText(text).then(function() { window.open('https://nara-speller.co.kr/old_speller/', '_blank'); });
+        }
+    </script>
+</body>
+</html>

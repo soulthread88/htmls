@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Decoded for Seniors Ep.43 — AI Music Maker: Turn Your Life Story Into a SONG! | Jake & Grandpa Bob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* =============================================================
+   AI DECODED FOR SENIORS — EP.43
+   AESTHETIC: "American Late-Night Show Meets Zine Culture"
+   Newsprint-textured blacks + neon coral + electric lime + chalk white
+   Bebas Neue headlines · DM Serif for pull quotes · DM Sans body
+   ZERO generic AI design — 100% original editorial DNA
+============================================================= */
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;overflow-x:hidden;}
+
+:root{
+  --ink:#0d0d0d;
+  --paper:#f5f0e8;
+  --coral:#ff4d3d;
+  --lime:#c8ff00;
+  --navy:#001f5b;
+  --sky:#e8f2ff;
+  --gold:#f7c500;
+  --chalk:#fffdf7;
+  --dust:#e8e2d4;
+  --mid:#6b6258;
+  --neon-pink:#ff2d78;
+  --electric-blue:#0055ff;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+.ts-wrap{
+  width:100%;max-width:900px;
+  margin:0 auto;
+  padding:0 0 110px 0;
+  position:relative;z-index:1;
+}
+
+img,video,iframe{max-width:100%!important;height:auto!important;}
+
+/* ── SPACING ── */
+.gap    {display:block;height:20px;}
+.gap-sm {display:block;height:10px;}
+.gap-lg {display:block;height:36px;}
+
+/* ── CONTENTEDITABLE ── */
+[contenteditable="true"]{outline:none;cursor:text;border-radius:3px;}
+[contenteditable="true"]:hover{background:rgba(199,255,0,.18);box-shadow:0 0 0 2px rgba(199,255,0,.6);}
+[contenteditable="true"]:focus{background:rgba(199,255,0,.28);box-shadow:0 0 0 2px var(--lime);}
+
+/* ══════════════════════════════════════════
+   ★ HERO — full-bleed magazine cover
+══════════════════════════════════════════ */
+.hero{
+  background:var(--ink);
+  min-height:560px;
+  padding:36px 32px 40px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid-lines{
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0px,rgba(255,255,255,.04) 1px,transparent 1px,transparent 60px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0px,rgba(255,255,255,.04) 1px,transparent 1px,transparent 60px);
+  pointer-events:none;
+}
+.hero-coral-slash{
+  position:absolute;
+  top:-80px;right:-60px;
+  width:340px;height:340px;
+  background:var(--coral);
+  border-radius:50%;
+  opacity:.12;
+  filter:blur(60px);
+}
+.hero-lime-dot{
+  position:absolute;
+  bottom:-40px;left:10%;
+  width:200px;height:200px;
+  background:var(--lime);
+  border-radius:50%;
+  opacity:.1;
+  filter:blur(50px);
+}
+.hero-series-flag{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--coral);
+  color:#fff;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13pt;letter-spacing:.18em;
+  padding:6px 20px 4px;
+  border-radius:0;
+  clip-path:polygon(0 0,100% 0,97% 100%,0 100%);
+  margin-bottom:20px;
+}
+.hero-ep-row{
+  display:flex;align-items:flex-start;gap:16px;
+  margin-bottom:16px;
+}
+.hero-ep-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:120pt;
+  color:rgba(255,255,255,.08);
+  line-height:.85;
+  letter-spacing:-.02em;
+  user-select:none;
+  flex-shrink:0;
+}
+.hero-ep-meta{
+  padding-top:14px;
+}
+.hero-ep-badge{
+  display:inline-block;
+  background:var(--lime);
+  color:var(--ink);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11pt;letter-spacing:.14em;
+  padding:3px 16px 1px;
+  border-radius:2px;
+  margin-bottom:10px;
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(28pt,5vw,48pt);
+  color:#fff;
+  line-height:1.05;
+  letter-spacing:.01em;
+}
+.hero-title .accent{color:var(--coral);}
+.hero-title .lime{color:var(--lime);}
+.hero-subtitle{
+  font-family:'DM Serif Display',serif;
+  font-size:14pt;
+  color:rgba(255,255,255,.6);
+  font-style:italic;
+  margin-top:10px;
+  line-height:1.5;
+}
+.hero-tags{
+  display:flex;flex-wrap:wrap;gap:7px;
+  margin-top:18px;
+}
+.hero-tag{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.75);
+  font-size:10pt;font-weight:600;
+  padding:3px 13px;border-radius:20px;
+  letter-spacing:.04em;
+  transition:all .2s;
+}
+.hero-tag:hover{background:var(--lime);color:var(--ink);border-color:var(--lime);}
+.hero-hosts{
+  display:flex;gap:12px;flex-wrap:wrap;
+  margin-top:22px;
+}
+.host-chip{
+  background:rgba(255,255,255,.09);
+  border:1.5px solid rgba(255,255,255,.2);
+  color:#fff;
+  font-size:11pt;font-weight:600;
+  padding:7px 16px;border-radius:10px;
+  display:flex;align-items:center;gap:7px;
+}
+
+/* ── TRENDING TAPE ── */
+.trending-tape{
+  background:var(--coral);
+  color:#fff;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13pt;letter-spacing:.25em;
+  padding:11px 24px 9px;
+  display:flex;align-items:center;gap:16px;
+  overflow:hidden;
+  position:relative;
+}
+.trending-tape-label{
+  background:#fff;color:var(--coral);
+  padding:2px 12px;border-radius:3px;
+  font-size:11pt;white-space:nowrap;flex-shrink:0;
+}
+.trending-scroll{
+  white-space:nowrap;
+  animation:scrollTape 22s linear infinite;
+  flex:1;
+}
+@keyframes scrollTape{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+
+/* ══════════════════════════════════════════
+   ★ SECTION DIVIDERS & LABELS
+══════════════════════════════════════════ */
+.section-tape{
+  display:flex;align-items:stretch;
+  margin:28px 0 14px;
+}
+.section-tape-num{
+  background:var(--ink);
+  color:var(--lime);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22pt;letter-spacing:.06em;
+  padding:8px 18px 6px;
+  display:flex;align-items:center;
+  flex-shrink:0;
+}
+.section-tape-title{
+  background:var(--lime);
+  color:var(--ink);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22pt;letter-spacing:.06em;
+  padding:8px 22px 6px;
+  flex:1;
+  display:flex;align-items:center;
+}
+.section-tape-title small{
+  font-family:'DM Sans',sans-serif;
+  font-size:11pt;font-weight:500;
+  letter-spacing:0;color:var(--mid);
+  margin-left:12px;padding-top:2px;
+}
+.section-tape-icon{
+  background:var(--coral);
+  color:#fff;
+  padding:8px 16px;
+  font-size:18pt;
+  display:flex;align-items:center;
+  flex-shrink:0;
+}
+
+/* ── PULL-QUOTE BOX ── */
+.pull-quote{
+  border-left:6px solid var(--coral);
+  padding:18px 24px;
+  margin:14px 0;
+  background:var(--chalk);
+  position:relative;
+}
+.pull-quote::before{
+  content:'"';
+  font-family:'DM Serif Display',serif;
+  font-size:80pt;
+  color:var(--dust);
+  position:absolute;
+  top:-10px;left:16px;
+  line-height:1;
+  pointer-events:none;
+}
+.pull-quote-text{
+  font-family:'DM Serif Display',serif;
+  font-size:19pt;
+  color:var(--ink);
+  line-height:1.5;
+  font-style:italic;
+  position:relative;z-index:1;
+}
+.pull-quote-ai{
+  font-size:13pt;font-weight:600;
+  color:var(--coral);
+  margin-top:10px;
+  font-style:normal;
+  font-family:'DM Sans',sans-serif;
+}
+
+/* ── BODY TEXT ── */
+.body-text{
+  font-size:16pt;line-height:1.85;
+  color:var(--ink);
+  word-break:normal;
+}
+.body-text+.body-text{margin-top:12px;}
+.sp{color:var(--navy);font-weight:700;}
+.em{color:var(--coral);font-weight:700;}
+.term{color:var(--electric-blue);font-weight:700;}
+
+/* ── DIALOGUE — late-night-show transcript style ── */
+.dialog-stage{
+  background:var(--ink);
+  border-radius:4px;
+  padding:28px 28px 22px;
+  margin:14px 0;
+  position:relative;
+  overflow:hidden;
+}
+.dialog-stage::before{
+  content:'LIVE ON STAGE';
+  position:absolute;top:10px;right:14px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:9pt;letter-spacing:.25em;
+  color:rgba(255,255,255,.12);
+}
+.d-row{
+  display:flex;gap:14px;
+  margin-bottom:16px;
+  align-items:flex-start;
+}
+.d-row:last-child{margin-bottom:0;}
+.d-avatar{
+  width:42px;height:42px;
+  border-radius:50%;
+  background:var(--coral);
+  font-size:18pt;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  border:2px solid rgba(255,255,255,.15);
+}
+.d-avatar.jake-av{background:var(--lime);}
+.d-avatar.bob-av{background:var(--gold);}
+.d-avatar.ai-av{background:var(--electric-blue);}
+.d-bubble{
+  flex:1;
+}
+.d-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12pt;letter-spacing:.12em;
+  margin-bottom:4px;
+}
+.d-name.jake-name{color:var(--lime);}
+.d-name.bob-name{color:var(--gold);}
+.d-name.ai-name{color:rgba(255,255,255,.5);}
+.d-text{
+  font-size:15pt;color:rgba(255,255,255,.88);
+  line-height:1.7;
+  background:rgba(255,255,255,.05);
+  border-radius:0 14px 14px 14px;
+  padding:10px 16px;
+  border-left:3px solid rgba(255,255,255,.1);
+}
+.d-text.jake-t{border-left-color:var(--lime);}
+.d-text.bob-t{border-left-color:var(--gold);}
+
+/* ── TIP CARDS — zine-style numbered ── */
+.tip-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  margin:14px 0;
+}
+.tip-card{
+  display:flex;gap:0;
+  background:var(--chalk);
+  border:2.5px solid var(--ink);
+  border-radius:4px;
+  overflow:hidden;
+  box-shadow:5px 5px 0 var(--ink);
+}
+.tip-num{
+  background:var(--ink);
+  color:var(--lime);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36pt;letter-spacing:-.02em;
+  width:70px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  padding:10px 0;
+}
+.tip-body{
+  padding:16px 20px;
+  flex:1;
+}
+.tip-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18pt;letter-spacing:.04em;
+  color:var(--ink);
+  margin-bottom:6px;
+  display:flex;align-items:center;gap:10px;
+}
+.tip-title .step-badge{
+  background:var(--coral);color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:9pt;font-weight:700;
+  padding:2px 10px;border-radius:20px;
+  letter-spacing:.06em;
+}
+.tip-desc{font-size:14pt;line-height:1.75;color:#222;}
+.tip-url{
+  display:inline-block;
+  margin-top:8px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12pt;letter-spacing:.08em;
+  color:var(--electric-blue);
+  background:var(--sky);
+  padding:3px 14px;
+  border-radius:3px;
+}
+
+/* ── DID YOU KNOW ── */
+.dyk{
+  background:var(--navy);
+  color:#fff;
+  border-radius:4px;
+  padding:18px 24px;
+  margin:14px 0;
+  display:flex;gap:16px;align-items:flex-start;
+}
+.dyk-icon{
+  font-size:30pt;flex-shrink:0;
+  background:var(--lime);
+  color:var(--ink);
+  width:54px;height:54px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.dyk-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11pt;letter-spacing:.2em;
+  color:var(--lime);
+  margin-bottom:4px;
+}
+.dyk-body{font-size:14pt;line-height:1.7;}
+
+/* ── AI USE CASES — magazine grid ── */
+.usecase-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:14px 0;
+}
+.usecase-card{
+  background:var(--chalk);
+  border:2.5px solid var(--ink);
+  border-radius:4px;
+  padding:18px 16px;
+  box-shadow:4px 4px 0 var(--ink);
+  position:relative;
+  overflow:hidden;
+}
+.usecase-card::before{
+  content:attr(data-num);
+  position:absolute;
+  bottom:-14px;right:-4px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:80pt;
+  color:rgba(0,0,0,.05);
+  line-height:1;
+  pointer-events:none;
+}
+.usecase-icon{
+  font-size:28pt;
+  margin-bottom:10px;
+  display:block;
+}
+.usecase-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16pt;letter-spacing:.04em;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.usecase-body{font-size:13pt;line-height:1.7;color:#333;}
+
+/* ── HUMOR BOX — yellow sticky ── */
+.humor-sticky{
+  background:var(--gold);
+  border-radius:2px;
+  padding:24px 26px 20px;
+  margin:14px 0;
+  position:relative;
+  box-shadow:3px 4px 0 rgba(0,0,0,.25),0 1px 0 rgba(255,255,255,.5) inset;
+  transform:rotate(-.4deg);
+}
+.humor-sticky::before{
+  content:'';
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:60px;height:18px;
+  background:rgba(0,0,0,.15);
+  border-radius:0 0 4px 4px;
+}
+.humor-header{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20pt;letter-spacing:.06em;
+  color:var(--ink);
+  margin-bottom:14px;
+}
+.humor-line{margin-bottom:9px;font-size:15pt;line-height:1.65;color:#1a1a1a;}
+.humor-line .who{font-weight:700;color:var(--navy);}
+.humor-punchline{
+  background:var(--ink);color:var(--lime);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:15pt;letter-spacing:.1em;
+  padding:8px 18px 6px;
+  border-radius:3px;
+  display:inline-block;
+  margin-top:12px;
+  transform:rotate(.3deg);
+}
+
+/* ── QUIZ — game-show style ── */
+.quiz-stage{
+  background:var(--navy);
+  border-radius:4px;
+  padding:24px 26px;
+  margin:14px 0;
+  border:3px solid var(--lime);
+  box-shadow:0 0 0 6px rgba(199,255,0,.12);
+}
+.quiz-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24pt;letter-spacing:.08em;
+  color:var(--lime);
+  margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.quiz-item{
+  background:rgba(255,255,255,.06);
+  border-radius:4px;
+  padding:14px 18px;
+  margin-bottom:12px;
+  border-left:4px solid var(--coral);
+}
+.quiz-item:last-child{margin-bottom:0;}
+.quiz-q{font-size:15pt;color:#fff;font-weight:600;margin-bottom:6px;line-height:1.55;}
+.quiz-hint{font-size:13pt;color:var(--gold);font-style:italic;}
+
+/* ── ANSWER REVEAL ── */
+.answer-reveal{
+  background:rgba(199,255,0,.06);
+  border:2px dashed var(--lime);
+  border-radius:4px;
+  padding:16px 20px;
+  margin-top:10px;
+  opacity:.05;
+  cursor:pointer;
+  transition:opacity .3s;
+}
+.answer-reveal:hover{opacity:.3;}
+.answer-reveal.revealed{opacity:1;}
+.answer-trigger{
+  text-align:center;font-size:13pt;color:var(--mid);
+  cursor:pointer;margin:6px 0;
+  font-style:italic;
+}
+.answer-trigger.revealed{color:var(--ink);}
+
+/* ── SAYING DEEP DIVE — editorial spread ── */
+.saying-spread{
+  background:var(--ink);
+  border-radius:4px;
+  padding:28px 28px 24px;
+  margin:14px 0;
+}
+.saying-spread-header{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13pt;letter-spacing:.22em;
+  color:var(--coral);
+  margin-bottom:12px;
+}
+.saying-full-text{
+  font-family:'DM Serif Display',serif;
+  font-size:26pt;
+  color:#fff;
+  line-height:1.3;
+  margin-bottom:20px;
+  border-bottom:2px solid rgba(255,255,255,.12);
+  padding-bottom:18px;
+}
+.word-cards{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:8px;margin-bottom:18px;
+}
+.word-card{
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:4px;
+  padding:12px 10px;
+  text-align:center;
+}
+.wc-word{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16pt;color:var(--lime);
+  letter-spacing:.04em;display:block;
+  margin-bottom:4px;
+}
+.wc-type{font-size:10pt;color:var(--coral);font-style:italic;display:block;margin-bottom:4px;}
+.wc-def{font-size:11pt;color:rgba(255,255,255,.7);line-height:1.4;display:block;}
+.saying-story-item{
+  background:rgba(255,255,255,.04);
+  border-left:4px solid var(--gold);
+  padding:14px 18px;
+  border-radius:0 8px 8px 0;
+  margin-bottom:12px;
+}
+.saying-story-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12pt;letter-spacing:.15em;
+  color:var(--gold);
+  margin-bottom:6px;
+}
+.saying-story-text{font-size:14pt;color:rgba(255,255,255,.85);line-height:1.7;}
+.saying-ai-box{
+  background:linear-gradient(135deg,rgba(0,85,255,.25),rgba(199,255,0,.15));
+  border:2px solid var(--lime);
+  border-radius:4px;
+  padding:16px 20px;
+  margin-top:14px;
+}
+.saying-ai-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13pt;letter-spacing:.15em;
+  color:var(--lime);margin-bottom:8px;
+}
+.saying-ai-body{font-size:14pt;color:#fff;line-height:1.75;}
+.saying-memory{
+  background:rgba(247,197,0,.12);
+  border:1.5px solid var(--gold);
+  border-radius:4px;
+  padding:12px 18px;
+  margin-top:12px;
+  font-size:14pt;color:rgba(255,255,255,.85);
+  line-height:1.7;
+}
+
+/* ── IMAGE UPLOAD AREAS ── */
+.img-area{
+  width:100%;min-height:380px;
+  background:var(--dust);
+  display:flex;align-items:center;justify-content:center;
+  border-radius:4px;border:3px dashed rgba(0,0,0,.25);
+  cursor:pointer;position:relative;overflow:hidden;
+  margin:12px 0;transition:all .2s;
+}
+.img-area:hover{background:rgba(0,0,0,.08);border-color:var(--coral);}
+.img-area .upload-label{
+  display:flex;flex-direction:column;align-items:center;
+  gap:10px;color:var(--mid);font-size:16pt;
+  text-align:center;padding:20px;
+}
+.img-area .upload-icon{font-size:44pt;}
+.img-area img,.img-area video{width:100%;height:auto;border-radius:3px;display:block;}
+.source-tag{font-size:11pt;font-style:italic;color:var(--mid);text-align:right;margin:2px 0 10px;line-height:1.5;}
+
+/* ── SMALL IMG GRID ── */
+.ai-img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0;}
+.ai-img-area{
+  background:var(--dust);
+  display:flex;align-items:center;justify-content:center;
+  border-radius:4px;border:2px dashed rgba(0,0,0,.2);
+  cursor:pointer;position:relative;overflow:hidden;
+  aspect-ratio:1/1;transition:all .2s;
+}
+.ai-img-area:hover{border-color:var(--coral);background:rgba(0,0,0,.06);}
+.ai-img-area .upload-label{
+  display:flex;flex-direction:column;align-items:center;
+  gap:4px;color:var(--mid);text-align:center;padding:8px;
+}
+.ai-img-area .upload-icon{font-size:30pt;}
+.ai-img-area img,.ai-img-area video{width:100%;height:auto;border-radius:3px;display:block;}
+
+/* ── MEDIA OVERLAY ── */
+.media-overlay{
+  position:absolute;top:8px;right:8px;
+  display:none;gap:6px;z-index:10;
+}
+.img-area:hover .media-overlay,
+.ai-img-area:hover .media-overlay{display:flex;}
+.media-btn{
+  background:rgba(0,0,0,.78);color:#fff;border:none;
+  border-radius:4px;padding:5px 12px;
+  font-size:12pt;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+}
+.media-btn:hover{background:#000;}
+
+/* ── KEYWORDS — neon pill grid ── */
+.kw-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:8px;margin:12px 0;
+}
+.kw-pill{
+  display:block;text-decoration:none;
+  background:var(--ink);
+  color:var(--lime);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12pt;letter-spacing:.08em;
+  padding:10px 12px 8px;
+  border-radius:3px;
+  text-align:center;
+  border:2px solid var(--ink);
+  transition:all .18s;
+}
+.kw-pill:hover{
+  background:var(--lime);color:var(--ink);
+  transform:translateY(-3px);
+  box-shadow:0 6px 0 var(--ink);
+}
+
+/* ── WORD POWER ── */
+.wp-box{
+  background:var(--neon-pink);
+  border-radius:4px;
+  padding:24px 26px;
+  margin:14px 0;
+  box-shadow:5px 5px 0 var(--ink);
+}
+.wp-header{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22pt;letter-spacing:.06em;
+  color:#fff;margin-bottom:16px;
+}
+.wp-item{
+  background:rgba(255,255,255,.15);
+  border-radius:4px;padding:14px 18px;
+  margin-bottom:10px;
+  border-left:4px solid #fff;
+}
+.wp-item:last-child{margin-bottom:0;}
+.wp-term{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:17pt;letter-spacing:.06em;color:#fff;
+  margin-bottom:5px;
+}
+.wp-body{font-size:14pt;color:rgba(255,255,255,.9);line-height:1.7;}
+
+/* ── GRANDPA CORNER ── */
+.grandpa-corner{
+  background:var(--chalk);
+  border:3px solid var(--ink);
+  border-radius:4px;
+  padding:22px 24px;
+  margin:14px 0;
+  box-shadow:6px 6px 0 var(--ink);
+  position:relative;
+}
+.gc-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11pt;letter-spacing:.2em;
+  color:var(--coral);
+  margin-bottom:8px;
+}
+.gc-text{
+  font-family:'DM Serif Display',serif;
+  font-size:17pt;font-style:italic;
+  color:var(--ink);line-height:1.6;
+}
+.gc-sig{
+  margin-top:12px;
+  font-size:13pt;font-weight:600;color:var(--mid);
+  display:flex;align-items:center;gap:8px;
+}
+
+/* ── VISUAL STORY PANELS ── */
+.vsp-wrap{
+  background:var(--ink);
+  border-radius:4px;
+  overflow:hidden;
+  margin:14px 0;
+  border:3px solid var(--lime);
+}
+.vsp-header{
+  background:var(--lime);
+  color:var(--ink);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:15pt;letter-spacing:.1em;
+  padding:10px 18px 8px;
+  display:flex;align-items:center;gap:10px;
+}
+.vsp-single{
+  position:relative;width:100%;aspect-ratio:1/1;
+  cursor:pointer;overflow:hidden;
+}
+.vsp-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#111,#1a1a2e);
+  gap:14px;padding:24px;box-sizing:border-box;
+}
+.vsp-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;align-items:center;justify-content:center;
+  gap:12px;flex-direction:column;z-index:5;
+}
+.vsp-single:hover .vsp-overlay{display:flex;}
+.vsp-btn{
+  background:var(--lime);color:var(--ink);border:none;
+  border-radius:4px;padding:5px 16px;
+  font-size:13pt;font-weight:700;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+}
+.vsp-btn:hover{background:#b5e600;}
+
+/* ── RECAP — full-bleed dark panel ── */
+.recap-box{
+  background:var(--ink);
+  border-radius:4px;
+  padding:28px 28px 24px;
+  margin:14px 0;
+  border:3px solid var(--lime);
+  box-shadow:8px 8px 0 var(--lime);
+}
+.recap-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28pt;letter-spacing:.06em;
+  color:var(--lime);
+  margin-bottom:18px;
+  display:flex;align-items:center;gap:14px;
+}
+.recap-item{
+  padding:14px 18px;
+  margin-bottom:12px;
+  border-left:5px solid var(--coral);
+  background:rgba(255,255,255,.04);
+  border-radius:0 6px 6px 0;
+  font-size:14pt;color:rgba(255,255,255,.88);
+  line-height:1.75;
+}
+.recap-item b{color:var(--lime);}
+.recap-item:last-child{margin-bottom:0;border-left-color:var(--gold);}
+.recap-cta{
+  text-align:center;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20pt;letter-spacing:.1em;
+  color:var(--lime);
+  margin-top:18px;
+}
+
+/* ── SUBSCRIBE CTA ── */
+.sub-cta{
+  background:var(--coral);
+  border-radius:4px;
+  padding:26px 28px;
+  margin:14px 0;
+  text-align:center;
+  box-shadow:7px 7px 0 var(--ink);
+}
+.sub-cta-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:30pt;letter-spacing:.06em;
+  color:#fff;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.sub-cta-body{font-size:15pt;color:rgba(255,255,255,.9);line-height:1.65;}
+.sub-cta-tags{
+  margin-top:14px;font-size:11pt;font-weight:700;
+  color:rgba(255,255,255,.7);letter-spacing:.04em;
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--ink);
+  padding:22px 28px;
+  margin-top:14px;
+  border-radius:4px;
+  text-align:center;
+}
+.footer-text{font-size:13pt;color:rgba(255,255,255,.55);line-height:1.6;}
+.footer-copy{font-size:11pt;color:rgba(255,255,255,.3);margin-top:6px;}
+
+/* ── SAVE BAR ── */
+.save-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,.95);
+  padding:10px 20px;
+  display:flex;justify-content:center;gap:12px;
+  z-index:9999;
+  border-top:2px solid var(--lime);
+}
+.save-bar button{
+  background:var(--lime);color:var(--ink);border:none;
+  padding:11px 36px;border-radius:3px;
+  font-size:15pt;font-weight:900;cursor:pointer;
+  font-family:'Bebas Neue',sans-serif;letter-spacing:.08em;
+  box-shadow:4px 4px 0 rgba(255,255,255,.3);
+  transition:all .15s;
+}
+.save-bar button:hover{background:#b5e600;transform:translateY(-2px);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hero-ep-num{font-size:70pt;}
+  .hero-title{font-size:22pt;}
+  .word-cards{grid-template-columns:repeat(2,1fr);}
+  .ai-img-grid{grid-template-columns:repeat(2,1fr);}
+  .kw-grid{grid-template-columns:repeat(2,1fr);}
+  .usecase-grid{grid-template-columns:1fr;}
+  .tip-num{width:52px;font-size:26pt;}
+  .hero-ep-meta{padding-top:4px;}
+}
+</style>
+</head>
+<body>
+<div class="ts-wrap">
+
+<!-- ══════════════════════════════════════════════════════════
+     ① HERO BANNER
+══════════════════════════════════════════════════════════ -->
+<div class="hero" contenteditable="true">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-coral-slash"></div>
+  <div class="hero-lime-dot"></div>
+  <div class="hero-series-flag">🤖 AI DECODED FOR SENIORS</div>
+  <div class="hero-ep-row">
+    <div class="hero-ep-num">43</div>
+    <div class="hero-ep-meta">
+      <div class="hero-ep-badge">EPISODE 43 — AI MUSIC SPECIAL</div>
+      <div class="hero-title">
+        <span class="accent">AI Music Maker:</span><br>
+        Turn Your <span class="lime">Life Story</span><br>
+        Into a SONG!
+      </div>
+      <div class="hero-subtitle">
+        Jake shows Grandpa Bob how to create a heartfelt song — no instruments, no music lessons, no talent needed!
+      </div>
+    </div>
+  </div>
+  <div class="hero-tags">
+    <span class="hero-tag">#SunoAI</span>
+    <span class="hero-tag">#AIMusic</span>
+    <span class="hero-tag">#ChatGPT</span>
+    <span class="hero-tag">#AIForSeniors</span>
+    <span class="hero-tag">#ArtificialIntelligence</span>
+    <span class="hero-tag">#AITools2025</span>
+    <span class="hero-tag">#AIGenerated</span>
+    <span class="hero-tag">#LearnAI</span>
+    <span class="hero-tag">#MakeASong</span>
+    <span class="hero-tag">#AIForEveryone</span>
+  </div>
+  <div class="hero-hosts">
+    <div class="host-chip">👦 Jake — Your AI Guide</div>
+    <div class="host-chip">👴 Grandpa Bob — Just Like You!</div>
+  </div>
+</div>
+
+<!-- TRENDING TAPE -->
+<div class="trending-tape">
+  <span class="trending-tape-label">🔥 TRENDING NOW</span>
+  <div class="trending-scroll">
+    ChatGPT &nbsp;·&nbsp; Suno AI &nbsp;·&nbsp; Google Gemini &nbsp;·&nbsp; Microsoft Copilot &nbsp;·&nbsp; Claude AI &nbsp;·&nbsp; Grok &nbsp;·&nbsp; AI Music Generator &nbsp;·&nbsp; Udio AI &nbsp;·&nbsp; Midjourney &nbsp;·&nbsp; AI Voice Clone &nbsp;·&nbsp; Perplexity AI &nbsp;·&nbsp; AI Song Creator &nbsp;·&nbsp; OpenAI &nbsp;·&nbsp; Sora &nbsp;·&nbsp; AI Songwriting &nbsp;·&nbsp; ChatGPT &nbsp;·&nbsp; Suno AI &nbsp;·&nbsp; Google Gemini &nbsp;·&nbsp; Microsoft Copilot &nbsp;·&nbsp; Claude AI &nbsp;·&nbsp; Grok &nbsp;·&nbsp; AI Music Generator &nbsp;·&nbsp; Udio AI &nbsp;·&nbsp; Midjourney &nbsp;·&nbsp; AI Voice Clone &nbsp;·&nbsp; Perplexity AI &nbsp;·&nbsp; AI Song Creator &nbsp;·&nbsp; OpenAI &nbsp;·&nbsp; Sora &nbsp;·&nbsp; AI Songwriting
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ② TODAY'S AMERICAN SAYING
+══════════════════════════════════════════════════════════ -->
+<div style="padding:0 18px;">
+
+<div class="section-tape">
+  <div class="section-tape-num">02</div>
+  <div class="section-tape-title">TODAY'S AMERICAN SAYING <small>Wisdom that connects to AI — every episode!</small></div>
+  <div class="section-tape-icon">💬</div>
+</div>
+
+<div class="pull-quote" contenteditable="true">
+  <div class="pull-quote-text">"Every song ever written<br>was once just a memory."</div>
+  <div class="pull-quote-ai">🤖 AI Connection: With AI music tools, YOUR memories are literally the raw material — and the song writes itself. Grandpa Bob, your stories are already songs waiting to happen!</div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ③ INTRO SECTION
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">03</div>
+  <div class="section-tape-title">AI MUSIC MAKER <small>The biggest AI trend you haven't tried yet</small></div>
+  <div class="section-tape-icon">🎵</div>
+</div>
+
+<div class="body-text" contenteditable="true">
+  Hey, welcome back to <strong>AI Decoded for Seniors</strong> — the only AI show where your guide <span class="sp">Jake</span> breaks everything down so clearly that Grandpa Bob gets it on the FIRST try! 🎉
+</div>
+<div class="gap-sm"></div>
+<div class="body-text" contenteditable="true">
+  You've heard of <span class="term">ChatGPT</span>. You've maybe seen <span class="term">Google Gemini</span>. But this week we're covering something that will absolutely blow your mind — <span class="em">AI-powered music creation.</span> We're talking full songs, complete with melody, harmony, vocals, and instruments — generated from nothing but your own personal stories. No music degree. No guitar lessons. No recording studio.
+</div>
+<div class="gap-sm"></div>
+<div class="dyk" contenteditable="true">
+  <div class="dyk-icon">🎤</div>
+  <div>
+    <div class="dyk-label">DID YOU KNOW?</div>
+    <div class="dyk-body">Over <strong>10 million people</strong> have already used <strong>Suno AI</strong> to create original songs — and it's completely free to start. The #1 search on Google right now: <em>"How to make a song with AI."</em> That's exactly what we're doing today.</div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Intro Image 1 -->
+<div class="img-area" id="area-1"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-1').click()}" style="cursor:pointer;">
+  <div class="upload-label" id="img-display-1">
+    <span class="upload-icon">🖼️</span>
+    <span>Click to Insert Image or Video</span>
+    <span style="font-size:12pt;color:#888;">[Intro image — Suno AI homepage / AI music creation]</span>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-1').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-1').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert</span>';document.getElementById('area-1').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-1" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:3px;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:3px;display:block;\'></video>';}document.getElementById('area-1').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Suno AI Official Website — suno.com</em></div>
+<div class="body-text" contenteditable="true">That's the Suno AI homepage. Type a sentence about your life — push Create — and in 60 seconds you have a real, full-length song. Country, gospel, jazz, pop, blues — you name it. Let's break down exactly how to do it.</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 1 -->
+<div class="vsp-wrap">
+  <div class="vsp-header">🎬 GRANDPA BOB DISCOVERS AI MUSIC — AND CAN'T BELIEVE IT'S FREE</div>
+  <div class="vsp-single" id="panel-comic-1" onclick="if(!event.target.closest('.vsp-overlay'))document.getElementById('up-comic-1').click()">
+    <div id="pd-comic-1" class="vsp-placeholder">
+      <div style="font-size:52px">🎵</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:.06em;color:var(--lime);text-align:center;">GRANDPA BOB DISCOVERS AI MUSIC</div>
+      <div style="font-size:12pt;color:rgba(255,255,255,.45);text-align:center;">Upload your panel image or illustration here</div>
+      <div style="margin-top:10px;background:var(--lime);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:14pt;padding:8px 26px;border-radius:3px;letter-spacing:.08em;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="vsp-overlay">
+      <span style="color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:16pt;letter-spacing:.1em;">🎬 CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="vsp-btn" onclick="event.stopPropagation();document.getElementById('up-comic-1').click()">🔄 Replace</button>
+        <button class="vsp-btn" onclick="event.stopPropagation();comicDelete('pd-comic-1','comic-1')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-1" accept="image/*,video/*" style="display:none" onchange="comicUpload('up-comic-1','pd-comic-1','comic-1')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ④ JAKE & BOB CONVERSATION
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">04</div>
+  <div class="section-tape-title">JAKE &amp; GRANDPA BOB TALK AI <small>A real conversation — just like Sunday dinner!</small></div>
+  <div class="section-tape-icon">🗣️</div>
+</div>
+
+<div class="dialog-stage" contenteditable="true">
+  <div class="d-row">
+    <div class="d-avatar bob-av">👴</div>
+    <div class="d-bubble">
+      <div class="d-name bob-name">GRANDPA BOB</div>
+      <div class="d-text bob-t">"Jake, I saw something on Facebook about AI making music. Is that real? I can't even carry a tune in a bucket!"</div>
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar jake-av">👦</div>
+    <div class="d-bubble">
+      <div class="d-name jake-name">JAKE</div>
+      <div class="d-text jake-t">"Grandpa, it is 100% real — and here's the kicker: YOU don't sing a single note. You just type your story and the AI creates a full song with real-sounding vocals, instruments, everything."</div>
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar bob-av">👴</div>
+    <div class="d-bubble">
+      <div class="d-name bob-name">GRANDPA BOB</div>
+      <div class="d-text bob-t">"Get outta here. So I could type about growing up on the farm in Kentucky, and it would turn that into an actual song?"</div>
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar jake-av">👦</div>
+    <div class="d-bubble">
+      <div class="d-name jake-name">JAKE</div>
+      <div class="d-text jake-t">"Exactly! ChatGPT writes the lyrics from your story. Then Suno AI turns those lyrics into a full song in about 60 seconds. Country, gospel, whatever style you want. You could email it to the whole family tonight."</div>
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar bob-av">👴</div>
+    <div class="d-bubble">
+      <div class="d-name bob-name">GRANDPA BOB</div>
+      <div class="d-text bob-t">"Well, hot dog. I've got 80 years of stories. I might just put every single one of them into a song. Jake, show me how to do it — right now!"</div>
+    </div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑤ AI CRASH COURSE TIPS — 3 Steps
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">05</div>
+  <div class="section-tape-title">YOUR 3-STEP AI MUSIC RECIPE <small>From life story to finished song — step by step</small></div>
+  <div class="section-tape-icon">⚡</div>
+</div>
+
+<div class="tip-grid" contenteditable="true">
+  <div class="tip-card">
+    <div class="tip-num">1</div>
+    <div class="tip-body">
+      <div class="tip-title">WRITE YOUR LYRICS WITH CHATGPT <span class="step-badge">STEP 1</span></div>
+      <div class="tip-desc">
+        Go to <strong>chat.openai.com</strong> and type this: <em>"I grew up in [your town] in the 1950s. My mom used to take me fishing every Saturday morning. I want a country-gospel song with 3 verses about those memories."</em> In 30 seconds, ChatGPT hands you beautiful, personalized lyrics. The more details you give, the more moving the song becomes.
+      </div>
+      <span class="tip-url">chat.openai.com (FREE)</span>
+    </div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-num">2</div>
+    <div class="tip-body">
+      <div class="tip-title">PASTE LYRICS INTO SUNO AI <span class="step-badge">STEP 2</span></div>
+      <div class="tip-desc">
+        Go to <strong>suno.com</strong> → Sign in with Google → Click <strong>[Create]</strong> → Paste your ChatGPT lyrics → In the "Style of Music" box, type: <em>"country gospel, warm, emotional, acoustic guitar"</em> → Hit <strong>[Create]</strong>. Suno AI gives you 2 complete, full-length song versions in about 60 seconds — completely free, up to 10 songs per day!
+      </div>
+      <span class="tip-url">suno.com (FREE · 10 songs/day)</span>
+    </div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-num">3</div>
+    <div class="tip-body">
+      <div class="tip-title">SHARE YOUR SONG WITH FAMILY <span class="step-badge">STEP 3</span></div>
+      <div class="tip-desc">
+        Click the <strong>Download</strong> button to save as an MP3 file — or hit <strong>Share</strong> to copy a link. Text it, email it, or drop it in the family group chat. When your grandkids hear "Grandpa made THIS song," they will absolutely lose their minds. 🎉 Pro tip: title it <em>"My Life Story in Song"</em> — it makes an unforgettable gift for birthdays, holidays, or any family reunion.
+      </div>
+      <span class="tip-url">Share via text · email · WhatsApp</span>
+    </div>
+  </div>
+</div>
+
+<!-- ★ Concept Image 2 -->
+<div class="img-area" id="area-2"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-2').click()}" style="cursor:pointer;">
+  <div class="upload-label" id="img-display-2">
+    <span class="upload-icon">🖼️</span>
+    <span>Click to Insert Image or Video</span>
+    <span style="font-size:12pt;color:#888;">[Suno AI interface / song creation screen]</span>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-2').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-2').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert</span>';document.getElementById('area-2').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-2" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:3px;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:3px;display:block;\'></video>';}document.getElementById('area-2').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Suno AI song creation interface — suno.com</em></div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 2 -->
+<div class="vsp-wrap">
+  <div class="vsp-header">🎬 CHATGPT WRITES THE LYRICS — GRANDPA'S JAW HITS THE FLOOR</div>
+  <div class="vsp-single" id="panel-comic-2" onclick="if(!event.target.closest('.vsp-overlay'))document.getElementById('up-comic-2').click()">
+    <div id="pd-comic-2" class="vsp-placeholder">
+      <div style="font-size:52px">📝</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:.06em;color:var(--lime);text-align:center;">CHATGPT WRITES THE LYRICS</div>
+      <div style="font-size:12pt;color:rgba(255,255,255,.45);text-align:center;">Upload your panel image or illustration here</div>
+      <div style="margin-top:10px;background:var(--lime);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:14pt;padding:8px 26px;border-radius:3px;letter-spacing:.08em;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="vsp-overlay">
+      <span style="color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:16pt;letter-spacing:.1em;">🎬 CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="vsp-btn" onclick="event.stopPropagation();document.getElementById('up-comic-2').click()">🔄 Replace</button>
+        <button class="vsp-btn" onclick="event.stopPropagation();comicDelete('pd-comic-2','comic-2')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-2" accept="image/*,video/*" style="display:none" onchange="comicUpload('up-comic-2','pd-comic-2','comic-2')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑥ AI IN YOUR DAILY LIFE
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">06</div>
+  <div class="section-tape-title">AI MUSIC — 4 WAYS TO USE IT TODAY <small>Practical ideas you can try this week!</small></div>
+  <div class="section-tape-icon">🌟</div>
+</div>
+
+<div class="body-text" contenteditable="true"><span class="sp">Jake:</span> "Grandpa, AI music isn't just one trick — here are four real ways you can use it starting today!"</div>
+<div class="gap-sm"></div>
+
+<div class="usecase-grid" contenteditable="true">
+  <div class="usecase-card" data-num="1">
+    <span class="usecase-icon">🎂</span>
+    <div class="usecase-title">PERSONALIZED BIRTHDAY SONGS</div>
+    <div class="usecase-body">Create a one-of-a-kind birthday song featuring your grandchild's name, age, and favorite things. "Happy Birthday, Little Emma — age 7, loves horses and macaroni" becomes a real song in seconds. They'll want to play it every year.</div>
+  </div>
+  <div class="usecase-card" data-num="2">
+    <span class="usecase-icon">💒</span>
+    <div class="usecase-title">ANNIVERSARY LOVE SONG GIFT</div>
+    <div class="usecase-body">Write a song about the day you met your spouse, your first dance, or your favorite memories together. It'll be the most heartfelt anniversary gift you've ever given — and it costs nothing but a few minutes of your time.</div>
+  </div>
+  <div class="usecase-card" data-num="3">
+    <span class="usecase-icon">🏡</span>
+    <div class="usecase-title">YOUR HOMETOWN TRIBUTE SONG</div>
+    <div class="usecase-body">Name the town, the street, the diner you loved, the old baseball field — feed it all to ChatGPT, then Suno AI. Bring it to your next high school reunion and watch the whole room tear up.</div>
+  </div>
+  <div class="usecase-card" data-num="4">
+    <span class="usecase-icon">📱</span>
+    <div class="usecase-title">SHARE IN THE FAMILY GROUP CHAT</div>
+    <div class="usecase-body">Drop the song link or MP3 file into your family group text. When your kids and grandkids see "Grandpa made THIS," you instantly become the coolest person in the family. Best conversation starter of the year — guaranteed.</div>
+  </div>
+</div>
+
+<!-- ★ AI use case image grid -->
+<div class="ai-img-grid">
+  <div class="ai-img-area" id="ai-area-1" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-1').click()}">
+    <div class="upload-label" id="ai-img-display-1"><span class="upload-icon">🎂</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-1').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-1').innerHTML='<span class=\'upload-icon\'>🎂</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:3px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:3px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-2" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-2').click()}">
+    <div class="upload-label" id="ai-img-display-2"><span class="upload-icon">💒</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-2').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-2').innerHTML='<span class=\'upload-icon\'>💒</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:3px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:3px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-3" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-3').click()}">
+    <div class="upload-label" id="ai-img-display-3"><span class="upload-icon">🏡</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-3').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-3').innerHTML='<span class=\'upload-icon\'>🏡</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:3px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:3px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-4" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-4').click()}">
+    <div class="upload-label" id="ai-img-display-4"><span class="upload-icon">📱</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-4').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-4').innerHTML='<span class=\'upload-icon\'>📱</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-4');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:3px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:3px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 3 -->
+<div class="vsp-wrap">
+  <div class="vsp-header">🎬 THE WHOLE FAMILY HEARS GRANDPA'S SONG — NOBODY IS PREPARED</div>
+  <div class="vsp-single" id="panel-comic-3" onclick="if(!event.target.closest('.vsp-overlay'))document.getElementById('up-comic-3').click()">
+    <div id="pd-comic-3" class="vsp-placeholder">
+      <div style="font-size:52px">👨‍👩‍👧‍👦</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:.06em;color:var(--lime);text-align:center;">THE WHOLE FAMILY REACTS</div>
+      <div style="font-size:12pt;color:rgba(255,255,255,.45);text-align:center;">Upload your panel image or illustration here</div>
+      <div style="margin-top:10px;background:var(--lime);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:14pt;padding:8px 26px;border-radius:3px;letter-spacing:.08em;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="vsp-overlay">
+      <span style="color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:16pt;letter-spacing:.1em;">🎬 CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="vsp-btn" onclick="event.stopPropagation();document.getElementById('up-comic-3').click()">🔄 Replace</button>
+        <button class="vsp-btn" onclick="event.stopPropagation();comicDelete('pd-comic-3','comic-3')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-3" accept="image/*,video/*" style="display:none" onchange="comicUpload('up-comic-3','pd-comic-3','comic-3')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑦ AI LAUGH BREAK
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">07</div>
+  <div class="section-tape-title">AI LAUGH BREAK <small>Because learning should always be fun!</small></div>
+  <div class="section-tape-icon">😂</div>
+</div>
+
+<div class="humor-sticky" contenteditable="true">
+  <div class="humor-header">🎭 GRANDPA BOB ASKS FOR A COUNTRY SONG — GETS FAMOUS</div>
+  <div class="humor-line"><span class="who">Grandpa Bob:</span> "Jake, I told the AI my whole life story and asked it to make a country song."</div>
+  <div class="humor-line"><span class="who">Jake:</span> "That's great! How did it turn out?"</div>
+  <div class="humor-line"><span class="who">Grandpa Bob:</span> "It was beautiful. Had steel guitar and everything. Then my neighbor Doris heard it and asked if I was secretly a famous songwriter this whole time."</div>
+  <div class="humor-line"><span class="who">Jake:</span> "Ha! What did you tell her?"</div>
+  <div class="humor-line"><span class="who">Grandpa Bob:</span> "I told her yes. I didn't want to ruin the mystery. Now she wants me to write her a love song."</div>
+  <div class="humor-punchline">GRANDPA BOB: ACCIDENTAL COUNTRY LEGEND SINCE EP. 43 🤠🎸</div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑧ AI TRIVIA CHALLENGE
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">08</div>
+  <div class="section-tape-title">AI TRIVIA CHALLENGE <small>Can you score 3 out of 3? Try before you scroll!</small></div>
+  <div class="section-tape-icon">🧠</div>
+</div>
+
+<div class="quiz-stage" contenteditable="true">
+  <div class="quiz-title">🏆 3 QUESTIONS — DO YOU KNOW YOUR AI?</div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q1. What is the name of the most popular AI music-creation tool that lets you turn lyrics into a full song in about 60 seconds?</div>
+    <div class="quiz-hint">💡 Hint: It rhymes with "Juno" — and it means "the sun" in Latin.</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q2. Which FREE AI chatbot is the best first step for writing personalized song lyrics from your life story?</div>
+    <div class="quiz-hint">💡 Hint: You've definitely heard of this one — it's the most searched AI tool on Google.</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q3. When entering a music style in Suno AI, which of these inputs would produce a warm, Southern-style faith song? A) "loud metal guitar" &nbsp; B) "country gospel, acoustic, warm, emotional" &nbsp; C) "techno dance remix"</div>
+    <div class="quiz-hint">💡 Hint: The more specific and emotional your style description, the better the song.</div>
+  </div>
+</div>
+<div class="answer-trigger" onclick="this.classList.toggle('revealed');document.getElementById('answer-reveal').classList.toggle('revealed')">👆 Tap here to reveal answers!</div>
+<div class="answer-reveal" id="answer-reveal" onclick="this.classList.toggle('revealed');document.querySelector('.answer-trigger').classList.toggle('revealed')" contenteditable="true">
+  <div class="body-text" style="color:var(--ink);">
+    <strong style="color:#1b5e20;font-size:17pt;">✅ Answers</strong><br>
+    <strong>A1:</strong> <strong>Suno AI</strong> — available free at suno.com<br>
+    <strong>A2:</strong> <strong>ChatGPT</strong> — at chat.openai.com (also free!)<br>
+    <strong>A3:</strong> <strong>B) "country gospel, acoustic, warm, emotional"</strong> — specific and descriptive always wins!
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑨ SAYING DEEP DIVE
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">09</div>
+  <div class="section-tape-title">SAYING DEEP DIVE <small>Understand every word — then connect it to AI!</small></div>
+  <div class="section-tape-icon">📖</div>
+</div>
+
+<div class="saying-spread">
+  <div class="saying-spread-header">🔍 BREAKING DOWN TODAY'S AMERICAN SAYING</div>
+  <div class="saying-full-text" contenteditable="true">"Every song ever written was once just a memory."</div>
+  <div class="word-cards" contenteditable="true">
+    <div class="word-card">
+      <span class="wc-word">EVERY</span>
+      <span class="wc-type">determiner</span>
+      <span class="wc-def">Each one without exception — not some, but all of them</span>
+    </div>
+    <div class="word-card">
+      <span class="wc-word">SONG</span>
+      <span class="wc-type">noun</span>
+      <span class="wc-def">A piece of music with words — can be short or long, any style</span>
+    </div>
+    <div class="word-card">
+      <span class="wc-word">WRITTEN</span>
+      <span class="wc-type">verb (past)</span>
+      <span class="wc-def">Created and recorded — put into words and music intentionally</span>
+    </div>
+    <div class="word-card">
+      <span class="wc-word">MEMORY</span>
+      <span class="wc-type">noun</span>
+      <span class="wc-def">Something remembered from the past — an experience stored in the mind</span>
+    </div>
+  </div>
+  <div class="saying-story-item" contenteditable="true">
+    <div class="saying-story-label">📌 WORD-FOR-WORD MEANING</div>
+    <div class="saying-story-text">Without exception, every single song that has ever been composed — from folk ballads to chart-topping hits — originally began as nothing more than a personal recollection in someone's mind.</div>
+  </div>
+  <div class="saying-story-item" contenteditable="true">
+    <div class="saying-story-label">📌 IN PLAIN ENGLISH</div>
+    <div class="saying-story-text">All great songs start the same way a great story does — with something real that happened to a real person. The feeling of a summer afternoon. A face you can't forget. A place you miss. Those aren't just memories. They're songs that haven't been written yet.</div>
+  </div>
+  <div class="saying-story-item" contenteditable="true">
+    <div class="saying-story-label">📌 REAL-LIFE ANALOGY</div>
+    <div class="saying-story-text">Think about "Take Me Home, Country Roads." John Denver didn't invent West Virginia — he just remembered what it felt like to belong somewhere beautiful. That memory became one of the best-loved American songs ever. Your memories are just as real, just as powerful, and just as worthy of becoming a song.</div>
+  </div>
+  <div class="saying-ai-box" contenteditable="true">
+    <div class="saying-ai-label">🤖 CONNECT IT TO AI!</div>
+    <div class="saying-ai-body">This is exactly why AI music tools are so powerful for YOU, specifically. ChatGPT doesn't need you to be a musician or a poet — it needs you to be a person with a past. You give it your memories, it builds the structure, and Suno AI transforms it into a real, full-length, goosebumps-inducing song. AI doesn't replace your story. It amplifies it.<br><br><strong style="color:var(--lime);">"Every song ever written was once just a memory."</strong> — YOUR memories. YOUR song. AI makes it real. 🌟</div>
+  </div>
+  <div class="saying-memory" contenteditable="true">
+    🧠 <strong>Memory Tip!</strong> Next time you catch yourself saying "I wish I'd written that down" — write it down AND ask ChatGPT to turn it into a song. You'll have a song AND a memory, preserved forever.<br>
+    <em>Example sentence: "When Grandpa Bob played his AI song at Thanksgiving, it proved that every song ever written was once just a memory — now his memories are music."</em>
+  </div>
+</div>
+
+<!-- ★ Image 3 -->
+<div class="img-area" id="area-3"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-3').click()}" style="cursor:pointer;">
+  <div class="upload-label" id="img-display-3">
+    <span class="upload-icon">🖼️</span>
+    <span>Click to Insert Image or Video</span>
+    <span style="font-size:12pt;color:#888;">[Closing / saying wrap-up image]</span>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-3').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-3').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert</span>';document.getElementById('area-3').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-3" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:3px;display:block;\'>';}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:3px;display:block;\'></video>';}document.getElementById('area-3').style.minHeight='auto';};r.readAsDataURL(f);})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: American music culture / AI music generation</em></div>
+
+<div class="body-text" contenteditable="true" style="margin-top:10px;">
+  <span class="sp">Jake:</span> "Grandpa Bob, your stories deserve to be songs. Don't let them stay locked in your memory — share them with the whole family through AI music. One song could become a family heirloom."
+</div>
+<div class="gap-sm"></div>
+<div class="body-text" contenteditable="true">
+  <span class="sp">Grandpa Bob:</span> "Jake, I'm already typing out the story of the summer of '68 right now. I had no idea my memories were sitting there just waiting to become a song. This is the most amazing thing I've ever seen a computer do."
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑩ SEARCH KEYWORDS
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">10</div>
+  <div class="section-tape-title">TOP AI SEARCH KEYWORDS <small>What America is Googling RIGHT NOW — click to search!</small></div>
+  <div class="section-tape-icon">🔍</div>
+</div>
+
+<div class="kw-grid">
+  <a href="https://www.google.com/search?q=Suno+AI+music+generator" target="_blank" class="kw-pill">Suno AI</a>
+  <a href="https://www.google.com/search?q=AI+music+maker+free" target="_blank" class="kw-pill">AI Music Maker Free</a>
+  <a href="https://www.google.com/search?q=ChatGPT+song+lyrics" target="_blank" class="kw-pill">ChatGPT Song Lyrics</a>
+  <a href="https://www.google.com/search?q=AI+song+generator" target="_blank" class="kw-pill">AI Song Generator</a>
+  <a href="https://www.google.com/search?q=Udio+AI+music" target="_blank" class="kw-pill">Udio AI Music</a>
+  <a href="https://www.google.com/search?q=AI+music+for+seniors" target="_blank" class="kw-pill">AI Music for Seniors</a>
+  <a href="https://www.google.com/search?q=make+a+song+with+AI" target="_blank" class="kw-pill">Make a Song With AI</a>
+  <a href="https://www.google.com/search?q=AI+voice+generator+free" target="_blank" class="kw-pill">AI Voice Generator</a>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑪ AMERICAN ENGLISH WORD POWER
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">11</div>
+  <div class="section-tape-title">AMERICAN ENGLISH WORD POWER <small>3 essential AI terms — explained simply</small></div>
+  <div class="section-tape-icon">📝</div>
+</div>
+
+<div class="wp-box" contenteditable="true">
+  <div class="wp-header">🇺🇸 AI VOCABULARY — TOP 3 THIS EPISODE</div>
+  <div class="wp-item">
+    <div class="wp-term">1. "GENERATIVE AI" (jen-uh-RAY-tiv A.I.)</div>
+    <div class="wp-body">A type of AI that <em>creates</em> brand-new content — songs, images, stories, code — rather than just answering questions. Suno AI is generative AI. It doesn't look up existing songs; it generates a completely new one just for you, in real time.</div>
+  </div>
+  <div class="wp-item">
+    <div class="wp-term">2. "PROMPT" (prahmt)</div>
+    <div class="wp-body">The instruction or description you type into an AI tool. Think of it like placing an order at a restaurant. The more specific your prompt — "country gospel ballad, acoustic guitar, emotional, about a father's love" — the better the song the AI serves you. Vague prompt = vague result.</div>
+  </div>
+  <div class="wp-item">
+    <div class="wp-term">3. "OUTPUT" (OWT-put)</div>
+    <div class="wp-body">What the AI produces in response to your prompt — in Suno AI's case, a finished song file you can download and share. The input is your story, the output is the song. Simple as that! When Grandpa Bob texts the family his song, that MP3 is the output.</div>
+  </div>
+</div>
+
+<!-- Dictionary resource -->
+<div style="background:var(--sky);border:3px solid var(--navy);border-radius:4px;padding:16px 20px;font-size:14pt;text-align:center;margin:12px 0;" contenteditable="true">
+  <strong style="font-size:17pt;color:var(--navy);">📚 Merriam-Webster — America's Free Online Dictionary</strong><br>
+  <div style="margin-top:6px;">
+    👉 <a href="https://www.merriam-webster.com/" target="_blank" style="color:var(--electric-blue);font-weight:700;">merriam-webster.com</a>
+    <span style="font-size:12pt;color:var(--mid);margin-left:8px;">Look up any AI word — always free, always accurate</span>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Grandpa's Corner -->
+<div class="grandpa-corner" contenteditable="true">
+  <div class="gc-label">👴 GRANDPA BOB'S CORNER</div>
+  <div class="gc-text">"You know, I spent 80 years thinking music was for other people — for the ones who took lessons, who learned to read notes on a page. I had stories but I never thought they belonged in a song. Then Jake showed me this, and in less than 10 minutes I had a real song about my father's hands and the farm. I played it for my daughter and she cried. I cried too. Don't wait as long as I did. Your stories belong in songs."</div>
+  <div class="gc-sig"><span>— 👴 Grandpa Bob</span><span style="color:var(--coral);margin-left:6px;">#AIDecodedForSeniors</span></div>
+</div>
+<div class="gap"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ⑭ TODAY'S RECAP
+══════════════════════════════════════════════════════════ -->
+<div class="section-tape">
+  <div class="section-tape-num">14</div>
+  <div class="section-tape-title">TODAY'S RECAP <small>Lock in what you learned — review before you close!</small></div>
+  <div class="section-tape-icon">📚</div>
+</div>
+
+<div class="recap-box">
+  <div class="recap-title">📚 LET'S REVIEW — 4 THINGS YOU NOW KNOW</div>
+  <div class="recap-item" contenteditable="true">
+    <b>① Anyone can make a real song with AI — no talent required.</b><br>
+    Suno AI and Udio AI generate complete songs — vocals, instruments, everything — from just a text description. It's free, takes 60 seconds, and the results are genuinely impressive.
+  </div>
+  <div class="recap-item" contenteditable="true">
+    <b>② The best workflow: ChatGPT → Suno AI, two steps.</b><br>
+    Tell ChatGPT your life story and ask for song lyrics. Then paste those lyrics into Suno AI, add your preferred style (country, gospel, blues, pop), and hit Create. Done. You have a song.
+  </div>
+  <div class="recap-item" contenteditable="true">
+    <b>③ Your finished song is a gift that lasts forever.</b><br>
+    Download the MP3 or share the link in your family group chat. A song about your hometown, your marriage, or your childhood is a gift no store can sell — and AI makes it possible today, for free.
+  </div>
+  <div class="recap-item" contenteditable="true">
+    <b>④ Today's American Saying</b><br>
+    <strong style="color:var(--gold);">"Every song ever written was once just a memory."</strong> — Your memories are the raw material. AI is the instrument. Together, they create something the whole family will treasure.
+  </div>
+  <div class="recap-cta">🎉 GREAT WORK TODAY — SEE YOU NEXT EPISODE! 🤖✨</div>
+</div>
+<div class="gap"></div>
+
+<!-- ── CLOSING MESSAGE ── -->
+<div class="body-text" contenteditable="true" style="text-align:center;padding:0 8px;">
+  📝 This post is made especially for seniors exploring AI for the very first time.<br>
+  Got questions? Drop a comment below — Jake reads every single one! 💬
+</div>
+<div class="gap-sm"></div>
+
+<!-- ── SUBSCRIBE CTA ── -->
+<div class="sub-cta" contenteditable="true">
+  <div class="sub-cta-title">🔔 DON'T MISS NEXT EPISODE!</div>
+  <div class="sub-cta-body">
+    Bookmark this page · Subscribe · Share with a friend who deserves to learn AI!<br>
+    <strong>New episode every week — always free, always beginner-friendly.</strong>
+  </div>
+  <div class="sub-cta-tags">
+    #AIDecodedForSeniors &nbsp;|&nbsp; #SunoAI &nbsp;|&nbsp; #ChatGPT &nbsp;|&nbsp; #AIForSeniors &nbsp;|&nbsp; #AIMusic &nbsp;|&nbsp; #LearnAI &nbsp;|&nbsp; #ArtificialIntelligence
+  </div>
+</div>
+<div class="gap-sm"></div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <div class="footer-text">This post is part of <em>AI Decoded for Seniors</em> — an educational series making Artificial Intelligence accessible to every American.</div>
+  <div class="footer-copy">© 2026 AI Decoded for Seniors | All rights reserved</div>
+</div>
+
+</div><!-- /inner padding -->
+</div><!-- /ts-wrap -->
+
+<!-- ══════════════════════════════════════════════════════════
+     JS — IndexedDB persistent storage + panel upload/delete
+══════════════════════════════════════════════════════════ -->
+<script>
+var SADB_NAME='ai-decoded-ep43-media', SADB_VER=1, SADB_STORE='media';
+function sadbOpen(cb){var req=indexedDB.open(SADB_NAME,SADB_VER);req.onupgradeneeded=function(e){e.target.result.createObjectStore(SADB_STORE)};req.onsuccess=function(e){cb(e.target.result)};req.onerror=function(){cb(null)};}
+function sadbSave(key,data){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).put(data,key);})}
+function sadbLoad(key,cb){sadbOpen(function(db){if(!db){cb(null);return}var req=db.transaction(SADB_STORE,'readonly').objectStore(SADB_STORE).get(key);req.onsuccess=function(e){cb(e.target.result||null)};req.onerror=function(){cb(null)};});}
+function sadbDelete(key){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).delete(key);});}
+
+window.addEventListener('DOMContentLoaded',function(){
+  ['comic-1','comic-2','comic-3'].forEach(function(id){
+    sadbLoad(id,function(data){
+      if(!data)return;
+      var el=document.getElementById('pd-'+id);
+      if(!el)return;
+      el.innerHTML=data.startsWith('data:video')
+        ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+        :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    });
+  });
+});
+
+function comicUpload(inputId,panelId,dbKey){
+  var inp=document.getElementById(inputId);if(!inp)return;
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var data=ev.target.result;
+    var el=document.getElementById(panelId);if(!el)return;
+    el.innerHTML=f.type.startsWith('video/')
+      ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+      :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    sadbSave(dbKey,data);
+  };
+  r.readAsDataURL(f);
+}
+
+function comicDelete(panelId,dbKey){
+  var el=document.getElementById(panelId);if(!el)return;
+  el.innerHTML='<div class="vsp-placeholder"><div style="font-size:52px">🎬</div><div style="font-size:13pt;color:rgba(255,255,255,.45);text-align:center;">Click to upload</div></div>';
+  sadbDelete(dbKey);
+}
+</script>
+
+<!-- ══════════════════════════════════════════════════════════
+     SAVE BUTTON BAR
+══════════════════════════════════════════════════════════ -->
+<div class="save-bar">
+<button onclick="(function(){
+  var clone=document.body.cloneNode(true);
+  var sb=clone.querySelector('.save-bar');if(sb)sb.parentNode.removeChild(sb);
+  clone.querySelectorAll('input[type=file]').forEach(function(i){i.value='';});
+  clone.querySelectorAll('script').forEach(function(s){s.parentNode.removeChild(s);});
+  var html='<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n<meta charset=\'UTF-8\'>\n<meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0\'>\n<link rel=\'preconnect\' href=\'https://fonts.googleapis.com\'>\n<link rel=\'preconnect\' href=\'https://fonts.gstatic.com\' crossorigin>\n<link href=\'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap\' rel=\'stylesheet\'>\n'+document.querySelector('style').outerHTML+'\n</head>\n<body>\n'+clone.innerHTML+'\n</body>\n</html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ai_decoded_ep43_eng.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){alert('✅ EP.43 saved!\n\nPaste the saved <body> into your blog\'s HTML tab.\n(Scripts stripped — no code leaks in preview mode)');},300);
+})()">💾 SAVE HTML (IMAGES INCLUDED)</button>
+</div>
+
+</body>
+</html>

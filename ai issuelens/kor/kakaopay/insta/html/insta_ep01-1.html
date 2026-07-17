@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens INSTA EP.01-1</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#111;font-family:'Noto Sans KR',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:24px;
+}
+.card{
+  position:relative;width:390px;height:390px;
+  overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.95);
+  flex-shrink:0;
+}
+
+/* 배경 */
+.bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 75%, rgba(190,100,0,.6) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 55% at 85% 25%, rgba(20,40,140,.65) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(30,10,60,.4) 0%, transparent 70%),
+    #06060f;
+}
+
+/* 좌상단 빨간 삼각 모서리 */
+.corner-tl{
+  position:absolute;top:0;left:0;
+  width:0;height:0;
+  border-style:solid;
+  border-width:110px 110px 0 0;
+  border-color:#CC0000 transparent transparent transparent;
+  z-index:2;
+}
+/* 우하단 모서리 */
+.corner-br{
+  position:absolute;bottom:0;right:0;
+  width:0;height:0;
+  border-style:solid;
+  border-width:0 0 90px 90px;
+  border-color:transparent transparent #CC0000 transparent;
+  z-index:2;
+}
+
+/* EP 배지 (삼각 위에) */
+.ep-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:10px;font-weight:900;color:rgba(255,255,255,.9);
+  letter-spacing:.14em;z-index:10;
+  text-shadow:1px 1px 0 rgba(0,0,0,.6);
+}
+
+/* 핸들 */
+.handle{
+  position:absolute;bottom:8px;right:12px;
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.7);
+  letter-spacing:.06em;z-index:10;
+}
+
+/* 폰 일러스트 */
+.phone{
+  position:absolute;left:16px;top:50%;
+  transform:translateY(-52%) rotate(-9deg);
+  width:108px;height:155px;
+  background:linear-gradient(145deg,#1a2540,#0c1020);
+  border:2.5px solid #243260;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;padding:12px;
+  box-shadow:0 8px 28px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06);
+  z-index:3;
+}
+.ph-b{width:80%;height:20px;background:#2a407a;border-radius:4px}
+.ph-btn{width:68%;height:20px;background:#D99000;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.ph-btn-i{width:11px;height:11px;border:2px solid rgba(0,0,0,.4);border-radius:50%}
+.ph-b2{width:80%;height:18px;background:#1a50a0;border-radius:4px}
+.ph-ln{height:2.5px;background:rgba(255,255,255,.18);border-radius:2px;width:68%}
+.ph-ln2{height:2.5px;background:rgba(255,255,255,.18);border-radius:2px;width:50%}
+
+/* 클릭 링 */
+.tap-ring{
+  position:absolute;
+  width:30px;height:30px;border-radius:50%;
+  border:2px solid rgba(217,144,0,.8);
+  top:calc(50% - 28px);left:calc(16px + 38px);
+  transform:translateY(-52%);
+  z-index:4;
+  box-shadow:0 0 14px rgba(217,144,0,.5);
+}
+
+/* 메인 텍스트 영역 */
+.main{
+  position:absolute;
+  right:16px;top:50%;transform:translateY(-66%);
+  width:200px;
+  text-align:center;
+  z-index:10;
+}
+.label{
+  font-size:35px;font-weight:900;
+  color:#CC0000;
+  letter-spacing:-.03em;line-height:1.1;
+  word-break:keep-all;
+  text-shadow:2px 2px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);
+  margin-bottom:16px;
+}
+.m-line{
+  font-weight:900;letter-spacing:-.03em;line-height:1.1;
+  word-break:keep-all;
+  text-shadow:2px 2px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);
+}
+.m-yellow{color:#FFD700;font-size:38px}
+.m-white{color:#fff;font-size:30px}
+
+/* 하단 스트립 */
+.strip{
+  position:absolute;bottom:0;left:0;right:0;
+  height:52px;
+  background:#CC0000;
+  display:flex;align-items:center;justify-content:center;
+  z-index:5;
+  gap:6px;
+}
+.strip-text{
+  font-size:19px;font-weight:900;color:#fff;
+  letter-spacing:-.02em;
+  text-shadow:1px 1px 0 rgba(0,0,0,.4);
+}
+.strip-text .acc{color:#FFD700}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="bg"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+  <div class="ep-badge">EP.01 · #1</div>
+  <div class="handle">@issuelens</div>
+  <div class="phone">
+    <div class="ph-b"></div>
+    <div class="ph-btn"><div class="ph-btn-i"></div></div>
+    <div class="ph-b2"></div>
+    <div class="ph-ln"></div>
+    <div class="ph-ln2"></div>
+  </div>
+  <div class="tap-ring"></div>
+  <div class="main">
+    <div class="label">결제 버튼 클릭!</div>
+    <div class="m-line m-yellow">상품 말고</div>
+    <div class="m-line m-white">다른 걸</div>
+    <div class="m-line m-yellow">팔았습니다</div>
+  </div>
+  <div class="strip">
+    <div class="strip-text">당신의 <span class="acc">정보</span>는 이미 팔렸습니다</div>
+  </div>
+</div>
+</body>
+</html>

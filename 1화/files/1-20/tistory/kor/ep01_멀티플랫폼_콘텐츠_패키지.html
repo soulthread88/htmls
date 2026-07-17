@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시니어 AI 공부방 Ep.01 — 멀티플랫폼 콘텐츠 패키지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #1a2a4a;
+  --navy2:  #243550;
+  --gold:   #c49a3a;
+  --gold-l: #f5e6c0;
+  --cream:  #faf8f4;
+  --ink:    #1e1e1e;
+  --muted:  #666;
+  --border: #e2ddd4;
+
+  /* 플랫폼 색상 */
+  --yt:     #ff0000;
+  --yt-bg:  #fff4f4;
+  --ig:     #c13584;
+  --ig-bg:  #fff0f8;
+  --tk:     #010101;
+  --tk-bg:  #f4f4f4;
+  --fb:     #1877f2;
+  --fb-bg:  #f0f5ff;
+  --x:      #000;
+  --x-bg:   #f5f5f5;
+  --th:     #5a3e9b;
+  --th-bg:  #f3f0ff;
+  --sh:     #4caf50;  /* short-form 공통 */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #eee9e0;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── 사이드바 네비 ── */
+.nav {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 230px;
+  background: var(--navy);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0 0 40px;
+}
+.nav-logo {
+  padding: 24px 20px 16px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--gold);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  line-height: 1.4;
+}
+.nav-logo span { display: block; font-size: 11px; color: rgba(255,255,255,.4); font-family: 'Noto Sans KR', sans-serif; font-weight: 400; margin-top: 4px; }
+.nav-section { padding: 16px 20px 6px; font-size: 10px; font-weight: 700; letter-spacing: .12em; color: rgba(255,255,255,.3); text-transform: uppercase; }
+.nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 20px; font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,.7); text-decoration: none;
+  transition: background .15s, color .15s;
+  border-left: 3px solid transparent;
+}
+.nav a:hover, .nav a.active {
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  border-left-color: var(--gold);
+}
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── 메인 ── */
+.main {
+  margin-left: 230px;
+  padding: 32px 40px 80px;
+  max-width: calc(100% - 230px);
+}
+
+/* ── 페이지 제목 ── */
+.page-header {
+  background: var(--navy);
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin-bottom: 36px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::after {
+  content: 'CONTENT\APACKAGE';
+  white-space: pre;
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  font-size: 60px; font-weight: 900; color: rgba(255,255,255,.05);
+  font-family: 'Noto Serif KR', serif; line-height: 1; text-align: right;
+}
+.page-header-badge { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+.page-header h1 { font-family: 'Noto Serif KR', serif; font-size: 26px; font-weight: 900; line-height: 1.35; margin-bottom: 10px; }
+.page-header p { font-size: 14px; color: rgba(255,255,255,.6); }
+
+/* ── 섹션 카드 ── */
+.section-card {
+  background: #fff;
+  border-radius: 16px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.section-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.section-icon { font-size: 28px; flex-shrink: 0; }
+.section-platform { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 3px; }
+.section-title-text { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 900; color: var(--navy); }
+.section-meta { margin-left: auto; font-size: 12px; color: var(--muted); text-align: right; line-height: 1.5; }
+.section-body { padding: 28px; }
+
+/* 플랫폼별 헤더 색상 */
+.hd-yt  { background: var(--yt-bg);  border-left: 5px solid var(--yt); }
+.hd-yt  .section-platform { color: var(--yt); }
+.hd-sh  { background: #fff8ec;       border-left: 5px solid #f59e0b; }
+.hd-sh  .section-platform { color: #d97706; }
+.hd-ig  { background: var(--ig-bg);  border-left: 5px solid var(--ig); }
+.hd-ig  .section-platform { color: var(--ig); }
+.hd-sns { background: #f0faf4;       border-left: 5px solid #22c55e; }
+.hd-sns .section-platform { color: #16a34a; }
+
+/* ── 스크립트 블록 ── */
+.script-block {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  position: relative;
+}
+.script-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+}
+.script-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.script-time {
+  position: absolute; top: 14px; right: 16px;
+  background: var(--navy); color: #fff;
+  font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 10px;
+}
+.script-text {
+  font-size: 15px; line-height: 1.85; color: var(--ink);
+  white-space: pre-line; word-break: keep-all;
+}
+.script-text .action { color: #888; font-style: italic; font-size: 13px; }
+.script-text .hook   { font-weight: 700; font-size: 16px; color: var(--navy); }
+.script-text .cta    { font-weight: 700; color: #e05a00; }
+
+/* ── 숏폼 카드 ── */
+.short-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+.short-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 16px;
+}
+.short-card-num { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--muted); margin-bottom: 8px; }
+.short-card-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.4; }
+.short-card-body { font-size: 13px; line-height: 1.8; color: #444; white-space: pre-line; }
+.short-card-tag { margin-top: 10px; font-size: 11px; color: #d97706; font-weight: 600; }
+
+/* ── 인스타 슬라이드 ── */
+.ig-slides { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.ig-slide {
+  border-radius: 14px;
+  padding: 22px 20px;
+  min-height: 200px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.ig-slide-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; opacity: .6; margin-bottom: 10px; }
+.ig-slide-title { font-family: 'Noto Serif KR', serif; font-size: 17px; font-weight: 900; line-height: 1.4; margin-bottom: 8px; }
+.ig-slide-body { font-size: 13px; line-height: 1.75; opacity: .85; flex: 1; }
+.ig-slide-footer { font-size: 11px; font-weight: 700; opacity: .5; margin-top: 14px; }
+.ig-slide-bg-text { position: absolute; bottom: -10px; right: -8px; font-size: 70px; opacity: .07; font-weight: 900; line-height: 1; }
+
+/* 인스타 슬라이드 색상 */
+.ig-s1 { background: #1a2a4a; color: #fff; }
+.ig-s2 { background: #fff8ec; color: var(--navy); border: 1.5px solid #f5d89a; }
+.ig-s3 { background: #f0f7ff; color: var(--navy); border: 1.5px solid #b8d4f5; }
+.ig-s4 { background: #1a2a4a; color: #fff; }
+.ig-s5 { background: #fff4f0; color: var(--navy); border: 1.5px solid #ffd0b8; }
+.ig-s6 { background: #f0fff4; color: #1a3a2a; border: 1.5px solid #a0dbb0; }
+.ig-s7 { background: var(--gold); color: var(--navy); }
+.ig-s7 .ig-slide-title { color: var(--navy); }
+
+/* ── SNS 포스트 ── */
+.sns-posts { display: flex; flex-direction: column; gap: 16px; }
+.sns-post {
+  border-radius: 12px; padding: 20px 22px;
+  border: 1.5px solid var(--border);
+  position: relative;
+}
+.sns-post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.sns-badge {
+  font-size: 11px; font-weight: 700; padding: 4px 10px;
+  border-radius: 20px; letter-spacing: .05em;
+}
+.badge-fb  { background: #e8f0fe; color: var(--fb); }
+.badge-x   { background: #f0f0f0; color: #000; }
+.badge-th  { background: #ede8ff; color: var(--th); }
+.sns-post-char { margin-left: auto; font-size: 12px; color: var(--muted); }
+.sns-post-text { font-size: 15px; line-height: 1.9; color: var(--ink); white-space: pre-line; word-break: keep-all; }
+.sns-post-tags { margin-top: 12px; font-size: 13px; color: #4a7fb5; font-weight: 600; line-height: 1.8; }
+.sns-post-note { margin-top: 10px; font-size: 12px; color: var(--muted); font-style: italic; background: var(--cream); padding: 8px 12px; border-radius: 6px; }
+
+/* ── 카피 버튼 ── */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--navy); color: #fff;
+  border: none; border-radius: 8px; padding: 7px 14px;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  margin-top: 14px; transition: opacity .15s; font-family: inherit;
+}
+.copy-btn:hover { opacity: .85; }
+.copy-btn.copied { background: #22c55e; }
+
+/* ── 구분 라벨 ── */
+.divider-label {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  color: var(--muted); text-transform: uppercase; margin: 24px 0 16px;
+}
+.divider-label::before, .divider-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ── 체크리스트 박스 ── */
+.checklist { list-style: none; padding: 0; margin: 16px 0; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: #444; padding: 8px 0;
+  border-bottom: 1px dotted var(--border); line-height: 1.6;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── 반응형 ── */
+@media (max-width: 1100px) {
+  .nav { width: 200px; }
+  .main { margin-left: 200px; max-width: calc(100% - 200px); padding: 24px 24px 60px; }
+  .short-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 800px) {
+  .nav { display: none; }
+  .main { margin-left: 0; max-width: 100%; padding: 20px 16px 60px; }
+  .short-grid { grid-template-columns: 1fr; }
+  .ig-slides { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ 사이드바 네비 ══ -->
+<nav class="nav">
+  <div class="nav-logo">
+    시니어 AI 공부방
+    <span>Ep.01 콘텐츠 패키지</span>
+  </div>
+
+  <div class="nav-section">YouTube</div>
+  <a href="#yt-long"><span class="nav-dot" style="background:#ff0000"></span> 롱폼 스크립트</a>
+  <a href="#yt-short"><span class="nav-dot" style="background:#ff6b00"></span> 숏츠 스크립트 ×4</a>
+
+  <div class="nav-section">Short-form</div>
+  <a href="#tiktok"><span class="nav-dot" style="background:#69c9d0"></span> TikTok ×4</a>
+  <a href="#reels"><span class="nav-dot" style="background:#c13584"></span> Instagram Reels ×4</a>
+
+  <div class="nav-section">Instagram</div>
+  <a href="#ig-card"><span class="nav-dot" style="background:#e1306c"></span> 카드뉴스 7장</a>
+
+  <div class="nav-section">텍스트 SNS</div>
+  <a href="#facebook"><span class="nav-dot" style="background:#1877f2"></span> Facebook</a>
+  <a href="#x"><span class="nav-dot" style="background:#000"></span> X (Twitter)</a>
+  <a href="#threads"><span class="nav-dot" style="background:#5a3e9b"></span> Threads</a>
+
+  <div class="nav-section">가이드</div>
+  <a href="#checklist"><span class="nav-dot" style="background:#22c55e"></span> 업로드 체크리스트</a>
+</nav>
+
+<!-- ══ 메인 ══ -->
+<main class="main">
+
+  <!-- 페이지 헤더 -->
+  <div class="page-header">
+    <div class="page-header-badge">📦 Content Package · Ep.01</div>
+    <h1>AI란 무엇인가?<br>멀티플랫폼 콘텐츠 전체 패키지</h1>
+    <p>YouTube 롱폼 · 숏츠 · TikTok · Reels · Instagram 카드뉴스 · Facebook · X · Threads — 한 파일에 모두 담았습니다.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       1. YouTube 롱폼 스크립트
+  ══════════════════════════════ -->
+  <div class="section-card" id="yt-long">
+    <div class="section-header hd-yt">
+      <span class="section-icon">▶️</span>
+      <div>
+        <div class="section-platform">YouTube · 롱폼</div>
+        <div class="section-title-text">AI란 무엇인가? — 풀 영상 스크립트</div>
+      </div>
+      <div class="section-meta">권장 길이 10~15분<br>자막 파일로도 사용 가능</div>
+    </div>
+    <div class="section-body">
+
+      <!-- 제목 & 설명란 -->
+      <div class="divider-label">영상 제목 · 설명란</div>
+      <div class="script-block">
+        <div class="script-label">영상 제목 (SEO 최적화)</div>
+        <div class="script-text">🤖 AI란 무엇인가? 시니어도 5분 만에 이해하는 인공지능 완전 쉬운 설명 | 시니어 AI 공부방 Ep.01</div>
+      </div>
+      <div class="script-block">
+        <div class="script-label">영상 설명란 (첫 3줄 = SEO 핵심)</div>
+        <div class="script-text">📖 AI(인공지능)가 무엇인지, 50·60·70대 시니어도 바로 이해할 수 있도록 가장 쉽게 설명합니다!
+
+✅ 이 영상에서 배우는 것
+- AI(인공지능)의 뜻과 정의
+- 우리가 매일 쓰는 AI 예시 3가지
+- AI가 어떻게 스스로 배우는지 (머신러닝 초간단 설명)
+- 시니어에게 AI가 유용한 이유 5가지
+
+📚 시니어 AI 공부방 재생목록 → [링크]
+🔔 구독 + 알림 설정하면 매주 새 강의를 받아보실 수 있어요!
+
+#AI란 #인공지능이란 #AI뜻 #시니어AI #ChatGPT란 #머신러닝이란 #AI쉬운설명 #50대AI #60대AI #인공지능공부 #AI입문</div>
+      </div>
+
+      <!-- 오프닝 훅 -->
+      <div class="divider-label">오프닝 훅 (0:00 ~ 0:40)</div>
+      <div class="script-block">
+        <div class="script-time">0:00</div>
+        <div class="script-text"><span class="action">[화면: "AI란?" 큰 글씨 등장 → 부드럽게 페이드인]</span>
+
+<span class="hook">여러분, 요즘 뉴스 보시면 매일 나오는 단어가 있죠?
+바로 "AI"입니다.</span>
+
+그런데 솔직히 물어볼게요.
+AI가 정확히 뭔지… 아직 잘 모르시겠죠? 😊
+
+걱정 마세요.
+오늘 이 영상 하나로 완벽하게 이해하실 수 있습니다.
+
+<span class="action">[자막 등장: "컴퓨터를 몰라도 됩니다"]</span>
+
+저는 [채널명]입니다.
+시니어 여러분과 함께 AI를 처음부터 차근차근 배워 나가겠습니다.
+자, 시작해 볼까요?</div>
+      </div>
+
+      <!-- 본론 1 -->
+      <div class="divider-label">본론 1 — AI란 무엇인가? (0:40 ~ 3:00)</div>
+      <div class="script-block">
+        <div class="script-time">0:40</div>
+        <div class="script-text"><span class="action">[화면: 'AI = Artificial Intelligence' 텍스트 애니메이션]</span>
+
+AI는 영어로 Artificial Intelligence라고 합니다.
+한국어로 하면 '인공지능'이에요.
+
+<span class="hook">한 문장으로 쉽게 말씀드리면 이겁니다.</span>
+<span class="action">[자막 강조: "컴퓨터가 사람처럼 생각하고 배우고 판단하는 기술"]</span>
+
+예전에는 컴퓨터가 딱 시키는 일만 했어요.
+1 더하기 1은 2, 이런 계산만 했죠.
+
+그런데 이제는 달라졌습니다.
+컴퓨터가 사진을 보고 "이건 고양이네" 하고 스스로 판단하고,
+우리 말을 듣고 이해하고, 심지어 글도 씁니다.
+
+<span class="action">[화면 전환: 스마트폰 화면 예시 이미지]</span>
+
+이게 바로 AI의 힘이에요.</div>
+      </div>
+
+      <!-- 본론 2 -->
+      <div class="divider-label">본론 2 — 우리는 이미 AI를 쓴다 (3:00 ~ 6:30)</div>
+      <div class="script-block">
+        <div class="script-time">3:00</div>
+        <div class="script-text"><span class="action">[화면: "나는 AI를 안 써요?" → X 표시]</span>
+
+여기서 중요한 말씀을 드릴게요.
+"저는 AI 안 써요"라고 하시는 분들 많으시죠?
+
+근데요, 사실 이미 매일 쓰고 계십니다! 😄
+
+<span class="hook">첫 번째, 유튜브 추천 영상입니다.</span>
+<span class="action">[화면: 유튜브 추천 영상 화면 캡처 예시]</span>
+
+지금 이 영상 오른쪽 보시면 "다음으로 볼 영상" 뜨죠?
+그게 AI가 여러분의 취향을 분석해서 골라 준 거예요.
+
+<span class="hook">두 번째, 스마트폰 얼굴 인식입니다.</span>
+스마트폰 들고 보기만 해도 잠금이 풀리는 거, 다들 써 보셨죠?
+그게 AI 얼굴 인식 기술이에요.
+
+<span class="hook">세 번째, 네이버 검색 자동완성입니다.</span>
+검색창에 "AI"라고 입력하면
+AI 뜻, AI 공부, AI 그림… 이렇게 자동으로 뜨잖아요.
+그것도 AI가 수백만 명의 검색 패턴을 분석한 결과예요.
+
+<span class="action">[카메라 직접 응시]</span>
+어떠세요? 이미 매일 쓰고 계셨죠? 😊</div>
+      </div>
+
+      <!-- 본론 3 -->
+      <div class="divider-label">본론 3 — AI는 어떻게 배우나? 머신러닝 (6:30 ~ 9:30)</div>
+      <div class="script-block">
+        <div class="script-time">6:30</div>
+        <div class="script-text"><span class="action">[화면: 고양이·강아지 사진 콜라주 이미지]</span>
+
+그럼 AI는 어떻게 이렇게 똑똑해진 걸까요?
+
+AI는 학교에 다니지 않아요.
+대신 엄청난 양의 데이터를 보면서 스스로 배웁니다.
+이걸 '머신러닝'이라고 해요.
+
+예를 들어볼게요.
+AI에게 고양이 사진 100만 장, 강아지 사진 100만 장을 보여 줍니다.
+<span class="action">[화면: 숫자 카운터 애니메이션 "1,000,000장"]</span>
+
+AI는 계속 분석해요.
+귀 모양이 이렇고, 눈 모양이 저렇고, 얼굴 형태가 이런 건 고양이구나…
+
+그러다 나중에 새로운 사진을 딱 보여 주면,
+<span class="hook">"이것은 고양이입니다!"</span>
+하고 정확하게 맞춥니다.
+
+사람이 경험으로 배우듯이,
+AI도 데이터로 배우는 거예요.
+이 과정을 머신러닝, 기계 학습이라고 합니다.</div>
+      </div>
+
+      <!-- 본론 4 -->
+      <div class="divider-label">본론 4 — 시니어에게 AI가 좋은 이유 (9:30 ~ 12:30)</div>
+      <div class="script-block">
+        <div class="script-time">9:30</div>
+        <div class="script-text"><span class="action">[화면: 스마트폰으로 AI 앱 사용하는 시니어 일러스트]</span>
+
+자, 그러면 AI가 우리 시니어 분들께 어떻게 도움이 될까요?
+
+<span class="hook">첫째, 글쓰기입니다.</span>
+자녀에게 편지 쓰기 어려우셨죠?
+AI에게 "아들한테 생일 축하 메시지 써줘" 하면 바로 써 줘요.
+
+<span class="hook">둘째, 번역입니다.</span>
+해외여행 가셨을 때 메뉴판 모르셨죠?
+AI에게 사진 찍어서 보내면 바로 번역해 줍니다.
+
+<span class="hook">셋째, 정보 검색입니다.</span>
+검색어를 몰라도 돼요.
+그냥 "서울에서 걷기 좋은 공원 알려줘" 하고 말하면 됩니다.
+
+<span class="hook">넷째, 사진 정리입니다.</span>
+손자 손녀 사진 수천 장 정리가 힘드셨죠?
+AI가 얼굴 인식해서 자동으로 분류해 줍니다.
+
+<span class="hook">다섯째, 스마트폰 사용 도움입니다.</span>
+버튼 어디 있는지 모를 때,
+AI에게 "카카오톡 프로필 바꾸는 법 알려줘" 하면 단계별로 알려 줘요.</div>
+      </div>
+
+      <!-- 클로징 -->
+      <div class="divider-label">클로징 + CTA (12:30 ~ 13:30)</div>
+      <div class="script-block">
+        <div class="script-time">12:30</div>
+        <div class="script-text"><span class="action">[화면: 핵심 정리 슬라이드 등장]</span>
+
+오늘 배운 내용 딱 4가지로 정리해 드릴게요.
+
+하나. AI는 인공지능, Artificial Intelligence의 약자입니다.
+둘. AI는 컴퓨터가 사람처럼 생각하도록 만든 기술입니다.
+셋. 우리는 이미 유튜브·스마트폰에서 매일 AI를 쓰고 있습니다.
+넷. AI는 데이터를 보면서 스스로 배웁니다.
+
+<span class="action">[카메라 직접 응시, 따뜻한 미소]</span>
+
+어떠셨어요? 생각보다 어렵지 않죠? 😊
+
+<span class="cta">다음 시간에는 요즘 가장 화제인 ChatGPT를 소개해 드릴게요.
+ChatGPT가 도대체 뭔지, 어떻게 쓰는지 알기 쉽게 설명해 드립니다.</span>
+
+구독 버튼과 좋아요 꾹 눌러 주시면 다음 강의 놓치지 않으세요!
+다음 시간에 또 만나요~ 안녕히 계세요! 👋
+
+<span class="action">[엔딩 카드: 다음 영상 추천 + 구독 버튼 애니메이션]</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       2. YouTube 숏츠
+  ══════════════════════════════ -->
+  <div class="section-card" id="yt-short">
+    <div class="section-header hd-sh">
+      <span class="section-icon">⚡</span>
+      <div>
+        <div class="section-platform">YouTube 숏츠 · TikTok · Instagram Reels 공용</div>
+        <div class="section-title-text">숏폼 스크립트 4편</div>
+      </div>
+      <div class="section-meta">각 45~60초<br>세로 9:16 촬영</div>
+    </div>
+    <div class="section-body">
+      <div class="short-grid">
+
+        <!-- 숏폼 1 -->
+        <div class="short-card">
+          <div class="short-card-num">SHORTS #01</div>
+          <div class="short-card-title">📱 스마트폰에 이미 AI가 있다!</div>
+          <div class="short-card-body"><span style="font-weight:700;color:#1a2a4a">[훅 — 첫 1초]</span>
+"스마트폰 쓰시죠? 그럼 이미 AI 쓰고 계신 거예요!"
+
+<span style="font-weight:700;color:#1a2a4a">[본론 — 20초]</span>
+얼굴 인식으로 잠금 해제 → AI
+유튜브 추천 영상 → AI
+네이버 검색 자동완성 → AI
+
+알고 보면 우리 모두 AI를 매일 쓰고 있어요!
+
+<span style="font-weight:700;color:#1a2a4a">[클로징 — 5초]</span>
+AI, 어렵지 않죠? 😊
+자세한 건 링크 영상에서!</div>
+          <div class="short-card-tag">#AI란 #인공지능 #시니어AI #AI쉬운설명</div>
+        </div>
+
+        <!-- 숏폼 2 -->
+        <div class="short-card">
+          <div class="short-card-num">SHORTS #02</div>
+          <div class="short-card-title">🤖 AI가 뭔지 10초 만에 설명!</div>
+          <div class="short-card-body"><span style="font-weight:700;color:#1a2a4a">[훅 — 첫 1초]</span>
+"AI가 뭔지 10초 만에 설명해 드릴게요!"
+
+<span style="font-weight:700;color:#1a2a4a">[본론 — 20초]</span>
+AI = 인공지능
+= 컴퓨터가 사람처럼 생각하는 기술
+
+사람이 경험으로 배우듯
+AI는 데이터로 배웁니다.
+
+고양이 사진 100만 장 → AI 학습
+→ "이건 고양이!" 자동 판단
+
+<span style="font-weight:700;color:#1a2a4a">[클로징 — 5초]</span>
+이제 AI가 뭔지 아셨죠? 👍
+구독하면 더 쉽게 배울 수 있어요!</div>
+          <div class="short-card-tag">#AI뜻 #인공지능이란 #머신러닝 #AI입문</div>
+        </div>
+
+        <!-- 숏폼 3 -->
+        <div class="short-card">
+          <div class="short-card-num">SHORTS #03</div>
+          <div class="short-card-title">👴👵 AI, 시니어에게 이렇게 좋습니다!</div>
+          <div class="short-card-body"><span style="font-weight:700;color:#1a2a4a">[훅 — 첫 1초]</span>
+"AI, 어르신들이 쓰면 이런 점이 좋아요!"
+
+<span style="font-weight:700;color:#1a2a4a">[본론 — 25초]</span>
+1️⃣ 편지·메시지 대신 써 줘요
+2️⃣ 외국어 즉시 번역해 줘요
+3️⃣ 무엇이든 쉽게 검색돼요
+4️⃣ 사진 자동으로 정리해 줘요
+5️⃣ 앱 사용법도 친절히 알려 줘요
+
+그냥 말로 물어보면 돼요!
+"서울 가볼 만한 곳 알려줘" 하면 바로 답이 나와요.
+
+<span style="font-weight:700;color:#1a2a4a">[클로징 — 5초]</span>
+AI, 어렵지 않아요! 같이 배워요 😊</div>
+          <div class="short-card-tag">#시니어AI #50대AI #60대AI #AI활용 #디지털문해력</div>
+        </div>
+
+        <!-- 숏폼 4 -->
+        <div class="short-card">
+          <div class="short-card-num">SHORTS #04</div>
+          <div class="short-card-title">🐱 AI가 고양이를 알아보는 법</div>
+          <div class="short-card-body"><span style="font-weight:700;color:#1a2a4a">[훅 — 첫 1초]</span>
+"AI가 어떻게 고양이를 알아볼까요?"
+
+<span style="font-weight:700;color:#1a2a4a">[본론 — 25초]</span>
+AI에게 고양이 사진 100만 장을 보여 줍니다.
+강아지 사진도 100만 장.
+
+AI는 스스로 분석해요.
+→ 귀가 이렇게 생기면 고양이
+→ 코가 저렇게 생기면 강아지
+
+그러다 새 사진을 보여 주면?
+"이건 고양이입니다!" 정확히 맞춰요.
+
+이게 바로 머신러닝, 기계 학습이에요!
+
+<span style="font-weight:700;color:#1a2a4a">[클로징 — 5초]</span>
+신기하죠? AI 더 알고 싶으면 구독! 🔔</div>
+          <div class="short-card-tag">#머신러닝이란 #AI학습 #인공지능원리 #ChatGPT란</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       3. Instagram 카드뉴스
+  ══════════════════════════════ -->
+  <div class="section-card" id="ig-card">
+    <div class="section-header hd-ig">
+      <span class="section-icon">📸</span>
+      <div>
+        <div class="section-platform">Instagram · 카드뉴스 슬라이드</div>
+        <div class="section-title-text">AI란 무엇인가? — 7장 슬라이드</div>
+      </div>
+      <div class="section-meta">1:1 정방형 or 4:5<br>1080×1080px 권장</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">아래 각 카드의 텍스트·색상 배치를 그대로 이미지로 제작하세요. Canva, 미리캔버스 사용 추천.</p>
+      <div class="ig-slides">
+
+        <div class="ig-slide ig-s1">
+          <div>
+            <div class="ig-slide-num">01 / 07</div>
+            <div class="ig-slide-title" style="color:#fff;font-size:22px">AI란<br>무엇인가?</div>
+            <div class="ig-slide-body" style="color:rgba(255,255,255,.8)">시니어도 5분 만에 이해하는<br>인공지능 완전 쉬운 설명</div>
+          </div>
+          <div class="ig-slide-footer" style="color:rgba(255,255,255,.5)">📚 시니어 AI 공부방 Ep.01</div>
+          <div class="ig-slide-bg-text" style="color:#fff">AI</div>
+        </div>
+
+        <div class="ig-slide ig-s2">
+          <div>
+            <div class="ig-slide-num" style="color:#b07a20">02 / 07</div>
+            <div class="ig-slide-title">AI가 뭔지<br>아직 모르세요?</div>
+            <div class="ig-slide-body">
+              많은 분들이 이렇게 말합니다.<br><br>
+              <strong>"AI는 전문가만 쓰는 거 아닌가요?"</strong><br><br>
+              사실 그렇지 않아요!<br>
+              알고 보면 우리 모두 이미 AI를<br>매일 쓰고 있답니다. 😊
+            </div>
+          </div>
+          <div class="ig-slide-footer">다음 카드에서 확인하세요 →</div>
+        </div>
+
+        <div class="ig-slide ig-s3">
+          <div>
+            <div class="ig-slide-num" style="color:#2a6aad">03 / 07</div>
+            <div class="ig-slide-title">AI = 인공지능</div>
+            <div class="ig-slide-body">
+              AI는 <strong>Artificial Intelligence</strong>의 약자.<br>
+              한국어로 <strong>인공지능</strong>이에요.<br><br>
+              한 줄 정의 :<br>
+              <strong style="font-size:15px">"컴퓨터가 사람처럼<br>생각하고 배우고 판단하는 기술"</strong>
+            </div>
+          </div>
+          <div class="ig-slide-footer" style="color:#2a6aad">쉽죠? 😊</div>
+        </div>
+
+        <div class="ig-slide ig-s4">
+          <div>
+            <div class="ig-slide-num">04 / 07</div>
+            <div class="ig-slide-title" style="color:#fff">우리가 매일 쓰는<br>AI 3가지</div>
+            <div class="ig-slide-body" style="color:rgba(255,255,255,.85)">
+              ▶ 유튜브 추천 영상<br>
+              → AI 추천 알고리즘<br><br>
+              😊 스마트폰 얼굴 인식<br>
+              → AI 얼굴 인식 기술<br><br>
+              🔍 네이버 검색 자동완성<br>
+              → AI 데이터 분석 기술
+            </div>
+          </div>
+          <div class="ig-slide-footer" style="color:rgba(255,255,255,.5)">알고 보면 이미 AI 전문가! 😄</div>
+          <div class="ig-slide-bg-text" style="color:#fff">📱</div>
+        </div>
+
+        <div class="ig-slide ig-s5">
+          <div>
+            <div class="ig-slide-num" style="color:#c05a20">05 / 07</div>
+            <div class="ig-slide-title">AI는 어떻게 배울까?</div>
+            <div class="ig-slide-body">
+              🐱 고양이 사진 100만 장<br>
+              🐶 강아지 사진 100만 장<br>
+              ↓<br>
+              AI가 스스로 분석<br>
+              (귀·눈·얼굴 형태)<br>
+              ↓<br>
+              <strong>"이것은 고양이입니다!" ✓</strong><br><br>
+              이걸 <strong>머신러닝</strong>이라고 해요.
+            </div>
+          </div>
+          <div class="ig-slide-footer" style="color:#c05a20">데이터로 배우는 AI</div>
+        </div>
+
+        <div class="ig-slide ig-s6">
+          <div>
+            <div class="ig-slide-num" style="color:#1a6a3a">06 / 07</div>
+            <div class="ig-slide-title">시니어에게 AI가<br>좋은 이유 5가지</div>
+            <div class="ig-slide-body">
+              ① 편지·메시지 대신 써 줘요<br>
+              ② 외국어 즉시 번역해 줘요<br>
+              ③ 뭐든 쉽게 검색돼요<br>
+              ④ 사진 자동 정리해 줘요<br>
+              ⑤ 앱 사용법 친절히 알려 줘요
+            </div>
+          </div>
+          <div class="ig-slide-footer" style="color:#1a6a3a">스마트폰만 있으면 충분해요 📱</div>
+        </div>
+
+        <div class="ig-slide ig-s7">
+          <div>
+            <div class="ig-slide-num" style="color:rgba(26,42,74,.6)">07 / 07</div>
+            <div class="ig-slide-title" style="font-size:20px">오늘의 핵심 정리 ✅</div>
+            <div class="ig-slide-body" style="color:var(--navy)">
+              ✓ AI = 인공지능<br>
+              ✓ 컴퓨터가 사람처럼 생각하는 기술<br>
+              ✓ 우리는 이미 매일 AI를 쓴다<br>
+              ✓ AI는 데이터로 스스로 배운다<br><br>
+              <strong>다음 편 : ChatGPT란 무엇인가?</strong>
+            </div>
+          </div>
+          <div class="ig-slide-footer" style="color:rgba(26,42,74,.5)">📚 시니어 AI 공부방 — 구독 & 팔로우</div>
+        </div>
+
+      </div>
+
+      <!-- 인스타 캡션 -->
+      <div class="divider-label" style="margin-top:24px">인스타그램 게시물 캡션</div>
+      <div class="script-block">
+        <div class="script-label">캡션 전문 (복사 후 바로 사용)</div>
+        <div class="script-text">🤖 AI란 무엇인가요? 5분 만에 완전 이해!
+
+요즘 뉴스에서 매일 나오는 'AI', 아직 낯설게 느껴지시나요?
+사실 여러분은 이미 매일 AI를 쓰고 계십니다! 😊
+
+📌 카드 넘겨 보시면 이런 내용이 있어요
+✅ AI(인공지능)의 쉬운 뜻
+✅ 우리가 매일 쓰는 AI 예시 3가지
+✅ AI가 스스로 배우는 원리 (머신러닝)
+✅ 시니어에게 특히 유용한 AI 활용법 5가지
+
+자세한 내용은 프로필 링크의 블로그 글에서 읽어보세요! 📖
+
+#AI란 #인공지능이란 #AI뜻 #AI쉬운설명 #시니어AI #50대AI #60대AI #70대AI #ChatGPT란 #머신러닝이란 #인공지능공부 #AI입문 #AI초보 #디지털문해력 #스마트폰활용 #시니어스타그램 #액티브시니어</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       4. 텍스트 SNS
+  ══════════════════════════════ -->
+  <div class="section-card" id="facebook">
+    <div class="section-header hd-sns">
+      <span class="section-icon">📣</span>
+      <div>
+        <div class="section-platform">Facebook · X(Twitter) · Threads</div>
+        <div class="section-title-text">플랫폼별 텍스트 포스트</div>
+      </div>
+      <div class="section-meta">각 플랫폼 최적화<br>길이·톤 조정 완료</div>
+    </div>
+    <div class="section-body">
+      <div class="sns-posts">
+
+        <!-- Facebook -->
+        <div class="sns-post" id="facebook-post">
+          <div class="sns-post-header">
+            <span class="sns-badge badge-fb">👍 Facebook</span>
+            <span class="sns-post-char">권장: 300~500자 · 이모지 적극 활용</span>
+          </div>
+          <div class="sns-post-text">🤖 AI란 도대체 뭘까요? 오늘 5분만 투자해 보세요!
+
+요즘 뉴스나 유튜브 보시면 매일 'AI'라는 단어가 나오죠?
+많은 분들이 "AI는 나와 상관없는 어려운 기술"이라고 생각하시더라고요.
+
+그런데 놀랍게도 우리는 이미 매일 AI를 쓰고 있습니다! 😄
+
+👉 유튜브 추천 영상 → AI
+👉 스마트폰 얼굴 인식 잠금 해제 → AI
+👉 네이버 검색 자동완성 → AI
+
+AI는 컴퓨터가 사람처럼 생각하고 배우는 기술이에요.
+어렵게 생각하실 필요가 전혀 없습니다!
+
+50·60·70대 시니어 분들도 스마트폰 하나로 AI를 얼마든지 활용하실 수 있어요.
+글쓰기 도움, 번역, 사진 정리, 정보 검색까지 다 됩니다.
+
+자세한 내용은 아래 블로그 글에서 읽어보세요! 📖
+[블로그 링크]
+
+주변에 AI가 궁금한 분들과 공유해 주세요~ 🙏</div>
+          <div class="sns-post-tags">#AI란 #인공지능이란 #시니어AI #AI쉬운설명 #50대AI #60대AI #디지털문해력</div>
+          <button class="copy-btn" onclick="copyText(this, 'facebook-post')">📋 복사하기</button>
+        </div>
+
+        <!-- X (Twitter) -->
+        <div class="sns-post" id="x-post">
+          <div class="sns-post-header">
+            <span class="sns-badge badge-x">𝕏 X (Twitter)</span>
+            <span class="sns-post-char">140자 스레드 × 5</span>
+          </div>
+          <div class="sns-post-text">🧵 AI란 뭔지 모르겠다는 분들을 위한 초간단 설명 스레드 [1/5]
+
+AI = 인공지능 = 컴퓨터가 사람처럼 생각하는 기술.
+어렵게 생각하면 끝없이 어렵고,
+쉽게 생각하면 5분 만에 이해됩니다. 👇
+
+━━━
+
+[2/5] 우리는 이미 매일 AI를 씁니다.
+
+✅ 유튜브 추천 영상 → AI
+✅ 스마트폰 얼굴 인식 → AI
+✅ 네이버 자동완성 → AI
+
+"AI 안 써요"라는 말은 사실 틀린 말이에요. 😄
+
+━━━
+
+[3/5] AI는 어떻게 배울까?
+
+고양이 사진 100만 장 + 강아지 사진 100만 장을 보여 주면
+AI가 스스로 분석해서 구분법을 배웁니다.
+이걸 머신러닝(Machine Learning)이라고 해요.
+
+━━━
+
+[4/5] 시니어에게 AI가 유용한 이유 5가지
+
+① 편지·메시지 대신 써 줌
+② 외국어 번역
+③ 정보 검색
+④ 사진 자동 정리
+⑤ 스마트폰 사용법 안내
+
+말로 물어보면 바로 답 나옵니다.
+
+━━━
+
+[5/5] 오늘의 결론
+
+AI는 어렵지 않아요.
+스마트폰만 있으면 누구나 쓸 수 있습니다.
+
+자세한 내용은 아래 블로그 글로 👇
+[블로그 링크]
+
+#AI란 #인공지능 #시니어AI #ChatGPT란 #머신러닝 #AI입문</div>
+          <div class="sns-post-note">💡 각 "━━━" 구분선 기준으로 쪼개어 스레드(연속 트윗)로 올리세요.</div>
+          <button class="copy-btn" onclick="copyText(this, 'x-post')">📋 복사하기</button>
+        </div>
+
+        <!-- Threads -->
+        <div class="sns-post" id="threads-post">
+          <div class="sns-post-header">
+            <span class="sns-badge badge-th">🧵 Threads</span>
+            <span class="sns-post-char">500자 · 대화체 권장</span>
+          </div>
+          <div class="sns-post-text">AI가 뭔지 아직 모르겠다는 분들, 손 들어 보세요! 🙋
+
+저도 처음엔 그랬거든요.
+뉴스에서 매일 나오는데, 막상 "AI가 뭔지 설명해 봐" 하면 말문이 막히는 그 느낌.
+
+근데 알고 나면 진짜 별거 아니에요.
+
+AI = 컴퓨터가 사람처럼 생각하는 기술.
+
+그리고 놀라운 사실 하나.
+우리는 이미 매일 AI를 쓰고 있어요.
+유튜브 추천, 스마트폰 얼굴 인식, 네이버 자동완성…
+전부 AI예요. 😄
+
+오늘 블로그에 시니어 분들을 위한 AI 입문 글 올렸어요.
+머신러닝이 뭔지, 시니어에게 AI가 왜 좋은지까지
+정말 쉽게 풀어 썼거든요.
+
+관심 있으신 분들 한번 읽어보세요 👇
+[블로그 링크]
+
+다음 편은 ChatGPT예요. 기대해 주세요! 🤖</div>
+          <div class="sns-post-tags">#AI란 #인공지능 #시니어AI #AI쉬운설명 #ChatGPT #머신러닝 #디지털문해력 #AI입문</div>
+          <button class="copy-btn" onclick="copyText(this, 'threads-post')">📋 복사하기</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       5. 업로드 체크리스트
+  ══════════════════════════════ -->
+  <div class="section-card" id="checklist">
+    <div class="section-header" style="background:#f0faf4; border-left:5px solid #22c55e;">
+      <span class="section-icon">✅</span>
+      <div>
+        <div class="section-platform" style="color:#16a34a">업로드 가이드</div>
+        <div class="section-title-text">플랫폼별 최종 업로드 체크리스트</div>
+      </div>
+      <div class="section-meta">발행 전 반드시 확인</div>
+    </div>
+    <div class="section-body">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+        <div>
+          <div class="divider-label">📝 블로그 (티스토리)</div>
+          <ul class="checklist">
+            <li><span class="check-icon">☐</span> 대표 이미지 등록 (1200×630px)</li>
+            <li><span class="check-icon">☐</span> 카테고리: 시니어 AI 공부방</li>
+            <li><span class="check-icon">☐</span> 태그 20개 입력 완료</li>
+            <li><span class="check-icon">☐</span> canonical URL 본인 주소로 수정</li>
+            <li><span class="check-icon">☐</span> 쿠팡 파트너스 실제 링크로 교체</li>
+            <li><span class="check-icon">☐</span> 애드센스 코드 삽입</li>
+            <li><span class="check-icon">☐</span> 모바일 미리보기 확인</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="divider-label">▶️ YouTube 롱폼</div>
+          <ul class="checklist">
+            <li><span class="check-icon">☐</span> 썸네일: 큰 글씨 + 얼굴 표정</li>
+            <li><span class="check-icon">☐</span> 제목에 핵심 키워드 포함 확인</li>
+            <li><span class="check-icon">☐</span> 설명란 3줄 이내 핵심 문장</li>
+            <li><span class="check-icon">☐</span> 챕터 타임스탬프 입력</li>
+            <li><span class="check-icon">☐</span> 자막 업로드 (접근성 + SEO)</li>
+            <li><span class="check-icon">☐</span> 카드·엔딩 화면 설정</li>
+            <li><span class="check-icon">☐</span> 재생목록 추가</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="divider-label">⚡ 숏폼 공통 (숏츠·TikTok·Reels)</div>
+          <ul class="checklist">
+            <li><span class="check-icon">☐</span> 세로 9:16 비율 촬영·편집</li>
+            <li><span class="check-icon">☐</span> 첫 1~2초 강렬한 훅 삽입</li>
+            <li><span class="check-icon">☐</span> 자막 크고 굵게 (시니어 가독성)</li>
+            <li><span class="check-icon">☐</span> 배경음악 저작권 무료 곡 사용</li>
+            <li><span class="check-icon">☐</span> 해시태그 5~10개 입력</li>
+            <li><span class="check-icon">☐</span> 링크 인 바이오 업데이트</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="divider-label">📸 Instagram 카드뉴스</div>
+          <ul class="checklist">
+            <li><span class="check-icon">☐</span> 1080×1080px 7장 제작</li>
+            <li><span class="check-icon">☐</span> 1번 카드 = 커버 (가장 눈에 띄게)</li>
+            <li><span class="check-icon">☐</span> 폰트 크기 최소 28pt (가독성)</li>
+            <li><span class="check-icon">☐</span> 캡션 복사 붙여넣기</li>
+            <li><span class="check-icon">☐</span> 해시태그 17개 확인</li>
+            <li><span class="check-icon">☐</span> 위치 태그 추가 (선택)</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="divider-label">📣 Facebook</div>
+          <ul class="checklist">
+            <li><span class="check-icon">☐</span> 블로그 링크 첨부</li>
+            <li><span class="check-icon">☐</span> 링크 미리보기 썸네일 확인</li>
+            <li><span class="check-icon">☐</span> 게시물 공개 범위: 전체 공개</li>
+            <li><span class="check-icon">☐</span> 관련 그룹 공유 (시니어·디지털)</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="divider-label">𝕏 X · 🧵 Threads</div>
+          <ul class="checklist">
+            <li><span class="check-icon">☐</span> X: 스레드 5개 연결 확인</li>
+            <li><span class="check-icon">☐</span> X: 마지막 스레드에 블로그 링크</li>
+            <li><span class="check-icon">☐</span> Threads: 블로그 링크 첨부</li>
+            <li><span class="check-icon">☐</span> 양 플랫폼 해시태그 입력 확인</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- 최적 발행 시간 -->
+      <div class="divider-label" style="margin-top:28px">⏰ 플랫폼별 최적 발행 시간 (한국 기준)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px;">
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:18px;margin-bottom:6px">▶️</div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">YouTube</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">오전 8~10시<br>오후 7~9시</div>
+        </div>
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:18px;margin-bottom:6px">📸</div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">Instagram</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">오전 11시~12시<br>오후 6~8시</div>
+        </div>
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:18px;margin-bottom:6px">🎵</div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">TikTok</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">오후 6~9시<br>저녁 10~11시</div>
+        </div>
+        <div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:18px;margin-bottom:6px">📣</div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">Facebook</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">오전 9~11시<br>오후 1~3시</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script>
+/* 네비 활성화 */
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+  });
+});
+
+/* 복사 버튼 */
+function copyText(btn, blockId) {
+  const block = document.getElementById(blockId);
+  const text = block.querySelector('.sns-post-text').innerText;
+  const tags = block.querySelector('.sns-post-tags');
+  const full = text + (tags ? '\n\n' + tags.innerText : '');
+  navigator.clipboard.writeText(full).then(() => {
+    btn.textContent = '✅ 복사됐어요!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 복사하기'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

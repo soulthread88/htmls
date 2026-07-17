@@ -1,0 +1,931 @@
+<!-- ============================================================
+  IssueLens EP.01 — WordPress Post (Custom HTML Block)
+  사용법: WordPress 글쓰기 → 블록 추가 → "Custom HTML" → 아래 전체 붙여넣기
+  ※ 테마의 기본 스타일과 충돌 방지를 위해 모든 클래스에 "il-" 네임스페이스 적용
+============================================================ -->
+
+<style>
+/* ── IssueLens EP.01 — Scoped Styles (il- namespace) ── */
+.il-wrap { all: initial; display: block; }
+.il-wrap *, .il-wrap *::before, .il-wrap *::after {
+  box-sizing: border-box; margin: 0; padding: 0;
+  font-family: inherit;
+}
+.il-wrap {
+  --ft: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  --fb: 'Noto Sans', 'Inter', -apple-system, sans-serif;
+  --bg: #fff; --bg2: #F7F9FC; --bg3: #FFF8F0;
+  --ink: #0A0A0A; --ink2: #1F2937; --ink3: #4B5563;
+  --red: #C8001A; --redbg: #FFF0F3; --redl: #FFCCD5;
+  --amb: #B45309; --ambbg: #FFFBEB;
+  --grn: #065F46; --blu: #1E3A8A; --blubg: #EFF6FF;
+  --bdr: #CBD5E1; --rul: #E2E8F0;
+  --sh: 0 2px 14px rgba(0,0,0,.07);
+  --shl: 0 8px 32px rgba(0,0,0,.13);
+  color: var(--ink);
+  font-family: var(--fb);
+  font-size: 18px;
+  line-height: 1.95;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+}
+.il-wrap a { color: var(--red); text-decoration: none; }
+
+/* Masthead */
+.il-mh { background: var(--bg); border-bottom: 3px solid var(--red); }
+.il-mh-top {
+  background: var(--red);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 20px; flex-wrap: wrap; gap: 8px;
+}
+.il-logo {
+  font-family: var(--ft); font-size: clamp(1.1rem,3.5vw,1.3rem);
+  font-weight: 800; color: #fff; display: flex; align-items: center; gap: 7px;
+}
+.il-logo-dot { width: 10px; height: 10px; background: #fff; border-radius: 50%; opacity: .85; }
+.il-mh-meta { font-family: var(--fb); font-size: clamp(13px,3vw,15px); color: rgba(255,255,255,.88); font-weight: 600; }
+.il-mh-hero {
+  padding: 36px 20px 28px;
+  display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;
+  max-width: 1100px; margin: 0 auto;
+}
+.il-ep-lbl {
+  font-family: var(--ft); font-size: clamp(13px,3.2vw,15px); font-weight: 700;
+  color: var(--red); letter-spacing: .16em; text-transform: uppercase;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.il-ep-lbl::before { content: ''; width: 22px; height: 3px; background: var(--red); border-radius: 2px; display: inline-block; }
+.il-headline {
+  font-family: var(--ft); font-size: clamp(1.85rem,6vw,3.6rem); font-weight: 800;
+  line-height: 1.22; color: var(--ink); letter-spacing: -.03em;
+}
+.il-headline .il-acc { color: var(--red); background: var(--redbg); padding: 2px 8px; border-radius: 5px; display: inline-block; }
+.il-sub-hl {
+  font-family: var(--fb); margin-top: 14px; font-size: clamp(17px,3.5vw,20px);
+  color: var(--ink3); line-height: 1.82; font-weight: 500;
+}
+.il-stats { display: flex; flex-direction: column; gap: 10px; min-width: 155px; }
+.il-stat {
+  background: var(--redbg); border: 2.5px solid var(--redl); border-radius: 14px;
+  padding: 14px 16px; text-align: center; box-shadow: var(--sh);
+}
+.il-stat-n {
+  font-family: var(--ft); font-size: clamp(1.5rem,4vw,2rem); font-weight: 800;
+  color: var(--red); display: block; line-height: 1; letter-spacing: -.02em;
+}
+.il-stat-l {
+  font-family: var(--fb); font-size: clamp(12px,2.8vw,14px); font-weight: 700;
+  color: var(--ink3); margin-top: 4px; display: block; line-height: 1.4;
+}
+.il-tags {
+  padding: 10px 20px 14px; border-top: 1.5px solid var(--rul);
+  display: flex; gap: 7px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;
+}
+.il-tag {
+  font-family: var(--fb); font-size: clamp(13px,3vw,15px); font-weight: 700;
+  border: 2px solid var(--bdr); color: var(--ink3); padding: 4px 12px;
+  border-radius: 20px;
+}
+.il-tag.hot { border-color: var(--red); color: var(--red); background: var(--redbg); }
+
+/* Brand strip */
+.il-brand-strip { background: var(--bg2); border-top: 2px solid var(--rul); border-bottom: 2px solid var(--rul); padding: 22px 20px; }
+.il-brand-strip-inner { max-width: 920px; margin: 0 auto; }
+.il-brand-ttl {
+  font-family: var(--ft); font-size: clamp(15px,3.5vw,17px); font-weight: 800;
+  color: var(--ink2); text-align: center; margin-bottom: 18px; letter-spacing: .02em;
+}
+.il-brand-row { display: flex; align-items: stretch; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.il-bp {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 14px 18px; border-radius: 14px; border: 2.5px solid var(--bdr);
+  background: #fff; box-shadow: var(--sh); min-width: 118px; width: 118px;
+}
+.il-bp-badge {
+  width: 90px; height: 40px; border-radius: 7px; display: flex; align-items: center;
+  justify-content: center; font-family: 'Arial Black','Arial',sans-serif;
+  font-size: 13px; font-weight: 900; color: #fff; letter-spacing: 0.5px;
+}
+.il-bp-badge.ali { background: #FF6900; font-size: 11px; }
+.il-bp-badge.temu { background: #FA5130; font-size: 16px; }
+.il-bp-badge.miniso { background: #E8002D; font-size: 12px; letter-spacing: 1px; }
+.il-bp-badge.yoyoso { background: #1A1A1A; color: #FFD700; font-size: 11px; letter-spacing: 1px; }
+.il-bp-badge.shein { background: #000; font-size: 14px; letter-spacing: 2px; }
+.il-bp-name { font-family: var(--ft); font-size: 13px; font-weight: 800; color: var(--ink2); }
+.il-bp-sub { font-family: var(--fb); font-size: 12px; color: var(--ink3); font-weight: 600; }
+
+/* Disclaimer */
+.il-disclaimer {
+  max-width: 860px; margin: 28px auto 0; padding: 16px 22px;
+  background: var(--bg2); border: 1.5px solid var(--bdr);
+  border-left: 6px solid var(--blu); border-radius: 10px;
+  font-family: var(--fb); font-size: clamp(15px,3.2vw,17px); color: var(--ink3); line-height: 1.82;
+}
+
+/* Article body */
+.il-ab { max-width: 860px; margin: 0 auto; padding: 36px 20px 56px; }
+.il-intro {
+  font-family: var(--fb); font-size: clamp(18px,3.8vw,21px); line-height: 1.95;
+  color: var(--ink2); background: var(--ambbg); border-left: 6px solid #F59E0B;
+  padding: 20px 22px; border-radius: 0 12px 12px 0; font-weight: 500;
+  margin-top: 28px;
+}
+.il-sec { margin-top: 52px; }
+.il-sec-ttl {
+  font-family: var(--ft); font-size: clamp(1.25rem,4.5vw,1.6rem); font-weight: 800;
+  color: var(--ink); padding: 16px 18px 16px 22px; border-left: 7px solid var(--red);
+  background: linear-gradient(90deg,var(--redbg) 0%,#fff 65%);
+  border-radius: 0 12px 12px 0; margin-bottom: 22px; line-height: 1.42;
+  display: flex; align-items: center; gap: 11px; box-shadow: var(--sh); letter-spacing: -.02em;
+}
+.il-sec-ttl.b2 {
+  background: linear-gradient(90deg,var(--blubg) 0%,#fff 65%);
+  border-left-color: var(--blu); color: var(--blu);
+}
+.il-sec-ttl .il-num {
+  font-family: var(--ft); font-size: clamp(12px,2.8vw,14px); font-weight: 800;
+  color: #fff; background: var(--red); border-radius: 6px; padding: 3px 11px;
+  flex-shrink: 0; letter-spacing: .06em;
+}
+.il-sec-ttl.b2 .il-num { background: var(--blu); }
+.il-bt { font-family: var(--fb); font-size: clamp(18px,3.5vw,21px); line-height: 2.0; color: var(--ink2); margin-bottom: 20px; }
+.il-hl-r { color: var(--red); font-weight: 800; }
+.il-hl-b { color: var(--blu); font-weight: 800; }
+.il-hl-a { color: var(--amb); font-weight: 800; }
+
+/* Data callout */
+.il-dcall {
+  background: var(--redbg); border: 2px solid var(--redl); border-top: 6px solid var(--red);
+  padding: 24px 26px; margin: 26px 0; border-radius: 14px; box-shadow: var(--sh);
+}
+.il-dcall-lbl {
+  font-family: var(--ft); font-size: clamp(12px,2.8vw,14px); font-weight: 700;
+  color: var(--red); letter-spacing: .16em; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 7px; text-transform: uppercase;
+}
+.il-dcall-lbl::before { content: '●'; font-size: .65rem; }
+.il-bignum {
+  font-family: var(--ft); font-size: clamp(2.4rem,7vw,3.8rem); font-weight: 800;
+  color: var(--red); display: block; line-height: 1; margin: 6px 0 5px; letter-spacing: -.03em;
+}
+.il-biglbl {
+  font-family: var(--fb); font-size: clamp(15px,3.2vw,17px); color: var(--ink3);
+  font-weight: 700; margin-bottom: 12px; display: block;
+}
+.il-cbody { font-family: var(--fb); font-size: clamp(17px,3.4vw,20px); line-height: 1.95; color: var(--ink2); }
+.il-cbody strong { color: var(--red); font-weight: 800; }
+
+.il-cctx {
+  background: var(--blubg); border: 2px solid #BFDBFE; border-top: 6px solid var(--blu);
+  padding: 24px 26px; margin: 26px 0; border-radius: 14px; box-shadow: var(--sh);
+}
+.il-cctx-lbl {
+  font-family: var(--ft); font-size: clamp(12px,2.8vw,14px); font-weight: 700;
+  color: var(--blu); letter-spacing: .14em; margin-bottom: 10px; text-transform: uppercase;
+}
+.il-cctx .il-cbody strong { color: var(--blu); }
+
+/* Flow */
+.il-flow {
+  margin: 24px 0; background: #fff; border: 2px solid var(--bdr);
+  border-radius: 16px; padding: 24px 16px 20px; box-shadow: var(--sh);
+}
+.il-flow-ttl {
+  font-family: var(--ft); font-size: clamp(15px,3.2vw,17px); font-weight: 700;
+  color: var(--ink); text-align: center; margin-bottom: 20px;
+}
+.il-flow-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.il-fs { flex: 1; min-width: 80px; max-width: 120px; text-align: center; }
+.il-fi {
+  width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 8px; font-size: 1.45rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.il-fi.s { background: #DCFCE7; border: 3px solid #22C55E; }
+.il-fi.w { background: #FEF3C7; border: 3px solid #F59E0B; }
+.il-fi.d { background: #FFE4E6; border: 3px solid var(--red); }
+.il-fs-lbl { font-family: var(--fb); font-size: clamp(13px,2.8vw,15px); font-weight: 800; color: var(--ink); line-height: 1.38; }
+.il-fs-sub { font-family: var(--fb); font-size: clamp(11px,2.4vw,13px); color: var(--ink3); margin-top: 2px; font-weight: 600; }
+.il-farrow { color: var(--red); font-size: 1.45rem; flex-shrink: 0; font-weight: 900; }
+
+/* Law quote */
+.il-lq {
+  border: 2.5px solid #9CA3AF; border-radius: 14px; padding: 26px 26px;
+  margin: 26px 0; position: relative; background: var(--bg2); box-shadow: var(--sh);
+}
+.il-lq-bdg {
+  position: absolute; top: -14px; left: 18px; background: var(--ink); color: #fff;
+  font-family: var(--ft); font-size: clamp(12px,2.8vw,14px); font-weight: 700;
+  padding: 3px 14px; border-radius: 4px; letter-spacing: .04em; white-space: nowrap;
+}
+.il-lq-txt { font-family: var(--fb); font-size: clamp(17px,3.4vw,20px); color: var(--ink2); line-height: 2.0; margin-top: 4px; }
+.il-lq-txt strong { color: var(--red); font-weight: 800; }
+.il-lq-src { font-family: var(--fb); margin-top: 10px; font-size: clamp(13px,2.8vw,15px); color: var(--ink3); text-align: right; font-weight: 700; }
+
+/* Risk meter */
+.il-rm {
+  margin: 26px 0; padding: 24px 26px; background: #fff;
+  border: 2px solid var(--bdr); border-radius: 16px; box-shadow: var(--sh);
+}
+.il-rm-ttl { font-family: var(--ft); font-size: clamp(16px,3.2vw,18px); font-weight: 700; color: var(--ink); margin-bottom: 18px; }
+.il-ri { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.il-rl { font-family: var(--fb); font-size: clamp(14px,3vw,16px); font-weight: 800; width: 170px; flex-shrink: 0; color: var(--ink); }
+.il-rbg { flex: 1; height: 14px; background: #F1F5F9; border-radius: 7px; overflow: hidden; border: 1px solid var(--rul); }
+.il-rbf { height: 100%; border-radius: 7px; transition: width 1.5s cubic-bezier(.2,1,.3,1); }
+.il-rbf.h { background: linear-gradient(90deg,#F87171,var(--red)); }
+.il-rbf.m { background: linear-gradient(90deg,#FCD34D,#D97706); }
+.il-rbf.l { background: linear-gradient(90deg,#6EE7B7,#059669); }
+.il-rp { font-family: var(--ft); font-size: clamp(15px,3vw,17px); font-weight: 800; width: 72px; text-align: right; flex-shrink: 0; }
+
+/* Media boxes — WordPress용: 이미지/유튜브 삽입 가능 */
+.il-media-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+.il-mbox-wrap { position: relative; }
+.il-mbox-label {
+  font-family: var(--ft); font-size: clamp(13px,2.8vw,15px); font-weight: 700;
+  color: var(--ink3); margin-bottom: 7px; display: flex; align-items: center; gap: 6px;
+}
+.il-mbox {
+  position: relative; border-radius: 14px; overflow: hidden;
+  background: #F1F5F9; border: 2.5px dashed var(--bdr);
+  min-height: 200px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: border-color .2s, box-shadow .2s;
+}
+.il-mbox:hover { border-color: var(--red); box-shadow: var(--shl); }
+.il-mbox-ph {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--ink3); padding: 20px; text-align: center; pointer-events: none; width: 100%;
+}
+.il-mbox-ph .il-ico { font-size: 2.4rem; opacity: .45; }
+.il-mbox-ph p { font-family: var(--fb); font-size: clamp(14px,3vw,16px); font-weight: 700; line-height: 1.45; color: var(--ink3); }
+.il-mbox-ph .il-hint { font-size: clamp(12px,2.5vw,13px); color: #94A3B8; margin-top: 2px; }
+.il-mbox img.il-prev { width: 100%; height: 100%; min-height: 200px; object-fit: cover; display: block; border-radius: 12px; }
+.il-mbox iframe { width: 100%; height: 100%; min-height: 200px; border: none; display: block; border-radius: 12px; }
+.il-mctrl {
+  position: absolute; top: 8px; right: 8px; display: flex; gap: 7px;
+  opacity: 0; transition: opacity .22s; pointer-events: none; z-index: 20;
+}
+.il-mbox:hover .il-mctrl { opacity: 1; pointer-events: auto; }
+.il-mbtn {
+  font-family: var(--ft); font-size: clamp(12px,2.8vw,14px); font-weight: 700;
+  padding: 6px 14px; border-radius: 7px; border: none; cursor: pointer;
+  backdrop-filter: blur(8px); transition: transform .15s; white-space: nowrap;
+}
+.il-mbtn:hover { transform: translateY(-1px); }
+.il-mbtn.rep { background: rgba(255,255,255,.92); color: var(--ink); }
+.il-mbtn.del { background: rgba(200,0,26,.88); color: #fff; }
+
+/* Pull quote */
+.il-pq {
+  margin: 26px 0 10px; padding: 28px 22px;
+  background: var(--bg3); border-top: 4px solid var(--ink); border-bottom: 4px solid var(--ink); text-align: center;
+}
+.il-pq-txt {
+  font-family: var(--ft); font-size: clamp(1.2rem,4vw,1.85rem);
+  font-weight: 800; color: var(--ink); line-height: 1.62; letter-spacing: -.02em;
+}
+.il-pq-txt em { color: var(--red); font-style: normal; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+/* Action section */
+.il-action { background: var(--bg2); border-top: 3px solid var(--rul); padding: 26px 20px 40px; }
+.il-action-inner { max-width: 860px; margin: 0 auto; }
+.il-action-ttl { font-family: var(--ft); font-size: clamp(1.35rem,4.5vw,1.9rem); font-weight: 800; color: var(--ink); margin-bottom: 6px; letter-spacing: -.02em; }
+.il-action-sub { font-family: var(--fb); font-size: clamp(15px,3.2vw,17px); color: var(--ink3); margin-bottom: 24px; font-weight: 700; }
+.il-action-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 14px; }
+.il-ac {
+  background: #fff; border: 2.5px solid var(--bdr); border-radius: 16px;
+  padding: 22px 18px; box-shadow: var(--sh); transition: box-shadow .2s,transform .2s,border-color .2s;
+}
+.il-ac:hover { border-color: var(--red); box-shadow: var(--shl); transform: translateY(-4px); }
+.il-ac-n { font-family: var(--ft); font-size: clamp(11px,2.5vw,13px); font-weight: 700; color: var(--red); letter-spacing: .12em; margin-bottom: 8px; text-transform: uppercase; }
+.il-ac-ico { font-size: 1.9rem; margin-bottom: 8px; line-height: 1; }
+.il-ac-ttl { font-family: var(--ft); font-size: clamp(16px,3.2vw,18px); font-weight: 800; color: var(--ink); margin-bottom: 8px; line-height: 1.42; letter-spacing: -.01em; }
+.il-ac-desc { font-family: var(--fb); font-size: clamp(14px,3vw,16px); color: var(--ink3); line-height: 1.85; }
+
+/* Social bar */
+.il-sb { max-width: 860px; margin: 0 auto; padding: 24px 20px; border-top: 1.5px solid var(--rul); }
+.il-sb-lbl {
+  font-family: var(--ft); font-size: clamp(13px,2.8vw,15px); font-weight: 800;
+  color: var(--ink3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.il-sb-lbl::after { content: ''; flex: 1; height: 1.5px; background: var(--rul); }
+.il-sb-btns { display: flex; flex-wrap: wrap; gap: 9px; }
+.il-snsbtn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--ft); font-size: clamp(13px,3vw,15px); font-weight: 700;
+  padding: 9px 16px; border-radius: 8px; border: 2.5px solid; cursor: pointer;
+  text-decoration: none; transition: background .18s,color .18s,transform .15s; white-space: nowrap;
+}
+.il-snsbtn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.il-snsbtn:hover { transform: translateY(-2px); }
+.il-snsbtn.yt { color: #CC0000; border-color: #CC0000; } .il-snsbtn.yt svg { fill: #CC0000; } .il-snsbtn.yt:hover { background: #CC0000; color: #fff; } .il-snsbtn.yt:hover svg { fill: #fff; }
+.il-snsbtn.ig { color: #C13584; border-color: #C13584; } .il-snsbtn.ig svg { fill: #C13584; } .il-snsbtn.ig:hover { background: #C13584; color: #fff; } .il-snsbtn.ig:hover svg { fill: #fff; }
+.il-snsbtn.tt { color: #010101; border-color: #010101; } .il-snsbtn.tt svg { fill: #010101; } .il-snsbtn.tt:hover { background: #010101; color: #fff; } .il-snsbtn.tt:hover svg { fill: #fff; }
+.il-snsbtn.th { color: #000; border-color: #000; } .il-snsbtn.th svg { fill: #000; } .il-snsbtn.th:hover { background: #000; color: #fff; } .il-snsbtn.th:hover svg { fill: #fff; }
+.il-snsbtn.xb { color: #14171A; border-color: #14171A; } .il-snsbtn.xb svg { fill: #14171A; } .il-snsbtn.xb:hover { background: #14171A; color: #fff; } .il-snsbtn.xb:hover svg { fill: #fff; }
+.il-snsbtn.fb { color: #1877F2; border-color: #1877F2; } .il-snsbtn.fb svg { fill: #1877F2; } .il-snsbtn.fb:hover { background: #1877F2; color: #fff; } .il-snsbtn.fb:hover svg { fill: #fff; }
+
+/* Footer */
+.il-ft { background: #0D0D0D; color: #9CA3AF; padding: 32px 20px; text-align: center; border-top: 4px solid var(--red); }
+.il-ft-brand { font-family: var(--ft); font-size: 1.2rem; font-weight: 800; color: #fff; display: flex; align-items: center; justify-content: center; gap: 7px; margin-bottom: 6px; }
+.il-ft-dot { width: 9px; height: 9px; background: var(--red); border-radius: 50%; }
+.il-ft p { font-family: var(--fb); font-size: clamp(13px,2.8vw,15px); line-height: 1.88; color: #6B7280; margin-top: 6px; }
+
+/* YouTube modal */
+.il-yt-modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,.55);
+  z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.il-yt-box { background: #fff; border-radius: 20px; padding: 28px 22px; max-width: 500px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+.il-yt-ttl { font-family: var(--ft); font-size: clamp(17px,3.5vw,19px); font-weight: 800; color: var(--ink); margin-bottom: 7px; }
+.il-yt-desc { font-family: var(--fb); font-size: clamp(14px,3vw,16px); color: var(--ink3); margin-bottom: 16px; line-height: 1.7; }
+.il-yt-inp {
+  width: 100%; border: 2.5px solid var(--bdr); border-radius: 10px;
+  padding: 11px 14px; font-family: var(--fb); font-size: clamp(14px,3vw,16px); outline: none;
+}
+.il-yt-inp:focus { border-color: var(--red); }
+.il-yt-btns { display: flex; gap: 9px; margin-top: 14px; }
+.il-yt-ok { flex: 1; font-family: var(--ft); font-size: clamp(14px,3vw,16px); font-weight: 800; background: var(--red); color: #fff; border: none; border-radius: 10px; padding: 12px; cursor: pointer; }
+.il-yt-ok:hover { background: #a80018; }
+.il-yt-cancel { font-family: var(--ft); font-size: clamp(14px,3vw,16px); font-weight: 700; background: var(--bg2); color: var(--ink3); border: 2px solid var(--bdr); border-radius: 10px; padding: 12px 20px; cursor: pointer; }
+
+/* Search bar highlight */
+.il-search-hint {
+  background: #FFF3CD; border-left: 5px solid #F59E0B; border-radius: 0 10px 10px 0;
+  padding: 16px 20px; margin-bottom: 20px; font-family: var(--fb);
+  font-size: clamp(15px,3vw,17px); color: #78350F; font-weight: 600; line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .il-mh-hero { grid-template-columns: 1fr; }
+  .il-stats { flex-direction: row; flex-wrap: wrap; }
+  .il-stat { flex: 1; min-width: 120px; }
+  .il-media-pair { grid-template-columns: 1fr; }
+  .il-rl { width: 120px; font-size: 13px; }
+}
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans:wght@400;500;700;900&display=swap');
+</style>
+
+<!-- ══════════ YOUTUBE MODAL ══════════ -->
+<div class="il-wrap">
+<div class="il-yt-modal" id="il-ytm" style="display:none">
+  <div class="il-yt-box">
+    <div class="il-yt-ttl">📹 Insert YouTube Video</div>
+    <div class="il-yt-desc">Paste a YouTube video link below.<br>It will be permanently embedded in this section.</div>
+    <input class="il-yt-inp" id="il-yti" type="text" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="il-yt-btns">
+      <button class="il-yt-ok" onclick="ilYtOk()">✓ Insert</button>
+      <button class="il-yt-cancel" onclick="ilYtClose()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MASTHEAD ══════════ -->
+<header class="il-mh">
+  <div class="il-mh-top">
+    <div class="il-logo"><span class="il-logo-dot"></span>IssueLens</div>
+    <span class="il-mh-meta">EP.01 · Data Sovereignty Series</span>
+    <span class="il-mh-meta">IssueLens Editorial</span>
+  </div>
+  <div class="il-mh-hero">
+    <div>
+      <div class="il-ep-lbl">EP.01 &nbsp;Data Sovereignty</div>
+      <h1 class="il-headline">
+        Is <span class="il-acc">Temu Safe?</span><br>
+        The Hidden Price<br>
+        of Every "$1 Deal"
+      </h1>
+      <p class="il-sub-hl">The real cost of cheap isn't money. It's your name, address,<br>purchase history — and your phone's fingerprint. Here's the truth.</p>
+    </div>
+    <div class="il-stats">
+      <div class="il-stat"><span class="il-stat-n">21</span><span class="il-stat-l">State AGs<br>demanding probe</span></div>
+      <div class="il-stat"><span class="il-stat-n">$1M+</span><span class="il-stat-l">TX lawsuit<br>relief sought</span></div>
+      <div class="il-stat"><span class="il-stat-n">Art. 7</span><span class="il-stat-l">China National<br>Intelligence Law</span></div>
+    </div>
+  </div>
+  <div class="il-tags">
+    <span class="il-tag hot">#IsTemuSafe</span>
+    <span class="il-tag hot">#TemuDataPrivacy</span>
+    <span class="il-tag hot">#ChineseAppsSpying</span>
+    <span class="il-tag hot">#DeleteTemu</span>
+    <span class="il-tag">#AliExpressSafe</span>
+    <span class="il-tag">#SheinPrivacy</span>
+    <span class="il-tag">#TemuSpyware</span>
+    <span class="il-tag">#ChineseAppsBan</span>
+    <span class="il-tag">#DataSovereignty</span>
+    <span class="il-tag">#TemuLawsuit2026</span>
+  </div>
+</header>
+
+<!-- ══════════ BRAND STRIP ══════════ -->
+<div class="il-brand-strip">
+  <div class="il-brand-strip-inner">
+    <div class="il-brand-ttl">⚠️ Apps Under the Spotlight</div>
+    <div class="il-brand-row">
+      <div class="il-bp">
+        <div class="il-bp-badge ali">AliExpress</div>
+        <span class="il-bp-name">AliExpress</span><span class="il-bp-sub">Alibaba Group</span>
+      </div>
+      <div class="il-bp">
+        <div class="il-bp-badge temu">Temu</div>
+        <span class="il-bp-name">Temu</span><span class="il-bp-sub">PDD Holdings</span>
+      </div>
+      <div class="il-bp">
+        <div class="il-bp-badge miniso">MINISO</div>
+        <span class="il-bp-name">MINISO</span><span class="il-bp-sub">Chinese-founded</span>
+      </div>
+      <div class="il-bp">
+        <div class="il-bp-badge yoyoso">YOYOSO</div>
+        <span class="il-bp-name">YOYOSO</span><span class="il-bp-sub">Chinese chain</span>
+      </div>
+      <div class="il-bp">
+        <div class="il-bp-badge shein">SHEIN</div>
+        <span class="il-bp-name">SHEIN</span><span class="il-bp-sub">China-based</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ARTICLE BODY ══════════ -->
+<main>
+  <div class="il-disclaimer" style="margin:28px 20px 0;max-width:860px;margin-left:auto;margin-right:auto">
+    <strong style="color:var(--blu)">📌 Editorial Disclosure</strong><br>
+    This article is public-interest commentary based on verified reporting from U.S. government agencies (FTC, FBI, Congressional committees), court filings, and major news organizations. It does not constitute legal advice. Our goal is to help Americans make informed decisions about the apps they use every day.
+  </div>
+
+  <div class="il-ab">
+
+    <!-- Lead paragraph -->
+    <p class="il-intro">
+      <strong class="il-hl-a">Temu, AliExpress, Shein, and MINISO</strong> are among the most downloaded apps in America right now. But while millions of shoppers chase <strong class="il-hl-a">"impossibly low prices,"</strong> federal agencies, state attorneys general, and national security experts are raising serious alarms about <strong class="il-hl-r">what these apps do with your personal data</strong> — and who can access it.
+    </p>
+
+    <!-- ══ SECTION 1 ══ -->
+    <div class="il-sec">
+      <h2 class="il-sec-ttl"><span class="il-num">01</span>What Temu &amp; AliExpress Know About You (It's More Than You Think)</h2>
+
+      <div class="il-search-hint">
+        🔍 <strong>Top searches right now:</strong> "Is Temu safe to use?" · "Does AliExpress steal your data?" · "Should I delete Temu from my phone?" · "Is Shein a spyware app?"
+      </div>
+
+      <p class="il-bt">
+        The moment you install <strong class="il-hl-r">Temu, AliExpress, or Shein</strong> and enter your payment info, the data collection begins — and it goes far beyond your name and shipping address. <strong class="il-hl-r">Device fingerprinting, location tracking, behavioral profiling, and contact list access</strong> are all documented practices. The question isn't whether they collect your data. The question is: what happens to it next?
+      </p>
+
+      <div class="il-dcall">
+        <div class="il-dcall-lbl">LIVE ALERT · Texas AG Lawsuit — February 2026</div>
+        <span class="il-bignum">$1M+</span>
+        <span class="il-biglbl">Minimum monetary relief sought — Texas v. Temu (Feb. 20, 2026)</span>
+        <p class="il-cbody">Texas Attorney General Ken Paxton filed suit against Temu, describing the app as <strong>"spyware disguised as a shopping app"</strong> — joining AGs from at least four other states. The suit alleges illegal data harvesting, deceptive pricing, and violations of the Texas Deceptive Trade Practices Act. Earlier, <strong>21 U.S. attorneys general called for a federal investigation</strong> into Temu's ties to the Chinese government.</p>
+      </div>
+
+      <div class="il-flow">
+        <div class="il-flow-ttl">📊 Where Does Your Data Go? — The Chinese Shopping App Pipeline</div>
+        <div class="il-flow-row">
+          <div class="il-fs"><div class="il-fi s">📱</div><div class="il-fs-lbl">App Install &amp;<br>Sign-Up</div><div class="il-fs-sub">Name, email, phone</div></div>
+          <div class="il-farrow">→</div>
+          <div class="il-fs"><div class="il-fi w">🛒</div><div class="il-fs-lbl">Shopping &amp;<br>Payment</div><div class="il-fs-sub">Card, location, habits</div></div>
+          <div class="il-farrow">→</div>
+          <div class="il-fs"><div class="il-fi d">📡</div><div class="il-fs-lbl">Background<br>Tracking</div><div class="il-fs-sub">Device fingerprint, contacts</div></div>
+          <div class="il-farrow">→</div>
+          <div class="il-fs"><div class="il-fi d">🌐</div><div class="il-fs-lbl">Overseas<br>Servers</div><div class="il-fs-sub">China-linked data centers</div></div>
+          <div class="il-farrow">→</div>
+          <div class="il-fs"><div class="il-fi d">🏛️</div><div class="il-fs-lbl">China Intel<br>Law Art. 7</div><div class="il-fs-sub">Gov't access required</div></div>
+          <div class="il-farrow">→</div>
+          <div class="il-fs"><div class="il-fi d">⚠️</div><div class="il-fs-lbl">You Lose<br>Control</div><div class="il-fs-sub">No deletion rights</div></div>
+        </div>
+      </div>
+
+      <!-- Section 1 media boxes -->
+      <div class="il-media-pair">
+        <div class="il-mbox-wrap">
+          <div class="il-mbox-label">🖼️ Insert Image</div>
+          <div class="il-mbox" id="il-mb-s1i" data-t="img" onclick="ilMbClick('s1i')">
+            <div class="il-mbox-ph" id="il-ph-s1i">
+              <span class="il-ico">🖼️</span>
+              <p>Insert Image</p>
+              <span class="il-hint">Click → Select file</span>
+            </div>
+            <div class="il-mctrl">
+              <button class="il-mbtn rep" onclick="event.stopPropagation();ilMbReplace('s1i')">↩ Replace</button>
+              <button class="il-mbtn del" onclick="event.stopPropagation();ilMbDel('s1i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="il-fi-s1i" accept="image/*" style="display:none" onchange="ilMbLoadImg('s1i',this)">
+        </div>
+        <div class="il-mbox-wrap">
+          <div class="il-mbox-label">🎬 Insert Video</div>
+          <div class="il-mbox" id="il-mb-s1v" data-t="vid" onclick="ilMbClick('s1v')">
+            <div class="il-mbox-ph" id="il-ph-s1v">
+              <span class="il-ico">🎬</span>
+              <p>Insert YouTube Video</p>
+              <span class="il-hint">Click → Paste link</span>
+            </div>
+            <div class="il-mctrl">
+              <button class="il-mbtn rep" onclick="event.stopPropagation();ilMbReplace('s1v')">↩ Replace</button>
+              <button class="il-mbtn del" onclick="event.stopPropagation();ilMbDel('s1v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 1 -->
+
+    <!-- ══ SECTION 2 ══ -->
+    <div class="il-sec">
+      <h2 class="il-sec-ttl b2"><span class="il-num">02</span>Why China's National Intelligence Law Is Every American's Problem</h2>
+
+      <div class="il-search-hint">
+        🔍 <strong>Top searches:</strong> "Can China access Temu data?" · "Is Temu a national security threat?" · "Chinese apps spy on Americans" · "Temu linked to CCP"
+      </div>
+
+      <p class="il-bt">This isn't just a privacy issue. It's a <strong class="il-hl-b">structural legal problem</strong>. Unlike Western companies bound by frameworks like GDPR or CCPA, Chinese companies face a fundamentally different obligation — one that has national security experts, the FBI, and Congress deeply alarmed.</p>
+
+      <div class="il-lq">
+        <div class="il-lq-bdg">China National Intelligence Law — Article 7 (2017, currently in force)</div>
+        <p class="il-lq-txt">All organizations and citizens shall <strong>support, assist, and cooperate with national intelligence work</strong> in accordance with the law, and shall protect national intelligence work secrets they are aware of.</p>
+        <div class="il-lq-src">— Enacted 2017 · Actively enforced —</div>
+      </div>
+
+      <p class="il-bt">This means <strong class="il-hl-r">every Chinese company — including Temu's parent PDD Holdings — can legally be compelled</strong> to hand over user data to the Chinese government, with no judicial oversight, no notice to users, and no ability to refuse. Your grocery list, your address, your financial habits: all potentially accessible.</p>
+
+      <div class="il-rm">
+        <div class="il-rm-ttl">⚡ Chinese Shopping App Risk Assessment — Based on FTC, FBI &amp; Congressional Findings</div>
+        <div class="il-ri"><div class="il-rl">Data Collection Scope</div><div class="il-rbg"><div class="il-rbf h" data-w="92" style="width:0%"></div></div><div class="il-rp" style="color:var(--red)">Extreme</div></div>
+        <div class="il-ri"><div class="il-rl">Right to Delete Data</div><div class="il-rbg"><div class="il-rbf h" data-w="82" style="width:0%"></div></div><div class="il-rp" style="color:var(--red)">Very Hard</div></div>
+        <div class="il-ri"><div class="il-rl">Overseas Server Risk</div><div class="il-rbg"><div class="il-rbf h" data-w="78" style="width:0%"></div></div><div class="il-rp" style="color:var(--red)">High</div></div>
+        <div class="il-ri"><div class="il-rl">3rd-Party Data Sharing</div><div class="il-rbg"><div class="il-rbf m" data-w="68" style="width:0%"></div></div><div class="il-rp" style="color:var(--amb)">Medium</div></div>
+        <div class="il-ri"><div class="il-rl">User Awareness</div><div class="il-rbg"><div class="il-rbf l" data-w="16" style="width:0%"></div></div><div class="il-rp" style="color:var(--grn)">Very Low</div></div>
+        <p style="font-size:13px;color:#64748B;margin-top:8px">※ Qualitative assessment synthesized from FTC formal warnings (Jan. 2026), FBI advisory (early 2026), and U.S. Congressional Select Committee reports on Chinese technology companies.</p>
+      </div>
+
+      <!-- Section 2 media boxes -->
+      <div class="il-media-pair">
+        <div class="il-mbox-wrap">
+          <div class="il-mbox-label">🖼️ Insert Image</div>
+          <div class="il-mbox" id="il-mb-s2i" data-t="img" onclick="ilMbClick('s2i')">
+            <div class="il-mbox-ph" id="il-ph-s2i"><span class="il-ico">🖼️</span><p>Insert Image</p><span class="il-hint">Click → Select file</span></div>
+            <div class="il-mctrl">
+              <button class="il-mbtn rep" onclick="event.stopPropagation();ilMbReplace('s2i')">↩ Replace</button>
+              <button class="il-mbtn del" onclick="event.stopPropagation();ilMbDel('s2i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="il-fi-s2i" accept="image/*" style="display:none" onchange="ilMbLoadImg('s2i',this)">
+        </div>
+        <div class="il-mbox-wrap">
+          <div class="il-mbox-label">🎬 Insert Video</div>
+          <div class="il-mbox" id="il-mb-s2v" data-t="vid" onclick="ilMbClick('s2v')">
+            <div class="il-mbox-ph" id="il-ph-s2v"><span class="il-ico">🎬</span><p>Insert YouTube Video</p><span class="il-hint">Click → Paste link</span></div>
+            <div class="il-mctrl">
+              <button class="il-mbtn rep" onclick="event.stopPropagation();ilMbReplace('s2v')">↩ Replace</button>
+              <button class="il-mbtn del" onclick="event.stopPropagation();ilMbDel('s2v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 2 -->
+
+    <!-- ══ SECTION 3 ══ -->
+    <div class="il-sec">
+      <h2 class="il-sec-ttl"><span class="il-num">03</span>The Double Standard: They Block Our Apps — We Hand Them Our Data</h2>
+
+      <div class="il-search-hint">
+        🔍 <strong>Top searches:</strong> "Why is Temu so cheap?" · "What does Temu do with my information?" · "Is it safe to give Temu your credit card?" · "Temu data breach"
+      </div>
+
+      <p class="il-bt"><strong class="il-hl-r">Here's the asymmetry Americans need to understand:</strong> Google, Instagram, YouTube, and Facebook are banned inside China. Yet Temu, AliExpress, and TikTok freely operate inside the United States, collecting <strong class="il-hl-r">hundreds of millions of behavioral profiles from American users</strong> every single day. Is that a fair trade?</p>
+
+      <div class="il-cctx">
+        <div class="il-cctx-lbl">📌 CONTEXT · What the FBI Said in Early 2026</div>
+        <p class="il-cbody">The FBI issued a formal warning that <strong>many of the most downloaded apps in America are maintained by foreign companies — particularly those based in China</strong> — and that apps with servers in China are subject to laws that enable Chinese government access to user data. The bureau specifically flagged aggressive data collection and malware risk as the two primary threat categories. Its advice: check your permissions, and delete apps you don't trust.</p>
+      </div>
+
+      <div class="il-dcall">
+        <div class="il-dcall-lbl">FACT CHECK · FTC Formal Warning — January 2026</div>
+        <span class="il-bignum">3rd</span>
+        <span class="il-biglbl">Time the FTC warned Temu over "inadequate transparency in cross-border data transfers"</span>
+        <p class="il-cbody">The Federal Trade Commission's latest notice cited Temu's failure to adequately disclose how user data is transferred across borders. Security researchers separately found that <strong>Temu's parent company's sister app, Pinduoduo, was removed from the Google Play Store</strong> after malware was discovered — and some of those same developers later joined Temu's engineering team.</p>
+      </div>
+
+      <!-- Section 3 media boxes -->
+      <div class="il-media-pair">
+        <div class="il-mbox-wrap">
+          <div class="il-mbox-label">🖼️ Insert Image</div>
+          <div class="il-mbox" id="il-mb-s3i" data-t="img" onclick="ilMbClick('s3i')">
+            <div class="il-mbox-ph" id="il-ph-s3i"><span class="il-ico">🖼️</span><p>Insert Image</p><span class="il-hint">Click → Select file</span></div>
+            <div class="il-mctrl">
+              <button class="il-mbtn rep" onclick="event.stopPropagation();ilMbReplace('s3i')">↩ Replace</button>
+              <button class="il-mbtn del" onclick="event.stopPropagation();ilMbDel('s3i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="il-fi-s3i" accept="image/*" style="display:none" onchange="ilMbLoadImg('s3i',this)">
+        </div>
+        <div class="il-mbox-wrap">
+          <div class="il-mbox-label">🎬 Insert Video</div>
+          <div class="il-mbox" id="il-mb-s3v" data-t="vid" onclick="ilMbClick('s3v')">
+            <div class="il-mbox-ph" id="il-ph-s3v"><span class="il-ico">🎬</span><p>Insert YouTube Video</p><span class="il-hint">Click → Paste link</span></div>
+            <div class="il-mctrl">
+              <button class="il-mbtn rep" onclick="event.stopPropagation();ilMbReplace('s3v')">↩ Replace</button>
+              <button class="il-mbtn del" onclick="event.stopPropagation();ilMbDel('s3v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 3 -->
+
+    <!-- Pull quote -->
+    <div class="il-pq">
+      <div class="il-pq-txt">
+        "The <em>dollar you saved on socks</em> today<br>
+        could be the data point that <em>defines you</em> tomorrow."
+      </div>
+    </div>
+
+  </div><!-- /il-ab -->
+
+  <!-- ══ ACTION SECTION ══ -->
+  <section class="il-action">
+    <div class="il-action-inner">
+      <div class="il-action-ttl">🛡️ Protect Yourself — 4 Steps Right Now</div>
+      <div class="il-action-sub">You can't unring the bell, but you can stop the bleeding</div>
+      <div class="il-action-grid">
+        <div class="il-ac"><div class="il-ac-n">STEP 01</div><div class="il-ac-ico">🗑️</div><div class="il-ac-ttl">Delete the Apps</div><div class="il-ac-desc">Remove Temu, AliExpress, Shein, and similar apps. Deleting the app doesn't delete your data from their servers — also submit a formal data deletion request through each app's privacy settings.</div></div>
+        <div class="il-ac"><div class="il-ac-n">STEP 02</div><div class="il-ac-ico">🔒</div><div class="il-ac-ttl">Lock Down Permissions</div><div class="il-ac-desc">Go to Settings → Apps and review what permissions each app has. Revoke access to your microphone, camera, contacts, and location for any app that doesn't absolutely need them.</div></div>
+        <div class="il-ac"><div class="il-ac-n">STEP 03</div><div class="il-ac-ico">📣</div><div class="il-ac-ttl">Tell Someone You Know</div><div class="il-ac-desc">Share this with your family and friends — especially older relatives who may not know about these risks. Awareness is the first line of defense. Knowledge spreads faster than any app.</div></div>
+        <div class="il-ac"><div class="il-ac-n">STEP 04</div><div class="il-ac-ico">🗳️</div><div class="il-ac-ttl">Contact Your Rep</div><div class="il-ac-desc">The U.S. still has no federal data privacy law. Contact your Congressional representatives and demand action. Digital sovereignty is the new frontier of American freedom.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SOCIAL BAR ══ -->
+  <div class="il-sb">
+    <div class="il-sb-lbl">Share &amp; Follow</div>
+    <div class="il-sb-btns">
+      <a href="#YOUTUBE_URL" class="il-snsbtn yt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube
+      </a>
+      <a href="#INSTAGRAM_URL" class="il-snsbtn ig" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+      </a>
+      <a href="#TIKTOK_URL" class="il-snsbtn tt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/></svg>TikTok
+      </a>
+      <a href="#THREADS_URL" class="il-snsbtn th" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.742-1.757-.438-.505-1.103-.769-1.98-.789h-.047c-.67 0-1.64.191-2.253 1.109l-1.755-1.2c.894-1.307 2.277-2.031 3.98-2.049h.064c2.71.048 4.327 1.692 4.73 4.778.108.028.214.057.316.089l-.001.007c1.338.386 2.462 1.093 3.24 2.254C22.01 16.06 21.748 19 19.743 21c-1.737 1.745-4.189 2.627-7.274 2.647l-.283-.003v.003Z"/></svg>Threads
+      </a>
+      <a href="#X_URL" class="il-snsbtn xb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>X (Twitter)
+      </a>
+      <a href="#FACEBOOK_URL" class="il-snsbtn fb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="il-ft">
+  <div class="il-ft-brand"><span class="il-ft-dot"></span>IssueLens</div>
+  <div style="color:#9CA3AF;font-family:'Noto Sans','Inter',sans-serif;font-size:clamp(13px,2.8vw,15px);margin-top:4px">Data Sovereignty Series · EP.01</div>
+  <p>This article is public-interest editorial commentary. Sources include verified government agency reports, court filings, and major news organizations.<br>Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+</div><!-- /il-wrap -->
+
+<!-- ══════════ JAVASCRIPT ══════════ -->
+<script>
+(function() {
+  // ── Scroll reveal ──
+  if ('IntersectionObserver' in window) {
+    const style = document.createElement('style');
+    style.textContent = '.il-rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}.il-rev.il-on{opacity:1;transform:none}';
+    document.head.appendChild(style);
+    document.querySelectorAll('.il-sec,.il-brand-strip,.il-dcall,.il-cctx,.il-flow,.il-lq,.il-rm,.il-media-pair,.il-pq,.il-disclaimer,.il-intro').forEach(el => el.classList.add('il-rev'));
+
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('il-on'), i * 60); ro.unobserve(e.target); }
+      });
+    }, { threshold: .07 });
+    document.querySelectorAll('.il-rev').forEach(el => ro.observe(el));
+
+    // ── Risk bars ──
+    const bo = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.il-rbf').forEach(b => { setTimeout(() => b.style.width = b.dataset.w + '%', 260); });
+          bo.unobserve(e.target);
+        }
+      });
+    }, { threshold: .25 });
+    document.querySelectorAll('.il-rm').forEach(el => bo.observe(el));
+  } else {
+    // Fallback for old browsers
+    document.querySelectorAll('.il-rbf').forEach(b => { b.style.width = b.dataset.w + '%'; });
+  }
+
+  // ══════════════════════════════════════════
+  // IndexedDB media persistence — il- prefixed
+  // ══════════════════════════════════════════
+  const IDB_NAME  = 'IssueLensWPMedia';
+  const IDB_VER   = 1;
+  const IDB_STORE = 'mediaStore';
+  let _db = null;
+
+  function openDB() {
+    if (_db) return Promise.resolve(_db);
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(IDB_NAME, IDB_VER);
+      req.onupgradeneeded = e => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains(IDB_STORE)) db.createObjectStore(IDB_STORE, { keyPath: 'id' });
+      };
+      req.onsuccess = e => { _db = e.target.result; resolve(_db); };
+      req.onerror = e => reject(e);
+    });
+  }
+
+  async function persistItem(id, val) {
+    try {
+      const db = await openDB();
+      return new Promise((res, rej) => {
+        const tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).put({ id, val, _intentionalDelete: false });
+        tx.oncomplete = () => res(); tx.onerror = e => rej(e);
+      });
+    } catch(e) { console.warn('persistItem failed:', e); }
+  }
+
+  async function persistDeletedItem(id) {
+    try {
+      const db = await openDB();
+      return new Promise((res, rej) => {
+        const tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).put({ id, val: null, _intentionalDelete: true });
+        tx.oncomplete = () => res(); tx.onerror = e => rej(e);
+      });
+    } catch(e) { console.warn('persistDeletedItem:', e); }
+  }
+
+  async function removeItem(id) {
+    try {
+      const db = await openDB();
+      return new Promise((res, rej) => {
+        const tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).delete(id);
+        tx.oncomplete = () => res(); tx.onerror = e => rej(e);
+      });
+    } catch(e) {}
+  }
+
+  function _applyImg(id, dataUrl, save) {
+    const box = document.getElementById('il-mb-' + id);
+    if (!box) return;
+    const ph = document.getElementById('il-ph-' + id);
+    if (ph) ph.style.display = 'none';
+    let img = box.querySelector('img.il-prev');
+    if (!img) { img = document.createElement('img'); img.className = 'il-prev'; box.insertBefore(img, box.querySelector('.il-mctrl')); }
+    img.src = dataUrl;
+    box.classList.add('il-filled');
+    box.onclick = null;
+    box.style.minHeight = '200px';
+    if (save) persistItem(id, dataUrl);
+  }
+
+  function _applyYt(id, embedUrl, save) {
+    const box = document.getElementById('il-mb-' + id);
+    if (!box) return;
+    const ph = document.getElementById('il-ph-' + id);
+    if (ph) ph.style.display = 'none';
+    let ifr = box.querySelector('iframe');
+    if (!ifr) {
+      ifr = document.createElement('iframe');
+      ifr.style.cssText = 'width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px';
+      ifr.allow = 'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';
+      ifr.allowFullscreen = true;
+      box.insertBefore(ifr, box.querySelector('.il-mctrl'));
+    }
+    ifr.src = embedUrl;
+    box.classList.add('il-filled');
+    box.style.minHeight = '220px';
+    box.onclick = null;
+    if (save) persistItem(id, 'yt:' + embedUrl);
+  }
+
+  function _restoreDel(id) {
+    const box = document.getElementById('il-mb-' + id);
+    if (!box) return;
+    const wrap = box.closest('.il-mbox-wrap');
+    if (wrap) {
+      wrap.style.display = 'none';
+      const pair = wrap.closest('.il-media-pair');
+      if (pair && [...pair.querySelectorAll('.il-mbox-wrap')].every(w => w.style.display === 'none')) pair.style.display = 'none';
+    }
+  }
+
+  async function restoreAll() {
+    try {
+      const db = await openDB();
+      const records = await new Promise((res, rej) => {
+        const tx = db.transaction(IDB_STORE, 'readonly');
+        const req = tx.objectStore(IDB_STORE).getAll();
+        req.onsuccess = e => res(e.target.result); req.onerror = e => rej(e);
+      });
+      for (const rec of records) {
+        if (!rec || !rec.id) continue;
+        if (rec._intentionalDelete) { _restoreDel(rec.id); continue; }
+        if (!rec.val) continue;
+        if (rec.val.startsWith('yt:')) _applyYt(rec.id, rec.val.slice(3).replace('&autoplay=1',''), false);
+        else if (rec.val.startsWith('data:')) _applyImg(rec.id, rec.val, false);
+      }
+    } catch(e) { console.warn('restoreAll:', e); }
+  }
+
+  // Expose global functions for onclick handlers
+  let ilCur = null;
+
+  window.ilMbClick = function(id) {
+    const box = document.getElementById('il-mb-' + id);
+    if (box.classList.contains('il-filled')) return;
+    if (box.dataset.t === 'img') { document.getElementById('il-fi-' + id).click(); }
+    else { ilYtOpen(id); }
+  };
+
+  window.ilMbReplace = function(id) {
+    ilMbClear(id);
+    const box = document.getElementById('il-mb-' + id);
+    if (box.dataset.t === 'img') { document.getElementById('il-fi-' + id).click(); }
+    else { ilYtOpen(id); }
+  };
+
+  window.ilMbDel = function(id) {
+    const box = document.getElementById('il-mb-' + id);
+    const wrap = box.closest('.il-mbox-wrap');
+    wrap.style.transition = 'max-height .35s ease, opacity .3s ease, margin .3s ease';
+    wrap.style.overflow = 'hidden';
+    wrap.style.maxHeight = wrap.offsetHeight + 'px';
+    requestAnimationFrame(() => { wrap.style.maxHeight = '0'; wrap.style.opacity = '0'; wrap.style.margin = '0'; wrap.style.padding = '0'; });
+    setTimeout(() => {
+      const pair = wrap.closest('.il-media-pair');
+      wrap.remove();
+      if (pair && pair.querySelectorAll('.il-mbox-wrap').length === 0) { pair.style.display = 'none'; }
+    }, 360);
+    persistDeletedItem(id);
+  };
+
+  window.ilMbClear = function(id) {
+    const box = document.getElementById('il-mb-' + id);
+    const ifrm = box.querySelector('iframe');
+    const img = box.querySelector('img.il-prev');
+    if (ifrm) ifrm.remove();
+    if (img) img.remove();
+    box.classList.remove('il-filled');
+    const ph = document.getElementById('il-ph-' + id);
+    if (ph) ph.style.display = '';
+    const fi = document.getElementById('il-fi-' + id);
+    if (fi) fi.value = '';
+    removeItem(id);
+  };
+
+  window.ilMbLoadImg = function(id, inp) {
+    if (!inp.files || !inp.files[0]) return;
+    const ph = document.getElementById('il-ph-' + id);
+    if (ph) { ph.querySelector('p').textContent = 'Saving…'; }
+    const r = new FileReader();
+    r.onload = ev => { _applyImg(id, ev.target.result, true); };
+    r.readAsDataURL(inp.files[0]);
+  };
+
+  function ilYtOpen(id) { ilCur = id; document.getElementById('il-yti').value = ''; document.getElementById('il-ytm').style.display = 'flex'; setTimeout(() => document.getElementById('il-yti').focus(), 80); }
+
+  window.ilYtClose = function() { document.getElementById('il-ytm').style.display = 'none'; ilCur = null; };
+
+  function ytEmbed(url) {
+    try {
+      const u = new URL(url); let vid = '';
+      if (u.hostname.includes('youtu.be')) { vid = u.pathname.slice(1).split('?')[0]; }
+      else { vid = u.searchParams.get('v') || ''; }
+      return vid ? 'https://www.youtube.com/embed/' + vid + '?rel=0&autoplay=1' : null;
+    } catch(e) { return null; }
+  }
+
+  window.ilYtOk = function() {
+    const url = document.getElementById('il-yti').value.trim();
+    const em = ytEmbed(url);
+    if (!em) { alert('Please enter a valid YouTube link.\nExample: https://www.youtube.com/watch?v=XXXXXXXXXXX'); return; }
+    _applyYt(ilCur, em, true);
+    ilYtClose();
+  };
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') ilYtClose(); });
+  document.getElementById('il-yti').addEventListener('keydown', e => { if (e.key === 'Enter') ilYtOk(); });
+
+  // Restore on load
+  restoreAll();
+
+  // Social link helpers — update your URLs here
+  // e.g. document.querySelector('.il-snsbtn.yt').href = 'https://youtube.com/@YourChannel';
+})();
+</script>

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤호와 함께하는 AI 이야기 - 4편: 할아버지, 유튜브랑 인스타그램이 뭐예요?</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Noto Sans KR', Arial, sans-serif; 
+            line-height: 2; 
+            color: #000; 
+            background: #FFF9E6; 
+            font-size: 28px;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .left-margin {
+            width: 12.5%;
+            background: #FFF9E6;
+        }
+        
+        .content-wrapper {
+            width: 55%;
+            background: #FFF9E6;
+            padding: 30px 0;
+        }
+        
+        .middle-gap {
+            width: 5%;
+            background: #FFF9E6;
+        }
+        
+        .sidebar {
+            width: 15%;
+            background: #f5f5f5;
+            padding: 30px 15px;
+            position: sticky;
+            top: 0;
+            height: fit-content;
+        }
+        
+        .sidebar-item {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-title {
+            background: #0066CC;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+        }
+        
+        .sidebar-content {
+            padding: 20px 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .ad-space {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            padding-top: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+        }
+        
+        .calendar {
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .calendar-day {
+            padding: 5px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        
+        .popular-post {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .popular-post:last-child {
+            border-bottom: none;
+        }
+        
+        .right-margin {
+            width: 12.5%;
+            background: #FFF9E6;
+        }
+        
+        .hero-section {
+            width: 100%;
+            margin: 0 0 30px 0;
+            background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);
+            padding: 60px 40px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border: 8px solid #E91E63;
+        }
+        
+        .hero-section h1 {
+            font-size: 68px;
+            color: #FFFFFF;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section .episode {
+            font-size: 42px;
+            color: #FFEB3B;
+            font-weight: 900;
+            margin: 20px 0;
+        }
+        
+        .container {
+            width: 100%;
+            padding: 50px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .character-intro {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 50px;
+            margin: 50px 0;
+            border-radius: 25px;
+            border-left: 15px solid #0066CC;
+        }
+        
+        .character {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            font-size: 32px;
+        }
+        
+        .character-icon {
+            font-size: 80px;
+            margin-right: 30px;
+        }
+        
+        .character-name {
+            font-weight: 900;
+            color: #0066CC;
+            font-size: 38px;
+        }
+        
+        .character-desc {
+            color: #333;
+            font-size: 28px;
+            margin-top: 10px;
+        }
+        
+        .song-box {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FD79A8 100%);
+            padding: 60px;
+            margin: 60px 0;
+            border-radius: 30px;
+            text-align: center;
+            border: 8px solid #E91E63;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+        
+        .song-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .song-lyrics {
+            font-size: 36px;
+            font-weight: 700;
+            color: #880E4F;
+            line-height: 2.2;
+        }
+        
+        .conversation {
+            margin: 50px 0;
+        }
+        
+        .chat-bubble {
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 25px;
+            font-size: 30px;
+            line-height: 2.2;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .chat-yoonho {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            border-left: 15px solid #FDD835;
+            margin-left: 0;
+            margin-right: 10%;
+        }
+        
+        .chat-grandpa {
+            background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+            border-right: 15px solid #66BB6A;
+            margin-left: 10%;
+            margin-right: 0;
+        }
+        
+        .chat-grandma {
+            background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%);
+            border-right: 15px solid #EC407A;
+            margin-left: 10%;
+            margin-right: 0;
+        }
+        
+        .chat-dad {
+            background: linear-gradient(135deg, #BBDEFB 0%, #90CAF9 100%);
+            border-left: 15px solid #42A5F5;
+            margin-left: 0;
+            margin-right: 10%;
+        }
+        
+        .chat-mom {
+            background: linear-gradient(135deg, #E1BEE7 0%, #CE93D8 100%);
+            border-left: 15px solid #AB47BC;
+            margin-left: 0;
+            margin-right: 10%;
+        }
+        
+        .chat-name {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chat-icon {
+            font-size: 50px;
+            margin-right: 15px;
+        }
+        
+        .keyword {
+            color: #FF0000;
+            font-weight: 900;
+            background: #FFEB3B;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+        
+        .app-card {
+            background: linear-gradient(135deg, #FFE0F0 0%, #FFB3D9 100%);
+            padding: 50px;
+            margin: 40px 0;
+            border-radius: 25px;
+            border-left: 15px solid #E91E63;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .app-name {
+            font-size: 48px;
+            font-weight: 900;
+            color: #C2185B;
+            margin-bottom: 20px;
+        }
+        
+        .app-desc {
+            font-size: 30px;
+            line-height: 2.2;
+            color: #333;
+        }
+        
+        .practice-box {
+            background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%);
+            padding: 50px;
+            margin: 60px 0;
+            border-radius: 25px;
+            border: 8px solid #FF9800;
+        }
+        
+        .practice-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: #E65100;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .practice-step {
+            background: white;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 15px;
+            border-left: 10px solid #FF9800;
+            font-size: 30px;
+        }
+        
+        .step-number {
+            font-size: 42px;
+            font-weight: 900;
+            color: #FF9800;
+            margin-right: 15px;
+        }
+        
+        .comic-strip {
+            background: #F5F5F5;
+            padding: 50px;
+            margin: 60px 0;
+            border-radius: 25px;
+            border: 5px solid #666;
+        }
+        
+        .comic-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .comic-panels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .comic-panel {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 4px solid #333;
+            text-align: center;
+        }
+        
+        .comic-image {
+            font-size: 100px;
+            margin: 20px 0;
+        }
+        
+        .comic-text {
+            font-size: 26px;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 50px;
+            margin: 50px 0;
+            border-radius: 25px;
+            border-left: 15px solid #0066CC;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            padding: 50px;
+            margin: 60px 0;
+            border-radius: 25px;
+            border-left: 15px solid #FDD835;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            padding: 50px;
+            margin: 60px 0;
+            border-radius: 25px;
+            border-left: 15px solid #D32F2F;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .ai-tool-card {
+            background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%);
+            padding: 50px;
+            margin: 40px 0;
+            border-radius: 25px;
+            border-left: 15px solid #0288D1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .tool-name {
+            font-size: 48px;
+            font-weight: 900;
+            color: #01579B;
+            margin-bottom: 20px;
+        }
+        
+        .content-image {
+            width: 100%;
+            margin: 60px 0;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border: 8px solid #E91E63;
+        }
+        
+        .content-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        h2 {
+            font-size: 52px;
+            color: #C2185B;
+            margin: 70px 0 40px;
+            padding-bottom: 20px;
+            border-bottom: 8px solid #C2185B;
+            font-weight: 900;
+        }
+        
+        h3 {
+            font-size: 42px;
+            color: #FF6B6B;
+            margin: 50px 0 30px;
+            font-weight: 900;
+        }
+        
+        .next-episode {
+            background: linear-gradient(135deg, #6B5B95 0%, #8B7BB5 100%);
+            padding: 60px;
+            margin: 60px 0;
+            border-radius: 30px;
+            text-align: center;
+            color: white;
+            border: 8px solid #4A3C65;
+        }
+        
+        .next-episode h2 {
+            color: white;
+            border-bottom: 5px solid white;
+            font-size: 48px;
+        }
+        
+        .next-episode p {
+            font-size: 36px;
+            margin: 30px 0;
+            line-height: 2;
+        }
+        
+        @media (max-width: 1200px) {
+            body { flex-direction: column; }
+            .left-margin, .middle-gap, .right-margin { display: none; }
+            .content-wrapper { width: 100%; }
+            .sidebar { width: 100%; position: relative; }
+        }
+        
+        @media (max-width: 768px) {
+            .container { font-size: 24px; padding: 30px; }
+            .hero-section h1 { font-size: 48px; }
+            .hero-section .episode { font-size: 32px; }
+            h2 { font-size: 42px; }
+            h3 { font-size: 36px; }
+            .chat-bubble { font-size: 26px; padding: 30px; }
+            .song-lyrics { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-margin"></div>
+    
+    <div class="content-wrapper">
+        
+        <div class="hero-section">
+            <div class="episode">🎬 윤호와 함께하는 AI 이야기 🎬</div>
+            <h1>Episode 4</h1>
+            <div class="episode" style="font-size: 52px; margin-top: 30px;">할아버지, 유튜브랑 인스타그램이 뭐예요?</div>
+            <p style="font-size: 36px; margin-top: 20px;">요즘 핫한 앱과 AI 도구들! 📱🎵🎥</p>
+        </div>
+
+        <div class="container">
+            
+            <div class="character-intro">
+                <h2 style="border-bottom: none; margin-top: 0; color: #0066CC;">👨‍👩‍👧‍👦 오늘의 등장인물</h2>
+                
+                <div class="character">
+                    <span class="character-icon">👦</span>
+                    <div>
+                        <div class="character-name">윤호 (KITA에 다니는 어린이)</div>
+                        <div class="character-desc">호기심 많은 어린이, AI에 관심이 많아요!</div>
+                    </div>
+                </div>
+                
+                <div class="character">
+                    <span class="character-icon">👴</span>
+                    <div>
+                        <div class="character-name">할아버지 (70대)</div>
+                        <div class="character-desc">손주 사랑이 최고! 새로운 것 배우기를 좋아하세요</div>
+                    </div>
+                </div>
+                
+                <div class="character">
+                    <span class="character-icon">👵</span>
+                    <div>
+                        <div class="character-name">할머니 (60대)</div>
+                        <div class="character-desc">또' 부러지고 또'또'하신 분, 스마트폰도 잘 다루세요!</div>
+                    </div>
+                </div>
+                
+                <div class="character">
+                    <span class="character-icon">👨‍🔬</span>
+                    <div>
+                        <div class="character-name">아빠 (30대)</div>
+                        <div class="character-desc">AI 전공 과학자</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="song-box">
+                <div class="song-title">🎵 SNS와 AI 동요 🎵</div>
+                <div class="song-lyrics">
+                    유튜브에는 영상이 틱톡에는 춤이<br>
+                    인스타그램에는 사진이 가득해요<br>
+                    <br>
+                    페이스북에서 친구 만나고<br>
+                    AI가 음악도 만들어줘요<br>
+                    <br>
+                    수노로 노래 만들고<br>
+                    베오로 영상 만들고<br>
+                    <br>
+                    할아버지도 할머니도<br>
+                    이제 다 알아요 신세계!<br>
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&q=80" alt="소셜미디어">
+            </div>
+
+            <h2>📱 할아버지의 질문</h2>
+
+            <p style="font-size: 32px; line-height: 2.2; color: #333;">
+                요즘 아이들이 자주 보는 앱들이 있다고 해요. 무엇이 무엇인지 알아봐요!
+            </p>
+
+            <div class="conversation">
+                <div class="chat-bubble chat-grandpa">
+                    <div class="chat-name">
+                        <span class="chat-icon">👴</span>
+                        할아버지
+                    </div>
+                    윤호야, 손주들이 맨날<br>
+                    <span class="keyword">유튜브</span> 본다고 하는데<br>
+                    그게 뭐야? TV랑 달라?
+                </div>
+
+                <div class="chat-bubble chat-yoonho">
+                    <div class="chat-name">
+                        <span class="chat-icon">👦</span>
+                        윤호
+                    </div>
+                    할아버지! 오늘 재미있는 것들<br>
+                    많이 알려드릴게요!<br>
+                    요즘 사람들이 가장 많이 쓰는<br>
+                    앱들이에요! 😊
+                </div>
+
+                <div class="chat-bubble chat-grandma">
+                    <div class="chat-name">
+                        <span class="chat-icon">👵</span>
+                        할머니
+                    </div>
+                    할머니도 궁금해!<br>
+                    이웃집 할머니가 <span class="keyword">인스타그램</span>한다는데<br>
+                    그게 뭔지 모르겠어...
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1920&q=80" alt="스마트폰 앱">
+            </div>
+
+            <h2>🎬 유튜브 (YouTube)</h2>
+
+            <div class="app-card">
+                <div class="app-name">📺 유튜브</div>
+                <div class="app-desc">
+                    <strong style="font-size: 36px; color: #C2185B;">유튜브가 뭐예요?</strong><br><br>
+                    
+                    세계 최대 <span class="keyword">동영상 사이트</span>예요!<br>
+                    빨간색 도네 안에 흰색 ▶️ 버튼이 로고예요.<br><br>
+                    
+                    <strong style="font-size: 34px;">뭘 볼 수 있나요?</strong><br>
+                    • 요리 레시피 영상<br>
+                    • 운동하는 방법<br>
+                    • 노래, 드라마, 영화<br>
+                    • 여행지 소개<br>
+                    • 손주 좋아하는 만화<br><br>
+                    
+                    <strong style="font-size: 34px;">어떻게 써요?</strong><br>
+                    스마트폰에서 <span class="keyword">"유튜브"</span> 검색!<br>
+                    보고 싶은 것 검색하면 영상 나와요!
+                </div>
+            </div>
+
+            <div class="conversation">
+                <div class="chat-bubble chat-grandpa">
+                    <div class="chat-name">
+                        <span class="chat-icon">👴</span>
+                        할아버지
+                    </div>
+                    오! TV처럼 무료로 볼 수 있어?
+                </div>
+
+                <div class="chat-bubble chat-yoonho">
+                    <div class="chat-name">
+                        <span class="chat-icon">👦</span>
+                        윤호
+                    </div>
+                    네! 무료예요!<br>
+                    <span class="keyword">광고</span>만 조금 나와요.<br>
+                    <span class="keyword">"뜨장찌깨 덮이는 법"</span> 검색하면<br>
+                    영상으로 다 나와요!
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1920&q=80" alt="유튜브">
+            </div>
+
+            <h2>📸 인스타그램 (Instagram)</h2>
+
+            <div class="app-card">
+                <div class="app-name">📷 인스타그램</div>
+                <div class="app-desc">
+                    <strong style="font-size: 36px; color: #C2185B;">인스타그램이 뭐예요?</strong><br><br>
+                    
+                    <span class="keyword">사진</span>을 올리고 공유하는 앱이에요!<br>
+                    무지개 색깔 카메라 📷 모양이 로고예요.<br><br>
+                    
+                    <strong style="font-size: 34px;">뭐하는 곳이에요?</strong><br>
+                    • 예쁜 사진 올리기<br>
+                    • 친구들 사진 보기<br>
+                    • 맛집, 여행지 사진<br>
+                    • 손주 사진 공유<br>
+                    • <span class="keyword">좋아요</span> ❤️ 누르기<br><br>
+                    
+                    <strong style="font-size: 34px;">누가 많이 써요?</strong><br>
+                    젊은 사람들이 많이 써요!<br>
+                    요즘은 할머니, 할아버지도 써세요!
+                </div>
+            </div>
+
+            <div class="conversation">
+                <div class="chat-bubble chat-grandma">
+                    <div class="chat-name">
+                        <span class="chat-icon">👵</span>
+                        할머니
+                    </div>
+                    그럼 손주 사진 올리면<br>
+                    다른 사람들도 볼 수 있어?
+                </div>
+
+                <div class="chat-bubble chat-yoonho">
+                    <div class="chat-name">
+                        <span class="chat-icon">👦</span>
+                        윤호
+                    </div>
+                    네! 하지만 조심하세요!<br>
+                    <span class="keyword">공개/비공개</span> 설정을 해야 해요.<br>
+                    가족들만 보게 할 수도 있어요!
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1611162618479-ee3d24aaef0b?w=1920&q=80" alt="인스타그램">
+            </div>
+
+            <h2>🎵 틱톡 (TikTok)</h2>
+
+            <div class="app-card">
+                <div class="app-name">🎶 틱톡</div>
+                <div class="app-desc">
+                    <strong style="font-size: 36px; color: #C2185B;">틱톡이 뭐예요?</strong><br><br>
+                    
+                    <span class="keyword">짧은 영상</span>을 보는 앱이에요!<br>
+                    검은색 음표 🎵 모양이 로고예요.<br><br>
+                    
+                    <strong style="font-size: 34px;">어떤 영상이 있어요?</strong><br>
+                    • 춤추는 영상<br>
+                    • 재미있는 영상 (15초~3분)<br>
+                    • 요리하는 짧은 영상<br>
+                    • 반려동물 영상<br><br>
+                    
+                    <strong style="font-size: 34px;">특징:</strong><br>
+                    위아래로 <span class="keyword">쓸어내리면</span><br>
+                    다음 영상이 나와요!<br>
+                    중독성 있어요! 조심!
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?w=1920&q=80" alt="틱톡">
+            </div>
+
+            <h2>💥 페이스북 (Facebook)</h2>
+
+            <div class="app-card">
+                <div class="app-name">💥 페이스북</div>
+                <div class="app-desc">
+                    <strong style="font-size: 36px; color: #C2185B;">페이스북이 뭐예요?</strong><br><br>
+                    
+                    <span class="keyword">친구</span>들과 소통하는 SNS예요!<br>
+                    파란색 f 모양이 로고예요.<br><br>
+                    
+                    <strong style="font-size: 34px;">뭐하는 곳이에요?</strong><br>
+                    • 친구 소식 보기<br>
+                    • 글 쓰고 사진 올리기<br>
+                    • 동창회 모임 만들기<br>
+                    • 같은 취미 사람들 모임<br><br>
+                    
+                    <strong style="font-size: 34px;">누가 써요?</strong><br>
+                    40~60대가 가장 많이 써요!<br>
+                    옛날 친구 찾기 좋아요!
+                </div>
+            </div>
+
+            <div class="conversation">
+                <div class="chat-bubble chat-grandpa">
+                    <div class="chat-name">
+                        <span class="chat-icon">👴</span>
+                        할아버지
+                    </div>
+                    오! 그럼 <span class="keyword">초등학교 동창</span><br>
+                    찾을 수 있겠네?
+                </div>
+
+                <div class="chat-bubble chat-yoonho">
+                    <div class="chat-name">
+                        <span class="chat-icon">👦</span>
+                        윤호
+                    </div>
+                    맞아요! 페이스북에서<br>
+                    이름 검색하면 나와요!<br>
+                    많은 할아버지들이 써세요!
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1633675254053-d96c7668c3b8?w=1920&q=80" alt="페이스북">
+            </div>
+
+            <h2>🤖 아빠가 알려주는 신기한 AI 도구들</h2>
+
+            <div class="conversation">
+                <div class="chat-bubble chat-dad">
+                    <div class="chat-name">
+                        <span class="chat-icon">👨‍🔬</span>
+                        아빠
+                    </div>
+                    아버지, 어머니!<br>
+                    요즘 나온 신기한 AI 도구들<br>
+                    소개해드릴게요!<br>
+                    <span class="keyword">영상</span>도 만들고 <span class="keyword">음악</span>도 만들어요!
+                </div>
+            </div>
+
+            <h2>🎬 Veo (베오) - AI 영상 만들기</h2>
+
+            <div class="ai-tool-card">
+                <div class="tool-name">🎥 Veo (베오)</div>
+                <div class="app-desc">
+                    <strong style="font-size: 36px; color: #01579B;">베오가 뭐예요?</strong><br><br>
+                    
+                    <span class="keyword">구글</span>이 만든 AI 영상 생성 도구예요!<br>
+                    (Veo 2가 최신 버전이에요)<br><br>
+                    
+                    <strong style="font-size: 34px;">뭘 할 수 있어요?</strong><br>
+                    • 글로 쓰면 <span class="keyword">영상</span>이 만들어져요!<br>
+                    • "바닷가에서 노을 지는 모습" 쓰면<br>
+                      진짜 같은 영상이 뜸!<br>
+                    • 최대 2분 영상 제작<br><br>
+                    
+                    <strong style="font-size: 34px;">어떻게 써요?</strong><br>
+                    아직은 전문가들만 쓸 수 있어요.<br>
+                    곧 일반인도 쓸 수 있을 거예요!
+                </div>
+            </div>
+
+            <div class="conversation">
+                <div class="chat-bubble chat-grandma">
+                    <div class="chat-name">
+                        <span class="chat-icon">👵</span>
+                        할머니
+                    </div>
+                    우와! 글만 쓰면<br>
+                    영상이 만들어진다고?<br>
+                    신기하네!
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1492619375914-88005aa8e8fb?w=1920&q=80" alt="AI 영상">
+            </div>
+
+            <h2>🎵 Suno (수노) - AI 음악 만들기</h2>
+
+            <div class="ai-tool-card">
+                <div class="tool-name">🎼 Suno (수노)</div>
+                <div class="app-desc">
+                    <strong style="font-size: 36px; color: #01579B;">수노가 뭐예요?</strong><br><br>
+                    
+                    <span class="keyword">AI</span>가 노래를 만들어주는 도구예요!<br><br>
+                    
+                    <strong style="font-size: 34px;">어떻게 써요?</strong><br>
+                    1. <span class="keyword">가사</span>를 입력해요<br>
+                    2. <span class="keyword">음악 스타일</span> 선택 (발라드, 트로트 등)<br>
+                    3. AI가 <span class="keyword">노래</span>를 만들어줘요!<br>
+                    4. 목소리까지 넣어줘요!<br><br>
+                    
+                    <strong style="font-size: 34px;">뭐에 쓸 수 있어요?</strong><br>
+                    • 손주 생일 축하 노래 만들기<br>
+                    • 추억의 가사로 노래 만들기<br>
+                    • 동요 만들기<br><br>
+                    
+                    <strong style="font-size: 34px;">무료로 쓸 수 있어요!</strong><br>
+                    <span class="keyword">suno.ai</span> 사이트에 가세요!
+                </div>
+            </div>
+
+            <div class="conversation">
+                <div class="chat-bubble chat-grandpa">
+                    <div class="chat-name">
+                        <span class="chat-icon">👴</span>
+                        할아버지
+                    </div>
+                    헤! 내가 가사 쓰면<br>
+                    AI가 노래를 만들어?<br>
+                    손주한테 자랑하고 싶다!
+                </div>
+
+                <div class="chat-bubble chat-yoonho">
+                    <div class="chat-name">
+                        <span class="chat-icon">👦</span>
+                        윤호
+                    </div>
+                    네! 우리 동요도<br>
+                    <span class="keyword">수노</span>로 만들 수 있어요!<br>
+                    정말 신기하죠?
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1920&q=80" alt="AI 음악">
+            </div>
+
+            <h2>📚 쉽게 구분하는 만화</h2>
+
+            <div class="comic-strip">
+                <div class="comic-title">🎨 한눈에 보는 SNS</div>
+                <div class="comic-panels">
+                    <div class="comic-panel">
+                        <div class="comic-image">📺</div>
+                        <div class="comic-text">
+                            <strong>유튜브</strong><br>
+                            빨간 도네 ▶️<br>
+                            <span class="keyword">영상</span> 보는 곳<br>
+                            무료!
+                        </div>
+                    </div>
+                    <div class="comic-panel">
+                        <div class="comic-image">📷</div>
+                        <div class="comic-text">
+                            <strong>인스타그램</strong><br>
+                            무지개 카메라<br>
+                            <span class="keyword">사진</span> 올리는 곳<br>
+                            젊은이들 많아요
+                        </div>
+                    </div>
+                    <div class="comic-panel">
+                        <div class="comic-image">🎵</div>
+                        <div class="comic-text">
+                            <strong>틱톡</strong><br>
+                            검은 음표<br>
+                            <span class="keyword">짧은 영상</span><br>
+                            중독 조심!
+                        </div>
+                    </div>
+                    <div class="comic-panel">
+                        <div class="comic-image">💥</div>
+                        <div class="comic-text">
+                            <strong>페이스북</strong><br>
+                            파란 f<br>
+                            <span class="keyword">친구</span> 만나는 곳<br>
+                            동창 찾기 좋아요
+                        </div>
+                    </div>
+                    <div class="comic-panel">
+                        <div class="comic-image">🎬</div>
+                        <div class="comic-text">
+                            <strong>Veo (베오)</strong><br>
+                            구글 AI<br>
+                            <span class="keyword">영상 생성</span><br>
+                            글로 영상 만들기
+                        </div>
+                    </div>
+                    <div class="comic-panel">
+                        <div class="comic-image">🎼</div>
+                        <div class="comic-text">
+                            <strong>Suno (수노)</strong><br>
+                            AI 작곡<br>
+                            <span class="keyword">노래 만들기</span><br>
+                            누구나 가능!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>👉 오늘의 실습</h2>
+
+            <div class="practice-box">
+                <div class="practice-title">🎯 유튜브 첫 도전!</div>
+                
+                <div class="practice-step">
+                    <span class="step-number">1단계</span>
+                    스마트폰에서 <span class="keyword">"유튜브"</span> 검색<br>
+                    빨간 도네 ▶️ 앱 클릭
+                </div>
+                
+                <div class="practice-step">
+                    <span class="step-number">2단계</span>
+                    위쪽 <span class="keyword">검색창</span> 클릭<br>
+                    (돋보기 🔍 모양)
+                </div>
+                
+                <div class="practice-step">
+                    <span class="step-number">3단계</span>
+                    <span class="keyword">"뜨장찌깨 덮이는 법"</span> 입력!
+                </div>
+                
+                <div class="practice-step">
+                    <span class="step-number">4단계</span>
+                    마음에 드는 영상 클릭해서 보기
+                </div>
+                
+                <div class="practice-step">
+                    <span class="step-number">5단계</span>
+                    영상 보면서 따라하기!
+                </div>
+                
+                <div style="margin-top: 40px; text-align: center; font-size: 36px; font-weight: 900; color: #E65100;">
+                    🎉 영상 봤다면 성공! 🎉
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&q=80" alt="실습">
+            </div>
+
+            <h2>⚠️ 주의할 점</h2>
+
+            <div class="warning-box">
+                <h3 style="margin-top: 0; color: #D32F2F; font-size: 42px;">🚨 꼭 조심하세요!</h3>
+                <ul style="font-size: 32px; line-height: 2.2;">
+                    <li>SNS에 <span class="keyword">개인정보</span> 올리지 마세요!</li>
+                    <li>집 주소, 전화번호 공개 금지!</li>
+                    <li>모르는 사람 <span class="keyword">친구 신청</span> 조심!</li>
+                    <li>영상 보다가 시간 가는 줄 몰라요 (시간 조절!)</li>
+                    <li>틱톡은 중독성 강해요!</li>
+                    <li>이상한 <span class="keyword">광고</span> 클릭하지 마세요!</li>
+                    <li>손주 사진 올릴 때 <span class="keyword">공개 설정</span> 확인!</li>
+                </ul>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1920&q=80" alt="주의">
+            </div>
+
+            <h2>💡 할머니, 할아버지 추천 검색어</h2>
+
+            <div class="tip-box">
+                <h3 style="margin-top: 0; color: #F57C00; font-size: 42px;">📺 유튜브 추천 검색어</h3>
+                <div style="font-size: 32px; line-height: 2.5;">
+                    <strong>🍳 요리:</strong><br>
+                    <span class="keyword">"백종원 김치찌개"</span><br>
+                    <span class="keyword">"집밥 레시피"</span><br><br>
+                    
+                    <strong>💪 건강:</strong><br>
+                    <span class="keyword">"시니어 스트레칭"</span><br>
+                    <span class="keyword">"무릎 운동"</span><br><br>
+                    
+                    <strong>🎵 음악:</strong><br>
+                    <span class="keyword">"트로트 메들리"</span><br>
+                    <span class="keyword">"7080 노래모음"</span><br><br>
+                    
+                    <strong>🌸 취미:</strong><br>
+                    <span class="keyword">"화이초 키우기"</span><br>
+                    <span class="keyword">"낚시 초보"</span>
+                </div>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1920&q=80" alt="배우기">
+            </div>
+
+            <h2>📝 오늘 배운 내용 정리</h2>
+
+            <div class="info-box">
+                <h3 style="margin-top: 0; color: #0066CC; font-size: 42px;">✨ 오늘의 핵심!</h3>
+                <ul style="font-size: 34px; line-height: 2.5;">
+                    <li><span class="keyword">유튜브</span> = 무료 영상 사이트</li>
+                    <li><span class="keyword">인스타그램</span> = 사진 SNS</li>
+                    <li><span class="keyword">틱톡</span> = 짧은 영상 (중독 조심!)</li>
+                    <li><span class="keyword">페이스북</span> = 친구 만나는 곳</li>
+                    <li><span class="keyword">Veo</span> = AI 영상 만들기</li>
+                    <li><span class="keyword">Suno</span> = AI 노래 만들기</li>
+                    <li>개인정보는 절대 올리지 마세요!</li>
+                    <li>하나씩 천천히 배워보세요!</li>
+                </ul>
+            </div>
+
+            <div class="tip-box" style="text-align: center;">
+                <h3 style="color: #F57C00; font-size: 46px;">💬 가족의 응원!</h3>
+                <p style="font-size: 36px; margin-top: 30px; line-height: 2.5;">
+                    <strong>윤호:</strong> "할아버지도 이제 유튜버예요!"<br><br>
+                    <strong>할아버지:</strong> "<span class="keyword">유튜브</span>에서 낚시 영상 찾았다!"<br><br>
+                    <strong>할머니:</strong> "<span class="keyword">요리 영상</span> 보면서 따라할래!"<br><br>
+                    <strong>아빠:</strong> "천천히 하나씩 배워보세요!"
+                </p>
+            </div>
+
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=1920&q=80" alt="가족">
+            </div>
+
+            <div class="next-episode">
+                <h2>🎬 다음 편 예고</h2>
+                <p style="font-size: 42px; margin: 20px 0;">
+                    <strong style="font-size: 48px; color: #FFEB3B;">Episode 5</strong><br>
+                    <span style="font-size: 42px;">
+                        "할머니, 스마트폰으로<br>
+                        <span class="keyword" style="background: none; color: #FFEB3B;">사진</span> 예쁘게 찍어요!"
+                    </span>
+                    <br><br>
+                    <span style="font-size: 34px;">
+                        윤호가 할머니께<br>
+                        <span class="keyword" style="background: none; color: #FFEB3B;">사진 잘 찍는 법</span>과<br>
+                        AI로 편집하는 방법을 알려드려요!<br>
+                        <br>
+                        손주 사진, 풍경 사진 멋지게! 📸
+                    </span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="middle-gap"></div>
+    
+    <div class="sidebar">
+        <div class="sidebar-item">
+            <div class="ad-space">
+                <div class="ad-text">광고 영역<br>1:1 비율</div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="sidebar-title">📅 달력</div>
+            <div class="sidebar-content calendar">
+                <div style="font-weight: 900; margin-bottom: 10px;">2025년 11월</div>
+                <div class="calendar-grid">
+                    <div class="calendar-day">일</div>
+                    <div class="calendar-day">월</div>
+                    <div class="calendar-day">화</div>
+                    <div class="calendar-day">수</div>
+                    <div class="calendar-day">목</div>
+                    <div class="calendar-day">금</div>
+                    <div class="calendar-day">토</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-item">
+            <div class="sidebar-title">🔥 인기글</div>
+            <div class="sidebar-content">
+                <div class="popular-post">1. AI 기초 완벽 가이드</div>
+                <div class="popular-post">2. 시니어를 위한 스마트폰</div>
+                <div class="popular-post">3. 윤호의 AI 시리즈</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-margin"></div>
+</body>
+</html>

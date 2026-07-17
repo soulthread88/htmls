@@ -1,0 +1,71 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap');
+.scene{display:flex;gap:32px;justify-content:center;align-items:flex-start;padding:24px 0 32px;flex-wrap:wrap;}
+.col{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.col-label{font-family:sans-serif;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;}
+
+/* 쇼츠 프레임 래퍼 */
+.shorts-frame{position:relative;width:220px;height:391px;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8);}
+
+/* 쇼츠 UI 오버레이 (반투명) */
+.ui-top{position:absolute;top:0;left:0;right:0;height:37px;background:rgba(255,0,0,.18);z-index:30;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;pointer-events:none;}
+.ui-top-txt{font-family:sans-serif;font-size:8px;color:rgba(255,120,120,.9);font-weight:700;}
+.ui-right{position:absolute;top:37px;right:0;width:28px;bottom:82px;background:rgba(255,0,0,.18);z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;}
+.ui-right-txt{font-family:sans-serif;font-size:7px;color:rgba(255,120,120,.9);font-weight:700;writing-mode:vertical-rl;text-orientation:mixed;}
+.ui-bot{position:absolute;bottom:0;left:0;right:0;height:82px;background:rgba(255,0,0,.18);z-index:30;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.ui-bot-txt{font-family:sans-serif;font-size:8px;color:rgba(255,120,120,.9);font-weight:700;}
+
+/* 카드 (쇼츠 프레임 안에 꽉 차게) */
+.card{position:absolute;inset:0;display:flex;flex-direction:column;font-family:'Noto Sans KR',sans-serif;}
+.top-bar{width:100%;background:#CC0000;height:90px;display:flex;align-items:center;justify-content:flex-start;flex-shrink:0;position:relative;overflow:hidden;}
+.top-bar::after{content:'';position:absolute;right:-17px;top:-23px;width:74px;height:124px;background:rgba(255,255,255,.07);transform:rotate(18deg);}
+.top-bar::before{content:'';position:absolute;left:-11px;bottom:-17px;width:57px;height:90px;background:rgba(0,0,0,.15);transform:rotate(18deg);}
+.top-text{font-size:28px;font-weight:900;color:#fff;text-align:left;text-shadow:1px 2px 0 rgba(0,0,0,.45);letter-spacing:-.02em;line-height:1.18;padding:0 31px 0 10px;word-break:keep-all;position:relative;z-index:2;width:100%;}
+.mid{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 10px;background:radial-gradient(ellipse 60% 45% at 18% 58%,rgba(170,90,0,.55) 0%,transparent 68%),radial-gradient(ellipse 65% 55% at 82% 35%,rgba(20,45,130,.6) 0%,transparent 70%),#080812;}
+.deco-circle{position:absolute;width:119px;height:119px;border-radius:50%;top:50%;left:10%;transform:translateY(-50%);background:rgba(210,110,0,.5);opacity:.35;pointer-events:none;}
+.deco-rect{position:absolute;width:91px;height:136px;top:6%;right:-11px;transform:rotate(11deg);background:rgba(10,16,50,.9);opacity:.18;pointer-events:none;}
+.phone{position:absolute;top:50%;left:6%;transform:translateY(-52%) rotate(-7deg);width:74px;height:105px;background:linear-gradient(145deg,#182038,#0c1222);border:1.5px solid #243255;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8px;box-shadow:0 5px 16px rgba(0,0,0,.7);pointer-events:none;z-index:2;}
+.ph-b{width:80%;height:15px;background:#28407a;border-radius:3px}
+.ph-btn{width:68%;height:14px;background:#D99000;border-radius:3px;display:flex;align-items:center;justify-content:center}
+.ph-btn-i{width:8px;height:8px;border:1.5px solid rgba(0,0,0,.38);border-radius:50%}
+.ph-b2{width:80%;height:12px;background:#1a55a8;border-radius:3px}
+.ph-ln{height:2px;background:rgba(255,255,255,.2);border-radius:1px;width:68%}
+.ph-ln2{height:2px;background:rgba(255,255,255,.2);border-radius:1px;width:50%}
+.tap-ring{position:absolute;width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(217,144,0,.7);top:calc(50% - 22px);left:calc(6% + 26px);transform:translateY(-52%);z-index:3;pointer-events:none;box-shadow:0 0 7px rgba(217,144,0,.4);}
+.main-block{position:relative;z-index:10;display:flex;flex-direction:column;align-items:flex-start;text-align:left;margin-left:9px;padding-right:31px;width:100%;}
+.m-line{font-size:32px;font-weight:900;letter-spacing:-.02em;line-height:1.12;text-shadow:2px 2px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);word-break:keep-all;}
+.bot-bar{width:100%;background:#CC0000;height:90px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;flex-shrink:0;position:relative;overflow:hidden;}
+.bot-bar::before{content:'';position:absolute;left:-17px;top:-17px;width:68px;height:113px;background:rgba(255,255,255,.06);transform:rotate(18deg);}
+.bot-line{font-size:18px;font-weight:900;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.45);text-align:left;letter-spacing:-.02em;line-height:1.28;padding:0 31px 0 10px;word-break:keep-all;position:relative;z-index:2;width:100%;}
+.ep-badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:2px 7px;font-size:6.5px;font-weight:900;color:rgba(255,255,255,.7);letter-spacing:.1em;z-index:40;}
+</style>
+
+<div class="scene">
+  <div class="col">
+    <div class="col-label">쇼츠 UI 충돌 영역 표시</div>
+    <div class="shorts-frame">
+      <div class="card">
+        <div class="top-bar"><div class="top-text">결제 버튼<br>누른 순간</div></div>
+        <div class="mid">
+          <div class="deco-circle"></div><div class="deco-rect"></div>
+          <div class="phone"><div class="ph-b"></div><div class="ph-btn"><div class="ph-btn-i"></div></div><div class="ph-b2"></div><div class="ph-ln"></div><div class="ph-ln2"></div></div>
+          <div class="tap-ring"></div>
+          <div class="main-block">
+            <div class="m-line" style="color:#FFD700">상품 말고</div>
+            <div class="m-line" style="color:#fff">다른 걸</div>
+            <div class="m-line" style="color:#FFD700">팔았습니다</div>
+          </div>
+        </div>
+        <div class="bot-bar">
+          <div class="bot-line">당신의 <span style="color:#FFD700">정보</span>는</div>
+          <div class="bot-line">이미 팔렸습니다</div>
+        </div>
+        <div class="ep-badge">EP01-1</div>
+      </div>
+      <div class="ui-top"><span class="ui-top-txt">상단 UI (검색·메뉴)</span></div>
+      <div class="ui-right"><span class="ui-right-txt">좋아요·댓글·공유</span></div>
+      <div class="ui-bot"><span class="ui-bot-txt">채널명·제목·음악</span></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+╔══════════════════════════════════════════════════════════════╗
+║  IssueLens EP.03 (English) — AI Image Generation Guide     ║
+║  Tools: DALL-E 3 · Midjourney v6 · Adobe Firefly · Canva    ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━━━ SECTION 1 IMAGE (s1i) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Topic: What Is China's Belt and Road Initiative? — The New Silk Road, Explained
+
+[DALL-E 3]
+Editorial news illustration, dramatic lighting, red #C8001A and dark navy #1E3A8A color palette,
+What Is China's Belt and Road Initiative? — The New Silk Road, Explained concept, infographic style, high contrast, bold typography space,
+16:9 ratio, no text in image, professional journalism aesthetic.
+
+[Midjourney]
+/imagine what is china's belt and road initiative? — the new silk road, explained, editorial infographic style,
+red and dark navy dramatic lighting, news magazine quality --ar 16:9 --v 6 --style raw
+
+[Unsplash search] "China Belt and Road Initiative debt trap" / "BRI debt trap 2026"
+[Pexels search]   "China debt diplomacy"
+
+━━━━━ SECTION 1 VIDEO (s1v) — YouTube search terms ━━━━━━━━━━
+• "China Belt and Road Initiative debt trap explained"
+• "BRI debt trap 2026 documentary"
+• "IssueLens EP.03 related footage"
+Source caption (required): *Source: [YouTube URL]*
+
+━━━━━ SECTION 2 IMAGE (s2i) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Topic: The Debt Trap in Action — Sri Lanka Lost a Port. Pakistan Lost Control. Indonesia Is Paying the Bills.
+
+[DALL-E 3]
+Data flow diagram illustration, glowing red warning lines connecting smartphones to government servers,
+map of US and Asia, editorial news style, ominous atmosphere, 16:9 no text.
+
+[Midjourney]
+/imagine data surveillance government national security concept, red warning signals,
+map infographic, dramatic editorial news style --ar 16:9 --v 6
+
+[Unsplash] "government surveillance" / "cybersecurity threat" / "data center"
+
+━━━━━ SECTION 2 VIDEO (s2v) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• "China taking over ports congressional hearing"
+• "Sri Lanka Hambantota port China news report"
+
+━━━━━ SECTION 3 IMAGE (s3i) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Topic: The Invisible Takeover — Digital Infrastructure & Data Sovereignty
+
+[DALL-E 3]
+Asymmetric balance scale infographic, one side blocked (firewall/censorship),
+other side open data flowing, flat design, red and blue contrast, editorial news, 16:9.
+
+[Midjourney]
+/imagine asymmetric trade data imbalance infographic, editorial flat design,
+red and blue high contrast --ar 16:9 --v 6
+
+━━━━━ YOUTUBE THUMBNAIL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[DALL-E 3]
+YouTube thumbnail, ultra high contrast, shocked person holding phone, red background,
+large bold white text space on left, warning icons, 1280x720px, no actual text generated.
+Color: #C8001A background, white text area, black accents.
+
+[Canva Guide]
+Size: 1280×720px
+BG: #C8001A → #0A0A0A left-to-right gradient
+Main text: "CHINA LENT THEM BILLIONS. NOW IT OW" — Inter Black, white, 80–90pt
+Sub text: "THE TRUTH [2025]" — Inter Bold, #FCD34D yellow, 50pt
+Badge: IssueLens EP.03 — top left
+
+━━━━━ INSTAGRAM CAROUSEL (10 slides) ━━━━━━━━━━━━━━━━━━━━━━━
+Size: 1080×1080px (square) or 1080×1350px (portrait — more reach)
+Design tool: Canva → search "news card dark"
+Palette: #C8001A, #1E3A8A, #FFFFFF, #0A0A0A, #FCD34D (accent)
+Font: Inter Black + Inter Regular
+
+━━━━━ FREE IMAGE SOURCES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Unsplash.com — high quality, free commercial use
+2. Pexels.com — free stock photo + video
+3. Pixabay.com — free, no attribution required
+4. Flaticon.com — icons (attribution required on free plan)
+5. Wikimedia Commons — government/official photos (check license)
+6. AP Images (apimages.com) — editorial use (subscription)

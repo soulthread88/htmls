@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens | EP.01 당신의 0원 결제, 그 뒤에 숨겨진 진실</title>
+<meta name="description" content="알리·테무 직구 앱이 당신의 개인정보를 어떻게 수집하고 어디로 보내는지, 데이터 주권의 현주소를 파헤칩니다.">
+<meta property="og:title" content="500원짜리 양말에 숨겨진 데이터 상납의 진실 — IssueLens">
+<meta property="og:description" content="초저가 해외 직구 뒤에 감춰진 데이터 주권 위협, 지금 당장 알아야 합니다.">
+
+<!-- Pretendard (제목용) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<!-- Noto Sans KR (본문용) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Do+Hyeon&display=swap" rel="stylesheet">
+
+<style>
+  /* ── FONT TOKENS ── */
+  :root {
+    --font-title: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+    --font-body:  'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+
+    --bg:        #FFFFFF;
+    --bg-soft:   #F7F9FC;
+    --bg-warm:   #FFF8F0;
+    --ink:       #0A0A0A;
+    --ink-mid:   #1F2937;
+    --ink-soft:  #4B5563;
+    --red:       #C8001A;
+    --red-bg:    #FFF0F3;
+    --red-light: #FFCCD5;
+    --amber:     #B45309;
+    --amber-bg:  #FFFBEB;
+    --green:     #065F46;
+    --blue:      #1E3A8A;
+    --blue-bg:   #EFF6FF;
+    --border:    #CBD5E1;
+    --rule:      #E2E8F0;
+    --shadow:    0 2px 14px rgba(0,0,0,0.07);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.13);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 2.05;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 제목 전용 클래스 */
+  .t-title { font-family: var(--font-title); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed; top: 0; left: 0;
+    height: 5px; background: var(--red);
+    z-index: 9999; width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(200,0,26,0.45);
+  }
+
+  /* ══════════════════ MASTHEAD ══════════════════ */
+  .masthead { background: var(--bg); border-bottom: 3px solid var(--red); }
+
+  .masthead-top {
+    background: var(--red);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 48px; flex-wrap: wrap; gap: 8px;
+  }
+
+  /* IssueLens 브랜드 로고 */
+  .brand-logo {
+    font-family: var(--font-title);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 7px;
+  }
+
+  .brand-logo .lens-dot {
+    width: 10px; height: 10px;
+    background: white; border-radius: 50%;
+    opacity: 0.85;
+  }
+
+  .masthead-meta {
+    font-family: var(--font-body);
+    font-size: 0.84rem; color: rgba(255,255,255,0.88);
+    font-weight: 600; letter-spacing: 0.04em;
+  }
+
+  .masthead-hero {
+    padding: 56px 48px 46px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 48px; align-items: start;
+    max-width: 1140px; margin: 0 auto;
+  }
+
+  .episode-label {
+    font-family: var(--font-title);
+    font-size: 0.9rem; font-weight: 700;
+    color: var(--red); letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .episode-label::before {
+    content: '';
+    display: inline-block; width: 28px; height: 3px;
+    background: var(--red); border-radius: 2px;
+  }
+
+  .main-headline {
+    font-family: var(--font-title);
+    font-size: clamp(2.5rem, 4.8vw, 4rem);
+    font-weight: 800;
+    line-height: 1.28; color: var(--ink);
+    letter-spacing: -0.03em; word-break: keep-all;
+  }
+
+  .main-headline span.accent {
+    color: var(--red); background: var(--red-bg);
+    padding: 2px 8px; border-radius: 5px; display: inline-block;
+  }
+
+  .sub-headline {
+    font-family: var(--font-body);
+    margin-top: 22px; font-size: 1.13rem;
+    color: var(--ink-soft); line-height: 1.92;
+    max-width: 600px; font-weight: 500; word-break: keep-all;
+  }
+
+  /* STAT BOXES */
+  .stat-cluster { display: flex; flex-direction: column; gap: 14px; min-width: 195px; }
+
+  .stat-box {
+    background: var(--red-bg);
+    border: 2.5px solid var(--red-light); border-radius: 14px;
+    padding: 18px 22px; text-align: center; box-shadow: var(--shadow);
+  }
+
+  .stat-number {
+    font-family: var(--font-title);
+    font-size: 2.1rem; font-weight: 800;
+    color: var(--red); display: block; line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 0.82rem; font-weight: 700;
+    color: var(--ink-soft); margin-top: 6px;
+    display: block; line-height: 1.55; word-break: keep-all;
+  }
+
+  /* TAGS */
+  .tags-bar {
+    padding: 14px 48px 20px; border-top: 1.5px solid var(--rule);
+    display: flex; gap: 9px; flex-wrap: wrap;
+    max-width: 1140px; margin: 0 auto;
+  }
+
+  .tag {
+    font-family: var(--font-body);
+    font-size: 0.84rem; font-weight: 700;
+    border: 2px solid var(--border); color: var(--ink-soft);
+    padding: 5px 14px; border-radius: 22px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tag:hover { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+  .tag.hot   { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+
+  /* ══════════════════ DISCLAIMER ══════════════════ */
+  .disclaimer {
+    max-width: 860px; margin: 40px auto 0;
+    padding: 18px 26px;
+    background: var(--bg-soft);
+    border: 1.5px solid var(--border); border-left: 6px solid var(--blue);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.92rem; color: var(--ink-soft); line-height: 1.85;
+    word-break: keep-all;
+  }
+
+  /* ══════════════════ ARTICLE BODY ══════════════════ */
+  .article-body { max-width: 860px; margin: 0 auto; padding: 46px 48px 84px; }
+
+  .intro-text {
+    font-family: var(--font-body);
+    font-size: 1.18rem; line-height: 2.05; color: var(--ink-mid);
+    background: var(--amber-bg); border-left: 6px solid #F59E0B;
+    padding: 24px 28px; border-radius: 0 12px 12px 0;
+    word-break: keep-all; font-weight: 500;
+  }
+
+  /* SECTION BLOCKS */
+  .section-block { margin-top: 68px; }
+
+  /* 기본 섹션 제목 */
+  .section-title {
+    font-family: var(--font-title);
+    font-size: 1.65rem; font-weight: 800;
+    color: var(--ink);
+    padding: 20px 24px 20px 26px;
+    border-left: 7px solid var(--red);
+    background: linear-gradient(90deg, var(--red-bg) 0%, white 65%);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 28px; line-height: 1.5;
+    word-break: keep-all;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: var(--shadow);
+    letter-spacing: -0.02em;
+  }
+
+  /* 섹션 2 전용 — Do Hyeon + 파랑 */
+  .section-title.style-b {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 1.75rem; font-weight: 400;
+    background: linear-gradient(90deg, var(--blue-bg) 0%, white 65%);
+    border-left-color: var(--blue); color: var(--blue);
+    letter-spacing: 0;
+  }
+
+  .section-title .num {
+    font-family: var(--font-title);
+    font-size: 0.88rem; font-weight: 800;
+    color: white; background: var(--red);
+    border-radius: 7px; padding: 3px 12px;
+    flex-shrink: 0; letter-spacing: 0.06em;
+  }
+  .section-title.style-b .num { background: var(--blue); }
+
+  /* BODY TEXT */
+  .body-text {
+    font-family: var(--font-body);
+    font-size: 1.08rem; line-height: 2.1;
+    color: var(--ink-mid); margin-bottom: 24px; word-break: keep-all;
+  }
+
+  strong.hl-red  { color: var(--red);   font-weight: 800; }
+  strong.hl-blue { color: var(--blue);  font-weight: 800; }
+  strong.hl-amb  { color: var(--amber); font-weight: 800; }
+
+  /* ══════════════════ DATA CALLOUT (red) ══════════════════ */
+  .data-callout {
+    background: var(--red-bg);
+    border: 2px solid var(--red-light); border-top: 6px solid var(--red);
+    padding: 30px 34px; margin: 34px 0;
+    border-radius: 14px; box-shadow: var(--shadow);
+  }
+
+  .data-callout-label {
+    font-family: var(--font-title);
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--red); letter-spacing: 0.16em;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+    text-transform: uppercase;
+  }
+  .data-callout-label::before { content: '●'; animation: blink 1.5s infinite; font-size: 0.7rem; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.15} }
+
+  .data-callout .big-number {
+    font-family: var(--font-title);
+    font-size: 3.8rem; font-weight: 800;
+    color: var(--red); display: block;
+    line-height: 1; margin: 8px 0 6px; letter-spacing: -0.03em;
+  }
+  .data-callout .big-label {
+    font-family: var(--font-body);
+    font-size: 0.94rem; color: var(--ink-soft);
+    font-weight: 700; margin-bottom: 16px; display: block;
+  }
+  .data-callout .callout-body {
+    font-family: var(--font-body);
+    font-size: 1.02rem; line-height: 2.0; color: var(--ink-mid); word-break: keep-all;
+  }
+  .data-callout .callout-body strong { color: var(--red); font-weight: 800; }
+
+  /* CONTEXT CALLOUT (blue) */
+  .context-callout {
+    background: var(--blue-bg);
+    border: 2px solid #BFDBFE; border-top: 6px solid var(--blue);
+    padding: 30px 34px; margin: 34px 0;
+    border-radius: 14px; box-shadow: var(--shadow);
+  }
+  .context-callout-label {
+    font-family: var(--font-title);
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--blue); letter-spacing: 0.14em;
+    margin-bottom: 12px; text-transform: uppercase;
+  }
+  .context-callout .callout-body {
+    font-family: var(--font-body);
+    font-size: 1.02rem; line-height: 2.0; color: var(--ink-mid); word-break: keep-all;
+  }
+  .context-callout .callout-body strong { color: var(--blue); font-weight: 800; }
+
+  /* ══════════════════ DATA FLOW ══════════════════ */
+  .data-flow {
+    margin: 36px 0; background: white;
+    border: 2px solid var(--border); border-radius: 16px;
+    padding: 32px 28px 28px; box-shadow: var(--shadow);
+  }
+  .data-flow-title {
+    font-family: var(--font-title);
+    font-size: 1rem; font-weight: 700;
+    color: var(--ink); text-align: center; margin-bottom: 30px;
+    letter-spacing: -0.01em;
+  }
+  .flow-steps {
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .flow-step { flex: 1; min-width: 100px; text-align: center; }
+  .flow-icon {
+    width: 62px; height: 62px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px; font-size: 1.65rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  .flow-icon.safe   { background:#DCFCE7; border:3px solid #22C55E; }
+  .flow-icon.warn   { background:#FEF3C7; border:3px solid #F59E0B; }
+  .flow-icon.danger { background:#FFE4E6; border:3px solid var(--red); }
+
+  .flow-step-label {
+    font-family: var(--font-body);
+    font-size: 0.9rem; font-weight: 800;
+    color: var(--ink); line-height: 1.5; word-break: keep-all;
+  }
+  .flow-step-sub {
+    font-family: var(--font-body);
+    font-size: 0.77rem; color: var(--ink-soft);
+    margin-top: 3px; font-weight: 600;
+  }
+  .flow-arrow {
+    color: var(--red); font-size: 1.7rem; flex-shrink: 0; font-weight: 900;
+    animation: arrow-pulse 1.9s infinite;
+  }
+  @keyframes arrow-pulse {
+    0%,100%{transform:translateX(0);opacity:1} 50%{transform:translateX(5px);opacity:0.35}
+  }
+
+  /* ══════════════════ LAW QUOTE ══════════════════ */
+  .law-quote {
+    border: 2.5px solid #9CA3AF; border-radius: 14px;
+    padding: 30px 32px; margin: 34px 0;
+    position: relative; background: var(--bg-soft); box-shadow: var(--shadow);
+  }
+  .law-quote-badge {
+    position: absolute; top: -15px; left: 24px;
+    background: var(--ink); color: white;
+    font-family: var(--font-title);
+    font-size: 0.82rem; font-weight: 700;
+    padding: 3px 18px; border-radius: 5px;
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .law-quote-text {
+    font-family: var(--font-body);
+    font-size: 1.06rem; color: var(--ink-mid);
+    line-height: 2.1; margin-top: 6px; word-break: keep-all;
+  }
+  .law-quote-text strong { color: var(--red); font-weight: 800; }
+  .law-quote-source {
+    font-family: var(--font-body);
+    margin-top: 14px; font-size: 0.84rem;
+    color: var(--ink-soft); text-align: right; font-weight: 700;
+  }
+
+  /* ══════════════════ RISK METER ══════════════════ */
+  .risk-meter {
+    margin: 34px 0; padding: 30px 34px;
+    background: white; border: 2px solid var(--border);
+    border-radius: 16px; box-shadow: var(--shadow);
+  }
+  .risk-meter-title {
+    font-family: var(--font-title);
+    font-size: 1.04rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 24px; letter-spacing: -0.01em;
+  }
+  .risk-item { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .risk-label {
+    font-family: var(--font-body);
+    font-size: 0.97rem; font-weight: 800;
+    width: 160px; flex-shrink: 0; color: var(--ink); word-break: keep-all;
+  }
+  .risk-bar-bg {
+    flex: 1; height: 15px; background: #F1F5F9;
+    border-radius: 8px; overflow: hidden; border: 1px solid var(--rule);
+  }
+  .risk-bar-fill {
+    height: 100%; border-radius: 8px; width: 0;
+    transition: width 1.6s cubic-bezier(0.2,1,0.3,1);
+  }
+  .risk-bar-fill.level-high { background: linear-gradient(90deg,#F87171,var(--red)); }
+  .risk-bar-fill.level-mid  { background: linear-gradient(90deg,#FCD34D,#D97706); }
+  .risk-bar-fill.level-low  { background: linear-gradient(90deg,#6EE7B7,#059669); }
+  .risk-pct {
+    font-family: var(--font-title);
+    font-size: 1.05rem; font-weight: 800;
+    width: 52px; text-align: right; flex-shrink: 0;
+  }
+
+  /* ══════════════════ PULL QUOTE ══════════════════ */
+  .pull-quote {
+    margin: 56px 0; padding: 40px 44px;
+    background: var(--bg-warm);
+    border-top: 4px solid var(--ink); border-bottom: 4px solid var(--ink);
+    text-align: center;
+  }
+  .pull-quote-text {
+    font-family: var(--font-title);
+    font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+    font-weight: 800; color: var(--ink);
+    line-height: 1.7; word-break: keep-all; letter-spacing: -0.02em;
+  }
+  .pull-quote-text em {
+    color: var(--red); font-style: normal;
+    text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 5px;
+  }
+
+  /* ══════════════════ ACTION SECTION ══════════════════ */
+  .action-section {
+    background: var(--bg-soft); border-top: 3px solid var(--rule); padding: 60px 48px;
+  }
+  .action-inner { max-width: 860px; margin: 0 auto; }
+  .action-title {
+    font-family: var(--font-title);
+    font-size: 2rem; font-weight: 800;
+    color: var(--ink); margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .action-subtitle {
+    font-family: var(--font-body);
+    font-size: 0.98rem; color: var(--ink-soft);
+    margin-bottom: 38px; font-weight: 700; letter-spacing: 0.03em;
+  }
+  .action-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 18px;
+  }
+  .action-card {
+    background: white; border: 2.5px solid var(--border);
+    border-radius: 16px; padding: 28px 24px; box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  }
+  .action-card:hover { border-color:var(--red); box-shadow:var(--shadow-lg); transform:translateY(-5px); }
+  .action-card-num {
+    font-family: var(--font-title);
+    font-size: 0.76rem; font-weight: 700;
+    color: var(--red); letter-spacing: 0.12em;
+    margin-bottom: 10px; text-transform: uppercase;
+  }
+  .action-card-icon { font-size: 2.3rem; margin-bottom: 12px; line-height: 1; }
+  .action-card-title {
+    font-family: var(--font-title);
+    font-size: 1.1rem; font-weight: 800;
+    color: var(--ink); margin-bottom: 10px;
+    line-height: 1.5; word-break: keep-all; letter-spacing: -0.01em;
+  }
+  .action-card-desc {
+    font-family: var(--font-body);
+    font-size: 0.92rem; color: var(--ink-soft); line-height: 1.9; word-break: keep-all;
+  }
+
+  /* ══════════════════ SOCIAL BAR ══════════════════ */
+  .social-bar {
+    max-width: 860px; margin: 0 auto;
+    padding: 32px 48px; border-top: 1.5px solid var(--rule);
+  }
+  .social-bar-label {
+    font-family: var(--font-title);
+    font-size: 0.88rem; font-weight: 800;
+    color: var(--ink-soft); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .social-bar-label::after {
+    content: ''; flex: 1; height: 1.5px; background: var(--rule);
+  }
+  .social-btns {
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+
+  /* 공통 SNS 버튼 */
+  .sns-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-title);
+    font-size: 0.88rem; font-weight: 700;
+    padding: 10px 20px; border-radius: 8px;
+    border: 2.5px solid; cursor: pointer;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s, transform 0.15s;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .sns-btn svg { width: 20px; height: 20px; flex-shrink: 0; transition: fill 0.18s; }
+  .sns-btn:hover { transform: translateY(-2px); }
+
+  /* YouTube */
+  .sns-btn.yt  { color: #CC0000; border-color: #CC0000; }
+  .sns-btn.yt svg { fill: #CC0000; }
+  .sns-btn.yt:hover { background: #CC0000; color: white; }
+  .sns-btn.yt:hover svg { fill: white; }
+
+  /* Instagram */
+  .sns-btn.ig  { color: #C13584; border-color: #C13584; }
+  .sns-btn.ig svg { fill: #C13584; }
+  .sns-btn.ig:hover { background: #C13584; color: white; }
+  .sns-btn.ig:hover svg { fill: white; }
+
+  /* TikTok */
+  .sns-btn.tt  { color: #010101; border-color: #010101; }
+  .sns-btn.tt svg { fill: #010101; }
+  .sns-btn.tt:hover { background: #010101; color: white; }
+  .sns-btn.tt:hover svg { fill: white; }
+
+  /* Threads */
+  .sns-btn.th  { color: #000000; border-color: #000000; }
+  .sns-btn.th svg { fill: #000000; }
+  .sns-btn.th:hover { background: #000000; color: white; }
+  .sns-btn.th:hover svg { fill: white; }
+
+  /* X (Twitter) */
+  .sns-btn.xb  { color: #14171A; border-color: #14171A; }
+  .sns-btn.xb svg { fill: #14171A; }
+  .sns-btn.xb:hover { background: #14171A; color: white; }
+  .sns-btn.xb:hover svg { fill: white; }
+
+  /* Facebook */
+  .sns-btn.fb  { color: #1877F2; border-color: #1877F2; }
+  .sns-btn.fb svg { fill: #1877F2; }
+  .sns-btn.fb:hover { background: #1877F2; color: white; }
+  .sns-btn.fb:hover svg { fill: white; }
+
+  /* ══════════════════ FOOTER ══════════════════ */
+  .site-footer {
+    background: #0D0D0D; color: #9CA3AF;
+    padding: 44px 48px; text-align: center;
+    border-top: 4px solid var(--red);
+  }
+  .footer-brand {
+    font-family: var(--font-title);
+    font-size: 1.3rem; font-weight: 800;
+    color: white; letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .footer-brand .lens-dot {
+    width: 10px; height: 10px;
+    background: var(--red); border-radius: 50%;
+  }
+  .site-footer p {
+    font-family: var(--font-body);
+    font-size: 0.85rem; line-height: 2.0;
+    color: #6B7280; word-break: keep-all; margin-top: 10px;
+  }
+
+  /* ══════════════════ SCROLL REVEAL ══════════════════ */
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ══════════════════ RESPONSIVE ══════════════════ */
+  @media (max-width: 720px) {
+    body { font-size: 17px; }
+    .masthead-top { padding: 10px 20px; }
+    .masthead-hero { grid-template-columns: 1fr; padding: 36px 20px 28px; gap: 28px; }
+    .stat-cluster { flex-direction: row; flex-wrap: wrap; }
+    .stat-box { flex: 1; min-width: 140px; }
+    .tags-bar, .social-bar { padding-left: 20px; padding-right: 20px; }
+    .article-body { padding: 36px 20px 64px; }
+    .action-section { padding: 44px 20px; }
+    .section-title { font-size: 1.3rem; padding: 16px 18px 16px 20px; }
+    .section-title.style-b { font-size: 1.4rem; }
+    .flow-steps { justify-content: center; }
+    .pull-quote { padding: 28px 20px; margin: 40px 0; }
+    .risk-label { width: 120px; font-size: 0.87rem; }
+    .disclaimer { margin: 28px 20px 0; }
+    .social-btns { gap: 10px; }
+    .sns-btn { font-size: 0.82rem; padding: 9px 15px; }
+  }
+
+  a { color: var(--red); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ══════════════════════════ MASTHEAD ══════════════════════════ -->
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="brand-logo">
+      <span class="lens-dot"></span>
+      IssueLens
+    </div>
+    <span class="masthead-meta">EP.01 &nbsp;·&nbsp; 데이터 주권 연재 시리즈</span>
+    <span class="masthead-meta">IssueLens 편집부</span>
+  </div>
+
+  <div class="masthead-hero">
+    <div>
+      <div class="episode-label">EP.01 &nbsp; 데이터 주권</div>
+      <h1 class="main-headline t-title">
+        당신의 <span class="accent">'0원 결제'</span>,<br>
+        그 뒤에 숨겨진<br>
+        데이터 주권의 현주소
+      </h1>
+      <p class="sub-headline">
+        알리·테무 초저가의 진짜 비용은 돈이 아닙니다.<br>
+        당신의 이름, 주소, 구매 패턴, 그리고 지인 관계가 그 대가입니다.
+      </p>
+    </div>
+
+    <div class="stat-cluster">
+      <div class="stat-box">
+        <span class="stat-number">20억</span>
+        <span class="stat-label">알리 과징금<br>(원, 2024년)</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">18만</span>
+        <span class="stat-label">정보 유출<br>중국 판매자 수</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">제7조</span>
+        <span class="stat-label">중국<br>국가정보법</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tags-bar">
+    <span class="tag hot">#데이터주권</span>
+    <span class="tag hot">#알리익스프레스</span>
+    <span class="tag hot">#테무</span>
+    <span class="tag">#개인정보</span>
+    <span class="tag">#해외직구</span>
+    <span class="tag">#중국앱</span>
+    <span class="tag">#개인정보보호위원회</span>
+    <span class="tag">#디지털안보</span>
+    <span class="tag">#소비자권리</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════ ARTICLE ══════════════════════════ -->
+<main>
+
+  <div class="disclaimer reveal" style="margin-left:48px; margin-right:48px; max-width:860px;">
+    <strong style="color:var(--blue);">📌 알림 및 면책 공고</strong><br>
+    본 게시물은 국내외 공신력 있는 언론 보도, 정부 기관(개인정보보호위원회 등)의 발표 자료를 바탕으로 작성된 공익적 논평입니다. 특정 기업이나 개인을 비방할 의도가 없으며, 대한민국 국민의 데이터 주권 보호와 알 권리 증진을 목적으로 합니다.
+  </div>
+
+  <div class="article-body">
+
+    <p class="intro-text reveal" style="margin-top:38px;">
+      최근 알리익스프레스와 테무 등 해외 직구 플랫폼의 공세가 거셉니다. 하지만 우리가 <strong class="hl-amb">'초저가'</strong>라는 달콤한 사탕발림에 취해 있을 때, 정작 우리 안방의 소중한 정보들이 어디로 흘러가는지 고민해 보셨습니까?
+    </p>
+
+    <!-- ────────── SECTION 1 ────────── -->
+    <div class="section-block reveal">
+      <h2 class="section-title">
+        <span class="num">01</span>
+        500원짜리 양말에 담긴 '데이터 상납'의 진실
+      </h2>
+
+      <p class="body-text">
+        해외 직구 앱을 설치하고 카드 정보를 입력하는 순간, 우리의 이름·주소·연락처는 물론 <strong class="hl-red">구매 패턴과 지인 관계까지 분석 가능한 방대한 데이터가 수집</strong>됩니다. 쇼핑의 즐거움을 누리는 사이, 그 데이터는 이미 국경을 넘고 있습니다.
+      </p>
+
+      <div class="data-callout reveal">
+        <div class="data-callout-label">FACT CHECK &nbsp;·&nbsp; 개인정보보호위원회 공식 발표</div>
+        <span class="big-number">₩ 20억</span>
+        <span class="big-label">2024년 7월 — 알리익스프레스 과징금 부과액</span>
+        <p class="callout-body">이용자의 개인정보를 <strong>중국 내 판매자 18만 곳</strong>에 이전하면서 이를 제대로 고지하지 않은 행위에 대한 행정 제재입니다. 이는 빙산의 일각일 뿐입니다.</p>
+      </div>
+
+      <div class="data-flow reveal">
+        <div class="data-flow-title">📊 당신의 데이터, 어디로 가는가? — 수집에서 활용까지</div>
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-icon safe">📱</div>
+            <div class="flow-step-label">앱 설치·<br>회원가입</div>
+            <div class="flow-step-sub">이름·연락처·주소</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon warn">🛒</div>
+            <div class="flow-step-label">구매·결제<br>행동 기록</div>
+            <div class="flow-step-sub">카드·패턴·위치</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon danger">🌐</div>
+            <div class="flow-step-label">해외 서버<br>전송</div>
+            <div class="flow-step-sub">중국 데이터센터</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon danger">🏛️</div>
+            <div class="flow-step-label">국가정보법<br>적용 가능</div>
+            <div class="flow-step-sub">정부 협조 의무</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-icon danger">⚠️</div>
+            <div class="flow-step-label">당신의 정보<br>통제권 상실</div>
+            <div class="flow-step-sub">삭제 불가</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────── SECTION 2 ────────── -->
+    <div class="section-block reveal">
+      <h2 class="section-title style-b">
+        <span class="num">02</span>
+        해외 서버 전송은 왜 안보 위협이 되는가
+      </h2>
+
+      <p class="body-text">
+        단순한 개인정보 유출 문제가 아닙니다. <strong class="hl-blue">중국의 법적 구조</strong>가 문제의 핵심입니다.
+      </p>
+
+      <div class="law-quote reveal">
+        <div class="law-quote-badge">중화인민공화국 국가정보법 제7조</div>
+        <p class="law-quote-text">
+          모든 조직과 시민은 <strong>국가 정보 활동을 지지·보조·협조</strong>해야 하며, 알게 된 국가 정보 활동 관련 비밀을 보호해야 한다.
+        </p>
+        <div class="law-quote-source">— 2017년 제정, 현행 적용 중 —</div>
+      </div>
+
+      <p class="body-text">
+        수집된 우리 국민의 데이터가 <strong class="hl-red">언제든 특정 목적을 위해 활용될 수 있다는 구조적 리스크</strong>를 안고 있는 셈입니다. 당신의 일상적인 쇼핑 기록이 국가 단위의 정보 자산으로 변환될 수 있습니다.
+      </p>
+
+      <div class="risk-meter reveal">
+        <div class="risk-meter-title">⚡ 데이터 위협 등급 분석 (전문가 종합 평가)</div>
+        <div class="risk-item">
+          <div class="risk-label">개인정보 노출</div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill level-high" data-width="92"></div></div>
+          <div class="risk-pct" style="color:var(--red)">92%</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">삭제·통제 불가</div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill level-high" data-width="85"></div></div>
+          <div class="risk-pct" style="color:var(--red)">85%</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">국가정보법 연동</div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill level-high" data-width="78"></div></div>
+          <div class="risk-pct" style="color:var(--red)">78%</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">3자 공유</div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill level-mid" data-width="70"></div></div>
+          <div class="risk-pct" style="color:var(--amber)">70%</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-label">소비자 인지도</div>
+          <div class="risk-bar-bg"><div class="risk-bar-fill level-low" data-width="18"></div></div>
+          <div class="risk-pct" style="color:var(--green)">18%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────── SECTION 3 ────────── -->
+    <div class="section-block reveal">
+      <h2 class="section-title">
+        <span class="num">03</span>
+        상호주의 없는 시장 개방의 위험성
+      </h2>
+
+      <p class="body-text">
+        중국은 자국 시장을 철저히 검열하고 규제하면서, 우리는 왜 데이터 안보의 빗장을 열어주고 있습니까? <strong class="hl-red">일방향적 개방은 곧 일방향적 착취</strong>입니다.
+      </p>
+
+      <p class="body-text">
+        정치권 일각에서 제기되는 저자세 대중 외교는 우리 국민의 정보 주권을 위태롭게 할 뿐입니다. 데이터는 21세기의 석유입니다. 자국민의 데이터를 경쟁국에 무상으로 헌납하는 국가는 존재하지 않습니다 — 유독 우리만 이 질문을 외면하고 있습니다.
+      </p>
+
+      <div class="context-callout reveal">
+        <div class="context-callout-label">📌 CONTEXT &nbsp;·&nbsp; 비대칭 구도</div>
+        <p class="callout-body">중국은 <strong>구글, 유튜브, 인스타그램, 카카오</strong> 등을 자국 내에서 차단합니다. 반면 알리·테무·틱톡은 대한민국에서 자유롭게 수억 개의 데이터 포인트를 수집합니다. 이것이 공정한 거래입니까?</p>
+      </div>
+    </div>
+
+    <!-- PULL QUOTE -->
+    <div class="pull-quote reveal">
+      <div class="pull-quote-text">
+        "오늘 당신이 아낀 <em>몇천 원</em>이,<br>
+        내일 대한민국의 주권을 위협하는 <em>실탄</em>이 됩니다."
+      </div>
+    </div>
+
+  </div><!-- /article-body -->
+
+  <!-- ══════════════════════════ ACTION SECTION ══════════════════════════ -->
+  <section class="action-section">
+    <div class="action-inner">
+      <div class="action-title">🛡️ 대한민국 생존을 위한 실천 강령</div>
+      <div class="action-subtitle">지금 당신이 할 수 있는 것들</div>
+      <div class="action-grid">
+        <div class="action-card">
+          <div class="action-card-num">ACTION — 01</div>
+          <div class="action-card-icon">🗑️</div>
+          <div class="action-card-title">해외 직구 앱 삭제</div>
+          <div class="action-card-desc">불필요한 해외 직구 앱을 삭제하고 권한 설정을 점검하십시오. 앱 삭제 후에도 데이터는 서버에 남습니다 — 정보 삭제 요청도 함께 하십시오.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-card-num">ACTION — 02</div>
+          <div class="action-card-icon">🛍️</div>
+          <div class="action-card-title">국내 플랫폼 이용</div>
+          <div class="action-card-desc">국내 유통 플랫폼과 제조사를 이용해 국내 생태계를 보호하십시오. 소비 선택 하나하나가 데이터 주권의 투표입니다.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-card-num">ACTION — 03</div>
+          <div class="action-card-icon">📣</div>
+          <div class="action-card-title">정보 공유 &amp; 확산</div>
+          <div class="action-card-desc">이 콘텐츠를 가족, 친구, 직장 동료에게 공유하십시오. 인식이 곧 방어입니다. 알아야 지킬 수 있습니다.</div>
+        </div>
+        <div class="action-card">
+          <div class="action-card-num">ACTION — 04</div>
+          <div class="action-card-icon">🗳️</div>
+          <div class="action-card-title">정치적 목소리</div>
+          <div class="action-card-desc">데이터 안보를 지킬 수 있는 정책과 정치적 목소리에 귀 기울이십시오. 디지털 주권은 민주주의의 새로운 전선입니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ SOCIAL BAR ══════════════════════════ -->
+  <!--
+    ★ 링크 연결 방법 ★
+    각 <a> 태그의 href="#LINK_여기에_URL_입력" 부분을
+    실제 채널/게시물 URL로 교체하시면 됩니다.
+    예) href="https://www.youtube.com/@IssueLens"
+  -->
+  <div class="social-bar">
+    <div class="social-bar-label">공유하기</div>
+    <div class="social-btns">
+
+      <!-- YouTube -->
+      <a href="#YOUTUBE_URL_HERE" class="sns-btn yt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        YouTube
+      </a>
+
+      <!-- Instagram -->
+      <a href="#INSTAGRAM_URL_HERE" class="sns-btn ig" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        Instagram
+      </a>
+
+      <!-- TikTok -->
+      <a href="#TIKTOK_URL_HERE" class="sns-btn tt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/>
+        </svg>
+        TikTok
+      </a>
+
+      <!-- Threads -->
+      <a href="#THREADS_URL_HERE" class="sns-btn th" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.742-1.757-.438-.505-1.103-.769-1.98-.789h-.047c-.67 0-1.64.191-2.253 1.109l-1.755-1.2c.894-1.307 2.277-2.031 3.98-2.049h.064c2.71.048 4.327 1.692 4.73 4.778.108.028.214.057.316.089l-.001.007c1.338.386 2.462 1.093 3.24 2.254C22.01 16.06 21.748 19 19.743 21c-1.737 1.745-4.189 2.627-7.274 2.647l-.283-.003v.003Z"/>
+        </svg>
+        Threads
+      </a>
+
+      <!-- X (Twitter) -->
+      <a href="#X_URL_HERE" class="sns-btn xb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/>
+        </svg>
+        X
+      </a>
+
+      <!-- Facebook -->
+      <a href="#FACEBOOK_URL_HERE" class="sns-btn fb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Facebook
+      </a>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <span class="lens-dot"></span>
+    IssueLens
+  </div>
+  <div style="color:#9CA3AF; font-family:var(--font-body); font-size:0.88rem; margin-top:4px;">
+    데이터 주권 연재 시리즈 · EP.01
+  </div>
+  <p>본 게시물은 공익 목적의 논평입니다. 공신력 있는 언론 보도 및 정부 기관 발표 자료를 근거로 합니다.<br>
+  Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+<script>
+  // PROGRESS BAR
+  const pb = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    pb.style.width = (document.documentElement.scrollTop /
+      (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100) + '%';
+  });
+
+  // SCROLL REVEAL
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // RISK BARS
+  const bo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.risk-bar-fill').forEach(b => {
+          setTimeout(() => b.style.width = b.dataset.width + '%', 280);
+        });
+        bo.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.risk-meter').forEach(el => bo.observe(el));
+</script>
+</body>
+</html>

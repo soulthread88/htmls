@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Retail Sovereignty Crisis | IssueLens EP.11</title>
+<meta name="description" content="Temu, Shein, AliExpress, Miniso — how Peak China's overproduction is flooding American retail and hollowing out Main Street. The de minimis loophole, data sovereignty, and the slow desertification of US small business.">
+<meta name="keywords" content="Temu,Shein,AliExpress,Miniso,de minimis loophole,Peak China,US retail,small business crisis,C-commerce,data sovereignty,Chinese e-commerce,Dollar Tree,manufacturing jobs,trade deficit">
+<meta property="og:title" content="Retail Sovereignty Crisis — How Chinese C-Commerce Is Desertifying Main Street | IssueLens EP.11">
+<meta property="og:description" content="Peak China overproduction → deflationary export → full-spectrum siege on US retail → small business &amp; manufacturing collapse. Tracking the real cost of an $8 shipping label.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   IssueLens English — EP.11 US Edition
+   Based on IssueLens English Template
+   ════════════════════════════════════════ */
+:root{
+  --ft:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --fb:'Noto Sans','Inter',-apple-system,sans-serif;
+  --bg:#fff;--bg2:#F7F9FC;--bg3:#FFF8F0;
+  --ink:#0A0A0A;--ink2:#1F2937;--ink3:#4B5563;
+  --red:#C8001A;--redbg:#FFF0F3;--redl:#FFCCD5;
+  --amb:#B45309;--ambbg:#FFFBEB;
+  --grn:#065F46;--blu:#1E3A8A;--blubg:#EFF6FF;
+  --bdr:#CBD5E1;--rul:#E2E8F0;
+  --sh:0 2px 14px rgba(0,0,0,.07);
+  --shl:0 8px 32px rgba(0,0,0,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:20px;line-height:1.95;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:normal}
+a{color:var(--red);text-decoration:none}
+
+/* ── Progress bar ── */
+#pb{position:fixed;top:0;left:0;height:5px;background:var(--red);z-index:9999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(200,0,26,.5)}
+
+/* ── Masthead ── */
+.mh{background:var(--bg);border-bottom:3px solid var(--red)}
+.mh-top{background:var(--red);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:8px}
+.logo{font-family:var(--ft);font-size:clamp(1.1rem,3.5vw,1.3rem);font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.logo-dot{width:10px;height:10px;background:#fff;border-radius:50%;opacity:.85}
+.mh-meta{font-family:var(--fb);font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.88);font-weight:600}
+.mh-hero{padding:36px 20px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+.ep-lbl{font-family:var(--ft);font-size:clamp(13px,3.2vw,15px);font-weight:700;color:var(--red);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ep-lbl::before{content:'';width:22px;height:3px;background:var(--red);border-radius:2px;display:inline-block}
+.headline{font-family:var(--ft);font-size:clamp(1.85rem,6vw,3.6rem);font-weight:800;line-height:1.22;color:var(--ink);letter-spacing:-.03em}
+.headline .acc{color:var(--red);background:var(--redbg);padding:2px 8px;border-radius:5px;display:inline-block}
+.sub-hl{font-family:var(--fb);margin-top:14px;font-size:clamp(17px,3.5vw,20px);color:var(--ink3);line-height:1.82;font-weight:500}
+.stats{display:flex;flex-direction:column;gap:10px;min-width:155px}
+.stat{background:var(--redbg);border:2.5px solid var(--redl);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--sh)}
+.stat-n{font-family:var(--ft);font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--red);display:block;line-height:1;letter-spacing:-.02em}
+.stat-l{font-family:var(--fb);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);margin-top:4px;display:block;line-height:1.4}
+/* Tags — up to 12 supported; add .hot for highlighted */
+.tags{padding:10px 20px 14px;border-top:1.5px solid var(--rul);display:flex;gap:7px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.tag{font-family:var(--fb);font-size:clamp(13px,3vw,15px);font-weight:700;border:2px solid var(--bdr);color:var(--ink3);padding:4px 12px;border-radius:20px;cursor:pointer;transition:all .2s}
+.tag:hover,.tag.hot{border-color:var(--red);color:var(--red);background:var(--redbg)}
+
+/* ── Brand strip ── */
+.brand-strip{background:var(--bg2);border-top:2px solid var(--rul);border-bottom:2px solid var(--rul);padding:22px 20px}
+.brand-strip-inner{max-width:920px;margin:0 auto}
+.brand-ttl{font-family:var(--ft);font-size:clamp(15px,3.5vw,17px);font-weight:800;color:var(--ink2);text-align:center;margin-bottom:18px;letter-spacing:.02em}
+.brand-row{display:flex;align-items:stretch;justify-content:center;gap:12px;flex-wrap:wrap}
+.bp{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 18px;border-radius:14px;border:2.5px solid var(--bdr);background:#fff;box-shadow:var(--sh);min-width:118px;width:118px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:default;white-space:nowrap}
+.bp:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:var(--red)}
+/* bp-badge: use inline emoji OR styled badge div */
+.bp-badge{width:90px;height:40px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Arial Black','Arial',sans-serif;font-size:13px;font-weight:900;color:#fff;letter-spacing:.5px;text-align:center;line-height:1;overflow:hidden;white-space:nowrap;flex-shrink:0}
+.bp-badge.b1{background:#FF6900;font-size:11px;letter-spacing:-.3px}
+.bp-badge.b2{background:#FA5130;font-size:16px}
+.bp-badge.b3{background:#00AAFF;font-size:14px;letter-spacing:1px}
+.bp-badge.b4{background:#E8002D;font-size:12px;letter-spacing:1px}
+.bp-badge.b5{background:#1A1A1A;color:#FFD700;font-size:11px;letter-spacing:1px}
+.bp-badge.b6{background:#C8001A;font-size:12px;letter-spacing:-.3px}
+.bp-name{font-family:var(--ft);font-size:13px;font-weight:800;color:var(--ink2);white-space:nowrap}
+.bp-sub{font-family:var(--fb);font-size:12px;color:var(--ink3);font-weight:600;white-space:nowrap}
+
+/* ── Disclaimer ── */
+.disclaimer{max-width:860px;margin:30px auto 0;padding:16px 22px;background:var(--bg2);border:1.5px solid var(--bdr);border-left:6px solid var(--blu);border-radius:10px;font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);line-height:1.82}
+
+/* ── Article body ── */
+.ab{max-width:860px;margin:0 auto;padding:36px 20px 56px}
+.intro{font-family:var(--fb);font-size:clamp(18px,3.8vw,21px);line-height:1.95;color:var(--ink2);background:var(--ambbg);border-left:6px solid #F59E0B;padding:20px 22px;border-radius:0 12px 12px 0;font-weight:500}
+.sec{margin-top:52px}
+/* sec-ttl variants: default (red), .b2 (blue) */
+.sec-ttl{font-family:var(--ft);font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:800;color:var(--ink);padding:16px 18px 16px 22px;border-left:7px solid var(--red);background:linear-gradient(90deg,var(--redbg) 0%,#fff 65%);border-radius:0 12px 12px 0;margin-bottom:22px;line-height:1.42;display:flex;align-items:center;gap:11px;box-shadow:var(--sh);letter-spacing:-.02em}
+.sec-ttl.b2{font-family:var(--ft);font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:800;background:linear-gradient(90deg,var(--blubg) 0%,#fff 65%);border-left-color:var(--blu);color:var(--blu)}
+.sec-ttl .num{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:#fff;background:var(--red);border-radius:6px;padding:3px 11px;flex-shrink:0;letter-spacing:.06em}
+.sec-ttl.b2 .num{background:var(--blu)}
+.bt{font-family:var(--fb);font-size:clamp(18px,3.5vw,21px);line-height:2.0;color:var(--ink2);margin-bottom:20px}
+.hl-r{color:var(--red);font-weight:800}
+.hl-b{color:var(--blu);font-weight:800}
+.hl-a{color:var(--amb);font-weight:800}
+.hl-g{color:var(--grn);font-weight:800}
+
+/* ── Data callout (red) ── */
+.dcall{background:var(--redbg);border:2px solid var(--redl);border-top:6px solid var(--red);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.dcall-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--red);letter-spacing:.16em;margin-bottom:10px;display:flex;align-items:center;gap:7px;text-transform:uppercase}
+.dcall-lbl::before{content:'●';animation:blink 1.5s infinite;font-size:.65rem}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.12}}
+.bignum{font-family:var(--ft);font-size:clamp(2.4rem,7vw,3.8rem);font-weight:800;color:var(--red);display:block;line-height:1;margin:6px 0 5px;letter-spacing:-.03em}
+.biglbl{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);font-weight:700;margin-bottom:12px;display:block}
+.cbody{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);line-height:1.95;color:var(--ink2)}
+.cbody strong{color:var(--red);font-weight:800}
+
+/* ── Context callout (blue) ── */
+.cctx{background:var(--blubg);border:2px solid #BFDBFE;border-top:6px solid var(--blu);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.cctx-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--blu);letter-spacing:.14em;margin-bottom:10px;text-transform:uppercase}
+.cctx .cbody strong{color:var(--blu)}
+
+/* ── 4-Column front grid
+     Card color variants: .red .blu .amb .grn
+     Risk badge variants: .high .med .watch         ── */
+.front-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:28px 0}
+.front-card{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden}
+.front-card:hover{transform:translateY(-4px);box-shadow:var(--shl)}
+.front-card.red{border-top:5px solid var(--red)}.front-card.red:hover{border-color:var(--red)}
+.front-card.blu{border-top:5px solid var(--blu)}.front-card.blu:hover{border-color:var(--blu)}
+.front-card.amb{border-top:5px solid #F59E0B}.front-card.amb:hover{border-color:#F59E0B}
+.front-card.grn{border-top:5px solid var(--grn)}.front-card.grn:hover{border-color:var(--grn)}
+.front-icon{font-size:2rem;margin-bottom:10px;line-height:1}
+.front-name{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:6px}
+.front-risk{display:inline-block;font-family:var(--ft);font-size:clamp(11px,2.4vw,13px);font-weight:700;padding:3px 10px;border-radius:12px;margin-bottom:10px}
+.front-risk.high{background:#FEE2E2;color:#991B1B}
+.front-risk.med{background:#FEF3C7;color:#92400E}
+.front-risk.watch{background:#EFF6FF;color:#1E40AF}
+.front-body{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);color:var(--ink3);line-height:1.82}
+
+/* ── Flow diagram ──
+     Step icon variants: .s (green) .w (amber) .d (red) .b (blue)    ── */
+.flow{margin:24px 0;background:#fff;border:2px solid var(--bdr);border-radius:16px;padding:24px 16px 20px;box-shadow:var(--sh)}
+.flow-ttl{font-family:var(--ft);font-size:clamp(15px,3.2vw,17px);font-weight:700;color:var(--ink);text-align:center;margin-bottom:20px}
+.flow-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.fs{flex:1;min-width:80px;max-width:120px;text-align:center}
+.fi{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.45rem;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.fi.s{background:#DCFCE7;border:3px solid #22C55E}
+.fi.w{background:#FEF3C7;border:3px solid #F59E0B}
+.fi.d{background:#FFE4E6;border:3px solid var(--red)}
+.fi.b{background:#EFF6FF;border:3px solid #3B82F6}
+.fs-lbl{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink);line-height:1.38}
+.fs-sub{font-family:var(--fb);font-size:clamp(11px,2.4vw,13px);color:var(--ink3);margin-top:2px;font-weight:600}
+.farrow{color:var(--red);font-size:1.45rem;flex-shrink:0;font-weight:900;animation:ap 1.9s infinite}
+@keyframes ap{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(4px);opacity:.3}}
+
+/* ── Law / quote box ── */
+.lq{border:2.5px solid #9CA3AF;border-radius:14px;padding:26px 26px;margin:26px 0;position:relative;background:var(--bg2);box-shadow:var(--sh)}
+.lq-bdg{position:absolute;top:-14px;left:18px;background:var(--ink);color:#fff;font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:3px 14px;border-radius:4px;letter-spacing:.04em;white-space:nowrap}
+.lq-txt{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);color:var(--ink2);line-height:2.0;margin-top:4px}
+.lq-txt strong{color:var(--red);font-weight:800}
+.lq-src{font-family:var(--fb);margin-top:10px;font-size:clamp(13px,2.8vw,15px);color:var(--ink3);text-align:right;font-weight:700}
+
+/* ── Risk meter ── */
+.rm{margin:26px 0;padding:24px 26px;background:#fff;border:2px solid var(--bdr);border-radius:16px;box-shadow:var(--sh)}
+.rm-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:700;color:var(--ink);margin-bottom:18px}
+.ri{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rl{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:800;width:160px;flex-shrink:0;color:var(--ink)}
+.rbg{flex:1;height:14px;background:#F1F5F9;border-radius:7px;overflow:hidden;border:1px solid var(--rul)}
+.rbf{height:100%;border-radius:7px;width:0;transition:width 1.5s cubic-bezier(.2,1,.3,1)}
+.rbf.h{background:linear-gradient(90deg,#F87171,var(--red))}
+.rbf.m{background:linear-gradient(90deg,#FCD34D,#D97706)}
+.rbf.l{background:linear-gradient(90deg,#6EE7B7,#059669)}
+.rp{font-family:var(--ft);font-size:clamp(15px,3vw,17px);font-weight:800;width:48px;text-align:right;flex-shrink:0}
+
+/* ── Timeline
+     Dot color variants: .r (red) .b (blue) .y (amber) .g (green) ── */
+.timeline{margin:28px 0}
+.tl-item{display:flex;gap:18px;margin-bottom:24px;align-items:flex-start}
+.tl-dot{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem;box-shadow:var(--sh)}
+.tl-dot.g{background:#DCFCE7;border:3px solid #22C55E}
+.tl-dot.r{background:#FEE2E2;border:3px solid var(--red)}
+.tl-dot.b{background:#EFF6FF;border:3px solid #3B82F6}
+.tl-dot.y{background:#FEF3C7;border:3px solid #F59E0B}
+.tl-content{flex:1}
+.tl-year{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);letter-spacing:.1em;margin-bottom:4px}
+.tl-title{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:6px;line-height:1.4}
+.tl-desc{font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:var(--ink3);line-height:1.85}
+
+/* ── Comparison table ──
+     Cell class variants: .bad (red) .ok (green) .warn (amber)        ── */
+.ctbl{width:100%;border-collapse:collapse;margin:26px 0;border-radius:14px;overflow:hidden;box-shadow:var(--sh)}
+.ctbl th{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:800;padding:14px 16px;background:var(--ink2);color:#fff;text-align:left}
+.ctbl td{font-family:var(--fb);font-size:clamp(14px,2.9vw,16px);padding:13px 16px;border-bottom:1px solid var(--rul);color:var(--ink2);line-height:1.75;vertical-align:top}
+.ctbl tr:nth-child(even) td{background:var(--bg2)}
+.ctbl tr:last-child td{border-bottom:none}
+.ctbl .bad{color:var(--red);font-weight:800}
+.ctbl .ok{color:var(--grn);font-weight:800}
+.ctbl .warn{color:#D97706;font-weight:800}
+
+/* ── Media box (2-column grid per section) ── */
+.media-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+.mbox-wrap{position:relative}
+.mbox-label{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--ink3);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.mbox{position:relative;border-radius:14px;overflow:hidden;background:#F1F5F9;border:2.5px dashed var(--bdr);min-height:200px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.mbox:hover{border-color:var(--red);box-shadow:var(--shl)}
+.mbox-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);padding:20px;text-align:center;pointer-events:none;width:100%}
+.mbox-ph .ico{font-size:2.4rem;opacity:.45}
+.mbox-ph p{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:700;line-height:1.45;color:var(--ink3)}
+.mbox-ph .hint{font-size:clamp(12px,2.5vw,13px);color:#94A3B8;margin-top:2px}
+.mbox img.prev{width:100%;height:100%;min-height:200px;object-fit:cover;display:block;border-radius:12px}
+.mbox iframe{width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px}
+.mctrl{position:absolute;top:8px;right:8px;display:flex;gap:7px;opacity:0;transition:opacity .22s;pointer-events:none;z-index:20}
+.mbox:hover .mctrl{opacity:1;pointer-events:auto}
+.mbtn{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:6px 14px;border-radius:7px;border:none;cursor:pointer;backdrop-filter:blur(8px);transition:transform .15s;white-space:nowrap}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn.rep{background:rgba(255,255,255,.92);color:var(--ink)}
+.mbtn.del{background:rgba(200,0,26,.88);color:#fff}
+
+/* ── Pull quote ── */
+.pq{margin:26px 0 10px;padding:28px 22px;background:var(--bg3);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);text-align:center}
+.pq-txt{font-family:var(--ft);font-size:clamp(1.2rem,4vw,1.85rem);font-weight:800;color:var(--ink);line-height:1.62;letter-spacing:-.02em}
+.pq-txt em{color:var(--red);font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+
+/* ── Action section ── */
+.action{background:var(--bg2);border-top:3px solid var(--rul);padding:40px 20px;margin-top:0}
+.action-inner{max-width:860px;margin:0 auto}
+.action-ttl{font-family:var(--ft);font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em}
+.action-sub{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);margin-bottom:24px;font-weight:700}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ac{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s,border-color .2s}
+.ac:hover{border-color:var(--red);box-shadow:var(--shl);transform:translateY(-4px)}
+.ac-n{font-family:var(--ft);font-size:clamp(11px,2.5vw,13px);font-weight:700;color:var(--red);letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase}
+.ac-ico{font-size:1.9rem;margin-bottom:8px;line-height:1}
+.ac-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.42;letter-spacing:-.01em}
+.ac-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);line-height:1.85}
+
+/* ── Social bar (button/modal pattern) ── */
+.sb{max-width:860px;margin:0 auto;padding:24px 20px;border-top:1.5px solid var(--rul)}
+.sb-lbl{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sb-lbl::after{content:'';flex:1;height:1.5px;background:var(--rul)}
+.sb-btns{display:flex;flex-wrap:wrap;gap:9px}
+/* snsbtn: can also be used as <a href> for static links */
+.snsbtn{display:inline-flex;align-items:center;gap:7px;font-family:var(--ft);font-size:clamp(13px,3vw,15px);font-weight:700;padding:9px 16px;border-radius:8px;border:2.5px solid;cursor:pointer;text-decoration:none;transition:background .18s,color .18s,transform .15s;white-space:nowrap;background:transparent;position:relative}
+/* Green checkmark overlay when a link has been saved */
+.snsbtn.has-link::after{content:'✓';position:absolute;top:-7px;right:-7px;width:18px;height:18px;background:#22C55E;color:#fff;border-radius:50%;font-size:11px;font-weight:900;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.snsbtn svg{width:18px;height:18px;flex-shrink:0;transition:fill .18s}
+.snsbtn:hover{transform:translateY(-2px)}
+.snsbtn.yt{color:#CC0000;border-color:#CC0000}.snsbtn.yt svg{fill:#CC0000}.snsbtn.yt:hover{background:#CC0000;color:#fff}.snsbtn.yt:hover svg{fill:#fff}
+.snsbtn.ig{color:#C13584;border-color:#C13584}.snsbtn.ig svg{fill:#C13584}.snsbtn.ig:hover{background:#C13584;color:#fff}.snsbtn.ig:hover svg{fill:#fff}
+.snsbtn.tt{color:#010101;border-color:#010101}.snsbtn.tt svg{fill:#010101}.snsbtn.tt:hover{background:#010101;color:#fff}.snsbtn.tt:hover svg{fill:#fff}
+.snsbtn.th{color:#000;border-color:#000}.snsbtn.th svg{fill:#000}.snsbtn.th:hover{background:#000;color:#fff}.snsbtn.th:hover svg{fill:#fff}
+.snsbtn.xb{color:#14171A;border-color:#14171A}.snsbtn.xb svg{fill:#14171A}.snsbtn.xb:hover{background:#14171A;color:#fff}.snsbtn.xb:hover svg{fill:#fff}
+.snsbtn.fb{color:#1877F2;border-color:#1877F2}.snsbtn.fb svg{fill:#1877F2}.snsbtn.fb:hover{background:#1877F2;color:#fff}.snsbtn.fb:hover svg{fill:#fff}
+
+/* ── Footer ── */
+.ft{background:#0D0D0D;color:#9CA3AF;padding:32px 20px;text-align:center;border-top:4px solid var(--red)}
+.ft-brand{font-family:var(--ft);font-size:1.2rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:6px}
+.ft-dot{width:9px;height:9px;background:var(--red);border-radius:50%}
+.ft p{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);line-height:1.88;color:#6B7280;margin-top:6px}
+
+/* ── YouTube modal ── */
+.yt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.yt-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.yt-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.yt-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.yt-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.yt-inp:focus{border-color:var(--red)}
+.yt-btns{display:flex;gap:9px;margin-top:14px}
+.yt-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s}
+.yt-ok:hover{background:#a80018}
+.yt-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+
+/* ── SNS link modal ── */
+.sns-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.sns-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.sns-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.sns-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.sns-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.sns-inp:focus{border-color:var(--red)}
+.sns-saved-bar{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:8px;font-family:var(--fb);font-size:13px;flex-wrap:wrap}
+.sns-saved-bar a{color:var(--grn);font-weight:700;word-break:break-all;flex:1}
+.sns-btns{display:flex;gap:9px;margin-top:14px}
+.sns-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer}
+.sns-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+
+/* ── Scroll reveal ── */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:none}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .mh-hero{grid-template-columns:1fr}
+  .stats{flex-direction:row;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px}
+  .sec-ttl{font-size:1.15rem}
+  .rl{width:120px;font-size:13px}
+  .media-pair{grid-template-columns:1fr}
+  .front-grid{grid-template-columns:1fr 1fr}
+  .ctbl{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<!-- ════════════ YouTube modal ════════════ -->
+<div class="yt-modal" id="ytm" style="display:none">
+  <div class="yt-box">
+    <div class="yt-ttl">📹 Embed YouTube Video</div>
+    <div class="yt-desc">Paste a YouTube link below.<br>The video will be permanently embedded in this section.</div>
+    <input class="yt-inp" id="yti" type="text" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="yt-btns">
+      <button class="yt-ok" onclick="ytOk()">✓ Embed</button>
+      <button class="yt-cancel" onclick="ytClose()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ SNS link modal ════════════ -->
+<div class="sns-modal" id="sns-modal" style="display:none">
+  <div class="sns-box">
+    <div class="sns-ttl" id="sns-modal-title">Set Social Link</div>
+    <div class="sns-desc" id="sns-modal-desc">Enter your link below.</div>
+    <input class="sns-inp" id="sns-url-input" type="url" placeholder="https://...">
+    <div id="sns-saved-bar" class="sns-saved-bar" style="display:none">
+      <span style="color:var(--ink3);font-weight:700;white-space:nowrap">Current:</span>
+      <a id="sns-saved-link" href="#" target="_blank" rel="noopener"></a>
+      <button onclick="snsClearSaved()" style="font-family:var(--ft);font-size:12px;font-weight:700;background:none;border:1.5px solid #86EFAC;border-radius:6px;padding:3px 9px;cursor:pointer;color:#166534;flex-shrink:0">Remove</button>
+    </div>
+    <div class="sns-btns">
+      <button class="sns-ok" onclick="snsSave()">✓ Save</button>
+      <button class="sns-cancel" onclick="snsClose()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ MASTHEAD ════════════ -->
+<header class="mh">
+  <div class="mh-top">
+    <div class="logo"><span class="logo-dot"></span>IssueLens</div>
+    <span class="mh-meta">EP.11 · American Sovereignty Series</span>
+    <span class="mh-meta">IssueLens Editorial</span>
+  </div>
+  <div class="mh-hero">
+    <div>
+      <div class="ep-lbl">EP.11 &nbsp;Retail Sovereignty Emergency Report</div>
+      <h1 class="headline">
+        Your Cart Is Under Siege:<br>
+        <span class="acc">How C-Commerce Is Desertifying Main Street</span><br>
+        — The Retail Sovereignty Crisis
+      </h1>
+      <p class="sub-hl">Temu, Shein, AliExpress, Miniso, and TikTok Shop — the online-offline pincer attack on American small businesses.<br>The de minimis loophole, data sovereignty, and how far the damage has already spread.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-n">$800</span>
+        <span class="stat-l">De Minimis threshold<br>letting C-commerce skip tariffs</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">1B+</span>
+        <span class="stat-l">Chinese C-commerce pkgs<br>shipped duty-free in 2023</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">40%+</span>
+        <span class="stat-l">US small retailers reporting<br>direct losses from Chinese platforms</span>
+      </div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag hot">#RetailSovereignty</span>
+    <span class="tag hot">#Temu</span>
+    <span class="tag hot">#Shein</span>
+    <span class="tag hot">#PeakChina</span>
+    <span class="tag hot">#DeMinimisLoophole</span>
+    <span class="tag hot">#SmallBusinessCrisis</span>
+    <span class="tag">#Miniso</span>
+    <span class="tag">#DollarTree</span>
+    <span class="tag">#CCommerce</span>
+    <span class="tag">#DataSovereignty</span>
+    <span class="tag">#AmericanJobs</span>
+    <span class="tag">#TradeDeficit</span>
+  </div>
+</header>
+
+<!-- ════════════ BRAND STRIP ════════════ -->
+<div class="brand-strip rev">
+  <div class="brand-strip-inner">
+    <div class="brand-ttl">⚠️ Chinese C-Commerce Siege on American Retail — The Six-Front Assault</div>
+    <div class="brand-row">
+      <div class="bp">
+        <div class="bp-badge b1">AliExpress</div>
+        <span class="bp-name">AliExpress</span><span class="bp-sub">Direct from factory</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge b2">TEMU</div>
+        <span class="bp-name">Temu</span><span class="bp-sub">"Shop like a billionaire"</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge b3">SHEIN</div>
+        <span class="bp-name">Shein</span><span class="bp-sub">Fast fashion giant</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge b4">MINISO</div>
+        <span class="bp-name">Miniso</span><span class="bp-sub">"Japanese-inspired" myth</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge b5">TikTok Shop</div>
+        <span class="bp-name">TikTok Shop</span><span class="bp-sub">Social commerce weapon</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge b6">Dollar Tree?</div>
+        <span class="bp-name">Dollar Tree</span><span class="bp-sub">Supply chain at risk</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ARTICLE BODY ═══════════ -->
+<main>
+
+  <div class="disclaimer rev" style="margin:28px 20px 0;max-width:860px;margin-left:auto;margin-right:auto">
+    <strong style="color:var(--blu)">📌 Notice &amp; Disclaimer</strong><br>
+    This analysis is based on official reports from the U.S.-China Economic and Security Review Commission (USCC), Congressional Research Service, U.S. Customs and Border Protection (CBP), Small Business Administration, Federal Trade Commission, and the House Select Committee on China, as well as credible media coverage from The Wall Street Journal, The New York Times, Bloomberg, Reuters, Axios, and NPR. Statistics reflect publication dates of cited reports; forward projections are analytical estimates based on current trends and do not constitute investment advice. Descriptions of companies are limited to publicly available facts without legal judgment or defamatory intent.
+  </div>
+
+  <div class="ab">
+
+    <!-- Lead paragraph -->
+    <p class="intro rev" style="margin-top:28px">
+      <strong class="hl-r">Scroll your phone for two minutes</strong> or walk through any American mall and something has quietly changed around you. Your feed is full of Temu's "shop like a billionaire" ads offering unbelievable prices. Down the street, a Miniso store — looking unmistakably Japanese — fills the storefront where a local gift shop used to be. This isn't just a story about cheap stuff from overseas. <strong class="hl-a">Peak China</strong> — the structural economic crisis forcing Beijing to dump its overproduction onto global markets — has turned American retail into a full-spectrum battlefield. Online and offline, digital and physical, the siege is simultaneous and coordinated. This is how it works, what it costs, and what you can do about it.
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 1 — Peak China: Why Now
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">01</span>Peak China — The Overproduction Machine That Cannot Stop</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>Top Searches:</strong> "What is Peak China?" · "Why is Temu so cheap?" · "China economic crisis and US trade" · "Chinese deflation export"
+      </div>
+
+      <p class="bt">
+        <strong class="hl-r">Peak China</strong> is the thesis that China's economy has hit a structural ceiling and is entering a long-term decline phase. The collapse of the property bubble — Evergrande, Country Garden, and dozens of smaller developers — combined with stagnant domestic demand and youth unemployment that officially topped 20% before Beijing stopped releasing the data, has caused Chinese consumers to close their wallets. But here's the problem: <strong class="hl-a">state-directed economies can't simply pause their factories</strong>. Stop the factories, and unemployment explodes. Exploding unemployment threatens Communist Party legitimacy. So the factories keep running.
+      </p>
+
+      <p class="bt">
+        The math is brutal. Beijing pumps subsidies into <strong class="hl-r">zombie factories</strong> that can't survive on market economics alone, and the resulting mountain of excess inventory gets pushed into global markets. Economists call this <strong class="hl-a">deflationary export</strong> — or more plainly, dumping. The United States, with its relatively open markets and uniquely generous <strong class="hl-b">$800 de minimis threshold</strong> — the highest of any major economy — has become the single most attractive target on earth.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">FACT CHECK · Lowy Institute / The Economist 2024</div>
+        <span class="bignum">+40%↑</span>
+        <span class="biglbl">China's manufacturing overcapacity vs. domestic demand — estimated excess production (2023–2024)</span>
+        <p class="cbody">China's manufacturing capacity utilization rate sat at approximately <strong>73.6%</strong> in Q2 2024 — well below the healthy threshold of 80%+. The surplus output is flooding global markets. The US, Europe, and Southeast Asia are bearing the greatest impact, with the US uniquely exposed due to the de minimis loophole.</p>
+        <div style="font-family:var(--fb);font-size:13px;color:var(--ink3);margin-top:10px">Source: Lowy Institute, "Peak China?" Analysis, 2024 / The Economist, "Why China's economy is in such a mess," August 2024</div>
+      </div>
+
+      <div class="lq rev">
+        <div class="lq-bdg">The Economist — August 2024</div>
+        <p class="lq-txt">"China's factories are running well below capacity, yet investment keeps flowing in, subsidised by local governments desperate to hit growth targets. The result is a global deflationary wave as cheap Chinese goods flood world markets."</p>
+        <div class="lq-src">— The Economist, "Why China's economy is in such a mess," August 2024</div>
+      </div>
+
+      <!-- Peak China mechanism flow -->
+      <div class="flow rev">
+        <div class="flow-ttl">📊 Peak China → American Retail Assault: The Mechanism</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi d">📉</div><div class="fs-lbl">Property Crash</div><div class="fs-sub">Domestic demand<br>collapses</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">🏭</div><div class="fs-lbl">Factory Overproduction</div><div class="fs-sub">State-directed;<br>can't stop</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">💸</div><div class="fs-lbl">Gov't Subsidies</div><div class="fs-sub">Artificially<br>low prices</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">📦</div><div class="fs-lbl">Direct-to-US</div><div class="fs-sub">Temu/Shein<br>B2C pipeline</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🏚️</div><div class="fs-lbl">Main Street Collapse</div><div class="fs-sub">Small biz &amp;<br>manufacturing</div></div>
+        </div>
+      </div>
+
+      <!-- Media boxes -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ Insert Image <span style="font-size:12px;color:#94A3B8">(China factory overcapacity / empty property crisis)</span></div>
+          <div class="mbox" id="mb-s1i" data-t="img" onclick="mbClick('s1i')">
+            <div class="mbox-ph" id="ph-s1i"><span class="ico">🖼️</span><p>Insert Image</p><span class="hint">Click → select file</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1i')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s1i" accept="image/*" style="display:none" onchange="mbLoadImg('s1i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 Insert Video <span style="font-size:12px;color:#94A3B8">(Recommended search: "Peak China explained" / "China deflation export Bloomberg")</span></div>
+          <div class="mbox" id="mb-s1v" data-t="vid" onclick="mbClick('s1v')">
+            <div class="mbox-ph" id="ph-s1v"><span class="ico">🎬</span><p>Embed YouTube Video</p><span class="hint">Click → paste link</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1v')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 1 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 2 — Online Front: Temu, Shein & the De Minimis Highway
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">02</span>The Online Front — Temu, Shein, and the De Minimis Highway</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>Top Searches:</strong> "Temu de minimis loophole explained" · "How does Shein ship so cheap?" · "AliExpress US market share" · "Chinese e-commerce vs American small business"
+      </div>
+
+      <p class="bt">
+        Before Temu and Shein, Chinese goods reached American consumers through importers and distributors who marked up the price. American small retailers had a fighting chance. That entire structure was dismantled by the <strong class="hl-r">B2C direct-to-consumer highway</strong> — from a factory floor in Guangzhou to your apartment door in three to five days. But the real secret weapon isn't just logistics efficiency. It's a gaping hole in US trade law: the <strong class="hl-b">de minimis exemption</strong>.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">DATA · CBP / Congressional Research Service 2024</div>
+        <span class="bignum">$800</span>
+        <span class="biglbl">US de minimis threshold — the highest of any major economy — allowing all packages under $800 to enter duty-free with minimal customs review</span>
+        <p class="cbody">In 2023, an estimated <strong>one billion-plus packages</strong> entered the United States under de minimis, with Temu and Shein accounting for the bulk of volume. This threshold — raised from $200 to $800 in 2015 — functions as a structural subsidy for Chinese platforms. American retailers importing inventory pay full tariffs; Temu ships individual orders duty-free. During peak US-China tariff periods exceeding 25%, this asymmetry alone represents a 25%+ cost advantage on every single order.</p>
+        <div style="font-family:var(--fb);font-size:13px;color:var(--ink3);margin-top:10px">Source: Congressional Research Service, "De Minimis Imports," 2024 / CBP enforcement data / Reuters reporting on Temu/Shein shipping volumes</div>
+      </div>
+
+      <p class="bt">
+        The deeper threat is <strong class="hl-r">data sovereignty</strong>. Every Temu or Shein purchase feeds consumer behavior patterns, payment data, location information, and lifestyle profiles into servers ultimately subject to China's <strong class="hl-a">2017 National Intelligence Law</strong>, which compels all Chinese firms to cooperate with state intelligence activities. The <strong class="hl-b">House Select Committee on China</strong> labeled these apps "digital Trojan horses," warning that collected data could be transferred to the Chinese government on demand — far beyond anything any American retailer could access.
+      </p>
+
+      <!-- C-commerce market penetration risk meter -->
+      <div class="rm rev">
+        <div class="rm-ttl">⚠️ C-Commerce Market Penetration Risk by US Sector (2025 estimate)</div>
+        <div class="ri"><div class="rl">Small Electronics</div><div class="rbg"><div class="rbf h" data-w="88"></div></div><div class="rp" style="color:var(--red)">Very High</div></div>
+        <div class="ri"><div class="rl">Apparel &amp; Fashion</div><div class="rbg"><div class="rbf h" data-w="85"></div></div><div class="rp" style="color:var(--red)">Very High</div></div>
+        <div class="ri"><div class="rl">Household Goods</div><div class="rbg"><div class="rbf h" data-w="79"></div></div><div class="rp" style="color:var(--red)">High</div></div>
+        <div class="ri"><div class="rl">Furniture &amp; Décor</div><div class="rbg"><div class="rbf m" data-w="65"></div></div><div class="rp" style="color:var(--amb)">Medium</div></div>
+        <div class="ri"><div class="rl">Toys &amp; Games</div><div class="rbg"><div class="rbf m" data-w="60"></div></div><div class="rp" style="color:var(--amb)">Medium</div></div>
+        <div class="ri"><div class="rl">Beauty &amp; Cosmetics</div><div class="rbg"><div class="rbf m" data-w="45"></div></div><div class="rp" style="color:var(--amb)">Watch</div></div>
+        <div style="font-family:var(--fb);font-size:clamp(12px,2.5vw,13px);color:var(--ink3);margin-top:4px">※ Risk scores aggregate Chinese direct import share, US seller closure rates, and price gap magnitude.</div>
+        <div style="font-family:var(--fb);font-size:13px;color:var(--ink3);margin-top:4px">Source: USITC 2024 estimates / CBP data / Small Business Administration sector analysis</div>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 CONTEXT · Three Structural Reasons Chinese Platforms Price So Low</div>
+        <p class="cbody"><strong>It isn't just efficiency.</strong> First, Beijing subsidizes manufacturing, artificially suppressing production costs below what any market-rate operation can match. Second, the $800 de minimis threshold exempts individual Temu and Shein shipments from tariffs that their American retail competitors must absorb on imported inventory. Third, these platforms face dramatically lower regulatory compliance costs — American retailers must meet CPSC safety certifications, state sales tax collection requirements, and OSHA-compliant warehousing standards that Chinese direct-shippers largely avoid. This isn't free-market competition. <strong>It's a state-backed price war with the rules rigged from the start.</strong></p>
+      </div>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ Insert Image <span style="font-size:12px;color:#94A3B8">(Temu/Shein US market share growth chart)</span></div>
+          <div class="mbox" id="mb-s2i" data-t="img" onclick="mbClick('s2i')">
+            <div class="mbox-ph" id="ph-s2i"><span class="ico">🖼️</span><p>Insert Image</p><span class="hint">Click → select file</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2i')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s2i" accept="image/*" style="display:none" onchange="mbLoadImg('s2i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 Insert Video <span style="font-size:12px;color:#94A3B8">(Recommended search: "Temu de minimis loophole Congress" / "Shein data privacy warning")</span></div>
+          <div class="mbox" id="mb-s2v" data-t="vid" onclick="mbClick('s2v')">
+            <div class="mbox-ph" id="ph-s2v"><span class="ico">🎬</span><p>Embed YouTube Video</p><span class="hint">Click → paste link</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2v')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 2 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 3 — Brick-and-Mortar: Miniso's Faux-Japanese Playbook
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">03</span>The Brick-and-Mortar Front — Miniso's "Faux-Japanese" Playbook</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>Top Searches:</strong> "Is Miniso a Japanese company?" · "Where is Miniso from?" · "Yoyoso brand country of origin" · "Mumuso Chinese or Korean?"
+      </div>
+
+      <p class="bt">
+        You've seen it in malls across America: <strong class="hl-r">Miniso</strong>, with its clean white-and-red logo and unmistakably Japanese aesthetic — think Muji, think Daiso, think design-forward minimalism. Many shoppers naturally assume it's Japanese. It isn't. Miniso is <strong class="hl-a">100% Chinese capital, 100% Chinese supply chain</strong>. For years, the company actively leveraged Japanese design cues and imagery to obscure its origins — a positioning so misleading that it drew scrutiny across multiple markets and eventually prompted the company's own founder to publicly clarify its Chinese identity.
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">Miniso Founder — Investor Communications, 2021</div>
+        <p class="lq-txt">After years of marketing materials emphasizing "Japanese design" aesthetics and even initially claiming a Japanese co-founder relationship, Miniso founder Ye Guofu stated publicly: <strong>"Miniso is a Chinese company."</strong> Consumer backlash and scrutiny in multiple markets — including the US — had made the brand's actual origins impossible to obscure any further.</p>
+        <div class="lq-src">— Ye Guofu, Miniso Group Founder &amp; CEO, 2021 / Coverage: WSJ, Bloomberg</div>
+      </div>
+
+      <p class="bt">
+        What makes these offline brands more strategically dangerous than online competitors is that they've successfully combined <strong class="hl-b">Chinese factory pricing with the in-store impulse experience</strong>. You used to have to wait two weeks for an AliExpress package. Now you walk into Miniso on your lunch break and walk out with the same products instantly. Online: Temu. Offline: Miniso. American consumers are being squeezed from both sides in a coordinated <strong class="hl-r">pincer strategy</strong> — one designed to capture every purchase occasion across every channel.
+      </p>
+
+      <!-- Online vs offline comparison table -->
+      <table class="ctbl rev">
+        <thead>
+          <tr><th>Category</th><th>Online Platforms</th><th>Brick-and-Mortar Brands</th><th>Strategy</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Top Players</strong></td><td>Temu, Shein, AliExpress, TikTok Shop</td><td>Miniso, Yoyoso, Mumuso</td><td>—</td></tr>
+          <tr><td><strong>Price Advantage</strong></td><td class="bad">30–70% below US retail price</td><td class="bad">20–50% below dollar-store tier</td><td>Subsidy dumping</td></tr>
+          <tr><td><strong>Consumer Perception</strong></td><td>Understood as Chinese platforms</td><td class="warn">Widely mistaken as Japanese/Korean</td><td>Faux-origin branding</td></tr>
+          <tr><td><strong>Data Collection</strong></td><td class="bad">App collects purchase, location &amp; contact data</td><td class="warn">Membership &amp; payment behavioral data</td><td>Big data harvest</td></tr>
+          <tr><td><strong>US Market Impact</strong></td><td class="bad">Drives out e-commerce small sellers &amp; Amazon SMBs</td><td class="bad">Closes local gift shops, dollar stores &amp; boutiques</td><td>Desertification</td></tr>
+        </tbody>
+      </table>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ Insert Image <span style="font-size:12px;color:#94A3B8">(Miniso US mall locations map / storefront)</span></div>
+          <div class="mbox" id="mb-s3i" data-t="img" onclick="mbClick('s3i')">
+            <div class="mbox-ph" id="ph-s3i"><span class="ico">🖼️</span><p>Insert Image</p><span class="hint">Click → select file</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3i')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s3i" accept="image/*" style="display:none" onchange="mbLoadImg('s3i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 Insert Video <span style="font-size:12px;color:#94A3B8">(Recommended search: "Miniso not Japanese company exposed" / "Chinese brands pretending to be Japanese")</span></div>
+          <div class="mbox" id="mb-s3v" data-t="vid" onclick="mbClick('s3v')">
+            <div class="mbox-ph" id="ph-s3v"><span class="ico">🎬</span><p>Embed YouTube Video</p><span class="hint">Click → paste link</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3v')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 3 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 4 — Dollar Tree Crisis: When Supply Chains Become Weapons
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">04</span>The Dollar Tree Crisis — When Your Supply Chain Becomes a Weapon</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>Top Searches:</strong> "Dollar Tree China sourcing percentage" · "Five Below vs Temu competition" · "Dollar store supply chain vulnerability" · "Temu cheaper than dollar store"
+      </div>
+
+      <p class="bt">
+        "At least we have Dollar Tree." A lot of Americans fall back on that — a domestically-listed, US-headquartered company offering the same $1.25-to-$5 goods for decades. Dollar Tree and Five Below are genuinely American companies. But the supply chain powering those stores? <strong class="hl-r">Overwhelmingly Chinese.</strong> And that's precisely where the vulnerability lies — the storefront is American, but the sourcing isn't, and that gap is the real crisis.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">RISK ALERT · Dollar Store Supply Chain Vulnerability Analysis</div>
+        <span class="bignum">~80%</span>
+        <span class="biglbl">Estimated share of Dollar Tree / Five Below SKUs sourced from Chinese manufacturers (industry analysis, 2024)</span>
+        <p class="cbody">If the Chinese factories currently supplying Dollar Tree decide it's more profitable to ship directly to US consumers through Temu — or redirect supply to Miniso's expanding brick-and-mortar footprint — Dollar Tree loses the pricing foundation its entire business model is built on. <strong>Temu already undercuts Dollar Tree on dozens of identical SKUs</strong>, and has run "free product" promotions functioning as loss leaders to capture price-sensitive shoppers. The $1.25 price point that defines Dollar Tree cannot be sustained if Chinese supplier partners defect.</p>
+        <div style="font-family:var(--fb);font-size:13px;color:var(--ink3);margin-top:10px">Source: Industry supply chain analysis / WSJ Dollar Tree reporting 2024 / Retail Dive competitive analysis</div>
+      </div>
+
+      <!-- Dollar store supply chain disruption flow -->
+      <div class="flow rev">
+        <div class="flow-ttl">🔗 Dollar Store Supply Chain Disruption Scenario</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi s">🏭</div><div class="fs-lbl">Chinese Supplier</div><div class="fs-sub">Currently: Dollar<br>Tree sourcing</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">⚡</div><div class="fs-lbl">Supply Shift</div><div class="fs-sub">Switches to<br>Temu / Miniso</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">💥</div><div class="fs-lbl">Sourcing Gap</div><div class="fs-sub">No viable<br>alternative</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">📈</div><div class="fs-lbl">Price Hike</div><div class="fs-sub">$1.25 can no<br>longer hold</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🏚️</div><div class="fs-lbl">Last Line Falls</div><div class="fs-sub">Domestic<br>price tier gone</div></div>
+        </div>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 CONTEXT · Can Dollar Tree Survive?</div>
+        <p class="cbody">Dollar Tree is already pursuing diversification — sourcing from Vietnam, India, and Bangladesh — and expanding its private-label lineup. But supply chain transitions take years to execute, and in the interim, Temu's algorithmic pricing can shadow any category Dollar Tree dominates. Consumer loyalty to Dollar Tree is real, but price-sensitive shoppers won't stay loyal if the Temu discount gap widens. <strong>This is where conscious consumer choice becomes an act of economic self-defense.</strong> Supporting retailers actively diversifying away from Chinese supply chains isn't protectionism — it's long-term strategic thinking.</p>
+      </div>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ Insert Image <span style="font-size:12px;color:#94A3B8">(Temu vs Dollar Tree price comparison / dollar store foot traffic trends)</span></div>
+          <div class="mbox" id="mb-s4i" data-t="img" onclick="mbClick('s4i')">
+            <div class="mbox-ph" id="ph-s4i"><span class="ico">🖼️</span><p>Insert Image</p><span class="hint">Click → select file</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4i')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s4i" accept="image/*" style="display:none" onchange="mbLoadImg('s4i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 Insert Video <span style="font-size:12px;color:#94A3B8">(Recommended search: "Dollar Tree vs Temu competition" / "Five Below supply chain China risk")</span></div>
+          <div class="mbox" id="mb-s4v" data-t="vid" onclick="mbClick('s4v')">
+            <div class="mbox-ph" id="ph-s4v"><span class="ico">🎬</span><p>Embed YouTube Video</p><span class="hint">Click → paste link</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4v')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 4 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 5 — Manufacturing Hollowing: The Statistics Behind Desertification
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">05</span>Manufacturing Hollowing — The Hard Numbers Behind the Desertification</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>Top Searches:</strong> "Chinese dumping impact on US small business" · "Temu Shein jobs lost America" · "US small business closure rate 2024" · "manufacturing hollowing out definition"
+      </div>
+
+      <p class="bt">
+        <strong class="hl-r">Desertification.</strong> That's the most accurate word for what's happening to American retail. This isn't just about wholesalers and middlemen becoming redundant. The actual American makers — small-batch manufacturers, indie designers, family importers, Main Street gift shops — are being driven out of business. The ground beneath them is being salted. And what fills the void is Chinese direct-shipment volume.
+      </p>
+
+      <!-- Industry damage statistics table -->
+      <table class="ctbl rev">
+        <thead>
+          <tr><th>Sector</th><th>Key Impact</th><th>Scale / Data</th><th>Severity</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Apparel &amp; Fashion</strong></td>
+            <td>Shein &amp; Temu ultra-cheap clothing undercuts indie designers and boutique retailers; items priced below US sewing labor cost alone</td>
+            <td class="bad">40%+ of US fashion SMBs report direct revenue losses from Chinese platforms (USITC 2024 est.)</td>
+            <td class="bad">Very High</td>
+          </tr>
+          <tr>
+            <td><strong>Small Electronics</strong></td>
+            <td>Power banks, fans, LED gadgets — all shipped factory-direct, undercutting Amazon small sellers by 60–80% on identical SKUs</td>
+            <td class="bad">Cross-border e-commerce electronics imports +45% YoY; US small electronics seller closure rate surging</td>
+            <td class="bad">Very High</td>
+          </tr>
+          <tr>
+            <td><strong>Furniture &amp; Home Décor</strong></td>
+            <td>Non-CPSC-certified Chinese direct-ship goods compete against safety-compliant domestic products with a massive cost advantage</td>
+            <td class="warn">Online furniture direct imports +30% YoY (CRS 2024); US small furniture retailers losing market share rapidly</td>
+            <td class="warn">High</td>
+          </tr>
+          <tr>
+            <td><strong>Toys &amp; Games</strong></td>
+            <td>Miniso character IP products crowd out US toy SMBs in gift and impulse-purchase segments; mall foot traffic redirected</td>
+            <td class="warn">70%+ of toy industry participants report pricing pressure from Chinese platforms (TIA survey 2024)</td>
+            <td class="warn">High</td>
+          </tr>
+          <tr>
+            <td><strong>Household Goods</strong></td>
+            <td>Dollar store-tier items on Temu priced below Dollar Tree; some offered free as loss leaders to acquire customers</td>
+            <td class="bad">Chinese household goods' share of US direct e-commerce imports exceeds 65% (CBP estimates, 2024)</td>
+            <td class="bad">Very High</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">WORST CASE · After the Monopoly Is Complete</div>
+        <span class="bignum">Pricing Power</span>
+        <span class="biglbl">Once domestic competition is eliminated — who controls the price?</span>
+        <p class="cbody">When American alternatives are gone, consumers have nowhere to turn. "Raw material costs went up" or "supply chain disruptions" become justifications for any price increase, with zero competitive pressure to hold the line. More critically: if a geopolitical event — a Taiwan Strait crisis, a trade war escalation, a pandemic — disrupts Chinese supply, Americans find they can no longer source basic household goods domestically. That is not a supply chain inconvenience. <strong>That is economic sovereignty loss.</strong></p>
+        <div style="font-family:var(--fb);font-size:13px;color:var(--ink3);margin-top:10px">Source: USCC "Chinese E-Commerce and National Security," 2024 / Congressional Research Service analysis</div>
+      </div>
+
+      <div class="lq rev">
+        <div class="lq-bdg">U.S.-China Economic and Security Review Commission — 2024</div>
+        <p class="lq-txt">"Shein, Temu, and similar Chinese e-commerce platforms are not merely commercial enterprises. They represent a systematic transfer of consumer data, market intelligence, and economic dependency from democratic market economies to entities operating under Chinese law and Communist Party oversight."</p>
+        <div class="lq-src">— USCC, "Chinese E-Commerce and National Security," 2024</div>
+      </div>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ Insert Image <span style="font-size:12px;color:#94A3B8">(US small business closure rate trend / Main Street vacancy data)</span></div>
+          <div class="mbox" id="mb-s5i" data-t="img" onclick="mbClick('s5i')">
+            <div class="mbox-ph" id="ph-s5i"><span class="ico">🖼️</span><p>Insert Image</p><span class="hint">Click → select file</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5i')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5i')">✕ Remove</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s5i" accept="image/*" style="display:none" onchange="mbLoadImg('s5i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 Insert Video <span style="font-size:12px;color:#94A3B8">(Recommended search: "Temu Shein killing American small business" / "Chinese e-commerce national security risk")</span></div>
+          <div class="mbox" id="mb-s5v" data-t="vid" onclick="mbClick('s5v')">
+            <div class="mbox-ph" id="ph-s5v"><span class="ico">🎬</span><p>Embed YouTube Video</p><span class="hint">Click → paste link</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5v')">↩ Replace</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5v')">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 5 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 6 — The Hidden Costs: What the $8 Shipping Doesn't Tell You
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">06</span>The Hidden Costs — What the $8 Shipping Label Doesn't Tell You</h2>
+
+      <p class="bt">
+        When you think <strong class="hl-a">"I'm saving money"</strong> at checkout, there are three invisible bills being run up simultaneously — one that you'll pay later, one that your community is paying now, and one that your country may pay for a generation.
+      </p>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">🔍 HIDDEN COST 1 · Data Sovereignty Exposure</div>
+        <p class="cbody">Every purchase on Temu or Shein feeds <strong>purchase patterns, payment credentials, location history, device fingerprinting, and behavioral profiles</strong> into servers subject to China's National Intelligence Law (2017). The House Select Committee on China has formally warned that this data pipeline represents a national security exposure far beyond ordinary commercial data collection. You're not just buying a product — you're contributing to a surveillance-capable profile that Chinese state intelligence can access on demand.</p>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">🔍 HIDDEN COST 2 · Brand Ecosystem Theft &amp; Market Pre-emption</div>
+        <p class="cbody">Miniso spent years marketing itself as "Japanese-inspired" in US malls, crowding out genuine Japanese lifestyle brands in premium mall real estate. Yoyoso actively markets itself as a <strong>"Korean Designer Brand"</strong> in Southeast Asia and the Middle East, pre-empting markets that American companies with genuine Korean partnerships and authentic cultural brands would otherwise develop. American economic soft power — in design, fashion, cultural export — is being quietly occupied by Chinese capital waving allied-nation flags as cover.</p>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">🔍 HIDDEN COST 3 · Jobs, Taxes, and the Social Contract</div>
+        <p class="cbody">Every American small business that closes takes its employees, payroll taxes, local sales taxes, commercial lease payments, and community purchasing power with it. Temu and Shein collect no US sales tax on most transactions (no physical nexus in most states, or recent adjustments), pay no manufacturing employment taxes, and use de minimis to avoid most import duties. <strong>The dollar you save at checkout may cost your community ten dollars in lost fiscal capacity</strong> — dollars that fund schools, roads, and social services. The math of cheap isn't as cheap as the price tag suggests.</p>
+      </div>
+
+      <div class="lq rev">
+        <div class="lq-bdg">FKI Survey Data — Adapted US Context</div>
+        <p class="lq-txt">A 2025 Federation of Korean Industries survey found that <strong>96.7% of small fashion manufacturers</strong> in Korea reported direct revenue losses from Chinese e-commerce platforms. The top impacts: loss of price competitiveness (78.3%), customer attrition (64.2%), and abandonment of new product development (41.5%). US small business data suggests comparable or worse penetration ratios in affected sectors.</p>
+        <div class="lq-src">— FKI, "Impact of Chinese E-Commerce Platforms on the Domestic Fashion Industry," 2025 / US parallel data: USITC, SBA</div>
+      </div>
+    </div><!-- /sec 6 -->
+
+    <!-- Pull quote -->
+    <div class="pq rev">
+      <div class="pq-txt">
+        "The checkout button you tapped for a <em>$6 dress tonight</em><br>
+        may have pre-paid a <em>layoff notice</em> for a designer<br>
+        in your city next year."
+      </div>
+      <div style="font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-top:12px;text-align:center">— IssueLens Editorial, American Sovereignty Series EP.11</div>
+    </div>
+
+  </div><!-- /ab -->
+
+  <!-- ═══════════════ ACTION SECTION ═══════════════ -->
+  <section class="action" style="padding-top:26px">
+    <div class="action-inner">
+      <div class="action-ttl">🛡️ 6 Actions to Defend American Retail Sovereignty</div>
+      <div class="action-sub">What consumers, businesses, and lawmakers can each do — this isn't protectionism; it's informed and strategic choice.</div>
+      <div class="action-grid">
+        <div class="ac">
+          <div class="ac-n">ACTION 01</div>
+          <div class="ac-ico">🔍</div>
+          <div class="ac-ttl">Verify Brand Origins</div>
+          <div class="ac-desc">Before shopping at Miniso or browsing a "Japanese-inspired" storefront, take 30 seconds to search the company's actual headquarters. "Inspired by" is not the same as "from." Informed purchasing starts with knowing who you're actually buying from.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 02</div>
+          <div class="ac-ico">🛒</div>
+          <div class="ac-ttl">Diversify Where You Spend</div>
+          <div class="ac-desc">You don't have to buy American-made for everything. But consciously redirecting even 20% of your discretionary spending toward local small businesses, domestic brands, or certified American-made products creates measurable impact at scale.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 03</div>
+          <div class="ac-ico">📱</div>
+          <div class="ac-ttl">Audit Your App Permissions</div>
+          <div class="ac-desc">Review the location, contacts, microphone, and camera permissions you've granted to Temu, Shein, and AliExpress. Revoke unnecessary access. Your purchase history and behavioral data have national security implications that extend far beyond personal privacy.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 04</div>
+          <div class="ac-ico">📢</div>
+          <div class="ac-ttl">Demand De Minimis Reform</div>
+          <div class="ac-desc">The $800 duty-free threshold is the single biggest structural advantage Chinese platforms hold over American retailers. Contact your representatives and support legislation — like the COMBATING UNFAIR TRADE Act — that would close this loophole for high-volume shippers like Temu and Shein.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 05</div>
+          <div class="ac-ico">🏭</div>
+          <div class="ac-ttl">Back Supply Chain Diversification</div>
+          <div class="ac-desc">Support retailers actively sourcing from Vietnam, India, Mexico, and other non-Chinese supply chains. When Dollar Tree or Five Below announces sourcing diversification, vote with your wallet. Demand transparency in sourcing — and reward companies that deliver it.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 06</div>
+          <div class="ac-ico">🌱</div>
+          <div class="ac-ttl">Think a Decade Out</div>
+          <div class="ac-desc">The shopping habits formed today will determine what American manufacturing and retail look like in 2035. The factories and boutiques that close today don't reopen when you need them. Convenience-optimized choices compound into structural economic outcomes that are nearly impossible to reverse.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNS link modal -->
+  <div id="sns-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#fff;border-radius:20px;padding:28px 24px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <div id="sns-modal-title" style="font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink)"></div>
+      </div>
+      <div id="sns-modal-desc" style="font-family:var(--fb);font-size:clamp(14px,3vw,15px);color:var(--ink3);margin-bottom:14px;line-height:1.7"></div>
+      <input id="sns-url-input" type="url" placeholder="https://" style="width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s;color:var(--ink)">
+      <div id="sns-saved-bar" style="display:none;margin-top:10px;padding:8px 12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:8px;font-family:var(--fb);font-size:clamp(13px,2.8vw,14px);color:#166534;align-items:center;gap:8px;flex-wrap:wrap">
+        <span>✅ Saved link:</span>
+        <a id="sns-saved-link" href="#" target="_blank" rel="noopener" style="color:#15803D;font-weight:700;word-break:break-all;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></a>
+        <button onclick="snsClearSaved()" style="font-family:var(--ft);font-size:12px;font-weight:700;background:none;border:1.5px solid #86EFAC;border-radius:6px;padding:3px 9px;cursor:pointer;color:#166534;flex-shrink:0">Remove</button>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:14px">
+        <button onclick="snsSave()" style="flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s">Save</button>
+        <button onclick="snsClose()" style="font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social share bar -->
+  <div class="sb">
+    <div class="sb-lbl">Share</div>
+    <div class="sb-btns">
+      <button class="snsbtn yt" onclick="snsOpen('yt')">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube
+      </button>
+      <button class="snsbtn ig" onclick="snsOpen('ig')">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+      </button>
+      <button class="snsbtn tt" onclick="snsOpen('tt')">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/></svg>TikTok
+      </button>
+      <button class="snsbtn th" onclick="snsOpen('th')">
+        <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.742-1.757-.438-.505-1.103-.769-1.98-.789h-.047c-.67 0-1.64.191-2.253 1.109l-1.755-1.2c.894-1.307 2.277-2.031 3.98-2.049h.064c2.71.048 4.327 1.692 4.73 4.778.108.028.214.057.316.089l-.001.007c1.338.386 2.462 1.093 3.24 2.254C22.01 16.06 21.748 19 19.743 21c-1.737 1.745-4.189 2.627-7.274 2.647l-.283-.003v.003Z"/></svg>Threads
+      </button>
+      <button class="snsbtn xb" onclick="snsOpen('xb')">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>X
+      </button>
+      <button class="snsbtn fb" onclick="snsOpen('fb')">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+      </button>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="ft">
+  <div class="ft-brand"><span class="ft-dot"></span>IssueLens</div>
+  <div style="color:#9CA3AF;font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);margin-top:4px">American Sovereignty Series · EP.11</div>
+  <p>This publication is a public-interest factual analysis based on official reports from the U.S.-China Economic and Security Review Commission, Congressional Research Service, U.S. Customs and Border Protection, Small Business Administration, and Federal Trade Commission; reporting from The Wall Street Journal, Bloomberg, Reuters, The New York Times, Axios, and NPR; and research from the Lowy Institute and The Economist.<br>
+  Statistical figures reflect the publication dates of cited reports; some figures are multi-source estimates. Descriptions of companies are limited to publicly available facts and carry no legal judgment or defamatory intent.<br>
+  Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+<script>
+// ── Progress bar ──
+const pb = document.getElementById('pb');
+window.addEventListener('scroll', () => {
+  pb.style.width = (document.documentElement.scrollTop /
+    (document.documentElement.scrollHeight - document.documentElement.clientHeight) * 100) + '%';
+});
+
+// ── Scroll reveal ──
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('on'), i * 60);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: .07 });
+document.querySelectorAll('.rev').forEach(el => ro.observe(el));
+
+// ── Risk meter bars ──
+const bo = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.rbf').forEach(b => {
+        setTimeout(() => b.style.width = b.dataset.w + '%', 260);
+      });
+      bo.unobserve(e.target);
+    }
+  });
+}, { threshold: .25 });
+document.querySelectorAll('.rm').forEach(el => bo.observe(el));
+
+// ── Media boxes ──
+let cur = null;
+const mediaStore = {};
+
+function persistItem(id, val) { try { mediaStore[id] = val; } catch(e){} }
+
+function restoreAll() {
+  Object.entries(mediaStore).forEach(([id, val]) => {
+    if (val.startsWith('yt:')) _applyYt(id, val.slice(3), false);
+  });
+}
+
+function mbClick(id) {
+  const box = document.getElementById('mb-' + id);
+  if (box.classList.contains('filled')) return;
+  if (box.dataset.t === 'img') { document.getElementById('fi-' + id).click(); }
+  else { ytOpen(id); }
+}
+
+function mbReplace(id) {
+  mbClear(id);
+  const box = document.getElementById('mb-' + id);
+  if (box.dataset.t === 'img') { document.getElementById('fi-' + id).click(); }
+  else { ytOpen(id); }
+}
+
+function mbDel(id) {
+  const box = document.getElementById('mb-' + id);
+  const wrap = box.closest('.mbox-wrap');
+  wrap.style.transition = 'max-height .35s ease, opacity .3s ease, margin .3s ease';
+  wrap.style.overflow = 'hidden';
+  wrap.style.maxHeight = wrap.offsetHeight + 'px';
+  requestAnimationFrame(() => {
+    wrap.style.maxHeight = '0';
+    wrap.style.opacity = '0';
+    wrap.style.margin = '0';
+    wrap.style.padding = '0';
+  });
+  setTimeout(() => {
+    const pair = wrap.closest('.media-pair');
+    wrap.remove();
+    if (pair && pair.querySelectorAll('.mbox-wrap').length === 0) {
+      pair.style.transition = 'max-height .3s ease,opacity .25s ease,margin .3s ease';
+      pair.style.overflow = 'hidden';
+      pair.style.maxHeight = '0';
+      pair.style.opacity = '0';
+      pair.style.margin = '0';
+      setTimeout(() => pair.remove(), 320);
+    }
+  }, 360);
+}
+
+function mbClear(id) {
+  const box = document.getElementById('mb-' + id);
+  const ifrm = box.querySelector('iframe');
+  const img = box.querySelector('img.prev');
+  if (ifrm) ifrm.remove();
+  if (img) img.remove();
+  box.classList.remove('filled');
+  const ph = document.getElementById('ph-' + id);
+  if (ph) ph.style.display = '';
+  const fi = document.getElementById('fi-' + id);
+  if (fi) fi.value = '';
+}
+
+function mbLoadImg(id, inp) {
+  if (!inp.files || !inp.files[0]) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    const box = document.getElementById('mb-' + id);
+    const ph = document.getElementById('ph-' + id);
+    if (ph) ph.style.display = 'none';
+    const img = document.createElement('img');
+    img.src = ev.target.result;
+    img.className = 'prev';
+    box.insertBefore(img, box.querySelector('.mctrl'));
+    box.classList.add('filled');
+    box.onclick = null;
+    box.style.minHeight = '200px';
+  };
+  r.readAsDataURL(inp.files[0]);
+}
+
+function _applyYt(id, embedUrl, save) {
+  const box = document.getElementById('mb-' + id);
+  if (!box) return;
+  const ph = document.getElementById('ph-' + id);
+  if (ph) ph.style.display = 'none';
+  let ifr = box.querySelector('iframe');
+  if (!ifr) {
+    ifr = document.createElement('iframe');
+    ifr.style.cssText = 'width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px';
+    ifr.allow = 'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';
+    ifr.allowFullscreen = true;
+    box.insertBefore(ifr, box.querySelector('.mctrl'));
+  }
+  ifr.src = embedUrl;
+  box.classList.add('filled');
+  box.style.minHeight = '220px';
+  box.onclick = null;
+  if (save) persistItem(id, 'yt:' + embedUrl);
+}
+
+// ── YouTube modal ──
+function ytOpen(id) {
+  cur = id;
+  document.getElementById('yti').value = '';
+  document.getElementById('ytm').style.display = 'flex';
+  setTimeout(() => document.getElementById('yti').focus(), 80);
+}
+function ytClose() { document.getElementById('ytm').style.display = 'none'; cur = null; }
+
+function ytEmbed(url) {
+  try {
+    const u = new URL(url); let vid = '';
+    if (u.hostname.includes('youtu.be')) { vid = u.pathname.slice(1).split('?')[0]; }
+    else { vid = u.searchParams.get('v') || ''; }
+    return vid ? 'https://www.youtube.com/embed/' + vid + '?rel=0&autoplay=1' : null;
+  } catch(e) { return null; }
+}
+
+function ytOk() {
+  const url = document.getElementById('yti').value.trim();
+  const em  = ytEmbed(url);
+  if (!em) { alert('Please enter a valid YouTube link.\nExample: https://www.youtube.com/watch?v=XXXXXXXXXXX'); return; }
+  _applyYt(cur, em, true);
+  ytClose();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { ytClose(); snsClose(); } });
+document.getElementById('yti').addEventListener('keydown', e => { if (e.key === 'Enter') ytOk(); });
+
+// ════════════════════════════════════════════════════════
+//  SNS link modal — button pattern
+//  Saves URLs to snsLinks{} per session.
+//  Saved buttons show ✓ badge and open link on click.
+//  Double-click a saved button to change the link.
+// ════════════════════════════════════════════════════════
+const snsMeta = {
+  yt:  { label: 'YouTube',     desc: 'Enter your YouTube channel or video link.',  ph: 'https://www.youtube.com/@channel' },
+  ig:  { label: 'Instagram',   desc: 'Enter your Instagram profile or post link.', ph: 'https://www.instagram.com/username' },
+  tt:  { label: 'TikTok',      desc: 'Enter your TikTok profile or video link.',   ph: 'https://www.tiktok.com/@username' },
+  th:  { label: 'Threads',     desc: 'Enter your Threads profile or post link.',   ph: 'https://www.threads.net/@username' },
+  xb:  { label: 'X (Twitter)', desc: 'Enter your X profile or post link.',         ph: 'https://x.com/username' },
+  fb:  { label: 'Facebook',    desc: 'Enter your Facebook page or post link.',     ph: 'https://www.facebook.com/page' }
+};
+const snsLinks = {};
+let curSns = null;
+
+function snsOpen(id) {
+  curSns = id;
+  const m = snsMeta[id];
+  document.getElementById('sns-modal-title').textContent = m.label + ' Link Setup';
+  document.getElementById('sns-modal-desc').textContent  = m.desc;
+  const inp = document.getElementById('sns-url-input');
+  inp.placeholder  = m.ph;
+  inp.value        = snsLinks[id] || '';
+  inp.style.borderColor = 'var(--bdr)';
+  snsUpdateSavedBar();
+  document.getElementById('sns-modal').style.display = 'flex';
+  setTimeout(() => inp.focus(), 80);
+}
+
+function snsUpdateSavedBar() {
+  const bar = document.getElementById('sns-saved-bar');
+  const lnk = document.getElementById('sns-saved-link');
+  if (snsLinks[curSns]) {
+    bar.style.display = 'flex';
+    lnk.href = snsLinks[curSns];
+    lnk.textContent = snsLinks[curSns];
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+function snsClearSaved() {
+  if (!curSns) return;
+  delete snsLinks[curSns];
+  document.getElementById('sns-url-input').value = '';
+  const btn = document.querySelector('.snsbtn.' + curSns);
+  if (btn) {
+    btn.classList.remove('has-link');
+    btn.onclick    = () => snsOpen(curSns);
+    btn.ondblclick = null;
+    btn.title      = '';
+  }
+  snsUpdateSavedBar();
+}
+
+function snsSave() {
+  const url = document.getElementById('sns-url-input').value.trim();
+  if (!url) { alert('Please enter a link.'); return; }
+  let finalUrl = url;
+  if (!/^https?:\/\//i.test(finalUrl)) finalUrl = 'https://' + finalUrl;
+  const id = curSns;
+  snsLinks[id] = finalUrl;
+  const btn = document.querySelector('.snsbtn.' + id);
+  if (btn) {
+    btn.classList.add('has-link');
+    btn.onclick    = () => window.open(snsLinks[id], '_blank', 'noopener,noreferrer');
+    btn.ondblclick = e => { e.preventDefault(); snsOpen(id); };
+    btn.title      = 'Click: open link  |  Double-click: change link';
+  }
+  snsUpdateSavedBar();
+  setTimeout(() => snsClose(), 300);
+}
+
+function snsClose() { document.getElementById('sns-modal').style.display = 'none'; curSns = null; }
+
+document.getElementById('sns-url-input').addEventListener('keydown', e => { if (e.key === 'Enter') snsSave(); });
+document.getElementById('sns-modal').addEventListener('click', function(e) { if (e.target === this) snsClose(); });
+
+// ── Restore all media on page load ──
+restoreAll();
+</script>
+</body>
+</html>

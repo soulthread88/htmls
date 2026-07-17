@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="시니어 입문자를 위한 필수 AI 기초 용어 가이드 — 프롬프트부터 생성형 AI까지">
+<title>시니어 AI 공부방 — Ep.04 | "시니어 AI 공부에 꼭 필요한 기초 개념 가이드"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;700;900&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM v3 — Magazine + Green Warmth
+   Palette: Light Green Mid / Forest / Cream
+═══════════════════════════════════════════ */
+:root {
+  --page-bg:    #EDF7EE;
+  --section-bg: #E8F5E9;
+  --section-bg2:#DFF0E0;
+  --section-bg3:#F0FAF2;
+  --cream:      #FAF7F2;
+  --cream-mid:  #F2EDE4;
+  --parchment:  #E8DFD0;
+  --forest:     #1A4731;
+  --forest-mid: #2D6A4F;
+  --forest-light:#52B788;
+  --mint-border:#A5D6A7;
+  --terracotta: #C1440E;
+  --terracotta-light:#E07A5F;
+  --gold:       #D4A017;
+  --gold-light: #F2C84B;
+  --ink:        #1C1C1E;
+  --ink-mid:    #3A3A3C;
+  --ink-light:  #5C6C5E;
+  --white:      #FFFFFF;
+  --col-width:  740px;
+  --base-fs:    19px;
+  --reading-line:1.95;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--page-bg);
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--ink);
+  font-size: var(--base-fs);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* grain overlay */
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  opacity:0.018;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Reading progress bar ── */
+#reading-bar {
+  position:fixed; top:0; left:0;
+  height:4px;
+  background:linear-gradient(90deg, var(--forest-light), var(--terracotta-light));
+  width:0%; z-index:10000; transition:width 0.1s;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  background: var(--forest);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px 72px;
+  text-align: center;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(82,183,136,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(193,68,14,0.12) 0%, transparent 60%);
+}
+.hero::after {
+  content:'📚'; position:absolute;
+  font-size:320px; opacity:0.04;
+  right:-40px; top:-60px; transform:rotate(12deg);
+  pointer-events:none; line-height:1;
+}
+.series-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(82,183,136,0.2); border:1px solid rgba(82,183,136,0.4);
+  border-radius:100px; padding:6px 18px;
+  font-size:14px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--forest-light); margin-bottom:28px; position:relative;
+}
+.series-badge .dot {
+  width:8px; height:8px; background:var(--forest-light); border-radius:50%;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-ep {
+  font-family:'Noto Sans KR',sans-serif; font-style:normal;
+  font-size:19px; color:var(--forest-light); letter-spacing:0.08em; margin-bottom:16px; position:relative;
+}
+.hero-title {
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(36px,7vw,72px); line-height:1.15; font-weight:400;
+  color:var(--cream); position:relative; margin-bottom:24px; letter-spacing:-0.02em;
+}
+.hero-title em { font-style:italic; color:var(--gold-light); }
+.hero-subtitle {
+  font-size:clamp(17px,2.5vw,21px); line-height:1.7;
+  color:rgba(250,247,242,0.72); max-width:560px; margin:0 auto 40px; position:relative;
+  word-break:keep-all; overflow-wrap:break-word;
+}
+.hero-meta {
+  display:flex; align-items:center; justify-content:center;
+  gap:20px; flex-wrap:wrap; position:relative;
+}
+.hero-meta-item {
+  display:flex; align-items:center; gap:7px;
+  font-size:15px; color:rgba(250,247,242,0.55); font-weight:500;
+}
+.hero-divider { width:1px; height:18px; background:rgba(250,247,242,0.2); }
+
+/* ═══ IDIOM STRIP ═══ */
+.idiom-strip {
+  background:linear-gradient(135deg, var(--terracotta) 0%, #8B2500 100%);
+  padding:36px 24px; text-align:center; position:relative; overflow:hidden;
+}
+.idiom-strip::before {
+  content:'日就月將'; position:absolute;
+  font-size:140px; font-weight:900; color:rgba(255,255,255,0.05);
+  left:50%; top:50%; transform:translate(-50%,-50%);
+  white-space:nowrap; pointer-events:none; letter-spacing:0.1em;
+}
+.idiom-label { font-size:13px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:12px; }
+.idiom-hanja { font-family:'Noto Serif KR',serif; font-size:clamp(42px,8vw,72px); font-weight:900; color:#fff; letter-spacing:0.15em; line-height:1; margin-bottom:10px; position:relative; }
+.idiom-reading { font-size:21px; color:rgba(255,255,255,0.7); font-weight:500; font-family:'Noto Sans KR',sans-serif; letter-spacing:0.18em; margin-bottom:14px; }
+.idiom-meaning-strip { display:inline-block; background:rgba(255,255,255,0.15); border-radius:100px; padding:9px 24px; font-size:18px; font-weight:700; color:#fff; margin-bottom:16px; }
+.idiom-ai-connect { font-size:17px; color:rgba(255,255,255,0.75); line-height:1.8; max-width:480px; margin:0 auto; }
+.idiom-ai-connect strong { color:#fff; }
+
+/* ═══ MAIN WRAP ═══ */
+.page-wrap { max-width:var(--col-width); margin:0 auto; padding:0 24px; }
+.section-gap { height:64px; }
+.section-gap-sm { height:36px; }
+
+/* ── Intro ── */
+.intro-block { padding:60px 0 0; }
+.intro-lead {
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(22px,3.5vw,30px); line-height:1.5;
+  color:var(--forest); font-style:italic;
+  border-left:5px solid var(--forest-light);
+  padding-left:24px; margin-bottom:40px;
+}
+.intro-lead em { color:var(--terracotta); font-style:normal; font-weight:700; }
+
+.body-text {
+  font-size:var(--base-fs); line-height:var(--reading-line);
+  color:var(--ink-mid); margin-bottom:24px; word-break:keep-all;
+}
+.body-text strong, .body-text b { color:var(--ink); font-weight:700; }
+.hi-forest { color:var(--forest); font-weight:700; }
+.hi-terra  { color:var(--terracotta); font-weight:700; }
+.speaker   { color:var(--forest-mid); font-weight:900; }
+
+/* ═══ SECTION HEADING ═══ */
+.sec-heading {
+  display:flex; align-items:center; gap:14px;
+  margin:52px 0 28px; padding:0;
+}
+.sec-num {
+  width:48px; height:48px; flex-shrink:0;
+  background:linear-gradient(135deg, var(--forest), var(--forest-mid));
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:900; color:var(--cream);
+  font-family:'DM Sans',sans-serif; letter-spacing:0.02em;
+  box-shadow:0 4px 14px rgba(26,71,49,0.25);
+}
+.sec-heading h2 {
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(23px,3.5vw,30px);
+  font-weight:900; color:var(--forest); line-height:1.4; flex:1;
+}
+
+/* ── CONTENTEDITABLE ── */
+[contenteditable] { outline:none; cursor:text; }
+[contenteditable]:hover { background:rgba(82,183,136,0.06); border-radius:4px; }
+[contenteditable]:focus { background:rgba(82,183,136,0.10); border-radius:4px; outline:2px solid rgba(82,183,136,0.3); }
+
+/* ── Real photo avatars ── */
+.av-photo { width:50px; height:50px; border-radius:50%; object-fit:cover; flex-shrink:0; box-shadow:0 2px 10px rgba(0,0,0,0.2); border:3px solid #fff; }
+
+/* ── Divider ── */
+.divider { display:flex; align-items:center; gap:16px; margin:48px 0; }
+.divider::before,.divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--mint-border),transparent); }
+.div-icon { font-size:22px; opacity:0.5; }
+
+/* ═══ IMAGE / VIDEO SLOT ═══ */
+.media-section {
+  background:var(--section-bg3);
+  border:2px dashed var(--mint-border);
+  border-radius:20px;
+  padding:0;
+  margin:32px 0 0;
+  overflow:hidden;
+}
+.img-slot {
+  width:100%; min-height:300px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:12px; cursor:pointer; position:relative; overflow:hidden;
+  transition:background 0.2s;
+  background:transparent;
+}
+.img-slot:hover { background:rgba(82,183,136,0.06); }
+.img-slot.has-media { min-height:unset; background:#000; cursor:default; }
+.slot-icon { font-size:52px; opacity:0.35; }
+.slot-label { font-size:var(--base-fs); font-weight:700; color:var(--ink-light); }
+.slot-hint  { font-size:16px; color:var(--ink-light); opacity:0.65; text-align:center; padding:0 24px; line-height:1.6; }
+.img-slot img,.img-slot video { width:100%; height:auto; display:block; }
+.img-slot-overlay { position:absolute; top:10px; right:10px; display:none; gap:6px; z-index:10; }
+.img-slot:hover .img-slot-overlay { display:flex; }
+.slot-btn { background:rgba(0,0,0,0.72); color:white; border:none; border-radius:8px; padding:7px 16px; font-size:14px; cursor:pointer; font-weight:700; font-family:'Noto Sans KR',sans-serif; }
+.slot-btn:hover { background:rgba(0,0,0,0.9); }
+.source-line {
+  background:var(--section-bg3);
+  border-top:1px dashed var(--mint-border);
+  padding:10px 18px;
+  font-size:16px; font-style:italic; color:var(--ink-light);
+  outline:none; cursor:text; display:block;
+  text-align:right;
+  transition:background 0.2s;
+  border-radius:0 0 18px 18px;
+}
+.source-line:hover { background:rgba(82,183,136,0.1); }
+.source-line:focus { background:rgba(82,183,136,0.15); outline:none; }
+
+/* ═══ DIALOG CARD ═══ */
+.dialog-card {
+  background:var(--section-bg);
+  border:2px solid var(--mint-border);
+  border-radius:24px; padding:36px 40px; margin:28px 0;
+  position:relative; overflow:hidden;
+}
+.dialog-card::before {
+  content:'🌸'; position:absolute;
+  top:-10px; right:24px; font-size:100px; opacity:0.08;
+  transform:rotate(-10deg); pointer-events:none;
+}
+.dialog-row { display:flex; gap:16px; margin-bottom:28px; align-items:flex-start; }
+.dialog-row:last-child { margin-bottom:0; }
+.dialog-avatar {
+  width:50px; height:50px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; flex-shrink:0;
+  box-shadow:0 2px 10px rgba(0,0,0,0.12);
+}
+.av-gramps{background:linear-gradient(135deg,#FFE0B2,#FFCC80);}
+.av-grams {background:linear-gradient(135deg,#F8BBD9,#F48FB1);}
+.av-yunho {background:linear-gradient(135deg,#C8E6C9,#81C784);}
+.av-dad   {background:linear-gradient(135deg,#BBDEFB,#64B5F6);}
+.av-mom   {background:linear-gradient(135deg,#E1BEE7,#BA68C8);}
+.dialog-bubble { flex:1; background:rgba(255,255,255,0.72); border-radius:0 16px 16px 16px; padding:14px 20px; }
+.dialog-bubble.right { background:rgba(82,183,136,0.15); border-radius:16px 0 16px 16px; }
+.bubble-name { font-size:17px; font-weight:900; color:var(--forest); letter-spacing:0.02em; display:inline; margin-right:6px; }
+.bubble-name::after { content:": "; }
+.bubble-text-wrap { display:inline; }
+.bubble-text { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); word-break:keep-all; }
+.bubble-text strong { color:var(--terracotta); }
+
+/* ═══ CONCEPT CARDS ═══ */
+.concept-grid { display:grid; grid-template-columns:1fr; gap:16px; margin:28px 0; }
+.concept-card {
+  background:var(--section-bg);
+  border:2px solid var(--mint-border);
+  border-radius:18px; padding:28px 30px;
+  display:flex; gap:20px; align-items:flex-start;
+  border-left:5px solid transparent;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.concept-card:hover { transform:translateX(4px); }
+.concept-card:nth-child(1){border-left-color:var(--forest-light);}
+.concept-card:nth-child(2){border-left-color:var(--gold);}
+.concept-card:nth-child(3){border-left-color:var(--terracotta);}
+.card-emoji { font-size:38px; flex-shrink:0; line-height:1; margin-top:2px; }
+.card-title { font-size:20px; font-weight:900; color:var(--ink); margin-bottom:8px; line-height:1.4; }
+.card-desc  { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); word-break:keep-all; }
+
+/* ═══ AI TYPES GRID ═══ */
+.ai-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:28px 0; }
+.ai-item {
+  background:var(--section-bg);
+  border:2px solid var(--mint-border);
+  border-radius:16px; padding:24px 22px;
+  position:relative; overflow:hidden;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.ai-item:hover { transform:translateY(-3px); box-shadow:0 8px 32px rgba(26,71,49,0.14); }
+.ai-item::before {
+  content:attr(data-num); position:absolute;
+  top:-8px; right:12px; font-size:72px; font-weight:900;
+  color:rgba(26,71,49,0.06); font-family:'DM Sans',sans-serif; line-height:1; pointer-events:none;
+}
+.ai-item-emoji { font-size:34px; margin-bottom:12px; display:block; }
+.ai-item-title { font-size:19px; font-weight:900; color:var(--forest); margin-bottom:8px; line-height:1.4; }
+.ai-item-desc  { font-size:var(--base-fs); line-height:1.8; color:var(--ink-mid); word-break:keep-all; }
+.ai-item-example {
+  display:inline-block; margin-top:10px;
+  font-size:14px; font-weight:700; color:var(--forest-mid);
+  background:rgba(82,183,136,0.15); border-radius:100px; padding:4px 14px;
+}
+
+/* ── Photo grid ── */
+.photo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:24px 0; }
+.photo-slot {
+  aspect-ratio:1/1; background:var(--section-bg);
+  border:2px dashed var(--mint-border); border-radius:14px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-size:28px; cursor:pointer; position:relative; overflow:hidden;
+  transition:border-color 0.2s, background 0.2s;
+}
+.photo-slot:hover { border-color:var(--forest-light); background:rgba(82,183,136,0.08); }
+.photo-slot.has-media { background:#000; border-style:solid; cursor:default; }
+.photo-slot img { width:100%; height:100%; object-fit:cover; display:block; border-radius:12px; }
+.photo-slot-overlay { position:absolute; top:6px; right:6px; display:none; gap:4px; z-index:10; }
+.photo-slot:hover .photo-slot-overlay { display:flex; }
+.photo-slot-btn { background:rgba(0,0,0,0.72); color:white; border:none; border-radius:6px; padding:5px 9px; font-size:12px; cursor:pointer; font-weight:700; }
+
+/* ═══ HUMOR BOX ═══ */
+.humor-card {
+  background:linear-gradient(135deg,#FFFBF0 0%,#FFF8E8 100%);
+  border:2px solid var(--gold-light); border-radius:24px;
+  padding:36px 40px; margin:32px 0; position:relative; overflow:hidden;
+}
+.humor-card::before {
+  content:'🌷'; position:absolute; font-size:130px; opacity:0.07;
+  right:-16px; bottom:-20px; transform:rotate(-12deg); pointer-events:none;
+}
+.humor-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--gold-light); color:var(--ink); font-size:19px; font-weight:900;
+  letter-spacing:0.1em; text-transform:uppercase; border-radius:100px;
+  padding:6px 16px; margin-bottom:20px;
+}
+.humor-title { font-family:'Noto Sans KR',sans-serif; font-size:23px; font-weight:900; color:var(--ink); margin-bottom:24px; line-height:1.4; }
+.humor-row { margin-bottom:16px; font-size:var(--base-fs); line-height:1.9; color:var(--ink-mid); }
+.humor-row .sp { color:var(--forest); font-weight:900; }
+.humor-row strong { color:var(--terracotta); }
+.humor-punchline { background:rgba(212,160,23,0.12); border-radius:12px; padding:16px 20px; font-size:var(--base-fs); font-weight:700; color:var(--ink); margin-top:8px; line-height:1.8; }
+
+/* ═══ QUIZ BOX ═══ */
+.quiz-card {
+  background:var(--section-bg); border:2px solid var(--mint-border);
+  border-radius:24px; padding:36px 40px; margin:32px 0;
+}
+.quiz-header { display:flex; align-items:center; gap:12px; margin-bottom:28px; }
+.quiz-badge { background:var(--forest); color:var(--cream); font-size:13px; font-weight:900; letter-spacing:0.12em; text-transform:uppercase; border-radius:100px; padding:6px 18px; }
+.quiz-title-text { font-family:'Noto Sans KR',sans-serif; font-size:22px; font-weight:900; color:var(--ink); }
+.quiz-q { margin-bottom:20px; padding:20px 24px; background:rgba(255,255,255,0.7); border-radius:14px; border-left:5px solid var(--forest-light); display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; }
+.quiz-num  { font-size:14px; font-weight:900; color:var(--forest); text-transform:uppercase; letter-spacing:0.12em; flex-shrink:0; }
+.quiz-text { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); word-break:keep-all; flex:1; min-width:200px; }
+.quiz-hint { font-size:16px; color:var(--ink-light); font-style:italic; width:100%; padding-left:0; margin-top:4px; }
+.quiz-cta  { text-align:center; margin-top:24px; font-size:var(--base-fs); font-weight:700; color:var(--forest); background:rgba(82,183,136,0.12); border-radius:12px; padding:16px; }
+
+/* ═══ IDIOM DEEP DIVE ═══ */
+.idiom-deep {
+  background:linear-gradient(135deg,#1A4731 0%,#0D2B1E 100%);
+  border-radius:28px; padding:44px 40px; margin:32px 0; color:var(--cream);
+  position:relative; overflow:hidden;
+}
+.idiom-deep::before {
+  content:'日就月將'; position:absolute;
+  font-size:120px; font-weight:900; color:rgba(255,255,255,0.04);
+  right:-20px; bottom:-10px; letter-spacing:0.05em; pointer-events:none; line-height:1;
+}
+.idiom-deep-tag  { font-size:14px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; color:var(--forest-light); margin-bottom:16px; }
+.idiom-deep-title{ font-family:'Noto Sans KR',sans-serif; font-size:clamp(20px,3vw,26px); font-style:normal; color:var(--cream); margin-bottom:28px; line-height:1.5; }
+.char-row { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:28px; }
+.char-tile { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:18px 12px; text-align:center; }
+.char-hanja   { font-size:38px; font-weight:900; color:var(--gold-light); display:block; line-height:1.2; margin-bottom:6px; }
+.char-reading { font-size:17px; color:rgba(250,247,242,0.75); font-weight:600; display:block; margin-bottom:4px; }
+.char-mean    { font-size:15px; color:rgba(250,247,242,0.5); display:block; }
+.meaning-block { background:rgba(255,255,255,0.07); border-radius:14px; padding:20px 24px; margin-bottom:14px; }
+.meaning-label { font-size:14px; font-weight:900; color:var(--forest-light); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px; }
+.meaning-text  { font-size:var(--base-fs); line-height:1.85; color:rgba(250,247,242,0.88); word-break:keep-all; }
+.meaning-text strong { color:#fff; }
+.ai-apply      { background:rgba(212,160,23,0.14); border:1px solid rgba(212,160,23,0.3); border-radius:14px; padding:22px 24px; margin-top:20px; }
+.ai-apply-title{ font-size:16px; font-weight:900; color:var(--gold-light); margin-bottom:12px; letter-spacing:0.06em; }
+.ai-apply-text { font-size:var(--base-fs); line-height:1.85; color:rgba(250,247,242,0.85); word-break:keep-all; }
+.ai-apply-text strong { color:#fff; }
+
+/* ═══ SONG BOX ═══ */
+.song-card {
+  background:var(--section-bg);
+  border:2px solid var(--mint-border);
+  border-radius:24px; padding:36px 40px; margin:32px 0;
+  border-top:5px solid var(--forest-mid);
+}
+.song-header { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
+.song-icon {
+  width:58px; height:58px;
+  background:linear-gradient(135deg,var(--forest),var(--forest-mid));
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:28px; box-shadow:0 4px 16px rgba(26,71,49,0.3); flex-shrink:0;
+}
+.song-title-text { font-family:'Noto Sans KR',sans-serif; font-size:24px; font-weight:900; color:var(--ink); line-height:1.3; }
+.song-subtitle   { font-size:16px; color:var(--ink-light); margin-top:4px; }
+.song-lyrics {
+  white-space:pre-line; font-size:var(--base-fs); line-height:2.1; color:var(--ink-mid);
+  background:rgba(255,255,255,0.6); border-radius:14px; padding:26px 28px;
+}
+.song-section { font-weight:900; color:var(--forest); font-size:15px; letter-spacing:0.1em; text-transform:uppercase; }
+
+/* ── Audio player ── */
+.audio-box {
+  background:linear-gradient(135deg,var(--forest) 0%,#0D2B1E 100%);
+  border-radius:18px; padding:24px 28px; margin-top:16px;
+  display:flex; flex-direction:column; gap:14px;
+}
+.play-btn {
+  width:54px; height:54px; background:var(--cream); border:none; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; flex-shrink:0; transition:transform 0.2s;
+}
+.play-btn:hover { transform:scale(1.08); }
+.play-icon  { width:0; height:0; border-left:20px solid var(--forest); border-top:12px solid transparent; border-bottom:12px solid transparent; margin-left:5px; }
+.pause-icon { display:flex; gap:6px; }
+.pause-bar  { width:6px; height:24px; background:var(--forest); border-radius:2px; }
+.progress-wrap { flex:1; min-width:120px; }
+.progress-track{ height:9px; background:rgba(255,255,255,0.2); border-radius:5px; cursor:pointer; position:relative; margin-bottom:6px; }
+.progress-fill { height:100%; background:var(--forest-light); border-radius:5px; width:0%; transition:width 0.1s; }
+.time-text     { font-size:16px; color:rgba(255,255,255,0.65); font-weight:700; }
+.upload-audio-btn {
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22);
+  border-radius:100px; padding:9px 20px; font-size:16px; font-weight:700; color:var(--cream);
+  cursor:pointer; font-family:'Noto Sans KR',sans-serif; transition:background 0.2s;
+  white-space:nowrap;
+}
+.upload-audio-btn:hover { background:rgba(255,255,255,0.22); }
+.audio-filename { font-size:15px; color:rgba(255,255,255,0.5); text-align:center; }
+
+/* ═══ GRAMMAR BOX ═══ */
+.grammar-card {
+  background:var(--section-bg);
+  border:2px solid var(--mint-border);
+  border-radius:24px; padding:36px 40px; margin:32px 0;
+}
+.grammar-title-text { font-family:'Noto Sans KR',sans-serif; font-size:23px; font-weight:900; color:var(--ink); margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+.grammar-item { margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--mint-border); }
+.grammar-item:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.grammar-rule { font-size:20px; font-weight:900; color:var(--ink); margin-bottom:12px; }
+.grammar-ex   { font-size:var(--base-fs); line-height:1.9; color:var(--ink-mid); }
+.grammar-ex .ok  { color:var(--forest-mid); font-weight:700; }
+.grammar-ex .no  { color:var(--terracotta); text-decoration:line-through; opacity:0.7; }
+.grammar-ex .key { color:var(--forest); font-weight:900; }
+
+/* ─ Speller Box ─ */
+.speller-box {
+  background:linear-gradient(135deg,var(--section-bg2) 0%,#C8E6C9 100%);
+  border:2px solid var(--forest-light); border-radius:20px;
+  padding:32px 36px; margin:28px 0; text-align:center; position:relative; overflow:hidden;
+}
+.speller-box::before { content:'✏️'; position:absolute; top:-14px; right:16px; font-size:90px; opacity:0.06; pointer-events:none; }
+.speller-badge { display:inline-block; background:var(--forest); color:var(--cream); font-size:19px; font-weight:900; letter-spacing:0.14em; text-transform:uppercase; border-radius:100px; padding:6px 18px; margin-bottom:16px; }
+.speller-title { font-family:'Noto Sans KR',sans-serif; font-size:24px; font-weight:900; color:var(--forest); margin-bottom:10px; line-height:1.4; }
+.speller-desc  { font-size:var(--base-fs); color:var(--ink-mid); margin-bottom:22px; line-height:1.8; }
+.speller-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--forest); color:var(--cream); font-size:var(--base-fs); font-weight:900;
+  padding:15px 36px; border-radius:100px; text-decoration:none;
+  transition:background 0.2s; box-shadow:0 4px 18px rgba(26,71,49,0.25);
+}
+.speller-btn:hover { background:var(--forest-mid); }
+.speller-warn { margin-top:16px; font-size:var(--base-fs); color:var(--terracotta); font-weight:700; }
+
+/* ─ Dad note ─ */
+.dad-note { background:#FFFDE7; border:2px solid var(--gold-light); border-radius:16px; padding:22px 28px; margin:24px 0; }
+
+/* ═══ SUMMARY BOX ═══ */
+.summary-card {
+  background:linear-gradient(135deg,#E8F5E9 0%,#C8E6C9 100%);
+  border:2px solid var(--forest-light); border-radius:28px;
+  padding:44px 40px; margin:32px 0; position:relative; overflow:hidden;
+}
+.summary-card::after {
+  content:'📚'; position:absolute; font-size:140px; opacity:0.05;
+  right:-20px; bottom:-20px; transform:rotate(-8deg); pointer-events:none;
+}
+.summary-header { text-align:center; margin-bottom:36px; }
+.summary-badge { display:inline-block; background:var(--forest); color:var(--cream); font-size:19px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; border-radius:100px; padding:7px 20px; margin-bottom:16px; }
+.summary-h-title { font-family:'Noto Sans KR',sans-serif; font-size:clamp(26px,4vw,34px); font-weight:900; color:var(--forest); line-height:1.35; }
+.summary-item { background:rgba(255,255,255,0.75); border-radius:16px; padding:22px 26px; margin-bottom:14px; display:flex; gap:16px; align-items:flex-start; }
+.sum-num { width:36px; height:36px; flex-shrink:0; background:var(--forest); color:var(--cream); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:900; font-family:'DM Sans',sans-serif; }
+.sum-title { font-size:20px; font-weight:900; color:var(--ink); margin-bottom:8px; line-height:1.4; }
+.sum-text  { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); word-break:keep-all; }
+.sum-text strong { color:var(--terracotta); }
+.summary-outro { text-align:center; margin-top:28px; font-size:21px; font-weight:700; color:var(--forest); }
+
+/* ─ Keyword cloud ─ */
+.keyword-wrap {
+  margin:48px 0; padding:36px;
+  background:var(--section-bg2);
+  border-radius:24px; border:1px solid var(--mint-border);
+}
+.keyword-label { font-size:15px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-light); margin-bottom:16px; text-align:center; }
+.keyword-cloud { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.keyword-tag {
+  display:inline-block; background:rgba(255,255,255,0.75);
+  border:2px solid var(--mint-border); border-radius:100px;
+  padding:9px 22px; font-size:var(--base-fs); font-weight:700; color:var(--forest);
+  text-decoration:none; transition:border-color 0.2s,background 0.2s,color 0.2s,transform 0.2s;
+}
+.keyword-tag:hover { background:var(--forest); color:var(--cream); border-color:var(--forest); transform:translateY(-2px); }
+
+/* ═══ 광고 영역 ═══ */
+.ad-zone-wrap { width:100%; position:relative; margin:8px 0; }
+.ad-trigger-bar {
+  width:100%; height:5px; cursor:default;
+  background:repeating-linear-gradient(90deg,#A5D6A7 0,#A5D6A7 5px,transparent 5px,transparent 13px);
+  opacity:0.4; border-radius:3px; transition:opacity 0.2s;
+}
+.ad-zone-wrap:hover .ad-trigger-bar { opacity:0.9; }
+.ad-box-inner {
+  max-height:0; overflow:hidden;
+  transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+  opacity:0;
+}
+.ad-zone-wrap:hover .ad-box-inner { max-height:200px; opacity:1; }
+.ad-zone-wrap.ad-permanent .ad-box-inner { max-height:none !important; opacity:1 !important; overflow:visible !important; }
+.ad-zone-wrap.ad-permanent .ad-trigger-bar { display:none; }
+.ad-zone-wrap.ad-permanent .ad-hover-hint { display:none; }
+.ad-box {
+  background:linear-gradient(135deg,#F1F8E9 0%,#E8F5E9 100%);
+  border:2px dashed #52B788; border-radius:13px;
+  padding:16px 22px; margin:6px 0 2px;
+  display:flex; align-items:center; gap:16px; min-height:68px;
+  position:relative; overflow:visible;
+}
+.ad-box-label {
+  font-size:12px; font-weight:900; color:#1A4731;
+  letter-spacing:0.1em; text-transform:uppercase;
+  background:rgba(82,183,136,0.18); border-radius:100px;
+  padding:4px 14px; white-space:nowrap; flex-shrink:0;
+}
+.ad-box-desc { font-size:15px; color:#5C6C5E; font-weight:500; line-height:1.6; flex:1; }
+.ad-box-size { font-size:12px; color:#52B788; font-weight:700; opacity:0.8; white-space:nowrap; }
+.ad-hover-hint {
+  text-align:center; font-size:11px; font-weight:700;
+  color:#52B788; letter-spacing:0.1em; text-transform:uppercase;
+  opacity:0; transition:opacity 0.2s; padding:2px 0 0;
+}
+.ad-zone-wrap:hover .ad-hover-hint { opacity:0.55; }
+.ad-menu-before {
+  position:absolute; top:50%; right:16px; transform:translateY(-50%);
+  display:none; gap:6px; z-index:10;
+}
+.ad-zone-wrap:hover .ad-menu-before { display:flex; }
+.ad-menu-before button {
+  background:rgba(82,183,136,0.95); color:#fff; border:none; border-radius:8px;
+  padding:8px 16px; font-size:14px; cursor:pointer; font-weight:700; font-family:inherit; transition:all 0.2s;
+}
+.ad-menu-before button:hover { background:#52B788; transform:scale(1.05); }
+.ad-menu-after { position:absolute; top:8px; right:8px; display:none; gap:6px; z-index:10; }
+.ad-box:hover .ad-menu-after { display:flex; }
+.ad-menu-after button {
+  background:rgba(0,0,0,0.72); color:#fff; border:none; border-radius:8px;
+  padding:7px 14px; font-size:14px; cursor:pointer; font-weight:700; font-family:inherit; transition:all 0.2s;
+}
+.ad-menu-after button:hover { background:rgba(0,0,0,0.88); transform:scale(1.05); }
+.ad-top-section { width:100%; padding:3px 0 2px; }
+.ad-bottom-section { max-width:740px; margin:0 auto; padding:0 24px 48px; }
+
+/* ═══ FOOTER ═══ */
+.blog-footer { background:var(--forest); color:rgba(250,247,242,0.65); padding:60px 24px; text-align:center; margin-top:80px; }
+.footer-inner { max-width:560px; margin:0 auto; }
+.footer-series { font-size:14px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--forest-light); margin-bottom:12px; }
+.footer-title-text { font-family:'DM Serif Display',serif; font-size:28px; font-style:italic; color:var(--cream); margin-bottom:16px; line-height:1.4; }
+.footer-desc { font-size:var(--base-fs); line-height:1.8; color:rgba(250,247,242,0.55); margin-bottom:28px; }
+.footer-cr   { margin-top:40px; font-size:15px; color:rgba(250,247,242,0.3); }
+
+/* ─ Fade-in ─ */
+.fade-in { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:600px){
+  .dialog-card,.humor-card,.quiz-card,.summary-card,.idiom-deep,.grammar-card,.speller-box,.keyword-wrap{padding:22px 18px;border-radius:16px;}
+  .ai-grid{grid-template-columns:1fr;}
+  .char-row{grid-template-columns:repeat(2,1fr);}
+  .photo-grid{grid-template-columns:repeat(2,1fr);}
+  .hero{padding:60px 20px 52px;}
+  .page-wrap{padding:0 16px;}
+  .dialog-row{flex-direction:column;gap:8px;}
+  .sec-heading h2{font-size:21px;}
+}
+
+/* ═══ TEMPLATE GUIDE PANEL ═══ */
+#tpl-guide {
+  position:fixed; bottom:20px; right:20px; z-index:99998;
+  background:var(--forest); color:var(--cream);
+  border-radius:16px; padding:16px 20px; max-width:280px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.35);
+  font-size:13px; line-height:1.7;
+  transition:transform 0.3s, opacity 0.3s;
+}
+#tpl-guide.hidden { transform:translateY(120%); opacity:0; pointer-events:none; }
+#tpl-guide-title { font-size:15px; font-weight:900; color:var(--gold-light); margin-bottom:10px; }
+#tpl-guide ul { padding-left:16px; margin:0; }
+#tpl-guide li { margin-bottom:4px; color:rgba(250,247,242,0.82); }
+#tpl-guide li strong { color:#fff; }
+#tpl-guide-close { position:absolute; top:10px; right:14px; background:none; border:none; color:rgba(255,255,255,0.5); font-size:18px; cursor:pointer; line-height:1; }
+#tpl-guide-close:hover { color:#fff; }
+#tpl-guide-toggle {
+  position:fixed; bottom:20px; right:20px; z-index:99999;
+  background:var(--forest); color:var(--cream);
+  border:none; border-radius:50%; width:48px; height:48px;
+  font-size:20px; cursor:pointer; display:none;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+  align-items:center; justify-content:center;
+}
+#tpl-guide-toggle.show { display:flex; }
+</style>
+</head>
+<body>
+
+<!-- ══ 상단 광고 영역 2개 ══ -->
+<div class="ad-top-section">
+  <div class="ad-zone-wrap" id="ad-wrap-1">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▲ 광고 영역 1 — 호버하면 나타납니다 ▲</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-1">
+        <span id="ad-content-1">
+          <span class="ad-box-label">광고 · 1</span>
+          <span class="ad-box-desc">시니어를 위한 태블릿 글자 크게 보기 설정법</span>
+          <span class="ad-box-size">728×90 Leaderboard</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-1').click(); event.stopPropagation();">📁 삽입</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-1" style="display:none">
+      </div>
+    </div>
+  </div>
+  <div class="ad-zone-wrap" id="ad-wrap-2">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▲ 광고 영역 2 — 호버하면 나타납니다 ▲</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-2">
+        <span id="ad-content-2">
+          <span class="ad-box-label">광고 · 2</span>
+          <span class="ad-box-desc">눈이 편한 디지털 독서용 안경 특별 기획전</span>
+          <span class="ad-box-size">970×90 Billboard</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-2').click(); event.stopPropagation();">📁 삽입</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-2" style="display:none">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="reading-bar"></div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<header class="hero">
+  <div class="series-badge"><span class="dot"></span>시니어 AI 공부방</div>
+  <div class="hero-ep">Episode 04</div>
+  <h1 class="hero-title" contenteditable="true" spellcheck="false">
+    "<em style="margin-left:0.02em;">AI 공부,<br>이 용어만 알면 끝!</em>"<br>
+    <span style="font-size:0.62em;color:rgba(250,247,242,0.65);font-style:normal;">"Essential AI Concepts for Seniors"</span>
+  </h1>
+  <p class="hero-subtitle" contenteditable="true" spellcheck="false">프롬프트부터 챗봇까지, 어렵게만 느껴졌던 AI 기초 용어들을 우리 눈높이에서 정리해 드립니다.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span>📖</span> 읽기 6분</div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item"><span>🌟</span> 입문</div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item"><span>📅</span> 2026</div>
+  </div>
+</header>
+
+<!-- ══════════════ IDIOM STRIP ══════════════ -->
+<div class="idiom-strip">
+  <div class="idiom-label">오늘의 사자성어 · Today's Idiom</div>
+  <div class="idiom-hanja">日就月將</div>
+  <div class="idiom-reading">일취월장</div>
+  <div class="idiom-meaning-strip">나날이 다달이 성장함 · Day by day, month by month</div>
+  <div class="idiom-ai-connect" contenteditable="true" spellcheck="false">
+    기초 개념부터 차근차근 익히다 보면, 실력이 <strong>일취월장</strong>하는 기쁨을 누리시게 될 거예요!
+  </div>
+</div>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+<div class="page-wrap">
+
+  <!-- Intro -->
+  <div class="intro-block fade-in">
+    <p class="intro-lead" contenteditable="true" spellcheck="false">
+      "손주가 말하는 '프롬프트'가 대체 뭔가요?" 🙋‍♂️
+    </p>
+    <p class="body-text" contenteditable="true" spellcheck="false">
+      안녕하세요! <b>&lt;시니어 AI 공부방&gt;</b>의 가이드, <span class="speaker">윤호 아빠</span>입니다. 오늘은 AI 공부를 시작할 때 가장 먼저 마주치는 <strong>'기초 용어'</strong>들을 정복해 보겠습니다. 하나씩 알아가다 보면 어느새 손주와 AI 대화를 나눌 수 있게 될 거예요!
+    </p>
+  </div>
+
+  <!-- ══ SECTION 01 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">01</div>
+    <h2 contenteditable="true" spellcheck="false">프롬프트: AI에게 내리는 '친절한 주문'</h2>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false">
+    AI와 대화할 때 우리가 입력하는 말, 즉 질문이나 요청을 <strong>'프롬프트(Prompt)'</strong>라고 합니다. 프롬프트가 구체적일수록 더 좋은 답변을 받을 수 있어요.
+  </p>
+
+  <div class="dialog-card fade-in">
+    <div class="dialog-row">
+      <div class="dialog-avatar av-gramps">👴</div>
+      <div class="dialog-bubble">
+        <div class="bubble-name">할아버지</div>
+        <span class="bubble-text-wrap bubble-text">"윤호야, 프롬프트라는 게 무슨 명령어 같은 거냐?"</span>
+      </div>
+    </div>
+    <div class="dialog-row">
+      <div class="dialog-avatar av-yunho">👦</div>
+      <div class="dialog-bubble right">
+        <div class="bubble-name">윤호</div>
+        <span class="bubble-text-wrap bubble-text">"할아버지, 식당에서 <strong>'안 맵게 해주세요'</strong>라고 주문하는 것과 같아요! 구체적으로 말할수록 원하는 걸 얻을 수 있죠."</span>
+      </div>
+    </div>
+    <div class="dialog-row">
+      <div class="dialog-avatar av-grams">👵</div>
+      <div class="dialog-bubble">
+        <div class="bubble-name">할머니</div>
+        <span class="bubble-text-wrap bubble-text">"그럼 '맛있는 거 줘'보다 '두부찌개 레시피 알려줘'가 더 좋은 프롬프트겠구나!"</span>
+      </div>
+    </div>
+    <div class="dialog-row">
+      <div class="dialog-avatar av-yunho">👦</div>
+      <div class="dialog-bubble right">
+        <div class="bubble-name">윤호</div>
+        <span class="bubble-text-wrap bubble-text">"정확해요! 할머니, 벌써 <strong>프롬프트 전문가</strong>가 되셨어요! 🎉"</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-1" onclick="if(!this.classList.contains('has-media'))document.getElementById('up1').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up1').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-1','disp1','프롬프트 개념 비유 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp1" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">프롬프트 개념 — 식당 주문과 AI 명령을 비유한 일러스트</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up1" style="display:none" onchange="loadMedia(this,'area-1','disp1')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌸</span></div>
+
+  <!-- ══ SECTION 02 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">02</div>
+    <h2 contenteditable="true" spellcheck="false">생성형 AI: 무언가를 '새로 만드는' 똑똑이</h2>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false">
+    <strong>생성형 AI(Generative AI)</strong>란 글, 그림, 음악 등 새로운 콘텐츠를 직접 만들어내는 AI입니다. 단순히 검색하는 것이 아니라 직접 창작한다는 점이 특별해요.
+  </p>
+
+  <div class="concept-grid fade-in">
+    <div class="concept-card">
+      <div class="card-emoji">✍️</div>
+      <div>
+        <div class="card-title" contenteditable="true" spellcheck="false">글을 쓰는 AI</div>
+        <div class="card-desc" contenteditable="true" spellcheck="false">시, 편지, 수필, 보고서 등 원하는 글을 뚝딱 써줍니다.<br>챗GPT(ChatGPT), 제미나이(Gemini)가 대표적이에요.</div>
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="card-emoji">🎨</div>
+      <div>
+        <div class="card-title" contenteditable="true" spellcheck="false">그림을 그리는 AI</div>
+        <div class="card-desc" contenteditable="true" spellcheck="false">말로 설명하면 상상하는 그림을 그려냅니다. 미드저니(Midjourney), 달리(DALL-E), 나노 바나나(Nano Banana)가 있어요.</div>
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="card-emoji">🎵</div>
+      <div>
+        <div class="card-title" contenteditable="true" spellcheck="false">노래를 만드는 AI</div>
+        <div class="card-desc" contenteditable="true" spellcheck="false">가사와 멜로디를 붙여 곡을 완성해 줍니다. 손주 생일 노래도 만들 수 있어요! 수노(Suno)가 대표적이에요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-2" onclick="if(!this.classList.contains('has-media'))document.getElementById('up2').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up2').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-2','disp2','생성형 AI 3가지 특징 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp2" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">생성형 AI의 3가지 능력 — 글쓰기, 그림그리기, 작곡을 보여주는 일러스트</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up2" style="display:none" onchange="loadMedia(this,'area-2','disp2')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌹</span></div>
+
+  <!-- ══ SECTION 03 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">03</div>
+    <h2 contenteditable="true" spellcheck="false">챗봇: 24시간 대기하는 나의 말동무</h2>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false">
+    <strong>챗봇(Chatbot)</strong>은 채팅(Chat)과 로봇(Robot)을 합친 말입니다. 카카오톡처럼 문자를 주고받는 방식으로 AI와 대화할 수 있어요. 새벽 3시에도 졸지 않고 답변해 준답니다!
+  </p>
+
+  <div class="ai-grid fade-in">
+    <div class="ai-item" data-num="01">
+      <span class="ai-item-emoji">💬</span>
+      <div class="ai-item-title" contenteditable="true" spellcheck="false">채팅(Chat)</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">카톡처럼 문자를 주고받는 것을 말해요. 질문하면 바로 답이 옵니다.</div>
+      <span class="ai-item-example">예: 챗GPT, 클로드</span>
+    </div>
+    <div class="ai-item" data-num="02">
+      <span class="ai-item-emoji">🤖</span>
+      <div class="ai-item-title" contenteditable="true" spellcheck="false">로봇(Robot)</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">프로그램으로 움직이는 똑똑한 기계 친구죠. 몸은 없지만 생각은 해요!</div>
+      <span class="ai-item-example">예: 24시간 무중단</span>
+    </div>
+  </div>
+
+  <!-- Photo grid -->
+  <div class="photo-grid fade-in">
+    <div class="photo-slot" id="ps1" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup1').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup1').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps1','pd1','💬')">🗑️</button></div>
+      <span id="pd1">💬</span><input type="file" accept="image/*" id="pup1" style="display:none" onchange="loadPhoto(this,'ps1','pd1')">
+    </div>
+    <div class="photo-slot" id="ps2" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup2').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup2').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps2','pd2','🤖')">🗑️</button></div>
+      <span id="pd2">🤖</span><input type="file" accept="image/*" id="pup2" style="display:none" onchange="loadPhoto(this,'ps2','pd2')">
+    </div>
+    <div class="photo-slot" id="ps3" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup3').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup3').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps3','pd3','📱')">🗑️</button></div>
+      <span id="pd3">📱</span><input type="file" accept="image/*" id="pup3" style="display:none" onchange="loadPhoto(this,'ps3','pd3')">
+    </div>
+    <div class="photo-slot" id="ps4" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup4').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup4').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps4','pd4','👴')">🗑️</button></div>
+      <span id="pd4">👴</span><input type="file" accept="image/*" id="pup4" style="display:none" onchange="loadPhoto(this,'ps4','pd4')">
+    </div>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-3" onclick="if(!this.classList.contains('has-media'))document.getElementById('up3').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up3').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-3','disp3','챗봇과의 대화 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp3" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">챗봇과 대화하는 시니어 — 스마트폰을 들고 웃는 할아버지 일러스트</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up3" style="display:none" onchange="loadMedia(this,'area-3','disp3')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌺</span></div>
+
+  <!-- ══ SECTION 04 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">04</div>
+    <h2 contenteditable="true" spellcheck="false">오늘의 유머: 프롬프트가 뭐길래</h2>
+  </div>
+
+  <div class="humor-card fade-in">
+    <div class="humor-tag">😄 오늘의 유머</div>
+    <div class="humor-title" contenteditable="true" spellcheck="false">김영감님의 첫 프롬프트 도전기 🥊</div>
+    <div class="humor-row"><span class="sp">할아버지:</span> "윤호야, 나 프롬프트 잘 썼지? <strong>'AI야, 밥 좀 차려줘'</strong>라고 했어."</div>
+    <div class="humor-row"><span class="sp">윤호:</span> "할아버지, 그건 AI가 아니라 로봇 청소기한테 시켜야 할 것 같은데요?"</div>
+    <div class="humor-row"><span class="sp">할아버지:</span> "로봇 청소기한테도 해봤는데... <strong>청소만 하고 밥은 안 해줘.</strong>"</div>
+    <div class="humor-row"><span class="sp">할머니:</span> "영감, 그냥 나한테 말해요. 내가 제일 좋은 AI야! 🤣"</div>
+    <div class="humor-punchline" style="text-align:center;"><b>최고의 AI는 늘 곁에 있었습니다 — 바로 할머니! 👵💪</b></div>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-4" onclick="if(!this.classList.contains('has-media'))document.getElementById('up4').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up4').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-4','disp4','시니어 유머 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp4" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">할아버지가 스마트폰 앞에서 당황한 모습 — 유머 관련 일러스트</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up4" style="display:none" onchange="loadMedia(this,'area-4','disp4')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌼</span></div>
+
+  <!-- ══ SECTION 05 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">05</div>
+    <h2 contenteditable="true" spellcheck="false">복습 퀴즈: 용어 왕 도전!</h2>
+  </div>
+
+  <div class="quiz-card fade-in">
+    <div class="quiz-header">
+      <span class="quiz-badge">🌸 QUIZ TIME</span>
+      <span class="quiz-title-text">오늘 배운 용어를 점검해요!</span>
+    </div>
+    <div class="quiz-q">
+      <span class="quiz-num">Q1</span>
+      <span class="quiz-text" contenteditable="true" spellcheck="false">AI에게 내리는 구체적인 지시나 주문을 무엇이라 할까요?</span>
+      <span class="quiz-hint">💡 힌트: ㅍㄹㅍㅌ (네 글자)</span>
+    </div>
+    <div class="quiz-q">
+      <span class="quiz-num">Q2</span>
+      <span class="quiz-text" contenteditable="true" spellcheck="false">글, 그림, 음악 등 새로운 콘텐츠를 만들어내는 AI를 무엇이라 할까요?</span>
+      <span class="quiz-hint">💡 힌트: 생성형 ○○</span>
+    </div>
+    <div class="quiz-q">
+      <span class="quiz-num">Q3</span>
+      <span class="quiz-text" contenteditable="true" spellcheck="false">'Chat'과 'Robot'의 합성어로, 문자 대화로 소통하는 AI를 무엇이라 할까요?</span>
+      <span class="quiz-hint">💡 힌트: ㅊㅂ (두 글자)</span>
+    </div>
+    <div class="quiz-cta">💬 댓글로 정답을 남겨주세요! 정답자께 응원의 댓글을 드립니다 😊</div>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-5" onclick="if(!this.classList.contains('has-media'))document.getElementById('up5').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up5').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-5','disp5','복습 퀴즈 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp5" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">퀴즈 시간 — 시니어가 메모하며 공부하는 모습</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up5" style="display:none" onchange="loadMedia(this,'area-5','disp5')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <!-- 중간 광고 D -->
+  <div class="ad-zone-wrap" id="ad-wrap-D">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▲ 광고 영역 D — 호버하면 나타납니다 ▲</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-D">
+        <span id="ad-content-D">
+          <span class="ad-box-label">광고 · D</span>
+          <span class="ad-box-desc">시니어를 위한 스마트폰 기초 강좌 — 쉽게 따라하는 AI 첫걸음</span>
+          <span class="ad-box-size">728×90</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-D').click(); event.stopPropagation();">📁 삽입</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-D" style="display:none">
+      </div>
+    </div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌻</span></div>
+
+  <!-- ══ SECTION 06 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">06</div>
+    <h2 contenteditable="true" spellcheck="false">사자성어 깊이 보기: 일취월장</h2>
+  </div>
+
+  <div class="idiom-deep fade-in">
+    <div class="idiom-deep-tag">오늘의 사자성어</div>
+    <div class="idiom-deep-title">日就月將 (일취월장)<br><span style="font-size:0.75em;opacity:0.75;">나날이 다달이 성장함</span></div>
+    <div class="char-row">
+      <div class="char-tile"><span class="char-hanja">日</span><span class="char-reading">일</span><span class="char-mean">날 일</span></div>
+      <div class="char-tile"><span class="char-hanja">就</span><span class="char-reading">취</span><span class="char-mean">나아갈 취</span></div>
+      <div class="char-tile"><span class="char-hanja">月</span><span class="char-reading">월</span><span class="char-mean">달 월</span></div>
+      <div class="char-tile"><span class="char-hanja">將</span><span class="char-reading">장</span><span class="char-mean">나아갈 장</span></div>
+    </div>
+    <div class="meaning-block">
+      <div class="meaning-label">📖 뜻 풀이</div>
+      <div class="meaning-text" contenteditable="true" spellcheck="false">하루하루(日就) 다달이(月將) 성장한다는 뜻으로, <strong>꾸준한 노력으로 실력이 날로 향상됨</strong>을 표현합니다.</div>
+    </div>
+    <div class="ai-apply">
+      <div class="ai-apply-title">🤖 AI와의 연결</div>
+      <div class="ai-apply-text" contenteditable="true" spellcheck="false">
+        매일 하나씩 새로운 AI 용어를 익히다 보면, 여러분의 디지털 실력은 반드시 <strong>일취월장</strong>하게 될 것입니다! 처음엔 낯설어도 꾸준히 하면 됩니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-6" onclick="if(!this.classList.contains('has-media'))document.getElementById('up6').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up6').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-6','disp6','일취월장 사자성어 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp6" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">일취월장 — 계단을 오르는 시니어 성장 일러스트</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up6" style="display:none" onchange="loadMedia(this,'area-6','disp6')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌹</span></div>
+
+  <!-- ══ SECTION 07 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">07</div>
+    <h2 contenteditable="true" spellcheck="false">공부하며 듣는 AI 노래</h2>
+  </div>
+
+  <div class="song-card fade-in">
+    <div class="song-header">
+      <div class="song-icon">🎵</div>
+      <div>
+        <div class="song-title-text" contenteditable="true" spellcheck="false">새로운 세상으로의 초대</div>
+        <div class="song-subtitle">시니어 AI 공부방 주제가 · Ep.04</div>
+      </div>
+    </div>
+    <div class="song-lyrics" contenteditable="true" spellcheck="false"><span class="song-section">&lt;Verse 1&gt;</span>
+처음엔 어렵고 낯설었지만
+한 걸음 한 걸음 따라가다 보니
+프롬프트도 배우고 챗봇도 알고
+세상이 새롭게 보이기 시작해
+
+<span class="song-section">&lt;Chorus&gt;</span>
+일취월장! 날마다 자라나
+우리가 함께라면 두렵지 않아
+AI라는 새 친구, 손 내밀어봐
+오늘도 한 걸음 더 나아가자
+
+<span class="song-section">&lt;Verse 2&gt;</span>
+손주가 말하던 그 용어들이
+이제는 내 입에서 자연스럽게
+프롬프트 한마디, 생성형 AI
+우리도 당당한 디지털 세대
+
+<span class="song-section">&lt;Bridge / Outro&gt;</span>
+배움에는 나이가 없다 했지
+오늘도 내일도 함께 배워요
+시니어 AI 공부방, 여기 있어요
+언제나 당신 곁에, 함께해요 ♪</div>
+
+    <!-- Audio player -->
+    <div class="audio-box" id="audioBox">
+      <div style="display:flex;align-items:center;gap:14px;width:100%;">
+        <button class="play-btn" id="playBtn" onclick="togglePlay()" title="재생 / 일시정지">
+          <div class="play-icon" id="playIcon"></div>
+        </button>
+        <div class="progress-wrap">
+          <div class="progress-track" id="progTrack" onclick="seekAudio(event)" style="position:relative;">
+            <div class="progress-fill" id="progFill"></div>
+            <div id="progMarker" style="position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid var(--forest-light);cursor:pointer;transition:left 0.1s;display:none;" onclick="seekAudio(event)"></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;margin-top:6px;">
+            <span class="time-text" id="timeDisp">0:00 / 0:00</span>
+            <span class="time-text" id="pctDisp" style="color:rgba(255,255,255,0.5);">0%</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:160px;">
+          <span style="font-size:20px;" id="volIcon">🔊</span>
+          <input type="range" id="volSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)"
+            style="flex:1;height:6px;accent-color:#52B788;cursor:pointer;">
+          <span id="volPct" style="font-size:16px;color:rgba(255,255,255,0.6);min-width:40px;font-weight:700;text-align:right;">100%</span>
+        </div>
+        <button id="loopBtn" onclick="toggleLoop()"
+          style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:9px 18px;font-size:16px;font-weight:700;color:rgba(255,255,255,0.65);cursor:pointer;font-family:inherit;transition:all 0.2s;white-space:nowrap;">
+          🔁 반복: OFF
+        </button>
+        <button class="upload-audio-btn" onclick="document.getElementById('audioInp').click()">🎵 오디오 업로드</button>
+      </div>
+      <div class="audio-filename" id="audioName"></div>
+    </div>
+    <input type="file" accept="audio/*,video/*" id="audioInp" style="display:none" onchange="loadAudio(this)">
+    <audio id="audioEl" ontimeupdate="updateProgress()" onended="onAudioEnded()"></audio>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-7" onclick="if(!this.classList.contains('has-media'))document.getElementById('up7').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up7').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-7','disp7','노래 관련 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp7" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">음악을 들으며 공부하는 시니어 — 노래와 AI를 함께 즐기는 일러스트</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up7" style="display:none" onchange="loadMedia(this,'area-7','disp7')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌺</span></div>
+
+  <!-- ══ SECTION 08 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">08</div>
+    <h2 contenteditable="true" spellcheck="false">헷갈리는 맞춤법 바로잡기</h2>
+  </div>
+
+  <div class="grammar-card fade-in">
+    <div class="grammar-title-text">🌸 한국인이 자주 틀리는 맞춤법</div>
+    <div class="grammar-item">
+      <div class="grammar-rule" contenteditable="true" spellcheck="false">1. '돼' vs '되' — 가장 많이 혼동하는 표현</div>
+      <div class="grammar-ex" contenteditable="true" spellcheck="false">
+        ✅ 그렇게 하면 <span class="ok">안 돼요</span>. — '돼'는 '되어'의 줄임말<br>
+        ✅ 이렇게 하면 <span class="ok">되나요</span>? — '되'는 단독으로 쓰일 때<br>
+        ❌ 그렇게 하면 <span class="no">안 되요</span>. / 왜 그렇게 <span class="no">됬어요</span>?
+      </div>
+    </div>
+    <div class="grammar-item">
+      <div class="grammar-rule" contenteditable="true" spellcheck="false">2. '~든지' vs '~던지' — 선택이냐 회상이냐</div>
+      <div class="grammar-ex" contenteditable="true" spellcheck="false">
+        ✅ 뭐<span class="key">든지</span> 물어보세요. — '이것이든 저것이든' 선택·나열할 때<br>
+        ✅ 얼마나 힘들<span class="key">던지</span> 눈물이 났어요. — 과거 경험을 회상할 때<br>
+        ❌ 뭐<span class="no">던지</span> 다 해드릴게요. — 선택인데 회상형 사용
+      </div>
+    </div>
+    <div class="grammar-item">
+      <div class="grammar-rule" contenteditable="true" spellcheck="false">3. '~로서' vs '~로써' — 자격이냐 수단이냐</div>
+      <div class="grammar-ex" contenteditable="true" spellcheck="false">
+        ✅ 부모<span class="key">로서</span> 책임을 다해야 해요. — 자격·신분을 나타낼 때<br>
+        ✅ 말<span class="key">로써</span> 해결할 수 있어요. — 수단·도구를 나타낼 때<br>
+        ❌ 선생님<span class="no">으로써</span> 해야 할 일이에요. — 자격인데 수단형 사용
+      </div>
+    </div>
+  </div>
+
+  <!-- 맞춤법 검사기 -->
+  <div class="speller-box fade-in">
+    <div class="speller-badge">한국어 맞춤법 / 문법 검사</div>
+    <div class="speller-title">부산대 맞춤법 / 문법 검사기</div>
+    <div class="speller-desc">글을 저장하거나 발행하기 전, 아래 검사기에서 맞춤법을 꼭 확인하세요!</div>
+    <a class="speller-btn" href="https://nara-speller.co.kr/old_speller/" target="_blank" rel="noopener">🌐 맞춤법 검사기 열기 →</a>
+    <div class="speller-warn">⚠️ 저장 / 발행 전에 반드시 이곳에서 맞춤법을 확인하세요!</div>
+  </div>
+
+  <div class="dad-note fade-in">
+    <p class="body-text" contenteditable="true" spellcheck="false" style="margin:0;"><b>※ 윤호 아빠의 한마디:</b> 글을 쓰신 뒤에 맞춤법과 띄어쓰기를 한 번만 더 살펴보시면, 글이 훨씬 읽기 쉽고 정갈해집니다. 작은 확인이 더 좋은 소통을 만들어 줍니다.</p>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-8" onclick="if(!this.classList.contains('has-media'))document.getElementById('up8').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up8').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-8','disp8','맞춤법 관련 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp8" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">맞춤법 / 한글 공부 관련 이미지</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up8" style="display:none" onchange="loadMedia(this,'area-8','disp8')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌼</span></div>
+
+  <!-- ══ SECTION 09 ══ -->
+  <div class="sec-heading fade-in">
+    <div class="sec-num">09</div>
+    <h2 contenteditable="true" spellcheck="false">핵심 용어 총정리</h2>
+  </div>
+
+  <div class="summary-card fade-in">
+    <div class="summary-header">
+      <div class="summary-badge">오늘의 정리</div>
+      <div class="summary-h-title">📚 AI 기초 용어 3가지<br>이것만 알면 충분해요!</div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-num">①</div>
+      <div>
+        <div class="sum-title" contenteditable="true" spellcheck="false">프롬프트 (Prompt)</div>
+        <div class="sum-text" contenteditable="true" spellcheck="false">AI에게 건네는 구체적인 지시나 질문입니다. 식당 주문처럼 <strong>구체적일수록</strong> 더 좋은 답변을 받을 수 있어요.</div>
+      </div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-num">②</div>
+      <div>
+        <div class="sum-title" contenteditable="true" spellcheck="false">생성형 AI (Generative AI)</div>
+        <div class="sum-text" contenteditable="true" spellcheck="false">글·그림·음악 등을 <strong>새롭게 만들어내는</strong> AI입니다. 챗GPT, DALL-E, Suno가 대표 사례예요.</div>
+      </div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-num">③</div>
+      <div>
+        <div class="sum-title" contenteditable="true" spellcheck="false">챗봇 (Chatbot)</div>
+        <div class="sum-text" contenteditable="true" spellcheck="false">채팅(Chat)과 로봇(Robot)의 합성어. <strong>24시간 언제든지</strong> 문자 대화로 질문에 답해주는 AI 친구입니다.</div>
+      </div>
+    </div>
+    <div class="summary-outro">🎉 오늘도 함께 배워주셔서 감사합니다! 다음 Ep.05에서 만나요 😊</div>
+  </div>
+
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-9" onclick="if(!this.classList.contains('has-media'))document.getElementById('up9').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up9').click()">🔄 교체</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-9','disp9','마무리 이미지')">🗑️ 삭제</button>
+      </div>
+      <div id="disp9" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">클릭하여 이미지 / 동영상 삽입</span>
+        <span class="slot-hint">가족이 함께 웃는 마무리 — 시니어와 손주의 따뜻한 장면</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up9" style="display:none" onchange="loadMedia(this,'area-9','disp9')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: ← 클릭하여 출처를 직접 입력하세요</em></div>
+  </div>
+
+  <!-- Keywords -->
+  <div class="keyword-wrap fade-in">
+    <div class="keyword-label">🔍 검색 키워드</div>
+    <div class="keyword-cloud">
+      <a class="keyword-tag" href="https://www.google.com/search?q=프롬프트란" target="_blank">프롬프트란</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=생성형AI란" target="_blank">생성형 AI란</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=챗봇이란" target="_blank">챗봇이란</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=챗GPT사용법" target="_blank">챗GPT 사용법</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=시니어AI교육" target="_blank">시니어 AI 교육</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=AI기초용어" target="_blank">AI 기초 용어</a>
+    </div>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false" style="text-align:center;font-size:var(--base-fs);color:var(--ink-light);padding-bottom:8px;">
+    오늘 배운 용어 중 가장 기억에 남는 것을 댓글로 알려주세요! 📝<br>
+    여러분의 참여가 더 좋은 콘텐츠를 만드는 힘이 됩니다 🙏
+  </p>
+
+</div><!-- /page-wrap -->
+</main>
+
+<!-- ══ 하단 광고 영역 3개 ══ -->
+<div class="ad-bottom-section">
+  <div class="ad-zone-wrap" id="ad-wrap-A">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▼ 광고 영역 A — 호버하면 나타납니다 ▼</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-A">
+        <span id="ad-content-A">
+          <span class="ad-box-label">광고 · A</span>
+          <span class="ad-box-desc">클릭하면 PC에서 광고 이미지/영상을 선택할 수 있습니다. 삽입 후 영구 유지.</span>
+          <span class="ad-box-size">728×90 Leaderboard</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-A').click(); event.stopPropagation();">📁 삽입</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-A" style="display:none">
+      </div>
+    </div>
+  </div>
+  <div class="ad-zone-wrap" id="ad-wrap-B">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▼ 광고 영역 B — 호버하면 나타납니다 ▼</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-B">
+        <span id="ad-content-B">
+          <span class="ad-box-label">광고 · B</span>
+          <span class="ad-box-desc">클릭하면 PC에서 광고 이미지/영상을 선택할 수 있습니다. 삽입 후 영구 유지.</span>
+          <span class="ad-box-size">300×250 Rectangle</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-B').click(); event.stopPropagation();">📁 삽입</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-B" style="display:none">
+      </div>
+    </div>
+  </div>
+  <div class="ad-zone-wrap" id="ad-wrap-C">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▼ 광고 영역 C — 호버하면 나타납니다 ▼</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-C">
+        <span id="ad-content-C">
+          <span class="ad-box-label">광고 · C</span>
+          <span class="ad-box-desc">클릭하면 PC에서 광고 이미지/영상을 선택할 수 있습니다. 삽입 후 영구 유지.</span>
+          <span class="ad-box-size">468×60 Banner</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-C').click(); event.stopPropagation();">📁 삽입</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-C" style="display:none">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="blog-footer">
+  <div class="footer-inner">
+    <div class="footer-series">시니어 AI 공부방</div>
+    <div class="footer-title-text" contenteditable="true" spellcheck="false">🌱 "함께 배우면 두렵지 않아요" 🌱</div>
+    <div class="footer-desc" contenteditable="true" spellcheck="false">
+      5060 시니어를 위한 AI 기초 교육 블로그<br>
+      매주 새로운 에피소드로 찾아옵니다
+    </div>
+    <div class="footer-cr">© 2026 Senior AI Study Room | All rights reserved</div>
+  </div>
+</footer>
+
+<!-- TEMPLATE GUIDE PANEL -->
+<div id="tpl-guide">
+  <button id="tpl-guide-close" onclick="document.getElementById('tpl-guide').classList.add('hidden');document.getElementById('tpl-guide-toggle').classList.add('show');" title="닫기">×</button>
+  <div id="tpl-guide-title">📋 Ep.04 편집 가이드</div>
+  <ul>
+    <li><strong>텍스트</strong> 클릭 → 바로 편집 가능</li>
+    <li><strong>이미지BOX</strong> 클릭 → PC에서 삽입</li>
+    <li><strong>광고BOX</strong> hover → 클릭 → 삽입</li>
+    <li><strong>🎵 오디오 업로드</strong> → 노래 삽입</li>
+    <li>교체/삭제 버튼으로 미디어 관리</li>
+    <li>이미지는 <strong>자동 저장</strong>됩니다 💾</li>
+  </ul>
+</div>
+<button id="tpl-guide-toggle" onclick="document.getElementById('tpl-guide').classList.remove('hidden');this.classList.remove('show');" title="가이드 보기">📋</button>
+
+<script>
+/* ── Reading progress bar ── */
+window.addEventListener('scroll', function() {
+  var d = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('reading-bar').style.width = (d > 0 ? (window.scrollY / d) * 100 : 0) + '%';
+});
+
+/* ── Fade-in on scroll ── */
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(function(el){ obs.observe(el); });
+
+/* ── Media (image/video) upload — 자동 localStorage 저장 ── */
+function loadMedia(input, areaId, dispId) {
+  var f = input.files[0]; if (!f) return;
+  var area = document.getElementById(areaId);
+  var disp = document.getElementById(dispId);
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var src = ev.target.result;
+    var type = f.type.startsWith('video/') ? 'video' : 'image';
+    try {
+      localStorage.setItem('media-ep04-' + areaId, JSON.stringify({src: src, type: type}));
+      showSaveToast('💾 이미지가 자동 저장되었습니다');
+    } catch(e) {
+      showSaveToast('⚠️ 저장 실패: 파일이 너무 큽니다 (5MB 이하 권장)');
+    }
+    renderMediaSlot(area, disp, src, type);
+  };
+  reader.readAsDataURL(f);
+  input.value = '';
+}
+
+function renderMediaSlot(area, disp, src, type) {
+  var el = type === 'video' ? document.createElement('video') : document.createElement('img');
+  if (type === 'video') { el.controls = true; el.autoplay = false; }
+  el.src = src;
+  el.style.cssText = 'width:100%;height:auto;display:block;';
+  disp.innerHTML = ''; disp.appendChild(el); disp.style.padding = '0';
+  area.classList.add('has-media');
+}
+
+function clearSlot(areaId, dispId, hint) {
+  var area = document.getElementById(areaId);
+  var disp = document.getElementById(dispId);
+  disp.innerHTML = '<span class="slot-icon">🖼️</span><span class="slot-label">클릭하여 이미지 / 동영상 삽입</span><span class="slot-hint">' + (hint||'') + '</span>';
+  disp.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;';
+  area.classList.remove('has-media');
+  localStorage.removeItem('media-ep04-' + areaId);
+  showSaveToast('🗑️ 이미지가 삭제되었습니다');
+}
+
+/* ── 저장 알림 토스트 ── */
+function showSaveToast(msg) {
+  var t = document.getElementById('save-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'save-toast';
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1A4731;color:#FAF7F2;padding:12px 28px;border-radius:100px;font-size:15px;font-weight:700;font-family:\'Noto Sans KR\',sans-serif;z-index:99999;opacity:0;transition:opacity 0.3s,transform 0.3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,0.25);white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function(){ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; }, 2500);
+}
+
+/* ── Photo slots ── */
+function loadPhoto(input, slotId, dispId) {
+  var f = input.files[0]; if (!f) return;
+  var slot = document.getElementById(slotId);
+  var disp = document.getElementById(dispId);
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var img = document.createElement('img');
+    img.src = ev.target.result;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;border-radius:12px;';
+    disp.innerHTML = ''; disp.appendChild(img);
+    slot.classList.add('has-media');
+  };
+  reader.readAsDataURL(f);
+  input.value = '';
+}
+function clearPhoto(slotId, dispId, icon) {
+  document.getElementById(slotId).classList.remove('has-media');
+  document.getElementById(dispId).innerHTML = icon || '🖼️';
+}
+
+/* ── Audio player ── */
+var isLooping = false;
+function loadAudio(input) {
+  var f = input.files[0]; if (!f) return;
+  if (f.type.startsWith('video/')) {
+    var songCard = document.querySelector('.song-card');
+    var audioBox = document.getElementById('audioBox');
+    var url = URL.createObjectURL(f);
+    var vid = document.createElement('video');
+    vid.src = url; vid.controls = true; vid.loop = isLooping;
+    vid.style.cssText = 'width:100%;border-radius:14px;display:block;margin-top:16px;background:#000;';
+    vid.id = 'videoEl';
+    var wrap = document.createElement('div');
+    wrap.id = 'videoWrap';
+    wrap.style.cssText = 'position:relative;margin-top:16px;';
+    var bar = document.createElement('div');
+    bar.style.cssText = 'position:absolute;top:8px;right:8px;display:none;gap:6px;z-index:10;';
+    bar.id = 'vidOverlay';
+    var replBtn = document.createElement('button');
+    replBtn.textContent = '🔄 교체';
+    replBtn.style.cssText = 'background:rgba(0,0,0,0.72);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;font-weight:700;font-family:inherit;';
+    replBtn.onclick = function(){ document.getElementById('audioInp').click(); };
+    var delBtn = document.createElement('button');
+    delBtn.textContent = '🗑️ 삭제';
+    delBtn.style.cssText = 'background:rgba(0,0,0,0.72);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;font-weight:700;font-family:inherit;';
+    delBtn.onclick = function(){
+      wrap.remove();
+      audioBox.style.display = 'flex';
+      document.getElementById('audioEl').src = '';
+      document.getElementById('audioName').textContent = '';
+    };
+    bar.appendChild(replBtn); bar.appendChild(delBtn);
+    wrap.addEventListener('mouseenter', function(){ bar.style.display='flex'; });
+    wrap.addEventListener('mouseleave', function(){ bar.style.display='none'; });
+    wrap.appendChild(vid); wrap.appendChild(bar);
+    var existing = document.getElementById('videoWrap');
+    if (existing) existing.remove();
+    audioBox.style.display = 'none';
+    songCard.insertBefore(wrap, audioBox.nextSibling);
+    document.getElementById('audioName').textContent = '🎬 ' + f.name;
+  } else {
+    var existing2 = document.getElementById('videoWrap');
+    if (existing2) existing2.remove();
+    document.getElementById('audioBox').style.display = 'flex';
+    var a = document.getElementById('audioEl');
+    a.src = URL.createObjectURL(f); a.loop = isLooping; a.load();
+    var marker = document.getElementById('progMarker');
+    if (marker){ marker.style.left='0%'; marker.style.display='none'; }
+    document.getElementById('progFill').style.width = '0%';
+    document.getElementById('pctDisp').textContent = '0%';
+    document.getElementById('timeDisp').textContent = '0:00 / 0:00';
+    document.getElementById('audioName').textContent = '✅ ' + f.name;
+  }
+}
+function togglePlay() {
+  var a = document.getElementById('audioEl');
+  if (!a.src || a.src === window.location.href) { alert('먼저 오디오 파일을 업로드해 주세요!'); return; }
+  if (a.paused) {
+    a.play();
+    document.getElementById('playIcon').outerHTML = '<div id="playIcon" class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+  } else {
+    a.pause();
+    document.getElementById('playIcon').outerHTML = '<div id="playIcon" class="play-icon"></div>';
+  }
+}
+function onAudioEnded() {
+  document.getElementById('playIcon').outerHTML = '<div id="playIcon" class="play-icon"></div>';
+}
+function toggleLoop() {
+  var a = document.getElementById('audioEl');
+  isLooping = !isLooping; a.loop = isLooping;
+  var btn = document.getElementById('loopBtn');
+  if (isLooping) { btn.textContent='🔁 반복: ON'; btn.style.cssText += ';background:rgba(82,183,136,0.3);color:#A7F3D0;border-color:rgba(82,183,136,0.6);'; }
+  else           { btn.textContent='🔁 반복: OFF'; btn.style.cssText += ';background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.25);'; }
+}
+function setVolume(val) {
+  document.getElementById('audioEl').volume = val;
+  document.getElementById('volPct').textContent = Math.round(val*100) + '%';
+  var v = parseFloat(val);
+  document.getElementById('volIcon').textContent = v===0 ? '🔇' : v<0.4 ? '🔈' : v<0.7 ? '🔉' : '🔊';
+}
+function updateProgress() {
+  var a = document.getElementById('audioEl');
+  var pct = a.duration ? (a.currentTime/a.duration)*100 : 0;
+  document.getElementById('progFill').style.width = pct + '%';
+  var marker = document.getElementById('progMarker');
+  if (marker){ marker.style.left = pct + '%'; marker.style.display = 'block'; }
+  function fmt(s){ if(isNaN(s))return'0:00'; return Math.floor(s/60)+':'+(Math.floor(s%60)<10?'0':'')+Math.floor(s%60); }
+  document.getElementById('timeDisp').textContent = fmt(a.currentTime)+' / '+fmt(a.duration);
+  document.getElementById('pctDisp').textContent = Math.round(pct) + '%';
+}
+function seekAudio(ev) {
+  var a = document.getElementById('audioEl');
+  if (!a.src || a.src===window.location.href) return;
+  var track = document.getElementById('progTrack');
+  var rect = track.getBoundingClientRect();
+  var ratio = Math.max(0, Math.min(1, (ev.clientX-rect.left)/rect.width));
+  a.currentTime = a.duration * ratio;
+}
+
+/* ═══ 광고 미디어 로드 + LocalStorage 영구 저장 ═══ */
+var adSlots = ['1', '2', 'A', 'B', 'C', 'D'];
+
+window.addEventListener('DOMContentLoaded', function() {
+  /* 광고 복원 */
+  adSlots.forEach(function(id) {
+    var saved = localStorage.getItem('ad-ep04-' + id);
+    if (saved) {
+      try { var data = JSON.parse(saved); restoreAd(id, data.src, data.type); }
+      catch(e) { console.error('Failed to restore ad-' + id, e); }
+    }
+  });
+  adSlots.forEach(function(id) {
+    var inp = document.getElementById('ad-inp-' + id);
+    if (inp) { inp.addEventListener('change', function() { loadAdMedia(this, id); }); }
+  });
+
+  /* 이미지 슬롯 복원 */
+  ['area-1','area-2','area-3','area-4','area-5','area-6','area-7','area-8','area-9'].forEach(function(areaId) {
+    var saved = localStorage.getItem('media-ep04-' + areaId);
+    if (!saved) return;
+    try {
+      var data = JSON.parse(saved);
+      var num = areaId.replace('area-','');
+      var area = document.getElementById(areaId);
+      var disp = document.getElementById('disp' + num);
+      if (area && disp) renderMediaSlot(area, disp, data.src, data.type);
+    } catch(e) { console.error('미디어 복원 실패:', areaId, e); }
+  });
+});
+
+function loadAdMedia(input, adId) {
+  var f = input.files[0]; if (!f) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var src = ev.target.result;
+    var type = f.type.startsWith('video/') ? 'video' : 'image';
+    try {
+      localStorage.setItem('ad-ep04-' + adId, JSON.stringify({src: src, type: type}));
+    } catch(e) {
+      alert('광고 저장 실패: 파일 크기가 너무 큽니다. (5MB 이하 권장)'); return;
+    }
+    renderAd(adId, src, type);
+  };
+  reader.readAsDataURL(f);
+  input.value = '';
+}
+
+function renderAd(adId, src, type) {
+  var wrap = document.getElementById('ad-wrap-' + adId);
+  var box  = document.getElementById('adbox-' + adId);
+  if (!wrap || !box) return;
+  box.style.cssText = 'padding:0;border:none;background:#000;border-radius:13px;overflow:hidden;min-height:unset;display:block;position:relative;cursor:default;';
+  box.innerHTML = '';
+  wrap.classList.add('ad-permanent');
+  var mediaEl;
+  if (type === 'video') {
+    mediaEl = document.createElement('video');
+    mediaEl.controls = true; mediaEl.autoplay = false;
+    mediaEl.style.cssText = 'width:100%;display:block;border-radius:13px;';
+  } else {
+    mediaEl = document.createElement('img');
+    mediaEl.style.cssText = 'width:100%;height:auto;display:block;border-radius:13px;';
+  }
+  mediaEl.src = src;
+  box.appendChild(mediaEl);
+  var menu = document.createElement('div');
+  menu.className = 'ad-menu-after';
+  var replBtn = document.createElement('button');
+  replBtn.innerHTML = '🔄 교체';
+  replBtn.onclick = function(e){ e.stopPropagation(); document.getElementById('ad-inp-' + adId).click(); };
+  var delBtn = document.createElement('button');
+  delBtn.innerHTML = '🗑️ 삭제';
+  delBtn.onclick = function(e){ e.stopPropagation(); deleteAd(adId); };
+  menu.appendChild(replBtn); menu.appendChild(delBtn);
+  box.appendChild(menu);
+}
+
+function restoreAd(adId, src, type) { renderAd(adId, src, type); }
+
+function deleteAd(adId) {
+  localStorage.removeItem('ad-ep04-' + adId);
+  var wrap = document.getElementById('ad-wrap-' + adId);
+  var box  = document.getElementById('adbox-' + adId);
+  if (!wrap || !box) return;
+  wrap.classList.remove('ad-permanent');
+  box.style.cssText = '';
+  box.innerHTML = '<span id="ad-content-' + adId + '"><span class="ad-box-label">광고 · ' + adId + '</span><span class="ad-box-desc">클릭하면 PC에서 광고 이미지/영상을 선택할 수 있습니다.</span></span><div class="ad-menu-before"><button onclick="document.getElementById(\'ad-inp-' + adId + '\').click();event.stopPropagation();">📁 삽입</button></div><input type="file" accept="image/*,video/*" id="ad-inp-' + adId + '" style="display:none">';
+  var newInp = document.getElementById('ad-inp-' + adId);
+  if (newInp) newInp.addEventListener('change', function() { loadAdMedia(this, adId); });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+# IssueLens Shorts 제작 완전 가이드
+
+## 📋 전체 워크플로우 (5단계)
+
+```
+① TTS 생성 + BGM 생성 (병렬)
+        ↓
+② TTS 오디오로 캡션 타임스탬프 추출
+        ↓
+③ 타임스탬프 → 씬 경계 계산 + 캡션 화면 설계
+        ↓
+④ Remotion 커스텀 코드로 영상 합성
+        ↓
+⑤ 완성 MP4 다운로드
+```
+
+---
+
+## 🛠️ 사용 앱/툴 목록
+
+### 1단계 — TTS (음성 합성)
+| 항목 | 값 |
+|---|---|
+| **툴 이름** | `execute_tool` (tool_name: `"generate"`) |
+| **모델 ID** | `elevenlabs-multilingual-v2-tts` |
+| **보이스 ID** | `U1cJYS4EdbaHmfR7YzHd` (Min ho — Korean male) |
+| **출력 파일** | `.mp3` (mono, 44100Hz) |
+
+**파라미터 (고정값):**
+```json
+{
+  "modelId": "elevenlabs-multilingual-v2-tts",
+  "voice_id": "U1cJYS4EdbaHmfR7YzHd",
+  "speed": 1.17,
+  "stability": 0.5,
+  "similarityBoost": 0.75,
+  "style": 0.1,
+  "useSpeakerBoost": true,
+  "language_code": "ko",
+  "text": "여기에 나레이션 전문 입력"
+}
+```
+
+---
+
+### 1단계 — BGM (배경음악) — TTS와 동시 실행
+| 항목 | 값 |
+|---|---|
+| **툴 이름** | `execute_tool` (tool_name: `"generate"`) |
+| **모델 ID** | `lyria3-pro` |
+| **출력 파일** | `.mp3` (stereo, 44100Hz, ~57~72초) |
+
+**파라미터:**
+```json
+{
+  "modelId": "lyria3-pro",
+  "prompt": "Investigative documentary background music, tense and urgent, dark orchestral strings, low brass, pulsing electronic beats, Korean news investigative feel, no vocals, cinematic suspense, 60 seconds"
+}
+```
+> ⚠️ BGM 프롬프트는 편마다 분위기에 맞게 변경 (investigative / dark spy / moral urgency / empowering 등)
+
+---
+
+### 2단계 — 캡션 타임스탬프 추출
+| 항목 | 값 |
+|---|---|
+| **툴 이름** | `generate_captions` |
+| **입력** | TTS `.mp3` URL |
+| **출력** | 단어별 `{text, start(ms), end(ms)}` 배열 |
+| **서비스** | AssemblyAI (자동) |
+| **언어** | 한국어 자동 감지 |
+
+```json
+{
+  "audio_url": "https://static.galaxy.ai/.../tts.mp3",
+  "duration_hint_seconds": 45
+}
+```
+
+> ⚠️ **AssemblyAI 오인식 주의 패턴:**
+> - "알리테무" → "알리·테무"로 수동 수정
+> - "테무" → "태무" 또는 "테문" 으로 오인식
+> - "쉬인" → "시인", "쉬인의" 오인식
+> - 화살표(→) 포함 문장 오인식
+> - 숫자+단위 ("321개") 오인식 주의
+
+---
+
+### 3단계 — 씬 경계 계산 (수동 계산)
+
+각 씬 나레이션의 **마지막 단어 end_ms**와 **다음 씬 첫 단어 start_ms** 사이 중간값으로 결정:
+
+```
+씬 경계 ms = (현재 씬 마지막 단어 end_ms + 다음 씬 첫 단어 start_ms) / 2
+씬 경계 frame = 씬 경계 ms / 1000 × 30
+```
+
+**예시 (2편 기준):**
+```
+s1 끝: "아십니까?" → end: 8271ms
+s2 시작: "한국" → start: 9091ms
+→ 씬 경계: (8271+9091)/2 ≈ 8680ms → 8680/1000×30 = 260프레임 → 264로 반올림
+```
+
+---
+
+### 4단계 — 영상 합성
+| 항목 | 값 |
+|---|---|
+| **툴 이름** | `compose_video` |
+| **모드** | 커스텀 코드 (`code` + `durationInFrames`) |
+| **해상도** | 1080 × 1920 (9:16) |
+| **FPS** | 30 |
+| **언어** | TypeScript + React (TSX) |
+
+**레이아웃 고정 상수:**
+```ts
+const HEADER_H = 440;  // 헤더 높이 (전체 1920px의 23%)
+const BODY_H   = 1020; // 바디 높이 (전체 1920px의 53%)
+const FOOTER_H = 460;  // 푸터 높이 (전체 1920px의 24%)
+```
+
+**색상 팔레트:**
+```ts
+const RED  = '#CC0000';
+const DRED = '#A80000';  // 그라디언트용 진한 빨강
+const NAVY = '#0D1326';  // 바디 배경
+const YEL  = '#FFD700';  // 강조 텍스트
+const WHT  = '#FFFFFF';
+```
+
+---
+
+## 📐 Remotion 코드 핵심 구조
+
+```tsx
+// ① 한국어 폰트 로딩 (렌더링 전 blocking)
+const _fh = delayRender('noto-kr');
+if (typeof document !== 'undefined') {
+  const lnk = document.createElement('link');
+  lnk.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap';
+  document.head.appendChild(lnk);
+  document.fonts.ready.then(() => continueRender(_fh));
+} else { continueRender(_fh); }
+
+// ② 씬 경계 정의
+const SC = {
+  s1:{a:0, z:264}, s2:{a:264, z:597}, ...
+};
+
+// ③ 씬별 바디 콘텐츠
+const SCENES = [
+  {tag:'HOOK', l1:'텍스트', c1:YEL, l2:'텍스트', c2:WHT, l3:'텍스트', c3:WHT, sub:'소제목'},
+  ...
+];
+
+// ④ 캡션 화면 배열 (한 화면 = 한 문장)
+const CAP_SCREENS = [
+  {t:'자막 텍스트', s:시작ms, e:종료ms},
+  ...
+];
+
+// ⑤ 캡션 조회 (150ms 선행)
+const CAP_OFFSET_MS = 150;
+const getCap = (frame) => {
+  const ms = (frame / FPS) * 1000 + CAP_OFFSET_MS;
+  return CAP_SCREENS.find(cs => ms >= cs.s && ms <= cs.e)?.t ?? '';
+};
+
+// ⑥ React.memo로 헤더/푸터 고정 (깜빡임 방지)
+const CardHeader = React.memo(() => ( ... ));
+const CardFooter = React.memo(() => ( ... ));
+
+// ⑦ 바디 슬라이드업 애니메이션
+const anim = (delay) => ({
+  opacity: interpolate(lf, [delay, delay+12], [0,1], {clamp}),
+  transform: `translateY(${interpolate(lf, [delay, delay+12], [32,0], {clamp})}px)`,
+});
+
+// ⑧ BGM 볼륨 (HOOK 무음 → fade in → 18% → fade out)
+const bgmVol = interpolate(frame,
+  [0, s1.z-1, s1.z+46, totalFrames-60, totalFrames],
+  [0, 0,      0.18,    0.18,           0]);
+```
+
+---
+
+## 📁 파일 유형 및 URL 패턴
+
+| 파일 | 형식 | 저장 위치 | 사용처 |
+|---|---|---|---|
+| TTS 오디오 | `.mp3` (mono) | `https://static.galaxy.ai/user_.../xxx.mp3` | `<Audio src={TTS} volume={1} />` |
+| BGM 오디오 | `.mp3` (stereo) | `https://static.galaxy.ai/user_.../xxx.mp3` | `<Audio src={BGM} volume={bgmVol} loop />` |
+| 완성 영상 | `.mp4` (H.264) | `https://galaxy-prod.tlcdn.com/gen/user_.../xxx.mp4` | 최종 다운로드 |
+
+---
+
+## 🗂️ 바디 콘텐츠 고정 좌표
+
+```
+body y=72   → 씬 태그 (32px, RED, letterSpacing:6)
+body y=182  → Line 1 (108px, fontWeight:900)
+body y=302  → Line 2 (108px, fontWeight:900)
+body y=422  → Line 3 (88px or 72px, fontWeight:900)
+body y=542  → 구분선 (height:2px, 투명도 18%)
+body y=565  → 서브 텍스트 (36px, opacity:0.6)
+```
+
+---
+
+## ✅ 편당 체크리스트
+
+```
+□ 나레이션 전문 작성 완료
+□ 상단 바 문구 확정 (헤더 2~3줄)
+□ 하단 바 문구 확정 (푸터 2줄)
+□ 씬별 바디 텍스트 3줄 + 서브 텍스트 확정
+
+□ TTS 생성 (execute_tool, elevenlabs-multilingual-v2-tts)
+□ BGM 생성 (execute_tool, lyria3-pro) ← TTS와 동시 실행
+□ 캡션 추출 (generate_captions, audio_url=TTS_URL)
+
+□ AssemblyAI 오인식 수정 (알리테무→알리·테무 등)
+□ 씬 경계 frame 계산 (나레이션 gap 기준)
+□ CAP_SCREENS 설계 (한 문장 = 한 화면, 13음절 초과 시 분리)
+
+□ compose_video 실행
+  - code: TSX 전문
+  - durationInFrames: (TTS 총 초 + ~8초 패딩) × 30
+  - fps: 30, width: 1080, height: 1920
+
+□ 완성 MP4 링크 확인
+```
+
+---
+
+## ⚡ 팁 & 주의사항
+
+| 항목 | 내용 |
+|---|---|
+| **병렬 실행** | TTS + BGM은 반드시 동시에 실행 (시간 절약) |
+| **BGM 볼륨** | HOOK 씬 = 0, 이후 = 18%, 종료 60프레임 전부터 fade out |
+| **자막 선행** | `CAP_OFFSET_MS = 150` 고정 (오디오 대비 150ms 먼저 표시) |
+| **헤더 깜빡임** | `React.memo` + `willChange:'transform'` 필수 |
+| **총 프레임** | `(TTS 초 + 8~10초 패딩) × 30` 으로 설정 |
+| **캡션 폰트** | `whiteSpace:'nowrap'` 필수 (줄바꿈 방지) |
+| **오타 수정** | AssemblyAI 타임스탬프는 그대로 쓰고, `t:` 텍스트만 수정 |

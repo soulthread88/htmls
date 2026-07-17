@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>IssueLens EP.01 | 알리·테무 해외직구 개인정보 유출 실태 — 초저가 앱의 숨겨진 진실</title>
+<meta name="description" content="알리익스프레스·테무·미니소 초저가 직구 앱이 내 개인정보를 어디로 보내는지 파헤칩니다. 개인정보 유출, 데이터 주권, 해외 서버 전송 위험성 완전 분석.">
+<meta name="keywords" content="알리익스프레스 개인정보,테무 개인정보 유출,해외직구 앱 위험,데이터 주권,초저가 직구 앱,개인정보보호,해외직구 개인정보,알리 테무 위험,미니소 데이터,쉬인 개인정보,직구앱 삭제,해외앱 보안,개인정보 침해,알리 과징금,데이터 안보">
+<meta property="og:title" content="알리·테무 초저가 앱, 내 정보는 어디로? | IssueLens EP.01">
+<meta property="og:description" content="500원 양말 뒤에 숨겨진 개인정보 상납의 진실. 알리·테무·미니소 직구 앱 데이터 유출 완전 분석.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Do+Hyeon&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ft:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
+  --fb:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  --bg:#fff;--bg2:#F7F9FC;--bg3:#FFF8F0;
+  --ink:#0A0A0A;--ink2:#1F2937;--ink3:#4B5563;
+  --red:#C8001A;--redbg:#FFF0F3;--redl:#FFCCD5;
+  --amb:#B45309;--ambbg:#FFFBEB;
+  --grn:#065F46;--blu:#1E3A8A;--blubg:#EFF6FF;
+  --bdr:#CBD5E1;--rul:#E2E8F0;
+  --sh:0 2px 14px rgba(0,0,0,.07);
+  --shl:0 8px 32px rgba(0,0,0,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:20px;line-height:1.95;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:var(--red);text-decoration:none}
+
+/* ── 진행 바 ── */
+#pb{position:fixed;top:0;left:0;height:5px;background:var(--red);z-index:9999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(200,0,26,.5)}
+
+/* ── 마스트헤드 ── */
+.mh{background:var(--bg);border-bottom:3px solid var(--red)}
+.mh-top{background:var(--red);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:8px}
+.logo{font-family:var(--ft);font-size:clamp(1.1rem,3.5vw,1.3rem);font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.logo-dot{width:10px;height:10px;background:#fff;border-radius:50%;opacity:.85}
+.mh-meta{font-family:var(--fb);font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.88);font-weight:600}
+.mh-hero{padding:36px 20px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+.ep-lbl{font-family:var(--ft);font-size:clamp(13px,3.2vw,15px);font-weight:700;color:var(--red);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ep-lbl::before{content:'';width:22px;height:3px;background:var(--red);border-radius:2px;display:inline-block}
+.headline{font-family:var(--ft);font-size:clamp(1.85rem,6vw,3.6rem);font-weight:800;line-height:1.22;color:var(--ink);letter-spacing:-.03em}
+.headline .acc{color:var(--red);background:var(--redbg);padding:2px 8px;border-radius:5px;display:inline-block}
+.sub-hl{font-family:var(--fb);margin-top:14px;font-size:clamp(17px,3.5vw,20px);color:var(--ink3);line-height:1.82;font-weight:500}
+.stats{display:flex;flex-direction:column;gap:10px;min-width:155px}
+.stat{background:var(--redbg);border:2.5px solid var(--redl);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--sh)}
+.stat-n{font-family:var(--ft);font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--red);display:block;line-height:1;letter-spacing:-.02em}
+.stat-l{font-family:var(--fb);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);margin-top:4px;display:block;line-height:1.4}
+.tags{padding:10px 20px 14px;border-top:1.5px solid var(--rul);display:flex;gap:7px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.tag{font-family:var(--fb);font-size:clamp(13px,3vw,15px);font-weight:700;border:2px solid var(--bdr);color:var(--ink3);padding:4px 12px;border-radius:20px;cursor:pointer;transition:all .2s}
+.tag:hover,.tag.hot{border-color:var(--red);color:var(--red);background:var(--redbg)}
+
+/* ── 브랜드 스트립 ── */
+.brand-strip{background:var(--bg2);border-top:2px solid var(--rul);border-bottom:2px solid var(--rul);padding:22px 20px}
+.brand-strip-inner{max-width:920px;margin:0 auto}
+.brand-ttl{font-family:var(--ft);font-size:clamp(15px,3.5vw,17px);font-weight:800;color:var(--ink2);text-align:center;margin-bottom:18px;letter-spacing:.02em}
+.brand-row{display:flex;align-items:stretch;justify-content:center;gap:12px;flex-wrap:wrap}
+/* ── 브랜드 카드: SVG <text> 대신 CSS div 뱃지 사용 ── */
+.bp{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 18px;border-radius:14px;border:2.5px solid var(--bdr);background:#fff;box-shadow:var(--sh);min-width:118px;width:118px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:default;white-space:nowrap}
+.bp:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:var(--red)}
+/* CSS 뱃지 (SVG <text> 대체 — 티스토리 호환) */
+.bp-badge{width:90px;height:40px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Arial Black','Arial',sans-serif;font-size:13px;font-weight:900;color:#fff;letter-spacing:0.5px;text-align:center;line-height:1;overflow:hidden;white-space:nowrap;flex-shrink:0}
+.bp-badge.ali{background:#FF6900;font-size:11px;letter-spacing:-0.3px}
+.bp-badge.temu{background:#FA5130;font-size:16px}
+.bp-badge.miniso{background:#E8002D;font-size:12px;letter-spacing:1px}
+.bp-badge.yoyoso{background:#1A1A1A;color:#FFD700;font-size:11px;letter-spacing:1px}
+.bp-badge.shein{background:#000;font-size:14px;letter-spacing:2px}
+.bp-name{font-family:var(--ft);font-size:13px;font-weight:800;color:var(--ink2);white-space:nowrap}
+.bp-sub{font-family:var(--fb);font-size:12px;color:var(--ink3);font-weight:600;white-space:nowrap}
+
+/* ── 면책 공고 ── */
+.disclaimer{max-width:860px;margin:30px auto 0;padding:16px 22px;background:var(--bg2);border:1.5px solid var(--bdr);border-left:6px solid var(--blu);border-radius:10px;font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);line-height:1.82}
+
+/* ── 아티클 바디 ── */
+.ab{max-width:860px;margin:0 auto;padding:36px 20px 56px}
+.intro{font-family:var(--fb);font-size:clamp(18px,3.8vw,21px);line-height:1.95;color:var(--ink2);background:var(--ambbg);border-left:6px solid #F59E0B;padding:20px 22px;border-radius:0 12px 12px 0;font-weight:500}
+.sec{margin-top:52px}
+.sec-ttl{font-family:var(--ft);font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:800;color:var(--ink);padding:16px 18px 16px 22px;border-left:7px solid var(--red);background:linear-gradient(90deg,var(--redbg) 0%,#fff 65%);border-radius:0 12px 12px 0;margin-bottom:22px;line-height:1.42;display:flex;align-items:center;gap:11px;box-shadow:var(--sh);letter-spacing:-.02em}
+.sec-ttl.b2{font-family:'Do Hyeon',sans-serif;font-size:clamp(1.3rem,4.5vw,1.7rem);font-weight:400;background:linear-gradient(90deg,var(--blubg) 0%,#fff 65%);border-left-color:var(--blu);color:var(--blu);letter-spacing:0}
+.sec-ttl .num{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:#fff;background:var(--red);border-radius:6px;padding:3px 11px;flex-shrink:0;letter-spacing:.06em}
+.sec-ttl.b2 .num{background:var(--blu)}
+.bt{font-family:var(--fb);font-size:clamp(18px,3.5vw,21px);line-height:2.0;color:var(--ink2);margin-bottom:20px}
+.hl-r{color:var(--red);font-weight:800}
+.hl-b{color:var(--blu);font-weight:800}
+.hl-a{color:var(--amb);font-weight:800}
+
+/* ── 데이터 콜아웃 ── */
+.dcall{background:var(--redbg);border:2px solid var(--redl);border-top:6px solid var(--red);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.dcall-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--red);letter-spacing:.16em;margin-bottom:10px;display:flex;align-items:center;gap:7px;text-transform:uppercase}
+.dcall-lbl::before{content:'●';animation:blink 1.5s infinite;font-size:.65rem}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.12}}
+.bignum{font-family:var(--ft);font-size:clamp(2.4rem,7vw,3.8rem);font-weight:800;color:var(--red);display:block;line-height:1;margin:6px 0 5px;letter-spacing:-.03em}
+.biglbl{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);font-weight:700;margin-bottom:12px;display:block}
+.cbody{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);line-height:1.95;color:var(--ink2)}
+.cbody strong{color:var(--red);font-weight:800}
+
+.cctx{background:var(--blubg);border:2px solid #BFDBFE;border-top:6px solid var(--blu);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.cctx-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--blu);letter-spacing:.14em;margin-bottom:10px;text-transform:uppercase}
+.cctx .cbody strong{color:var(--blu)}
+
+/* ── 플로우 ── */
+.flow{margin:24px 0;background:#fff;border:2px solid var(--bdr);border-radius:16px;padding:24px 16px 20px;box-shadow:var(--sh)}
+.flow-ttl{font-family:var(--ft);font-size:clamp(15px,3.2vw,17px);font-weight:700;color:var(--ink);text-align:center;margin-bottom:20px}
+.flow-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.fs{flex:1;min-width:80px;max-width:120px;text-align:center}
+.fi{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.45rem;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.fi.s{background:#DCFCE7;border:3px solid #22C55E}
+.fi.w{background:#FEF3C7;border:3px solid #F59E0B}
+.fi.d{background:#FFE4E6;border:3px solid var(--red)}
+.fs-lbl{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink);line-height:1.38}
+.fs-sub{font-family:var(--fb);font-size:clamp(11px,2.4vw,13px);color:var(--ink3);margin-top:2px;font-weight:600}
+.farrow{color:var(--red);font-size:1.45rem;flex-shrink:0;font-weight:900;animation:ap 1.9s infinite}
+@keyframes ap{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(4px);opacity:.3}}
+
+/* ── 법조항 박스 ── */
+.lq{border:2.5px solid #9CA3AF;border-radius:14px;padding:26px 26px;margin:26px 0;position:relative;background:var(--bg2);box-shadow:var(--sh)}
+.lq-bdg{position:absolute;top:-14px;left:18px;background:var(--ink);color:#fff;font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:3px 14px;border-radius:4px;letter-spacing:.04em;white-space:nowrap}
+.lq-txt{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);color:var(--ink2);line-height:2.0;margin-top:4px}
+.lq-txt strong{color:var(--red);font-weight:800}
+.lq-src{font-family:var(--fb);margin-top:10px;font-size:clamp(13px,2.8vw,15px);color:var(--ink3);text-align:right;font-weight:700}
+
+/* ── 리스크 미터 ── */
+.rm{margin:26px 0;padding:24px 26px;background:#fff;border:2px solid var(--bdr);border-radius:16px;box-shadow:var(--sh)}
+.rm-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:700;color:var(--ink);margin-bottom:18px}
+.ri{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rl{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:800;width:140px;flex-shrink:0;color:var(--ink)}
+.rbg{flex:1;height:14px;background:#F1F5F9;border-radius:7px;overflow:hidden;border:1px solid var(--rul)}
+.rbf{height:100%;border-radius:7px;width:0;transition:width 1.5s cubic-bezier(.2,1,.3,1)}
+.rbf.h{background:linear-gradient(90deg,#F87171,var(--red))}
+.rbf.m{background:linear-gradient(90deg,#FCD34D,#D97706)}
+.rbf.l{background:linear-gradient(90deg,#6EE7B7,#059669)}
+.rp{font-family:var(--ft);font-size:clamp(15px,3vw,17px);font-weight:800;width:48px;text-align:right;flex-shrink:0}
+
+/* ── 미디어 박스 (이미지 + 영상 나란히) ── */
+.media-pair{display:grid;grid-template-columns:1fr;gap:14px;margin:28px 0}
+.mbox-wrap{position:relative}
+.mbox-label{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--ink3);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.mbox{
+  position:relative;border-radius:14px;overflow:hidden;
+  background:#F1F5F9;border:2.5px dashed var(--bdr);
+  min-height:200px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .2s,box-shadow .2s;
+}
+.mbox:hover{border-color:var(--red);box-shadow:var(--shl)}
+.mbox-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);padding:20px;text-align:center;pointer-events:none;width:100%}
+.mbox-ph .ico{font-size:2.4rem;opacity:.45}
+.mbox-ph p{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:700;line-height:1.45;color:var(--ink3)}
+.mbox-ph .hint{font-size:clamp(12px,2.5vw,13px);color:#94A3B8;margin-top:2px}
+.mbox img.prev{width:100%;height:100%;min-height:200px;object-fit:cover;display:block;border-radius:12px}
+.mbox iframe{width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px}
+
+/* hover 버튼 */
+.mctrl{position:absolute;top:8px;right:8px;display:flex;gap:7px;opacity:0;transition:opacity .22s;pointer-events:none;z-index:20}
+.mbox:hover .mctrl{opacity:1;pointer-events:auto}
+.mbtn{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:6px 14px;border-radius:7px;border:none;cursor:pointer;backdrop-filter:blur(8px);transition:transform .15s;white-space:nowrap}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn.rep{background:rgba(255,255,255,.92);color:var(--ink)}
+.mbtn.del{background:rgba(200,0,26,.88);color:#fff}
+
+/* ── 인용구 ── */
+.pq{margin:26px 0 10px;padding:28px 22px;background:var(--bg3);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);text-align:center}
+.pq-txt{font-family:var(--ft);font-size:clamp(1.2rem,4vw,1.85rem);font-weight:800;color:var(--ink);line-height:1.62;letter-spacing:-.02em}
+.pq-txt em{color:var(--red);font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+
+/* ── 실천 강령 ── */
+.action{background:var(--bg2);border-top:3px solid var(--rul);padding:40px 20px;margin-top:0}
+.action-inner{max-width:860px;margin:0 auto}
+.action-ttl{font-family:var(--ft);font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em}
+.action-sub{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);margin-bottom:24px;font-weight:700}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ac{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s,border-color .2s}
+.ac:hover{border-color:var(--red);box-shadow:var(--shl);transform:translateY(-4px)}
+.ac-n{font-family:var(--ft);font-size:clamp(11px,2.5vw,13px);font-weight:700;color:var(--red);letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase}
+.ac-ico{font-size:1.9rem;margin-bottom:8px;line-height:1}
+.ac-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.42;letter-spacing:-.01em}
+.ac-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);line-height:1.85}
+
+/* ── 소셜 바 ── */
+.sb{max-width:860px;margin:0 auto;padding:24px 20px;border-top:1.5px solid var(--rul)}
+.sb-lbl{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sb-lbl::after{content:'';flex:1;height:1.5px;background:var(--rul)}
+.sb-btns{display:flex;flex-wrap:wrap;gap:9px}
+.snsbtn{display:inline-flex;align-items:center;gap:7px;font-family:var(--ft);font-size:clamp(13px,3vw,15px);font-weight:700;padding:9px 16px;border-radius:8px;border:2.5px solid;cursor:pointer;text-decoration:none;transition:background .18s,color .18s,transform .15s;white-space:nowrap}
+.snsbtn svg{width:18px;height:18px;flex-shrink:0;transition:fill .18s}
+.snsbtn:hover{transform:translateY(-2px)}
+.snsbtn.yt{color:#CC0000;border-color:#CC0000}.snsbtn.yt svg{fill:#CC0000}.snsbtn.yt:hover{background:#CC0000;color:#fff}.snsbtn.yt:hover svg{fill:#fff}
+.snsbtn.ig{color:#C13584;border-color:#C13584}.snsbtn.ig svg{fill:#C13584}.snsbtn.ig:hover{background:#C13584;color:#fff}.snsbtn.ig:hover svg{fill:#fff}
+.snsbtn.tt{color:#010101;border-color:#010101}.snsbtn.tt svg{fill:#010101}.snsbtn.tt:hover{background:#010101;color:#fff}.snsbtn.tt:hover svg{fill:#fff}
+.snsbtn.th{color:#000;border-color:#000}.snsbtn.th svg{fill:#000}.snsbtn.th:hover{background:#000;color:#fff}.snsbtn.th:hover svg{fill:#fff}
+.snsbtn.xb{color:#14171A;border-color:#14171A}.snsbtn.xb svg{fill:#14171A}.snsbtn.xb:hover{background:#14171A;color:#fff}.snsbtn.xb:hover svg{fill:#fff}
+.snsbtn.fb{color:#1877F2;border-color:#1877F2}.snsbtn.fb svg{fill:#1877F2}.snsbtn.fb:hover{background:#1877F2;color:#fff}.snsbtn.fb:hover svg{fill:#fff}
+
+/* ── 푸터 ── */
+.ft{background:#0D0D0D;color:#9CA3AF;padding:32px 20px;text-align:center;border-top:4px solid var(--red)}
+.ft-brand{font-family:var(--ft);font-size:1.2rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:6px}
+.ft-dot{width:9px;height:9px;background:var(--red);border-radius:50%}
+.ft p{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);line-height:1.88;color:#6B7280;margin-top:6px}
+
+/* ── YouTube 모달 ── */
+.yt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.yt-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.yt-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.yt-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.yt-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.yt-inp:focus{border-color:var(--red)}
+.yt-btns{display:flex;gap:9px;margin-top:14px}
+.yt-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s}
+.yt-ok:hover{background:#a80018}
+.yt-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+
+/* ── 스크롤 reveal ── */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:none}
+
+/* ── 반응형 ── */
+@media(max-width:600px){
+  .mh-hero{grid-template-columns:1fr}
+  .stats{flex-direction:row;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px}
+  .sec-ttl{font-size:1.15rem}
+  .rl{width:110px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<!-- YouTube 모달 -->
+<div class="yt-modal" id="ytm" style="display:none">
+  <div class="yt-box">
+    <div class="yt-ttl">📹 YouTube 영상 삽입</div>
+    <div class="yt-desc">관련 YouTube 영상 링크를 붙여넣으세요.<br>확인하면 영상이 이 섹션에 영구 삽입됩니다.</div>
+    <input class="yt-inp" id="yti" type="text" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="yt-btns">
+      <button class="yt-ok" onclick="ytOk()">✓ 삽입하기</button>
+      <button class="yt-cancel" onclick="ytClose()">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 마스트헤드 ═══ -->
+<header class="mh">
+  <div class="mh-top">
+    <div class="logo"><span class="logo-dot"></span>IssueLens</div>
+    <span class="mh-meta">EP.01 · 데이터 주권 연재 시리즈</span>
+    <span class="mh-meta">IssueLens 편집부</span>
+  </div>
+  <div class="mh-hero">
+    <div>
+      <div class="ep-lbl">EP.01 &nbsp;데이터 주권</div>
+      <h1 class="headline">
+        당신의 <span class="acc">'0원 결제'</span>,<br>
+        그 뒤에 숨겨진<br>
+        데이터 주권의 현주소
+      </h1>
+      <p class="sub-hl">알리·테무 초저가 앱의 진짜 비용은 돈이 아닙니다.<br>당신의 이름, 주소, 구매 패턴, 지인 관계가 그 대가입니다.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="stat-n">20억</span><span class="stat-l">알리 과징금<br>(원, 2024년)</span></div>
+      <div class="stat"><span class="stat-n">18만</span><span class="stat-l">정보 유출<br>해외 판매자 수</span></div>
+      <div class="stat"><span class="stat-n">제7조</span><span class="stat-l">국가정보법<br>(해당국)</span></div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag hot">#알리익스프레스개인정보</span>
+    <span class="tag hot">#테무개인정보유출</span>
+    <span class="tag hot">#해외직구앱위험</span>
+    <span class="tag hot">#데이터주권</span>
+    <span class="tag">#직구앱삭제</span>
+    <span class="tag">#개인정보보호</span>
+    <span class="tag">#초저가직구</span>
+    <span class="tag">#해외앱보안</span>
+    <span class="tag">#미니소개인정보</span>
+    <span class="tag">#쉬인위험</span>
+  </div>
+</header>
+
+<!-- ═══ 브랜드 스트립 ═══ -->
+<div class="brand-strip rev">
+  <div class="brand-strip-inner">
+    <div class="brand-ttl">⚠️ 주목받는 초저가 플랫폼</div>
+    <div class="brand-row">
+      <div class="bp">
+        <div class="bp-badge ali">AliExpress</div>
+        <span class="bp-name">AliExpress</span><span class="bp-sub">알리익스프레스</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge temu">Temu</div>
+        <span class="bp-name">Temu</span><span class="bp-sub">테무</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge miniso">MINISO</div>
+        <span class="bp-name">MINISO</span><span class="bp-sub">미니소</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge yoyoso">YOYOSO</div>
+        <span class="bp-name">YOYOSO</span><span class="bp-sub">요요소</span>
+      </div>
+      <div class="bp">
+        <div class="bp-badge shein">SHEIN</div>
+        <span class="bp-name">SHEIN</span><span class="bp-sub">쉬인</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 기사 본문 ═══ -->
+<main>
+  <div class="disclaimer rev" style="margin:28px 20px 0;max-width:860px;margin-left:auto;margin-right:auto">
+    <strong style="color:var(--blu)">📌 알림 및 면책 공고</strong><br>
+    본 게시물은 국내외 공신력 있는 언론 보도, 정부 기관(개인정보보호위원회 등)의 발표 자료를 바탕으로 작성된 공익적 논평입니다. 특정 기업이나 개인을 비방할 의도가 없으며, 대한민국 국민의 데이터 주권 보호와 알 권리 증진을 목적으로 합니다.
+  </div>
+
+  <div class="ab">
+
+    <!-- 리드 문장 + SEO 키워드 자연 반영 -->
+    <p class="intro rev" style="margin-top:28px">
+      <strong class="hl-a">알리익스프레스·테무·미니소·쉬인</strong> 등 초저가 해외 직구 플랫폼 이용자가 폭발적으로 늘고 있습니다. 하지만 우리가 <strong class="hl-a">'공짜에 가까운 가격'</strong>에 현혹될 때, 정작 우리 안방의 소중한 <strong class="hl-r">개인정보</strong>가 어디로 흘러가는지 고민해 보셨습니까?
+    </p>
+
+    <!-- ══════════ SECTION 1 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">01</span>500원짜리 양말에 담긴 '개인정보 상납'의 진실</h2>
+
+      <!-- SEO 강화 인트로 -->
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "알리익스프레스 개인정보 어디로?" · "테무 앱 깔면 위험한가요?" · "해외 직구 앱 개인정보 유출"
+      </div>
+
+      <p class="bt">
+        <strong class="hl-r">알리익스프레스·테무·쉬인</strong> 같은 해외 직구 앱을 설치하고 카드 정보를 입력하는 순간, 이름·주소·연락처는 물론 <strong class="hl-r">구매 패턴과 지인 관계까지 분석 가능한 방대한 데이터가 수집</strong>됩니다. 직구 앱 개인정보 유출 문제는 더 이상 남의 일이 아닙니다.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">FACT CHECK · 개인정보보호위원회 공식 발표</div>
+        <span class="bignum">₩ 20억</span>
+        <span class="biglbl">2024년 7월 — 알리익스프레스 과징금 부과액</span>
+        <p class="cbody">이용자 개인정보를 <strong>해외 판매자 18만 곳</strong>에 이전하면서 제대로 고지하지 않은 행위에 대한 행정 제재입니다. 이것은 빙산의 일각일 뿐입니다. <strong>테무·쉬인·미니소</strong> 역시 유사한 데이터 수집 방식을 운용합니다.</p>
+      </div>
+
+      <div class="flow rev">
+        <div class="flow-ttl">📊 내 정보는 어디로? — 해외 직구 앱 데이터 흐름</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi s">📱</div><div class="fs-lbl">앱 설치·<br>회원가입</div><div class="fs-sub">이름·연락처</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">🛒</div><div class="fs-lbl">구매·결제<br>행동 기록</div><div class="fs-sub">카드·패턴·위치</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🌐</div><div class="fs-lbl">해외 서버<br>전송</div><div class="fs-sub">해외 데이터센터</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🏛️</div><div class="fs-lbl">국가정보법<br>적용 가능</div><div class="fs-sub">정부 협조 의무</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">⚠️</div><div class="fs-lbl">통제권<br>상실</div><div class="fs-sub">삭제 불가</div></div>
+        </div>
+      </div>
+
+      <!-- SECTION 1 미디어 박스 쌍 -->
+      <div class="media-pair rev">
+        <!-- 이미지 -->
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입</div>
+          <div class="mbox" id="mb-s1i" data-t="img" onclick="mbClick('s1i')">
+            <div class="mbox-ph" id="ph-s1i">
+              <span class="ico">🖼️</span>
+              <p>이미지 삽입</p>
+              <span class="hint">클릭 → 파일 선택</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s1i" accept="image/*" style="display:none" onchange="mbLoadImg('s1i',this)">
+        </div>
+        <!-- 영상 -->
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입</div>
+          <div class="mbox" id="mb-s1v" data-t="vid" onclick="mbClick('s1v')">
+            <div class="mbox-ph" id="ph-s1v">
+              <span class="ico">🎬</span>
+              <p>YouTube 영상 삽입</p>
+              <span class="hint">클릭 → 링크 입력</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 1 -->
+
+    <!-- ══════════ SECTION 2 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">02</span>해외 서버 전송은 왜 안보 위협이 되는가</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "해외 앱 개인정보 위험한 이유" · "직구 앱 데이터 어디 저장?" · "개인정보 해외 이전 위험"
+      </div>
+
+      <p class="bt">단순한 개인정보 유출 문제가 아닙니다. <strong class="hl-b">특정 국가의 법적 구조</strong>가 문제의 핵심입니다. 해외 직구 앱 보안 문제는 개인의 프라이버시를 넘어 국가 안보 차원의 사안입니다.</p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">국가정보법 제7조 (해당국)</div>
+        <p class="lq-txt">모든 조직과 시민은 <strong>국가 정보 활동을 지지·보조·협조</strong>해야 하며, 알게 된 국가 정보 활동 관련 비밀을 보호해야 한다.</p>
+        <div class="lq-src">— 2017년 제정, 현행 적용 중 —</div>
+      </div>
+
+      <p class="bt"><strong class="hl-r">알리·테무·쉬인이 수집한 한국 이용자 데이터</strong>가 언제든 특정 목적으로 활용될 수 있다는 구조적 리스크가 존재합니다. 당신의 일상적인 쇼핑 기록이 국가 단위의 정보 자산으로 변환될 수 있습니다.</p>
+
+      <div class="rm rev">
+        <div class="rm-ttl">⚡ 해외 직구 앱 개인정보 위험 — 주요 지적 사항 (개인정보보호위원회·FTC 발표 기반)</div>
+        <div class="ri"><div class="rl">개인정보 수집 범위</div><div class="rbg"><div class="rbf h" data-w="90"></div></div><div class="rp" style="color:var(--red)">광범위</div></div>
+        <div class="ri"><div class="rl">이용자 삭제 요청 어려움</div><div class="rbg"><div class="rbf h" data-w="80"></div></div><div class="rp" style="color:var(--red)">높음</div></div>
+        <div class="ri"><div class="rl">해외 서버 이전 위험</div><div class="rbg"><div class="rbf h" data-w="75"></div></div><div class="rp" style="color:var(--red)">높음</div></div>
+        <div class="ri"><div class="rl">제3자 공유 고지 미흡</div><div class="rbg"><div class="rbf m" data-w="65"></div></div><div class="rp" style="color:var(--amb)">중간</div></div>
+        <div class="ri"><div class="rl">소비자 인지도</div><div class="rbg"><div class="rbf l" data-w="18"></div></div><div class="rp" style="color:var(--grn)">낮음</div></div>
+        <p style="font-size:13px;color:#64748B;margin-top:8px">※ 위 항목은 개인정보보호위원회 제재 결정(2024), FTC 보고서, 미 의회 청문회 지적 사항을 종합한 정성적 평가입니다.</p>
+      </div>
+
+      <!-- SECTION 2 미디어 박스 쌍 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입</div>
+          <div class="mbox" id="mb-s2i" data-t="img" onclick="mbClick('s2i')">
+            <div class="mbox-ph" id="ph-s2i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s2i" accept="image/*" style="display:none" onchange="mbLoadImg('s2i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입</div>
+          <div class="mbox" id="mb-s2v" data-t="vid" onclick="mbClick('s2v')">
+            <div class="mbox-ph" id="ph-s2v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 2 -->
+
+    <!-- ══════════ SECTION 3 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">03</span>상호주의 없는 시장 개방 — 누가 이득을 보는가</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "알리 테무 사용해도 되나요?" · "해외 직구 개인정보 지키는 법" · "직구 앱 안전한가"
+      </div>
+
+      <p class="bt">특정 나라는 자국 인터넷을 철저히 통제하면서, 정작 <strong class="hl-r">알리·테무·쉬인</strong>은 대한민국에서 수억 건의 개인정보를 자유롭게 수집하고 있습니다. <strong class="hl-r">일방향적 개방은 곧 일방향적 착취</strong>입니다.</p>
+
+      <p class="bt"><strong class="hl-r">해외 직구 앱 개인정보 유출</strong> 피해를 막으려면, 소비자 개인의 각성이 필요합니다. 데이터는 21세기의 석유입니다. 자국민의 데이터를 무상으로 내주는 나라는 존재하지 않습니다.</p>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 CONTEXT · 비대칭 구도 — 알아야 할 사실</div>
+        <p class="cbody">해당 플랫폼 본국은 <strong>구글, 유튜브, 인스타그램, 카카오</strong> 등을 자국 내 차단합니다. 반면 알리·테무·틱톡은 대한민국에서 자유롭게 수억 건의 <strong>개인정보와 행동 데이터</strong>를 수집합니다. 이것이 공정한 거래입니까?</p>
+      </div>
+
+      <!-- SECTION 3 미디어 박스 쌍 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입</div>
+          <div class="mbox" id="mb-s3i" data-t="img" onclick="mbClick('s3i')">
+            <div class="mbox-ph" id="ph-s3i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s3i" accept="image/*" style="display:none" onchange="mbLoadImg('s3i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입</div>
+          <div class="mbox" id="mb-s3v" data-t="vid" onclick="mbClick('s3v')">
+            <div class="mbox-ph" id="ph-s3v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 3 -->
+
+    <!-- 인용구 -->
+    <div class="pq rev">
+      <div class="pq-txt">
+        "오늘 당신이 아낀 <em>몇천 원</em>이,<br>
+        내일 대한민국의 주권을 위협하는 <em>실탄</em>이 됩니다."
+      </div>
+    </div>
+
+  </div><!-- /ab -->
+
+  <!-- ═══ 실천 강령 ═══ -->
+  <section class="action" style="padding-top:26px">
+    <div class="action-inner">
+      <div class="action-ttl">🛡️ 대한민국 생존을 위한 실천 강령</div>
+      <div class="action-sub">지금 당신이 할 수 있는 것들 — 개인정보 지키는 법</div>
+      <div class="action-grid">
+        <div class="ac"><div class="ac-n">ACTION 01</div><div class="ac-ico">🗑️</div><div class="ac-ttl">해외 직구 앱 삭제</div><div class="ac-desc">알리·테무·쉬인 등 불필요한 해외 직구 앱을 삭제하고 권한 설정을 점검하세요. 앱 삭제 후에도 데이터는 서버에 남습니다 — 정보 삭제 요청도 함께 하세요.</div></div>
+        <div class="ac"><div class="ac-n">ACTION 02</div><div class="ac-ico">🛍️</div><div class="ac-ttl">국내 플랫폼 이용</div><div class="ac-desc">쿠팡·네이버쇼핑·무신사 등 국내 유통 플랫폼을 이용해 국내 생태계를 보호하세요. 소비 선택 하나하나가 데이터 주권의 투표입니다.</div></div>
+        <div class="ac"><div class="ac-n">ACTION 03</div><div class="ac-ico">📣</div><div class="ac-ttl">정보 공유 &amp; 확산</div><div class="ac-desc">이 내용을 가족·친구·직장 동료에게 공유하세요. 알아야 지킬 수 있습니다. 인식이 곧 방어입니다.</div></div>
+        <div class="ac"><div class="ac-n">ACTION 04</div><div class="ac-ico">🗳️</div><div class="ac-ttl">정책적 목소리</div><div class="ac-desc">데이터 안보를 지킬 수 있는 정책과 정치적 목소리에 귀 기울이세요. 디지털 주권은 민주주의의 새로운 전선입니다.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 소셜 바 ═══ -->
+  <!--
+  ★ 링크 연결: href="#..." 부분을 실제 URL로 교체하세요
+  예) href="https://www.youtube.com/@IssueLens"
+  -->
+  <div class="sb">
+    <div class="sb-lbl">공유하기</div>
+    <div class="sb-btns">
+      <a href="#YOUTUBE_URL" class="snsbtn yt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube
+      </a>
+      <a href="#INSTAGRAM_URL" class="snsbtn ig" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+      </a>
+      <a href="#TIKTOK_URL" class="snsbtn tt" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/></svg>TikTok
+      </a>
+      <a href="#THREADS_URL" class="snsbtn th" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.742-1.757-.438-.505-1.103-.769-1.98-.789h-.047c-.67 0-1.64.191-2.253 1.109l-1.755-1.2c.894-1.307 2.277-2.031 3.98-2.049h.064c2.71.048 4.327 1.692 4.73 4.778.108.028.214.057.316.089l-.001.007c1.338.386 2.462 1.093 3.24 2.254C22.01 16.06 21.748 19 19.743 21c-1.737 1.745-4.189 2.627-7.274 2.647l-.283-.003v.003Z"/></svg>Threads
+      </a>
+      <a href="#X_URL" class="snsbtn xb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>X
+      </a>
+      <a href="#FACEBOOK_URL" class="snsbtn fb" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="ft-brand"><span class="ft-dot"></span>IssueLens</div>
+  <div style="color:#9CA3AF;font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);margin-top:4px">데이터 주권 연재 시리즈 · EP.01</div>
+  <p>본 게시물은 공익 목적의 논평입니다. 공신력 있는 언론 보도 및 정부 기관 발표 자료를 근거로 합니다.<br>Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+<script>
+// ── 진행 바 ──
+const pb=document.getElementById('pb');
+window.addEventListener('scroll',()=>{pb.style.width=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-document.documentElement.clientHeight)*100)+'%'});
+
+// ── 스크롤 reveal ──
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);ro.unobserve(e.target)}})},{threshold:.07});
+document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
+
+// ── 리스크 바 ──
+const bo=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.rbf').forEach(b=>{setTimeout(()=>b.style.width=b.dataset.w+'%',260)});bo.unobserve(e.target)}})},{threshold:.25});
+document.querySelectorAll('.rm').forEach(el=>bo.observe(el));
+
+// ══════════════════════════════════════════════════════════
+// ── Artifact Storage 기반 영구 저장 (브라우저·기기 무관) ──
+// ══════════════════════════════════════════════════════════
+const STORE_KEY = 'issuelens_ep1_media_v1';
+
+// 저장된 전체 미디어 맵을 서버에서 읽어옴
+async function loadStore() {
+  try {
+    const res = await window.storage.get(STORE_KEY);
+    return res ? JSON.parse(res.value) : {};
+  } catch(e) {
+    return {};
+  }
+}
+
+// 전체 미디어 맵을 서버에 씀
+async function saveStore(map) {
+  try {
+    await window.storage.set(STORE_KEY, JSON.stringify(map));
+  } catch(e) {
+    console.warn('storage.set 실패:', e);
+  }
+}
+
+// 페이지 로드 시 저장된 미디어 전부 복원
+async function restoreAll() {
+  const map = await loadStore();
+  for (const [id, val] of Object.entries(map)) {
+    if (!val) continue;
+    if (val === 'deleted') {
+      _restoreDel(id);
+    } else if (val.startsWith('yt:')) {
+      // YouTube 복원 (autoplay 제거)
+      _applyYt(id, val.slice(3).replace('&autoplay=1',''), false);
+    } else if (val.startsWith('data:')) {
+      // 이미지 복원
+      _applyImg(id, val, false);
+    }
+  }
+}
+
+// 개별 항목 저장 (기존 map 읽어서 병합 후 저장)
+async function persistItem(id, val) {
+  const map = await loadStore();
+  map[id] = val;
+  await saveStore(map);
+}
+
+// 개별 항목 삭제 (교체 시)
+async function removeItem(id) {
+  const map = await loadStore();
+  delete map[id];
+  await saveStore(map);
+}
+
+// ── 삭제 상태 DOM 복원 ──
+function _restoreDel(id) {
+  const box = document.getElementById('mb-' + id);
+  if (!box) return;
+  const wrap = box.closest('.mbox-wrap');
+  if (wrap) {
+    wrap.style.display = 'none';
+    const pair = wrap.closest('.media-pair');
+    if (pair && [...pair.querySelectorAll('.mbox-wrap')].every(w => w.style.display === 'none')) {
+      pair.style.display = 'none';
+    }
+  }
+}
+
+// ── 미디어 박스 클릭 ──
+let cur = null;
+
+function mbClick(id) {
+  const box = document.getElementById('mb-' + id);
+  if (box.classList.contains('filled')) return;
+  if (box.dataset.t === 'img') { document.getElementById('fi-' + id).click(); }
+  else { ytOpen(id); }
+}
+
+function mbReplace(id) {
+  mbClear(id);
+  const box = document.getElementById('mb-' + id);
+  if (box.dataset.t === 'img') { document.getElementById('fi-' + id).click(); }
+  else { ytOpen(id); }
+}
+
+// ── 삭제: 슬라이드 업 애니메이션 후 DOM 제거 + 영구 저장 ──
+function mbDel(id) {
+  const box = document.getElementById('mb-' + id);
+  const wrap = box.closest('.mbox-wrap');
+  wrap.style.transition = 'max-height .35s ease, opacity .3s ease, margin .3s ease';
+  wrap.style.overflow = 'hidden';
+  wrap.style.maxHeight = wrap.offsetHeight + 'px';
+  requestAnimationFrame(() => {
+    wrap.style.maxHeight = '0';
+    wrap.style.opacity = '0';
+    wrap.style.margin = '0';
+    wrap.style.padding = '0';
+  });
+  setTimeout(() => {
+    const pair = wrap.closest('.media-pair');
+    wrap.remove();
+    if (pair && pair.querySelectorAll('.mbox-wrap').length === 0) {
+      pair.style.transition = 'max-height .3s ease, opacity .25s ease, margin .3s ease';
+      pair.style.overflow = 'hidden';
+      pair.style.maxHeight = '0';
+      pair.style.opacity = '0';
+      pair.style.margin = '0';
+      setTimeout(() => pair.remove(), 320);
+    }
+  }, 360);
+  // 삭제 상태를 서버에 영구 저장
+  persistItem(id, 'deleted');
+}
+
+function mbClear(id) {
+  const box = document.getElementById('mb-' + id);
+  const ifrm = box.querySelector('iframe');
+  const img  = box.querySelector('img.prev');
+  if (ifrm) ifrm.remove();
+  if (img)  img.remove();
+  box.classList.remove('filled');
+  const ph = document.getElementById('ph-' + id);
+  if (ph) ph.style.display = '';
+  const fi = document.getElementById('fi-' + id);
+  if (fi) fi.value = '';
+  // 교체 시 저장 데이터 제거
+  removeItem(id);
+}
+
+// ── 이미지 DOM 적용 ──
+function _applyImg(id, dataUrl, save) {
+  const box = document.getElementById('mb-' + id);
+  if (!box) return;
+  const ph = document.getElementById('ph-' + id);
+  if (ph) ph.style.display = 'none';
+  let img = box.querySelector('img.prev');
+  if (!img) {
+    img = document.createElement('img');
+    img.className = 'prev';
+    box.insertBefore(img, box.querySelector('.mctrl'));
+  }
+  img.src = dataUrl;
+  box.classList.add('filled');
+  box.onclick = null;
+  box.style.minHeight = '200px';
+  if (save) persistItem(id, dataUrl);
+}
+
+function mbLoadImg(id, inp) {
+  if (!inp.files || !inp.files[0]) return;
+  // 저장 중 UI 피드백
+  const ph = document.getElementById('ph-' + id);
+  if (ph) { ph.querySelector('p').textContent = '저장 중…'; }
+  const r = new FileReader();
+  r.onload = ev => { _applyImg(id, ev.target.result, true); };
+  r.readAsDataURL(inp.files[0]);
+}
+
+// ── YouTube DOM 적용 ──
+function _applyYt(id, embedUrl, save) {
+  const box = document.getElementById('mb-' + id);
+  if (!box) return;
+  const ph = document.getElementById('ph-' + id);
+  if (ph) ph.style.display = 'none';
+  let ifr = box.querySelector('iframe');
+  if (!ifr) {
+    ifr = document.createElement('iframe');
+    ifr.style.cssText = 'width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px';
+    ifr.allow = 'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';
+    ifr.allowFullscreen = true;
+    box.insertBefore(ifr, box.querySelector('.mctrl'));
+  }
+  ifr.src = embedUrl;
+  box.classList.add('filled');
+  box.style.minHeight = '220px';
+  box.onclick = null;
+  if (save) persistItem(id, 'yt:' + embedUrl);
+}
+
+// ── YouTube 모달 ──
+function ytOpen(id) { cur=id; document.getElementById('yti').value=''; document.getElementById('ytm').style.display='flex'; setTimeout(()=>document.getElementById('yti').focus(),80); }
+function ytClose() { document.getElementById('ytm').style.display='none'; cur=null; }
+function ytEmbed(url) {
+  try {
+    const u = new URL(url); let vid = '';
+    if (u.hostname.includes('youtu.be')) { vid = u.pathname.slice(1).split('?')[0]; }
+    else { vid = u.searchParams.get('v') || ''; }
+    return vid ? 'https://www.youtube.com/embed/' + vid + '?rel=0&autoplay=1' : null;
+  } catch(e) { return null; }
+}
+function ytOk() {
+  const url = document.getElementById('yti').value.trim();
+  const em = ytEmbed(url);
+  if (!em) { alert('올바른 YouTube 링크를 입력해 주세요.\n예: https://www.youtube.com/watch?v=XXXXXXXXXXX'); return; }
+  _applyYt(cur, em, true);
+  ytClose();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') ytClose(); });
+document.getElementById('yti').addEventListener('keydown', e => { if (e.key === 'Enter') ytOk(); });
+
+// ── 페이지 로드 시 서버에서 미디어 복원 ──
+restoreAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║          시니어 AI 공부 시리즈 — 티스토리 재사용 템플릿              ║
+║  사용법: ★ 표시된 플레이스홀더만 교체하면 새 에피소드 완성!         ║
+║  버전: 1.0 / 2026                                                    ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+[플레이스홀더 목록]
+  {{EP_NUM}}        : 에피소드 번호 (예: 01, 02)
+  {{EP_TITLE}}      : 에피소드 부제목 (예: AI가 도대체 뭔가요?)
+  {{EP_SUBTITLE}}   : 상단 한 줄 설명
+  {{IDIOM_HANJA}}   : 사자성어 한자 (예: 青出於藍)
+  {{IDIOM_KOREAN}}  : 사자성어 한글 (예: 청출어람)
+  {{IDIOM_MEANING}} : 사자성어 뜻 (예: 제자가 스승보다 낫다)
+  {{IDIOM_APPLY}}   : 사자성어 AI 적용 문장
+  {{INTRO_TEXT}}    : 인트로 본문 (2~3문장)
+  {{DIALOG_...}}    : 대화 박스 내용
+  {{TIP_...}}       : 핵심 개념 팁 3가지
+  {{AI_ITEM_...}}   : 우리 생활 속 AI 항목
+  {{HUMOR_...}}     : 유머 대화 내용
+  {{QUIZ_...}}      : 퀴즈 Q1~Q3
+  {{GRAMMAR_...}}   : 맞춤법 내용
+  {{SONG_TITLE}}    : 노래 제목
+  {{SONG_LYRICS}}   : 노래 가사
+  {{SUMMARY_...}}   : 공부 요약 박스 항목
+  {{KEYWORDS}}      : 검색 키워드 목록
+  {{CLOSING_...}}   : 마무리 대화
+  {{DB_KEY}}        : IndexedDB 고유 키 (예: ep02) ← 에피소드마다 다르게!
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ★ 제목 수정 -->
+    <title>시니어 AI 공부 시리즈 - Episode {{EP_NUM}}: {{EP_TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ================================================================
+           BASE RESET & BODY
+           ================================================================ */
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif !important;
+            line-height: 1.2 !important;
+            color: #000 !important;
+            background: #FFF9E6 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px 30px;
+        }
+
+        /* ================================================================
+           BANNER
+           ================================================================ */
+        .ad-banner {
+            width: 100%;
+            height: 130pt;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32pt;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 4px solid #333;
+        }
+
+        .mid-banner {
+            width: 100%;
+            height: 130pt;
+            background: #FFF9E6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32pt;
+            color: #999;
+            font-weight: bold;
+            margin: 15px 0;
+            border: 2px dashed #ddd;
+            border-radius: 15px;
+        }
+
+        /* ================================================================
+           INFO BAR & CALENDAR
+           ================================================================ */
+        .info-bar {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .datetime-weather {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 19pt;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 8px;
+        }
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 16pt;
+            padding: 6px;
+            background: #E3F2FD;
+            line-height: 1.2;
+        }
+        .calendar-day {
+            text-align: center;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15pt;
+            background: white;
+            line-height: 1.2;
+        }
+        .calendar-day.today {
+            background: #2196F3; color: white;
+            font-weight: bold;
+            border: 3px solid #1565C0;
+            border-radius: 50%;
+        }
+        .calendar-day.holiday {
+            background: #FFE0F0; color: #D32F2F;
+            font-weight: bold;
+            border: 3px solid #FF69B4;
+            border-radius: 50%;
+        }
+        .calendar-day.today.holiday { background: #2196F3; color: white; }
+        .calendar-day.empty { background: #f5f5f5; border: none; }
+        .holiday-list {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 2px solid #E3F2FD;
+            font-size: 14pt;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        /* ================================================================
+           TYPOGRAPHY
+           ================================================================ */
+        .title-main {
+            font-size: 30pt;
+            font-weight: 900;
+            text-align: center;
+            margin: 15px 0 10px 0;
+            line-height: 1.2;
+            color: #1A237E;
+        }
+        .title-sub {
+            font-size: 28pt;
+            font-weight: 700;
+            color: #2E7D32;
+            margin: 12px 0 5px 0;
+            line-height: 1.2;
+        }
+        .title-minor {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #D32F2F;
+            margin: 12px 0 5px 0;
+            line-height: 1.2;
+        }
+        .content-body {
+            font-size: 19pt;
+            margin-bottom: 6pt;
+            text-align: justify;
+            word-break: keep-all;
+            line-height: 1.2;
+        }
+        .source-tag {
+            font-size: 16pt;
+            font-style: italic;
+            color: #555;
+            text-align: right;
+            margin-top: 2px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        /* ================================================================
+           COLOUR UTILITIES
+           ================================================================ */
+        .speaker   { color: blue;    font-weight: bold; font-size: 19pt; }
+        .hook-tag  { color: #E91E63; font-weight: bold; }
+        .emphasis  { color: red;     font-weight: bold; }
+
+        .space-6pt { height: 6pt; }
+
+        /* ================================================================
+           CONTENT BOXES
+           ================================================================ */
+
+        /* 사자성어 */
+        .idiom-box {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+            border: 4px solid #E91E63;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .idiom-main {
+            font-size: 30pt;
+            font-weight: 900;
+            color: #D32F2F;
+            margin: 6px 0 4px 0;
+            line-height: 1.2;
+        }
+        .idiom-meaning {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #8B4513;
+            margin: 4px 0;
+            line-height: 1.2;
+        }
+
+        /* 대화 박스 */
+        .dialog-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border: 4px solid #2196F3;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+        .dialog-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .dialog-row:last-child { margin-bottom: 0; }
+        .dialog-speaker {
+            color: blue;
+            font-weight: bold;
+            font-size: 19pt;
+            min-width: 90px;
+            flex-shrink: 0;
+            line-height: 1.2;
+        }
+        .dialog-content {
+            font-size: 19pt;
+            line-height: 1.2;
+            flex: 1;
+        }
+
+        /* 핵심 팁 박스 */
+        .tip-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            border: 4px solid #FBC02D;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+
+        /* AI 생활 박스 (단일 컬럼) */
+        .ai-box-single {
+            background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%);
+            border: 4px solid #0288D1;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+        .ai-section-item { margin-bottom: 10px; }
+        .ai-section-item:last-child { margin-bottom: 0; }
+
+        /* 유머 박스 */
+        .humor-box {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+            border: 4px solid #E91E63;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+
+        /* 퀴즈 박스 */
+        .quiz-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border: 4px solid #9C27B0;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+        .quiz-number { color: #9C27B0; font-weight: bold; font-size: 19pt; }
+
+        /* 문법 박스 */
+        .grammar-box {
+            background: #FFF3E0;
+            border: 4px solid #FF9800;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+
+        /* 맞춤법 검사 박스 */
+        .checker-box {
+            background: #E3F2FD;
+            border: 4px solid #2196F3;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+
+        /* 노래 박스 */
+        .song-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 4px solid #4CAF50;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+        }
+        .song-title {
+            font-size: 28pt;
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .song-lyrics {
+            font-size: 19pt;
+            line-height: 1.3;
+            color: #333;
+            white-space: pre-line;
+        }
+
+        /* 공부 요약 박스 */
+        .summary-box {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            border: 4px solid #3F51B5;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 15px 0;
+        }
+        .summary-title {
+            font-size: 28pt;
+            font-weight: 900;
+            color: #1A237E;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .summary-item {
+            font-size: 19pt;
+            line-height: 1.3;
+            margin-bottom: 6pt;
+            padding-left: 10px;
+            border-left: 4px solid #3F51B5;
+        }
+        .summary-item:last-child { margin-bottom: 0; }
+
+        /* 검색 키워드 */
+        .keyword-section {
+            font-size: 24pt;
+            font-weight: bold;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px 8px;
+            line-height: 1.4;
+            margin-bottom: 6pt;
+        }
+
+        /* 푸터 */
+        .footer-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 3px solid #E0E0E0;
+        }
+        .footer-title {
+            font-size: 28pt;
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        /* ================================================================
+           MEDIA UPLOAD AREAS
+           ================================================================ */
+        /* 일반 이미지 영역 */
+        .img-area {
+            width: 100%;
+            min-height: 400px;
+            background: #E8F4FD;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            border: 3px dashed #64B5F6;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .img-area:hover { background: #DCEEFB; border-color: #1976D2; }
+        .img-area .upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #1976D2;
+            font-size: 20pt;
+            user-select: none;
+            text-align: center;
+            padding: 15px;
+        }
+        .img-area .upload-icon { font-size: 48pt; }
+        .img-area img, .img-area video { max-width: 100%; max-height: 600px; border-radius: 10px; display: block; }
+
+        /* AI 섹션용 소형 이미지 영역 */
+        .ai-img-area {
+            width: 100%;
+            min-height: 200px;
+            background: #E8F4FD;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            border: 3px dashed #64B5F6;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .ai-img-area:hover { background: #DCEEFB; border-color: #1976D2; }
+        .ai-img-area .upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: #1976D2;
+            font-size: 17pt;
+            user-select: none;
+            text-align: center;
+            padding: 10px;
+        }
+        .ai-img-area .upload-icon { font-size: 36pt; }
+        .ai-img-area img, .ai-img-area video { max-width: 100%; max-height: 400px; border-radius: 10px; display: block; }
+
+        /* 오버레이 교체/삭제 버튼 */
+        .media-overlay {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: none;
+            gap: 6px;
+            z-index: 10;
+        }
+        .img-area:hover .media-overlay,
+        .ai-img-area:hover .media-overlay { display: flex; }
+        .media-btn {
+            background: rgba(0,0,0,0.65);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 14pt;
+            cursor: pointer;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .media-btn:hover { background: rgba(0,0,0,0.9); }
+
+        /* ================================================================
+           AUDIO PLAYER
+           ================================================================ */
+        .audio-player-box {
+            background: linear-gradient(135deg, #7B1FA2 0%, #9C27B0 100%);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 20px rgba(123,31,162,0.3);
+        }
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 15px;
+        }
+        .play-btn {
+            background: white; border: none;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s; flex-shrink: 0;
+        }
+        .play-btn:hover { transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .play-icon  { width:0; height:0; border-left:20px solid #7B1FA2; border-top:12px solid transparent; border-bottom:12px solid transparent; margin-left:4px; }
+        .pause-icon { display:flex; gap:6px; }
+        .pause-bar  { width:6px; height:24px; background:#7B1FA2; border-radius:2px; }
+        .progress-container { flex:1; }
+        .progress-bar  { height:8px; background:rgba(255,255,255,0.3); border-radius:4px; cursor:pointer; position:relative; }
+        .progress-fill { height:100%; background:white; border-radius:4px; width:0%; transition:width 0.1s; }
+        .time-display  { font-size:16pt; color:white; font-weight:700; min-width:100px; text-align:right; }
+
+        /* ================================================================
+           SECTION COMMENT LABELS (편집 시 보조용, 출력 시 숨김 처리 가능)
+           ================================================================ */
+        .section-label {
+            display: inline-block;
+            background: #FF6F00;
+            color: white;
+            font-size: 13pt;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
+        }
+        /* 티스토리에 붙여넣을 때 아래 줄 활성화하면 레이블 숨김 */
+        /* .section-label { display: none; } */
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ================================================================
+         ① 상단 광고 배너
+         ================================================================ -->
+    <div class="ad-banner">
+        [상단 배너 광고 영역 - 130pt]
+    </div>
+
+    <!-- ================================================================
+         ② 날짜 / 시간 / 달력  (자동 생성 — 수정 불필요)
+         ================================================================ -->
+    <div class="info-bar">
+        <div class="datetime-weather">
+            <div><strong>📅 오늘:</strong> <span id="current-date"></span></div>
+            <div><strong>🕐 시간:</strong> <span id="current-time"></span></div>
+            <!-- ★ 날씨 정보 수정 -->
+            <div><strong>🌤️ 날씨:</strong> 맑음 20°C</div>
+        </div>
+        <div style="font-size:22pt; font-weight:bold; margin-bottom:8px; color:#1565C0; line-height:1.2;" id="calendar-month"></div>
+        <div class="calendar" id="calendar"></div>
+        <div class="holiday-list" id="holiday-list"></div>
+    </div>
+
+    <!-- ================================================================
+         ③ 메인 제목
+         ★ EP_NUM, EP_TITLE, EP_SUBTITLE 교체
+         ================================================================ -->
+    <div class="title-main">
+        &lt;시니어 AI 공부 시리즈&gt; Episode {{EP_NUM}}<br>
+        "{{EP_TITLE}}"<br>
+        {{EP_SUBTITLE}}
+    </div>
+
+    <!-- ================================================================
+         ④ 오늘의 사자성어
+         ★ IDIOM_HANJA / IDIOM_KOREAN / IDIOM_MEANING / IDIOM_APPLY 교체
+         ================================================================ -->
+    <div class="title-sub">🌸 오늘의 사자성어</div>
+
+    <div class="idiom-box">
+        <div class="idiom-main">{{IDIOM_HANJA}}<br>({{IDIOM_KOREAN}})</div>
+        <div class="idiom-meaning">{{IDIOM_MEANING}}</div>
+        <div class="content-body" style="margin-bottom:0; text-align:center;">
+            {{IDIOM_APPLY}}
+        </div>
+    </div>
+
+    <!-- ================================================================
+         ⑤ 인트로 섹션
+         ★ EP_TITLE / INTRO_TEXT 교체
+         ================================================================ -->
+    <div class="title-sub">🌸 "{{EP_TITLE}}"</div>
+
+    <div class="content-body">
+        안녕하세요! <b>&lt;시니어 AI 공부 시리즈&gt;</b>의 가이드, <span class="speaker">윤호</span>입니다.
+    </div>
+    <div class="content-body">
+        이 시리즈는 <span class="emphasis">AI</span>와 같은 최신 트렌드가 낯설고 어렵게 느껴지시는 시니어 여러분이 <span class="emphasis">가볍고 즐겁게</span> 따라올 수 있도록 만들었습니다. 처음이라도 괜찮아요, 함께 천천히 배워봐요!
+    </div>
+    <!-- ★ 인트로 본문 추가 작성 -->
+    <div class="content-body">
+        {{INTRO_TEXT}}
+    </div>
+
+    <!-- ★ 인트로 이미지 1 -->
+    <div class="img-area" id="area-1" onclick="handleAreaClick(event,'1')">
+        <div class="upload-label" id="img-display-1">
+            <span class="upload-icon">🖼️</span>
+            <span>클릭하여 이미지 / 동영상 삽입</span>
+            <!-- ★ 이미지 설명 문구 교체 -->
+            <span style="font-size:14pt; color:#888;">[인트로 관련 이미지 설명]</span>
+        </div>
+        <div class="media-overlay" id="overlay-1">
+            <button class="media-btn" onclick="replaceMedia(event,'1')">🔄 교체</button>
+            <button class="media-btn" onclick="deleteMedia(event,'1')">🗑️ 삭제</button>
+        </div>
+        <input type="file" id="upload-1" accept="image/*,video/*" style="display:none" onchange="handleMediaUpload(event,'img-display-1','1')">
+    </div>
+    <!-- ★ Source 수정 -->
+    <div class="source-tag">Source: {{SOURCE_1}}</div>
+
+    <div class="content-body">{{SCENE_SETUP}}</div>
+
+    <!-- ================================================================
+         ⑥ 대화 박스
+         ★ 화자명(dialog-speaker) / 대화내용(dialog-content) 교체·추가
+         ================================================================ -->
+    <div class="dialog-box">
+        <!-- ★ 대화 1 -->
+        <div class="dialog-row">
+            <div class="dialog-speaker">{{SPEAKER_1}}:</div>
+            <div class="dialog-content">{{DIALOG_1}}</div>
+        </div>
+        <!-- ★ 대화 2 -->
+        <div class="dialog-row">
+            <div class="dialog-speaker">{{SPEAKER_2}}:</div>
+            <div class="dialog-content">{{DIALOG_2}}</div>
+        </div>
+        <!-- ★ 대화 3 -->
+        <div class="dialog-row">
+            <div class="dialog-speaker">{{SPEAKER_3}}:</div>
+            <div class="dialog-content">{{DIALOG_3}}</div>
+        </div>
+        <!-- ★ 필요시 행 복사하여 추가 -->
+    </div>
+
+    <!-- ================================================================
+         ⑦ 핵심 개념 팁 3가지
+         ★ TIP_1 / TIP_2 / TIP_3 교체 (제목 + 내용)
+         ================================================================ -->
+    <!-- ★ title-minor 텍스트 교체 -->
+    <div class="title-minor">💡 {{TIP_SECTION_TITLE}}</div>
+
+    <div class="tip-box">
+        <div class="content-body">
+            <b>1. {{TIP_1_TITLE}}</b><br>{{TIP_1_BODY}}
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body">
+            <b>2. {{TIP_2_TITLE}}</b><br>{{TIP_2_BODY}}
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body" style="margin-bottom:0;">
+            <b>3. {{TIP_3_TITLE}}</b><br>{{TIP_3_BODY}}
+        </div>
+    </div>
+
+    <!-- ★ 개념 이미지 2 -->
+    <div class="img-area" id="area-2" onclick="handleAreaClick(event,'2')">
+        <div class="upload-label" id="img-display-2">
+            <span class="upload-icon">🖼️</span>
+            <span>클릭하여 이미지 / 동영상 삽입</span>
+            <span style="font-size:14pt; color:#888;">[개념 설명 관련 이미지]</span>
+        </div>
+        <div class="media-overlay" id="overlay-2">
+            <button class="media-btn" onclick="replaceMedia(event,'2')">🔄 교체</button>
+            <button class="media-btn" onclick="deleteMedia(event,'2')">🗑️ 삭제</button>
+        </div>
+        <input type="file" id="upload-2" accept="image/*,video/*" style="display:none" onchange="handleMediaUpload(event,'img-display-2','2')">
+    </div>
+    <div class="source-tag">Source: {{SOURCE_2}}</div>
+
+    <!-- ================================================================
+         ⑧ 중간 광고 배너
+         ================================================================ -->
+    <div class="mid-banner">[중간 배너 광고 영역 - 130pt]</div>
+
+    <!-- ================================================================
+         ⑨ 우리 생활 속 AI 섹션 (단일 컬럼 + 항목별 이미지)
+         ★ AI_SECTION_TITLE / 각 AI_ITEM 교체 / 항목 수 자유롭게 추가·삭제
+         ================================================================ -->
+    <!-- ★ title-sub 교체 -->
+    <div class="title-sub">🌸 {{AI_SECTION_TITLE}}</div>
+
+    <div class="content-body">
+        <span class="speaker">윤호:</span> "{{AI_SECTION_INTRO}}"
+    </div>
+
+    <div class="ai-box-single">
+
+        <!-- ★ AI 항목 1 -->
+        <div class="ai-section-item">
+            <div class="content-body">
+                <b>1. {{AI_ITEM_1_NAME}}</b> - {{AI_ITEM_1_SUB}}<br>
+                {{AI_ITEM_1_BODY}}
+            </div>
+            <div class="ai-img-area" id="ai-area-1" onclick="handleAiAreaClick(event,'ai-1')">
+                <div class="upload-label" id="ai-img-display-1">
+                    <span class="upload-icon">{{AI_ITEM_1_ICON}}</span>
+                    <span>클릭하여 이미지 / 동영상 삽입</span>
+                    <span style="font-size:13pt; color:#888;">[{{AI_ITEM_1_NAME}} 관련 이미지]</span>
+                </div>
+                <div class="media-overlay" id="ai-overlay-1">
+                    <button class="media-btn" onclick="replaceAiMedia(event,'ai-1')">🔄 교체</button>
+                    <button class="media-btn" onclick="deleteAiMedia(event,'ai-1')">🗑️ 삭제</button>
+                </div>
+                <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none" onchange="handleAiMediaUpload(event,'ai-img-display-1','ai-1')">
+            </div>
+        </div>
+
+        <div class="space-6pt"></div>
+
+        <!-- ★ AI 항목 2 -->
+        <div class="ai-section-item">
+            <div class="content-body">
+                <b>2. {{AI_ITEM_2_NAME}}</b> - {{AI_ITEM_2_SUB}}<br>
+                {{AI_ITEM_2_BODY}}
+            </div>
+            <div class="ai-img-area" id="ai-area-2" onclick="handleAiAreaClick(event,'ai-2')">
+                <div class="upload-label" id="ai-img-display-2">
+                    <span class="upload-icon">{{AI_ITEM_2_ICON}}</span>
+                    <span>클릭하여 이미지 / 동영상 삽입</span>
+                    <span style="font-size:13pt; color:#888;">[{{AI_ITEM_2_NAME}} 관련 이미지]</span>
+                </div>
+                <div class="media-overlay" id="ai-overlay-2">
+                    <button class="media-btn" onclick="replaceAiMedia(event,'ai-2')">🔄 교체</button>
+                    <button class="media-btn" onclick="deleteAiMedia(event,'ai-2')">🗑️ 삭제</button>
+                </div>
+                <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none" onchange="handleAiMediaUpload(event,'ai-img-display-2','ai-2')">
+            </div>
+        </div>
+
+        <div class="space-6pt"></div>
+
+        <!-- ★ AI 항목 3 -->
+        <div class="ai-section-item">
+            <div class="content-body">
+                <b>3. {{AI_ITEM_3_NAME}}</b> - {{AI_ITEM_3_SUB}}<br>
+                {{AI_ITEM_3_BODY}}
+            </div>
+            <div class="ai-img-area" id="ai-area-3" onclick="handleAiAreaClick(event,'ai-3')">
+                <div class="upload-label" id="ai-img-display-3">
+                    <span class="upload-icon">{{AI_ITEM_3_ICON}}</span>
+                    <span>클릭하여 이미지 / 동영상 삽입</span>
+                    <span style="font-size:13pt; color:#888;">[{{AI_ITEM_3_NAME}} 관련 이미지]</span>
+                </div>
+                <div class="media-overlay" id="ai-overlay-3">
+                    <button class="media-btn" onclick="replaceAiMedia(event,'ai-3')">🔄 교체</button>
+                    <button class="media-btn" onclick="deleteAiMedia(event,'ai-3')">🗑️ 삭제</button>
+                </div>
+                <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none" onchange="handleAiMediaUpload(event,'ai-img-display-3','ai-3')">
+            </div>
+        </div>
+
+        <div class="space-6pt"></div>
+
+        <!-- ★ AI 항목 4 (필요시 복사·추가 / 불필요시 삭제) -->
+        <div class="ai-section-item">
+            <div class="content-body">
+                <b>4. {{AI_ITEM_4_NAME}}</b> - {{AI_ITEM_4_SUB}}<br>
+                {{AI_ITEM_4_BODY}}
+            </div>
+            <div class="ai-img-area" id="ai-area-4" onclick="handleAiAreaClick(event,'ai-4')">
+                <div class="upload-label" id="ai-img-display-4">
+                    <span class="upload-icon">{{AI_ITEM_4_ICON}}</span>
+                    <span>클릭하여 이미지 / 동영상 삽입</span>
+                    <span style="font-size:13pt; color:#888;">[{{AI_ITEM_4_NAME}} 관련 이미지]</span>
+                </div>
+                <div class="media-overlay" id="ai-overlay-4">
+                    <button class="media-btn" onclick="replaceAiMedia(event,'ai-4')">🔄 교체</button>
+                    <button class="media-btn" onclick="deleteAiMedia(event,'ai-4')">🗑️ 삭제</button>
+                </div>
+                <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none" onchange="handleAiMediaUpload(event,'ai-img-display-4','ai-4')">
+            </div>
+        </div>
+
+    </div><!-- /ai-box-single -->
+
+    <!-- ================================================================
+         ⑩ 오늘의 AI 유머
+         ★ HUMOR_TITLE / 각 HUMOR_LINE 교체
+         ================================================================ -->
+    <div class="title-minor">🌸 오늘의 AI 유머</div>
+
+    <div class="humor-box">
+        <div class="content-body"><b>{{HUMOR_TITLE}}</b></div>
+        <div class="space-6pt"></div>
+        <!-- ★ 유머 대화: dialog-speaker 색상 = blue bold, 내용은 자유롭게 -->
+        <div class="content-body"><span class="speaker">{{HUMOR_SPK_1}}:</span> {{HUMOR_LINE_1}}</div>
+        <div class="content-body"><span class="speaker">{{HUMOR_SPK_2}}:</span> {{HUMOR_LINE_2}}</div>
+        <div class="content-body"><span class="speaker">{{HUMOR_SPK_1}}:</span> {{HUMOR_LINE_3}}</div>
+        <div class="content-body"><span class="speaker">{{HUMOR_SPK_2}}:</span> {{HUMOR_LINE_4}}</div>
+        <div class="content-body"><span class="speaker">{{HUMOR_SPK_1}}:</span> {{HUMOR_LINE_5}}</div>
+        <div class="space-6pt"></div>
+        <div class="content-body" style="margin-bottom:0; text-align:center; color:#D32F2F;">
+            😄 {{HUMOR_PUNCHLINE}}
+        </div>
+    </div>
+
+    <!-- ================================================================
+         ⑪ AI 퀴즈타임
+         ★ QUIZ_Q1 / QUIZ_HINT_1 / Q2 / Q3 교체
+         ================================================================ -->
+    <div class="title-minor">🌸 시니어 AI 퀴즈타임!</div>
+
+    <div class="quiz-box">
+        <div class="content-body">
+            <span class="quiz-number"><b>Q1.</b></span> {{QUIZ_Q1}}<br>
+            (힌트: {{QUIZ_HINT_1}})
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body">
+            <span class="quiz-number"><b>Q2.</b></span> {{QUIZ_Q2}}<br>
+            (힌트: {{QUIZ_HINT_2}})
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body">
+            <span class="quiz-number"><b>Q3.</b></span> {{QUIZ_Q3}}<br>
+            (힌트: {{QUIZ_HINT_3}})
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body" style="margin-bottom:0; text-align:center; color:#D32F2F;">
+            정답을 아시는 분은 댓글로 남겨주세요!
+        </div>
+    </div>
+
+    <!-- ★ 퀴즈 관련 이미지 3 -->
+    <div class="img-area" id="area-3" onclick="handleAreaClick(event,'3')">
+        <div class="upload-label" id="img-display-3">
+            <span class="upload-icon">🖼️</span>
+            <span>클릭하여 이미지 / 동영상 삽입</span>
+            <span style="font-size:14pt; color:#888;">[퀴즈 마무리 관련 이미지]</span>
+        </div>
+        <div class="media-overlay" id="overlay-3">
+            <button class="media-btn" onclick="replaceMedia(event,'3')">🔄 교체</button>
+            <button class="media-btn" onclick="deleteMedia(event,'3')">🗑️ 삭제</button>
+        </div>
+        <input type="file" id="upload-3" accept="image/*,video/*" style="display:none" onchange="handleMediaUpload(event,'img-display-3','3')">
+    </div>
+    <div class="source-tag">Source: {{SOURCE_3}}</div>
+
+    <!-- ★ 마무리 대화 -->
+    <div class="content-body" style="margin-top:10px;">
+        <span class="speaker">윤호:</span> "{{CLOSING_YUNHO}}"
+    </div>
+    <div class="content-body">
+        <span class="speaker">할아버지:</span> "{{CLOSING_GRANDPA}}"
+    </div>
+
+    <!-- ================================================================
+         ⑫ 검색 키워드
+         ★ KEYWORDS 교체 (| 구분)
+         ================================================================ -->
+    <div class="footer-section">
+        <div class="footer-title">🌸 검색 키워드</div>
+        <div class="keyword-section">
+            <!-- ★ 키워드 span 추가·삭제 자유롭게 -->
+            <span>{{KW1}}</span> <span style="color:#999; font-weight:normal;">|</span>
+            <span>{{KW2}}</span> <span style="color:#999; font-weight:normal;">|</span>
+            <span>{{KW3}}</span> <span style="color:#999; font-weight:normal;">|</span>
+            <span>{{KW4}}</span> <span style="color:#999; font-weight:normal;">|</span>
+            <span>{{KW5}}</span> <span style="color:#999; font-weight:normal;">|</span>
+            <span>{{KW6}}</span> <span style="color:#999; font-weight:normal;">|</span>
+            <span>{{KW7}}</span>
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body" style="margin-bottom:0;">
+            📝 이 글은 <span class="emphasis">AI</span>를 처음 접하는 시니어 여러분을 위해 작성되었습니다.<br>
+            궁금한 점이 있으시면 언제든 댓글로 문의해 주세요!
+        </div>
+    </div>
+
+    <!-- ================================================================
+         ⑬ 한글 맞춤법 / 문법
+         ★ GRAMMAR_1 / GRAMMAR_2 / GRAMMAR_3 교체
+         ================================================================ -->
+    <div class="title-minor">🌸 한글 맞춤법 / 문법!</div>
+
+    <div class="grammar-box">
+        <div class="content-body"><b>자주 헷갈리는 맞춤법 TOP 3</b></div>
+        <div class="space-6pt"></div>
+        <div class="content-body">
+            <b>1. {{GRAMMAR_1_TITLE}}</b><br>
+            {{GRAMMAR_1_BODY}}
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body">
+            <b>2. {{GRAMMAR_2_TITLE}}</b><br>
+            {{GRAMMAR_2_BODY}}
+        </div>
+        <div class="space-6pt"></div>
+        <div class="content-body" style="margin-bottom:0;">
+            <b>3. {{GRAMMAR_3_TITLE}}</b><br>
+            {{GRAMMAR_3_BODY}}
+        </div>
+    </div>
+
+    <div class="footer-section">
+        <div class="footer-title">🌺 한국어 맞춤법 / 문법 검사</div>
+        <div class="checker-box" style="font-size:19pt; line-height:1.3;">
+            부산대 맞춤법 / 문법 검사기<br><br>
+            👉 <a href="https://nara-speller.co.kr/old_speller/" target="_blank" style="color:#1565C0; font-weight:bold;">
+                https://nara-speller.co.kr/old_speller/
+            </a>
+        </div>
+    </div>
+
+    <!-- ★ 아빠 한마디 -->
+    <div class="content-body" style="margin-top:15px; background-color:#FFFF00; padding:15px; border-radius:10px;">
+        <b>※ <span class="speaker">윤호</span> 아빠의 한마디:</b>
+        {{DAD_COMMENT}}
+    </div>
+
+    <!-- ================================================================
+         ⑭ 오늘의 노래 (단일 컬럼)
+         ★ SONG_TITLE / SONG_LYRICS 교체
+         ================================================================ -->
+    <div class="title-sub">🌸 오늘의 노래</div>
+
+    <div class="song-box">
+        <!-- ★ 노래 제목 -->
+        <div class="song-title">{{SONG_TITLE}}</div>
+        <!-- ★ 가사: pre-line 형식 그대로 줄바꿈 반영됨 -->
+        <div class="song-lyrics">{{SONG_LYRICS}}</div>
+    </div>
+
+    <!-- ================================================================
+         ⑮ 오디오 플레이어 (기능 고정 — 수정 불필요)
+         ================================================================ -->
+    <div class="audio-player-box">
+        <div class="player-controls">
+            <button class="play-btn" id="playButton" onclick="togglePlay()">
+                <div class="play-icon"></div>
+            </button>
+            <div class="progress-container">
+                <div class="progress-bar" onclick="seek(event)">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+        </div>
+        <audio id="audioElement" style="display:none;"><source src="" type="audio/mpeg"></audio>
+        <div style="text-align:center; margin-top:15px;">
+            <input type="file" id="audioFileInput" accept="audio/mp3,audio/mpeg,audio/mp4" style="display:none;" onchange="loadAudioFile(event)">
+            <button onclick="document.getElementById('audioFileInput').click()"
+                style="background:white; color:#7B1FA2; border:2px solid white; padding:10px 28px; border-radius:25px; font-size:16pt; font-weight:bold; cursor:pointer;">
+                🎵 MP3/MP4 파일 업로드
+            </button>
+            <div id="fileName" style="color:white; font-size:14pt; margin-top:6px; line-height:1.2;"></div>
+        </div>
+    </div>
+
+    <!-- ================================================================
+         ⑯ 오늘의 공부 요약
+         ★ SUMMARY_1 ~ SUMMARY_4 교체
+         ================================================================ -->
+    <div class="summary-box">
+        <div class="summary-title">📚 오늘의 공부 요약 — 복습해봐요!</div>
+
+        <!-- ★ 요약 항목 1 -->
+        <div class="summary-item">
+            <b>① {{SUMMARY_1_TITLE}}</b><br>
+            {{SUMMARY_1_BODY}}
+        </div>
+        <div class="space-6pt"></div>
+
+        <!-- ★ 요약 항목 2 -->
+        <div class="summary-item">
+            <b>② {{SUMMARY_2_TITLE}}</b><br>
+            {{SUMMARY_2_BODY}}
+        </div>
+        <div class="space-6pt"></div>
+
+        <!-- ★ 요약 항목 3 -->
+        <div class="summary-item">
+            <b>③ {{SUMMARY_3_TITLE}}</b><br>
+            {{SUMMARY_3_BODY}}
+        </div>
+        <div class="space-6pt"></div>
+
+        <!-- ★ 사자성어 요약 (매 회 고정 형식) -->
+        <div class="summary-item" style="border-left-color:#E91E63;">
+            <b>④ 오늘의 사자성어</b><br>
+            <b style="color:#D32F2F;">{{IDIOM_HANJA}} ({{IDIOM_KOREAN}})</b> — {{IDIOM_MEANING}}. {{IDIOM_APPLY}}
+        </div>
+        <div class="space-6pt"></div>
+
+        <div class="content-body" style="margin-bottom:0; text-align:center; color:#1A237E; font-weight:bold;">
+            🎉 오늘도 수고하셨습니다! 다음 에피소드도 기대해 주세요 😊
+        </div>
+    </div>
+
+    <!-- ================================================================
+         ⑰ 하단 푸터 (고정)
+         ================================================================ -->
+    <div class="space-6pt"></div>
+    <div class="content-body" style="text-align:center; font-size:17pt; color:#333; font-weight:500; line-height:1.2;">
+        본 게시물은 시니어를 위한 <span class="emphasis">AI</span> 교육용으로 제작되었습니다.
+    </div>
+    <div class="content-body" style="text-align:center; font-size:16pt; color:#222; font-weight:bold; margin-bottom:0; line-height:1.2;">
+        © 2026 시니어 AI 공부 시리즈. All rights reserved.
+    </div>
+
+</div><!-- /container -->
+
+<!-- ================================================================
+     JAVASCRIPT (기능 고정 — 수정 불필요)
+     단, ★ DB_KEY 는 에피소드마다 다른 값으로 변경할 것!
+     예: 'ep01', 'ep02', 'ep03' ...
+     ================================================================ -->
+<script>
+    /* ── IndexedDB 미디어 영구 보관 ── */
+    const DB_NAME    = 'seniorblog_media';
+    /* ★ 에피소드마다 이 값을 변경하세요 (예: 'ep02') */
+    const DB_KEY_PREFIX = '{{DB_KEY}}_';
+    let db;
+
+    function openDB() {
+        return new Promise((resolve, reject) => {
+            const req = indexedDB.open(DB_NAME, 1);
+            req.onupgradeneeded = e => e.target.result.createObjectStore('media', { keyPath: 'id' });
+            req.onsuccess = e => { db = e.target.result; resolve(db); };
+            req.onerror  = e => reject(e);
+        });
+    }
+
+    function saveMedia(id, dataUrl, fileType) {
+        if (!db) return;
+        db.transaction('media','readwrite').objectStore('media').put({ id: DB_KEY_PREFIX+id, dataUrl, fileType });
+    }
+
+    function removeMedia(id) {
+        if (!db) return;
+        db.transaction('media','readwrite').objectStore('media').delete(DB_KEY_PREFIX+id);
+    }
+
+    function loadAllMedia() {
+        if (!db) return;
+        const req = db.transaction('media','readonly').objectStore('media').getAll();
+        req.onsuccess = e => {
+            e.target.result.forEach(r => {
+                if (r.id.startsWith(DB_KEY_PREFIX)) {
+                    restoreMedia(r.id.replace(DB_KEY_PREFIX,''), r.dataUrl, r.fileType);
+                }
+            });
+        };
+    }
+
+    function restoreMedia(id, dataUrl, fileType) {
+        let displayEl, areaEl;
+        if (id.startsWith('ai-')) {
+            const n = id.replace('ai-','');
+            displayEl = document.getElementById('ai-img-display-'+n);
+            areaEl    = document.getElementById('ai-area-'+n);
+        } else {
+            displayEl = document.getElementById('img-display-'+id);
+            areaEl    = document.getElementById('area-'+id);
+        }
+        if (!displayEl) return;
+        if (fileType.startsWith('image/')) {
+            displayEl.innerHTML = `<img src="${dataUrl}" style="max-width:100%;border-radius:10px;display:block;">`;
+        } else if (fileType.startsWith('video/')) {
+            displayEl.innerHTML = `<video src="${dataUrl}" controls style="max-width:100%;border-radius:10px;display:block;"></video>`;
+        }
+        if (areaEl) areaEl.style.minHeight = 'auto';
+    }
+
+    function fileToDataUrl(file) {
+        return new Promise((res, rej) => {
+            const r = new FileReader();
+            r.onload = e => res(e.target.result);
+            r.onerror = rej;
+            r.readAsDataURL(file);
+        });
+    }
+
+    /* ── 일반 이미지 영역 ── */
+    async function handleMediaUpload(event, displayId, mediaId) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const display = document.getElementById(displayId);
+        const area    = document.getElementById('area-'+mediaId);
+        if (file.type.startsWith('image/')) {
+            const dataUrl = await fileToDataUrl(file);
+            display.innerHTML = `<img src="${dataUrl}" style="max-width:100%;border-radius:10px;display:block;">`;
+            saveMedia(mediaId, dataUrl, file.type);
+        } else if (file.type.startsWith('video/')) {
+            const url = URL.createObjectURL(file);
+            display.innerHTML = `<video src="${url}" controls style="max-width:100%;border-radius:10px;display:block;"></video>`;
+        }
+        if (area) area.style.minHeight = 'auto';
+    }
+    function handleAreaClick(event, mediaId) {
+        if (event.target.closest('.media-overlay')) return;
+        document.getElementById('upload-'+mediaId)?.click();
+    }
+    function replaceMedia(event, mediaId) {
+        event.stopPropagation();
+        document.getElementById('upload-'+mediaId)?.click();
+    }
+    function deleteMedia(event, mediaId) {
+        event.stopPropagation();
+        const display = document.getElementById('img-display-'+mediaId);
+        const area    = document.getElementById('area-'+mediaId);
+        if (display) display.innerHTML = `<span class="upload-icon">🖼️</span><span>클릭하여 이미지 / 동영상 삽입</span>`;
+        if (area)    area.style.minHeight = '';
+        removeMedia(mediaId);
+    }
+
+    /* ── AI 섹션 이미지 영역 ── */
+    async function handleAiMediaUpload(event, displayId, mediaId) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const display = document.getElementById(displayId);
+        const n    = mediaId.replace('ai-','');
+        const area = document.getElementById('ai-area-'+n);
+        if (file.type.startsWith('image/')) {
+            const dataUrl = await fileToDataUrl(file);
+            display.innerHTML = `<img src="${dataUrl}" style="max-width:100%;border-radius:10px;display:block;">`;
+            saveMedia(mediaId, dataUrl, file.type);
+        } else if (file.type.startsWith('video/')) {
+            const url = URL.createObjectURL(file);
+            display.innerHTML = `<video src="${url}" controls style="max-width:100%;border-radius:10px;display:block;"></video>`;
+        }
+        if (area) area.style.minHeight = 'auto';
+    }
+    function handleAiAreaClick(event, mediaId) {
+        if (event.target.closest('.media-overlay')) return;
+        const n = mediaId.replace('ai-','');
+        document.getElementById('ai-upload-'+n)?.click();
+    }
+    function replaceAiMedia(event, mediaId) {
+        event.stopPropagation();
+        const n = mediaId.replace('ai-','');
+        document.getElementById('ai-upload-'+n)?.click();
+    }
+    function deleteAiMedia(event, mediaId) {
+        event.stopPropagation();
+        const n       = mediaId.replace('ai-','');
+        const display = document.getElementById('ai-img-display-'+n);
+        const area    = document.getElementById('ai-area-'+n);
+        if (display) display.innerHTML = `<span class="upload-icon">🖼️</span><span>클릭하여 이미지 / 동영상 삽입</span>`;
+        if (area)    area.style.minHeight = '';
+        removeMedia(mediaId);
+    }
+
+    /* ── 날짜·시간 ── */
+    function updateDateTime() {
+        const now  = new Date();
+        const dOpt = { year:'numeric', month:'long', day:'numeric', weekday:'long' };
+        const tOpt = { hour:'2-digit', minute:'2-digit', second:'2-digit' };
+        const dateEl = document.getElementById('current-date');
+        const timeEl = document.getElementById('current-time');
+        if (dateEl) dateEl.textContent = now.toLocaleDateString('ko-KR', dOpt);
+        if (timeEl) timeEl.textContent = now.toLocaleTimeString('ko-KR', tOpt);
+    }
+
+    /* ── 달력 ── */
+    function generateCalendar() {
+        const now   = new Date();
+        const year  = now.getFullYear();
+        const month = now.getMonth();
+        const today = now.getDate();
+
+        const holidays = {
+            2026: {
+                0:{1:'신정'}, 2:{1:'삼일절'}, 4:{5:'어린이날'},
+                5:{6:'현충일'}, 7:{15:'광복절'},
+                9:{3:'개천절',9:'한글날'}, 11:{25:'크리스마스'}
+            }
+        };
+
+        const monthEl = document.getElementById('calendar-month');
+        if (monthEl) monthEl.textContent = `${year}년 ${month+1}월`;
+
+        const calendar = document.getElementById('calendar');
+        if (!calendar) return;
+        calendar.innerHTML = '';
+
+        ['일','월','화','수','목','금','토'].forEach(d => {
+            const h = document.createElement('div');
+            h.className   = 'calendar-header';
+            h.textContent = d;
+            calendar.appendChild(h);
+        });
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month+1, 0).getDate();
+
+        for (let i = 0; i < firstDay; i++) {
+            const e = document.createElement('div');
+            e.className = 'calendar-day empty';
+            calendar.appendChild(e);
+        }
+        for (let date = 1; date <= lastDate; date++) {
+            const cell = document.createElement('div');
+            cell.className = 'calendar-day';
+            if (holidays[year]?.[month]?.[date]) cell.classList.add('holiday');
+            if (date === today)                  cell.classList.add('today');
+            cell.textContent = date;
+            calendar.appendChild(cell);
+        }
+
+        const hl = document.getElementById('holiday-list');
+        if (hl && holidays[year]?.[month]) {
+            hl.innerHTML = Object.entries(holidays[year][month])
+                .map(([d,n]) => `* ${month+1}/${d}: ${n}`).join('<br>');
+        }
+    }
+
+    /* ── 오디오 플레이어 ── */
+    const audioElement  = document.getElementById('audioElement');
+    const playButton    = document.getElementById('playButton');
+    const progressFill  = document.getElementById('progressFill');
+    const timeDisplay   = document.getElementById('timeDisplay');
+
+    function loadAudioFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        audioElement.src = URL.createObjectURL(file);
+        document.getElementById('fileName').textContent = '✅ ' + file.name;
+        audioElement.load();
+    }
+    function togglePlay() {
+        if (!audioElement.src) { alert('먼저 오디오 파일을 업로드해주세요!'); return; }
+        if (audioElement.paused) {
+            audioElement.play();
+            playButton.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+        } else {
+            audioElement.pause();
+            playButton.innerHTML = '<div class="play-icon"></div>';
+        }
+    }
+    if (audioElement) {
+        audioElement.addEventListener('timeupdate', () => {
+            const pct = (audioElement.currentTime / audioElement.duration) * 100;
+            if (progressFill) progressFill.style.width = pct + '%';
+            if (timeDisplay)  timeDisplay.textContent  = formatTime(audioElement.currentTime) + ' / ' + formatTime(audioElement.duration);
+        });
+        audioElement.addEventListener('ended', () => {
+            if (playButton) playButton.innerHTML = '<div class="play-icon"></div>';
+        });
+    }
+    function formatTime(sec) {
+        if (isNaN(sec)) return '0:00';
+        const m = Math.floor(sec/60), s = Math.floor(sec%60);
+        return m + ':' + (s<10?'0':'') + s;
+    }
+    function seek(event) {
+        if (!audioElement?.src) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        audioElement.currentTime = audioElement.duration * ((event.clientX - rect.left) / rect.width);
+    }
+
+    /* ── 초기화 ── */
+    window.onload = async function() {
+        updateDateTime();
+        generateCalendar();
+        setInterval(updateDateTime, 1000);
+        await openDB();
+        loadAllMedia();
+    };
+</script>
+</body>
+</html>

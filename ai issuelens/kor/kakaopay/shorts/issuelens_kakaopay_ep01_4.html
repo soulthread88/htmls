@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens · EP01-4 — 유튜브 막고 데이터 공짜로 가져간다</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#080810;color:#fff;font-family:'Noto Sans KR',sans-serif;min-height:100vh;}
+
+/* ── 페이지 헤더 ── */
+.page-header{
+  text-align:center;padding:40px 20px 28px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.page-header h1{
+  font-size:13px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:#CC0000;margin-bottom:6px;
+}
+.page-header p{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.06em;}
+
+/* ── 쇼츠 갤러리 ── */
+.gallery{
+  display:flex;flex-wrap:wrap;gap:32px;
+  justify-content:center;padding:36px 24px 60px;
+}
+.shorts-col{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.ep-label{
+  font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);
+}
+
+/* ── 쇼츠 프레임 (220×391 = 9:16 스케일) ── */
+.sf{
+  position:relative;width:220px;height:391px;
+  background:#000;border-radius:14px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.85);
+  flex-shrink:0;
+}
+
+/* ── YouTube Shorts UI 오버레이 (터치 불가) ── */
+/* 상단: 검색/메뉴 ~37px */
+.yt-top{
+  position:absolute;top:0;left:0;right:0;height:37px;
+  background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 100%);
+  z-index:50;pointer-events:none;
+  display:flex;align-items:center;justify-content:space-between;padding:0 8px;
+}
+.yt-top-l{display:flex;align-items:center;gap:5px;}
+.yt-icon{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3);}
+.yt-logo{font-size:7px;font-weight:900;color:rgba(255,255,255,.55);letter-spacing:.05em;}
+.yt-top-r{display:flex;align-items:center;gap:4px;}
+.yt-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.4);}
+
+/* 오른쪽: 좋아요·싫어요·댓글·공유·리믹스 */
+.yt-right{
+  position:absolute;right:0;top:37px;bottom:74px;width:36px;
+  background:linear-gradient(270deg,rgba(0,0,0,.3) 0%,transparent 100%);
+  z-index:50;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  gap:0;padding-bottom:12px;
+}
+.yt-action{
+  display:flex;flex-direction:column;align-items:center;gap:1px;
+  margin-bottom:10px;
+}
+.yt-action-icon{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+}
+.yt-action-icon svg{width:11px;height:11px;fill:rgba(255,255,255,.7);}
+.yt-action-num{font-size:6.5px;color:rgba(255,255,255,.55);font-weight:700;}
+
+/* 하단: 채널명·제목·음악 74px */
+.yt-bot{
+  position:absolute;bottom:0;left:0;right:36px;height:74px;
+  background:linear-gradient(0deg,rgba(0,0,0,.7) 0%,transparent 100%);
+  z-index:50;pointer-events:none;
+  padding:8px 8px 10px;display:flex;flex-direction:column;justify-content:flex-end;
+}
+.yt-channel{font-size:7.5px;font-weight:900;color:#fff;letter-spacing:.03em;margin-bottom:2px;}
+.yt-title{font-size:6.5px;color:rgba(255,255,255,.75);line-height:1.4;margin-bottom:4px;}
+.yt-music{
+  display:flex;align-items:center;gap:3px;
+}
+.yt-music-icon{width:8px;height:8px;border:1px solid rgba(255,255,255,.5);border-radius:50%;}
+.yt-music-txt{font-size:6px;color:rgba(255,255,255,.5);}
+
+/* ── 카드 구조 (safe zone: top 37px ~ bottom 74px, right 36px) ── */
+.card{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  font-family:'Noto Sans KR',sans-serif;
+}
+
+/* 상단 바 — 높이 90px (safe zone 37px 이후 시작, 상단 37px은 오버레이에 가려짐) */
+.top-bar{
+  width:100%;height:90px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;overflow:hidden;
+}
+.top-bar::after{content:'';position:absolute;right:-17px;top:-23px;width:74px;height:124px;background:rgba(255,255,255,.07);transform:rotate(18deg);}
+.top-bar::before{content:'';position:absolute;left:-11px;bottom:-17px;width:57px;height:90px;background:rgba(0,0,0,.15);transform:rotate(18deg);}
+/* safe zone 고려: 텍스트를 아래쪽에 정렬, 중앙 배치 */
+.top-text{
+  font-size:22px;font-weight:900;color:#fff;
+  text-align:center;
+  text-shadow:1px 2px 0 rgba(0,0,0,.55);
+  letter-spacing:-.02em;line-height:1.15;
+  padding:38px 10px 6px 10px; /* 상단 38px은 yt-top 아래로 내림 */
+  word-break:keep-all;position:relative;z-index:2;width:100%;
+}
+
+/* 중앙 */
+.mid{
+  flex:1;position:relative;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;
+  padding:10px 10px 14px 10px;
+}
+.deco-circle{
+  position:absolute;width:110px;height:110px;border-radius:50%;
+  top:50%;left:8%;transform:translateY(-50%);
+  opacity:.32;pointer-events:none;
+}
+.deco-rect{
+  position:absolute;width:80px;height:130px;
+  top:6%;right:-11px;transform:rotate(11deg);
+  background:rgba(10,16,50,.9);opacity:.18;pointer-events:none;
+}
+
+/* 일러스트들 */
+.illus-phone{
+  position:absolute;top:20%;left:50%;
+  transform:translateX(-50%) rotate(-6deg);
+  width:68px;height:98px;
+  background:linear-gradient(145deg,#182038,#0c1222);
+  border:1.5px solid #243255;border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;padding:7px;
+  box-shadow:0 5px 18px rgba(0,0,0,.75);
+  pointer-events:none;z-index:2;
+}
+.ph-b{width:80%;height:13px;background:#28407a;border-radius:3px}
+.ph-btn{width:68%;height:12px;border-radius:3px;display:flex;align-items:center;justify-content:center}
+.ph-btn-i{width:7px;height:7px;border:1.5px solid rgba(0,0,0,.38);border-radius:50%}
+.ph-b2{width:80%;height:11px;background:#1a55a8;border-radius:3px}
+.ph-ln{height:2px;background:rgba(255,255,255,.2);border-radius:1px;width:68%}
+.ph-ln2{height:2px;background:rgba(255,255,255,.2);border-radius:1px;width:50%}
+.tap-ring{
+  position:absolute;width:18px;height:18px;border-radius:50%;
+  top:calc(20% + 28px);left:calc(50% + 10px);
+  z-index:3;pointer-events:none;
+}
+
+/* 경보·도장 일러스트 */
+.illus-stamp{
+  position:absolute;top:50%;left:5%;
+  transform:translateY(-50%) rotate(-8deg);
+  width:80px;height:80px;pointer-events:none;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+}
+.stamp-circle{
+  width:74px;height:74px;border-radius:50%;
+  border:4px solid;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+}
+.stamp-txt{font-size:7.5px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;}
+.stamp-num{font-size:18px;font-weight:900;line-height:1;}
+
+/* 지구 + 데이터 흐름 */
+.illus-globe{
+  position:absolute;top:10%;left:50%;
+  transform:translateX(-50%);
+  width:90px;height:90px;pointer-events:none;z-index:2;
+}
+.globe-body{
+  width:82px;height:82px;border-radius:50%;
+  border:2.5px solid;position:relative;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.globe-line{
+  position:absolute;width:100%;height:2px;background:rgba(255,255,255,.15);
+}
+.globe-vline{
+  position:absolute;height:100%;width:2px;background:rgba(255,255,255,.15);left:50%;transform:translateX(-50%);
+}
+.globe-vline2{
+  position:absolute;height:100%;width:1.5px;background:rgba(255,255,255,.1);left:28%;
+}
+.globe-vline3{
+  position:absolute;height:100%;width:1.5px;background:rgba(255,255,255,.1);left:72%;
+}
+.globe-dot{
+  position:absolute;width:6px;height:6px;border-radius:50%;
+  animation:pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+
+/* 저울 일러스트 */
+.illus-scale{
+  position:absolute;top:8%;left:50%;
+  transform:translateX(-50%);
+  width:95px;height:88px;pointer-events:none;z-index:2;
+}
+.scale-beam{
+  position:absolute;top:24px;left:8px;right:8px;height:3px;border-radius:2px;
+  transform:rotate(-8deg);transform-origin:center;
+}
+.scale-pole{
+  position:absolute;top:4px;left:50%;transform:translateX(-50%);
+  width:3px;height:28px;border-radius:2px;
+}
+.scale-top{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:12px;height:4px;border-radius:2px;
+}
+.scale-pan-l,.scale-pan-r{
+  position:absolute;bottom:0;
+  width:32px;height:7px;border-radius:4px;
+}
+.scale-pan-l{left:2px;}
+.scale-pan-r{right:2px;}
+.scale-string-l,.scale-string-r{
+  position:absolute;width:1.5px;border-radius:1px;
+  bottom:7px;
+}
+.scale-string-l{left:18px;height:22px;transform:rotate(-5deg);transform-origin:bottom;}
+.scale-string-r{right:18px;height:14px;transform:rotate(5deg);transform-origin:bottom;}
+.scale-label-l,.scale-label-r{
+  position:absolute;bottom:9px;font-size:5.5px;font-weight:900;text-align:center;width:32px;
+}
+.scale-label-l{left:2px;color:rgba(255,200,0,.85);}
+.scale-label-r{right:2px;color:rgba(255,255,255,.5);}
+
+/* 방패 일러스트 */
+.illus-shield{
+  position:absolute;top:10%;left:50%;
+  transform:translateX(-50%) rotate(-5deg);
+  width:75px;height:88px;pointer-events:none;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+}
+.shield-body{
+  width:66px;height:78px;
+  clip-path:polygon(50% 0%,100% 15%,100% 60%,50% 100%,0% 60%,0% 15%);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;
+}
+.shield-inner{
+  width:44px;height:52px;
+  clip-path:polygon(50% 0%,100% 15%,100% 60%,50% 100%,0% 60%,0% 15%);
+  background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+}
+.shield-x{font-size:20px;font-weight:900;line-height:1;}
+
+/* 법 문서 일러스트 */
+.illus-law{
+  position:absolute;top:8%;left:50%;
+  transform:translateX(-50%) rotate(-4deg);
+  width:72px;height:88px;pointer-events:none;z-index:2;
+}
+.law-doc{
+  width:64px;height:80px;border-radius:5px;
+  background:linear-gradient(160deg,#1e2a4a,#0e1830);
+  border:1.5px solid rgba(100,140,255,.3);
+  padding:7px 6px;display:flex;flex-direction:column;gap:4px;
+}
+.law-line{height:4px;border-radius:2px;background:rgba(255,255,255,.2);}
+.law-line.accent{background:rgba(204,0,0,.6);}
+.law-line.short{width:65%;}
+.law-seal{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid rgba(255,200,0,.5);
+  margin-top:auto;margin-left:auto;
+  display:flex;align-items:center;justify-content:center;
+  font-size:7px;color:rgba(255,200,0,.7);font-weight:900;
+}
+
+/* 메인 텍스트 블록 — 오른쪽 36px 확보, 중앙 정렬 */
+.main-block{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;
+  align-items:center;text-align:center;
+  margin-left:0;
+  padding-right:38px; /* yt-right 36px + 2px 여유 */
+  padding-left:8px;
+  width:100%;
+}
+.m-line{
+  font-size:30px;font-weight:900;
+  letter-spacing:-.02em;line-height:1.1;
+  text-shadow:2px 2px 0 rgba(0,0,0,.95),-1px -1px 0 rgba(0,0,0,.6);
+  word-break:keep-all;
+}
+
+/* 하단 바 — 높이 90px, 텍스트는 상단 쪽 배치(bottom 74px은 yt-bot) */
+.bot-bar{
+  width:100%;height:90px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-start;
+  gap:0;flex-shrink:0;position:relative;overflow:hidden;
+}
+.bot-bar::before{content:'';position:absolute;left:-17px;top:-17px;width:68px;height:113px;background:rgba(255,255,255,.06);transform:rotate(18deg);}
+.bot-line{
+  font-size:14px;font-weight:900;color:#fff;
+  text-shadow:1px 1px 0 rgba(0,0,0,.55);
+  text-align:center;letter-spacing:-.02em;line-height:1.1;
+  padding:4px 38px 0 10px; /* 오른쪽 38px = yt-right 36 + 2 여유 */
+  word-break:keep-all;position:relative;z-index:2;width:100%;
+}
+.bot-line:first-child{padding-top:5px;}
+.acc{color:#FFD700;}
+
+/* 에피소드 배지 — yt-top(0~37px) 영역과 같은 높이, 수평 중앙 */
+.ep-badge{
+  position:absolute;top:0;left:0;right:0;height:37px;
+  display:flex;align-items:center;justify-content:center;
+  z-index:55;pointer-events:none;
+}
+.ep-badge span{
+  background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.22);
+  border-radius:10px;padding:2px 8px;
+  font-size:6.5px;font-weight:900;color:rgba(255,255,255,.8);
+  letter-spacing:.1em;
+}
+
+/* ── 각 편 배경색/스타일 변수 ── */
+.s1-top{background:#CC0000;}
+.s1-bot{background:#CC0000;}
+.s1-mid{background:radial-gradient(ellipse 60% 45% at 18% 58%,rgba(170,90,0,.55) 0%,transparent 68%),radial-gradient(ellipse 65% 55% at 82% 35%,rgba(20,45,130,.6) 0%,transparent 70%),#080812;}
+
+.s2-top{background:#B8001A;}
+.s2-bot{background:#B8001A;}
+.s2-mid{background:radial-gradient(ellipse 60% 50% at 20% 55%,rgba(140,0,30,.5) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 80% 38%,rgba(10,20,80,.7) 0%,transparent 68%),#06060e;}
+
+.s3-top{background:#1a1a6e;}
+.s3-bot{background:#1a1a6e;}
+.s3-mid{background:radial-gradient(ellipse 55% 45% at 20% 55%,rgba(10,10,90,.7) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 80% 38%,rgba(80,0,160,.35) 0%,transparent 68%),#04040c;}
+
+.s4-top{background:#7a3800;}
+.s4-bot{background:#7a3800;}
+.s4-mid{background:radial-gradient(ellipse 58% 48% at 20% 55%,rgba(100,50,0,.6) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 80% 38%,rgba(0,60,30,.5) 0%,transparent 68%),#060a04;}
+
+.s5-top{background:#006640;}
+.s5-bot{background:#006640;}
+.s5-mid{background:radial-gradient(ellipse 58% 48% at 20% 55%,rgba(0,80,40,.55) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 80% 38%,rgba(0,30,80,.6) 0%,transparent 68%),#040c08;}
+
+/* 단독 페이지: 중앙 정렬 */
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;}
+</style>
+</head>
+<body>
+<div class="gallery">
+<!-- ════════════════════════════════════════
+       EP01-4 : 유튜브 막고 데이터 공짜로 가져간다
+  ════════════════════════════════════════ -->
+  <div class="shorts-col">
+    <div class="ep-label">EP01-4</div>
+    <div class="sf">
+      <div class="card">
+
+        <div class="top-bar s4-top">
+          <div class="top-text">이게 공정한<br>거래입니까?</div>
+        </div>
+
+        <div class="mid s4-mid">
+          <div class="deco-circle" style="background:rgba(120,60,0,.5);"></div>
+          <div class="deco-rect"></div>
+
+          <!-- 저울 일러스트 -->
+          <div class="illus-scale">
+            <div class="scale-pole" style="background:#c8860a;left:50%;transform:translateX(-50%);top:4px;width:3px;height:30px;position:absolute;border-radius:2px;"></div>
+            <div class="scale-top" style="background:#c8860a;"></div>
+            <div class="scale-beam" style="background:#c8860a;"></div>
+            <div class="scale-string-l" style="background:#c8860a99;"></div>
+            <div class="scale-string-r" style="background:#c8860a99;"></div>
+            <div class="scale-pan-l" style="background:#a06800;bottom:0;"></div>
+            <div class="scale-pan-r" style="background:#a06800;bottom:8px;"></div>
+            <div class="scale-label-l">우리 데이터</div>
+            <div class="scale-label-r" style="bottom:17px;">싼 물건</div>
+          </div>
+
+          <div class="main-block">
+            <div class="m-line" style="color:#FFB347;">유튜브는</div>
+            <div class="m-line" style="color:#fff;">막고</div>
+            <div class="m-line" style="color:#FFD700;">데이터는 공짜</div>
+          </div>
+        </div>
+
+        <div class="bot-bar s4-bot">
+          <div class="bot-line">내 소비 선택이</div>
+          <div class="bot-line"><span class="acc">데이터 주권</span>의 투표입니다</div>
+        </div>
+
+        <div class="ep-badge"><span>EP01-4</span></div>
+      </div>
+
+      <div class="yt-top">
+        <div class="yt-top-l"><div class="yt-icon"></div><span class="yt-logo">Shorts</span></div>
+        <div class="yt-top-r"><div class="yt-dot"></div><div class="yt-dot"></div><div class="yt-dot"></div></div>
+      </div>
+      <div class="yt-right">
+        <div class="yt-action"><div class="yt-action-icon"><svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div><span class="yt-action-num">7.4만</span></div>
+        <div class="yt-action"><div class="yt-action-icon"><svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg></div><span class="yt-action-num">싫어요</span></div>
+        <div class="yt-action"><div class="yt-action-icon"><svg viewBox="0 0 24 24"><path d="M21 6.5c0-1.38-1.12-2.5-2.5-2.5h-13C4.12 4 3 5.12 3 6.5v8c0 1.38 1.12 2.5 2.5 2.5H18l3 3-.01-14z"/></svg></div><span class="yt-action-num">3.2만</span></div>
+        <div class="yt-action"><div class="yt-action-icon"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div><span class="yt-action-num">공유</span></div>
+        <div class="yt-action"><div class="yt-action-icon"><svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></div><span class="yt-action-num">리믹스</span></div>
+      </div>
+      <div class="yt-bot">
+        <div class="yt-channel">@IssueLens</div>
+        <div class="yt-title">그 나라는 유튜브 막고 우린 데이터 공짜로 줍니다</div>
+        <div class="yt-music"><div class="yt-music-icon"></div><span class="yt-music-txt">오리지널 사운드 · IssueLens</span></div>
+      </div>
+    </div>
+  </div><!-- /EP01-4 -->
+</div>
+</body>
+</html>

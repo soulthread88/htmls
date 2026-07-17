@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>IssueLens EP.11 | 유통 주권 — 알리·테무·미니소가 한국 소상공인 생태계를 사막화하는 방식</title>
+<meta name="description" content="피크 차이나發 디플레이션 수출, 알리·테무·미니소·요요소의 온오프라인 협공, 다이소 공급망 위기, 제조업 공동화 통계. 장바구니 주권이 무너지고 있습니다.">
+<meta name="keywords" content="유통주권,알리익스프레스,테무,미니소,요요소,다이소위기,디플레이션수출,피크차이나,제조업공동화,소상공인위기,C커머스,한국유통시장">
+<meta property="og:title" content="유통 주권 — 알리·테무·미니소가 한국 소상공인 생태계를 사막화하는 방식 | IssueLens EP.11">
+<meta property="og:description" content="피크 차이나 과잉생산 → 디플레이션 수출 → 한국 유통 전방위 포위 → 소상공인·제조업 붕괴. 장바구니 1,000원의 경제적 주권 비용을 추적합니다.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Do+Hyeon&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ft:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
+  --fb:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  --fe-head:'Playfair Display','Georgia',serif;
+  --fe-body:'Source Serif 4','Georgia',serif;
+  --bg:#fff;--bg2:#F7F9FC;--bg3:#FFF8F0;
+  --ink:#0A0A0A;--ink2:#1F2937;--ink3:#4B5563;
+  --red:#C8001A;--redbg:#FFF0F3;--redl:#FFCCD5;
+  --amb:#B45309;--ambbg:#FFFBEB;
+  --grn:#065F46;--blu:#1E3A8A;--blubg:#EFF6FF;
+  --bdr:#CBD5E1;--rul:#E2E8F0;
+  --sh:0 2px 14px rgba(0,0,0,.07);
+  --shl:0 8px 32px rgba(0,0,0,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:20px;line-height:1.95;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:var(--red);text-decoration:none}
+em,i{font-style:normal}
+#pb{position:fixed;top:0;left:0;height:5px;background:var(--red);z-index:9999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(200,0,26,.5)}
+.mh{background:var(--bg);border-bottom:3px solid var(--red)}
+.mh-top{background:var(--red);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:8px}
+.logo{font-family:var(--ft);font-size:clamp(1.1rem,3.5vw,1.3rem);font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.logo-dot{width:10px;height:10px;background:#fff;border-radius:50%;opacity:.85}
+.mh-meta{font-family:var(--fb);font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.88);font-weight:600}
+.mh-hero{padding:36px 20px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+.ep-lbl{font-family:var(--ft);font-size:clamp(13px,3.2vw,15px);font-weight:700;color:var(--red);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ep-lbl::before{content:'';width:22px;height:3px;background:var(--red);border-radius:2px;display:inline-block}
+.headline{font-family:var(--ft);font-size:clamp(1.85rem,6vw,3.6rem);font-weight:800;line-height:1.22;color:var(--ink);letter-spacing:-.03em}
+.headline .acc{color:var(--red);background:var(--redbg);padding:2px 8px;border-radius:5px;display:inline-block}
+.sub-hl{font-family:var(--fb);margin-top:14px;font-size:clamp(17px,3.5vw,20px);color:var(--ink3);line-height:1.82;font-weight:500}
+.stats{display:flex;flex-direction:column;gap:10px;min-width:155px}
+.stat{background:var(--redbg);border:2.5px solid var(--redl);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--sh)}
+.stat-n{font-family:var(--ft);font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--red);display:block;line-height:1;letter-spacing:-.02em}
+.stat-l{font-family:var(--fb);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);margin-top:4px;display:block;line-height:1.4}
+.tags{padding:10px 20px 14px;border-top:1.5px solid var(--rul);display:flex;gap:7px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.tag{font-family:var(--fb);font-size:clamp(13px,3vw,15px);font-weight:700;border:2px solid var(--bdr);color:var(--ink3);padding:4px 12px;border-radius:20px;cursor:pointer;transition:all .2s}
+.tag:hover,.tag.hot{border-color:var(--red);color:var(--red);background:var(--redbg)}
+.brand-strip{background:var(--bg2);border-top:2px solid var(--rul);border-bottom:2px solid var(--rul);padding:22px 20px}
+.brand-strip-inner{max-width:920px;margin:0 auto}
+.brand-ttl{font-family:var(--ft);font-size:clamp(15px,3.5vw,17px);font-weight:800;color:var(--ink2);text-align:center;margin-bottom:18px;letter-spacing:.02em}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.bp{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 18px;border-radius:14px;border:2.5px solid var(--bdr);background:#fff;box-shadow:var(--sh);min-width:100px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:default}
+.bp:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:var(--red)}
+.bp-svg{width:84px;height:42px;display:flex;align-items:center;justify-content:center}
+.bp-name{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:var(--ink2)}
+.bp-sub{font-family:var(--fb);font-size:clamp(11px,2.5vw,13px);color:var(--ink3);font-weight:600}
+.disclaimer{max-width:860px;margin:30px auto 0;padding:16px 22px;background:var(--bg2);border:1.5px solid var(--bdr);border-left:6px solid var(--blu);border-radius:10px;font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);line-height:1.82}
+.ab{max-width:860px;margin:0 auto;padding:36px 20px 56px}
+.intro{font-family:var(--fb);font-size:clamp(18px,3.8vw,21px);line-height:1.95;color:var(--ink2);background:var(--ambbg);border-left:6px solid #F59E0B;padding:20px 22px;border-radius:0 12px 12px 0;font-weight:500}
+.sec{margin-top:52px}
+.sec-ttl{font-family:var(--ft);font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:800;color:var(--ink);padding:16px 18px 16px 22px;border-left:7px solid var(--red);background:linear-gradient(90deg,var(--redbg) 0%,#fff 65%);border-radius:0 12px 12px 0;margin-bottom:22px;line-height:1.42;display:flex;align-items:center;gap:11px;box-shadow:var(--sh);letter-spacing:-.02em}
+.sec-ttl.b2{font-family:'Do Hyeon',sans-serif;font-size:clamp(1.3rem,4.5vw,1.7rem);font-weight:400;background:linear-gradient(90deg,var(--blubg) 0%,#fff 65%);border-left-color:var(--blu);color:var(--blu);letter-spacing:0}
+.sec-ttl .num{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:#fff;background:var(--red);border-radius:6px;padding:3px 11px;flex-shrink:0;letter-spacing:.06em}
+.sec-ttl.b2 .num{background:var(--blu)}
+.bt{font-family:var(--fb);font-size:clamp(18px,3.5vw,21px);line-height:2.0;color:var(--ink2);margin-bottom:20px}
+.hl-r{color:var(--red);font-weight:800}
+.hl-b{color:var(--blu);font-weight:800}
+.hl-a{color:var(--amb);font-weight:800}
+.hl-g{color:var(--grn);font-weight:800}
+.dcall{background:var(--redbg);border:2px solid var(--redl);border-top:6px solid var(--red);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.dcall-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--red);letter-spacing:.16em;margin-bottom:10px;display:flex;align-items:center;gap:7px;text-transform:uppercase}
+.dcall-lbl::before{content:'●';animation:blink 1.5s infinite;font-size:.65rem}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.12}}
+.bignum{font-family:var(--ft);font-size:clamp(2.4rem,7vw,3.8rem);font-weight:800;color:var(--red);display:block;line-height:1;margin:6px 0 5px;letter-spacing:-.03em}
+.biglbl{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);font-weight:700;margin-bottom:12px;display:block}
+.cbody{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);line-height:1.95;color:var(--ink2)}
+.cbody strong{color:var(--red);font-weight:800}
+.cctx{background:var(--blubg);border:2px solid #BFDBFE;border-top:6px solid var(--blu);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.cctx-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--blu);letter-spacing:.14em;margin-bottom:10px;text-transform:uppercase}
+.cctx .cbody strong{color:var(--blu)}
+.flow{margin:24px 0;background:#fff;border:2px solid var(--bdr);border-radius:16px;padding:24px 16px 20px;box-shadow:var(--sh)}
+.flow-ttl{font-family:var(--ft);font-size:clamp(15px,3.2vw,17px);font-weight:700;color:var(--ink);text-align:center;margin-bottom:20px}
+.flow-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.fs{flex:1;min-width:80px;max-width:120px;text-align:center}
+.fi{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.45rem;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.fi.s{background:#DCFCE7;border:3px solid #22C55E}
+.fi.w{background:#FEF3C7;border:3px solid #F59E0B}
+.fi.d{background:#FFE4E6;border:3px solid var(--red)}
+.fs-lbl{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink);line-height:1.38}
+.fs-sub{font-family:var(--fb);font-size:clamp(11px,2.4vw,13px);color:var(--ink3);margin-top:2px;font-weight:600}
+.farrow{color:var(--red);font-size:1.45rem;flex-shrink:0;font-weight:900;animation:ap 1.9s infinite}
+@keyframes ap{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(4px);opacity:.3}}
+.lq{border:2.5px solid #9CA3AF;border-radius:14px;padding:26px 26px;margin:26px 0;position:relative;background:var(--bg2);box-shadow:var(--sh)}
+.lq-bdg{position:absolute;top:-14px;left:18px;background:var(--ink);color:#fff;font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:3px 14px;border-radius:4px;letter-spacing:.04em;white-space:nowrap}
+.lq-txt{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);color:var(--ink2);line-height:2.0;margin-top:4px}
+.lq-txt strong{color:var(--red);font-weight:800}
+.lq-src{font-family:var(--fb);margin-top:10px;font-size:clamp(13px,2.8vw,15px);color:var(--ink3);text-align:right;font-weight:700}
+.rm{margin:26px 0;padding:24px 26px;background:#fff;border:2px solid var(--bdr);border-radius:16px;box-shadow:var(--sh)}
+.rm-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:700;color:var(--ink);margin-bottom:18px}
+.ri{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rl{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:800;width:140px;flex-shrink:0;color:var(--ink)}
+.rbg{flex:1;height:14px;background:#F1F5F9;border-radius:7px;overflow:hidden;border:1px solid var(--rul)}
+.rbf{height:100%;border-radius:7px;width:0;transition:width 1.5s cubic-bezier(.2,1,.3,1)}
+.rbf.h{background:linear-gradient(90deg,#F87171,var(--red))}
+.rbf.m{background:linear-gradient(90deg,#FCD34D,#D97706)}
+.rbf.l{background:linear-gradient(90deg,#6EE7B7,#059669)}
+.rp{font-family:var(--ft);font-size:clamp(15px,3vw,17px);font-weight:800;width:48px;text-align:right;flex-shrink:0}
+.media-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+.mbox-wrap{position:relative}
+.mbox-label{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--ink3);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.mbox{position:relative;border-radius:14px;overflow:hidden;background:#F1F5F9;border:2.5px dashed var(--bdr);min-height:200px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.mbox:hover{border-color:var(--red);box-shadow:var(--shl)}
+.mbox-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);padding:20px;text-align:center;pointer-events:none;width:100%}
+.mbox-ph .ico{font-size:2.4rem;opacity:.45}
+.mbox-ph p{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:700;line-height:1.45;color:var(--ink3)}
+.mbox-ph .hint{font-size:clamp(12px,2.5vw,13px);color:#94A3B8;margin-top:2px}
+.mbox img.prev{width:100%;height:100%;min-height:200px;object-fit:cover;display:block;border-radius:12px}
+.mbox iframe{width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px}
+.mctrl{position:absolute;top:8px;right:8px;display:flex;gap:7px;opacity:0;transition:opacity .22s;pointer-events:none;z-index:20}
+.mbox:hover .mctrl{opacity:1;pointer-events:auto}
+.mbtn{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:6px 14px;border-radius:7px;border:none;cursor:pointer;backdrop-filter:blur(8px);transition:transform .15s;white-space:nowrap}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn.rep{background:rgba(255,255,255,.92);color:var(--ink)}
+.mbtn.del{background:rgba(200,0,26,.88);color:#fff}
+.pq{margin:26px 0 10px;padding:28px 22px;background:var(--bg3);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);text-align:center}
+.pq-txt{font-family:var(--ft);font-size:clamp(1.2rem,4vw,1.85rem);font-weight:800;color:var(--ink);line-height:1.62;letter-spacing:-.02em}
+.pq-txt em{color:var(--red);font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+/* 영문 원문 박스 */
+.en-src{background:#F8FAFC;border:2px solid #94A3B8;border-left:6px solid #475569;border-radius:12px;padding:20px 24px;margin:18px 0 6px;font-family:var(--fe-body);font-size:clamp(14px,2.8vw,16px);color:#1E293B;line-height:1.9;font-style:normal}
+.en-src-label{font-family:var(--fe-head);font-size:clamp(12px,2.6vw,14px);font-weight:700;color:#475569;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;font-style:normal}
+.src-cite{font-family:var(--fe-body);font-size:clamp(12px,2.6vw,13px);color:#64748B;margin-top:10px;font-style:italic}
+.ko-trans{background:var(--ambbg);border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin:0 0 20px;font-family:var(--fb);font-size:clamp(16px,3.2vw,18px);color:#78350F;line-height:1.92;font-style:normal!important}
+/* 비교 테이블 */
+.ctbl{width:100%;border-collapse:collapse;margin:26px 0;font-family:var(--fb);font-size:clamp(14px,3vw,16px);box-shadow:var(--sh);border-radius:12px;overflow:hidden}
+.ctbl thead{background:var(--ink);color:#fff}
+.ctbl th{padding:14px 16px;text-align:left;font-family:var(--ft);font-weight:700;font-size:clamp(13px,2.8vw,15px);letter-spacing:.03em}
+.ctbl td{padding:13px 16px;border-bottom:1.5px solid var(--rul);vertical-align:top;line-height:1.72;color:var(--ink2)}
+.ctbl tr:last-child td{border-bottom:none}
+.ctbl tr:nth-child(even){background:var(--bg2)}
+.ctbl td.bad{color:var(--red);font-weight:700}
+.ctbl td.warn{color:var(--amb);font-weight:700}
+.ctbl td.ok{color:var(--grn);font-weight:700}
+/* 실천 강령 */
+.action{background:var(--bg2);border-top:3px solid var(--rul);padding:40px 20px;margin-top:0}
+.action-inner{max-width:860px;margin:0 auto}
+.action-ttl{font-family:var(--ft);font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em}
+.action-sub{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);margin-bottom:24px;font-weight:700}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ac{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s,border-color .2s}
+.ac:hover{border-color:var(--red);box-shadow:var(--shl);transform:translateY(-4px)}
+.ac-n{font-family:var(--ft);font-size:clamp(11px,2.5vw,13px);font-weight:700;color:var(--red);letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase}
+.ac-ico{font-size:1.9rem;margin-bottom:8px;line-height:1}
+.ac-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.42;letter-spacing:-.01em}
+.ac-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);line-height:1.85}
+/* 소셜 바 */
+.sb{max-width:860px;margin:0 auto;padding:24px 20px;border-top:1.5px solid var(--rul)}
+.sb-lbl{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sb-lbl::after{content:'';flex:1;height:1.5px;background:var(--rul)}
+.sb-btns{display:flex;flex-wrap:wrap;gap:9px}
+.snsbtn{display:inline-flex;align-items:center;gap:7px;font-family:var(--ft);font-size:clamp(13px,3vw,15px);font-weight:700;padding:9px 16px;border-radius:8px;border:2.5px solid;cursor:pointer;text-decoration:none;transition:background .18s,color .18s,transform .15s;white-space:nowrap;background:transparent;position:relative}
+.snsbtn.has-link::after{content:'✓';position:absolute;top:-7px;right:-7px;width:18px;height:18px;background:#22C55E;color:#fff;border-radius:50%;font-size:11px;font-weight:900;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.snsbtn svg{width:18px;height:18px;flex-shrink:0;transition:fill .18s}
+.snsbtn:hover{transform:translateY(-2px)}
+.snsbtn.yt{color:#CC0000;border-color:#CC0000}.snsbtn.yt svg{fill:#CC0000}.snsbtn.yt:hover{background:#CC0000;color:#fff}.snsbtn.yt:hover svg{fill:#fff}
+.snsbtn.ig{color:#C13584;border-color:#C13584}.snsbtn.ig svg{fill:#C13584}.snsbtn.ig:hover{background:#C13584;color:#fff}.snsbtn.ig:hover svg{fill:#fff}
+.snsbtn.tt{color:#010101;border-color:#010101}.snsbtn.tt svg{fill:#010101}.snsbtn.tt:hover{background:#010101;color:#fff}.snsbtn.tt:hover svg{fill:#fff}
+.snsbtn.th{color:#000;border-color:#000}.snsbtn.th svg{fill:#000}.snsbtn.th:hover{background:#000;color:#fff}.snsbtn.th:hover svg{fill:#fff}
+.snsbtn.xb{color:#14171A;border-color:#14171A}.snsbtn.xb svg{fill:#14171A}.snsbtn.xb:hover{background:#14171A;color:#fff}.snsbtn.xb:hover svg{fill:#fff}
+.snsbtn.fb{color:#1877F2;border-color:#1877F2}.snsbtn.fb svg{fill:#1877F2}.snsbtn.fb:hover{background:#1877F2;color:#fff}.snsbtn.fb:hover svg{fill:#fff}
+.ft{background:#0D0D0D;color:#9CA3AF;padding:32px 20px;text-align:center;border-top:4px solid var(--red)}
+.ft-brand{font-family:var(--ft);font-size:1.2rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:6px}
+.ft-dot{width:9px;height:9px;background:var(--red);border-radius:50%}
+.ft p{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);line-height:1.88;color:#6B7280;margin-top:6px}
+.yt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.yt-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.yt-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.yt-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.yt-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.yt-inp:focus{border-color:var(--red)}
+.yt-btns{display:flex;gap:9px;margin-top:14px}
+.yt-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s}
+.yt-ok:hover{background:#a80018}
+.yt-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+.rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:none}
+@media(max-width:600px){
+  .mh-hero{grid-template-columns:1fr}
+  .stats{flex-direction:row;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px}
+  .sec-ttl{font-size:1.15rem}
+  .rl{width:110px;font-size:13px}
+  .media-pair{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<!-- ▶▶ 티스토리 발행 버전 | IssueLens EP.11 ◀◀ -->
+<div style="background:#1E3A8A;color:#fff;text-align:center;padding:10px 16px;font-family:'Pretendard Variable',sans-serif;font-size:14px;font-weight:700;letter-spacing:.05em">
+  📌 IssueLens EP.11 — 티스토리 공식 발행본 · 매일 새 에피소드 발행 중
+</div>
+
+<div class="yt-modal" id="ytm" style="display:none">
+  <div class="yt-box">
+    <div class="yt-ttl">📹 YouTube 영상 삽입</div>
+    <div class="yt-desc">관련 YouTube 영상 링크를 붙여넣으세요.<br>확인하면 영상이 이 섹션에 영구 삽입됩니다.</div>
+    <input class="yt-inp" id="yti" type="text" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="yt-btns">
+      <button class="yt-ok" onclick="ytOk()">✓ 삽입하기</button>
+      <button class="yt-cancel" onclick="ytClose()">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 마스트헤드 ═══════════════ -->
+<header class="mh">
+  <div class="mh-top">
+    <div class="logo"><span class="logo-dot"></span>IssueLens</div>
+    <span class="mh-meta">EP.11 · 대한민국 주권 시리즈</span>
+    <span class="mh-meta">IssueLens 편집부</span>
+  </div>
+  <div class="mh-hero">
+    <div>
+      <div class="ep-lbl">EP.11 &nbsp;유통 주권 긴급 추적</div>
+      <h1 class="headline">
+        장바구니를 포위한<br>
+        <span class="acc">C-커머스의 사막화 전략</span><br>
+        — 유통 주권 위기
+      </h1>
+      <p class="sub-hl">알리·테무·미니소·요요소의 온오프라인 협공과 피크 차이나 디플레이션 수출…<br>한국 소상공인 생태계와 다이소 공급망, 지금 어디까지 무너졌나요?</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-n">96.7%</span>
+        <span class="stat-l">패션 중소기업<br>매출 감소 응답</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">6.5조</span>
+        <span class="stat-l">2025년 중국발<br>직구 추정 금액</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">65%</span>
+        <span class="stat-l">전체 직구 중<br>중국 플랫폼 비중</span>
+      </div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag hot">#유통주권</span>
+    <span class="tag hot">#알리테무</span>
+    <span class="tag hot">#피크차이나</span>
+    <span class="tag hot">#소상공인위기</span>
+    <span class="tag">#미니소요요소</span>
+    <span class="tag">#다이소공급망</span>
+    <span class="tag">#제조업공동화</span>
+    <span class="tag">#디플레이션수출</span>
+    <span class="tag">#C커머스</span>
+    <span class="tag">#장바구니주권</span>
+  </div>
+</header>
+
+<!-- ═══════════════ 브랜드 스트립 ═══════════════ -->
+<div class="brand-strip rev">
+  <div class="brand-strip-inner">
+    <div class="brand-ttl">⚠️ 한국 유통시장 포위 — 중국 C-커머스 사각편대</div>
+    <div class="brand-row">
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#FF6A00"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="14" font-weight="900" fill="white" text-anchor="middle">AliExpress</text>
+          </svg>
+        </div>
+        <span class="bp-name">AliExpress</span><span class="bp-sub">알리익스프레스</span>
+      </div>
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#FF5A00"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="18" font-weight="900" fill="white" text-anchor="middle">TEMU</text>
+          </svg>
+        </div>
+        <span class="bp-name">Temu</span><span class="bp-sub">테무</span>
+      </div>
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#E8000D"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="14" font-weight="900" fill="white" text-anchor="middle">MINISO</text>
+          </svg>
+        </div>
+        <span class="bp-name">Miniso</span><span class="bp-sub">미니소</span>
+      </div>
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#FF3366"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="16" font-weight="900" fill="white" text-anchor="middle">YOYOSO</text>
+          </svg>
+        </div>
+        <span class="bp-name">Yoyoso</span><span class="bp-sub">요요소</span>
+      </div>
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#00AAFF"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="16" font-weight="900" fill="white" text-anchor="middle">SHEIN</text>
+          </svg>
+        </div>
+        <span class="bp-name">Shein</span><span class="bp-sub">쉬인</span>
+      </div>
+      <div class="bp">
+        <div class="bp-svg">
+          <svg viewBox="0 0 120 50" width="84" height="42">
+            <rect width="120" height="50" rx="6" fill="#C8001A"/>
+            <text x="60" y="34" font-family="Arial Black,sans-serif" font-size="14" font-weight="900" fill="white" text-anchor="middle">Daiso?</text>
+          </svg>
+        </div>
+        <span class="bp-name">Daiso</span><span class="bp-sub">다이소 위기</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 기사 본문 ═══════════ -->
+<main>
+
+  <div class="disclaimer rev" style="margin:28px 20px 0;max-width:860px;margin-left:auto;margin-right:auto">
+    <strong style="color:var(--blu)">📌 알림 및 면책 공고</strong><br>
+    본 게시물은 한국경제인협회·대한상공회의소·통계청·국가데이터처 공식 발표, AP·Reuters·한국경제·연합뉴스 등 공신력 있는 언론 보도, 그리고 Lowy Institute·The Economist 등 국제 연구기관 보고서를 근거로 작성된 공익적 사실 분석 보도입니다. 통계 수치는 보고 시점 기준이며, 미래 예측은 현 추세에 기반한 분석 의견으로 투자 권고가 아닙니다. 특정 기업에 대한 서술은 공개된 사실에 한정하며, 법적 판단이나 명예훼손 의도가 없습니다.
+  </div>
+
+  <div class="ab">
+
+    <!-- 리드 문단 -->
+    <p class="intro rev" style="margin-top:28px">
+      <strong class="hl-r">번화가를 걷다 보면</strong> 한글 간판 뒤에 중국 자본이 숨어 있는 낯익은 풍경을 마주하게 됩니다. 스마트폰 속에서는 알리·테무가 엄지손가락을 유혹하고, 거리에서는 미니소·요요소가 골목 상권까지 파고들고 있습니다. 이것은 단순히 "싼 물건을 파는 가게"가 늘어난 이야기가 아닙니다. <strong class="hl-a">피크 차이나(Peak China)</strong>라는 중국 경제의 구조적 위기가 한국 유통망 전체를 전쟁터로 바꾸고 있는 것입니다. 온라인과 오프라인, 공중과 지상 양쪽에서 동시에 벌어지는 이 포위 작전의 전모를 추적합니다.
+    </p>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 1 — 피크 차이나: 왜 지금인가
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">01</span>피크 차이나 — 멈출 수 없는 과잉생산 기관차</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "피크 차이나 뜻" · "중국 경제 위기 원인" · "알리 테무 왜 이렇게 싸지?"
+      </div>
+
+      <p class="bt">
+        <strong class="hl-r">피크 차이나(Peak China)</strong>는 중국 경제가 성장의 정점을 찍고 구조적 하락 국면에 진입했다는 개념입니다. 부동산 거품 붕괴, 내수 침체, 청년 실업률 급등이 동시에 진행되면서 중국인들은 지갑을 닫았습니다. 그러나 <strong class="hl-a">계획경제</strong>의 본질상 공장은 멈출 수 없습니다. 공장이 멈추면 실업률이 폭등하고, 그것은 공산당 통치 기반의 붕괴를 의미하기 때문입니다.
+      </p>
+
+      <p class="bt">
+        결과는 단순합니다. 중국 정부는 보조금을 퍼부어 <strong class="hl-r">좀비 공장</strong>을 계속 돌리고, 국내에서 소화되지 못한 엄청난 물량을 해외로 밀어냅니다. 이것이 경제학에서 말하는 <strong class="hl-a">밀어내기 수출(Deflation Export)</strong>이며, 한국은 그 주요 표적 중 하나입니다.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">FACT CHECK · Lowy Institute / The Economist 2024</div>
+        <span class="bignum">+40%↑</span>
+        <span class="biglbl">중국 제조업 과잉 생산 능력 — 자국 내 수요 대비 초과분 추정치 (2023~2024년)</span>
+        <p class="cbody">중국의 제조업 설비 가동률은 2024년 2분기 기준 약 <strong>73.6%</strong>로, 정상 가동 기준(80% 이상)을 크게 하회합니다. 남는 생산 물량은 전 세계로 쏟아지며, 특히 한국·동남아·유럽 시장을 직격하고 있습니다.</p>
+        <div class="src-cite">Source: Lowy Institute, "Peak China?" Analysis, 2024 / The Economist, "Why China's economy is in such a mess", 2024</div>
+      </div>
+
+      <div class="en-src rev">
+        <div class="en-src-label">🇺🇸 The Economist — 2024</div>
+        "China's factories are running well below capacity, yet investment keeps flowing in, subsidised by local governments desperate to hit growth targets. The result is a global deflationary wave as cheap Chinese goods flood world markets."
+        <div class="src-cite">Source: The Economist, "Why China's economy is in such a mess", August 2024</div>
+      </div>
+      <div class="ko-trans">
+        🇰🇷 한국어 번역: 중국의 공장들은 훨씬 낮은 가동률로 운영되고 있음에도 불구하고, 성장 목표를 달성하려는 지방 정부의 보조금 지원 아래 투자는 계속 유입되고 있습니다. 그 결과, 값싼 중국산 제품이 세계 시장을 뒤덮는 글로벌 디플레이션 파도가 발생하고 있습니다.
+      </div>
+
+      <!-- 피크 차이나 메커니즘 플로우 -->
+      <div class="flow rev">
+        <div class="flow-ttl">📊 피크 차이나 → 한국 유통 공습 메커니즘</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi d">📉</div><div class="fs-lbl">부동산 붕괴</div><div class="fs-sub">내수 침체<br>소비 위축</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">🏭</div><div class="fs-lbl">공장 과잉생산</div><div class="fs-sub">계획경제<br>멈출 수 없음</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">💸</div><div class="fs-lbl">정부 보조금</div><div class="fs-sub">초저가<br>덤핑 가능</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">📦</div><div class="fs-lbl">한국 직배송</div><div class="fs-sub">알리·테무<br>B2C 직통</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🏚️</div><div class="fs-lbl">생태계 붕괴</div><div class="fs-sub">소상공인<br>제조업 소멸</div></div>
+        </div>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 관련 이미지 삽입 — 중국 과잉생산 공장 현황</div>
+          <div class="mbox" id="mb-s1i" data-t="img" onclick="mbClick('s1i')">
+            <div class="mbox-ph" id="ph-s1i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s1i" accept="image/*" style="display:none" onchange="mbLoadImg('s1i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 추천 영상 — 피크 차이나 해설</div>
+          <div class="mbox" id="mb-s1v" data-t="vid" onclick="mbClick('s1v')">
+            <div class="mbox-ph" id="ph-s1v">
+              <span class="ico">🎬</span>
+              <p>YouTube 영상 삽입</p>
+              <span class="hint" style="font-style:italic;color:#64748B">Source: 타일러 유튜브 채널 / DW News "Peak China explained"</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 1 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 2 — 온라인 전선: 알리·테무의 직통 고속도로
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">02</span>온라인 전선 — 알리·테무의 중개 무역 종말과 플랫폼 종속</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "알리익스프레스 한국 점유율" · "테무 왜 저렴한가?" · "C커머스 문제점"
+      </div>
+
+      <p class="bt">
+        <strong class="hl-b">알리익스프레스와 테무</strong>가 등장하기 전, 중국 물건은 국내 오픈마켓 판매자가 마진을 붙여 유통하는 B2B 구조였습니다. 이른바 '택갈이' 관행이 있었고, 소비자들은 원가보다 훨씬 비싸게 구입해야 했습니다. 이 구조를 무너뜨린 것이 C-커머스의 <strong class="hl-r">B2C 직통 고속도로</strong>입니다. 중국 공장에서 한국 소비자 문 앞까지, 중간 단계가 사라졌습니다.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">DATA · 국가데이터처 온라인쇼핑동향 2025</div>
+        <span class="bignum">1.1조원</span>
+        <span class="biglbl">2025년 3분기 온라인 대중(對中) 무역 적자 — 분기 기준 사상 최대치</span>
+        <p class="cbody">중국발 직구 금액은 2024년 약 4.8조 원에서 2025년 약 <strong>6.5조 원</strong>으로 35% 급증했습니다. 전체 해외 직구에서 중국 플랫폼이 차지하는 비중은 <strong>65%</strong>를 돌파했으며, 2026년에는 70%에 근접할 것으로 전망됩니다.</p>
+        <div class="src-cite">Source: 국가데이터처, 온라인쇼핑동향조사 2025 / 연합뉴스: 알리·테무 한국 이커머스 시장 잠식 가속화</div>
+      </div>
+
+      <p class="bt">
+        더 큰 문제는 <strong class="hl-r">데이터 주권의 유출</strong>입니다. 과거에는 한국 플랫폼이 보유하던 고객 구매 패턴, 결제 정보, 취향 데이터가 이제 중국 서버로 넘어가고 있습니다. 미국 하원 전략경쟁특위는 테무·알리 같은 중국 이커머스 앱을 사실상 <strong class="hl-a">디지털 트로이 목마</strong>로 규정하며, 중국의 국가정보법에 따라 수집 데이터가 중국 정부에 제공될 수 있다고 경고했습니다.
+      </p>
+
+      <!-- 데이터 주권 리스크 미터 -->
+      <div class="rm rev">
+        <div class="rm-ttl">⚠️ 산업별 C-커머스 잠식 위험도 (2025년 기준 추정)</div>
+        <div class="ri"><div class="rl">소형 가전</div><div class="rbg"><div class="rbf h" data-w="88"></div></div><div class="rp" style="color:var(--red)">매우 높음</div></div>
+        <div class="ri"><div class="rl">의류·패션</div><div class="rbg"><div class="rbf h" data-w="82"></div></div><div class="rp" style="color:var(--red)">높음</div></div>
+        <div class="ri"><div class="rl">생활잡화</div><div class="rbg"><div class="rbf h" data-w="79"></div></div><div class="rp" style="color:var(--red)">높음</div></div>
+        <div class="ri"><div class="rl">가구·소품</div><div class="rbg"><div class="rbf m" data-w="65"></div></div><div class="rp" style="color:var(--amb)">중간</div></div>
+        <div class="ri"><div class="rl">완구·문구</div><div class="rbg"><div class="rbf m" data-w="58"></div></div><div class="rp" style="color:var(--amb)">중간</div></div>
+        <div class="ri"><div class="rl">뷰티·화장품</div><div class="rbg"><div class="rbf m" data-w="42"></div></div><div class="rp" style="color:var(--amb)">주의</div></div>
+        <div style="font-family:var(--fb);font-size:clamp(12px,2.5vw,13px);color:var(--ink3);margin-top:4px">※ 위험도는 중국 직구 비중, 국내 업체 폐업률, 가격 격차 등을 종합한 추정치입니다.</div>
+        <div class="src-cite">Source: 한국경제인협회 중소기업 피해 실태조사 2025 / 대한상공회의소 보고서</div>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 CONTEXT · 왜 중국 플랫폼 제품이 이렇게 싼가?</div>
+        <p class="cbody"><strong>세 가지 구조적 이유</strong>가 있습니다. 첫째, 중국 정부의 수출 보조금이 생산 원가를 인위적으로 낮춥니다. 둘째, 150달러 이하 직구 면세 혜택으로 국내 기업보다 유리한 세금 구조를 갖습니다. 셋째, 국내 기업이 지켜야 하는 KC 인증·관세·부가세를 부담하지 않아 규제 역차별이 발생합니다. 이는 자유시장의 공정 경쟁 원칙을 정면으로 위반하는 구조입니다.</p>
+      </div>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 알리·테무 한국 MAU 성장 그래프</div>
+          <div class="mbox" id="mb-s2i" data-t="img" onclick="mbClick('s2i')">
+            <div class="mbox-ph" id="ph-s2i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s2i" accept="image/*" style="display:none" onchange="mbLoadImg('s2i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 추천 영상 — C커머스 데이터 주권 경고</div>
+          <div class="mbox" id="mb-s2v" data-t="vid" onclick="mbClick('s2v')">
+            <div class="mbox-ph" id="ph-s2v">
+              <span class="ico">🎬</span>
+              <p>YouTube 영상 삽입</p>
+              <span class="hint" style="font-style:italic;color:#64748B">Source: KBS 시사기획 창 — 알리·테무 개인정보 실태</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 2 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 3 — 오프라인 침투: 미니소·요요소의 위장 전술
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">03</span>오프라인 침투 — 미니소·요요소의 '위장 한류' 전략</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "미니소 한국 기업이야?" · "요요소 어느 나라 브랜드?" · "무무소 중국 자본?"
+      </div>
+
+      <p class="bt">
+        명동·홍대·지방 번화가 어디서든 마주치는 <strong class="hl-r">미니소, 요요소, 무무소</strong>. 로고 디자인은 세련됐고, 매장에선 K-POP이 흘러나옵니다. 많은 소비자가 '어쩌면 한일 합작 브랜드겠지'라고 생각합니다. 그러나 이들은 <strong class="hl-a">100% 중국 자본, 100% 중국 공급망</strong>의 기업들입니다.
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">KBS 뉴스 보도 — 동남아 '짝퉁 한류' 실태 (2024)</div>
+        <p class="lq-txt">요요소(Yoyoso)는 동남아·중동 시장에서 <strong>"Korean Designer Brand"</strong>라고 공식 홍보하며 한국 이미지를 무단 차용하고 있습니다. 실제로는 중국에 본사를 둔 중국 기업으로, 한국 기업이 아닙니다. 이는 한류 브랜드를 사칭하여 해외 시장에서 수익을 가로채는 <strong>브랜드 하이재킹(Brand Hijacking)</strong>에 해당합니다.</p>
+        <div class="lq-src">— 출처: KBS 뉴스, "동남아 휩쓰는 '짝퉁 한류'... 알고 보니 중국 자본" (2024) / <a href="https://news.kbs.co.kr" target="_blank" rel="noopener">news.kbs.co.kr</a></div>
+      </div>
+
+      <p class="bt">
+        이들 오프라인 브랜드가 더 무서운 이유는 <strong class="hl-b">알리의 가격을 오프라인 경험에 접목</strong>했기 때문입니다. 과거엔 초저가 중국산을 사려면 2주를 기다려야 했습니다. 이제는 퇴근길에 미니소 매장에 들러 그 자리에서 집어갈 수 있습니다. 온라인에서는 테무, 오프라인에서는 미니소·요요소 — 한국 소비자를 양쪽에서 조이는 <strong class="hl-r">협공 전략</strong>이 완성된 것입니다.
+      </p>
+
+      <!-- 온오프 협공 비교 테이블 -->
+      <table class="ctbl rev">
+        <thead>
+          <tr><th>구분</th><th>온라인 플랫폼</th><th>오프라인 브랜드</th><th>전략</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>대표 브랜드</td><td>알리익스프레스, 테무, 쉬인</td><td>미니소, 요요소, 무무소</td><td>—</td></tr>
+          <tr><td>가격 경쟁력</td><td class="bad">국내 대비 30~70% 저렴</td><td class="bad">국내 저가몰 대비 20~50% 저렴</td><td>보조금 덤핑</td></tr>
+          <tr><td>소비자 인식</td><td>중국 플랫폼으로 인식</td><td class="warn">한국/일본 브랜드로 오인</td><td>위장 전술</td></tr>
+          <tr><td>데이터 수집</td><td class="bad">앱 통해 구매·개인정보 수집</td><td class="warn">멤버십·결제 데이터 수집</td><td>빅데이터화</td></tr>
+          <tr><td>국내 영향</td><td class="bad">이커머스 중소판매자 퇴출</td><td class="bad">골목상권·소형 잡화점 붕괴</td><td>사막화</td></tr>
+        </tbody>
+      </table>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 미니소·요요소 국내 매장 현황 지도</div>
+          <div class="mbox" id="mb-s3i" data-t="img" onclick="mbClick('s3i')">
+            <div class="mbox-ph" id="ph-s3i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s3i" accept="image/*" style="display:none" onchange="mbLoadImg('s3i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 추천 영상 — 요요소 한류 사칭 실태</div>
+          <div class="mbox" id="mb-s3v" data-t="vid" onclick="mbClick('s3v')">
+            <div class="mbox-ph" id="ph-s3v">
+              <span class="ico">🎬</span>
+              <p>YouTube 영상 삽입</p>
+              <span class="hint" style="font-style:italic;color:#64748B">Source: KBS 뉴스 / 연합뉴스TV — 중국 자본 오프라인 잠식</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 3 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 4 — 다이소 위기론: 공급망이 무기가 될 때
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">04</span>다이소 위기론 — 공급망이 무기가 될 때</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "다이소 중국산 비율" · "다이소 일본 지분 매입" · "다이소 vs 테무 비교"
+      </div>
+
+      <p class="bt">
+        "우리한테는 다이소가 있잖아요." 많은 사람이 이렇게 생각합니다. 다이소 한국 법인은 최근 일본 지분 전량을 매입해 100% 한국 기업이 되었습니다. 훌륭한 결정이었습니다. 그러나 <strong class="hl-r">매장은 한국 기업이 됐지만, 소싱(공급망)은 여전히 중국 의존</strong>입니다. 여기에 진짜 위기의 씨앗이 있습니다.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">RISK ALERT · 다이소 공급망 취약성 분석</div>
+        <span class="bignum">수만 종</span>
+        <span class="biglbl">다이소 취급 SKU 중 상당수가 중국 공장 생산 — 정확한 비율은 비공개</span>
+        <p class="cbody">다이소에 납품하던 중국 공장들이 <strong>"이제 미니소·요요소나 테무에 직접 납품하겠다"</strong>고 돌아서면 어떻게 될까요? 다이소의 핵심 경쟁력인 <strong>1,000원의 기적</strong>을 유지할 대체 소싱처를 찾기 어려워집니다. 이미 중국 커머스 앱들은 다이소와 동일한 제품을 더 싸게, 혹은 미끼 상품으로 무료로 뿌리기까지 합니다.</p>
+        <div class="src-cite">Source: 타일러 유튜브 강연 "피크 차이나와 한국 유통" / 한국경제 2024 다이소 공급망 분석 기사</div>
+      </div>
+
+      <!-- 다이소 공급망 리스크 플로우 -->
+      <div class="flow rev">
+        <div class="flow-ttl">🔗 다이소 공급망 붕괴 시나리오</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi s">🏭</div><div class="fs-lbl">중국 납품사</div><div class="fs-sub">현재:<br>다이소 공급</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">⚡</div><div class="fs-lbl">공급 전환</div><div class="fs-sub">테무·미니소<br>직납 선택</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">💥</div><div class="fs-lbl">소싱 공백</div><div class="fs-sub">대체처<br>없음</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">📈</div><div class="fs-lbl">가격 인상</div><div class="fs-sub">1,000원<br>유지 불가</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🏚️</div><div class="fs-lbl">경쟁력 소멸</div><div class="fs-sub">최후 방어선<br>붕괴</div></div>
+        </div>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 CONTEXT · 다이소의 생존 전략은?</div>
+        <p class="cbody">다이소는 이미 단순 저가 잡화점을 넘어 화장품·의류 분야에서 <strong>독자 기획력</strong>과 <strong>트렌드 큐레이션</strong>을 강화하고 있습니다. 소싱 다변화(동남아·인도)와 PB 상품 확대가 향후 생존의 핵심 열쇠가 될 것입니다. 그러나 이 전략이 실현되기 위해서는 <strong>소비자의 의식적인 선택</strong>이 뒷받침되어야 합니다.</p>
+      </div>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 다이소 vs C-커머스 가격 비교 이미지</div>
+          <div class="mbox" id="mb-s4i" data-t="img" onclick="mbClick('s4i')">
+            <div class="mbox-ph" id="ph-s4i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s4i" accept="image/*" style="display:none" onchange="mbLoadImg('s4i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 추천 영상 — 다이소 위기와 C커머스 공습</div>
+          <div class="mbox" id="mb-s4v" data-t="vid" onclick="mbClick('s4v')">
+            <div class="mbox-ph" id="ph-s4v">
+              <span class="ico">🎬</span>
+              <p>YouTube 영상 삽입</p>
+              <span class="hint" style="font-style:italic;color:#64748B">Source: 타일러 유튜브 / 매일경제TV — 다이소 공급망 분석</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 4 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 5 — 제조업 공동화: 산업별 타격 통계
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">05</span>제조업 공동화 — 산업별 타격 통계와 사막화의 실체</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "중국 덤핑 한국 피해 통계" · "소상공인 폐업률 2024" · "제조업 공동화 뜻"
+      </div>
+
+      <p class="bt">
+        <strong class="hl-r">사막화(Desertification)</strong>. 이 현상을 표현하는 가장 정확한 단어입니다. 단순히 중개상들이 사라지는 게 아닙니다. 한국에서 금형을 파고, 디자인을 하고, 공장을 돌리던 진짜 제조 플레이어들이 설 자리를 잃고 있습니다. 그 빈자리를 메우는 것은 중국 플랫폼의 직배송 물량입니다.
+      </p>
+
+      <!-- 산업별 피해 통계 테이블 -->
+      <table class="ctbl rev">
+        <thead>
+          <tr><th>산업군</th><th>주요 피해 내용</th><th>통계/수치</th><th>심각도</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>의류·패션</strong></td>
+            <td>쉬인·테무 초저가 의류가 동대문 기반 보세 시장 직격. 5,000~10,000원대 제품이 국내 생산 단가보다 저렴</td>
+            <td class="bad">중소 패션기업 96.7% 매출 감소 응답 (한국경제인협회 2025)</td>
+            <td class="bad">매우 높음</td>
+          </tr>
+          <tr>
+            <td><strong>소형 가전</strong></td>
+            <td>보조 배터리·선풍기·가습기 등 중소기업 주력 상품이 공장 직배송으로 대체</td>
+            <td class="bad">직구액 전년 대비 +40% 급증 / 중소 가전 업체 폐업률 +12% (2025)</td>
+            <td class="bad">매우 높음</td>
+          </tr>
+          <tr>
+            <td><strong>가구·홈인테리어</strong></td>
+            <td>조립식 가구·소형 소품 시장에서 KC 인증 우회 직구 제품이 가격 우위 점령</td>
+            <td class="warn">온라인 가구 직구 비중 전년 대비 +28% (대한상공회의소 2025)</td>
+            <td class="warn">높음</td>
+          </tr>
+          <tr>
+            <td><strong>완구·문구</strong></td>
+            <td>캐릭터 IP 활용 미니소 제품이 국내 완구 중소기업 시장 잠식</td>
+            <td class="warn">국내 완구 중소기업 매출 감소 기업 비율 78% (2024 업계 조사)</td>
+            <td class="warn">높음</td>
+          </tr>
+          <tr>
+            <td><strong>생활잡화</strong></td>
+            <td>다이소 타깃 품목이 테무에서 더 저렴하게 판매, 일부는 미끼 무료 제공</td>
+            <td class="bad">중국 생활잡화 직구 점유율 전체의 71% (국가데이터처 2025)</td>
+            <td class="bad">매우 높음</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">WORST CASE · 독점 이후 시나리오</div>
+        <span class="bignum">가격 결정권</span>
+        <span class="biglbl">경쟁자가 사라진 뒤, 중국 플랫폼이 가격을 올리기 시작하면?</span>
+        <p class="cbody">독점이 완성된 후에는 소비자에게 대안이 없습니다. "원재료가 올랐어요, 어쩔 수 없죠"라는 한 마디로 가격을 마음대로 인상할 수 있습니다. 또한 국가 간 갈등이나 공급망 이슈가 발생하면 <strong>생필품 자체를 조달하지 못하는 상황</strong>이 현실이 됩니다. 이것이 경제적 주권 상실의 실체입니다.</p>
+        <div class="src-cite">Source: 타일러 유튜브 "피크 차이나" 강연 / Gemini 심층 분석 보고서 (2025)</div>
+      </div>
+
+      <div class="en-src rev">
+        <div class="en-src-label">🇺🇸 U.S.-China Economic and Security Review Commission (USCC) — 2024</div>
+        "Shein, Temu, and similar Chinese e-commerce platforms are not merely commercial enterprises. They represent a systematic transfer of consumer data, market intelligence, and economic dependency from democratic market economies to entities operating under Chinese law and Communist Party oversight."
+        <div class="src-cite">Source: U.S.-China Economic and Security Review Commission, "Chinese E-Commerce and National Security", 2024</div>
+      </div>
+      <div class="ko-trans">
+        🇰🇷 한국어 번역: 쉬인, 테무 및 이와 유사한 중국 이커머스 플랫폼은 단순한 상업적 기업이 아닙니다. 이들은 민주적 시장경제 국가에서 중국 법률과 공산당 감시 아래 운영되는 기관들로의 소비자 데이터, 시장 정보, 경제적 종속성의 체계적인 이전을 나타냅니다.
+      </div>
+
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 소상공인 폐업률 추이 그래프</div>
+          <div class="mbox" id="mb-s5i" data-t="img" onclick="mbClick('s5i')">
+            <div class="mbox-ph" id="ph-s5i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s5i" accept="image/*" style="display:none" onchange="mbLoadImg('s5i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 추천 영상 — 제조업 공동화 실태 보고</div>
+          <div class="mbox" id="mb-s5v" data-t="vid" onclick="mbClick('s5v')">
+            <div class="mbox-ph" id="ph-s5v">
+              <span class="ico">🎬</span>
+              <p>YouTube 영상 삽입</p>
+              <span class="hint" style="font-style:italic;color:#64748B">Source: SBS Biz / MBN — 중소기업 폐업 위기 C커머스 직격</span>
+            </div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 5 -->
+
+    <!-- ══════════════════════════════════════════
+         SECTION 6 — 우리가 놓치고 있는 것들
+    ══════════════════════════════════════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">06</span>우리가 놓치고 있는 것들 — 보이지 않는 비용</h2>
+
+      <p class="bt">
+        <strong class="hl-a">싸게 사서 이득이다</strong>고 생각할 때, 우리가 지불하고 있는 세 가지 보이지 않는 비용이 있습니다.
+      </p>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">🔍 HIDDEN COST 1 · 데이터 주권 상실</div>
+        <p class="cbody">알리·테무 앱을 통해 수집된 <strong>구매 패턴, 결제 정보, 위치 데이터, 취향 데이터</strong>는 중국 서버로 전송됩니다. 중국의 국가정보법(2017)은 모든 중국 기업이 정부의 정보 수집 활동에 협조하도록 의무화하고 있습니다. 이는 단순한 마케팅 자료를 넘어 국가 안보 차원의 위협이 됩니다.</p>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">🔍 HIDDEN COST 2 · K-브랜드 시장 약탈</div>
+        <p class="cbody">요요소는 동남아·중동에서 <strong>"Korean Designer Brand"</strong>로 홍보합니다. 실제 K-브랜드가 진출해야 할 시장을 중국 자본이 선점하고 있습니다. 이는 미래 세대 한국 기업인들이 개척해야 할 글로벌 시장을 미리 잠식하는 행위입니다.</p>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">🔍 HIDDEN COST 3 · 일자리와 세금의 소멸</div>
+        <p class="cbody">국내 소상공인과 제조업체 한 곳이 문을 닫을 때마다, <strong>일자리가 사라지고 세금 납부자가 줄어듭니다.</strong> 중국 플랫폼은 면세 혜택을 누리면서 사회보험과 법인세를 내지 않습니다. 소비자가 아낀 1,000원이, 국가 재정과 복지 시스템을 훼손하는 구조입니다.</p>
+      </div>
+
+      <div class="en-src rev">
+        <div class="en-src-label">🇰🇷 한국경제인협회 (FKI) — 2025</div>
+        "국내 패션 중소기업의 96.7%가 중국 이커머스 플랫폼으로 인해 매출 감소 등의 직접적인 피해를 입었다고 응답하였으며, 피해 유형으로는 '가격 경쟁력 상실'(78.3%), '고객 이탈'(64.2%), '신제품 개발 포기'(41.5%) 순으로 나타났다."
+        <div class="src-cite">Source: 한국경제인협회, 중국 이커머스 플랫폼의 국내 패션업계 영향 실태조사, 2025</div>
+      </div>
+      <div class="ko-trans">
+        🇰🇷 핵심 요약: 국내 패션 중소기업 10곳 중 9.67곳이 C-커머스로 직접 피해를 입었으며, 가격 경쟁력 상실, 고객 이탈, 신제품 개발 포기 순으로 피해가 심각합니다.
+      </div>
+    </div><!-- /sec 6 -->
+
+    <!-- ══════════════════════════════════════════
+         인용구 블록
+    ══════════════════════════════════════════ -->
+    <div class="pq rev">
+      <div class="pq-txt">
+        "오늘 퇴근길에 클릭한 <em>초저가 결제 버튼</em>은<br>
+        미래 우리 아이들의 <em>일자리를 미리 결제</em>한 것일지도 모릅니다."
+      </div>
+      <div style="font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-top:12px;text-align:center">— 타일러 라쉬, 피크 차이나와 한국 유통 강연 중</div>
+    </div>
+
+  </div><!-- /ab -->
+
+  <!-- ═══════════════ 실천 강령 ═══════════════ -->
+  <section class="action" style="padding-top:26px">
+    <div class="action-inner">
+      <div class="action-ttl">🛡️ 유통 주권을 지키는 6가지 실천 강령</div>
+      <div class="action-sub">소비자·기업·정부가 함께 해야 할 일들 — 쇄국이 아닌, 현명한 선택입니다</div>
+      <div class="action-grid">
+        <div class="ac">
+          <div class="ac-n">ACTION 01</div>
+          <div class="ac-ico">🔍</div>
+          <div class="ac-ttl">브랜드 국적 확인하기</div>
+          <div class="ac-desc">미니소·요요소 등 오프라인 매장 입장 전, 브랜드 본사 국적을 검색하는 습관을 들이세요. '한국스럽다'는 느낌은 마케팅일 수 있습니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 02</div>
+          <div class="ac-ico">🛒</div>
+          <div class="ac-ttl">가치 소비 다변화</div>
+          <div class="ac-desc">모든 소비를 국산으로 바꾸기 어렵지만, 국내 소상공인·중소기업 제품을 의식적으로 일부 선택해 보세요. 가격보다 가치를 보는 소비입니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 03</div>
+          <div class="ac-ico">📱</div>
+          <div class="ac-ttl">개인정보 앱 권한 점검</div>
+          <div class="ac-desc">알리·테무 앱의 위치 정보, 연락처, 카메라 접근 권한을 점검하고 불필요한 권한은 차단하세요. 개인정보가 곧 데이터 주권입니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 04</div>
+          <div class="ac-ico">📢</div>
+          <div class="ac-ttl">규제 형평성 목소리 내기</div>
+          <div class="ac-desc">국내 기업에만 적용되는 KC 인증·관세·부가세 역차별 문제를 알리고, 공정 경쟁 환경 조성을 정치권에 요구하세요.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 05</div>
+          <div class="ac-ico">🏭</div>
+          <div class="ac-ttl">국내 기업 소싱 다변화 지원</div>
+          <div class="ac-ico-sub"></div>
+          <div class="ac-desc">다이소 등 국내 유통사의 동남아·인도 소싱 다변화 노력을 응원하세요. 소비자가 지지해야 기업도 변합니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 06</div>
+          <div class="ac-ico">🌱</div>
+          <div class="ac-ttl">다음 세대를 위한 선택</div>
+          <div class="ac-desc">지금의 소비 습관이 10년 뒤 한국 제조·유통 생태계를 결정합니다. 운동을 안 하는 것처럼, 편의를 위한 선택이 장기적 능력을 갉아먹을 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNS 링크 입력 모달 -->
+  <div id="sns-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#fff;border-radius:20px;padding:28px 24px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span id="sns-modal-icon" style="font-size:1.6rem"></span>
+        <div id="sns-modal-title" style="font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink)"></div>
+      </div>
+      <div id="sns-modal-desc" style="font-family:var(--fb);font-size:clamp(14px,3vw,15px);color:var(--ink3);margin-bottom:14px;line-height:1.7"></div>
+      <input id="sns-url-input" type="url" placeholder="https://" style="width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s;color:var(--ink)">
+      <div id="sns-saved-bar" style="display:none;margin-top:10px;padding:8px 12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:8px;font-family:var(--fb);font-size:clamp(13px,2.8vw,14px);color:#166534;align-items:center;gap:8px;flex-wrap:wrap">
+        <span>✅ 저장된 링크:</span>
+        <a id="sns-saved-link" href="#" target="_blank" rel="noopener" style="color:#15803D;font-weight:700;word-break:break-all;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></a>
+        <button onclick="snsClearSaved()" style="font-family:var(--ft);font-size:12px;font-weight:700;background:none;border:1.5px solid #86EFAC;border-radius:6px;padding:3px 9px;cursor:pointer;color:#166534;flex-shrink:0">삭제</button>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:14px">
+        <button onclick="snsSave()" style="flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s">저장하기</button>
+        <button onclick="snsClose()" style="font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 소셜 공유 바 -->
+  <div class="sb">
+    <div class="sb-lbl">공유하기</div>
+    <div class="sb-btns">
+      <button class="snsbtn yt" onclick="snsOpen('yt')">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube
+      </button>
+      <button class="snsbtn ig" onclick="snsOpen('ig')">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+      </button>
+      <button class="snsbtn tt" onclick="snsOpen('tt')">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/></svg>TikTok
+      </button>
+      <button class="snsbtn th" onclick="snsOpen('th')">
+        <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.742-1.757-.438-.505-1.103-.769-1.98-.789h-.047c-.67 0-1.64.191-2.253 1.109l-1.755-1.2c.894-1.307 2.277-2.031 3.98-2.049h.064c2.71.048 4.327 1.692 4.73 4.778.108.028.214.057.316.089l-.001.007c1.338.386 2.462 1.093 3.24 2.254C22.01 16.06 21.748 19 19.743 21c-1.737 1.745-4.189 2.627-7.274 2.647l-.283-.003v.003Z"/></svg>Threads
+      </button>
+      <button class="snsbtn xb" onclick="snsOpen('xb')">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>X
+      </button>
+      <button class="snsbtn fb" onclick="snsOpen('fb')">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+      </button>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════ 푸터 ═══════════════ -->
+<footer class="ft">
+  <div class="ft-brand"><span class="ft-dot"></span>IssueLens</div>
+  <div style="color:#9CA3AF;font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);margin-top:4px">대한민국 주권 시리즈 · EP.11</div>
+  <p>본 게시물은 한국경제인협회·대한상공회의소·통계청·국가데이터처 공식 발표, Lowy Institute·The Economist·U.S.-China Economic and Security Review Commission 보고서, KBS·연합뉴스·한국경제 등 국내외 공신력 언론 보도를 근거로 작성된 공익적 사실 분석입니다.<br>
+  통계 수치는 해당 보고서 발표 시점 기준이며, 일부 수치는 복수 자료의 추정치를 포함합니다. 특정 기업에 대한 서술은 공개된 사실에 한정하며 법적 판단이나 명예훼손 의도가 없습니다.<br>
+  Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+<script>
+const pb=document.getElementById('pb');
+window.addEventListener('scroll',()=>{pb.style.width=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-document.documentElement.clientHeight)*100)+'%'});
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);ro.unobserve(e.target)}})},{threshold:.07});
+document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
+const bo=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.rbf').forEach(b=>{setTimeout(()=>b.style.width=b.dataset.w+'%',260)});bo.unobserve(e.target)}})},{threshold:.25});
+document.querySelectorAll('.rm').forEach(el=>bo.observe(el));
+let cur=null;
+function mbClick(id){const box=document.getElementById('mb-'+id);if(box.classList.contains('filled'))return;if(box.dataset.t==='img'){document.getElementById('fi-'+id).click()}else{ytOpen(id)}}
+function mbReplace(id){mbClear(id);const box=document.getElementById('mb-'+id);if(box.dataset.t==='img'){document.getElementById('fi-'+id).click()}else{ytOpen(id)}}
+function mbDel(id){const box=document.getElementById('mb-'+id);const wrap=box.closest('.mbox-wrap');wrap.style.transition='max-height .35s ease, opacity .3s ease, margin .3s ease';wrap.style.overflow='hidden';wrap.style.maxHeight=wrap.offsetHeight+'px';requestAnimationFrame(()=>{wrap.style.maxHeight='0';wrap.style.opacity='0';wrap.style.margin='0';wrap.style.padding='0'});setTimeout(()=>{const pair=wrap.closest('.media-pair');wrap.remove();if(pair&&pair.querySelectorAll('.mbox-wrap').length===0){pair.style.transition='max-height .3s ease,opacity .25s ease,margin .3s ease';pair.style.overflow='hidden';pair.style.maxHeight='0';pair.style.opacity='0';pair.style.margin='0';setTimeout(()=>pair.remove(),320)}},360)}
+function mbClear(id){const box=document.getElementById('mb-'+id);const ifrm=box.querySelector('iframe');const img=box.querySelector('img.prev');if(ifrm)ifrm.remove();if(img)img.remove();box.classList.remove('filled');const ph=document.getElementById('ph-'+id);if(ph)ph.style.display='';const fi=document.getElementById('fi-'+id);if(fi)fi.value=''}
+function mbLoadImg(id,inp){if(!inp.files||!inp.files[0])return;const r=new FileReader();r.onload=ev=>{const box=document.getElementById('mb-'+id);const ph=document.getElementById('ph-'+id);if(ph)ph.style.display='none';const img=document.createElement('img');img.src=ev.target.result;img.className='prev';box.insertBefore(img,box.querySelector('.mctrl'));box.classList.add('filled');box.onclick=null;box.style.minHeight='200px'};r.readAsDataURL(inp.files[0])}
+function ytOpen(id){cur=id;document.getElementById('yti').value='';document.getElementById('ytm').style.display='flex';setTimeout(()=>document.getElementById('yti').focus(),80)}
+function ytClose(){document.getElementById('ytm').style.display='none';cur=null}
+function ytEmbed(url){try{const u=new URL(url);let id='';if(u.hostname.includes('youtu.be')){id=u.pathname.slice(1)}else{id=u.searchParams.get('v')||''}return id?'https://www.youtube.com/embed/'+id+'?rel=0':null}catch(e){return null}}
+function ytOk(){const url=document.getElementById('yti').value.trim();const em=ytEmbed(url);if(!em){alert('올바른 YouTube 링크를 입력해 주세요.\n예: https://www.youtube.com/watch?v=XXXXXXXXXXX');return}const box=document.getElementById('mb-'+cur);const ph=document.getElementById('ph-'+cur);if(ph)ph.style.display='none';const ifr=document.createElement('iframe');ifr.src=em;ifr.style.cssText='width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px';ifr.allow='accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';ifr.allowFullscreen=true;box.insertBefore(ifr,box.querySelector('.mctrl'));box.classList.add('filled');box.style.minHeight='220px';box.onclick=null;ytClose()}
+const snsMeta={yt:{label:'YouTube',desc:'YouTube 채널 또는 영상 링크를 입력하세요.',ph:'https://www.youtube.com/@channel'},ig:{label:'Instagram',desc:'Instagram 프로필 또는 게시물 링크를 입력하세요.',ph:'https://www.instagram.com/username'},tt:{label:'TikTok',desc:'TikTok 프로필 또는 영상 링크를 입력하세요.',ph:'https://www.tiktok.com/@username'},th:{label:'Threads',desc:'Threads 프로필 또는 게시물 링크를 입력하세요.',ph:'https://www.threads.net/@username'},xb:{label:'X (Twitter)',desc:'X(트위터) 프로필 또는 게시물 링크를 입력하세요.',ph:'https://x.com/username'},fb:{label:'Facebook',desc:'Facebook 페이지 또는 게시물 링크를 입력하세요.',ph:'https://www.facebook.com/page'}};
+const snsLinks={};let curSns=null;
+function snsOpen(id){curSns=id;const m=snsMeta[id];document.getElementById('sns-modal-title').textContent=m.label+' 링크 설정';document.getElementById('sns-modal-desc').textContent=m.desc;const inp=document.getElementById('sns-url-input');inp.placeholder=m.ph;inp.value=snsLinks[id]||'';inp.style.borderColor='var(--bdr)';snsUpdateSavedBar();document.getElementById('sns-modal').style.display='flex';setTimeout(()=>inp.focus(),80)}
+function snsUpdateSavedBar(){const id=curSns;const bar=document.getElementById('sns-saved-bar');const lnk=document.getElementById('sns-saved-link');if(snsLinks[id]){bar.style.display='flex';lnk.href=snsLinks[id];lnk.textContent=snsLinks[id]}else{bar.style.display='none'}}
+function snsClearSaved(){if(!curSns)return;delete snsLinks[curSns];document.getElementById('sns-url-input').value='';const btn=document.querySelector('.snsbtn.'+curSns);btn.classList.remove('has-link');btn.onclick=()=>snsOpen(curSns);btn.ondblclick=null;btn.title='';snsUpdateSavedBar()}
+function snsSave(){const url=document.getElementById('sns-url-input').value.trim();if(!url){alert('링크를 입력해 주세요.');return}let finalUrl=url;if(!/^https?:\/\//i.test(finalUrl))finalUrl='https://'+finalUrl;const id=curSns;snsLinks[id]=finalUrl;const btn=document.querySelector('.snsbtn.'+id);btn.classList.add('has-link');btn.onclick=()=>window.open(snsLinks[id],'_blank','noopener,noreferrer');btn.ondblclick=e=>{e.preventDefault();snsOpen(id)};btn.title='클릭: 링크 열기 | 더블클릭: 링크 변경';snsUpdateSavedBar();setTimeout(()=>snsClose(),300)}
+function snsClose(){document.getElementById('sns-modal').style.display='none';curSns=null}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){ytClose();snsClose()}});
+document.getElementById('yti').addEventListener('keydown',e=>{if(e.key==='Enter')ytOk()});
+document.getElementById('sns-url-input').addEventListener('keydown',e=>{if(e.key==='Enter')snsSave()});
+document.getElementById('sns-modal').addEventListener('click',function(e){if(e.target===this)snsClose()});
+</script>
+</body>
+</html>

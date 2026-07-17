@@ -1,0 +1,74 @@
+╔══════════════════════════════════════════════════════╗
+║  IssueLens EP.10 — Instagram CAROUSEL  (10 slides) ║
+╚══════════════════════════════════════════════════════╝
+
+━━━ SLIDE 1 — COVER
+Headline: Election Sovereignty — China's Digital Assault on 
+Subhead:  "Swipe to find out →"
+Style: IssueLens Red (#C8001A) + Dark gradient
+Badge: EP.10 top-left | @IssueLens bottom-right
+Size: 1080×1080px
+
+━━━ SLIDE 2 — THE SHOCKING NUMBERS
+Title: "By the Numbers"
+Content:
+  📊 5 Eyes — Allied intel agenciesissued joint warning
+  📊 40M+ — Voter records accessedin UK alone (APT31)
+  📊 40+ — Countries targeted byChina election ops
+
+━━━ SLIDE 3 — THE PROBLEM
+Title: "The Five Eyes Warning — Official Text & What It Means"
+Body: "The ballot box is democracy's last line of defense. But what if the software tallying your votes, the hardware reading your ballot, and the telecom networks carrying election data have already been co..."
+Visual: Relevant infographic / icon
+
+━━━ SLIDE 4 — HOW IT WORKS
+Title: "How This Actually Happens"
+Body: Data flow / process breakdown
+Visual: Step-by-step diagram (arrows)
+
+━━━ SLIDE 5 — THE DATA
+Title: "The Hard Numbers"
+  • 40+ Nations — Countries where China state-linked actors have conducted confirmed or suspected election-related cyber operations (ASPI estimate, 2024)
+  • 119 Nations — Member election management bodies — the world's largest hub for electoral technology sharing and democratic governance standards
+  • Compromised — CISA confirmed PRC-linked actors successfully gained access to election-adjacent networks in multiple U.S. states during the 2020–2024 election cycles
+
+━━━ SLIDE 6 — Volt Typhoon & Salt Typhoon — China's Tw
+Body: [Content from section 2]
+Source citation (italic, -2pt): *Source: [Publication], [Date], [Author]*
+
+━━━ SLIDE 7 — The Voting Machine Supply Chain — Americ
+Body: [Content from section 3]
+
+━━━ SLIDE 8 — PRO vs. CON  (if politically contested)
+PRO side: [Argument in favor]
+CON side: [Argument against]
+⚖️ Balanced — both sides shown equally
+
+━━━ SLIDE 9 — ACTION ITEMS
+Title: "What You Can Do RIGHT NOW"
+  1. Demand a Supply Chain Audit
+  2. Push for Open-Source Voting Code
+  3. Support Air-Gap Legislation
+  4. Keep Facts & Fear Separate
+  5. Support Five Eyes Coordination
+
+━━━ SLIDE 10 — CTA
+"Save this. Share it. Follow @IssueLens."
+Subtext: "New deep-dive every single day."
+Visual: All platform icons
+
+━━━ CAPTION  (≤2200 chars) ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Election Sovereignty — China's Digital Assault on the Ballot Box | IssueLens EP.10 🚨
+
+Five Eyes joint warnings, Volt Typhoon pre-positioned malware, Salt Typhoon telecom wiretaps, U.S. voting machine supply chain risks — a full investigation into China's cyber operations targeting the ballot box and American democracy.
+
+💬 ""You can steal an election without firing a shot.All you need is one line of codeand a supply chain nobody audited."— Senior CISA official, Senate Int"
+
+👉 Full breakdown at link in bio — IssueLens EP.10
+🔔 Follow @IssueLens for a new deep-dive EVERY DAY.
+
+#Chinaelectioninterference #VoltTyphoonelectioninfrastructure #SaltTyphoonwiretap #FiveEyesChinawarning #CISAelectionsecurity #votingmachinesupplychainChina #electionsovereignty #Chinesecyberthreatdemocracy #USelectionsecurity #APT41electionhack #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth
+
+━━━ HASHTAGS (comment drop — 30 max) ━━━━━━━━━━━━━━━
+#Chinaelectioninterference #VoltTyphoonelectioninfrastructure #SaltTyphoonwiretap #FiveEyesChinawarning #CISAelectionsecurity #votingmachinesupplychainChina #electionsovereignty #Chinesecyberthreatdemocracy #USelectionsecurity #APT41electionhack #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth

@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║   🇺🇸 AI DECODED FOR SENIORS — EP.36  ★ ENGLISH EDITION                    ║
+║   File: ai_decoded_ep36_eng.html                                            ║
+║   Topic: AI Budget Tracker & Receipt Organizer — Using ChatGPT & Claude!    ║
+║   "AI Decoded for Seniors" — with your guide JAKE & Grandpa BOB             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Decoded for Seniors Ep.36 — AI Budget Tracker & Receipt Organizer | with Jake & Grandpa Bob</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+/* ================================================================
+   AI DECODED FOR SENIORS — EP.36  ★ REVOLUTIONARY AMERICAN EDITION
+   🎨 AESTHETIC: "Neon Newsroom" — Bold editorial meets electric retro
+   Palette: Deep Graphite · Electric Lime · Hot Coral · Cream White
+   NO vanilla AI design. No purple gradients. Full stop.
+================================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; }
+
+:root {
+    --graphite:   #0e0e10;
+    --graphite-2: #1a1a1f;
+    --graphite-3: #26262d;
+    --lime:       #c6f135;
+    --lime-dark:  #9bbf1a;
+    --coral:      #ff4d4d;
+    --cream:      #f5f0e8;
+    --cream-2:    #ede7d9;
+    --steel:      #3a3a45;
+    --mist:       #8a8a99;
+    --sky:        #4fc3f7;
+    --gold:       #ffd700;
+    --mint:       #00e5b0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.8;
+    color: var(--graphite);
+    background: var(--cream);
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Noise texture overlay on body ── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+/* ── Blog wrapper ── */
+.ts-wrap {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 120px 16px;
+    position: relative;
+    z-index: 1;
+}
+
+img, video, iframe { max-width: 100% !important; height: auto !important; }
+
+/* ── Spacing ── */
+.gap    { display: block; height: 20px; }
+.gap-sm { display: block; height: 10px; }
+.br     { display: block; height: 12px; }
+
+/* ── contenteditable ── */
+[contenteditable="true"] { outline: none; border-radius: 3px; cursor: text; }
+[contenteditable="true"]:hover  { background: rgba(198,241,53,0.15); box-shadow: 0 0 0 2px rgba(198,241,53,0.5); }
+[contenteditable="true"]:focus  { background: rgba(198,241,53,0.28); box-shadow: 0 0 0 2px var(--lime); }
+
+/* ── Save bar ── */
+.save-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(14,14,16,0.97);
+    padding: 12px 20px;
+    display: flex; justify-content: center; gap: 14px;
+    z-index: 9999;
+    border-top: 3px solid var(--lime);
+}
+.save-bar button {
+    background: linear-gradient(135deg, var(--lime), var(--lime-dark));
+    color: var(--graphite);
+    border: none;
+    padding: 12px 36px;
+    border-radius: 4px;
+    font-size: 14pt;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 20px rgba(198,241,53,0.4);
+    text-transform: uppercase;
+}
+.save-bar button:hover {
+    background: linear-gradient(135deg, #d8ff50, var(--lime));
+    box-shadow: 0 6px 28px rgba(198,241,53,0.6);
+}
+
+/* ════════════════════════════════════════════
+   ★ HERO BANNER — Neon Newsroom style
+════════════════════════════════════════════ */
+.hero-banner {
+    background: var(--graphite);
+    border-radius: 0;
+    padding: 0;
+    margin: 0 0 0 0;
+    position: relative;
+    overflow: hidden;
+    border: none;
+}
+/* Diagonal lime stripe */
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; right: -80px;
+    width: 350px; height: 100%;
+    background: var(--lime);
+    transform: skewX(-12deg);
+    z-index: 0;
+    opacity: 0.07;
+}
+.hero-inner {
+    position: relative; z-index: 2;
+    padding: 36px 32px 28px 32px;
+    border-left: 10px solid var(--lime);
+}
+.hero-series-bar {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 16px; flex-wrap: wrap;
+}
+.hero-series-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--mist);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+.hero-ep-badge {
+    display: inline-block;
+    background: var(--lime);
+    color: var(--graphite);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13pt;
+    font-weight: 400;
+    padding: 3px 16px;
+    border-radius: 2px;
+    letter-spacing: 0.12em;
+}
+.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(34pt, 6vw, 52pt);
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.1;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.02em;
+}
+.hero-title .accent { color: var(--lime); }
+.hero-title .coral  { color: var(--coral); }
+.hero-subtitle {
+    font-size: 14pt;
+    font-weight: 300;
+    color: #a0a0b0;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    max-width: 640px;
+}
+.hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+}
+.hero-tag {
+    background: rgba(198,241,53,0.1);
+    border: 1px solid rgba(198,241,53,0.35);
+    color: var(--lime);
+    font-family: 'Space Mono', monospace;
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.hero-hosts {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-top: 18px; padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+.host-badge {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #c8c8d8;
+    font-size: 11pt;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 3px;
+    display: flex; align-items: center; gap: 8px;
+}
+
+/* ════════════════════════════════════════════
+   ★ TRENDING TICKER BANNER
+════════════════════════════════════════════ */
+.ticker-wrap {
+    background: var(--coral);
+    overflow: hidden;
+    padding: 10px 0;
+    margin: 0 0 24px 0;
+    position: relative;
+}
+.ticker-label {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--graphite);
+    color: var(--lime);
+    font-family: 'Space Mono', monospace;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0 16px;
+    display: flex; align-items: center;
+    z-index: 2;
+    white-space: nowrap;
+}
+.ticker-track {
+    display: flex; gap: 40px;
+    white-space: nowrap;
+    padding-left: 130px;
+    animation: ticker 28s linear infinite;
+}
+@keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+.ticker-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 10pt;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+.ticker-item::before { content: '★ '; color: var(--graphite); }
+
+/* ════════════════════════════════════════════
+   ★ SECTION HEADERS
+════════════════════════════════════════════ */
+.sec-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin: 30px 0 16px 0;
+}
+.sec-num {
+    background: var(--graphite);
+    color: var(--lime);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28pt;
+    padding: 8px 20px;
+    display: flex; align-items: center; justify-content: center;
+    min-width: 70px;
+    letter-spacing: 0.05em;
+}
+.sec-label {
+    background: var(--lime);
+    color: var(--graphite);
+    padding: 8px 20px;
+    display: flex; flex-direction: column; justify-content: center;
+}
+.sec-label .main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20pt;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+}
+.sec-label .sub {
+    font-size: 10pt;
+    font-weight: 600;
+    color: rgba(14,14,16,0.6);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Mini section accent */
+.mini-sec {
+    display: flex; align-items: center; gap: 12px;
+    margin: 24px 0 12px 0;
+}
+.mini-sec-icon {
+    width: 42px; height: 42px;
+    background: var(--graphite);
+    color: var(--lime);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20pt;
+    flex-shrink: 0;
+}
+.mini-sec-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20pt;
+    color: var(--graphite);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+}
+.mini-sec-text small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--mist);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════
+   ★ CONTENT BODY TEXT
+════════════════════════════════════════════ */
+.content-body {
+    font-size: 16pt;
+    line-height: 1.95;
+    color: var(--graphite);
+    word-break: normal;
+}
+.content-body + .content-body { margin-top: 12px; }
+
+/* speaker / color classes */
+.speaker     { color: #0d47a1; font-weight: 700; font-size: 16pt; }
+.ai-name     { color: var(--coral); font-weight: 700; }
+.term-name   { color: #1565c0; font-weight: 700; }
+.company-name{ color: var(--coral); font-weight: 700; }
+.emphasis    { color: var(--coral); font-weight: 700; }
+.lime-text   { color: var(--lime-dark); font-weight: 700; }
+.trending    { color: #1565c0; font-weight: 700; font-style: italic; }
+
+/* ════════════════════════════════════════════
+   ★ SAYING BOX — Editorial pull-quote style
+════════════════════════════════════════════ */
+.saying-box {
+    background: var(--graphite);
+    border-left: 8px solid var(--lime);
+    border-radius: 6px;
+    padding: 30px 28px;
+    margin: 16px 0;
+    position: relative;
+    overflow: hidden;
+}
+.saying-box::after {
+    content: '"';
+    position: absolute;
+    bottom: -30px; right: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 140pt;
+    color: rgba(198,241,53,0.07);
+    line-height: 1;
+    pointer-events: none;
+}
+.saying-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 24pt;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--lime);
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+.saying-meaning {
+    font-size: 17pt;
+    font-weight: 600;
+    color: #d0d0e0;
+    line-height: 1.65;
+    margin: 8px 0;
+}
+.saying-tag {
+    display: inline-block;
+    background: rgba(198,241,53,0.15);
+    border: 1px solid rgba(198,241,53,0.4);
+    color: var(--lime);
+    font-family: 'Space Mono', monospace;
+    font-size: 10pt;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-top: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════
+   ★ DIALOG / CONVERSATION BOX
+════════════════════════════════════════════ */
+.dialog-box {
+    background: #fff;
+    border: 2.5px solid var(--graphite);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 14px 0;
+    box-shadow: 6px 6px 0 var(--graphite);
+}
+.dialog-row { margin-bottom: 14px; line-height: 1.9; }
+.dialog-row:last-child { margin-bottom: 0; }
+.dialog-speaker {
+    color: var(--graphite);
+    font-weight: 700;
+    font-size: 15pt;
+    font-family: 'Space Mono', monospace;
+    display: inline;
+    background: var(--lime);
+    padding: 1px 8px;
+    border-radius: 2px;
+    margin-right: 6px;
+}
+.dialog-content { font-size: 15pt; line-height: 1.9; display: inline; color: var(--graphite); }
+
+/* ════════════════════════════════════════════
+   ★ TIP BOX
+════════════════════════════════════════════ */
+.tip-box {
+    background: var(--cream-2);
+    border: 2.5px solid var(--graphite);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 14px 0;
+    box-shadow: 6px 6px 0 rgba(14,14,16,0.12);
+    position: relative;
+}
+.tip-box::before {
+    content: 'TIPS';
+    position: absolute; top: -14px; left: 20px;
+    background: var(--graphite);
+    color: var(--lime);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13pt;
+    letter-spacing: 0.15em;
+    padding: 2px 14px;
+    border-radius: 2px;
+}
+.tip-number-badge {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    background: var(--graphite);
+    color: var(--lime);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 12pt;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+/* ════════════════════════════════════════════
+   ★ AI IN DAILY LIFE BOX
+════════════════════════════════════════════ */
+.ai-box-single {
+    background: #fff;
+    border: 2.5px solid var(--graphite);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 14px 0;
+    box-shadow: 6px 6px 0 var(--graphite);
+}
+.ai-section-item {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 2px dashed var(--cream-2);
+}
+.ai-section-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+/* ════════════════════════════════════════════
+   ★ IMAGE UPLOAD AREAS
+════════════════════════════════════════════ */
+.img-area {
+    width: 100%; min-height: 380px;
+    background: var(--cream-2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24pt; color: var(--mist);
+    border-radius: 6px;
+    border: 2.5px dashed var(--graphite);
+    cursor: pointer; position: relative; overflow: hidden;
+    margin: 14px 0;
+    transition: all 0.2s;
+}
+.img-area:hover { background: #e8e0d0; border-color: var(--coral); }
+.img-area .upload-label {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 10px; color: var(--graphite); font-size: 16pt;
+    user-select: none; text-align: center; padding: 20px;
+}
+.img-area .upload-icon { font-size: 44pt; }
+.img-area img, .img-area video { width:100%; height:auto; border-radius:4px; display:block; }
+
+/* AI image grid */
+.ai-img-area {
+    background: var(--cream-2);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px; border: 2px dashed var(--graphite);
+    cursor: pointer; position: relative; overflow: hidden;
+    aspect-ratio: 1/1; transition: all 0.2s;
+}
+.ai-img-area:hover { background: #e8e0d0; border-color: var(--coral); }
+.ai-img-area .upload-label {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; color: var(--graphite); font-size: 15pt;
+    user-select: none; text-align: center; padding: 10px;
+}
+.ai-img-area .upload-icon { font-size: 34pt; }
+.ai-img-area img, .ai-img-area video { width:100%; height:auto; border-radius:4px; display:block; }
+.ai-img-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 14px 0; }
+
+/* Media overlay */
+.media-overlay {
+    position: absolute; top: 8px; right: 8px;
+    display: none; gap: 6px; z-index: 10;
+}
+.img-area:hover .media-overlay,
+.ai-img-area:hover .media-overlay { display: flex; }
+.media-btn {
+    background: rgba(14,14,16,0.85); color: white; border: none;
+    border-radius: 3px; padding: 5px 12px;
+    font-size: 12pt; cursor: pointer;
+    font-family: 'Space Mono', monospace;
+}
+.media-btn:hover { background: var(--graphite); }
+
+/* Source tag */
+.source-tag {
+    font-size: 11pt; font-style: italic; color: var(--mist);
+    text-align: right; margin: 4px 0 12px 0; line-height: 1.5;
+    font-family: 'Space Mono', monospace;
+}
+
+/* ════════════════════════════════════════════
+   ★ HUMOR BOX
+════════════════════════════════════════════ */
+.humor-box {
+    background: var(--graphite);
+    border-radius: 6px;
+    padding: 24px 26px;
+    margin: 14px 0;
+    position: relative;
+    overflow: hidden;
+}
+.humor-box::before {
+    content: 'HA HA HA';
+    position: absolute; top: -8px; right: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48pt;
+    color: rgba(198,241,53,0.06);
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    white-space: nowrap;
+}
+.humor-box .dialog-speaker { background: var(--coral); }
+.humor-box .dialog-content { color: var(--cream); }
+
+/* ════════════════════════════════════════════
+   ★ QUIZ BOX
+════════════════════════════════════════════ */
+.quiz-box {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border: 2.5px solid #2e7d32;
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 14px 0;
+    box-shadow: 6px 6px 0 rgba(46,125,50,0.25);
+    position: relative;
+}
+.quiz-number { color: #1b5e20; font-weight: 800; font-size: 16pt; font-family: 'Space Mono', monospace; }
+
+/* Answer reveal */
+.answer-box {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border: 2.5px solid #4caf50;
+    padding: 16px 22px; border-radius: 6px; margin: 14px 0;
+    opacity: 0.07; cursor: pointer; transition: opacity 0.3s;
+    box-shadow: 6px 6px 0 rgba(76,175,80,0.2);
+}
+.answer-box:hover { opacity: 0.35; }
+.answer-box.revealed { opacity: 1; }
+.hidden-title { opacity: 0.07; cursor: pointer; transition: opacity 0.3s; }
+.hidden-title:hover { opacity: 0.35; }
+.hidden-title.revealed { opacity: 1; }
+
+/* ════════════════════════════════════════════
+   ★ SAYING DEEP DIVE
+════════════════════════════════════════════ */
+.saying-study-box {
+    background: var(--cream-2);
+    border: 2.5px solid var(--graphite);
+    padding: 24px;
+    border-radius: 6px;
+    margin: 14px 0;
+    box-shadow: 6px 6px 0 var(--graphite);
+}
+.saying-study-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22pt;
+    color: var(--graphite);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+}
+.saying-study-full {
+    font-family: 'Playfair Display', serif;
+    font-size: 22pt;
+    font-weight: 700;
+    font-style: italic;
+    color: #0d47a1;
+    line-height: 1.5;
+    margin: 6px 0;
+}
+.saying-word-grid   { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 14px 0; }
+.saying-word-card   { background: #fff; border: 2px solid var(--graphite); border-radius: 4px; padding: 10px 8px; text-align: center; }
+.word-main   { font-family: 'Space Mono', monospace; font-size: 13pt; font-weight: 700; color: #0d47a1; line-height: 1.3; display: block; }
+.word-type   { font-size: 10pt; font-weight: 700; color: var(--coral); line-height: 1.3; display: block; margin-top: 2px; font-style: italic; }
+.word-def    { font-size: 11pt; color: #444; line-height: 1.4; display: block; margin-top: 4px; }
+.saying-story-box  { background: #fff; border-left: 6px solid var(--lime-dark); padding: 14px 18px; border-radius: 0 4px 4px 0; margin: 10px 0; }
+.saying-apply-box  { background: var(--graphite); border-radius: 4px; padding: 16px 18px; margin-top: 14px; }
+
+/* ════════════════════════════════════════════
+   ★ KEYWORD SECTION
+════════════════════════════════════════════ */
+.keyword-section {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px 12px; margin-bottom: 10px;
+}
+.keyword-pill {
+    background: var(--graphite);
+    color: var(--lime);
+    padding: 10px 16px;
+    border-radius: 3px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11pt;
+    font-weight: 700;
+    transition: all 0.2s;
+    display: block;
+    text-decoration: none;
+    border: 2px solid transparent;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+.keyword-pill:hover {
+    background: var(--lime);
+    color: var(--graphite);
+    border-color: var(--graphite);
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 var(--graphite);
+}
+
+/* ════════════════════════════════════════════
+   ★ WORD POWER BOX
+════════════════════════════════════════════ */
+.wordpower-box {
+    background: #fff;
+    border: 2.5px solid var(--coral);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 14px 0;
+    box-shadow: 6px 6px 0 rgba(255,77,77,0.25);
+    position: relative;
+}
+.wordpower-box::before {
+    content: 'VOCAB';
+    position: absolute; top: -14px; left: 20px;
+    background: var(--coral);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13pt;
+    letter-spacing: 0.15em;
+    padding: 2px 14px;
+    border-radius: 2px;
+}
+
+/* ════════════════════════════════════════════
+   ★ GRANDPA'S CORNER
+════════════════════════════════════════════ */
+.grandpa-box {
+    background: #fff;
+    border: 2.5px solid var(--gold);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 14px 0;
+    position: relative;
+    box-shadow: 6px 6px 0 rgba(255,215,0,0.35);
+}
+.grandpa-box::before {
+    content: '👴 GRANDPA\'S CORNER';
+    position: absolute; top: -14px; left: 20px;
+    background: var(--gold);
+    color: var(--graphite);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12pt;
+    letter-spacing: 0.15em;
+    padding: 2px 16px;
+    border-radius: 2px;
+}
+
+/* ════════════════════════════════════════════
+   ★ SPOTLIGHT CARD
+════════════════════════════════════════════ */
+.spotlight-card {
+    background: var(--graphite-2);
+    border-radius: 6px;
+    padding: 20px 22px;
+    margin: 14px 0;
+    display: flex; gap: 16px; align-items: flex-start;
+    border: 2px solid rgba(198,241,53,0.25);
+}
+.spotlight-icon {
+    font-size: 32pt; flex-shrink: 0;
+    background: rgba(198,241,53,0.1);
+    width: 68px; height: 68px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+}
+.spotlight-content { flex: 1; }
+.spotlight-title { font-family: 'Bebas Neue', sans-serif; font-size: 18pt; color: var(--lime); line-height: 1.3; margin-bottom: 5px; letter-spacing: 0.05em; }
+.spotlight-body  { font-size: 14pt; color: #b0b0c4; line-height: 1.7; }
+
+/* Did You Know */
+.did-you-know {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-left: 8px solid #2e7d32;
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px; margin: 14px 0;
+}
+.dyk-label { font-family: 'Space Mono', monospace; font-size: 10pt; font-weight: 700; color: #1b5e20; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; }
+.dyk-body  { font-size: 16pt; color: var(--graphite); line-height: 1.8; }
+
+/* ════════════════════════════════════════════
+   ★ VISUAL STORY PANELS
+════════════════════════════════════════════ */
+.comic-wrap {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 8px 8px 0 var(--graphite);
+    overflow: hidden; margin: 16px 0;
+    border: 2.5px solid var(--graphite);
+}
+.comic-header {
+    background: var(--graphite);
+    color: var(--lime);
+    padding: 10px 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16pt;
+    letter-spacing: 0.1em;
+    display: flex; align-items: center; gap: 10px;
+}
+.comic-single { position: relative; width: 100%; aspect-ratio: 1/1; cursor: pointer; overflow: hidden; }
+.comic-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: var(--cream-2);
+    gap: 14px; padding: 20px;
+}
+.comic-single-overlay {
+    position: absolute; inset: 0;
+    background: rgba(14,14,16,0.65);
+    display: none; align-items: center; justify-content: center;
+    gap: 12px; flex-direction: column; z-index: 5;
+}
+.comic-single:hover .comic-single-overlay { display: flex; }
+.comic-mob {
+    background: var(--lime); color: var(--graphite); border: none;
+    border-radius: 3px; padding: 6px 16px;
+    font-size: 13pt; cursor: pointer; font-weight: 700;
+    font-family: 'Space Mono', monospace;
+}
+.comic-mob:hover { background: #d8ff50; }
+
+/* ════════════════════════════════════════════
+   ★ SUMMARY / RECAP BOX
+════════════════════════════════════════════ */
+.summary-box {
+    background: var(--graphite);
+    border: 3px solid var(--lime);
+    border-radius: 6px;
+    padding: 28px 26px;
+    margin: 16px 0;
+    box-shadow: 8px 8px 0 rgba(198,241,53,0.2);
+}
+.summary-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26pt;
+    color: var(--lime);
+    margin-bottom: 16px;
+    text-align: center;
+    letter-spacing: 0.08em;
+}
+.summary-item {
+    font-size: 15pt; line-height: 1.9;
+    margin-bottom: 14px;
+    padding-left: 16px;
+    border-left: 5px solid var(--lime);
+    color: #d0d0e0;
+}
+.summary-item:last-child { margin-bottom: 0; }
+.summary-item b { color: var(--lime); }
+
+/* ════════════════════════════════════════════
+   ★ RECEIPT CARD — unique visual element EP36
+════════════════════════════════════════════ */
+.receipt-card {
+    background: #fff;
+    border: 2px solid var(--graphite);
+    border-radius: 4px 4px 0 0;
+    max-width: 460px; margin: 18px auto;
+    font-family: 'Space Mono', monospace;
+    box-shadow: 0 8px 0 var(--graphite), 0 9px 0 #ccc;
+    position: relative;
+    overflow: hidden;
+}
+.receipt-card::after {
+    content: '';
+    display: block;
+    height: 20px;
+    background: repeating-linear-gradient(
+        -45deg,
+        #fff 0, #fff 6px,
+        var(--cream-2) 6px, var(--cream-2) 12px
+    );
+    border-top: 2px dashed var(--graphite);
+}
+.receipt-header {
+    background: var(--graphite);
+    color: var(--lime);
+    text-align: center;
+    padding: 12px 16px 8px;
+    font-size: 13pt; font-weight: 700;
+    letter-spacing: 0.1em;
+}
+.receipt-body { padding: 14px 20px; }
+.receipt-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px dashed #ddd;
+    padding: 6px 0;
+    font-size: 12pt;
+}
+.receipt-row:last-child { border-bottom: none; }
+.receipt-row.total {
+    font-weight: 700; font-size: 14pt;
+    border-top: 2px solid var(--graphite);
+    border-bottom: none;
+    margin-top: 8px; padding-top: 10px;
+    color: var(--coral);
+}
+.receipt-row.ai-saved { color: #2e7d32; font-weight: 700; }
+
+/* ════════════════════════════════════════════
+   ★ FOOTER SECTION
+════════════════════════════════════════════ */
+.footer-section { margin-top: 24px; padding-top: 18px; border-top: 2px solid var(--cream-2); }
+.footer-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20pt; color: var(--graphite);
+    margin-bottom: 10px; letter-spacing: 0.06em;
+}
+
+/* ════════════════════════════════════════════
+   ★ CTA / SUBSCRIBE BAR
+════════════════════════════════════════════ */
+.cta-bar {
+    background: var(--graphite);
+    border: 3px solid var(--lime);
+    border-radius: 6px;
+    padding: 22px 26px;
+    text-align: center;
+    margin: 16px 0;
+    box-shadow: 8px 8px 0 rgba(198,241,53,0.15);
+}
+.cta-bar .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28pt;
+    color: var(--lime);
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+}
+.cta-bar .cta-sub {
+    font-size: 14pt; color: #a0a0b4; margin-top: 8px; line-height: 1.6;
+}
+.cta-bar .cta-tags {
+    margin-top: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10pt; color: rgba(198,241,53,0.5);
+    letter-spacing: 0.06em;
+}
+
+/* ════════════════════════════════════════════
+   ★ RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width: 600px) {
+    .hero-title { font-size: 28pt; }
+    .sec-num { font-size: 20pt; min-width: 54px; padding: 6px 12px; }
+    .sec-label .main { font-size: 15pt; }
+    .saying-word-grid  { grid-template-columns: repeat(2,1fr); }
+    .ai-img-grid       { grid-template-columns: repeat(2,1fr); }
+    .keyword-section   { grid-template-columns: 1fr; }
+    .spotlight-card    { flex-direction: column; }
+    .ticker-track      { padding-left: 90px; }
+    .ticker-label      { font-size: 8pt; padding: 0 10px; }
+    .hero-inner        { padding: 24px 18px 20px; }
+    .receipt-card      { max-width: 100%; }
+}
+    </style>
+</head>
+<body>
+<div class="ts-wrap">
+
+<!-- ================================================================
+     ① HERO BANNER
+================================================================ -->
+<div class="hero-banner">
+    <div class="hero-inner" contenteditable="true">
+        <div class="hero-series-bar">
+            <div class="hero-series-label">🤖 AI DECODED FOR SENIORS</div>
+            <div class="hero-ep-badge">EPISODE 36</div>
+        </div>
+        <div class="hero-title">
+            <span class="accent">AI BUDGET TRACKER</span><br>
+            <span class="coral">&amp; RECEIPT ORGANIZER</span><br>
+            <span style="color:#fff;font-size:0.65em;">Using ChatGPT &amp; Claude Like a Pro!</span>
+        </div>
+        <div class="hero-subtitle">
+            Jake shows Grandpa Bob how to photograph a grocery receipt, let AI categorize every expense, and build a FREE monthly budget — no spreadsheets, no confusion!
+        </div>
+        <div class="hero-tags">
+            <span class="hero-tag">#ChatGPT</span>
+            <span class="hero-tag">#AIForSeniors</span>
+            <span class="hero-tag">#ArtificialIntelligence</span>
+            <span class="hero-tag">#AIBudget</span>
+            <span class="hero-tag">#AITools2025</span>
+            <span class="hero-tag">#LearnAI</span>
+            <span class="hero-tag">#ClaudeAI</span>
+            <span class="hero-tag">#PersonalFinanceAI</span>
+        </div>
+        <div class="hero-hosts">
+            <div class="host-badge">👦 Jake — Your AI Guide</div>
+            <div class="host-badge">👴 Grandpa Bob — Just Like You!</div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔥 LIVE TICKER BANNER -->
+<div class="ticker-wrap">
+    <div class="ticker-label">🔥 TRENDING</div>
+    <div class="ticker-track">
+        <span class="ticker-item">ChatGPT</span>
+        <span class="ticker-item">Claude AI</span>
+        <span class="ticker-item">Google Gemini</span>
+        <span class="ticker-item">Microsoft Copilot</span>
+        <span class="ticker-item">Grok by xAI</span>
+        <span class="ticker-item">Perplexity AI</span>
+        <span class="ticker-item">AI Budget Tracker</span>
+        <span class="ticker-item">AI Receipt Scanner</span>
+        <span class="ticker-item">Midjourney</span>
+        <span class="ticker-item">Sora AI Video</span>
+        <span class="ticker-item">DeepSeek</span>
+        <span class="ticker-item">AI Personal Finance</span>
+        <!-- duplicated for seamless loop -->
+        <span class="ticker-item">ChatGPT</span>
+        <span class="ticker-item">Claude AI</span>
+        <span class="ticker-item">Google Gemini</span>
+        <span class="ticker-item">Microsoft Copilot</span>
+        <span class="ticker-item">Grok by xAI</span>
+        <span class="ticker-item">Perplexity AI</span>
+        <span class="ticker-item">AI Budget Tracker</span>
+        <span class="ticker-item">AI Receipt Scanner</span>
+        <span class="ticker-item">Midjourney</span>
+        <span class="ticker-item">Sora AI Video</span>
+        <span class="ticker-item">DeepSeek</span>
+        <span class="ticker-item">AI Personal Finance</span>
+    </div>
+</div>
+
+<!-- ================================================================
+     ② TODAY'S AMERICAN SAYING
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">②</div>
+    <div class="sec-label">
+        <div class="main">TODAY'S AMERICAN SAYING</div>
+        <div class="sub">Wisdom that connects to AI — every episode!</div>
+    </div>
+</div>
+
+<div class="saying-box">
+    <div class="saying-main" contenteditable="true">"A penny saved is a penny earned."</div>
+    <div class="saying-meaning" contenteditable="true">
+        💡 <b>Meaning:</b> Every dollar you save is just as valuable as every dollar you earn. Saving money = making money!
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body" contenteditable="true"
+        style="color:#a0a0b8;">
+        🤖 <b>AI Connection:</b> Today, AI tools like ChatGPT and Claude act as your <span style="color:var(--lime);font-weight:700;">free personal finance assistant</span> — helping you track every single penny without hiring an accountant. Every receipt you scan, every category AI organizes for you, is a penny <i>earned back</i> in time and awareness!
+    </div>
+    <div class="gap-sm"></div>
+    <span class="saying-tag">🤖 AI Money Connection</span>
+</div>
+
+<!-- ================================================================
+     ③ INTRO
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">③</div>
+    <div class="sec-label">
+        <div class="main">AI BUDGET TRACKER &amp; RECEIPT ORGANIZER</div>
+        <div class="sub">This week's AI topic — breaking it all the way down</div>
+    </div>
+</div>
+
+<div class="content-body" contenteditable="true">
+    Hey there! Welcome back to <b>AI Decoded for Seniors</b> — the show where your guide <span class="speaker">Jake</span> makes the world's most talked-about AI tools so simple, even Grandpa Bob gets it on the first try! 🎉
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    Whether you've heard of <span class="term-name">ChatGPT</span>, <span class="term-name">Google Gemini</span>, or <span class="term-name">Anthropic Claude</span> — or maybe you've been too nervous to try — <b>this series is built for YOU.</b> No tech background needed. We go step by step, together.
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    <b>This episode is about something EVERY American worries about</b> — <span class="emphasis">money.</span> Grocery bills going up. Gas prices swinging. It's hard to keep track! But here's the game-changer: <span class="ai-name">AI tools like ChatGPT and Claude can read your receipts, sort your spending into categories, and even suggest where you can save</span> — all for FREE, right from your smartphone. No complicated apps. No accountant fees. Just you, your phone camera, and a little AI magic!
+</div>
+<div class="gap"></div>
+
+<!-- Unique EP36 visual: Sample AI Receipt Card -->
+<div class="receipt-card">
+    <div class="receipt-header">🤖 AI-ANALYZED RECEIPT — Grandpa Bob's Grocery Run</div>
+    <div class="receipt-body">
+        <div class="receipt-row"><span>Whole milk (1 gal)</span><span>$4.29</span></div>
+        <div class="receipt-row"><span>Bread (whole wheat)</span><span>$3.49</span></div>
+        <div class="receipt-row"><span>Chicken breast (2 lb)</span><span>$8.76</span></div>
+        <div class="receipt-row"><span>Apples (3 lb bag)</span><span>$5.99</span></div>
+        <div class="receipt-row"><span>Orange juice (64oz)</span><span>$4.49</span></div>
+        <div class="receipt-row"><span>Canned soup × 3</span><span>$5.37</span></div>
+        <div class="receipt-row"><span>Paper towels</span><span>$7.99</span></div>
+        <div class="receipt-row total"><span>TOTAL</span><span>$40.38</span></div>
+        <div class="receipt-row ai-saved"><span>🤖 AI found: 3 items on coupon savings list!</span><span>-$4.20</span></div>
+    </div>
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT / Claude — Receipt Analysis Demo (AI Decoded for Seniors)</em></div>
+
+<div class="content-body" contenteditable="true">
+    👆 <b>That's exactly what AI does for you!</b> Just snap a photo of your receipt, paste the totals into ChatGPT or Claude, and ask: <i>"Please organize this grocery receipt by category and show me where I'm spending the most."</i> The AI does the rest in seconds!
+</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 1 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 SCENE 1 — Jake Walks Grandpa Bob Through His First AI Receipt Scan</div>
+  <div class="comic-single" id="panel-comic-1"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-1').click()">
+    <div id="pd-comic-1" class="comic-placeholder">
+      <div style="font-size:56px">📸</div>
+      <div style="font-size:16pt;font-weight:700;color:var(--graphite);text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em;">JAKE SCANS HIS FIRST RECEIPT WITH AI</div>
+      <div style="font-size:12pt;color:var(--mist);text-align:center;">Show Jake holding up a grocery receipt to his phone camera with ChatGPT open on screen</div>
+      <div style="margin-top:12px;background:var(--graphite);color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:14pt;letter-spacing:0.1em;padding:10px 28px;border-radius:3px;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:0.1em;">CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-1').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-1','comic-1')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-1" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-1','pd-comic-1','comic-1')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ④ JAKE & BOB CONVERSATION
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">④</div>
+    <div class="sec-label">
+        <div class="main">JAKE &amp; GRANDPA BOB TALK AI</div>
+        <div class="sub">A real conversation — just like your family dinner table!</div>
+    </div>
+</div>
+
+<div class="dialog-box" contenteditable="true">
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob</span>
+        <span class="dialog-content">"Jake, I've got a shoebox full of grocery receipts from the last three months. My wife says I spend too much on snacks. I can never prove her wrong because sorting those receipts by hand takes forever!"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Jake</span>
+        <span class="dialog-content">"Grandpa, that shoebox is GOLD. Here's what we're going to do — take a photo of any receipt with your phone, type the items and prices into ChatGPT, and just say: 'Please sort this into food categories and tell me my top 3 spending areas.' Done in 10 seconds!"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob</span>
+        <span class="dialog-content">"Wait — I just type it like I'm talking to a person? No spreadsheet program? No special app to buy?"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Jake</span>
+        <span class="dialog-content">"Exactly! ChatGPT is free, Claude is free — you just type naturally, like you're texting a really smart friend. You can even take a photo of the receipt and upload it! The AI reads the photo and does all the math for you."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob</span>
+        <span class="dialog-content">"So I could finally prove to Marge that I only spent $11 on chips last month… and she spent $40 on her 'healthy' granola bars?!" 😂</span>
+    </div>
+    <!-- Add more dialog-row blocks as needed -->
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑤ AI CRASH COURSE TIPS
+================================================================ -->
+<div class="mini-sec">
+    <div class="mini-sec-icon">⚡</div>
+    <div class="mini-sec-text">3 STEPS TO USE AI AS YOUR BUDGET BUDDY
+        <small>No App. No Cost. Just Pure AI Power.</small>
+    </div>
+</div>
+
+<div class="did-you-know" contenteditable="true">
+    <div class="dyk-label">💡 Did You Know?</div>
+    <div class="dyk-body">Nearly <b>40% of Americans</b> now use an AI chatbot at least once a month — and the fastest-growing use case is <b>personal finance help</b>. ChatGPT alone handles over <b>1 billion queries every single day!</b></div>
+</div>
+
+<div class="tip-box" contenteditable="true">
+    <div class="content-body" style="margin-top:8px;">
+        <span class="tip-number-badge">1</span>
+        <b>Snap &amp; Type — Turn Any Receipt Into a Budget Entry</b><br>
+        <span style="padding-left:42px;display:block;">Open ChatGPT (chat.openai.com) or Claude (claude.ai) on your phone or computer — both are 100% FREE. Type in: <i>"Here are the items from my grocery receipt: [list them out]. Please organize by category (Food, Household, Snacks) and give me the total for each."</i> The AI instantly sorts everything. No math, no typing errors!</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="tip-number-badge">2</span>
+        <b>Ask for a Monthly Summary — Let AI Be Your Accountant</b><br>
+        <span style="padding-left:42px;display:block;">Once a week, type your receipts into the same chat and ask: <i>"Based on everything I've shared this month, what are my top 5 spending categories? How does this week compare to last week?"</i> Claude is especially great at this — it remembers the whole conversation and gives you a clear, honest summary!</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="tip-number-badge">3</span>
+        <b>Get AI Savings Tips — Personalized Just For You</b><br>
+        <span style="padding-left:42px;display:block;">After your summary, ask: <i>"Where could I cut back by $20-30 this month without feeling deprived? Give me 3 practical tips based on my actual spending."</i> AI gives you real, personalized suggestions — not generic advice from a finance book!</span>
+    </div>
+</div>
+
+<!-- AI Tool Spotlight -->
+<div class="spotlight-card" contenteditable="true">
+    <div class="spotlight-icon">💰</div>
+    <div class="spotlight-content">
+        <div class="spotlight-title">🔦 AI TOOL SPOTLIGHT — Budget Tracking</div>
+        <div class="spotlight-body">
+            <b style="color:var(--lime);">ChatGPT · Claude · Copilot · Gemini · Perplexity · Grok</b><br>
+            ALL of these top AI tools can be your personal budget tracker! <b style="color:var(--lime);">Best for seniors:</b> ChatGPT (easiest interface) and Claude (best at remembering your full financial conversation). Both are free to start!
+        </div>
+    </div>
+</div>
+
+<!-- ★ Concept Image 2 -->
+<div class="img-area" id="area-2"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-2').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-2">
+        <span class="upload-icon">📊</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:12pt;color:var(--mist);">[AI Budget Dashboard Screenshot — ChatGPT or Claude in action]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-2').click()">🔄 Replace</button>
+        <button class="media-btn"
+            onclick="event.stopPropagation();
+                     document.getElementById('img-display-2').innerHTML='<span class=\'upload-icon\'>📊</span><span>Click to Insert Image or Video</span>';
+                     document.getElementById('area-2').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-2" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){
+            const f=e.target.files[0]; if(!f) return;
+            const r=new FileReader();
+            r.onload=function(ev){
+                const d=document.getElementById('img-display-2');
+                if(f.type.startsWith('image/')){
+                    d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>';
+                } else {
+                    d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>';
+                }
+                document.getElementById('area-2').style.minHeight='auto';
+            };
+            r.readAsDataURL(f);
+        })(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT Official Site / Claude.ai Demo</em></div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 2 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 SCENE 2 — Grandpa Bob Gets His First AI Budget Report!</div>
+  <div class="comic-single" id="panel-comic-2"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-2').click()">
+    <div id="pd-comic-2" class="comic-placeholder">
+      <div style="font-size:56px">📈</div>
+      <div style="font-size:16pt;font-weight:700;color:var(--graphite);text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em;">GRANDPA BOB SEES HIS MONTHLY AI BUDGET</div>
+      <div style="font-size:12pt;color:var(--mist);text-align:center;">Show Grandpa Bob looking amazed at his phone screen showing a ChatGPT budget summary</div>
+      <div style="margin-top:12px;background:var(--graphite);color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:14pt;letter-spacing:0.1em;padding:10px 28px;border-radius:3px;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:0.1em;">CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-2').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-2','comic-2')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-2" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-2','pd-comic-2','comic-2')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑥ AI IN YOUR DAILY LIFE
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">⑥</div>
+    <div class="sec-label">
+        <div class="main">AI CAN DO THIS FOR YOUR WALLET!</div>
+        <div class="sub">Practical AI for your real, everyday American life</div>
+    </div>
+</div>
+<div class="content-body" contenteditable="true"><span class="speaker">Jake:</span> <i>"Grandpa, here are 4 real ways Americans your age are using AI right now to stretch every dollar — no smartphone expertise required!"</i></div>
+<div class="gap-sm"></div>
+
+<div class="ai-box-single">
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>1. 🛒 Grocery Receipt Categorization</b><br>
+            Snap a photo of your Walmart, Kroger, or Publix receipt and upload it to ChatGPT or Claude. Ask: <i>"Sort these items into Produce, Meat, Dairy, Snacks, and Household. Show me totals for each."</i> In seconds you'll know exactly where your grocery dollars are going — no pen, no paper, no calculator!
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>2. 💊 Track Medication &amp; Healthcare Spending</b><br>
+            Healthcare is the #1 financial worry for American seniors. Type in your prescription copays, doctor visit costs, and over-the-counter medicine receipts. Ask AI: <i>"How much have I spent on healthcare this month? Is there a pattern I should watch?"</i> AI spots trends humans miss!
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>3. 💡 Utility &amp; Bill Comparison</b><br>
+            Type in your electric bill from last month and this month. Ask Claude or ChatGPT: <i>"My electric bill went from $87 to $134. What are the most common reasons for this kind of jump, and what are 5 easy ways to lower it?"</i> You'll get practical, senior-friendly advice instantly!
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>4. 🎁 Holiday &amp; Gift Budget Planner</b><br>
+            Before Thanksgiving or Christmas, tell AI: <i>"I have $400 for holiday gifts for 7 people. Here are their ages and what they like. Help me make a budget plan and gift list."</i> AI creates a personalized, organized gift budget that keeps you from overspending — every year!
+        </div>
+    </div>
+</div>
+
+<!-- AI icon grid -->
+<div class="ai-img-grid">
+    <div class="ai-img-area" id="ai-area-1"
+        onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-1').click()}">
+        <div class="upload-label" id="ai-img-display-1">
+            <span class="upload-icon">🛒</span>
+        </div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-1').click()">🔄</button>
+            <button class="media-btn"
+                onclick="event.stopPropagation();document.getElementById('ai-img-display-1').innerHTML='<span class=\'upload-icon\'>🛒</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-2"
+        onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-2').click()}">
+        <div class="upload-label" id="ai-img-display-2">
+            <span class="upload-icon">💊</span>
+        </div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-2').click()">🔄</button>
+            <button class="media-btn"
+                onclick="event.stopPropagation();document.getElementById('ai-img-display-2').innerHTML='<span class=\'upload-icon\'>💊</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-3"
+        onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-3').click()}">
+        <div class="upload-label" id="ai-img-display-3">
+            <span class="upload-icon">💡</span>
+        </div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-3').click()">🔄</button>
+            <button class="media-btn"
+                onclick="event.stopPropagation();document.getElementById('ai-img-display-3').innerHTML='<span class=\'upload-icon\'>💡</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-4"
+        onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-4').click()}">
+        <div class="upload-label" id="ai-img-display-4">
+            <span class="upload-icon">🎁</span>
+        </div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-4').click()">🔄</button>
+            <button class="media-btn"
+                onclick="event.stopPropagation();document.getElementById('ai-img-display-4').innerHTML='<span class=\'upload-icon\'>🎁</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-4');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑦ AI LAUGH BREAK
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">😂</div>
+    <div class="sec-label">
+        <div class="main">AI LAUGH BREAK!</div>
+        <div class="sub">Because learning should always be fun 🎉</div>
+    </div>
+</div>
+
+<div class="humor-box" contenteditable="true">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22pt;color:var(--lime);letter-spacing:0.06em;margin-bottom:12px;">🎭 GRANDPA BOB TRIES TO TRICK THE AI!</div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob</span>
+        <span class="dialog-content" style="color:var(--cream);">"ChatGPT, I spent $8.99 on 'research materials' at the grocery store."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">ChatGPT</span>
+        <span class="dialog-content" style="color:#a0d8f0;">"Of course! Could you list the items? I want to make sure they're categorized correctly."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob</span>
+        <span class="dialog-content" style="color:var(--cream);">"...Two bags of Doritos and a family-size Snickers bar."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">ChatGPT</span>
+        <span class="dialog-content" style="color:#a0d8f0;">"I've categorized that under 'Snacks.' Would you like me to note it as 'Important Research'?"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob</span>
+        <span class="dialog-content" style="color:var(--cream);">"...Yes. And please don't tell Marge." 😂</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body" style="text-align:center;font-style:italic;color:var(--coral);">AI is smart enough to know Doritos aren't a tax deduction — but kind enough not to judge! 😂</div>
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑧ AI TRIVIA CHALLENGE
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">🧠</div>
+    <div class="sec-label">
+        <div class="main">AI TRIVIA CHALLENGE!</div>
+        <div class="sub">Test your new AI knowledge — answers below 👇</div>
+    </div>
+</div>
+
+<div class="quiz-box" contenteditable="true">
+    <div class="content-body" style="font-family:'Bebas Neue',sans-serif;font-size:22pt;color:#1b5e20;margin-bottom:10px;letter-spacing:0.06em;">🏆 CAN YOU ANSWER THESE?</div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q1.</span> What is the name of Anthropic's AI chatbot that is famous for being safe, helpful, and especially good at long, detailed conversations?<br>
+        <span style="color:#5a6e8a;font-size:14pt;font-family:'Space Mono',monospace;">💡 Hint: Its name is also a word meaning "an assistant" in French.</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q2.</span> If you type your grocery list into ChatGPT and ask it to "categorize by food group and give me the total for each," what kind of task is this called?<br>
+        <span style="color:#5a6e8a;font-size:14pt;font-family:'Space Mono',monospace;">💡 Hint: Think of what an accountant does with your expenses.</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q3.</span> As of 2026, roughly how many weekly users does ChatGPT have worldwide?<br>
+        <span style="color:#5a6e8a;font-size:14pt;font-family:'Space Mono',monospace;">💡 Hint: It's a number between 800 million and 1 billion!</span>
+    </div>
+</div>
+
+<div class="content-body hidden-title" style="text-align:center;font-family:'Space Mono',monospace;font-size:13pt;color:#888;margin:8px 0;"
+    onclick="this.classList.toggle('revealed');document.getElementById('answer-reveal').classList.toggle('revealed')">
+    👆 Tap / hover here to reveal answers!
+</div>
+<div class="answer-box" id="answer-reveal"
+    onclick="this.classList.toggle('revealed');document.querySelector('.hidden-title').classList.toggle('revealed')"
+    contenteditable="true">
+    <div class="content-body">
+        <b style="color:#1b5e20;font-family:'Bebas Neue',sans-serif;font-size:22pt;letter-spacing:0.06em;">✅ ANSWERS</b><br>
+        <b>A1:</b> <span class="ai-name">Claude</span> — made by Anthropic! (claude.ai — free to use!)<br>
+        <b>A2:</b> <span class="term-name">Budget Categorization</span> — sorting expenses into groups to see spending patterns.<br>
+        <b>A3:</b> Approximately <b>800–900 million weekly users</b> as of early 2026!
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑨ SAYING DEEP DIVE
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">📖</div>
+    <div class="sec-label">
+        <div class="main">SAYING DEEP DIVE</div>
+        <div class="sub">Understand every word — and connect it to AI!</div>
+    </div>
+</div>
+
+<div class="saying-study-box">
+    <div class="saying-study-title" contenteditable="true">🔍 BREAKING DOWN TODAY'S SAYING</div>
+    <div class="saying-study-full" contenteditable="true">"A penny saved is a penny earned."</div>
+
+    <div class="saying-word-grid">
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">penny</span>
+            <span class="word-type" contenteditable="true">(noun)</span>
+            <span class="word-def" contenteditable="true">The smallest U.S. coin = 1 cent. Here it means any small amount of money.</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">saved</span>
+            <span class="word-type" contenteditable="true">(verb)</span>
+            <span class="word-def" contenteditable="true">Set aside money instead of spending it; kept safe from being used.</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">earned</span>
+            <span class="word-type" contenteditable="true">(verb)</span>
+            <span class="word-def" contenteditable="true">Money received in exchange for work or effort; deserved.</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">is</span>
+            <span class="word-type" contenteditable="true">(verb — linking)</span>
+            <span class="word-def" contenteditable="true">Equals; connects two ideas that are the same in value.</span>
+        </div>
+    </div>
+
+    <div class="saying-story-box" contenteditable="true">
+        <div class="content-body">
+            <b>📌 Word-for-word meaning:</b><div class="br"></div>
+            If you save one penny, that one penny has the same value as if you had worked to earn it. Not spending money = making money.
+        </div>
+        <div class="gap"></div>
+        <div class="content-body">
+            <b>📌 In plain English:</b><div class="br"></div>
+            Every time you don't waste money on something unnecessary, it's the same as going to work and earning that money. Saving IS earning!
+        </div>
+        <div class="gap"></div>
+        <div class="content-body">
+            <b>📌 Real-life analogy:</b><div class="br"></div>
+            Imagine you normally spend $15 on lunch at a restaurant. Today, you make lunch at home for $3. That $12 difference? You just "earned" $12 without working an extra minute! Same idea: every dollar AI helps you stop wasting on impulse buys is a dollar your wallet keeps.
+        </div>
+    </div>
+
+    <div class="saying-apply-box" contenteditable="true">
+        <div class="content-body" style="font-family:'Bebas Neue',sans-serif;font-size:19pt;color:var(--lime);letter-spacing:0.06em;">
+            🤖 CONNECT IT TO AI!
+        </div>
+        <div class="gap-sm"></div>
+        <div class="content-body" style="color:#c8c8d8;">
+            When AI tracks your receipts and shows you that you spent $47 on impulse snack purchases last month — and next month you spend only $20 — you just "earned" $27 without doing a single extra hour of work! <b style="color:var(--lime);">"A penny saved is a penny earned"</b> — AI makes this saying more powerful than ever by showing you exactly where your pennies are going! 🌟
+        </div>
+    </div>
+
+    <div class="gap-sm"></div>
+    <div class="content-body" contenteditable="true"
+        style="background:linear-gradient(135deg, #e8f0ff, #d0e4ff);padding:14px 18px;border-radius:4px;border-left:6px solid #1a3a6e;">
+        🧠 <b>Memory Tip!</b> Think of Benjamin Franklin, who is often credited with this saying. He was also a famous American inventor — and today's AI tools are the new invention that puts his money wisdom into action for free! Try using it in a sentence: <i>"I used ChatGPT to find I was overpaying for streaming services — a penny saved is a penny earned!"</i>
+    </div>
+</div>
+
+<!-- Image 3 -->
+<div class="img-area" id="area-3"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-3').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-3">
+        <span class="upload-icon">🖼️</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:12pt;color:var(--mist);">[Saying wrap-up image — coins, piggy bank, or AI finance visual]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-3').click()">🔄 Replace</button>
+        <button class="media-btn"
+            onclick="event.stopPropagation();
+                     document.getElementById('img-display-3').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';
+                     document.getElementById('area-3').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-3" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){
+            const f=e.target.files[0]; if(!f) return;
+            const r=new FileReader();
+            r.onload=function(ev){
+                const d=document.getElementById('img-display-3');
+                if(f.type.startsWith('image/')){
+                    d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>';
+                } else {
+                    d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>';
+                }
+                document.getElementById('area-3').style.minHeight='auto';
+            };
+            r.readAsDataURL(f);
+        })(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: AI Decoded for Seniors / Free Stock (Unsplash / Pexels)</em></div>
+
+<div class="content-body" contenteditable="true" style="margin-top:12px;">
+    <span class="speaker">Jake:</span> <i>"Grandpa, next time you're at the grocery store and you think about grabbing that extra bag of chips, just remember — a penny saved is a penny earned. And now you have AI to show you exactly how many pennies you're saving every month!"</i>
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    <span class="speaker">Grandpa Bob:</span> <i>"I'm going to screenshot my ChatGPT budget report and tape it to the refrigerator door. Marge is going to be so impressed… or so suspicious. Either way, AI is on my side now!"</i> 😄
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑩ SEARCH KEYWORDS
+================================================================ -->
+<div class="footer-section">
+    <div class="footer-title" contenteditable="true">🔍 TOP AI SEARCH KEYWORDS — TRY THESE!</div>
+    <div class="content-body" style="font-size:13pt;color:var(--mist);margin-bottom:12px;font-family:'Space Mono',monospace;"
+        contenteditable="true">These are the hottest AI terms Americans are Googling RIGHT NOW. Click any keyword to search!</div>
+    <div class="keyword-section">
+        <a href="https://www.google.com/search?q=ChatGPT+budget+tracker" target="_blank" class="keyword-pill">ChatGPT Budget Tracker</a>
+        <a href="https://www.google.com/search?q=AI+receipt+scanner+free" target="_blank" class="keyword-pill">AI Receipt Scanner Free</a>
+        <a href="https://www.google.com/search?q=Claude+AI+personal+finance" target="_blank" class="keyword-pill">Claude AI Personal Finance</a>
+        <a href="https://www.google.com/search?q=how+to+use+ChatGPT+for+seniors" target="_blank" class="keyword-pill">ChatGPT for Seniors</a>
+        <a href="https://www.google.com/search?q=AI+savings+tips+2025" target="_blank" class="keyword-pill">AI Savings Tips 2025</a>
+        <a href="https://www.google.com/search?q=Google+Gemini+budget+planner" target="_blank" class="keyword-pill">Gemini Budget Planner</a>
+        <a href="https://www.google.com/search?q=Perplexity+AI+money+tips" target="_blank" class="keyword-pill">Perplexity AI Money Tips</a>
+        <a href="https://www.google.com/search?q=Microsoft+Copilot+expense+tracker" target="_blank" class="keyword-pill">Copilot Expense Tracker</a>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑪ WORD POWER
+================================================================ -->
+<div class="sec-header">
+    <div class="sec-num">📝</div>
+    <div class="sec-label">
+        <div class="main">AMERICAN ENGLISH WORD POWER</div>
+        <div class="sub">Essential AI vocabulary every senior should know!</div>
+    </div>
+</div>
+
+<div class="wordpower-box" contenteditable="true">
+    <div class="content-body" style="font-family:'Bebas Neue',sans-serif;font-size:22pt;color:#880e4f;letter-spacing:0.06em;margin-top:8px;">🇺🇸 AI VOCABULARY — TOP 3 THIS EPISODE</div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <b>1. Prompt</b> (noun / verb)<br>
+        A message or instruction you type into an AI tool like ChatGPT or Claude. Writing a good prompt is the #1 skill for getting great AI results. Example: <i>"Organize my grocery receipts by category"</i> is a prompt! 💬
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <b>2. Categorize</b> (verb)<br>
+        To sort items into labeled groups. When you ask AI to categorize your receipts, it puts groceries with groceries, utilities with utilities, and snacks with snacks — so you can see the big picture instantly! 📊
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <b>3. Budget</b> (noun / verb)<br>
+        A plan for spending money — how much you have, how much you'll spend, and on what. AI turns budgeting from a painful chore into a 2-minute conversation. "Budget" is one of the most searched financial words on ChatGPT today! 💰
+    </div>
+</div>
+
+<div class="footer-section">
+    <div class="footer-title" contenteditable="true">📚 FREE AMERICAN ENGLISH DICTIONARY</div>
+    <div style="background:#e8f0ff;border:2.5px solid var(--graphite);border-radius:6px;padding:16px 20px;font-size:15pt;line-height:1.6;text-align:center;box-shadow:4px 4px 0 rgba(14,14,16,0.12);">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:22pt;color:#0d47a1;letter-spacing:0.05em;">MERRIAM-WEBSTER ONLINE DICTIONARY</span>
+        <div class="br"></div>
+        👉 <a href="https://www.merriam-webster.com/" target="_blank"
+            style="color:#1565c0;font-weight:bold;font-family:'Space Mono',monospace;">
+            merriam-webster.com
+        </a>
+        <div style="font-size:12pt;color:var(--mist);margin-top:6px;font-family:'Space Mono',monospace;">America's most trusted dictionary — free, fast, and always up to date!</div>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 3 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 SCENE 3 — Grandpa Bob Shows Marge His AI Budget Report!</div>
+  <div class="comic-single" id="panel-comic-3"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-3').click()">
+    <div id="pd-comic-3" class="comic-placeholder">
+      <div style="font-size:56px">🏆</div>
+      <div style="font-size:16pt;font-weight:700;color:var(--graphite);text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em;">VICTORY! GRANDPA BOB PROVES HIS POINT</div>
+      <div style="font-size:12pt;color:var(--mist);text-align:center;">Grandpa Bob proudly showing Marge his AI-generated budget report on the tablet, both smiling</div>
+      <div style="margin-top:12px;background:var(--graphite);color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:14pt;letter-spacing:0.1em;padding:10px 28px;border-radius:3px;">📁 CLICK TO UPLOAD</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:18pt;letter-spacing:0.1em;">CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-3').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-3','comic-3')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-3" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-3','pd-comic-3','comic-3')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Grandpa's Corner -->
+<div class="grandpa-box" contenteditable="true" style="margin-top:16px;">
+    <span style="font-size:16pt;font-style:italic;display:block;margin-top:8px;">"I've been keeping paper receipts in a shoebox for 40 years — my wife calls it my 'archive,' but honestly it's just chaos. The first time I typed my grocery list into ChatGPT and it gave me a full spending breakdown in 8 seconds… I sat there with my mouth open for a full minute. My grandson Jake says 'a penny saved is a penny earned' — well, AI is now my penny-counting partner, and it never loses count!"</span>
+</div>
+<div class="gap"></div>
+
+<!-- ================================================================
+     ⑭ TODAY'S RECAP
+================================================================ -->
+<div class="summary-box">
+    <div class="summary-title" contenteditable="true">📚 TODAY'S RECAP — LET'S REVIEW!</div>
+    <div class="br"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>① What Is AI Budget Tracking?</b><br>
+        Using free AI tools like ChatGPT, Claude, or Gemini to type or photograph your receipts and expenses — then asking the AI to organize, categorize, and summarize your spending. No apps to buy. No spreadsheets to build.
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>② The 3 Magic Steps</b><br>
+        Step 1: Snap &amp; Type your receipts. Step 2: Ask AI for a monthly summary. Step 3: Request personalized savings tips. That's your complete AI money system — free forever!
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>③ Best Free AI Tools for Budgeting</b><br>
+        <b style="color:var(--lime);">ChatGPT</b> (chat.openai.com) — easiest to start. <b style="color:var(--lime);">Claude</b> (claude.ai) — best at long conversations and detailed analysis. <b style="color:var(--lime);">Google Gemini</b> — great if you already use Gmail. All are 100% free!
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true" style="border-left-color:var(--gold);">
+        <b>④ Today's American Saying</b><br>
+        <b style="color:var(--lime);">"A penny saved is a penny earned."</b> — Every dollar that AI helps you stop wasting is a dollar your wallet keeps. Saving IS earning, and AI makes saving effortless!
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="content-body" contenteditable="true"
+        style="text-align:center;color:var(--lime);font-family:'Bebas Neue',sans-serif;font-size:22pt;letter-spacing:0.08em;">
+        🎉 GREAT JOB TODAY! SEE YOU NEXT EPISODE! 🤖✨
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- Closing message -->
+<div class="content-body" contenteditable="true" style="text-align:center;">
+    📝 This post is made especially for seniors exploring AI for the very first time.<br>
+    Got questions? Drop a comment below — Jake reads every single one! 💬
+</div>
+<div class="gap-sm"></div>
+
+<!-- Subscribe CTA -->
+<div class="cta-bar" contenteditable="true">
+    <div class="cta-title">🔔 NEVER MISS AN EPISODE!</div>
+    <div class="cta-sub">
+        Subscribe · Bookmark · Share with a friend who deserves to learn AI!<br>
+        <b>New episode every week — always free, always simple.</b>
+    </div>
+    <div class="cta-tags">
+        #AIDecodedForSeniors &nbsp;|&nbsp; #ChatGPT &nbsp;|&nbsp; #AIForSeniors &nbsp;|&nbsp; #LearnAI &nbsp;|&nbsp; #ArtificialIntelligence &nbsp;|&nbsp; #ClaudeAI
+    </div>
+</div>
+<div class="gap-sm"></div>
+
+<!-- Footer -->
+<div class="content-body" contenteditable="true"
+    style="text-align:center;font-size:15pt;color:var(--graphite);font-weight:500;line-height:1.6;">
+    This post is part of <span class="emphasis">AI Decoded for Seniors</span> — an educational series designed to make <span class="emphasis">Artificial Intelligence</span> accessible to every American.
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true"
+    style="text-align:center;font-family:'Space Mono',monospace;font-size:11pt;color:var(--mist);font-weight:600;line-height:1.5;">
+    © 2026 AI Decoded for Seniors | All rights reserved
+</div>
+
+</div><!-- /ts-wrap -->
+
+<!-- JS — IndexedDB + panel upload/delete -->
+<script>
+var SADB_NAME='ai-decoded-ep-media', SADB_VER=1, SADB_STORE='media';
+function sadbOpen(cb){
+  var req=indexedDB.open(SADB_NAME,SADB_VER);
+  req.onupgradeneeded=function(e){e.target.result.createObjectStore(SADB_STORE)};
+  req.onsuccess=function(e){cb(e.target.result)};
+  req.onerror=function(){cb(null)};
+}
+function sadbSave(key,data){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).put(data,key);})}
+function sadbLoad(key,cb){sadbOpen(function(db){if(!db){cb(null);return}var req=db.transaction(SADB_STORE,'readonly').objectStore(SADB_STORE).get(key);req.onsuccess=function(e){cb(e.target.result||null)};req.onerror=function(){cb(null)};})}
+function sadbDelete(key){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).delete(key);})}
+
+window.addEventListener('DOMContentLoaded',function(){
+  ['comic-1','comic-2','comic-3'].forEach(function(id){
+    sadbLoad(id,function(data){
+      if(!data)return;
+      var el=document.getElementById('pd-'+id);
+      if(!el)return;
+      el.innerHTML=data.startsWith('data:video')
+        ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+        :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    });
+  });
+});
+
+function comicUpload(inputId,panelId,dbKey){
+  var inp=document.getElementById(inputId);
+  if(!inp)return;
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var data=ev.target.result;
+    var el=document.getElementById(panelId);
+    if(!el)return;
+    el.innerHTML=f.type.startsWith('video/')
+      ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+      :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    sadbSave(dbKey,data);
+  };
+  r.readAsDataURL(f);
+}
+
+function comicDelete(panelId,dbKey){
+  var el=document.getElementById(panelId);
+  if(!el)return;
+  el.innerHTML='<div class="comic-placeholder">'
+    +'<div style="font-size:56px">&#127916;</div>'
+    +'<div style="font-size:14pt;color:var(--mist);text-align:center;font-family:\'Space Mono\',monospace;">Click to Upload Image or Video</div>'
+    +'</div>';
+  sadbDelete(dbKey);
+}
+</script>
+
+<!-- SAVE BUTTON BAR -->
+<div class="save-bar">
+<button onclick="(function(){
+  var clone=document.body.cloneNode(true);
+  var sb=clone.querySelector('.save-bar');if(sb)sb.parentNode.removeChild(sb);
+  clone.querySelectorAll('input[type=file]').forEach(function(i){i.value='';});
+  clone.querySelectorAll('script').forEach(function(s){s.parentNode.removeChild(s);});
+  var styleTag=document.querySelector('style').outerHTML;
+  var fontLink='<link href=\'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Mono:wght@400;700&display=swap\' rel=\'stylesheet\'>';
+  var html='<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n<meta charset=\'UTF-8\'>\n<meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0\'>\n'+fontLink+'\n'+styleTag+'\n</head>\n<body>\n'+clone.innerHTML+'\n</body>\n</html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=\'ai_decoded_ep36_eng.html\';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){alert(\'✅ EP.36 saved!\\n\\nPaste the saved <body> content into your blog HTML tab.\\n(Scripts removed — no code leaks in preview mode)\');},300);
+})()">💾 SAVE HTML (IMAGES INCLUDED)</button>
+</div>
+
+</body>
+</html>

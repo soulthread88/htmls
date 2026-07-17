@@ -1,0 +1,73 @@
+╔══════════════════════════════════════════════════════╗
+║  IssueLens EP.01 — Instagram CAROUSEL  (10 slides) ║
+╚══════════════════════════════════════════════════════╝
+
+━━━ SLIDE 1 — COVER
+Headline: Is Temu Spying on You? The Real Price Behind '$1 D
+Subhead:  "Swipe to find out →"
+Style: IssueLens Red (#C8001A) + Dark gradient
+Badge: EP.01 top-left | @IssueLens bottom-right
+Size: 1080×1080px
+
+━━━ SLIDE 2 — THE SHOCKING NUMBERS
+Title: "By the Numbers"
+Content:
+  📊 21 — State AGsdemanding probe
+  📊 $1M+ — TX lawsuitrelief sought
+  📊 Art. 7 — China NationalIntelligence Law
+
+━━━ SLIDE 3 — THE PROBLEM
+Title: "What Temu & AliExpress Know About You (It's More Than You Think)"
+Body: "Temu, AliExpress, Shein, and MINISO are among the most downloaded apps in America right now. But while millions of shoppers chase "impossibly low prices," federal agencies, state attorneys general, an..."
+Visual: Relevant infographic / icon
+
+━━━ SLIDE 4 — HOW IT WORKS
+Title: "How This Actually Happens"
+Body: Data flow / process breakdown
+Visual: Step-by-step diagram (arrows)
+
+━━━ SLIDE 5 — THE DATA
+Title: "The Hard Numbers"
+  • $1M+ — Minimum monetary relief sought — Texas v. Temu (Feb. 20, 2026)
+  • 3rd — Time the FTC warned Temu over "inadequate transparency in cross-border data transfers"
+
+━━━ SLIDE 6 — Why China's National Intelligence Law Is
+Body: [Content from section 2]
+Source citation (italic, -2pt): *Source: [Publication], [Date], [Author]*
+
+━━━ SLIDE 7 — The Double Standard: They Block Our Apps
+Body: [Content from section 3]
+
+━━━ SLIDE 8 — PRO vs. CON  (if politically contested)
+PRO side: [Argument in favor]
+CON side: [Argument against]
+⚖️ Balanced — both sides shown equally
+
+━━━ SLIDE 9 — ACTION ITEMS
+Title: "What You Can Do RIGHT NOW"
+  1. Delete the Apps
+  2. Lock Down Permissions
+  3. Tell Someone You Know
+  4. Contact Your Rep
+
+━━━ SLIDE 10 — CTA
+"Save this. Share it. Follow @IssueLens."
+Subtext: "New deep-dive every single day."
+Visual: All platform icons
+
+━━━ CAPTION  (≤2200 chars) ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Is Temu Spying on You? The Real Price Behind '$1 Deals' | IssueLens EP.01 🚨
+
+Is Temu spying on you? Is AliExpress safe? We break down how Chinese shopping apps harvest your personal data, what the FBI and FTC are warning Americans, and what you can do right now.
+
+💬 ""The dollar you saved on socks today
+        could be the data point that defines you tomorrow.""
+
+👉 Full breakdown at link in bio — IssueLens EP.01
+🔔 Follow @IssueLens for a new deep-dive EVERY DAY.
+
+#isTemusafe #Temudataprivacy2026 #isAliExpresssafe #Chineseappsspying #Temuspyware #deleteTemuapp #Temulawsuit2026 #AliExpressdatacollection #Chineseshoppingappsdangerous #Sheindataprivacy #Temunationalsecurityrisk #isSheinsafe #TemubannedUS #Chineseappsstealdata #TemuFTCwarning #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth
+
+━━━ HASHTAGS (comment drop — 30 max) ━━━━━━━━━━━━━━━
+#isTemusafe #Temudataprivacy2026 #isAliExpresssafe #Chineseappsspying #Temuspyware #deleteTemuapp #Temulawsuit2026 #AliExpressdatacollection #Chineseshoppingappsdangerous #Sheindataprivacy #Temunationalsecurityrisk #isSheinsafe #TemubannedUS #Chineseappsstealdata #TemuFTCwarning #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth

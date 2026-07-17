@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>IssueLens EP.08 | 텐센트의 한국 장악 — 게임·콘텐츠·핀테크로 완성되는 자본 종속의 덫</title>
+<meta name="description" content="넷마블 17.5%, 크래프톤 13.7%, 카카오페이 32%, 시프트업 35%. 텐센트가 한국 게임·콘텐츠·핀테크 산업을 어떻게 지분으로 장악하고 있는지 공시 데이터로 추적합니다.">
+<meta name="keywords" content="텐센트한국지분,텐센트넷마블,텐센트크래프톤,카카오페이앤트그룹,텐센트시프트업,중국자본한국게임,한국콘텐츠중국자본,데이터주권,문화종속,자본종속">
+<meta property="og:title" content="텐센트의 한국 장악 — 게임·콘텐츠·핀테크로 완성되는 자본 종속의 덫 | IssueLens EP.08">
+<meta property="og:description" content="공시 데이터로 추적하는 텐센트·앤트그룹의 한국 핵심 산업 지분 현황과 보이지 않는 영향력의 실체">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Do+Hyeon&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ft:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
+  --fb:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  --bg:#fff;--bg2:#F7F9FC;--bg3:#FFF8F0;
+  --ink:#0A0A0A;--ink2:#1F2937;--ink3:#4B5563;
+  --red:#C8001A;--redbg:#FFF0F3;--redl:#FFCCD5;
+  --amb:#B45309;--ambbg:#FFFBEB;
+  --grn:#065F46;--blu:#1E3A8A;--blubg:#EFF6FF;
+  --bdr:#CBD5E1;--rul:#E2E8F0;
+  --sh:0 2px 14px rgba(0,0,0,.07);
+  --shl:0 8px 32px rgba(0,0,0,.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:20px;line-height:1.95;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:var(--red);text-decoration:none}
+
+/* ── 진행 바 ── */
+#pb{position:fixed;top:0;left:0;height:5px;background:var(--red);z-index:9999;width:0;transition:width .1s linear;box-shadow:0 0 8px rgba(200,0,26,.5)}
+
+/* ── 마스트헤드 ── */
+.mh{background:var(--bg);border-bottom:3px solid var(--red)}
+.mh-top{background:var(--red);display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:8px}
+.logo{font-family:var(--ft);font-size:clamp(1.1rem,3.5vw,1.3rem);font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.logo-dot{width:10px;height:10px;background:#fff;border-radius:50%;opacity:.85}
+.mh-meta{font-family:var(--fb);font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.88);font-weight:600}
+.mh-hero{padding:36px 20px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+.ep-lbl{font-family:var(--ft);font-size:clamp(13px,3.2vw,15px);font-weight:700;color:var(--red);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ep-lbl::before{content:'';width:22px;height:3px;background:var(--red);border-radius:2px;display:inline-block}
+.headline{font-family:var(--ft);font-size:clamp(1.85rem,6vw,3.6rem);font-weight:800;line-height:1.22;color:var(--ink);letter-spacing:-.03em}
+.headline .acc{color:var(--red);background:var(--redbg);padding:2px 8px;border-radius:5px;display:inline-block}
+.sub-hl{font-family:var(--fb);margin-top:14px;font-size:clamp(17px,3.5vw,20px);color:var(--ink3);line-height:1.82;font-weight:500}
+.stats{display:flex;flex-direction:column;gap:10px;min-width:155px}
+.stat{background:var(--redbg);border:2.5px solid var(--redl);border-radius:14px;padding:14px 16px;text-align:center;box-shadow:var(--sh)}
+.stat-n{font-family:var(--ft);font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:var(--red);display:block;line-height:1;letter-spacing:-.02em}
+.stat-l{font-family:var(--fb);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--ink3);margin-top:4px;display:block;line-height:1.4}
+.tags{padding:10px 20px 14px;border-top:1.5px solid var(--rul);display:flex;gap:7px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.tag{font-family:var(--fb);font-size:clamp(13px,3vw,15px);font-weight:700;border:2px solid var(--bdr);color:var(--ink3);padding:4px 12px;border-radius:20px;cursor:pointer;transition:all .2s}
+.tag:hover,.tag.hot{border-color:var(--red);color:var(--red);background:var(--redbg)}
+
+/* ── 브랜드 스트립 ── */
+.brand-strip{background:var(--bg2);border-top:2px solid var(--rul);border-bottom:2px solid var(--rul);padding:22px 20px}
+.brand-strip-inner{max-width:920px;margin:0 auto}
+.brand-ttl{font-family:var(--ft);font-size:clamp(15px,3.5vw,17px);font-weight:800;color:var(--ink2);text-align:center;margin-bottom:18px;letter-spacing:.02em}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.bp{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 18px;border-radius:14px;border:2.5px solid var(--bdr);background:#fff;box-shadow:var(--sh);min-width:100px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:default}
+.bp:hover{transform:translateY(-3px);box-shadow:var(--shl);border-color:var(--red)}
+.bp-icon{font-size:2rem;line-height:1}
+.bp-name{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:var(--ink2)}
+.bp-sub{font-family:var(--fb);font-size:clamp(11px,2.5vw,13px);color:var(--ink3);font-weight:600}
+
+/* ── 면책 공고 ── */
+.disclaimer{max-width:860px;margin:30px auto 0;padding:16px 22px;background:var(--bg2);border:1.5px solid var(--bdr);border-left:6px solid var(--blu);border-radius:10px;font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);line-height:1.82}
+
+/* ── 아티클 바디 ── */
+.ab{max-width:860px;margin:0 auto;padding:36px 20px 56px}
+.intro{font-family:var(--fb);font-size:clamp(18px,3.8vw,21px);line-height:1.95;color:var(--ink2);background:var(--ambbg);border-left:6px solid #F59E0B;padding:20px 22px;border-radius:0 12px 12px 0;font-weight:500}
+.sec{margin-top:52px}
+.sec-ttl{font-family:var(--ft);font-size:clamp(1.25rem,4.5vw,1.6rem);font-weight:800;color:var(--ink);padding:16px 18px 16px 22px;border-left:7px solid var(--red);background:linear-gradient(90deg,var(--redbg) 0%,#fff 65%);border-radius:0 12px 12px 0;margin-bottom:22px;line-height:1.42;display:flex;align-items:center;gap:11px;box-shadow:var(--sh);letter-spacing:-.02em}
+.sec-ttl.b2{font-family:'Do Hyeon',sans-serif;font-size:clamp(1.3rem,4.5vw,1.7rem);font-weight:400;background:linear-gradient(90deg,var(--blubg) 0%,#fff 65%);border-left-color:var(--blu);color:var(--blu);letter-spacing:0}
+.sec-ttl .num{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:800;color:#fff;background:var(--red);border-radius:6px;padding:3px 11px;flex-shrink:0;letter-spacing:.06em}
+.sec-ttl.b2 .num{background:var(--blu)}
+.bt{font-family:var(--fb);font-size:clamp(18px,3.5vw,21px);line-height:2.0;color:var(--ink2);margin-bottom:20px}
+.hl-r{color:var(--red);font-weight:800}
+.hl-b{color:var(--blu);font-weight:800}
+.hl-a{color:var(--amb);font-weight:800}
+.hl-g{color:var(--grn);font-weight:800}
+
+/* ── 데이터 콜아웃 ── */
+.dcall{background:var(--redbg);border:2px solid var(--redl);border-top:6px solid var(--red);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.dcall-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--red);letter-spacing:.16em;margin-bottom:10px;display:flex;align-items:center;gap:7px;text-transform:uppercase}
+.dcall-lbl::before{content:'●';animation:blink 1.5s infinite;font-size:.65rem}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.12}}
+.bignum{font-family:var(--ft);font-size:clamp(2.4rem,7vw,3.8rem);font-weight:800;color:var(--red);display:block;line-height:1;margin:6px 0 5px;letter-spacing:-.03em}
+.biglbl{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);font-weight:700;margin-bottom:12px;display:block}
+.cbody{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);line-height:1.95;color:var(--ink2)}
+.cbody strong{color:var(--red);font-weight:800}
+
+.cctx{background:var(--blubg);border:2px solid #BFDBFE;border-top:6px solid var(--blu);padding:24px 26px;margin:26px 0;border-radius:14px;box-shadow:var(--sh)}
+.cctx-lbl{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;color:var(--blu);letter-spacing:.14em;margin-bottom:10px;text-transform:uppercase}
+.cctx .cbody strong{color:var(--blu)}
+
+/* ── 지분 현황 테이블 ── */
+.ctbl{width:100%;border-collapse:collapse;margin:24px 0;border-radius:14px;overflow:hidden;box-shadow:var(--sh)}
+.ctbl thead{background:var(--ink);color:#fff}
+.ctbl th{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;padding:13px 16px;text-align:left;letter-spacing:.04em}
+.ctbl td{font-family:var(--fb);font-size:clamp(14px,3vw,16px);padding:13px 16px;border-bottom:1.5px solid var(--rul);vertical-align:middle;line-height:1.7;color:var(--ink2)}
+.ctbl tr:last-child td{border-bottom:none}
+.ctbl tr:nth-child(even){background:var(--bg2)}
+.ctbl tr:hover td{background:var(--redbg)}
+.ctbl td.pct{font-family:var(--ft);font-weight:800;color:var(--red);font-size:clamp(15px,3vw,17px)}
+.ctbl td.bad{color:var(--red);font-weight:700}
+.ctbl td.warn{color:var(--amb);font-weight:700}
+.ctbl td.ok{color:var(--grn);font-weight:700}
+
+/* ── 지분 파이 시각화 카드 ── */
+.share-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:28px 0}
+.share-card{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden}
+.share-card:hover{transform:translateY(-4px);box-shadow:var(--shl);border-color:var(--red)}
+.share-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--red)}
+.share-company{font-family:var(--ft);font-size:clamp(15px,3.2vw,17px);font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+.share-pct{font-family:var(--ft);font-size:clamp(2rem,5vw,2.8rem);font-weight:800;color:var(--red);display:block;line-height:1;margin:8px 0 4px}
+.share-rank{font-family:var(--fb);font-size:clamp(12px,2.5vw,14px);font-weight:700;color:#fff;background:var(--ink3);border-radius:5px;padding:2px 9px;display:inline-block;margin-bottom:8px}
+.share-rank.top{background:var(--red)}
+.share-body{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);color:var(--ink3);line-height:1.75}
+.share-src{font-family:var(--fb);font-size:clamp(12px,2.5vw,13px);color:#94A3B8;margin-top:10px;font-style:italic}
+
+/* ── 플로우 ── */
+.flow{margin:24px 0;background:#fff;border:2px solid var(--bdr);border-radius:16px;padding:24px 16px 20px;box-shadow:var(--sh)}
+.flow-ttl{font-family:var(--ft);font-size:clamp(15px,3.2vw,17px);font-weight:700;color:var(--ink);text-align:center;margin-bottom:20px}
+.flow-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.fs{flex:1;min-width:80px;max-width:120px;text-align:center}
+.fi{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.45rem;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.fi.s{background:#DCFCE7;border:3px solid #22C55E}
+.fi.w{background:#FEF3C7;border:3px solid #F59E0B}
+.fi.d{background:#FFE4E6;border:3px solid var(--red)}
+.fi.b{background:var(--blubg);border:3px solid var(--blu)}
+.fs-lbl{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink);line-height:1.38}
+.fs-sub{font-family:var(--fb);font-size:clamp(11px,2.4vw,13px);color:var(--ink3);margin-top:2px;font-weight:600}
+.farrow{color:var(--red);font-size:1.45rem;flex-shrink:0;font-weight:900;animation:ap 1.9s infinite}
+@keyframes ap{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(4px);opacity:.3}}
+
+/* ── 법조항 박스 ── */
+.lq{border:2.5px solid #9CA3AF;border-radius:14px;padding:26px 26px;margin:26px 0;position:relative;background:var(--bg2);box-shadow:var(--sh)}
+.lq-bdg{position:absolute;top:-14px;left:18px;background:var(--ink);color:#fff;font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:3px 14px;border-radius:4px;letter-spacing:.04em;white-space:nowrap}
+.lq-txt{font-family:var(--fb);font-size:clamp(17px,3.4vw,20px);color:var(--ink2);line-height:2.0;margin-top:4px}
+.lq-txt strong{color:var(--red);font-weight:800}
+.lq-src{font-family:var(--fb);margin-top:10px;font-size:clamp(13px,2.8vw,15px);color:var(--ink3);text-align:right;font-weight:700}
+
+/* ── 리스크 미터 ── */
+.rm{margin:26px 0;padding:24px 26px;background:#fff;border:2px solid var(--bdr);border-radius:16px;box-shadow:var(--sh)}
+.rm-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:700;color:var(--ink);margin-bottom:18px}
+.ri{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.rl{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:800;width:160px;flex-shrink:0;color:var(--ink)}
+.rbg{flex:1;height:14px;background:#F1F5F9;border-radius:7px;overflow:hidden;border:1px solid var(--rul)}
+.rbf{height:100%;border-radius:7px;width:0;transition:width 1.5s cubic-bezier(.2,1,.3,1)}
+.rbf.h{background:linear-gradient(90deg,#F87171,var(--red))}
+.rbf.m{background:linear-gradient(90deg,#FCD34D,#D97706)}
+.rbf.l{background:linear-gradient(90deg,#6EE7B7,#059669)}
+.rp{font-family:var(--ft);font-size:clamp(15px,3vw,17px);font-weight:800;width:56px;text-align:right;flex-shrink:0}
+
+/* ── 미디어 박스 ── */
+.media-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+.mbox-wrap{position:relative}
+.mbox-label{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:700;color:var(--ink3);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.mbox{
+  position:relative;border-radius:14px;overflow:hidden;
+  background:#F1F5F9;border:2.5px dashed var(--bdr);
+  min-height:200px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .2s,box-shadow .2s;
+}
+.mbox:hover{border-color:var(--red);box-shadow:var(--shl)}
+.mbox-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);padding:20px;text-align:center;pointer-events:none;width:100%}
+.mbox-ph .ico{font-size:2.4rem;opacity:.45}
+.mbox-ph p{font-family:var(--fb);font-size:clamp(14px,3vw,16px);font-weight:700;line-height:1.45;color:var(--ink3)}
+.mbox-ph .hint{font-size:clamp(12px,2.5vw,13px);color:#94A3B8;margin-top:2px}
+.mbox img.prev{width:100%;height:100%;min-height:200px;object-fit:cover;display:block;border-radius:12px}
+.mbox iframe{width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px}
+.mctrl{position:absolute;top:8px;right:8px;display:flex;gap:7px;opacity:0;transition:opacity .22s;pointer-events:none;z-index:20}
+.mbox:hover .mctrl{opacity:1;pointer-events:auto}
+.mbtn{font-family:var(--ft);font-size:clamp(12px,2.8vw,14px);font-weight:700;padding:6px 14px;border-radius:7px;border:none;cursor:pointer;backdrop-filter:blur(8px);transition:transform .15s;white-space:nowrap}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn.rep{background:rgba(255,255,255,.92);color:var(--ink)}
+.mbtn.del{background:rgba(200,0,26,.88);color:#fff}
+
+/* ── 인용구 ── */
+.pq{margin:26px 0 10px;padding:28px 22px;background:var(--bg3);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);text-align:center}
+.pq-txt{font-family:var(--ft);font-size:clamp(1.2rem,4vw,1.85rem);font-weight:800;color:var(--ink);line-height:1.62;letter-spacing:-.02em}
+.pq-txt em{color:var(--red);font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+
+/* ── 실천 강령 ── */
+.action{background:var(--bg2);border-top:3px solid var(--rul);padding:40px 20px;margin-top:0}
+.action-inner{max-width:860px;margin:0 auto}
+.action-ttl{font-family:var(--ft);font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em}
+.action-sub{font-family:var(--fb);font-size:clamp(15px,3.2vw,17px);color:var(--ink3);margin-bottom:24px;font-weight:700}
+.action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.ac{background:#fff;border:2.5px solid var(--bdr);border-radius:16px;padding:22px 18px;box-shadow:var(--sh);transition:box-shadow .2s,transform .2s,border-color .2s}
+.ac:hover{border-color:var(--red);box-shadow:var(--shl);transform:translateY(-4px)}
+.ac-n{font-family:var(--ft);font-size:clamp(11px,2.5vw,13px);font-weight:700;color:var(--red);letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase}
+.ac-ico{font-size:1.9rem;margin-bottom:8px;line-height:1}
+.ac-ttl{font-family:var(--ft);font-size:clamp(16px,3.2vw,18px);font-weight:800;color:var(--ink);margin-bottom:8px;line-height:1.42;letter-spacing:-.01em}
+.ac-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);line-height:1.85}
+
+/* ── 소셜 바 ── */
+.sb{max-width:860px;margin:0 auto;padding:24px 20px;border-top:1.5px solid var(--rul)}
+.sb-lbl{font-family:var(--ft);font-size:clamp(13px,2.8vw,15px);font-weight:800;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sb-lbl::after{content:'';flex:1;height:1.5px;background:var(--rul)}
+.sb-btns{display:flex;flex-wrap:wrap;gap:9px}
+.snsbtn{display:inline-flex;align-items:center;gap:7px;font-family:var(--ft);font-size:clamp(13px,3vw,15px);font-weight:700;padding:9px 16px;border-radius:8px;border:2.5px solid;cursor:pointer;text-decoration:none;transition:background .18s,color .18s,transform .15s;white-space:nowrap;background:transparent;position:relative}
+.snsbtn.has-link::after{content:'✓';position:absolute;top:-7px;right:-7px;width:18px;height:18px;background:#22C55E;color:#fff;border-radius:50%;font-size:11px;font-weight:900;line-height:18px;text-align:center;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.snsbtn svg{width:18px;height:18px;flex-shrink:0;transition:fill .18s}
+.snsbtn:hover{transform:translateY(-2px)}
+.snsbtn.yt{color:#CC0000;border-color:#CC0000}.snsbtn.yt svg{fill:#CC0000}.snsbtn.yt:hover{background:#CC0000;color:#fff}.snsbtn.yt:hover svg{fill:#fff}
+.snsbtn.ig{color:#C13584;border-color:#C13584}.snsbtn.ig svg{fill:#C13584}.snsbtn.ig:hover{background:#C13584;color:#fff}.snsbtn.ig:hover svg{fill:#fff}
+.snsbtn.tt{color:#010101;border-color:#010101}.snsbtn.tt svg{fill:#010101}.snsbtn.tt:hover{background:#010101;color:#fff}.snsbtn.tt:hover svg{fill:#fff}
+.snsbtn.th{color:#000;border-color:#000}.snsbtn.th svg{fill:#000}.snsbtn.th:hover{background:#000;color:#fff}.snsbtn.th:hover svg{fill:#fff}
+.snsbtn.xb{color:#14171A;border-color:#14171A}.snsbtn.xb svg{fill:#14171A}.snsbtn.xb:hover{background:#14171A;color:#fff}.snsbtn.xb:hover svg{fill:#fff}
+.snsbtn.fb{color:#1877F2;border-color:#1877F2}.snsbtn.fb svg{fill:#1877F2}.snsbtn.fb:hover{background:#1877F2;color:#fff}.snsbtn.fb:hover svg{fill:#fff}
+
+/* ── 푸터 ── */
+.ft{background:#0D0D0D;color:#9CA3AF;padding:32px 20px;text-align:center;border-top:4px solid var(--red)}
+.ft-brand{font-family:var(--ft);font-size:1.2rem;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:6px}
+.ft-dot{width:9px;height:9px;background:var(--red);border-radius:50%}
+.ft p{font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);line-height:1.88;color:#6B7280;margin-top:6px}
+
+/* ── YouTube 모달 ── */
+.yt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.yt-box{background:#fff;border-radius:20px;padding:28px 22px;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.yt-ttl{font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink);margin-bottom:7px}
+.yt-desc{font-family:var(--fb);font-size:clamp(14px,3vw,16px);color:var(--ink3);margin-bottom:16px;line-height:1.7}
+.yt-inp{width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s}
+.yt-inp:focus{border-color:var(--red)}
+.yt-btns{display:flex;gap:9px;margin-top:14px}
+.yt-ok{flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s}
+.yt-ok:hover{background:#a80018}
+.yt-cancel{font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer}
+
+/* ── 스크롤 reveal ── */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:none}
+
+/* ── 반응형 ── */
+@media(max-width:600px){
+  .mh-hero{grid-template-columns:1fr}
+  .stats{flex-direction:row;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px}
+  .sec-ttl{font-size:1.15rem}
+  .rl{width:120px;font-size:13px}
+  .media-pair{grid-template-columns:1fr}
+  .share-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<!-- YouTube 모달 -->
+<div class="yt-modal" id="ytm" style="display:none">
+  <div class="yt-box">
+    <div class="yt-ttl">📹 YouTube 영상 삽입</div>
+    <div class="yt-desc">관련 YouTube 영상 링크를 붙여넣으세요.<br>확인하면 영상이 이 섹션에 영구 삽입됩니다.</div>
+    <input class="yt-inp" id="yti" type="text" placeholder="https://www.youtube.com/watch?v=...">
+    <div class="yt-btns">
+      <button class="yt-ok" onclick="ytOk()">✓ 삽입하기</button>
+      <button class="yt-cancel" onclick="ytClose()">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ 마스트헤드 ═══════════════ -->
+<header class="mh">
+  <div class="mh-top">
+    <div class="logo"><span class="logo-dot"></span>IssueLens</div>
+    <span class="mh-meta">EP.08 · 대한민국 주권 시리즈</span>
+    <span class="mh-meta">IssueLens 편집부</span>
+  </div>
+  <div class="mh-hero">
+    <div>
+      <div class="ep-lbl">EP.08 &nbsp;자본 종속 분석</div>
+      <h1 class="headline">
+        텐센트의 한국 장악,<br>
+        <span class="acc">지분·콘텐츠·핀테크</span><br>
+        자본 종속의 3중 덫
+      </h1>
+      <p class="sub-hl">게임 1위 넷마블 17.5%, 크래프톤 13.7%, 카카오페이 32%…<br>중국 자본이 이미 한국 산업의 혈관 속에 들어와 있습니다.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-n">35%</span>
+        <span class="stat-l">시프트업 내<br>텐센트 지분</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">32%</span>
+        <span class="stat-l">카카오페이 내<br>앤트그룹 지분</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">5개+</span>
+        <span class="stat-l">텐센트 주요<br>주주 한국 기업</span>
+      </div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag hot">#텐센트한국지분</span>
+    <span class="tag hot">#중국자본한국게임</span>
+    <span class="tag hot">#카카오페이앤트그룹</span>
+    <span class="tag hot">#자본종속</span>
+    <span class="tag">#넷마블텐센트</span>
+    <span class="tag">#크래프톤중국</span>
+    <span class="tag">#데이터주권</span>
+    <span class="tag">#문화주권</span>
+    <span class="tag">#한국게임산업</span>
+    <span class="tag">#피크차이나</span>
+  </div>
+</header>
+
+<!-- ═══════════════ 브랜드 스트립 ═══════════════ -->
+<div class="brand-strip rev">
+  <div class="brand-strip-inner">
+    <div class="brand-ttl">⚠️ 텐센트·앤트그룹이 주요 주주로 등재된 한국 기업들</div>
+    <div class="brand-row">
+      <div class="bp">
+        <div class="bp-icon">🎮</div>
+        <span class="bp-name">Netmarble</span><span class="bp-sub">넷마블 17.5%</span>
+      </div>
+      <div class="bp">
+        <div class="bp-icon">🎯</div>
+        <span class="bp-name">Krafton</span><span class="bp-sub">크래프톤 13.7%</span>
+      </div>
+      <div class="bp">
+        <div class="bp-icon">💬</div>
+        <span class="bp-name">Kakao</span><span class="bp-sub">카카오 5.9%</span>
+      </div>
+      <div class="bp">
+        <div class="bp-icon">💸</div>
+        <span class="bp-name">KakaoPay</span><span class="bp-sub">앤트그룹 32%</span>
+      </div>
+      <div class="bp">
+        <div class="bp-icon">⚔️</div>
+        <span class="bp-name">Shift Up</span><span class="bp-sub">텐센트 35%</span>
+      </div>
+      <div class="bp">
+        <div class="bp-icon">🎬</div>
+        <span class="bp-name">SLL(JTBC)</span><span class="bp-sub">텐센트 투자</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 기사 본문 ═══ -->
+<main>
+
+  <div class="disclaimer rev" style="margin:28px 20px 0;max-width:860px;margin-left:auto;margin-right:auto">
+    <strong style="color:var(--blu)">📌 알림 및 면책 공고</strong><br>
+    본 게시물은 금융감독원 전자공시시스템(DART), 각사 공시 보고서, 공신력 있는 국내외 언론 보도 및 정부 기관 자료를 바탕으로 작성된 공익적 논평입니다. 지분율은 공시 기준 시점에 따라 변동될 수 있으며, 정확한 현황은 금융감독원 DART(dart.fss.or.kr)를 통해 직접 확인하시기 바랍니다. 본 글은 특정 기업이나 투자 결정에 대한 권유가 아닙니다.
+  </div>
+
+  <div class="ab">
+
+    <p class="intro rev" style="margin-top:28px">
+      <strong class="hl-a">EP.07에서 우리는</strong> 화웨이 5G, 딥시크 AI, SMIC 반도체라는 '기술 인프라'의 위협을 살펴봤습니다. 그런데 더 조용하고, 더 깊숙이, 이미 수년 전부터 진행된 침투가 있습니다. 바로 <strong class="hl-r">자본(지분)을 통한 내부 장악</strong>입니다. 총 한 방 쏘지 않고도, 한국인이 매일 즐기는 게임 회사, 매일 쓰는 결제 앱, 매일 보는 드라마 제작사에 이미 중국 자본이 주주로 앉아 있습니다. 이것이 EP.08의 주제입니다.
+    </p>
+
+    <!-- ══════════ SECTION 1 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">01</span>텐센트는 어떻게 한국을 골랐나 — 투자 전략의 해부</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "텐센트 한국 투자" · "텐센트 넷마블 지분" · "Tencent Korea gaming" · "중국 게임 자본 한국"
+      </div>
+
+      <p class="bt">
+        텐센트(Tencent Holdings)는 중국 최대 IT 기업이자 세계 최대 게임 회사입니다. 전 세계 게임 시장에서 텐센트는 단순한 참여자가 아닙니다 — <strong class="hl-r">지분 투자를 통해 핵심 게임사를 사실상 지배</strong>하는 전략을 구사합니다. 미국의 에픽게임즈(Epic Games) 지분 40%, 라이엇게임즈(Riot Games) 지분 100% 인수가 대표적 사례입니다.
+      </p>
+
+      <p class="bt">
+        한국 시장에 대한 텐센트의 접근도 같은 패턴입니다. 한국은 전 세계에서 가장 고도화된 게임·K콘텐츠 생산국 중 하나입니다. 텐센트 입장에서 한국 게임사에 지분을 확보하는 것은 단순한 재무 투자가 아닙니다 — <strong class="hl-r">IP(지식재산권), 개발 인력, 플랫폼 생태계를 흡수하는 전략적 행위</strong>입니다.
+      </p>
+
+      <div class="flow rev">
+        <div class="flow-ttl">📊 텐센트의 한국 자본 침투 메커니즘</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi s">💰</div><div class="fs-lbl">초기 투자</div><div class="fs-sub">소수 지분 확보 (5~15%)</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">📈</div><div class="fs-lbl">지분 확대</div><div class="fs-sub">상장·유상증자 참여</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">🤝</div><div class="fs-lbl">이사회 진입</div><div class="fs-sub">경영 정보 접근</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🔒</div><div class="fs-lbl">IP·데이터 흡수</div><div class="fs-sub">기술·게임 정보 유출</div></div>
+        </div>
+      </div>
+
+      <div class="lq rev">
+        <div class="lq-bdg">텐센트 연간보고서 2023 — 글로벌 투자 전략</div>
+        <p class="lq-txt">텐센트는 자사 연간보고서에서 "전 세계 우수 게임·콘텐츠 회사에 대한 지분 투자는 글로벌 생태계 확장의 핵심 전략"이라고 명시합니다. 한국 기업 투자는 이 전략의 일환으로, <strong>단순 재무 수익이 아닌 전략적 파트너십 확보</strong>를 목적으로 합니다.</p>
+        <div class="lq-src">— Tencent Holdings Annual Report 2023 / <a href="https://www.tencent.com/en-us/investors/annual-reports.html" target="_blank" rel="noopener">tencent.com</a></div>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 텐센트 글로벌 게임사 지분 지도)</span></div>
+          <div class="mbox" id="mb-s1i" data-t="img" onclick="mbClick('s1i')">
+            <div class="mbox-ph" id="ph-s1i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s1i" accept="image/*" style="display:none" onchange="mbLoadImg('s1i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: Tencent gaming investments global strategy)</span></div>
+          <div class="mbox" id="mb-s1v" data-t="vid" onclick="mbClick('s1v')">
+            <div class="mbox-ph" id="ph-s1v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s1v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s1v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 1 -->
+
+    <!-- ══════════ SECTION 2 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">02</span>공시로 확인하는 텐센트의 한국 게임 지배도</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "넷마블 대주주" · "크래프톤 외국인 주주" · "시프트업 텐센트 지분" · "한국 게임사 중국 지분"
+      </div>
+
+      <p class="bt">
+        다음 지분 현황은 금융감독원 전자공시시스템(DART) 및 각사 공시 보고서에서 확인 가능한 내용을 바탕으로 정리했습니다. 지분율은 보고 기준 시점에 따라 변동될 수 있습니다. <strong class="hl-r">정확한 현재 지분율은 DART(dart.fss.or.kr)에서 해당 기업명을 검색하여 최신 사업보고서를 직접 확인하시기 바랍니다.</strong>
+      </p>
+
+      <!-- 지분 카드 그리드 -->
+      <div class="share-grid rev">
+        <div class="share-card">
+          <div class="share-company">🎮 넷마블 (Netmarble)</div>
+          <span class="share-pct">17.5%</span>
+          <span class="share-rank top">3대 주주</span>
+          <div class="share-body">텐센트(Han River Investment Holdings)가 약 17.5% 지분을 보유. 방준혁 의장, NXC(넥슨 모회사) 다음으로 큰 주주. 한국 최대 모바일 게임사 중 하나에 대한 실질적 영향력 보유.</div>
+          <div class="share-src">출처: 금감원 DART, 넷마블 사업보고서 / <a href="https://dart.fss.or.kr" target="_blank" rel="noopener">dart.fss.or.kr</a></div>
+        </div>
+        <div class="share-card">
+          <div class="share-company">🎯 크래프톤 (Krafton)</div>
+          <span class="share-pct">13.7%</span>
+          <span class="share-rank top">2대 주주</span>
+          <div class="share-body">텐센트(Image Frame Investment)가 약 13.7% 지분 보유. '배틀그라운드(PUBG)' 개발사이자 글로벌 배급사. 크래프톤 매출의 상당 부분이 중국 시장에 의존.</div>
+          <div class="share-src">출처: 금감원 DART, 크래프톤 사업보고서 / <a href="https://dart.fss.or.kr" target="_blank" rel="noopener">dart.fss.or.kr</a></div>
+        </div>
+        <div class="share-card">
+          <div class="share-company">⚔️ 시프트업 (Shift Up)</div>
+          <span class="share-pct">35%</span>
+          <span class="share-rank top">2대 주주</span>
+          <div class="share-body">텐센트(Aceville Pte. Ltd.)가 약 35% 지분 보유. '승리의 여신: 니케', '스텔라 블레이드' 개발사. 2024년 코스피 상장 이후에도 대규모 지분 유지.</div>
+          <div class="share-src">출처: 금감원 DART, 시프트업 증권신고서 / <a href="https://dart.fss.or.kr" target="_blank" rel="noopener">dart.fss.or.kr</a></div>
+        </div>
+        <div class="share-card">
+          <div class="share-company">💬 카카오 (Kakao)</div>
+          <span class="share-pct">5.9%</span>
+          <span class="share-rank">주요 주주</span>
+          <div class="share-body">텐센트(Maximo Pte. Ltd.)가 약 5.9% 지분 보유. 카카오뱅크, 카카오페이, 카카오엔터테인먼트 등 광범위한 계열사 생태계에 간접 영향력.</div>
+          <div class="share-src">출처: 금감원 DART, 카카오 사업보고서 / <a href="https://dart.fss.or.kr" target="_blank" rel="noopener">dart.fss.or.kr</a></div>
+        </div>
+      </div>
+
+      <p class="bt">
+        이 수치들은 단순한 투자 포트폴리오가 아닙니다. <strong class="hl-r">주요 주주(5% 이상)는 이사회 의결 사항, 전략 정보, 재무 데이터에 대한 접근 권한을 갖습니다.</strong> 특히 2대 주주 수준(13~35%)이면 특별결의 사항에 영향을 미칠 수 있는 실질적 경영 참여 지위에 해당합니다.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">KEY FACT · 텐센트 한국 게임 생태계 지배력</div>
+        <span class="bignum">5개사+</span>
+        <span class="biglbl">텐센트가 주요 주주(5% 이상)로 등재된 한국 상장 게임·IT 기업 수 (2024년 공시 기준)</span>
+        <p class="cbody">한국 게임 시장 매출 상위 10개 기업 중 절반 이상에서 텐센트가 직·간접 지분을 보유하고 있습니다. 이는 한국 게임 산업의 <strong>사실상의 최대 단일 해외 자본 주주</strong>가 텐센트임을 의미합니다. 넥슨(NXC)이 텐센트에 지분을 매각하지 않은 것이 사실상 국내 게임 독립성의 마지막 보루 중 하나라는 평가도 있습니다. — <em>출처: 한국콘텐츠진흥원, 2024 게임 산업 보고서 / <a href="https://www.kocca.kr" target="_blank" rel="noopener">kocca.kr</a></em></p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 한국 게임사 텐센트 지분율 인포그래픽)</span></div>
+          <div class="mbox" id="mb-s2i" data-t="img" onclick="mbClick('s2i')">
+            <div class="mbox-ph" id="ph-s2i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s2i" accept="image/*" style="display:none" onchange="mbLoadImg('s2i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: 텐센트 한국 게임 지분 투자 / Tencent Korea game investment)</span></div>
+          <div class="mbox" id="mb-s2v" data-t="vid" onclick="mbClick('s2v')">
+            <div class="mbox-ph" id="ph-s2v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s2v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s2v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 2 -->
+
+    <!-- ══════════ SECTION 3 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">03</span>앤트그룹 32% — 카카오페이가 중국 법의 사정권에 있다</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "카카오페이 중국 자본" · "앤트그룹 카카오페이 지분" · "카카오페이 개인정보 중국" · "알리페이 카카오페이"
+      </div>
+
+      <p class="bt">
+        게임 산업보다 더 민감한 영역이 있습니다 — 바로 <strong class="hl-r">결제·금융 데이터</strong>입니다. 카카오페이는 수천만 명 한국인의 결제 정보, 소비 패턴, 금융 거래 내역을 보유합니다. 그리고 이 카카오페이의 2대 주주는 알리바바 계열 앤트그룹(Ant Group)의 자회사, 알리페이 싱가포르(Alipay Singapore)입니다.
+      </p>
+
+      <div class="dcall rev">
+        <div class="dcall-lbl">KEY FACT · 카카오페이-앤트그룹 지분 현황 (공시 기준)</div>
+        <span class="bignum">~32%</span>
+        <span class="biglbl">알리페이 싱가포르(앤트그룹 자회사)의 카카오페이 보유 지분율 — 2대 주주 (금감원 DART 공시)</span>
+        <p class="cbody">앤트그룹은 2017년 카카오페이에 약 2억 달러를 투자하며 대주주 지위를 확보했습니다. 알리바바 창업자 마윈의 경영권 박탈 이후 앤트그룹 자체가 중국 정부의 강력한 통제 아래 들어갔습니다. 이는 <strong>카카오페이의 결제 데이터가 중국 국가정보법의 사정권 내에 있을 수 있음</strong>을 의미합니다. — <em>출처: 금감원 DART 카카오페이 사업보고서 / <a href="https://dart.fss.or.kr" target="_blank" rel="noopener">dart.fss.or.kr</a></em></p>
+      </div>
+
+      <p class="bt">
+        실제로 2022년, 카카오페이가 앤트그룹에 <strong class="hl-r">사용자 542만 명의 개인정보를 무단으로 제공</strong>한 사실이 개인정보보호위원회의 조사로 드러났습니다. 카카오페이는 약 151억 원의 과징금 처분을 받았습니다.
+      </p>
+
+      <div class="lq rev">
+        <div class="lq-bdg">개인정보보호위원회 — 카카오페이 제재 결정 (2023)</div>
+        <p class="lq-txt">개인정보보호위원회는 카카오페이가 정보주체의 동의 없이 <strong>542만여 명의 개인신용정보를 알리페이 싱가포르(앤트그룹 자회사)에 제공</strong>한 사실을 확인하고, 시정명령 및 과징금 처분을 내렸습니다. 해당 정보에는 이름, 전화번호, CI, 결제 내역 등이 포함되었습니다.</p>
+        <div class="lq-src">— 개인정보보호위원회 보도자료, 2023 / <a href="https://www.pipc.go.kr" target="_blank" rel="noopener">pipc.go.kr</a></div>
+      </div>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 찬반 균형 시각</div>
+        <p class="cbody" style="color:var(--ink2)">
+          <strong style="color:var(--grn)">투자 수용론:</strong> 앤트그룹의 초기 투자가 없었다면 카카오페이의 글로벌 핀테크 성장은 더뎠을 수 있습니다. 해외 자본 유입은 국내 금융 혁신을 가속화하는 긍정적 기능이 있으며, 실제 카카오페이는 현재 한국 간편결제 시장을 선도하는 기업으로 성장했습니다.<br><br>
+          <strong style="color:var(--red)">데이터 주권 위협론:</strong> 결제 데이터는 국가 안보와 직결되는 민감 정보입니다. 수천만 명의 소비 패턴, 자산 수준, 거래 내역이 중국 국가정보법 적용을 받는 기업의 서버에 접근 가능한 상태에 있는 것은, 개인정보 침해를 넘어 국가적 리스크입니다. 이미 542만 명의 정보가 실제 유출된 사실이 공식 확인된 만큼, 이것은 가능성이 아닌 현실입니다.
+        </p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 카카오페이-앤트그룹 지배구조 다이어그램)</span></div>
+          <div class="mbox" id="mb-s3i" data-t="img" onclick="mbClick('s3i')">
+            <div class="mbox-ph" id="ph-s3i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s3i" accept="image/*" style="display:none" onchange="mbLoadImg('s3i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: 카카오페이 개인정보 앤트그룹 제재)</span></div>
+          <div class="mbox" id="mb-s3v" data-t="vid" onclick="mbClick('s3v')">
+            <div class="mbox-ph" id="ph-s3v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s3v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s3v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 3 -->
+
+    <!-- ══════════ SECTION 4 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">04</span>콘텐츠 장악 — 드라마·K팝 제작사에 스며든 중국 자본</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "JTBC 텐센트 투자" · "SLL 중국 자본" · "SM 중국 지분" · "K콘텐츠 중국 자본"
+      </div>
+
+      <p class="bt">
+        게임과 핀테크를 넘어, 중국 자본은 한국인의 일상에서 가장 큰 영향력을 지닌 영역인 <strong class="hl-r">드라마·음악·엔터테인먼트 콘텐츠</strong>에도 깊숙이 침투해 있습니다. 방송법과 신문법이 언론사 지분을 직접 제한하고 있으나, <strong class="hl-b">콘텐츠 제작사를 통한 우회 투자는 규제 공백 상태</strong>입니다.
+      </p>
+
+      <table class="ctbl rev">
+        <thead>
+          <tr>
+            <th>기업·기관</th>
+            <th>중국 자본 관련 현황</th>
+            <th>우려 내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🎬 SLL (JTBC스튜디오)</td>
+            <td class="bad">텐센트 약 1,000억 원 투자 (2020년)</td>
+            <td>드라마 제작 방향성·콘텐츠 편향 우려</td>
+          </tr>
+          <tr>
+            <td>🎵 SM엔터테인먼트</td>
+            <td class="warn">중국 스트리밍 플랫폼과의 협력 계약 이력 (현재 카카오 계열사)</td>
+            <td>K팝 IP·콘텐츠 유통 데이터 접근 우려</td>
+          </tr>
+          <tr>
+            <td>🎵 YG엔터테인먼트</td>
+            <td class="warn">텐센트 뮤직 등 중국 플랫폼과의 유통 협력 (보도된 사실 기반)</td>
+            <td>콘텐츠 유통 종속 리스크</td>
+          </tr>
+          <tr>
+            <td>📺 iQIYI·WeTV</td>
+            <td class="bad">중국 OTT의 한국 콘텐츠 독점 계약</td>
+            <td>한국 드라마 IP 중국 플랫폼 종속</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="bt">
+        특히 우려되는 것은 <strong class="hl-r">'문화 공정(文化工程)'</strong>의 가능성입니다. 중국 자본이 들어간 제작사에서 만든 드라마에 중국 문화·역사를 유리하게 묘사하거나, 한복을 한국 문화가 아닌 것처럼 표현하거나, 중국 상품 PPL이 자연스럽게 삽입되는 사례들이 보고되고 있습니다. 이것은 콘텐츠를 통한 <strong class="hl-r">문화 주권의 잠식</strong>입니다.
+      </p>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 실제 논란 사례 — '문화 공정' 의혹</div>
+        <p class="cbody" style="color:var(--ink2)">
+          2021년 방영된 일부 OTT 드라마에서 한복 디자인이 중국 한푸(漢服)와 유사하게 제작돼 논란이 됐고, 중국 자본과 연계된 제작사가 관여한 것으로 알려져 문화 주권 침해 논란이 일었습니다. 한국콘텐츠진흥원은 2022년 보고서에서 "중국 자본의 K콘텐츠 투자 확대가 제작 방향성에 영향을 미칠 수 있다"고 경고했습니다. — <em>출처: 한국콘텐츠진흥원 2022 / <a href="https://www.kocca.kr" target="_blank" rel="noopener">kocca.kr</a></em>
+        </p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: K콘텐츠 중국 자본 투자 현황표)</span></div>
+          <div class="mbox" id="mb-s4i" data-t="img" onclick="mbClick('s4i')">
+            <div class="mbox-ph" id="ph-s4i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s4i" accept="image/*" style="display:none" onchange="mbLoadImg('s4i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: 중국 자본 K콘텐츠 문화공정 드라마)</span></div>
+          <div class="mbox" id="mb-s4v" data-t="vid" onclick="mbClick('s4v')">
+            <div class="mbox-ph" id="ph-s4v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s4v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s4v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 4 -->
+
+    <!-- ══════════ SECTION 5 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">05</span>VIE 구조의 덫 — 중국 기업의 지배구조는 왜 더 위험한가</h2>
+
+      <div style="background:#FFF3CD;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:20px;font-family:var(--fb);font-size:clamp(15px,3vw,17px);color:#78350F;font-weight:600;line-height:1.8">
+        🔍 <strong>많이 검색하는 질문:</strong> "텐센트 VIE구조" · "중국 기업 지배구조 위험" · "황금주 중국" · "중국 국가정보법 기업"
+      </div>
+
+      <p class="bt">
+        텐센트가 보유한 한국 기업 지분은 표면상 '싱가포르 법인'이나 '케이만군도 법인' 명의로 돼 있습니다. 이것이 바로 <strong class="hl-r">VIE(Variable Interest Entity, 가변이익실체) 구조</strong>입니다. 중국 기업들이 해외 자본시장에서 주식을 상장하고 자금을 조달하기 위해 설계된 법적 우회 장치입니다.
+      </p>
+
+      <div class="flow rev">
+        <div class="flow-ttl">⚠️ 텐센트 VIE 구조 — 실제 지배 관계</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi s">🇨🇳</div><div class="fs-lbl">중국 공산당</div><div class="fs-sub">국가정보법 강제</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi w">🏢</div><div class="fs-lbl">텐센트 본사</div><div class="fs-sub">마화텅·당위원회</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi b">🏦</div><div class="fs-lbl">싱가포르 법인</div><div class="fs-sub">Han River 등</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🇰🇷</div><div class="fs-lbl">한국 기업 지분</div><div class="fs-sub">넷마블·크래프톤…</div></div>
+        </div>
+      </div>
+
+      <p class="bt">
+        <strong class="hl-b">법인 명의는 싱가포르지만, 실질적 지배권은 텐센트 본사에 있습니다.</strong> 그리고 텐센트는 중국 국가정보법 제7조("모든 중국 기업과 시민은 국가 정보 활동에 협조할 의무가 있다")의 적용을 받습니다. 이 구조는 한국 공정거래위원회와 금융 당국이 파악하기도, 규제하기도 어렵습니다.
+      </p>
+
+      <div class="rm rev">
+        <div class="rm-ttl">🔴 텐센트 지분 보유의 산업별 위험 노출 수준</div>
+        <div class="ri"><div class="rl">게임 IP 유출</div><div class="rbg"><div class="rbf h" data-w="85"></div></div><div class="rp" style="color:var(--red)">85%</div></div>
+        <div class="ri"><div class="rl">결제 데이터</div><div class="rbg"><div class="rbf h" data-w="90"></div></div><div class="rp" style="color:var(--red)">90%</div></div>
+        <div class="ri"><div class="rl">콘텐츠 편향</div><div class="rbg"><div class="rbf m" data-w="65"></div></div><div class="rp" style="color:#D97706">65%</div></div>
+        <div class="ri"><div class="rl">경영권 침해</div><div class="rbg"><div class="rbf m" data-w="55"></div></div><div class="rp" style="color:#D97706">55%</div></div>
+        <div class="ri"><div class="rl">기술 기밀 유출</div><div class="rbg"><div class="rbf h" data-w="75"></div></div><div class="rp" style="color:var(--red)">75%</div></div>
+        <p style="font-family:var(--fb);font-size:13px;color:var(--ink3);margin-top:10px">※ 수치는 전문가 의견 및 공개 보고서 기반 위험 노출 추정치. 높을수록 위험 노출 수준이 높음.</p>
+      </div>
+
+      <div class="lq rev">
+        <div class="lq-bdg">중국 국가정보법(2017) 제7조 — 핵심 조항</div>
+        <p class="lq-txt">중국 국가정보법 제7조: "<strong>모든 조직과 시민은 법에 따라 국가 정보 활동을 지원하고, 협조하며, 국가 정보 활동을 통해 얻은 비밀을 보호하여야 한다.</strong>" — 이 조항은 텐센트, 앤트그룹 등 모든 중국 기업에 동일하게 적용됩니다. 기업의 선의(善意)와 무관하게, 중국 정보기관이 요청하면 한국 기업에서 수집한 데이터를 제공할 법적 의무가 발생합니다.</p>
+        <div class="lq-src">— 중국 국가정보법(2017.6.27 시행) / <a href="https://www.chinalawtranslate.com/en/national-intelligence-law-2017/" target="_blank" rel="noopener">chinalawtranslate.com</a></div>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 텐센트 VIE 지배구조 도식)</span></div>
+          <div class="mbox" id="mb-s5i" data-t="img" onclick="mbClick('s5i')">
+            <div class="mbox-ph" id="ph-s5i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s5i" accept="image/*" style="display:none" onchange="mbLoadImg('s5i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: China VIE structure explained risk)</span></div>
+          <div class="mbox" id="mb-s5v" data-t="vid" onclick="mbClick('s5v')">
+            <div class="mbox-ph" id="ph-s5v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s5v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s5v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 5 -->
+
+    <!-- ══════════ SECTION 6 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl b2"><span class="num">06</span>서방의 대응 — 미국·EU는 어떻게 중국 자본을 막고 있나</h2>
+
+      <p class="bt">
+        한국이 이 문제를 방치하는 동안, 서방 국가들은 이미 수년 전부터 중국 자본의 핵심 산업 침투를 제도적으로 차단하고 있습니다. 이들의 접근 방식은 한국이 취해야 할 방향을 보여주는 중요한 선례입니다.
+      </p>
+
+      <table class="ctbl rev">
+        <thead>
+          <tr>
+            <th>국가</th>
+            <th>제도적 대응</th>
+            <th>한국과의 비교</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🇺🇸 미국</td>
+            <td class="bad">CFIUS(외국인투자심의위) — 안보 관련 업종 중국 투자 사실상 전면 차단</td>
+            <td>한국은 동등한 기관·권한 없음</td>
+          </tr>
+          <tr>
+            <td>🇬🇧 영국</td>
+            <td class="bad">NSI법(국가안보투자법, 2022) — 17개 민감 산업 분야 외국 투자 심사 의무화</td>
+            <td>한국 외국인투자촉진법 — 안보 심사 미비</td>
+          </tr>
+          <tr>
+            <td>🇩🇪 독일</td>
+            <td class="warn">대외경제법 개정 — 게임·미디어 포함 전략산업 중국 투자 사전 심사</td>
+            <td>한국 문화·게임 산업 — 외투 안보 심사 없음</td>
+          </tr>
+          <tr>
+            <td>🇦🇺 호주</td>
+            <td class="warn">FIRB(외국인투자심의위) — 미디어·통신·금융 분야 중국 투자 불허 사례 다수</td>
+            <td>한국 금융위원회 — 실질 심사 기준 미비</td>
+          </tr>
+          <tr>
+            <td>🇰🇷 한국</td>
+            <td class="ok">방위산업 일부만 외투 제한 — 게임·핀테크·콘텐츠 사각지대</td>
+            <td>— (제도 공백 상태)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cctx rev">
+        <div class="cctx-lbl">📌 미국 CFIUS 사례 — 텐센트 관련 투자 차단</div>
+        <p class="cbody" style="color:var(--ink2)">
+          미국 CFIUS는 2021년 텐센트가 연루된 게임·소셜미디어 투자 건을 안보 위협 이유로 심사 강화했습니다. 트럼프·바이든 행정부 모두 중국 자본의 미국 미디어·게임 산업 투자를 안보 관점에서 규제했습니다. 에픽게임즈에 대한 텐센트의 40% 지분도 CFIUS 심사의 지속적 감시 대상입니다. — <em>출처: <a href="https://home.treasury.gov/policy-issues/international/the-committee-on-foreign-investment-in-the-united-states-cfius" target="_blank" rel="noopener">U.S. Treasury, CFIUS</a></em>
+        </p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 각국 외국인 투자 안보 심사 제도 비교표)</span></div>
+          <div class="mbox" id="mb-s6i" data-t="img" onclick="mbClick('s6i')">
+            <div class="mbox-ph" id="ph-s6i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s6i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s6i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s6i" accept="image/*" style="display:none" onchange="mbLoadImg('s6i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: CFIUS China investment block national security)</span></div>
+          <div class="mbox" id="mb-s6v" data-t="vid" onclick="mbClick('s6v')">
+            <div class="mbox-ph" id="ph-s6v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s6v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s6v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 6 -->
+
+    <!-- ══════════ SECTION 7 ══════════ -->
+    <div class="sec rev">
+      <h2 class="sec-ttl"><span class="num">07</span>종합 진단 — 자본 종속의 3중 구조와 한국의 선택</h2>
+
+      <p class="bt">
+        지금까지 살펴본 텐센트·앤트그룹의 한국 침투 구조를 종합하면, 이것은 단일 사건이 아니라 <strong class="hl-r">게임(IP·기술)→ 핀테크(결제·데이터)→ 콘텐츠(문화·여론)</strong>로 연결되는 체계적인 3중 종속 구조입니다.
+      </p>
+
+      <div class="flow rev">
+        <div class="flow-ttl">🔴 자본 종속의 3중 구조 — 한국 산업 생태계에 미치는 연쇄 효과</div>
+        <div class="flow-row">
+          <div class="fs"><div class="fi d">🎮</div><div class="fs-lbl">게임 IP 종속</div><div class="fs-sub">기술·인력·IP 흡수</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">💸</div><div class="fs-lbl">핀테크 데이터</div><div class="fs-sub">소비·금융 정보 수집</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🎬</div><div class="fs-lbl">콘텐츠 편향</div><div class="fs-sub">문화 주권 잠식</div></div>
+          <div class="farrow">→</div>
+          <div class="fs"><div class="fi d">🔒</div><div class="fs-lbl">경제 주권 상실</div><div class="fs-sub">이탈 불가 종속</div></div>
+        </div>
+      </div>
+
+      <p class="bt">
+        문제의 본질은 이겁니다. <strong class="hl-r">한국은 외국인 직접 투자(FDI)를 환영하는 개방 경제이지만, 중국은 시장 경제가 아닙니다.</strong> 중국 기업의 투자는 순수 상업적 행위가 아닌, 중국 국가정보법·당의 지도 아래 이루어지는 준(準)국가적 행위입니다. 이 비대칭성을 무시한 채 일반 FDI와 동일하게 취급하는 것은 법적 공백을 넘어, 국가 안보의 사각지대를 방치하는 것입니다.
+      </p>
+
+      <div class="pq rev">
+        <p class="pq-txt">"텐센트의 투자를 받은 순간,<br>그 회사의 데이터는 <em>중국 정보기관의 요청</em>으로부터<br>자유롭지 않습니다."<br><span style="font-size:clamp(1rem,3vw,1.2rem);color:var(--ink3);font-weight:700">— 호주 전략정책연구소(ASPI), 중국 자본 리스크 보고서 (2023)</span></p>
+      </div>
+
+      <!-- 미디어 박스 -->
+      <div class="media-pair rev">
+        <div class="mbox-wrap">
+          <div class="mbox-label">🖼️ 이미지 삽입 <span style="font-size:12px;color:#94A3B8">(권장: 자본 종속 3중 구조 인포그래픽)</span></div>
+          <div class="mbox" id="mb-s7i" data-t="img" onclick="mbClick('s7i')">
+            <div class="mbox-ph" id="ph-s7i"><span class="ico">🖼️</span><p>이미지 삽입</p><span class="hint">클릭 → 파일 선택</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s7i')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s7i')">✕ 삭제</button>
+            </div>
+          </div>
+          <input type="file" id="fi-s7i" accept="image/*" style="display:none" onchange="mbLoadImg('s7i',this)">
+        </div>
+        <div class="mbox-wrap">
+          <div class="mbox-label">🎬 영상 삽입 <span style="font-size:12px;color:#94A3B8">(권장 검색어: China capital control Korea sovereignty risk)</span></div>
+          <div class="mbox" id="mb-s7v" data-t="vid" onclick="mbClick('s7v')">
+            <div class="mbox-ph" id="ph-s7v"><span class="ico">🎬</span><p>YouTube 영상 삽입</p><span class="hint">클릭 → 링크 입력</span></div>
+            <div class="mctrl">
+              <button class="mbtn rep" onclick="event.stopPropagation();mbReplace('s7v')">↩ 교체</button>
+              <button class="mbtn del" onclick="event.stopPropagation();mbDel('s7v')">✕ 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /sec 7 -->
+
+  </div><!-- /ab -->
+
+  <!-- ═══════════════ 실천 강령 ═══════════════ -->
+  <section class="action" style="padding-top:26px">
+    <div class="action-inner">
+      <div class="action-ttl">🛡️ 우리가 할 수 있는 것 — 자본 주권 회복을 위한 실천</div>
+      <div class="action-sub">지금 당장 실행 가능한 개인·기업·정책 레벨 대응 방향</div>
+      <div class="action-grid">
+        <div class="ac">
+          <div class="ac-n">ACTION 01</div>
+          <div class="ac-ico">🔍</div>
+          <div class="ac-ttl">내가 쓰는 앱의 주주 확인</div>
+          <div class="ac-desc">금융감독원 DART(dart.fss.or.kr)에서 사용 중인 한국 상장 앱·플랫폼의 주요 주주를 직접 확인하세요. 텐센트·앤트그룹이 5% 이상 지분을 보유한 기업인지 파악하는 것이 시작입니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 02</div>
+          <div class="ac-ico">📋</div>
+          <div class="ac-ttl">CFIUS형 외투 심사법 촉구</div>
+          <div class="ac-desc">게임·핀테크·콘텐츠 등 전략 산업에 대한 외국인 투자 안보 심사를 의무화하는 법안을 촉구하세요. 미국·영국·독일이 이미 시행 중인 제도입니다. 국회의원·정책 청원에 목소리를 내는 것이 실질적 변화를 만듭니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 03</div>
+          <div class="ac-ico">💡</div>
+          <div class="ac-ttl">데이터 현지화 입법 지지</div>
+          <div class="ac-desc">결제·의료·금융 데이터의 국내 서버 저장을 의무화하는 데이터 현지화 법안을 지지하세요. EU의 GDPR은 이미 이 원칙을 강제합니다. 데이터 주권은 경제 주권의 핵심입니다.</div>
+        </div>
+        <div class="ac">
+          <div class="ac-n">ACTION 04</div>
+          <div class="ac-ico">🎮</div>
+          <div class="ac-ttl">독립 게임·콘텐츠 생태계 지원</div>
+          <div class="ac-desc">중국 자본으로부터 독립된 국내 게임사, 독립 제작사, 국내 OTT 플랫폼을 의식적으로 소비하세요. 소비자의 선택이 건강한 생태계를 유지하는 가장 직접적인 수단입니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 소셜 링크 입력 모달 -->
+  <div id="sns-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#fff;border-radius:20px;padding:28px 24px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <div id="sns-modal-title" style="font-family:var(--ft);font-size:clamp(17px,3.5vw,19px);font-weight:800;color:var(--ink)"></div>
+      </div>
+      <div id="sns-modal-desc" style="font-family:var(--fb);font-size:clamp(14px,3vw,15px);color:var(--ink3);margin-bottom:14px;line-height:1.7"></div>
+      <input id="sns-url-input" type="url" placeholder="https://" style="width:100%;border:2.5px solid var(--bdr);border-radius:10px;padding:11px 14px;font-family:var(--fb);font-size:clamp(14px,3vw,16px);outline:none;transition:border-color .2s;color:var(--ink)">
+      <div id="sns-saved-bar" style="display:none;margin-top:10px;padding:8px 12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:8px;font-family:var(--fb);font-size:clamp(13px,2.8vw,14px);color:#166534;align-items:center;gap:8px;flex-wrap:wrap">
+        <span>✅ 저장된 링크:</span>
+        <a id="sns-saved-link" href="#" target="_blank" rel="noopener" style="color:#15803D;font-weight:700;word-break:break-all;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></a>
+        <button onclick="snsClearSaved()" style="font-family:var(--ft);font-size:12px;font-weight:700;background:none;border:1.5px solid #86EFAC;border-radius:6px;padding:3px 9px;cursor:pointer;color:#166534;flex-shrink:0">삭제</button>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:14px">
+        <button onclick="snsSave()" style="flex:1;font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:800;background:var(--red);color:#fff;border:none;border-radius:10px;padding:12px;cursor:pointer;transition:background .15s">저장하기</button>
+        <button onclick="snsClose()" style="font-family:var(--ft);font-size:clamp(14px,3vw,16px);font-weight:700;background:var(--bg2);color:var(--ink3);border:2px solid var(--bdr);border-radius:10px;padding:12px 20px;cursor:pointer">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb">
+    <div class="sb-lbl">공유하기</div>
+    <div class="sb-btns">
+      <button class="snsbtn yt" onclick="snsOpen('yt')">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>YouTube
+      </button>
+      <button class="snsbtn ig" onclick="snsOpen('ig')">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram
+      </button>
+      <button class="snsbtn tt" onclick="snsOpen('tt')">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.78 1.52V6.82a4.85 4.85 0 0 1-1.01-.13z"/></svg>TikTok
+      </button>
+      <button class="snsbtn th" onclick="snsOpen('th')">
+        <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.742-1.757-.438-.505-1.103-.769-1.98-.789h-.047c-.67 0-1.64.191-2.253 1.109l-1.755-1.2c.894-1.307 2.277-2.031 3.98-2.049h.064c2.71.048 4.327 1.692 4.73 4.778.108.028.214.057.316.089l-.001.007c1.338.386 2.462 1.093 3.24 2.254C22.01 16.06 21.748 19 19.743 21c-1.737 1.745-4.189 2.627-7.274 2.647l-.283-.003v.003Z"/></svg>Threads
+      </button>
+      <button class="snsbtn xb" onclick="snsOpen('xb')">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117Z"/></svg>X
+      </button>
+      <button class="snsbtn fb" onclick="snsOpen('fb')">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
+      </button>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════ 푸터 ═══════════════ -->
+<footer class="ft">
+  <div class="ft-brand"><span class="ft-dot"></span>IssueLens</div>
+  <div style="color:#9CA3AF;font-family:var(--fb);font-size:clamp(13px,2.8vw,15px);margin-top:4px">대한민국 주권 시리즈 · EP.08</div>
+  <p>본 게시물은 공익 목적의 논평입니다. 금융감독원 DART 공시 및 공신력 있는 언론 보도·정부 기관 발표 자료를 근거로 합니다.<br>지분율 등 수치는 공시 시점에 따라 변동될 수 있으므로 DART에서 직접 확인하시기 바랍니다.<br>Copyright © IssueLens. All rights reserved.</p>
+</footer>
+
+<script>
+// ── 진행 바 ──
+const pb=document.getElementById('pb');
+window.addEventListener('scroll',()=>{pb.style.width=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-document.documentElement.clientHeight)*100)+'%'});
+
+// ── 스크롤 reveal ──
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);ro.unobserve(e.target)}})},{threshold:.07});
+document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
+
+// ── 리스크 바 ──
+const bo=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.rbf').forEach(b=>{setTimeout(()=>b.style.width=b.dataset.w+'%',260)});bo.unobserve(e.target)}})},{threshold:.25});
+document.querySelectorAll('.rm').forEach(el=>bo.observe(el));
+
+// ── 미디어 박스 ──
+let cur=null;
+
+function mbClick(id){
+  const box=document.getElementById('mb-'+id);
+  if(box.classList.contains('filled'))return;
+  if(box.dataset.t==='img'){document.getElementById('fi-'+id).click()}
+  else{ytOpen(id)}
+}
+
+function mbReplace(id){
+  mbClear(id);
+  const box=document.getElementById('mb-'+id);
+  if(box.dataset.t==='img'){document.getElementById('fi-'+id).click()}
+  else{ytOpen(id)}
+}
+
+function mbDel(id){
+  const box=document.getElementById('mb-'+id);
+  const wrap=box.closest('.mbox-wrap');
+  wrap.style.transition='max-height .35s ease, opacity .3s ease, margin .3s ease';
+  wrap.style.overflow='hidden';
+  wrap.style.maxHeight=wrap.offsetHeight+'px';
+  requestAnimationFrame(()=>{
+    wrap.style.maxHeight='0';
+    wrap.style.opacity='0';
+    wrap.style.margin='0';
+    wrap.style.padding='0';
+  });
+  setTimeout(()=>{
+    const pair=wrap.closest('.media-pair');
+    wrap.remove();
+    if(pair&&pair.querySelectorAll('.mbox-wrap').length===0){
+      pair.style.transition='max-height .3s ease,opacity .25s ease,margin .3s ease';
+      pair.style.overflow='hidden';
+      pair.style.maxHeight='0';
+      pair.style.opacity='0';
+      pair.style.margin='0';
+      setTimeout(()=>pair.remove(),320);
+    }
+  },360);
+}
+
+function mbClear(id){
+  const box=document.getElementById('mb-'+id);
+  const ifrm=box.querySelector('iframe');
+  const img=box.querySelector('img.prev');
+  if(ifrm)ifrm.remove();
+  if(img)img.remove();
+  box.classList.remove('filled');
+  const ph=document.getElementById('ph-'+id);
+  if(ph)ph.style.display='';
+  const fi=document.getElementById('fi-'+id);
+  if(fi)fi.value='';
+}
+
+function mbLoadImg(id,inp){
+  if(!inp.files||!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const box=document.getElementById('mb-'+id);
+    const ph=document.getElementById('ph-'+id);
+    if(ph)ph.style.display='none';
+    const img=document.createElement('img');
+    img.src=ev.target.result;
+    img.className='prev';
+    box.insertBefore(img,box.querySelector('.mctrl'));
+    box.classList.add('filled');
+    box.onclick=null;
+    box.style.minHeight='200px';
+  };
+  r.readAsDataURL(inp.files[0]);
+}
+
+// ── YouTube 모달 ──
+function ytOpen(id){cur=id;document.getElementById('yti').value='';document.getElementById('ytm').style.display='flex';setTimeout(()=>document.getElementById('yti').focus(),80)}
+function ytClose(){document.getElementById('ytm').style.display='none';cur=null}
+function ytEmbed(url){
+  try{
+    const u=new URL(url);let id='';
+    if(u.hostname.includes('youtu.be')){id=u.pathname.slice(1)}
+    else{id=u.searchParams.get('v')||''}
+    return id?'https://www.youtube.com/embed/'+id+'?rel=0':null
+  }catch(e){return null}
+}
+function ytOk(){
+  const url=document.getElementById('yti').value.trim();
+  const em=ytEmbed(url);
+  if(!em){alert('올바른 YouTube 링크를 입력해 주세요.\n예: https://www.youtube.com/watch?v=XXXXXXXXXXX');return}
+  const box=document.getElementById('mb-'+cur);
+  const ph=document.getElementById('ph-'+cur);
+  if(ph)ph.style.display='none';
+  const ifr=document.createElement('iframe');
+  ifr.src=em;
+  ifr.style.cssText='width:100%;height:100%;min-height:200px;border:none;display:block;border-radius:12px';
+  ifr.allow='accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture';
+  ifr.allowFullscreen=true;
+  box.insertBefore(ifr,box.querySelector('.mctrl'));
+  box.classList.add('filled');
+  box.style.minHeight='220px';
+  box.onclick=null;
+  ytClose();
+}
+
+// ── SNS 링크 모달 ──
+const snsMeta={
+  yt:{label:'YouTube',desc:'YouTube 채널 또는 영상 링크를 입력하세요.',ph:'https://www.youtube.com/@channel'},
+  ig:{label:'Instagram',desc:'Instagram 프로필 또는 게시물 링크를 입력하세요.',ph:'https://www.instagram.com/username'},
+  tt:{label:'TikTok',desc:'TikTok 프로필 또는 영상 링크를 입력하세요.',ph:'https://www.tiktok.com/@username'},
+  th:{label:'Threads',desc:'Threads 프로필 또는 게시물 링크를 입력하세요.',ph:'https://www.threads.net/@username'},
+  xb:{label:'X (Twitter)',desc:'X(트위터) 프로필 또는 게시물 링크를 입력하세요.',ph:'https://x.com/username'},
+  fb:{label:'Facebook',desc:'Facebook 페이지 또는 게시물 링크를 입력하세요.',ph:'https://www.facebook.com/page'}
+};
+const snsLinks={};
+let curSns=null;
+
+function snsOpen(id){
+  curSns=id;
+  const m=snsMeta[id];
+  document.getElementById('sns-modal-title').textContent=m.label+' 링크 설정';
+  document.getElementById('sns-modal-desc').textContent=m.desc;
+  const inp=document.getElementById('sns-url-input');
+  inp.placeholder=m.ph;
+  inp.value=snsLinks[id]||'';
+  inp.style.borderColor='var(--bdr)';
+  snsUpdateSavedBar();
+  document.getElementById('sns-modal').style.display='flex';
+  setTimeout(()=>inp.focus(),80);
+}
+
+function snsUpdateSavedBar(){
+  const id=curSns;
+  const bar=document.getElementById('sns-saved-bar');
+  const lnk=document.getElementById('sns-saved-link');
+  if(snsLinks[id]){
+    bar.style.display='flex';
+    lnk.href=snsLinks[id];
+    lnk.textContent=snsLinks[id];
+  }else{
+    bar.style.display='none';
+  }
+}
+
+function snsClearSaved(){
+  if(!curSns)return;
+  delete snsLinks[curSns];
+  document.getElementById('sns-url-input').value='';
+  const btn=document.querySelector('.snsbtn.'+curSns);
+  btn.classList.remove('has-link');
+  btn.onclick=()=>snsOpen(curSns);
+  btn.ondblclick=null;
+  btn.title='';
+  snsUpdateSavedBar();
+}
+
+function snsSave(){
+  const url=document.getElementById('sns-url-input').value.trim();
+  if(!url){alert('링크를 입력해 주세요.');return}
+  let finalUrl=url;
+  if(!/^https?:\/\//i.test(finalUrl))finalUrl='https://'+finalUrl;
+  const id=curSns;
+  snsLinks[id]=finalUrl;
+  const btn=document.querySelector('.snsbtn.'+id);
+  btn.classList.add('has-link');
+  btn.onclick=()=>window.open(snsLinks[id],'_blank','noopener,noreferrer');
+  btn.ondblclick=e=>{e.preventDefault();snsOpen(id)};
+  btn.title='클릭: 링크 열기 | 더블클릭: 링크 변경';
+  snsUpdateSavedBar();
+  setTimeout(()=>snsClose(),300);
+}
+
+function snsClose(){
+  document.getElementById('sns-modal').style.display='none';
+  curSns=null;
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){ytClose();snsClose()}});
+document.getElementById('yti').addEventListener('keydown',e=>{if(e.key==='Enter')ytOk()});
+document.getElementById('sns-url-input').addEventListener('keydown',e=>{if(e.key==='Enter')snsSave()});
+document.getElementById('sns-modal').addEventListener('click',function(e){if(e.target===this)snsClose()});
+</script>
+</body>
+</html>

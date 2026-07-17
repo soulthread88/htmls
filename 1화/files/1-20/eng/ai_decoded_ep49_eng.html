@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Decoded for Seniors Ep.49 — AI Travel Planner | Jake & Grandpa Bob</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+/* ================================================================
+   AI DECODED FOR SENIORS — EP.49 "AI TRAVEL PLANNER"
+   🇺🇸 BOLD AMERICAN / SENIOR-FRIENDLY / BLOG-COMPATIBLE
+   Style: Deep Navy + Electric Gold + Sky Blue — Premium TV-show vibe
+   Fonts: Bebas Neue (headlines) + DM Sans (body) — Zero Inter/Roboto
+   ZERO SCRIPT TAGS in saved output — blog-safe
+================================================================ */
+* { box-sizing: border-box; }
+html, body { width: 100%; overflow-x: hidden; }
+
+:root {
+  --navy:   #0a1628;
+  --navy2:  #1a3a6e;
+  --gold:   #FFD700;
+  --gold2:  #FFA000;
+  --sky:    #e8f0ff;
+  --sky2:   #dce8ff;
+  --red:    #b71c1c;
+  --green:  #1b5e20;
+  --orange: #c45000;
+  --muted:  #5a6e8a;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif !important;
+    line-height: 1.85 !important;
+    color: var(--navy) !important;
+    background: #f0f4ff !important;
+    margin: 0 !important; padding: 0 !important;
+}
+
+.ts-wrap {
+    width: 100%; max-width: 880px;
+    margin: 0 auto;
+    padding: 24px 18px 100px 18px;
+    background: #f0f4ff;
+}
+
+img, video, iframe { max-width: 100% !important; height: auto !important; }
+
+.gap    { display: block; height: 14pt; }
+.gap-sm { display: block; height: 7pt; }
+.br-11pt { display: block; height: 11pt; }
+
+[contenteditable="true"] { outline: none; border-radius: 4px; cursor: text; }
+[contenteditable="true"]:hover  { background: rgba(255,215,0,0.18); box-shadow: 0 0 0 2px rgba(255,193,7,0.55); }
+[contenteditable="true"]:focus  { background: rgba(255,215,0,0.32); box-shadow: 0 0 0 2px #FFC107; }
+
+/* ── Save bar ── */
+.save-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(10,22,40,0.96);
+    padding: 10px 20px;
+    display: flex; justify-content: center; gap: 12px; z-index: 9999;
+}
+.save-bar button {
+    background: linear-gradient(135deg,#FFD700,#FFA000);
+    color: #0a1628; border: none;
+    padding: 11px 34px; border-radius: 30px;
+    font-size: 15pt; font-weight: 900; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; letter-spacing: 0.03em;
+    box-shadow: 0 4px 18px rgba(255,200,0,0.5);
+}
+.save-bar button:hover { background: linear-gradient(135deg,#FFC107,#FF6F00); }
+
+/* ════════════════════════════════════════════
+   ★ HERO BANNER
+════════════════════════════════════════════ */
+.hero-banner {
+    background: linear-gradient(135deg, #0a1628 0%, #1a3a6e 50%, #0d2d5e 100%);
+    border-radius: 24px; padding: 32px 28px 24px 28px;
+    margin: 0 0 10px 0; position: relative; overflow: hidden;
+    border: 3px solid #FFD700;
+    box-shadow: 0 8px 40px rgba(10,22,40,0.35);
+}
+.hero-banner::before {
+    content: '✈️';
+    position: absolute; top: -20px; right: 20px;
+    font-size: 120pt; opacity: 0.07; line-height: 1;
+}
+.hero-series-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14pt; color: #FFD700;
+    letter-spacing: 0.22em; margin-bottom: 8px;
+}
+.hero-ep-badge {
+    display: inline-block; background: #FFD700; color: #0a1628;
+    font-size: 12pt; font-weight: 900; padding: 4px 18px;
+    border-radius: 20px; letter-spacing: 0.1em; margin-bottom: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+}
+.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44pt; color: #fff; line-height: 1.1; margin: 0 0 10px 0;
+    letter-spacing: 0.02em;
+}
+.hero-title .gold { color: #FFD700; }
+.hero-subtitle { font-size: 16pt; font-weight: 400; color: #a8c4e8; line-height: 1.55; margin: 0 0 14px 0; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.hero-tag {
+    background: rgba(255,215,0,0.15); border: 1.5px solid rgba(255,215,0,0.45);
+    color: #FFD700; font-size: 11pt; font-weight: 700;
+    padding: 4px 14px; border-radius: 20px; letter-spacing: 0.05em;
+}
+.hero-hosts { margin-top: 16px; display: flex; gap: 14px; flex-wrap: wrap; }
+.host-badge {
+    background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.22);
+    color: #e8f0ff; font-size: 12pt; font-weight: 700;
+    padding: 6px 16px; border-radius: 12px; display: flex; align-items: center; gap: 6px;
+}
+
+/* ════════════════════════════════════════════
+   ★ SECTION ACCENT BARS
+════════════════════════════════════════════ */
+.section-accent {
+    display: flex; align-items: center; gap: 12px; margin: 20px 0 8px 0;
+}
+.section-accent .acc-icon {
+    font-size: 22pt; background: #FFD700; width: 46px; height: 46px;
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; box-shadow: 0 3px 10px rgba(255,193,7,0.4);
+}
+.section-accent .acc-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 23pt; color: var(--navy); line-height: 1.2; letter-spacing: 0.04em;
+}
+.section-accent .acc-label small {
+    display: block; font-family: 'DM Sans', sans-serif;
+    font-size: 12pt; font-weight: 400; color: var(--muted); letter-spacing: 0;
+}
+
+/* ── Title hierarchy ── */
+.title-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30pt; text-align: center; color: var(--navy);
+    padding: 16px 0 10px 0; border-bottom: 5px solid #FFD700;
+    line-height: 1.2; margin: 0 0 6px 0; letter-spacing: 0.04em;
+}
+.title-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22pt; color: var(--navy);
+    border-left: 8px solid #FFD700; padding-left: 14px;
+    margin: 22px 0 6px 0; line-height: 1.3; letter-spacing: 0.04em;
+}
+.title-minor {
+    font-size: 19pt; font-weight: 700; color: var(--navy2);
+    border-left: 5px solid #a8c4e8; padding-left: 10px;
+    margin: 18px 0 5px 0; line-height: 1.45;
+}
+
+/* ── Body text ── */
+.content-body {
+    font-size: 17pt; line-height: 1.9; text-align: left;
+    color: var(--navy); margin-bottom: 0;
+}
+.content-body + .content-body { margin-top: 10px; }
+
+/* ── Color classes ── */
+.speaker      { color: #1a3a6e; font-weight: 800; font-size: 17pt; }
+.ai-name      { color: #c45000; font-weight: bold; }
+.hook-tag     { color: #b71c1c; font-weight: bold; }
+.term-name    { color: #0d47a1; font-weight: bold; }
+.company-name { color: #c45000; font-weight: bold; }
+.emphasis     { color: #b71c1c; font-weight: bold; }
+.gold-text    { color: #c47a00; font-weight: bold; }
+.trending     { color: #1565c0; font-weight: bold; font-style: italic; }
+
+/* ── Trending banner ── */
+.trending-banner {
+    background: linear-gradient(90deg, #c62828, #b71c1c);
+    color: #fff; padding: 10px 20px; border-radius: 12px;
+    font-size: 14pt; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+    margin: 12px 0; letter-spacing: 0.03em; flex-wrap: wrap;
+}
+.trending-banner .tb-label {
+    background: #FFD700; color: #0a1628; padding: 2px 12px;
+    border-radius: 20px; font-size: 12pt; font-weight: 900; white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════
+   ★ SAYING BOX
+════════════════════════════════════════════ */
+.saying-box {
+    background: linear-gradient(135deg,#0a1628 0%,#1a3a6e 100%);
+    border: 4px solid #FFD700; padding: 22px 24px; border-radius: 24px; margin: 14px 0;
+    text-align: center; box-shadow: 0 6px 28px rgba(10,22,40,0.22);
+    position: relative; overflow: hidden;
+}
+.saying-box::after {
+    content: '⭐'; position: absolute; top: -10px; right: 14px;
+    font-size: 60pt; opacity: 0.07;
+}
+.saying-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 24pt; font-weight: 900; color: #FFD700;
+    margin: 6px 0 8px 0; line-height: 1.4;
+}
+.saying-meaning {
+    font-size: 18pt; font-weight: 700; color: #e8f0ff;
+    margin: 8px 0; line-height: 1.55;
+}
+.saying-tag {
+    display: inline-block; background: rgba(255,215,0,0.18);
+    border: 1.5px solid rgba(255,215,0,0.5); color: #FFD700;
+    font-size: 12pt; font-weight: 700; padding: 3px 14px; border-radius: 20px; margin-top: 4px;
+}
+
+/* ════════════════════════════════════════════
+   ★ DIALOG BOX
+════════════════════════════════════════════ */
+.dialog-box {
+    background: linear-gradient(135deg,#e8f0ff 0%,#dce8ff 100%);
+    border: 4px solid #1a3a6e; padding: 18px 22px; border-radius: 22px; margin: 14px 0;
+    position: relative;
+}
+.dialog-box::before {
+    content: '💬'; position: absolute; top: -14px; left: 20px;
+    font-size: 22pt; background: #e8f0ff; padding: 0 6px; border-radius: 6px;
+}
+.dialog-row { margin-bottom: 12px; line-height: 1.9; }
+.dialog-row:last-child { margin-bottom: 0; }
+.dialog-speaker { color: #0d47a1; font-weight: 800; font-size: 17pt; display: inline; }
+.dialog-content  { font-size: 17pt; line-height: 1.9; display: inline; color: var(--navy); }
+
+/* ════════════════════════════════════════════
+   ★ TIP BOX
+════════════════════════════════════════════ */
+.tip-box {
+    background: linear-gradient(135deg,#fffde7 0%,#fff8cc 100%);
+    border: 4px solid #FFD700; padding: 18px 22px; border-radius: 22px; margin: 14px 0;
+    box-shadow: 0 4px 18px rgba(255,193,7,0.22);
+}
+.tip-number-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #FFD700; color: #0a1628; font-weight: 900; font-size: 13pt;
+    width: 30px; height: 30px; border-radius: 50%;
+    margin-right: 8px; flex-shrink: 0; vertical-align: middle;
+}
+
+/* ════════════════════════════════════════════
+   ★ AI IN DAILY LIFE
+════════════════════════════════════════════ */
+.ai-box-single {
+    background: linear-gradient(135deg,#e8f0ff 0%,#d0e4ff 100%);
+    border: 4px solid #1a3a6e; padding: 18px 22px; border-radius: 22px; margin: 14px 0;
+}
+.ai-section-item {
+    margin-bottom: 16px; padding-bottom: 16px; border-bottom: 2px dashed #a8c4e8;
+}
+.ai-section-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+/* ════════════════════════════════════════════
+   ★ IMAGE / VIDEO UPLOAD AREAS
+════════════════════════════════════════════ */
+.img-area {
+    width: 100%; min-height: 400px;
+    background: linear-gradient(135deg,#dce8ff 0%,#c8daff 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24pt; color: #555; border-radius: 18px;
+    border: 3px dashed #1a3a6e; cursor: pointer; position: relative; overflow: hidden; margin: 12px 0;
+    transition: all 0.2s;
+}
+.img-area:hover { background: #c0d4ff; border-color: #0d2d5e; }
+.img-area .upload-label {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 10px; color: #1a3a6e; font-size: 18pt;
+    user-select: none; text-align: center; padding: 15px;
+}
+.img-area .upload-icon { font-size: 48pt; }
+.img-area img, .img-area video { width:100%; height:auto; border-radius:12px; display:block; }
+
+.ai-img-area {
+    background: linear-gradient(135deg,#dce8ff 0%,#c8daff 100%);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 14px; border: 3px dashed #1a3a6e;
+    cursor: pointer; position: relative; overflow: hidden; aspect-ratio: 1/1; transition: all 0.2s;
+}
+.ai-img-area:hover { background: #c0d4ff; border-color: #0d2d5e; }
+.ai-img-area .upload-label {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; color: #1a3a6e; font-size: 17pt;
+    user-select: none; text-align: center; padding: 10px;
+}
+.ai-img-area .upload-icon { font-size: 36pt; }
+.ai-img-area img, .ai-img-area video { width:100%; height:auto; border-radius:10px; display:block; }
+.ai-img-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 12px 0; }
+
+.media-overlay { position: absolute; top: 8px; right: 8px; display: none; gap: 6px; z-index: 10; }
+.img-area:hover .media-overlay, .ai-img-area:hover .media-overlay { display: flex; }
+.media-btn {
+    background: rgba(10,22,40,0.75); color: white; border: none;
+    border-radius: 6px; padding: 5px 12px; font-size: 13pt; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+}
+.media-btn:hover { background: rgba(10,22,40,0.95); }
+
+.source-tag { font-size: 13pt; font-style: italic; color: #5a6e8a; text-align: right; margin: 2px 0 12px 0; }
+
+/* ════════════════════════════════════════════
+   ★ HUMOR BOX
+════════════════════════════════════════════ */
+.humor-box {
+    background: linear-gradient(135deg,#fff8e1 0%,#fff0b3 100%);
+    border: 4px solid #FFC107; padding: 18px 22px; border-radius: 22px; margin: 14px 0;
+    position: relative;
+}
+.humor-box::before {
+    content: '😂'; position: absolute; top: -12px; left: 20px;
+    font-size: 22pt; background: #fff8e1; padding: 0 6px; border-radius: 6px;
+}
+
+/* ════════════════════════════════════════════
+   ★ QUIZ BOX
+════════════════════════════════════════════ */
+.quiz-box {
+    background: linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 100%);
+    border: 4px solid #2e7d32; padding: 18px 22px; border-radius: 22px; margin: 14px 0;
+    position: relative;
+}
+.quiz-box::before {
+    content: '🧠'; position: absolute; top: -12px; left: 20px;
+    font-size: 22pt; background: #e8f5e9; padding: 0 6px; border-radius: 6px;
+}
+.quiz-number { color: #1b5e20; font-weight: 800; font-size: 17pt; }
+
+/* ════════════════════════════════════════════
+   ★ ANSWER REVEAL
+════════════════════════════════════════════ */
+.answer-box {
+    background: linear-gradient(135deg,#e8f5e9,#c8e6c9);
+    border: 4px solid #4caf50; padding: 16px 22px; border-radius: 20px; margin: 14px 0;
+    opacity: 0.06; cursor: pointer; transition: opacity 0.3s;
+}
+.answer-box:hover { opacity: 0.3; }
+.answer-box.revealed { opacity: 1; }
+.hidden-title { opacity:0.06; cursor:pointer; transition:opacity 0.3s; }
+.hidden-title:hover { opacity:0.3; }
+.hidden-title.revealed { opacity:1; }
+
+/* ════════════════════════════════════════════
+   ★ SAYING DEEP DIVE
+════════════════════════════════════════════ */
+.saying-study-box {
+    background: linear-gradient(135deg,#fff8e1 0%,#fff3cc 100%);
+    border: 3px solid #FFD700; padding: 18px 22px; border-radius: 18px; margin: 14px 0;
+    box-shadow: 0 4px 18px rgba(255,193,7,0.18);
+}
+.saying-study-title { font-size: 20pt; font-weight: 900; color: var(--navy); margin-bottom:10px; line-height:1.5; }
+.saying-study-full {
+    font-family: 'Playfair Display', serif;
+    font-size:22pt; font-weight:900; color:#0d47a1; line-height:1.5; margin:6px 0;
+}
+.saying-word-grid   { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:12px 0; }
+.saying-word-card   { background:#ffffffcc; border:2px solid #FFD700; border-radius:12px; padding:10px 6px; text-align:center; }
+.word-main   { font-size:15pt; font-weight:900; color:#0d47a1; line-height:1.3; display:block; }
+.word-type   { font-size:11pt; font-weight:700; color:#c45000; line-height:1.3; display:block; margin-top:2px; font-style:italic; }
+.word-def    { font-size:12pt; color:#444; line-height:1.4; display:block; margin-top:4px; }
+.saying-story-box  { background:#ffffffcc; border-left:6px solid #FFD700; padding:12px 16px; border-radius:0 12px 12px 0; margin:10px 0; }
+.saying-apply-box  { background:#e8f0ff; border:2px dashed #1a3a6e; border-radius:12px; padding:14px 16px; margin-top:12px; }
+
+/* ════════════════════════════════════════════
+   ★ SEARCH KEYWORDS
+════════════════════════════════════════════ */
+.keyword-section { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; text-align: center; margin-bottom: 10pt; }
+.keyword-pill {
+    background: linear-gradient(135deg, #1a3a6e, #0d2d5e);
+    color: #FFD700; padding: 8px 14px; border-radius: 14px;
+    font-size: 13pt; font-weight: 700; transition: all 0.2s;
+    display: block; text-decoration: none;
+    border: 1.5px solid rgba(255,215,0,0.3); letter-spacing: 0.02em;
+}
+.keyword-pill:hover {
+    background: linear-gradient(135deg, #FFD700, #FFA000); color: #0a1628;
+    transform: translateY(-2px); box-shadow: 0 4px 14px rgba(255,193,7,0.4);
+}
+
+/* ════════════════════════════════════════════
+   ★ WORD POWER
+════════════════════════════════════════════ */
+.wordpower-box {
+    background: linear-gradient(135deg,#fce4ec 0%,#ffd5e0 100%);
+    border: 4px solid #e91e63; padding: 18px 22px; border-radius: 22px; margin: 14px 0;
+}
+
+/* ════════════════════════════════════════════
+   ★ GRANDPA BOX
+════════════════════════════════════════════ */
+.grandpa-box {
+    background: linear-gradient(135deg,#fff8e1 0%,#fff3cc 100%);
+    border: 4px solid #FFC107; padding: 18px 22px; border-radius: 22px; margin: 14px 0;
+    position: relative;
+}
+.grandpa-box::before {
+    content: '👴'; position: absolute; top: -14px; left: 20px;
+    font-size: 24pt; background: #fff8e1; padding: 0 6px; border-radius: 8px;
+}
+
+/* ════════════════════════════════════════════
+   ★ DID YOU KNOW / SPOTLIGHT
+════════════════════════════════════════════ */
+.did-you-know {
+    background: linear-gradient(135deg,#e8f5e9,#c8e6c9);
+    border-left: 8px solid #2e7d32; border-radius: 0 16px 16px 0;
+    padding: 14px 18px; margin: 14px 0;
+}
+.dyk-label { font-size:13pt; font-weight:800; color:#1b5e20; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:4px; }
+.dyk-body  { font-size:17pt; color:var(--navy); line-height:1.8; }
+
+.spotlight-card {
+    background: linear-gradient(135deg,#0a1628 0%,#0d2d5e 100%);
+    border-radius: 18px; padding: 18px 22px; margin: 14px 0;
+    display: flex; gap: 16px; align-items: flex-start;
+    border: 2px solid rgba(255,215,0,0.35);
+}
+.spotlight-icon {
+    font-size: 36pt; flex-shrink: 0; background: rgba(255,215,0,0.12);
+    width: 70px; height: 70px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+}
+.spotlight-content { flex: 1; }
+.spotlight-title { font-size:18pt; font-weight:900; color:#FFD700; line-height:1.3; margin-bottom:5px; }
+.spotlight-body  { font-size:15pt; color:#c8daff; line-height:1.7; }
+
+/* ════════════════════════════════════════════
+   ★ VISUAL STORY PANELS
+════════════════════════════════════════════ */
+.comic-wrap {
+    background: #fff; border-radius: 22px;
+    box-shadow: 0 6px 24px rgba(10,22,40,0.14);
+    overflow: hidden; margin: 14px 0; border: 3px solid #1a3a6e;
+}
+.comic-header {
+    background: linear-gradient(135deg, #0a1628, #1a3a6e);
+    color: #FFD700; padding: 11px 18px; font-size: 15pt; font-weight: 800;
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.06em;
+}
+.comic-single { position: relative; width: 100%; aspect-ratio: 1/1; cursor: pointer; overflow: hidden; }
+.comic-placeholder {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg,#f0f4ff,#dce8ff);
+    gap: 14px; padding: 20px; box-sizing: border-box;
+}
+.comic-single-overlay {
+    position: absolute; inset: 0; background: rgba(10,22,40,0.60);
+    display: none; align-items: center; justify-content: center;
+    gap: 12px; flex-direction: column; z-index: 5;
+}
+.comic-single:hover .comic-single-overlay { display: flex; }
+.comic-mob {
+    background: rgba(255,215,0,0.85); color: #0a1628; border: none;
+    border-radius: 8px; padding: 5px 14px; font-size: 14pt; cursor: pointer;
+    font-weight: 700; font-family: 'DM Sans', sans-serif;
+}
+.comic-mob:hover { background: #FFD700; }
+
+/* ════════════════════════════════════════════
+   ★ SUMMARY / RECAP
+════════════════════════════════════════════ */
+.summary-box {
+    background: linear-gradient(135deg,#0a1628 0%,#1a3a6e 100%);
+    border: 4px solid #FFD700; padding: 22px 24px; border-radius: 24px; margin: 14px 0;
+    box-shadow: 0 6px 28px rgba(10,22,40,0.3);
+}
+.summary-title { font-family: 'Bebas Neue', sans-serif; font-size:24pt; color:#FFD700; margin-bottom:14px; text-align:center; line-height:1.2; letter-spacing:0.04em; }
+.summary-item  { font-size:16pt; line-height:1.9; margin-bottom:12pt; padding-left:14px; border-left:5px solid #FFD700; color:#e8f0ff; }
+.summary-item:last-child { margin-bottom:0; }
+.summary-item b { color: #FFD700; }
+
+/* ════════════════════════════════════════════
+   ★ FOOTER
+════════════════════════════════════════════ */
+.footer-section { margin-top: 24px; padding-top: 18px; border-top: 3px solid #a8c4e8; }
+.footer-title { font-family: 'Bebas Neue', sans-serif; font-size: 20pt; color: var(--navy); margin-bottom: 8px; line-height: 1.3; letter-spacing: 0.05em; }
+
+/* ════════════════════════════════════════════
+   ★ RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width:600px) {
+    .hero-title { font-size: 28pt; }
+    .title-main { font-size: 22pt; }
+    .title-sub  { font-size: 19pt; }
+    .title-minor{ font-size: 17pt; }
+    .content-body, .dialog-content, .dialog-speaker { font-size: 15pt; }
+    .saying-word-grid  { grid-template-columns: repeat(2,1fr); }
+    .ai-img-grid       { grid-template-columns: repeat(2,1fr); }
+    .keyword-section   { grid-template-columns: 1fr; }
+    .spotlight-card    { flex-direction: column; }
+    .hero-hosts        { flex-direction: column; }
+}
+    </style>
+</head>
+<body>
+<div class="ts-wrap">
+
+<!-- ① HERO BANNER -->
+<div class="hero-banner" contenteditable="true">
+    <div class="hero-series-label">🤖 AI DECODED FOR SENIORS</div>
+    <div class="hero-ep-badge">EPISODE 49</div>
+    <div class="hero-title"><span class="gold">AI Travel Planner</span><br>Plan Europe &amp; Japan — Solo!</div>
+    <div class="hero-subtitle">Jake shows Grandpa Bob how ChatGPT builds a perfect trip itinerary in under 10 minutes ✈️🗺️</div>
+    <div class="hero-tags">
+        <span class="hero-tag">#ChatGPT</span>
+        <span class="hero-tag">#AIForSeniors</span>
+        <span class="hero-tag">#AITravelPlanner</span>
+        <span class="hero-tag">#TravelWithAI</span>
+        <span class="hero-tag">#SeniorTravel</span>
+        <span class="hero-tag">#AITools2025</span>
+        <span class="hero-tag">#LearnAI</span>
+    </div>
+    <div class="hero-hosts">
+        <div class="host-badge">👦 Jake — Your AI Guide</div>
+        <div class="host-badge">👴 Grandpa Bob — Just Like You!</div>
+    </div>
+</div>
+<div class="gap-sm"></div>
+
+<!-- 🔥 TRENDING BANNER -->
+<div class="trending-banner">
+    <span class="tb-label">🔥 TRENDING NOW</span>
+    ChatGPT · Gemini · Claude · Copilot · Grok · AI Image Generator · Perplexity AI · AI Travel Planner · Sora · Midjourney
+</div>
+<div class="gap"></div>
+
+<!-- ② TODAY'S AMERICAN SAYING -->
+<div class="section-accent">
+    <div class="acc-icon">💬</div>
+    <div class="acc-label">Today's American Saying
+        <small>Wisdom that connects to AI — every episode!</small>
+    </div>
+</div>
+
+<div class="saying-box">
+    <div class="saying-main" contenteditable="true">"An ounce of prevention is worth a pound of cure."</div>
+    <div class="saying-meaning" contenteditable="true">A little preparation now saves you from a big headache later.</div>
+    <div class="gap-sm"></div>
+    <div class="content-body" contenteditable="true"
+        style="text-align:center;color:#a8c4e8;">Traveling is one of life's greatest joys — but surprises happen! When you plan your trip with AI ahead of time, one hour of prep can save you from a week of stress. That's the ultimate "ounce of prevention!" ✈️</div>
+    <div class="gap-sm"></div>
+    <span class="saying-tag">🤖 AI Connection</span>
+</div>
+
+<!-- ③ INTRO -->
+<div class="section-accent">
+    <div class="acc-icon">🚀</div>
+    <div class="acc-label">AI Travel Planner
+        <small>Plan Europe &amp; Japan Solo — AI Does the Heavy Lifting!</small>
+    </div>
+</div>
+
+<div class="content-body" contenteditable="true">
+    Hey there! Welcome back to <b>AI Decoded for Seniors</b> — the show where your guide <span class="speaker">Jake</span> makes the world's most talked-about AI tools so simple, even Grandpa Bob gets it on the first try! 🎉
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    Whether you've heard of <span class="term-name">ChatGPT</span>, <span class="term-name">Google Gemini</span>, or <span class="term-name">Microsoft Copilot</span> — or maybe you've been too nervous to try — <b>this series is built for YOU.</b> No tech background needed. We go step by step, together.
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    Today's topic is one that so many of you have dreamed about! We're talking about <span class="emphasis">using AI to plan your dream vacation — all by yourself.</span> Have you ever wanted to visit Paris or Rome but felt overwhelmed by where to start? Spent hours searching for flights, hotels, and restaurants only to give up in frustration? Didn't want to pay a travel agent thousands of dollars? <b>AI is about to become your personal, free, 24/7 travel concierge.</b> Let's go! 🗺️
+</div>
+<div class="gap"></div>
+
+<!-- ★ Intro Image 1 -->
+<div class="img-area" id="area-1"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-1').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-1">
+        <span class="upload-icon">🖼️</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:13pt;color:#5a6e8a;">[Intro image — AI travel planning screen / map / ChatGPT itinerary]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-1').click()">🔄 Replace</button>
+        <button class="media-btn"
+            onclick="event.stopPropagation();
+                     document.getElementById('img-display-1').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';
+                     document.getElementById('area-1').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-1" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){
+            const f=e.target.files[0]; if(!f) return;
+            const r=new FileReader();
+            r.onload=function(ev){
+                const d=document.getElementById('img-display-1');
+                if(f.type.startsWith('image/')){
+                    d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:12px;display:block;\'>';
+                } else {
+                    d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:12px;display:block;\'></video>';
+                }
+                document.getElementById('area-1').style.minHeight='auto';
+            };
+            r.readAsDataURL(f);
+        })(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT / Claude AI travel itinerary screen (reference image)</em></div>
+
+<div class="content-body" contenteditable="true">
+    Grandpa Bob spreads a map of Europe across the kitchen table, eyes sparkling. "Jake, before I kick the bucket, I want to stand in front of the Eiffel Tower. But I have no idea where to even start planning…" Jake pulls up ChatGPT and grins. "Grandpa, give me 10 minutes — AI will have a full week itinerary ready for you!"
+</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 1 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 Grandpa Bob Starts Planning His Dream Europe Trip with AI!</div>
+  <div class="comic-single" id="panel-comic-1"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-1').click()">
+    <div id="pd-comic-1" class="comic-placeholder">
+      <div style="font-size:56px">🎬</div>
+      <div style="font-size:16pt;font-weight:900;color:#0a1628;text-align:center;">Grandpa Bob Discovers AI Travel Planning!</div>
+      <div style="font-size:13pt;color:#5a6e8a;text-align:center;">Grandpa looking at a map → Jake opens ChatGPT → Eyes light up as itinerary appears instantly</div>
+      <div style="margin-top:8px;background:linear-gradient(135deg,#FFD700,#FFA000);color:#0a1628;font-size:14pt;font-weight:900;padding:10px 28px;border-radius:25px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:#FFD700;font-size:16pt;font-weight:800;">🎬 Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-1').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-1','comic-1')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-1" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-1','pd-comic-1','comic-1')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ④ JAKE & BOB CONVERSATION -->
+<div class="section-accent">
+    <div class="acc-icon">🗣️</div>
+    <div class="acc-label">Jake &amp; Grandpa Bob Talk AI
+        <small>A real conversation — just like your family dinner table!</small>
+    </div>
+</div>
+
+<div class="dialog-box" contenteditable="true">
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "Jake, I've been dreaming of a 5-day trip to Kyoto, Japan for my retirement. But I don't even know where to start — flights, hotels, what to see… my head's spinning!"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Jake:</span>
+        <span class="dialog-content"> "Grandpa, just type this into ChatGPT: 'I'm a 65-year-old couple planning a 5-day trip to Kyoto, Japan. We love traditional culture and easy walking tours. Please create a detailed itinerary.' Hit enter — watch what happens!"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "That's it?! It'll actually give me a real itinerary? Like a professional travel agent?"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Jake:</span>
+        <span class="dialog-content"> "Better than most travel agents, Grandpa! It'll give you day-by-day plans, transportation tips, restaurant suggestions, AND you can say 'Grandma's knees are bad, adjust the walking distances' — it customizes everything! 🦵"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "Well I'll be darned! Okay AI, plan our Kyoto trip — and take it easy on Grandma's knees! Ha ha ha!"</span>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑤ AI CRASH COURSE TIPS -->
+<div class="title-minor" contenteditable="true">⚡ Plan Any Trip in 3 Steps with AI!</div>
+<div class="gap-sm"></div>
+
+<div class="did-you-know" contenteditable="true">
+    <div class="dyk-label">💡 Did You Know?</div>
+    <div class="dyk-body">Over <b>40% of American travelers</b> now use AI to help plan their trips — and those who do save an average of <b>$500+ per trip</b> by finding better deals and avoiding tourist traps. You're next! 🎉</div>
+</div>
+
+<div class="tip-box" contenteditable="true">
+    <div class="content-body">
+        <span class="tip-number-badge">1</span>
+        <b>Tell AI Your Travel Details — The More, The Better!</b><br>
+        <span style="padding-left:38px;display:block;">Try prompts like: <b>"I'm a 70-year-old couple planning 8 days in Paris and Amsterdam. We love art museums and good food. One of us has knee problems — please suggest low-walking routes and avoid cobblestone streets."</b> Include your age, travel companions, budget, health needs, and interests. The more detail you give, the more personalized your trip plan! 💰</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="tip-number-badge">2</span>
+        <b>Ask About Transportation, Hotels &amp; Food Separately!</b><br>
+        <span style="padding-left:38px;display:block;">Ask things like: <b>"What's the easiest way to get from Tokyo to Kyoto?"</b>, <b>"Which Paris museums offer free entry for visitors over 65?"</b>, and <b>"Recommend a quiet, traditional Japanese inn (ryokan) suitable for a senior couple."</b> AI is your 24/7 travel concierge who never gets tired! 🏨</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="tip-number-badge">3</span>
+        <b>Save or Print Your AI Itinerary Before You Go!</b><br>
+        <span style="padding-left:38px;display:block;">Copy your AI-generated itinerary into your phone's notes app, or ask a grandkid to print it out. Pro tip: ask AI to <b>"Organize this itinerary by day in a table format"</b> for easy reading. Always ask AI for local emergency phone numbers too! 📄</span>
+    </div>
+</div>
+
+<!-- ★ AI Tool Spotlight -->
+<div class="spotlight-card" contenteditable="true">
+    <div class="spotlight-icon">✈️</div>
+    <div class="spotlight-content">
+        <div class="spotlight-title">🔦 AI Travel Tools Spotlight</div>
+        <div class="spotlight-body">
+            <b style="color:#FFD700;">ChatGPT · Gemini · Claude · Copilot · Perplexity AI</b><br>
+            All of these tools can build full travel itineraries for FREE. This episode focuses on: <b style="color:#FFD700;">AI Travel Planning — Plan Europe &amp; Japan Solo!</b>
+        </div>
+    </div>
+</div>
+
+<!-- ★ Concept Image 2 -->
+<div class="img-area" id="area-2"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-2').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-2">
+        <span class="upload-icon">🖼️</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:13pt;color:#5a6e8a;">[Concept image — ChatGPT travel itinerary / Japan or Europe tourism]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-2').click()">🔄 Replace</button>
+        <button class="media-btn"
+            onclick="event.stopPropagation();
+                     document.getElementById('img-display-2').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';
+                     document.getElementById('area-2').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-2" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){
+            const f=e.target.files[0]; if(!f) return;
+            const r=new FileReader();
+            r.onload=function(ev){
+                const d=document.getElementById('img-display-2');
+                if(f.type.startsWith('image/')){
+                    d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:12px;display:block;\'>';
+                } else {
+                    d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:12px;display:block;\'></video>';
+                }
+                document.getElementById('area-2').style.minHeight='auto';
+            };
+            r.readAsDataURL(f);
+        })(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT travel itinerary screen / Japan Tourism Agency / European Tourism official reference images</em></div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 2 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 Grandpa Bob Gets His Kyoto Itinerary — His Jaw Drops!</div>
+  <div class="comic-single" id="panel-comic-2"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-2').click()">
+    <div id="pd-comic-2" class="comic-placeholder">
+      <div style="font-size:56px">🎬</div>
+      <div style="font-size:16pt;font-weight:900;color:#0a1628;text-align:center;">Grandpa Bob's Eyes Go Wide at AI's 5-Day Kyoto Itinerary!</div>
+      <div style="font-size:13pt;color:#5a6e8a;text-align:center;">AI-generated day-by-day itinerary appears → Grandpa stunned → Jake beaming proudly</div>
+      <div style="margin-top:8px;background:linear-gradient(135deg,#FFD700,#FFA000);color:#0a1628;font-size:14pt;font-weight:900;padding:10px 28px;border-radius:25px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:#FFD700;font-size:16pt;font-weight:800;">🎬 Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-2').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-2','comic-2')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-2" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-2','pd-comic-2','comic-2')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑥ AI IN YOUR DAILY LIFE -->
+<div class="section-accent">
+    <div class="acc-icon">🌟</div>
+    <div class="acc-label" contenteditable="true">AI Can Plan THESE Trips for You!
+        <small>Practical AI for your real American travel life</small>
+    </div>
+</div>
+<div class="content-body" contenteditable="true"><span class="speaker">Jake:</span> "Here are the four travel situations where AI helps seniors most — and the exact prompts to use. Save these, Grandpa Bob!"</div>
+<div class="gap-sm"></div>
+
+<div class="ai-box-single">
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>1. 🌸 Japan Trip — Kyoto, Tokyo &amp; Osaka Custom Itinerary</b><br>Ask AI: <b>"My wife and I are in our 70s. Plan a 5-day Osaka and Kyoto trip. Her knees are bad — keep walking distances short and skip steep stairs."</b> ChatGPT will explain IC transit cards (Suica/ICOCA), the best time to see cherry blossoms or fall foliage, shinkansen booking tips, and even key Japanese phrases for pharmacies. One prompt, everything covered! 🌸
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>2. 🗼 Europe Trip — Paris, Rome &amp; Barcelona Core Highlights</b><br>Ask AI: <b>"What are the best free museum days for visitors over 65 in Paris?"</b> or <b>"What's the most comfortable way to travel from Paris to Rome?"</b> AI will also cover currency exchange tips, must-have travel insurance items, pickpocket prevention, and emergency embassy phone numbers — all in one conversation. Never stress about European logistics again! 🗼
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>3. 💊 Health &amp; Safety — What to Do If You Get Sick Abroad</b><br>Ask AI: <b>"What Japanese phrases do I need at a pharmacy if I have a cold?"</b> or <b>"Walk me through the steps of using travel insurance if I need a European hospital."</b> AI can generate a personalized medication checklist, local emergency numbers, and even help you explain your existing health conditions (diabetes, blood pressure) in the local language. Safety first! 💊
+        </div>
+    </div>
+    <div class="ai-section-item">
+        <div class="content-body" contenteditable="true">
+            <b>4. 💰 Budget Smart — Cut Travel Costs with AI</b><br>Ask AI: <b>"Is a 8-day Paris trip possible on $3,000 including flights, hotels, and food? Break it down for me."</b> AI will walk through early-bird flight timing, free WiFi strategies, local grocery shopping tips, senior discount programs, and off-season travel dates. Your AI travel planner saves money AND time! 💰
+        </div>
+    </div>
+</div>
+
+<!-- ★ AI item image grid -->
+<div class="ai-img-grid">
+    <div class="ai-img-area" id="ai-area-1" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-1').click()}">
+        <div class="upload-label" id="ai-img-display-1"><span class="upload-icon">🌸</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-1').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-1').innerHTML='<span class=\'upload-icon\'>🌸</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-2" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-2').click()}">
+        <div class="upload-label" id="ai-img-display-2"><span class="upload-icon">🗼</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-2').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-2').innerHTML='<span class=\'upload-icon\'>🗼</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-3" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-3').click()}">
+        <div class="upload-label" id="ai-img-display-3"><span class="upload-icon">💊</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-3').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-3').innerHTML='<span class=\'upload-icon\'>💊</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+    <div class="ai-img-area" id="ai-area-4" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-4').click()}">
+        <div class="upload-label" id="ai-img-display-4"><span class="upload-icon">💰</span></div>
+        <div class="media-overlay">
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-4').click()">🔄</button>
+            <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-4').innerHTML='<span class=\'upload-icon\'>💰</span>'">🗑️</button>
+        </div>
+        <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none"
+            onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-4');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 3 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 "An Ounce of Prevention" — Grandpa Bob Packs Up &amp; Flies with Confidence!</div>
+  <div class="comic-single" id="panel-comic-3"
+       onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-3').click()">
+    <div id="pd-comic-3" class="comic-placeholder">
+      <div style="font-size:56px">🎬</div>
+      <div style="font-size:16pt;font-weight:900;color:#0a1628;text-align:center;">Grandpa Bob Prints His AI Itinerary &amp; Heads to the Airport — Thumbs Up! ✈️</div>
+      <div style="font-size:13pt;color:#5a6e8a;text-align:center;">AI itinerary printed → packing bags → Grandpa and Grandma at departure gate with big smiles</div>
+      <div style="margin-top:8px;background:linear-gradient(135deg,#FFD700,#FFA000);color:#0a1628;font-size:14pt;font-weight:900;padding:10px 28px;border-radius:25px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:#FFD700;font-size:16pt;font-weight:800;">🎬 Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-3').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-3','comic-3')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-3" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-3','pd-comic-3','comic-3')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑦ AI LAUGH BREAK -->
+<div class="section-accent">
+    <div class="acc-icon">😂</div>
+    <div class="acc-label">AI Laugh Break!
+        <small>Because learning should always be fun 🎉</small>
+    </div>
+</div>
+
+<div class="humor-box" contenteditable="true">
+    <div class="title-minor" style="margin-top:10px;">🎭 Grandpa Bob's First AI Travel Planning Adventure!</div>
+    <div class="gap-sm"></div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "Hey AI, I want to go to Paris. I want to take a picture in front of the Eiffel Tower. Is the Eiffel Tower actually real? I saw it in cartoons..."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">AI:</span>
+        <span class="dialog-content"> "Yes, the Eiffel Tower is very much real — it's in the 7th arrondissement of Paris! If you book tickets online in advance, you can skip the 2-3 hour line. Want me to build your full Paris itinerary?"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "No line?! Fantastic! Oh — and I heard you have to eat snails in France. I'm NOT eating a snail, AI. Tell me I don't HAVE to eat snails."</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">AI:</span>
+        <span class="dialog-content"> "Escargot is totally optional! It's a traditional French appetizer — garlic butter snails. Many visitors love them, but there are thousands of amazing French dishes without snails. I'll include snail-free restaurant recommendations in your itinerary!"</span>
+    </div>
+    <div class="dialog-row">
+        <span class="dialog-speaker">Grandpa Bob:</span>
+        <span class="dialog-content"> "(slaps knee) Ha! Jake, this AI knows Paris better than my old travel agent — AND it won't judge me for not eating snails. That's what I call 'an ounce of prevention worth a pound of cure!' Best trip prep ever!"</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body" style="text-align:center;font-style:italic;color:#c45000;">With AI by your side, not even the snails can scare you! — Grandpa Bob is Paris-ready! 😂✈️</div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑧ AI TRIVIA CHALLENGE -->
+<div class="section-accent">
+    <div class="acc-icon">🧠</div>
+    <div class="acc-label">AI Trivia Challenge!
+        <small>Test your new AI knowledge — answers below 👇</small>
+    </div>
+</div>
+
+<div class="quiz-box" contenteditable="true">
+    <div class="content-body" style="font-size:19pt;font-weight:900;color:#1b5e20;margin-bottom:8px;">🏆 Can You Answer These?</div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q1.</span> In Japan, what is the name of the rechargeable prepaid card used for trains, buses, and convenience stores?<br>
+        <span style="color:#5a6e8a;font-size:15pt;">💡 Hint: You can buy it at the airport as soon as you land, and it works almost everywhere in Japan!</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q2.</span> If you get sick or injured while traveling abroad, what should you contact FIRST for help with medical bills?<br>
+        <span style="color:#5a6e8a;font-size:15pt;">💡 Hint: Smart travelers buy this before every international trip — it covers emergency hospital costs!</span>
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <span class="quiz-number">Q3.</span> Today's American saying was "An ounce of prevention is worth a pound of cure." What does it mean in everyday life?<br>
+        <span style="color:#5a6e8a;font-size:15pt;">💡 Hint: Think about what happens when you prepare well ahead of time vs. scrambling at the last minute!</span>
+    </div>
+</div>
+
+<div class="content-body hidden-title" style="text-align:center;font-size:15pt;color:#888;margin:6px 0;"
+    onclick="this.classList.toggle('revealed');document.getElementById('answer-reveal').classList.toggle('revealed')">
+    👆 Tap / hover here to reveal answers!
+</div>
+<div class="answer-box" id="answer-reveal"
+    onclick="this.classList.toggle('revealed');document.querySelector('.hidden-title').classList.toggle('revealed')"
+    contenteditable="true">
+    <div class="content-body">
+        <b style="color:#1b5e20;font-size:19pt;">✅ Answers</b><br>
+        <b>A1:</b> Suica (or ICOCA) — Japan's IC transit card, available at airport vending machines. Works like a charm! 🚆<br>
+        <b>A2:</b> Your Travel Insurance Company — always save their emergency number before you fly! 💊<br>
+        <b>A3:</b> A little preparation now prevents a big problem later — like planning your trip with AI before you go! ✈️
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑨ SAYING DEEP DIVE -->
+<div class="section-accent">
+    <div class="acc-icon">📖</div>
+    <div class="acc-label">Saying Deep Dive
+        <small>Understand every word — and connect it to AI!</small>
+    </div>
+</div>
+
+<div class="saying-study-box">
+    <div class="saying-study-title" contenteditable="true">🔍 Breaking Down Today's Saying</div>
+    <div class="saying-study-full" contenteditable="true">"An ounce of prevention is worth a pound of cure."</div>
+
+    <div class="saying-word-grid">
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">ounce</span>
+            <span class="word-type" contenteditable="true">(noun)</span>
+            <span class="word-def" contenteditable="true">A small unit of weight — here it means a tiny, small amount</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">prevention</span>
+            <span class="word-type" contenteditable="true">(noun)</span>
+            <span class="word-def" contenteditable="true">Stopping something bad before it happens; advance preparation</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">pound</span>
+            <span class="word-type" contenteditable="true">(noun)</span>
+            <span class="word-def" contenteditable="true">A larger unit of weight — here it means a large, heavy amount</span>
+        </div>
+        <div class="saying-word-card">
+            <span class="word-main" contenteditable="true">cure</span>
+            <span class="word-type" contenteditable="true">(noun)</span>
+            <span class="word-def" contenteditable="true">A solution to fix a problem after it has already happened</span>
+        </div>
+    </div>
+
+    <div class="saying-story-box" contenteditable="true">
+        <div class="content-body">
+            <b>📌 Word-for-word meaning:</b><div class="br-11pt"></div>A tiny bit of prevention (an ounce) is more valuable than a huge amount of fixing things later (a pound of cure). In other words, small actions taken now are more powerful than big efforts made after a problem occurs.
+        </div>
+        <div class="gap"></div>
+        <div class="content-body">
+            <b>📌 In plain English:</b><div class="br-11pt"></div>It's much easier — and cheaper! — to prepare ahead of time than to deal with a crisis later. This famous saying is often attributed to Benjamin Franklin, one of America's Founding Fathers.
+        </div>
+        <div class="gap"></div>
+        <div class="content-body">
+            <b>📌 Real-life analogy:</b><div class="br-11pt"></div>Imagine you're going on a trip to Europe. If you <em>don't</em> buy travel insurance beforehand, a broken leg in Paris could cost you $30,000 out of pocket. If you <em>do</em> buy it for $150, you're fully covered. That $150 "ounce of prevention" saved you the $30,000 "pound of cure!" The same goes for planning — 1 hour with AI prevents days of travel chaos!
+        </div>
+    </div>
+
+    <div class="saying-apply-box" contenteditable="true">
+        <div class="content-body" style="font-weight:800;color:#0d47a1;">
+            🤖 Connect It to AI Travel Planning!
+        </div>
+        <div class="gap-sm"></div>
+        <div class="content-body">
+            When you use AI to plan your trip in advance, you're practicing the ultimate ounce of prevention. Ask AI about passport loss procedures, local emergency numbers, medical phrase guides, and weather contingencies BEFORE you board the plane. AI is your prevention tool — it helps you think of things you'd never think to worry about until it's too late!<div class="br-11pt"></div>
+            <b style="color:#c45000;">"An ounce of prevention is worth a pound of cure."</b> — This saying was made for AI travel planning! 🌟
+        </div>
+    </div>
+
+    <div class="gap-sm"></div>
+    <div class="content-body" contenteditable="true"
+        style="background:linear-gradient(135deg,#e8f0ff,#d0e4ff);padding:12px 16px;border-radius:12px;border-left:5px solid #1a3a6e;">
+        🧠 <b>Memory Tip!</b> Think of "ounce" as one simple AI chat session, and "pound" as your luggage full of travel problems you avoided by planning ahead! Example sentence: "Before flying to Rome, I spent one hour with ChatGPT — a true ounce of prevention for a worry-free vacation!"
+    </div>
+</div>
+
+<!-- ★ Image 3 -->
+<div class="img-area" id="area-3"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-3').click()}"
+    style="cursor:pointer;">
+    <div class="upload-label" id="img-display-3">
+        <span class="upload-icon">🖼️</span>
+        <span>Click to Insert Image or Video</span>
+        <span style="font-size:13pt;color:#5a6e8a;">[Saying / travel wrap-up related image]</span>
+    </div>
+    <div class="media-overlay">
+        <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-3').click()">🔄 Replace</button>
+        <button class="media-btn"
+            onclick="event.stopPropagation();
+                     document.getElementById('img-display-3').innerHTML='<span class=\'upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';
+                     document.getElementById('area-3').style.minHeight=''">🗑️ Delete</button>
+    </div>
+    <input type="file" id="upload-3" accept="image/*,video/*" style="display:none"
+        onchange="(async function(e){
+            const f=e.target.files[0]; if(!f) return;
+            const r=new FileReader();
+            r.onload=function(ev){
+                const d=document.getElementById('img-display-3');
+                if(f.type.startsWith('image/')){
+                    d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:12px;display:block;\'>';
+                } else {
+                    d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:12px;display:block;\'></video>';
+                }
+                document.getElementById('area-3').style.minHeight='auto';
+            };
+            r.readAsDataURL(f);
+        })(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Korea Tourism Organization / Japan Tourism Agency / European Tourism official images</em></div>
+
+<div class="content-body" contenteditable="true" style="margin-top:10px;">
+    <span class="speaker">Jake:</span> "Grandpa, travel is one of life's great joys — but surprises happen! The more you prepare with AI before you go, the better you can handle whatever comes your way. That's the real ounce of prevention. ✈️😊"
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true">
+    <span class="speaker">Grandpa Bob:</span> "An ounce of prevention… you know, Ben Franklin was right and he never even met ChatGPT! I've got my whole Kyoto itinerary ready, emergency numbers saved, and even the Japanese word for 'pharmacy.' Jake, I am READY. Paris, here I come! 🥐"
+</div>
+<div class="gap"></div>
+
+<!-- ⑩ SEARCH KEYWORDS -->
+<div class="footer-section">
+    <div class="footer-title" contenteditable="true">🔍 Top AI Travel Search Keywords — Try These!</div>
+    <div class="content-body" style="font-size:14pt;color:#5a6e8a;margin-bottom:10px;" contenteditable="true">The hottest AI travel terms Americans are Googling RIGHT NOW. Click any keyword to search!</div>
+    <div class="keyword-section">
+        <a href="https://www.google.com/search?q=ChatGPT+travel+itinerary+planner" target="_blank" class="keyword-pill">ChatGPT Travel Planner</a>
+        <a href="https://www.google.com/search?q=AI+trip+planner+seniors+2025" target="_blank" class="keyword-pill">AI Trip Planner Seniors</a>
+        <a href="https://www.google.com/search?q=Japan+Kyoto+itinerary+5+days" target="_blank" class="keyword-pill">Kyoto 5-Day Itinerary</a>
+        <a href="https://www.google.com/search?q=Paris+senior+travel+tips+free+museums" target="_blank" class="keyword-pill">Paris Senior Travel Tips</a>
+        <a href="https://www.google.com/search?q=best+travel+insurance+seniors+2025" target="_blank" class="keyword-pill">Best Travel Insurance Seniors</a>
+        <a href="https://www.google.com/search?q=how+to+use+ChatGPT+for+vacation+planning" target="_blank" class="keyword-pill">ChatGPT Vacation Planning</a>
+        <a href="https://www.google.com/search?q=Suica+card+Japan+how+to+use" target="_blank" class="keyword-pill">Japan Suica Card Tips</a>
+        <a href="https://www.google.com/search?q=an+ounce+of+prevention+worth+pound+of+cure+meaning" target="_blank" class="keyword-pill">Ounce of Prevention Meaning</a>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑪ AMERICAN ENGLISH WORD POWER -->
+<div class="section-accent">
+    <div class="acc-icon">📝</div>
+    <div class="acc-label">American English Word Power
+        <small>Essential AI &amp; travel vocabulary every senior should know!</small>
+    </div>
+</div>
+
+<div class="wordpower-box" contenteditable="true">
+    <div class="content-body" style="font-size:19pt;font-weight:900;color:#880e4f;">🇺🇸 AI Travel Vocabulary — Top 3 This Episode</div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <b>1. "Itinerary" (ih-TIN-er-air-ee)</b><br>A day-by-day schedule of your trip — where you'll go, what you'll see, and when. When talking to AI, say: <b>"Please create a detailed itinerary for my 7-day Europe trip."</b> This is the single most powerful word to use with AI travel planning! Same root as "travel" in Latin — the journey between places.
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <b>2. "Concierge" (con-see-AIRZH)</b><br>A hotel or service professional who helps you plan activities and solve problems. Now, AI is your free 24/7 concierge! You might hear: <b>"The hotel concierge recommended a great restaurant."</b> Borrowed from French, this word is widely used across America in luxury travel contexts.
+    </div>
+    <div class="gap-sm"></div>
+    <div class="content-body">
+        <b>3. "Prompt" (in AI context)</b><br>The question or instruction you type into an AI tool. A better prompt = a better answer! Compare: ❌ <b>"Plan my trip"</b> (too vague) vs. ✅ <b>"Plan a 5-day low-walking-distance trip to Kyoto for a 68-year-old couple who love temples and local food, budget $3,000."</b> Prompting is the new travel skill everyone needs in 2025!
+    </div>
+</div>
+
+<!-- Merriam-Webster link -->
+<div class="footer-section">
+    <div class="footer-title" contenteditable="true">📚 Free American English Dictionary</div>
+    <div style="background:#e8f0ff;border:3px solid #1a3a6e;border-radius:16px;padding:16px 20px;font-size:15pt;line-height:1.6;text-align:center;">
+        <span style="font-size:20pt;font-weight:900;color:#0d47a1;">Merriam-Webster Online Dictionary</span>
+        <div class="br-11pt"></div>
+        👉 <a href="https://www.merriam-webster.com/" target="_blank" style="color:#1565c0;font-weight:bold;">https://www.merriam-webster.com/</a>
+        <div style="font-size:13pt;color:#5a6e8a;margin-top:6px;">America's most trusted dictionary — free, fast, and always up to date!</div>
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Grandpa's Corner -->
+<div class="grandpa-box" contenteditable="true" style="margin-top:12px;">
+    <b style="font-size:17pt;">👴 Grandpa Bob's Corner:</b><br>
+    <span style="font-size:17pt;font-style:italic;">"You know what? I spent 40 years working hard and putting off that dream trip to Europe. Now AI can plan the whole thing in 10 minutes! I'm a little mad it didn't exist sooner — but mostly I'm just grateful. Folks, if I can learn to use ChatGPT for travel planning at my age, so can you. An ounce of prevention, remember? Book that trip. You deserve it. 🥂✈️"</span>
+</div>
+<div class="gap"></div>
+
+<!-- ⑭ TODAY'S RECAP -->
+<div class="summary-box">
+    <div class="summary-title" contenteditable="true">📚 Today's Recap — Let's Review!</div>
+    <div class="br-11pt"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>① AI Travel Planning in 3 Steps</b><br>① Give AI your age, travel companions, budget, and health needs → get a custom itinerary. ② Ask separately about transportation, hotels, food, and senior discounts. ③ Save or print the AI itinerary — and ask for emergency prep info too! Your AI travel concierge is free, 24/7, and never impatient.
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>② AI Travel Safety Checklist — Ask AI BEFORE You Fly!</b><br>✅ Local emergency phone numbers (police, ambulance, US Embassy) ✅ Travel insurance claim procedure ✅ What to do if your passport is lost ✅ Your medication names in English and the local language ✅ How to use local transit cards ✅ Senior discount venues at your destination
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true">
+        <b>③ Pro Tips to Get Better AI Travel Answers</b><br>① Be specific about age, mobility, and health — the more detail, the more tailored the plan. ② Ask AI to "organize this in a table by day" for a clean, readable itinerary. ③ Don't like part of the plan? Just say "Change Day 3 to less walking" — AI adjusts instantly! ④ Always ask for a "worst case scenario prep plan" — that's your ounce of prevention! ✈️
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="summary-item" contenteditable="true" style="border-left-color:#FFC107;">
+        <b>④ Today's American Saying</b><br>
+        <b style="color:#FFD700;">"An ounce of prevention is worth a pound of cure."</b> — A little AI prep before your trip is worth so much more than scrambling after something goes wrong. Plan ahead, travel confidently! ✈️🌟
+    </div>
+    <div class="gap-sm"></div>
+
+    <div class="content-body" contenteditable="true"
+        style="text-align:center;color:#FFD700;font-weight:900;font-size:18pt;">
+        🎉 Great job today! See you next episode! 🤖✨
+    </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Closing message -->
+<div class="content-body" contenteditable="true" style="text-align:center;">
+    📝 This post is made especially for seniors exploring AI for the very first time.<br>
+    Got questions? Drop a comment below — Jake reads every single one! 💬
+</div>
+<div class="gap-sm"></div>
+
+<!-- ★ Subscribe CTA -->
+<div style="background:linear-gradient(135deg,#FFD700,#FFA000);border-radius:20px;padding:20px 24px;text-align:center;margin:14px 0;box-shadow:0 6px 24px rgba(255,193,7,0.35);" contenteditable="true">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24pt;color:#0a1628;line-height:1.2;letter-spacing:0.04em;">
+        🔔 Never Miss an Episode!
+    </div>
+    <div style="font-size:15pt;color:#0a1628;margin-top:6px;line-height:1.6;">
+        Subscribe · Bookmark · Share with a friend who deserves to learn AI!<br>
+        <b>New episode every week — always free, always simple.</b>
+    </div>
+    <div style="margin-top:12px;font-size:13pt;color:#3e2000;font-weight:700;letter-spacing:0.05em;">
+        #AIDecodedForSeniors &nbsp;|&nbsp; #ChatGPT &nbsp;|&nbsp; #AIForSeniors &nbsp;|&nbsp; #AITravelPlanner &nbsp;|&nbsp; #LearnAI &nbsp;|&nbsp; #SeniorTravel
+    </div>
+</div>
+<div class="gap-sm"></div>
+
+<!-- ⑮ FOOTER -->
+<div class="content-body" contenteditable="true"
+    style="text-align:center;font-size:17pt;color:#0a1628;font-weight:500;line-height:1.6;">
+    This post is part of <span class="emphasis">AI Decoded for Seniors</span> — an educational series designed to make <span class="emphasis">Artificial Intelligence</span> accessible to every American.
+</div>
+<div class="gap-sm"></div>
+<div class="content-body" contenteditable="true"
+    style="text-align:center;font-size:15pt;color:#5a6e8a;font-weight:600;line-height:1.5;">
+    © 2026 AI Decoded for Seniors | All rights reserved
+</div>
+
+</div><!-- /ts-wrap -->
+
+<script>
+var SADB_NAME='ai-decoded-ep-media', SADB_VER=1, SADB_STORE='media';
+function sadbOpen(cb){
+  var req=indexedDB.open(SADB_NAME,SADB_VER);
+  req.onupgradeneeded=function(e){e.target.result.createObjectStore(SADB_STORE)};
+  req.onsuccess=function(e){cb(e.target.result)};
+  req.onerror=function(){cb(null)};
+}
+function sadbSave(key,data){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).put(data,key);})}
+function sadbLoad(key,cb){sadbOpen(function(db){if(!db){cb(null);return}var req=db.transaction(SADB_STORE,'readonly').objectStore(SADB_STORE).get(key);req.onsuccess=function(e){cb(e.target.result||null)};req.onerror=function(){cb(null)};});}
+function sadbDelete(key){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).delete(key);})}
+
+window.addEventListener('DOMContentLoaded',function(){
+  ['comic-1','comic-2','comic-3'].forEach(function(id){
+    sadbLoad(id,function(data){
+      if(!data)return;
+      var el=document.getElementById('pd-'+id);
+      if(!el)return;
+      el.innerHTML=data.startsWith('data:video')
+        ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+        :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    });
+  });
+});
+
+function comicUpload(inputId,panelId,dbKey){
+  var inp=document.getElementById(inputId);
+  if(!inp)return;
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var data=ev.target.result;
+    var el=document.getElementById(panelId);
+    if(!el)return;
+    el.innerHTML=f.type.startsWith('video/')
+      ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+      :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    sadbSave(dbKey,data);
+  };
+  r.readAsDataURL(f);
+}
+
+function comicDelete(panelId,dbKey){
+  var el=document.getElementById(panelId);
+  if(!el)return;
+  el.innerHTML='<div class="comic-placeholder">'
+    +'<div style="font-size:56px">&#127916;</div>'
+    +'<div style="font-size:14pt;color:#5a6e8a;text-align:center;">Click to Upload Image or Video</div>'
+    +'</div>';
+  sadbDelete(dbKey);
+}
+</script>
+
+<div class="save-bar">
+<button onclick="(function(){
+  var epNum='49';
+  var clone=document.body.cloneNode(true);
+  var sb=clone.querySelector('.save-bar');if(sb)sb.parentNode.removeChild(sb);
+  clone.querySelectorAll('input[type=file]').forEach(function(i){i.value='';});
+  clone.querySelectorAll('script').forEach(function(s){s.parentNode.removeChild(s);});
+  var html='<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n'
+    +'<meta charset=\'UTF-8\'>\n'
+    +'<meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0\'>\n'
+    +'<link rel=\'preconnect\' href=\'https://fonts.googleapis.com\'>\n'
+    +'<link rel=\'preconnect\' href=\'https://fonts.gstatic.com\' crossorigin>\n'
+    +'<link href=\'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap\' rel=\'stylesheet\'>\n'
+    +document.querySelector('style').outerHTML+'\n'
+    +'</head>\n<body>\n'
+    +clone.innerHTML
+    +'\n</body>\n</html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ai_decoded_ep49_eng.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){alert('✅ EP.49 saved!\n\nPaste the saved <body> content into your blog HTML tab.\n(Scripts removed — no code leaks in preview mode)');},300);
+})()">💾 Save HTML (Images Included)</button>
+</div>
+
+</body>
+</html>

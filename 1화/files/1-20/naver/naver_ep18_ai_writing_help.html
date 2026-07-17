@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시니어 AI 공부 시리즈 - Episode 18 - Template V14</title>
+    <!-- 
+    ★★★ 철칙: 콘텐츠 작성 후 반드시 '부산대 맞춤법/문법 검사기'(https://nara-speller.co.kr/old_speller/)에서 검사 필수! ★★★
+    ★★★ 이것은 100% 필수 사항입니다! 절대 빠뜨리지 마세요! ★★★
+    
+    ★★★ PERMANENT CRITERIA - V14 ★★★
+    1. 사자성어: [한자]<br>([음])<br><br-11pt>해석: xxx.<br><br-11pt>AI 연결 설명
+       - 사자성어 제목(한자+음): 빨간색 bold체
+    2. AI 용어: 각 용어는 독립된 box, 용어명 30pt, 본문 19pt
+       - "뜻:", "쉬운 설명:" → bold체
+       - 핵심 개념 설명 → 파란색 bold체
+    3. 해결법 단계: [질문: 구체적 설명] 포함
+       - 중요 경로/메뉴명 → 파란색 bold체
+       - 위험/주의 문구 → 빨간색 bold체
+    4. 꿀팁: [질문: 보충 설명] 포함
+       - 질문 부분 → 빨간색 bold체 (시니어 꿀팁 섹션)
+       - 질문 부분 → 파란색 bold체 (해결법 섹션)
+    5. 오늘 배울 내용 핵심: <b>굵은 글씨</b>
+    6. 한글 맞춤법 코너: X/O + 해설 + 예문 2개
+       - "해설:", "예문:" → bold체
+       - 핵심 문법 규칙 설명 → bold체
+    7. 구조 순서: 퀴즈 → 검색 키워드 → 노래 → 퀴즈 정답 → 사자성어 풀이 → 맞춤법 검사기 → 한 줄 요약
+    8. **소제목-box 간격**: 모든 소제목(title-sub, title-minor) 다음에는 반드시 <div class="space-11pt"></div> 1개만 사용
+       - 간격은 정확히 11pt로 통일 (절대 변경 금지)
+       - 모든 소제목 아래 동일한 간격 유지
+    9. **색상 강조 규칙**:
+       - 빨간색 bold체: 위험/주의사항, 사기 관련, 절대 금지 사항, 시니어 꿀팁의 질문, 사자성어 제목
+       - 파란색 bold체: 핵심 개념, 중요 경로/메뉴, 실용적 팁, 해결법 섹션의 질문
+    -->
+    <style>
+        /* [PERMANENT CRITERIA - V14 최종 규격] */
+        body { font-family: 'Noto Sans KR', sans-serif !important; line-height: 1.6 !important; color: #000 !important; background: #FFF9E6 !important; margin: 0 !important; padding: 0 !important; }
+        .container { max-width: 100%; padding: 40px; background: #ffffff; margin: 0 auto; }
+        .title-main { font-size: 38pt; font-weight: 900; text-align: center; margin-bottom: 50px; line-height: 1.5; color: #1A237E; }
+        .title-sub { font-size: 34pt; font-weight: 700; color: #2E7D32; margin: 40px 0 0 0; }
+        .title-minor { font-size: 30pt; font-weight: 700; color: #D32F2F; margin: 40px 0 0 0; }
+        .content-body { font-size: 19pt; margin-bottom: 11pt; text-align: justify; word-break: keep-all; }
+        .space-11pt { height: 11pt; }
+        /* 섹션 박스 스타일 */
+        .ai-term-box, .song-box, .quiz-box, .grammar-box { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border: 4px solid #66BB6A; padding: 30px; border-radius: 20px; margin: 30px 0; }
+        .spell-checker-box { background: linear-gradient(135deg, #FFECB3 0%, #FFE082 100%); border: 4px solid #F57C00; padding: 30px; border-radius: 20px; margin: 30px 0; }
+        .copyright { text-align: center; font-size: 16pt; color: #666; margin-top: 60px; padding-top: 30px; border-top: 2px solid #E0E0E0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-main">
+            &lt;시니어 AI 공부 시리즈&gt;<br>
+            Episode 18<br>
+            📝 글 쓰기 어려울 때 AI 도움받는 법
+        </div>
+
+        <div class="title-sub">🌸 오늘은 뭘 공부할까요?</div>
+        <div class="space-11pt"></div>
+        <div class="content-body">
+            안녕하세요!<br>
+            &lt;시니어 AI 공부 시리즈&gt;의 든든한 가이드 <span style="color:blue; font-weight:bold;">윤호</span>입니다.<br>
+            "감사 문자를 보내고 싶은데 뭐라고 써야 할지 모르겠어요."<br>
+            오늘은 <b>AI에게 문자, 댓글, 경조사 문구를 대신 써달라고 요청하는 법과 너무 딱딱한 문장을 자연스럽게 고치는 방법</b>을 배울 거예요!
+        </div>
+
+        <div class="title-sub">🌸 오늘의 사자성어</div>
+        <div class="space-11pt"></div>
+        <div style="background: #FCE4EC; border: 4px solid #E91E63; padding: 30px; border-radius: 20px;">
+            <div class="content-body" style="font-size: 30pt; text-align: center;">
+                <b style="color: red;">借書報恩<br>(차서보은)</b>
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body" style="color: #8B4513; font-weight: bold; text-align: left;">
+                빌린 것을 갚고 은혜에 보답함.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body" style="text-align: left;">
+                누군가에게 도움을 받았을 때 감사 인사를 하는 것은 기본 예의입니다. 하지만 어떤 말로 표현해야 할지 어려울 때가 있죠. AI는 우리의 마음을 적절한 문장으로 표현하도록 도와주는 든든한 조력자입니다. 기술을 빌려 마음을 전하는 것, 이것도 차서보은의 한 방법이 아닐까요?
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 오늘의 AI 용어</div>
+        <div class="space-11pt"></div>
+        <div class="ai-term-box">
+            <div class="content-body" style="font-size: 30pt; text-align: center;"><b>프롬프트 (Prompt)</b></div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>뜻:</b> AI에게 원하는 결과를 얻기 위해 입력하는 명령문이나 질문<br>
+                <b>쉬운 설명:</b> <b style="color: blue;">AI에게 "이렇게 해줘"라고 부탁하는 말</b>입니다. 예를 들어 "결혼식 축하 문자를 따뜻하게 써줘"처럼 구체적으로 요청하는 문장이에요.
+            </div>
+        </div>
+        <div class="ai-term-box">
+            <div class="content-body" style="font-size: 30pt; text-align: center;"><b>생성형 AI (Generative AI)</b></div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>뜻:</b> 사용자의 요청에 따라 새로운 텍스트, 이미지, 음악 등을 만들어내는 인공지능<br>
+                <b>쉬운 설명:</b> <b style="color: blue;">사람이 시키는 대로 글을 쓰거나 그림을 그려주는 똑똑한 AI</b>예요. ChatGPT, 클로드, 뤼튼, 구글 바드 등이 대표적입니다.
+            </div>
+        </div>
+        <div class="ai-term-box">
+            <div class="content-body" style="font-size: 30pt; text-align: center;"><b>톤 앤 매너 (Tone and Manner)</b></div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>뜻:</b> 글이나 말의 분위기와 스타일<br>
+                <b>쉬운 설명:</b> <b style="color: blue;">"격식 있게", "친근하게", "따뜻하게" 같은 문장의 느낌</b>을 말해요. AI에게 글을 부탁할 때 "존댓말로", "반말로", "정중하게" 같은 스타일을 지정할 수 있습니다.
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 문자·댓글 대신 써달라고 하기</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border: 4px solid #FF9800; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body">
+                <b>문제 상황:</b> 친구에게 감사 문자를 보내고 싶은데 어떻게 쓸지 막막해요.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>해결 방법:</b><br>
+                1. <b>AI 채팅 앱 열기:</b> <b style="color: blue;">ChatGPT, 클로드, 뤼튼</b> 같은 AI 채팅 앱을 실행하세요.<br>
+                2. <b>구체적으로 요청하기:</b> <b style="color: blue;">"친구에게 저녁 식사 대접받은 것에 대한 감사 문자를 따뜻하고 친근하게 써줘"</b>라고 입력하세요.<br>
+                3. <b>마음에 들 때까지 수정:</b> 결과가 마음에 안 들면 <b style="color: blue;">"좀 더 짧게 써줘" 또는 "존댓말로 바꿔줘"</b>라고 추가 요청하세요.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁:</b> <b style="color: blue;">질문: 어떻게 부탁해야 좋은 문장이 나오나요?</b> → 상황을 자세히 설명하고, 원하는 느낌을 구체적으로 말하세요. 예: "어머니 생신 축하 문자를 따뜻하고 정중하게 3줄 정도로 써줘"처럼요.
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 경조사 문구 만들기</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border: 4px solid #FF9800; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body">
+                <b>문제 상황:</b> 조카 결혼식 축의금 봉투에 쓸 문구가 생각나지 않아요.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>해결 방법:</b><br>
+                1. <b>AI에게 상황 설명:</b> <b style="color: blue;">"조카 결혼식 축의금 봉투에 쓸 짧고 따뜻한 축하 문구 5개 만들어줘"</b>라고 입력하세요.<br>
+                2. <b>여러 옵션 받기:</b> AI가 여러 개의 문구를 제안하면 <b style="color: blue;">마음에 드는 것을 골라 사용</b>하세요.<br>
+                3. <b>부조 문구도 가능:</b> 장례식 조의금 문구는 <b style="color: blue;">"부고 조의금 봉투에 쓸 정중하고 위로가 되는 문구를 짧게 써줘"</b>라고 요청하세요.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁:</b> <b style="color: blue;">질문: 경조사 문구를 손으로 직접 써야 하는데 예쁘게 쓸 자신이 없어요.</b> → AI가 만든 문구를 종이에 먼저 연습해서 쓰고, 깔끔하게 쓴 것을 봉투에 옮겨 적으세요. 천천히 또박또박 쓰면 충분히 예쁘게 쓸 수 있어요.
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 너무 기계적일 때 수정법</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border: 4px solid #FF9800; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body">
+                <b>문제 상황:</b> AI가 만든 문장이 <b style="color: red;">너무 딱딱하고 로봇 같아서 이상해요. "귀하의 건강을 기원합니다" 같은 문장은 제가 평소에 쓸 말이 아니에요.</b>
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>해결 방법:</b><br>
+                1. <b>스타일 재지정:</b> <b style="color: blue;">"너무 격식 있어. 좀 더 자연스럽고 친근하게 다시 써줘"</b>라고 추가 요청하세요.<br>
+                2. <b>직접 수정:</b> AI가 만든 문장 중 어색한 부분만 <b style="color: blue;">내 말투로 바꿔서 사용</b>하세요. 전부 그대로 쓸 필요는 없어요.<br>
+                3. <b>예시 제공:</b> <b style="color: blue;">"'귀하' 대신 '당신'처럼 부드러운 표현으로 바꿔줘"</b>처럼 구체적으로 요청하면 더 자연스러워져요.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁:</b> <b style="color: blue;">질문: AI 문장을 그대로 복사해서 보내도 되나요?</b> → 괜찮지만, <b style="color: red;">너무 완벽하면 오히려 이상해 보일 수 있어요.</b> 일부러 작은 실수를 남기거나 내 말투로 살짝 고치면 더 자연스럽습니다.
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 시니어 꿀팁!</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); border: 4px solid #9C27B0; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body">
+                <b>💡 꿀팁 1:</b> <b style="color: red;">질문: AI가 만든 문장을 저장해 두었다가 나중에 다시 쓸 수 있나요?</b> → 네! 마음에 드는 문장은 스마트폰 메모장에 복사해서 저장하세요. "감사 인사", "축하 문구", "위로 문구"처럼 분류해 두면 나중에 찾기 쉬워요.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁 2:</b> <b style="color: red;">질문: 블로그 댓글이나 카페 후기도 AI한테 부탁할 수 있나요?</b> → 물론이에요! "맛집 블로그에 남길 긍정적인 후기 3줄로 써줘" 또는 "운동 카페에 인사글 친근하게 써줘"처럼 요청하면 됩니다.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>💡 꿀팁 3:</b> <b style="color: red;">질문: AI가 만든 글인 걸 상대방이 알까 봐 걱정돼요.</b> → 걱정 마세요. AI는 도구일 뿐이고, 중요한 건 마음을 전하는 거예요. 요리할 때 칼과 도마를 쓰듯, 글 쓸 때 AI를 쓰는 건 자연스러운 일입니다.
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 한글 맞춤법 / 문법 코너</div>
+        <div class="space-11pt"></div>
+        <div class="grammar-box" style="background: #E3F2FD; border-color: #2196F3;">
+            <div class="content-body">
+                <b>1. "안녕하십니까 vs 안녕하세요"</b><br>
+                <span style="color:red;">X 틀린 것: 친구에게 "안녕하십니까"</span><br>
+                <span style="color:blue;">O 맞는 것: 친구에게 "안녕하세요" / 격식 있는 자리에 "안녕하십니까"</span><br>
+                <b>해설:</b> <b>'안녕하십니까'는 매우 격식 있는 표현이고, '안녕하세요'는 일반적인 존댓말입니다.</b> 상황에 맞게 사용하세요.<br>
+                <b>예문:</b> 회의 때 "안녕하십니까" / 일상에서 "안녕하세요"
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>2. "축하드립니다 vs 축하합니다"</b><br>
+                <span style="color:blue;">⭕ 둘 다 맞는 표현: 축하드립니다 / 축하합니다</span><br>
+                차이점: '축하드립니다'가 '축하합니다'보다 더 격식 있고 공손한 표현<br>
+                <b>해설:</b> <b>과거에는 '축하드립니다'를 과도한 높임으로 보았으나, 현재는 둘 다 인정됩니다.</b> '축하드립니다'가 더 격식 있고 정중한 표현이에요.<br>
+                <b>예문:</b> 결혼을 축하합니다 / 합격을 진심으로 축하드립니다
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>3. "뵙겠습니다 vs 봬겠습니다"</b><br>
+                <span style="color:red;">X 틀린 것: 곧 봬겠습니다</span><br>
+                <span style="color:blue;">O 맞는 것: 곧 뵙겠습니다</span><br>
+                <b>해설:</b> <b>'보다'의 높임말은 '뵙다'입니다.</b> '봬다'나 '뵈다'는 잘못된 표현이에요.<br>
+                <b>예문:</b> 내일 뵙겠습니다 / 자주 뵙고 싶습니다
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 윤호의 깜짝 퀴즈</div>
+        <div class="space-11pt"></div>
+        <div class="quiz-box">
+            <div class="content-body">
+                <b>Q1. AI에게 원하는 결과를 얻기 위해 입력하는 명령문이나 질문을 무엇이라 하나요?</b> (ㅍㄹㅍㅌ)<br>
+                <div class="space-11pt"></div>
+                <b>Q2. 사용자 요청에 따라 새로운 텍스트나 이미지를 만들어내는 AI는?</b> (ㅅㅅㅎ AI)<br>
+                <div class="space-11pt"></div>
+                <b>Q3. 글이나 말의 분위기와 스타일을 의미하는 용어는?</b> (ㅌ ㅇ ㅁ)
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 오늘의 검색 키워드</div>
+        <div class="space-11pt"></div>
+        <div style="background: linear-gradient(135deg, #FBE9E7 0%, #FFCCBC 100%); border: 4px solid #FF5722; padding: 30px; border-radius: 20px; margin: 30px 0;">
+            <div class="content-body" style="text-align: center;">
+                <b style="font-size: 24pt; color: #BF360C;">
+                    🔍 <a href="https://search.naver.com/search.naver?query=ChatGPT 사용법" target="_blank" style="color: #BF360C; text-decoration: none;">ChatGPT 사용법</a> | 
+                    <a href="https://search.naver.com/search.naver?query=클로드 AI" target="_blank" style="color: #BF360C; text-decoration: none;">클로드 AI</a> | 
+                    <a href="https://search.naver.com/search.naver?query=경조사 문구" target="_blank" style="color: #BF360C; text-decoration: none;">경조사 문구</a> | 
+                    <a href="https://search.naver.com/search.naver?query=뤼튼 AI" target="_blank" style="color: #BF360C; text-decoration: none;">뤼튼 AI</a> | 
+                    <a href="https://search.naver.com/search.naver?query=AI 프롬프트 작성법" target="_blank" style="color: #BF360C; text-decoration: none;">AI 프롬프트 작성법</a>
+                </b>
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                위 키워드를 클릭하면 네이버 검색으로 바로 연결됩니다!
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 오늘의 노래</div>
+        <div class="space-11pt"></div>
+        <div class="song-box">
+            <div style="font-size: 28pt; font-weight: bold; color: #2E7D32; text-align: center;">🎵 마음을 전하는 글</div>
+            <div class="space-11pt"></div>
+            <div class="content-body" style="text-align: center; color: #555; font-size: 16pt;">
+                <b>Style:</b> Korean ballad, slow tempo (70~80 bpm), emotional male or female vocal,<br>
+                soft piano and strings, warm reverb, sentimental atmosphere,<br>
+                style like Choi Bakho or Shim Subong
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body" style="text-align: left; font-size: 16px;">
+                <b style="font-size: 19pt;">&lt;Verse 1&gt;</b><br>
+                감사하단 말 한마디<br>
+                어떻게 전할까 고민했죠<br>
+                종이 위에 펜을 들었지만<br>
+                좋은 문장이 떠오르지 않아<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Chorus&gt;</b><br>
+                AI가 내 마음을 대신 써주네<br>
+                따뜻한 문장으로 감싸주네<br>
+                부끄러워 말 못 했던 마음도<br>
+                이젠 전할 수 있어요<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Verse 2&gt;</b><br>
+                축하 문구도 위로의 말도<br>
+                어떻게 시작할지 막막했죠<br>
+                하지만 이제는 두렵지 않아<br>
+                친구 같은 AI가 곁에 있으니<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Chorus&gt;</b><br>
+                AI가 내 마음을 대신 써주네<br>
+                따뜻한 문장으로 감싸주네<br>
+                딱딱한 문장도 고쳐주고<br>
+                내 말투로 바꿔주네<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Bridge&gt;</b><br>
+                借書報恩 차서보은<br>
+                빌린 것을 갚듯이<br>
+                기술의 도움 받아<br>
+                마음을 전하는 거야<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Final Chorus&gt;</b><br>
+                도구일 뿐 중요한 건 마음<br>
+                진심이 담긴 그 한마디<br>
+                AI의 도움 받아도 괜찮아<br>
+                마음만 진실하다면요<br>
+                <div class="space-11pt"></div>
+                <b style="font-size: 19pt;">&lt;Outro&gt;</b><br>
+                오늘도 따뜻한 문장<br>
+                누군가에게 전해봐요<br>
+                감사하단 그 말 한마디<br>
+                세상을 따뜻하게 해요
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 오늘의 퀴즈 정답</div>
+        <div class="space-11pt"></div>
+        <div class="quiz-box" style="background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%); border-color: #3F51B5;">
+            <div class="content-body">
+                <b>A1.</b> 프롬프트 - AI에게 "이렇게 해줘"라고 부탁하는 명령문이나 질문으로, 구체적일수록 좋은 결과를 얻을 수 있습니다.<br>
+                <div class="space-11pt"></div>
+                <b>A2.</b> 생성형 AI - 사용자 요청에 따라 새로운 텍스트, 이미지, 음악 등을 만들어내는 AI로, ChatGPT, 클로드, 뤼튼 등이 있습니다.<br>
+                <div class="space-11pt"></div>
+                <b>A3.</b> 톤 앤 매너 - 글이나 말의 분위기와 스타일을 의미하며, "격식 있게", "친근하게" 같은 느낌을 지정할 수 있습니다.
+            </div>
+        </div>
+
+        <div class="title-minor">🌸 오늘의 사자성어 풀이</div>
+        <div class="space-11pt"></div>
+        <div style="background: #FCE4EC; border: 4px solid #E91E63; padding: 30px; border-radius: 20px;">
+            <div class="content-body">
+                <b style="color: red;">借書報恩(차서보은)</b>을 풀어보면:<br>
+                <b>借(차)</b>: 빌릴 <b>차</b> - 무언가를 빌리다<br>
+                <b>書(서)</b>: 글 <b>서</b> - 책이나 글자<br>
+                <b>報(보)</b>: 갚을 <b>보</b> - 보답하다, 갚다<br>
+                <b>恩(은)</b>: 은혜 <b>은</b> - 받은 혜택이나 호의
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                <b>해석: 빌린 것을 갚고 은혜에 보답함</b>이라는 뜻.
+            </div>
+            <div class="space-11pt"></div>
+            <div class="content-body">
+                누군가에게 도움을 받았을 때 감사 인사를 하는 것은 사람의 기본 도리입니다. <b style="color: red;">하지만 어떤 말로 표현해야 할지 막막할 때, AI의 도움을 받는 것을 부끄러워할 필요는 없습니다.</b> 요리할 때 칼과 도마를 쓰고, 청소할 때 청소기를 쓰듯, 글 쓸 때 AI를 쓰는 것은 자연스러운 일입니다. 중요한 건 <b style="color: red;">도구가 아니라 그 속에 담긴 진심</b>입니다. AI의 도움을 빌려 우리의 마음을 아름답게 전하고, 받은 은혜에 감사하는 것. 이것이 바로 현대판 차서보은이 아닐까요?
+            </div>
+        </div>
+
+        <div class="title-sub">🌸 한글 맞춤법/문법/띄어쓰기</div>
+        <div class="space-11pt"></div>
+        <div class="spell-checker-box">
+            <div style="text-align: center; font-size: 22pt; font-weight: bold; color: #E65100; margin-bottom: 11pt;">
+                부산대 맞춤법/문법 검사기 도구<br>
+                <a href="https://nara-speller.co.kr/old_speller/" target="_blank" style="color: #E65100; font-size: 18pt;">https://nara-speller.co.kr/old_speller/</a>
+            </div>
+            <div class="content-body" style="font-size: 16pt; color: #555; text-align: center;">아래 상자에 글을 입력하고 버튼을 누르면 검사기로 연결됩니다.</div>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <textarea id="spellInput" style="flex: 1; height: 120px; font-size: 18pt; padding: 15px; border: 2px solid #F57C00; border-radius: 10px;" placeholder="검사할 내용을 입력하세요..."></textarea>
+                <button onclick="openSpellChecker()" style="padding: 20px; font-size: 18pt; background: #F57C00; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 150px;">맞춤법<br>검사하기</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <div style="font-size: 34pt; font-weight: 700; color: #2E7D32; margin-bottom: 11pt;">🌸 오늘의 한 줄 요약</div>
+            <div class="content-body" style="text-align: center; color: #0066CC; font-weight: bold; font-size: 24pt;">"AI에게 상황 설명하고 '따뜻하게 써줘'라고 부탁하면 문자, 댓글, 경조사 문구 다 만들어줘요!"</div>
+        </div>
+
+        <div class="copyright"><strong>© 2026 시니어 AI 공부방 | All rights reserved</strong></div>
+    </div>
+    <script>
+        function openSpellChecker() {
+            const text = document.getElementById('spellInput').value;
+            if (text.trim() === '') { alert('문장을 입력해주세요!'); return; }
+            navigator.clipboard.writeText(text).then(function() { window.open('https://nara-speller.co.kr/old_speller/', '_blank'); });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+📌 [IssueLens EP.10] Election Sovereignty — China's Digital Assault on the Ballot Box | IssueLens EP.10
+
+Five Eyes joint warnings, Volt Typhoon pre-positioned malware, Salt Typhoon telecom wiretaps, U.S. voting machine supply chain risks — a full investigation into China's cyber operations targeting the ballot box and American democracy.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 Key Points:
+  ▶ The Five Eyes Warning — Official Text & What It Means
+  ▶ Volt Typhoon & Salt Typhoon — China's Two-Pronged Attack on U.S. Elections
+  ▶ The Voting Machine Supply Chain — America's Hidden Vulnerability
+  ▶ A-WEB — The Global Election Network & China's Influence Strategy
+  ▶ 🇺🇸 U.S. Election System Vulnerabilities — Confirmed Facts vs. Open Questions
+  ▶ Global Election Interference Cases — Taiwan, Canada, UK, Australia, Germany
+  ▶ Election Infrastructure Security Index — Country-by-Country
+
+
+📊 The Numbers:
+  • 40+ Nations — Countries where China state-linked actors have conducted confirmed or suspected election-related cyber operations (ASPI estimate, 2024)
+  • 119 Nations — Member election management bodies — the world's largest hub for electoral technology sharing and democratic governance standards
+  • Compromised — CISA confirmed PRC-linked actors successfully gained access to election-adjacent networks in multiple U.S. states during the 2020–2024 election cycles
+
+
+🛡️ What You Can Do:
+  1. Demand a Supply Chain Audit: Contact your U.S. senators and representatives and demand they pass legislation ...
+  2. Push for Open-Source Voting Code: Demand that election tabulation software be subject to independent security revi...
+  3. Support Air-Gap Legislation: Congress must codify physical network separation between election management sys...
+  4. Keep Facts & Fear Separate: China's information operations benefit when Americans can't tell confirmed threa...
+  5. Support Five Eyes Coordination: Advocate for deeper U.S. election security intelligence sharing with Five Eyes a...
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬 ""You can steal an election without firing a shot.All you need is one line of codeand a supply chain nobody audited."— Senior CISA official, Senate Intelligence Committee (2024)"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👉 Read the full breakdown: [BLOG URL]
+🔔 Follow IssueLens for a new episode every day!
+📹 YouTube · Instagram · TikTok: @IssueLens
+
+⚠️ All data sourced from official government reports & credible journalism.
+
+#Chinaelectioninterference #VoltTyphoonelectioninfrastructure #SaltTyphoonwiretap #FiveEyesChinawarning #CISAelectionsecurity #votingmachinesupplychainChina #electionsovereignty #Chinesecyberthreatdemocracy #USelectionsecurity #APT41electionhack #IssueLens #news #factcheck

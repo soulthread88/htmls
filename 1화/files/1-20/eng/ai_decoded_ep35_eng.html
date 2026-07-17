@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Decoded for Seniors Ep.35 — AI Reading Guide | with Jake & Grandpa Bob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   AI DECODED FOR SENIORS — EP.35 "AI Reading Guide"
+   🎬 LATE-NIGHT TV SHOW MEETS AI CLASSROOM
+   Style: Electric Coral + Ink Black + Cream — Bold editorial / magazine
+   NO SCRIPT TAGS in saved output — blog-safe
+================================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;overflow-x:hidden}
+
+:root{
+  --ink:#0d0d0d;
+  --cream:#faf7f2;
+  --coral:#ff4d2e;
+  --gold:#f5c842;
+  --teal:#00b4a6;
+  --navy:#0a1628;
+  --soft:#f0ece4;
+  --mid:#6b6560;
+  --white:#ffffff;
+  --red2:#c0392b;
+}
+
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.75;
+}
+
+.wrap{width:100%;max-width:900px;margin:0 auto;padding:20px 16px 100px}
+
+img,video,iframe{max-width:100%!important;height:auto!important}
+.gap{display:block;height:20px}
+.gap-sm{display:block;height:10px}
+
+/* ── contenteditable ── */
+[contenteditable="true"]{outline:none;border-radius:4px;cursor:text}
+[contenteditable="true"]:hover{background:rgba(245,200,66,0.18);box-shadow:0 0 0 2px rgba(245,200,66,0.5)}
+[contenteditable="true"]:focus{background:rgba(245,200,66,0.3);box-shadow:0 0 0 2px var(--gold)}
+
+/* ── Save bar ── */
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--ink);padding:10px 20px;display:flex;justify-content:center;gap:12px;z-index:9999}
+.save-bar button{background:linear-gradient(135deg,var(--coral),#e03010);color:var(--white);border:none;padding:11px 34px;border-radius:4px;font-size:14pt;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;letter-spacing:0.05em;box-shadow:0 4px 18px rgba(255,77,46,0.45)}
+.save-bar button:hover{background:linear-gradient(135deg,#ff6347,var(--coral))}
+
+/* ══════════════════════════════════
+   ① HERO — BROADCAST TICKER STYLE
+══════════════════════════════════ */
+.hero{
+  background:var(--ink);
+  border-radius:0;
+  padding:0;
+  margin:0 0 0 0;
+  position:relative;
+  overflow:hidden;
+}
+.hero-topbar{
+  background:var(--coral);
+  color:var(--white);
+  padding:7px 24px;
+  font-size:11pt;
+  font-weight:700;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.live-dot{
+  width:10px;height:10px;background:var(--white);border-radius:50%;
+  animation:blink 1.2s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero-inner{
+  padding:36px 32px 28px;
+  position:relative;
+}
+.hero-ep-pill{
+  display:inline-block;
+  border:2.5px solid var(--coral);
+  color:var(--coral);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14pt;
+  letter-spacing:0.18em;
+  padding:3px 18px;
+  border-radius:2px;
+  margin-bottom:14px;
+}
+.hero-headline{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(38pt,7vw,64pt);
+  color:var(--white);
+  line-height:1.0;
+  margin-bottom:8px;
+  letter-spacing:0.02em;
+}
+.hero-headline .accent{color:var(--coral)}
+.hero-subhead{
+  font-family:'DM Serif Display',serif;
+  font-size:18pt;
+  color:#c8c0b8;
+  font-style:italic;
+  line-height:1.5;
+  margin-bottom:20px;
+}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.htag{
+  background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(255,255,255,0.18);
+  color:#e0d8cf;
+  font-size:10.5pt;
+  font-weight:600;
+  padding:4px 13px;
+  border-radius:2px;
+  letter-spacing:0.04em;
+}
+.htag.hot{background:rgba(255,77,46,0.2);border-color:rgba(255,77,46,0.5);color:var(--coral)}
+.hero-hosts{display:flex;gap:12px;flex-wrap:wrap}
+.hbadge{
+  background:rgba(245,200,66,0.12);
+  border:1.5px solid rgba(245,200,66,0.35);
+  color:var(--gold);
+  font-size:12pt;font-weight:700;
+  padding:7px 18px;
+  border-radius:2px;
+}
+
+/* ── TICKER TAPE ── */
+.ticker-wrap{
+  background:var(--gold);
+  overflow:hidden;
+  padding:7px 0;
+  position:relative;
+}
+.ticker-inner{
+  display:inline-block;
+  white-space:nowrap;
+  animation:ticker 28s linear infinite;
+}
+@keyframes ticker{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}
+.ticker-inner span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13pt;
+  color:var(--ink);
+  letter-spacing:0.12em;
+  margin-right:40px;
+}
+.ticker-inner span::before{content:"★ ";color:var(--coral)}
+
+/* ══════════════════════════════════
+   SECTION HEADERS — editorial style
+══════════════════════════════════ */
+.sec-header{
+  display:flex;
+  align-items:flex-end;
+  gap:0;
+  margin:28px 0 10px;
+  border-bottom:3px solid var(--ink);
+  padding-bottom:8px;
+}
+.sec-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42pt;
+  color:var(--coral);
+  line-height:1;
+  margin-right:10px;
+  flex-shrink:0;
+}
+.sec-label{
+  flex:1;
+}
+.sec-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22pt;
+  color:var(--ink);
+  letter-spacing:0.06em;
+  line-height:1.1;
+}
+.sec-sub{
+  font-size:11.5pt;
+  color:var(--mid);
+  font-weight:500;
+  letter-spacing:0.01em;
+}
+
+/* body text */
+.body-txt{
+  font-size:16.5pt;
+  line-height:1.9;
+  color:var(--ink);
+  font-weight:400;
+}
+.body-txt b{font-weight:700}
+.spk{color:var(--coral);font-weight:700}
+.ai-name{color:#c45000;font-weight:700}
+.term{color:#0d47a1;font-weight:700}
+.em{color:var(--coral);font-weight:700}
+
+/* ══════════════════════════════════
+   ② SAYING BOX — split card design
+══════════════════════════════════ */
+.saying-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-radius:6px;
+  overflow:hidden;
+  border:3px solid var(--ink);
+  margin:14px 0;
+  box-shadow:6px 6px 0 var(--ink);
+}
+.saying-left{
+  background:var(--coral);
+  padding:24px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.saying-right{
+  background:var(--ink);
+  padding:24px 22px;
+}
+.saying-main{
+  font-family:'DM Serif Display',serif;
+  font-size:20pt;
+  color:var(--white);
+  font-style:italic;
+  line-height:1.4;
+  margin-bottom:12px;
+}
+.saying-tag-pill{
+  display:inline-block;
+  background:rgba(255,255,255,0.22);
+  border:1.5px solid rgba(255,255,255,0.4);
+  color:var(--white);
+  font-size:10pt;
+  font-weight:700;
+  padding:3px 12px;
+  border-radius:2px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.saying-meaning{
+  font-size:15.5pt;
+  color:var(--gold);
+  font-weight:700;
+  line-height:1.6;
+  margin-bottom:10px;
+}
+.saying-ai-connect{
+  font-size:13.5pt;
+  color:#a8b8c8;
+  line-height:1.65;
+}
+
+/* ══════════════════════════════════
+   ③ INTRO — magazine pull-quote
+══════════════════════════════════ */
+.pull-quote{
+  border-left:6px solid var(--coral);
+  padding:16px 22px;
+  margin:16px 0;
+  background:var(--soft);
+  border-radius:0 6px 6px 0;
+}
+.pull-quote-text{
+  font-family:'DM Serif Display',serif;
+  font-size:20pt;
+  font-style:italic;
+  color:var(--ink);
+  line-height:1.5;
+}
+
+/* ── Image upload areas ── */
+.img-area{
+  width:100%;min-height:380px;
+  background:linear-gradient(135deg,#e8e4dc,#d8d0c4);
+  display:flex;align-items:center;justify-content:center;
+  border-radius:6px;border:3px dashed #888;
+  cursor:pointer;position:relative;overflow:hidden;
+  margin:12px 0;transition:all 0.2s;
+}
+.img-area:hover{background:#d4cfc6;border-color:var(--ink)}
+.img-area .upload-label{
+  display:flex;flex-direction:column;align-items:center;
+  gap:10px;color:var(--mid);font-size:16pt;
+  user-select:none;text-align:center;padding:15px;
+}
+.img-area .upload-icon{font-size:44pt}
+.img-area img,.img-area video{width:100%;height:auto;border-radius:4px;display:block}
+.media-overlay{
+  position:absolute;top:8px;right:8px;
+  display:none;gap:6px;z-index:10;
+}
+.img-area:hover .media-overlay,
+.ai-img-area:hover .media-overlay{display:flex}
+.media-btn{
+  background:rgba(10,10,10,0.8);color:white;border:none;
+  border-radius:4px;padding:5px 12px;
+  font-size:12pt;cursor:pointer;font-family:'Space Grotesk',sans-serif;
+}
+.media-btn:hover{background:var(--ink)}
+.source-tag{font-size:12pt;font-style:italic;color:var(--mid);text-align:right;margin:3px 0 12px}
+
+/* ══════════════════════════════════
+   ④ DIALOG — chat bubble style
+══════════════════════════════════ */
+.chat-wrap{margin:14px 0}
+.bubble-row{
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+  align-items:flex-start;
+}
+.bubble-row.right{flex-direction:row-reverse}
+.bubble-avatar{
+  width:44px;height:44px;
+  border-radius:50%;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20pt;
+  border:2.5px solid var(--ink);
+}
+.bubble-avatar.jake{background:var(--coral)}
+.bubble-avatar.bob{background:var(--gold)}
+.bubble-body{
+  max-width:75%;
+  background:var(--white);
+  border:2.5px solid var(--ink);
+  border-radius:6px;
+  padding:12px 16px;
+  box-shadow:3px 3px 0 var(--ink);
+  position:relative;
+}
+.bubble-row.right .bubble-body{
+  background:var(--navy);
+  border-color:var(--navy);
+  color:var(--white);
+  box-shadow:3px 3px 0 rgba(0,0,0,0.3);
+}
+.bubble-name{
+  font-size:11pt;
+  font-weight:700;
+  color:var(--coral);
+  letter-spacing:0.05em;
+  margin-bottom:4px;
+  text-transform:uppercase;
+}
+.bubble-row.right .bubble-name{color:var(--gold)}
+.bubble-text{font-size:15.5pt;line-height:1.75;color:inherit}
+
+/* ══════════════════════════════════
+   ⑤ TIPS — numbered step cards
+══════════════════════════════════ */
+.tip-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0}
+.tip-card{
+  background:var(--white);
+  border:2.5px solid var(--ink);
+  border-radius:6px;
+  padding:18px 16px;
+  position:relative;
+  box-shadow:4px 4px 0 var(--ink);
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.tip-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.tip-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:40pt;
+  color:var(--coral);
+  line-height:1;
+  margin-bottom:6px;
+}
+.tip-title{font-size:14pt;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.35}
+.tip-body{font-size:13pt;color:#444;line-height:1.7}
+
+/* DID YOU KNOW */
+.dyk{
+  background:var(--teal);
+  color:var(--white);
+  border-radius:6px;
+  padding:16px 22px;
+  margin:14px 0;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  border:2.5px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+}
+.dyk-icon{font-size:28pt;flex-shrink:0}
+.dyk-label{font-size:10pt;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:4px}
+.dyk-body{font-size:16pt;font-weight:600;line-height:1.7}
+
+/* SPOTLIGHT */
+.spotlight{
+  background:var(--ink);
+  border-radius:6px;
+  padding:20px 24px;
+  margin:14px 0;
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+  border:2.5px solid var(--coral);
+  box-shadow:4px 4px 0 var(--coral);
+}
+.spotlight-icon{font-size:34pt;flex-shrink:0;width:66px;height:66px;background:rgba(255,77,46,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.spotlight-title{font-size:17pt;font-weight:700;color:var(--coral);margin-bottom:5px}
+.spotlight-body{font-size:14pt;color:#c0c8d8;line-height:1.7}
+
+/* ══════════════════════════════════
+   ⑥ AI IN DAILY LIFE — full-bleed cards
+══════════════════════════════════ */
+.life-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.life-card{
+  border:2.5px solid var(--ink);
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:4px 4px 0 var(--ink);
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.life-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.life-card-top{
+  padding:14px 16px 10px;
+  background:var(--coral);
+  border-bottom:2.5px solid var(--ink);
+}
+.life-card:nth-child(2) .life-card-top{background:var(--teal)}
+.life-card:nth-child(3) .life-card-top{background:var(--gold)}
+.life-card:nth-child(4) .life-card-top{background:var(--navy)}
+.life-icon{font-size:26pt;margin-bottom:4px}
+.life-title{font-family:'Bebas Neue',sans-serif;font-size:17pt;letter-spacing:0.05em;color:var(--white);line-height:1.2}
+.life-card:nth-child(3) .life-title{color:var(--ink)}
+.life-body{padding:14px 16px;font-size:14pt;color:var(--ink);line-height:1.75;background:var(--white)}
+
+/* AI img grid */
+.ai-img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.ai-img-area{
+  background:linear-gradient(135deg,#e8e4dc,#d8d0c4);
+  display:flex;align-items:center;justify-content:center;
+  border-radius:6px;border:3px dashed #888;
+  cursor:pointer;position:relative;overflow:hidden;
+  aspect-ratio:1/1;transition:all 0.2s;
+}
+.ai-img-area:hover{background:#d4cfc6;border-color:var(--ink)}
+.ai-img-area .upload-label{
+  display:flex;flex-direction:column;align-items:center;
+  gap:6px;color:var(--mid);font-size:16pt;
+  user-select:none;text-align:center;padding:10px;
+}
+.ai-img-area .upload-icon{font-size:34pt}
+.ai-img-area img,.ai-img-area video{width:100%;height:auto;border-radius:4px;display:block}
+
+/* ══════════════════════════════════
+   ⑦ HUMOR — late-night joke card
+══════════════════════════════════ */
+.humor-stage{
+  background:var(--ink);
+  border-radius:8px;
+  overflow:hidden;
+  margin:14px 0;
+  border:3px solid var(--gold);
+  box-shadow:5px 5px 0 var(--gold);
+}
+.humor-marquee{
+  background:var(--gold);
+  padding:6px 20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13pt;
+  letter-spacing:0.18em;
+  color:var(--ink);
+  display:flex;align-items:center;gap:10px;
+}
+.humor-body{padding:22px 26px}
+.humor-title{
+  font-family:'DM Serif Display',serif;
+  font-size:19pt;
+  color:var(--gold);
+  font-style:italic;
+  margin-bottom:16px;
+  line-height:1.35;
+}
+.humor-line{
+  margin-bottom:13px;
+  font-size:15.5pt;
+  line-height:1.8;
+}
+.humor-spk{color:var(--coral);font-weight:700}
+.humor-line .bob-spk{color:var(--gold)}
+.humor-txt{color:#e0d8cf}
+.punchline{
+  margin-top:16px;
+  padding:12px 18px;
+  background:rgba(245,200,66,0.12);
+  border:1.5px solid rgba(245,200,66,0.35);
+  border-radius:4px;
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:16pt;
+  color:var(--gold);
+  text-align:center;
+  line-height:1.5;
+}
+
+/* ══════════════════════════════════
+   ⑧ QUIZ — game-show style
+══════════════════════════════════ */
+.quiz-stage{
+  border:3px solid var(--ink);
+  border-radius:8px;
+  overflow:hidden;
+  margin:14px 0;
+  box-shadow:5px 5px 0 var(--ink);
+}
+.quiz-header{
+  background:linear-gradient(135deg,#1b5e20,#2e7d32);
+  padding:12px 22px;
+  display:flex;align-items:center;gap:12px;
+}
+.quiz-header-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20pt;
+  color:var(--white);
+  letter-spacing:0.1em;
+}
+.quiz-body{padding:22px;background:var(--white)}
+.quiz-q{
+  margin-bottom:18px;
+  padding:16px 18px;
+  border-left:5px solid #2e7d32;
+  background:#f1f8f1;
+  border-radius:0 6px 6px 0;
+}
+.quiz-q:last-child{margin-bottom:0}
+.q-num{font-family:'Bebas Neue',sans-serif;font-size:15pt;color:#1b5e20;letter-spacing:0.08em}
+.q-text{font-size:16pt;font-weight:600;color:var(--ink);line-height:1.6;margin:3px 0}
+.q-hint{font-size:13pt;color:var(--mid);font-style:italic;margin-top:4px}
+
+.answer-reveal-btn{
+  text-align:center;font-size:13.5pt;color:#888;
+  margin:8px 0;cursor:pointer;
+  font-style:italic;transition:color 0.2s;
+}
+.answer-reveal-btn:hover{color:var(--coral)}
+.answer-box{
+  border:3px solid #4caf50;
+  border-radius:6px;
+  padding:18px 22px;
+  margin:6px 0;
+  background:#e8f5e9;
+  opacity:0.06;cursor:pointer;transition:opacity 0.3s;
+}
+.answer-box:hover{opacity:0.3}
+.answer-box.revealed{opacity:1}
+.hidden-title{opacity:0.06;cursor:pointer;transition:opacity 0.3s}
+.hidden-title:hover{opacity:0.3}
+.hidden-title.revealed{opacity:1}
+
+/* ══════════════════════════════════
+   ⑨ SAYING DEEP DIVE
+══════════════════════════════════ */
+.deep-dive{
+  background:var(--soft);
+  border:3px solid var(--ink);
+  border-radius:8px;
+  overflow:hidden;
+  margin:14px 0;
+  box-shadow:5px 5px 0 var(--ink);
+}
+.deep-dive-header{
+  background:var(--ink);
+  padding:12px 22px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:19pt;
+  color:var(--gold);
+  letter-spacing:0.12em;
+}
+.deep-dive-body{padding:22px}
+.saying-full-quote{
+  font-family:'DM Serif Display',serif;
+  font-size:22pt;
+  font-style:italic;
+  color:var(--coral);
+  border-left:5px solid var(--coral);
+  padding:10px 18px;
+  margin-bottom:18px;
+  line-height:1.4;
+  background:rgba(255,77,46,0.05);
+}
+.word-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.word-card{
+  background:var(--white);
+  border:2.5px solid var(--ink);
+  border-radius:6px;
+  padding:12px 10px;
+  text-align:center;
+  box-shadow:3px 3px 0 var(--ink);
+  transition:transform 0.15s;
+}
+.word-card:hover{transform:translateY(-3px)}
+.wc-main{font-size:15pt;font-weight:800;color:var(--coral);display:block;line-height:1.3;margin-bottom:3px}
+.wc-type{font-size:10.5pt;color:var(--teal);font-weight:700;font-style:italic;display:block;margin-bottom:4px}
+.wc-def{font-size:11.5pt;color:#444;line-height:1.4;display:block}
+.story-block{
+  background:var(--white);
+  border-left:5px solid var(--gold);
+  padding:14px 18px;
+  border-radius:0 6px 6px 0;
+  margin:10px 0;
+}
+.story-label{font-size:11.5pt;font-weight:700;color:var(--mid);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
+.story-text{font-size:15.5pt;color:var(--ink);line-height:1.8}
+.ai-connect-box{
+  background:var(--navy);
+  border:2.5px solid var(--coral);
+  border-radius:6px;
+  padding:16px 20px;
+  margin-top:14px;
+}
+.ai-connect-title{font-size:13pt;font-weight:700;color:var(--coral);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px}
+.ai-connect-text{font-size:15.5pt;color:#c8d8e8;line-height:1.8}
+.memory-tip{
+  background:var(--gold);
+  border-radius:6px;
+  padding:14px 18px;
+  margin-top:12px;
+  font-size:14.5pt;
+  color:var(--ink);
+  font-weight:600;
+  line-height:1.7;
+}
+
+/* ══════════════════════════════════
+   ⑩ KEYWORDS
+══════════════════════════════════ */
+.kw-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.kw-pill{
+  display:block;
+  background:var(--ink);
+  color:var(--gold);
+  font-size:12.5pt;
+  font-weight:700;
+  padding:10px 16px;
+  border-radius:4px;
+  text-decoration:none;
+  border:2px solid var(--ink);
+  text-align:center;
+  letter-spacing:0.04em;
+  transition:all 0.18s;
+  box-shadow:3px 3px 0 var(--coral);
+}
+.kw-pill:hover{background:var(--coral);color:var(--white);border-color:var(--coral);transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+
+/* ══════════════════════════════════
+   ⑪ WORD POWER
+══════════════════════════════════ */
+.wordpower{
+  background:linear-gradient(135deg,#fce4ec,#ffd5e0);
+  border:3px solid var(--ink);
+  border-radius:8px;
+  padding:22px 24px;
+  margin:14px 0;
+  box-shadow:5px 5px 0 var(--ink);
+}
+.wp-header{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:19pt;
+  color:#880e4f;
+  letter-spacing:0.1em;
+  margin-bottom:14px;
+}
+.wp-item{margin-bottom:14px;padding-bottom:14px;border-bottom:2px dashed #e8a0b8}
+.wp-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.wp-title{font-size:16pt;font-weight:800;color:var(--ink);margin-bottom:4px}
+.wp-body{font-size:14.5pt;color:#444;line-height:1.75}
+
+/* ══════════════════════════════════
+   GRANDPA BOX
+══════════════════════════════════ */
+.grandpa-box{
+  background:var(--soft);
+  border:3px solid var(--ink);
+  border-radius:8px;
+  padding:20px 24px;
+  margin:14px 0;
+  box-shadow:5px 5px 0 var(--gold);
+  position:relative;
+}
+.grandpa-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16pt;
+  letter-spacing:0.1em;
+  color:var(--mid);
+  margin-bottom:8px;
+}
+.grandpa-text{
+  font-family:'DM Serif Display',serif;
+  font-size:18pt;
+  font-style:italic;
+  color:var(--ink);
+  line-height:1.6;
+}
+
+/* COMIC PANELS */
+.comic-wrap{
+  background:var(--white);
+  border-radius:8px;
+  box-shadow:5px 5px 0 var(--ink);
+  overflow:hidden;
+  margin:14px 0;
+  border:3px solid var(--ink);
+}
+.comic-header{
+  background:var(--ink);
+  color:var(--gold);
+  padding:10px 18px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:16pt;
+  letter-spacing:0.12em;
+  display:flex;align-items:center;gap:10px;
+}
+.comic-single{position:relative;width:100%;aspect-ratio:1/1;cursor:pointer;overflow:hidden}
+.comic-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#f0ece4,#e4dfd8);
+  gap:14px;padding:20px;
+}
+.comic-single-overlay{
+  position:absolute;inset:0;
+  background:rgba(10,10,10,0.65);
+  display:none;align-items:center;justify-content:center;
+  gap:12px;flex-direction:column;z-index:5;
+}
+.comic-single:hover .comic-single-overlay{display:flex}
+.comic-mob{
+  background:rgba(245,200,66,0.9);color:var(--ink);border:none;
+  border-radius:4px;padding:5px 14px;
+  font-size:13pt;cursor:pointer;font-weight:700;
+  font-family:'Space Grotesk',sans-serif;
+}
+.comic-mob:hover{background:var(--gold)}
+
+/* ══════════════════════════════════
+   RECAP / SUMMARY
+══════════════════════════════════ */
+.recap-box{
+  background:var(--ink);
+  border:3px solid var(--coral);
+  border-radius:8px;
+  padding:26px 28px;
+  margin:14px 0;
+  box-shadow:5px 5px 0 var(--coral);
+}
+.recap-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26pt;
+  color:var(--gold);
+  letter-spacing:0.08em;
+  margin-bottom:18px;
+  text-align:center;
+}
+.recap-item{
+  font-size:15.5pt;
+  line-height:1.9;
+  margin-bottom:14px;
+  padding:12px 16px;
+  border-left:5px solid var(--coral);
+  color:#e8e0d8;
+  background:rgba(255,255,255,0.05);
+  border-radius:0 6px 6px 0;
+}
+.recap-item:last-child{margin-bottom:0}
+.recap-item b{color:var(--gold)}
+
+/* SUBSCRIBE CTA */
+.cta-box{
+  background:var(--coral);
+  border-radius:8px;
+  padding:24px 28px;
+  text-align:center;
+  margin:14px 0;
+  border:3px solid var(--ink);
+  box-shadow:5px 5px 0 var(--ink);
+}
+.cta-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:30pt;
+  color:var(--white);
+  letter-spacing:0.06em;
+  line-height:1.2;
+  margin-bottom:8px;
+}
+.cta-body{font-size:15pt;color:rgba(255,255,255,0.9);line-height:1.7;margin-bottom:10px}
+.cta-tags{font-size:12pt;color:rgba(255,255,255,0.7);letter-spacing:0.04em}
+
+/* FOOTER */
+.footer-txt{text-align:center;font-size:14pt;color:var(--mid);line-height:1.6;margin:10px 0}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .saying-card{grid-template-columns:1fr}
+  .tip-grid{grid-template-columns:1fr}
+  .life-grid{grid-template-columns:1fr}
+  .word-grid{grid-template-columns:repeat(2,1fr)}
+  .ai-img-grid{grid-template-columns:repeat(2,1fr)}
+  .kw-grid{grid-template-columns:1fr}
+  .hero-headline{font-size:30pt}
+  .bubble-body{max-width:85%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ① HERO BANNER -->
+<div class="hero">
+  <div class="hero-topbar">
+    <div class="live-dot"></div>
+    🤖 AI DECODED FOR SENIORS &nbsp;|&nbsp; EPISODE 35 &nbsp;|&nbsp; EVERY WEEK, FREE
+  </div>
+  <div class="hero-inner" contenteditable="true">
+    <div class="hero-ep-pill">EPISODE 35</div>
+    <div class="hero-headline">Your AI <span class="accent">Reading</span> Guide</div>
+    <div class="hero-subhead">Jake teaches Grandpa Bob how ChatGPT, Gemini &amp; Claude can supercharge your reading life — from book picks to instant summaries!</div>
+    <div class="hero-tags">
+      <span class="htag hot">#ChatGPT</span>
+      <span class="htag hot">#GoogleGemini</span>
+      <span class="htag hot">#ClaudeAI</span>
+      <span class="htag hot">#AIForSeniors</span>
+      <span class="htag">#AIReading</span>
+      <span class="htag">#BookSummaryAI</span>
+      <span class="htag">#ArtificialIntelligence</span>
+      <span class="htag">#LearnAI2026</span>
+      <span class="htag">#Perplexity</span>
+      <span class="htag">#MicrosoftCopilot</span>
+      <span class="htag">#AITools2026</span>
+      <span class="htag">#SeniorTech</span>
+    </div>
+    <div class="hero-hosts">
+      <div class="hbadge">👦 Jake — Your AI Guide</div>
+      <div class="hbadge">👴 Grandpa Bob — Just Like You!</div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>ChatGPT</span><span>Google Gemini</span><span>Claude AI</span><span>Microsoft Copilot</span><span>Perplexity AI</span><span>Grok</span><span>AI Book Summary</span><span>AI Reading Guide</span><span>AI Chatbot</span><span>Generative AI</span><span>Large Language Model</span><span>Sora</span><span>Midjourney</span><span>AI Image Generator</span><span>NotebookLM</span><span>Kindle AI</span><span>Book Recommendation AI</span><span>AI For Seniors</span><span>ChatGPT</span><span>Google Gemini</span>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ② TODAY'S AMERICAN SAYING -->
+<div class="sec-header">
+  <div class="sec-num">02</div>
+  <div class="sec-label">
+    <div class="sec-title">TODAY'S AMERICAN SAYING</div>
+    <div class="sec-sub">Timeless wisdom — connected to AI every episode!</div>
+  </div>
+</div>
+
+<div class="saying-card" contenteditable="true">
+  <div class="saying-left">
+    <div class="saying-main">"A reader lives a thousand lives before he dies. The man who never reads lives only one."</div>
+    <div class="gap-sm"></div>
+    <span class="saying-tag-pill">— George R.R. Martin</span>
+  </div>
+  <div class="saying-right">
+    <div class="saying-meaning">📖 A person who reads books gets to experience countless different lives, perspectives, and adventures.</div>
+    <div class="saying-ai-connect">🤖 <b style="color:var(--coral)">AI connection:</b> Today's AI tools — ChatGPT, Gemini, Claude — are like having a brilliant reading companion available 24/7. They can summarize books, explain confusing passages, recommend your next great read, and even discuss themes with you. Now you can "live a thousand lives" faster than ever before!</div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ③ INTRO -->
+<div class="sec-header">
+  <div class="sec-num">03</div>
+  <div class="sec-label">
+    <div class="sec-title">YOUR AI READING GUIDE</div>
+    <div class="sec-sub">This week's AI topic — breaking it all the way down</div>
+  </div>
+</div>
+
+<div class="body-txt" contenteditable="true">
+  Hey there! Welcome back to <b>AI Decoded for Seniors</b> — the show where your guide <span class="spk">Jake</span> makes the world's most talked-about AI tools so simple, even Grandpa Bob gets it on the first try! 🎉
+</div>
+<div class="gap-sm"></div>
+
+<div class="pull-quote" contenteditable="true">
+  <div class="pull-quote-text">"Did you know ChatGPT can summarize a 400-page novel in under 60 seconds? Or that Google Gemini can recommend your next book based on exactly what you love?"</div>
+</div>
+<div class="gap-sm"></div>
+
+<div class="body-txt" contenteditable="true">
+  In <b>Episode 35</b>, we're diving into how <span class="term">AI tools</span> are completely changing the way people read. Whether you love novels, biographies, news articles, or self-help books — <span class="ai-name">ChatGPT</span>, <span class="ai-name">Google Gemini</span>, and <span class="ai-name">Claude AI</span> can be your personal reading assistant. No library card needed!
+</div>
+<div class="gap"></div>
+
+<div class="img-area" id="area-1"
+  onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-1').click()}" style="cursor:pointer;">
+  <div class="upload-label" id="img-display-1">
+    <span class="upload-icon">📚</span>
+    <span>Click to Insert Image or Video</span>
+    <span style="font-size:12pt;color:#888;">[Intro image — AI reading / books]</span>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-1').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-1').innerHTML='<span class=\'upload-icon\'>📚</span><span>Click to Insert Image</span>';document.getElementById('area-1').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-1" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'};document.getElementById('area-1').style.minHeight='auto'};r.readAsDataURL(f)})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Pexels / Unsplash — free use with attribution</em></div>
+
+<!-- PANEL 1 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 SCENE 1 — "Grandpa, Meet Your AI Reading Buddy!"</div>
+  <div class="comic-single" id="panel-comic-1" onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-1').click()">
+    <div id="pd-comic-1" class="comic-placeholder">
+      <div style="font-size:52px">📖</div>
+      <div style="font-size:15pt;font-weight:800;color:var(--ink);text-align:center;">Jake introducing AI reading tools to Grandpa Bob</div>
+      <div style="font-size:12pt;color:var(--mid);text-align:center;">Upload your comic or illustration image here</div>
+      <div style="margin-top:10px;background:var(--coral);color:white;font-size:13pt;font-weight:800;padding:9px 26px;border-radius:4px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:var(--gold);font-size:15pt;font-weight:800;">Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-1').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-1','comic-1')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-1" accept="image/*,video/*" style="display:none" onchange="comicUpload('up-comic-1','pd-comic-1','comic-1')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ④ CONVERSATION -->
+<div class="sec-header">
+  <div class="sec-num">04</div>
+  <div class="sec-label">
+    <div class="sec-title">JAKE &amp; GRANDPA BOB TALK AI</div>
+    <div class="sec-sub">A real conversation — just like your family dinner table!</div>
+  </div>
+</div>
+
+<div class="chat-wrap" contenteditable="true">
+  <div class="bubble-row">
+    <div class="bubble-avatar jake">👦</div>
+    <div class="bubble-body">
+      <div class="bubble-name">Jake</div>
+      <div class="bubble-text">Grandpa, how do you usually pick your next book to read?</div>
+    </div>
+  </div>
+  <div class="bubble-row right">
+    <div class="bubble-avatar bob">👴</div>
+    <div class="bubble-body">
+      <div class="bubble-name">Grandpa Bob</div>
+      <div class="bubble-text">Oh, I just wander around the bookstore and pick whatever looks interesting on the cover! Sometimes I ask the librarian.</div>
+    </div>
+  </div>
+  <div class="bubble-row">
+    <div class="bubble-avatar jake">👦</div>
+    <div class="bubble-body">
+      <div class="bubble-name">Jake</div>
+      <div class="bubble-text">That's sweet! But what if I told you that ChatGPT could give you a personalized list of 10 perfect books — based on everything you already love — in about 10 seconds?</div>
+    </div>
+  </div>
+  <div class="bubble-row right">
+    <div class="bubble-avatar bob">👴</div>
+    <div class="bubble-body">
+      <div class="bubble-name">Grandpa Bob</div>
+      <div class="bubble-text">You're kidding me! Like a smarter version of the library catalog?</div>
+    </div>
+  </div>
+  <div class="bubble-row">
+    <div class="bubble-avatar jake">👦</div>
+    <div class="bubble-body">
+      <div class="bubble-name">Jake</div>
+      <div class="bubble-text">Way smarter! And it can also summarize books, explain hard parts, translate passages, quiz you to help you remember — and it never closes. Open 24 hours a day, 365 days a year!</div>
+    </div>
+  </div>
+  <div class="bubble-row right">
+    <div class="bubble-avatar bob">👴</div>
+    <div class="bubble-body">
+      <div class="bubble-name">Grandpa Bob</div>
+      <div class="bubble-text">Well I'll be darned. A reading buddy that's available at 3am? Even my old friend Harold can't do that! Where do I sign up?</div>
+    </div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑤ CRASH COURSE TIPS -->
+<div class="sec-header">
+  <div class="sec-num">05</div>
+  <div class="sec-label">
+    <div class="sec-title">AI CRASH COURSE: 3 WAYS AI SUPERCHARGES READING</div>
+    <div class="sec-sub">Simple steps — you can try these TODAY!</div>
+  </div>
+</div>
+
+<div class="dyk" contenteditable="true">
+  <div class="dyk-icon">💡</div>
+  <div>
+    <div class="dyk-label">Did You Know?</div>
+    <div class="dyk-body">Over <b>100 million Americans</b> now use AI tools every month — and the #1 use case for seniors is getting help understanding articles and books. You're joining a massive movement!</div>
+  </div>
+</div>
+
+<div class="tip-grid" contenteditable="true">
+  <div class="tip-card">
+    <div class="tip-num">01</div>
+    <div class="tip-title">Ask for Book Recommendations</div>
+    <div class="tip-body">Open ChatGPT and type: <em>"I love historical fiction set in WW2. What should I read next?"</em> — You'll get a personalized list instantly! Works with Gemini and Claude too.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-num">02</div>
+    <div class="tip-title">Get Instant Summaries</div>
+    <div class="tip-body">Ask: <em>"Summarize the book Educated by Tara Westover in 5 bullet points."</em> — Perfect for deciding if a book is worth your time before buying it!</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-num">03</div>
+    <div class="tip-title">Understand Difficult Passages</div>
+    <div class="tip-body">Copy any confusing paragraph and ask: <em>"Explain this in simple English."</em> — AI becomes your patient reading tutor, available 24/7, zero judgment!</div>
+  </div>
+</div>
+
+<div class="spotlight" contenteditable="true">
+  <div class="spotlight-icon">🔦</div>
+  <div>
+    <div class="spotlight-title">🔦 AI Tool Spotlight — Reading Edition</div>
+    <div class="spotlight-body">
+      <b style="color:var(--gold);">ChatGPT · Google Gemini · Claude AI · Perplexity · Microsoft Copilot · NotebookLM</b><br>
+      These are the top AI tools Americans are searching for RIGHT NOW. For reading assistance, <b style="color:var(--coral);">ChatGPT and Google Gemini</b> are the most popular, while <b style="color:var(--coral);">Claude AI</b> is the fastest-growing — surging 27% in April 2026 alone!
+    </div>
+  </div>
+</div>
+
+<div class="img-area" id="area-2"
+  onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-2').click()}" style="cursor:pointer;">
+  <div class="upload-label" id="img-display-2">
+    <span class="upload-icon">🤖</span>
+    <span>Click to Insert Image or Video</span>
+    <span style="font-size:12pt;color:#888;">[ChatGPT / AI tool screenshot or concept image]</span>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-2').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-2').innerHTML='<span class=\'upload-icon\'>🤖</span><span>Click to Insert Image</span>';document.getElementById('area-2').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-2" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'};document.getElementById('area-2').style.minHeight='auto'};r.readAsDataURL(f)})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Pexels / Wikimedia Commons — free commercial use</em></div>
+<div class="gap"></div>
+
+<!-- PANEL 2 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 SCENE 2 — "Grandpa Types His First AI Prompt!"</div>
+  <div class="comic-single" id="panel-comic-2" onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-2').click()">
+    <div id="pd-comic-2" class="comic-placeholder">
+      <div style="font-size:52px">💻</div>
+      <div style="font-size:15pt;font-weight:800;color:var(--ink);text-align:center;">Grandpa Bob types his first ChatGPT prompt about books</div>
+      <div style="font-size:12pt;color:var(--mid);text-align:center;">Upload your comic or illustration here</div>
+      <div style="margin-top:10px;background:var(--coral);color:white;font-size:13pt;font-weight:800;padding:9px 26px;border-radius:4px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:var(--gold);font-size:15pt;font-weight:800;">Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-2').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-2','comic-2')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-2" accept="image/*,video/*" style="display:none" onchange="comicUpload('up-comic-2','pd-comic-2','comic-2')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑥ AI IN DAILY LIFE -->
+<div class="sec-header">
+  <div class="sec-num">06</div>
+  <div class="sec-label">
+    <div class="sec-title">AI READING — 4 REAL-LIFE SUPERPOWERS</div>
+    <div class="sec-sub">Practical AI for your everyday reading life</div>
+  </div>
+</div>
+<div class="body-txt" contenteditable="true">
+  <span class="spk">Jake:</span> <em>"Grandpa, here are the four ways AI is transforming how Americans read — and every single one is FREE to try right now!"</em>
+</div>
+<div class="gap-sm"></div>
+
+<div class="life-grid" contenteditable="true">
+  <div class="life-card">
+    <div class="life-card-top">
+      <div class="life-icon">🎯</div>
+      <div class="life-title">Personalized Book Picks</div>
+    </div>
+    <div class="life-body">Tell ChatGPT your favorite authors, themes, and genres — it generates a custom reading list tailored just for you. Like having a librarian who has read every book ever written!</div>
+  </div>
+  <div class="life-card">
+    <div class="life-card-top">
+      <div class="life-icon">⚡</div>
+      <div class="life-title">Lightning-Fast Summaries</div>
+    </div>
+    <div class="life-body">Don't have time for 400 pages? Ask Google Gemini or ChatGPT for a full summary with key takeaways. Read smarter, not harder — now you can "read" 5x more books per month!</div>
+  </div>
+  <div class="life-card">
+    <div class="life-card-top">
+      <div class="life-icon">🔍</div>
+      <div class="life-title">Instant Word &amp; Phrase Help</div>
+    </div>
+    <div class="life-body">Stumble on an unfamiliar word or cultural reference? Just ask Claude AI to explain it in plain English. No more stopping to search in a separate dictionary — AI does it all in one place!</div>
+  </div>
+  <div class="life-card">
+    <div class="life-card-top">
+      <div class="life-icon">🧠</div>
+      <div class="life-title">Memory Quizzes &amp; Discussion</div>
+    </div>
+    <div class="life-body">Ask ChatGPT to quiz you on what you just read, or have a full book club discussion — right in the chat! Perfect for solo readers who want to go deeper into every book.</div>
+  </div>
+</div>
+
+<div class="ai-img-grid">
+  <div class="ai-img-area" id="ai-area-1" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-1').click()}">
+    <div class="upload-label" id="ai-img-display-1"><span class="upload-icon">📚</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-1').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-1').innerHTML='<span class=\'upload-icon\'>📚</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-2" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-2').click()}">
+    <div class="upload-label" id="ai-img-display-2"><span class="upload-icon">⚡</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-2').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-2').innerHTML='<span class=\'upload-icon\'>⚡</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-3" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-3').click()}">
+    <div class="upload-label" id="ai-img-display-3"><span class="upload-icon">🔍</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-3').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-3').innerHTML='<span class=\'upload-icon\'>🔍</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-4" onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-4').click()}">
+    <div class="upload-label" id="ai-img-display-4"><span class="upload-icon">🧠</span></div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-4').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-4').innerHTML='<span class=\'upload-icon\'>🧠</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none" onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-4');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑦ HUMOR -->
+<div class="sec-header">
+  <div class="sec-num">07</div>
+  <div class="sec-label">
+    <div class="sec-title">AI LAUGH BREAK!</div>
+    <div class="sec-sub">Because learning should always be fun 🎉</div>
+  </div>
+</div>
+
+<div class="humor-stage" contenteditable="true">
+  <div class="humor-marquee">😂 &nbsp; TONIGHT'S COMEDY BIT &nbsp;★&nbsp; GRANDPA VS. THE BOOK AI</div>
+  <div class="humor-body">
+    <div class="humor-title">📚 "Grandpa Asks ChatGPT to Summarize War and Peace"</div>
+    <div class="humor-line"><span class="humor-spk">Grandpa Bob:</span> <span class="humor-txt">"Jake, I've been meaning to read War and Peace for forty years. It's 1,400 pages!"</span></div>
+    <div class="humor-line"><span class="humor-spk">Jake:</span> <span class="humor-txt">"Grandpa, just ask ChatGPT for a summary!"</span></div>
+    <div class="humor-line"><span class="humor-spk">Grandpa Bob:</span> <span class="humor-txt">[types into ChatGPT] "What is War and Peace about?"</span></div>
+    <div class="humor-line"><span class="humor-spk">ChatGPT:</span> <span class="humor-txt">"War and Peace is Tolstoy's epic about Napoleon's invasion of Russia, following five aristocratic families over 15 years of war, romance, and philosophical reflection..."</span></div>
+    <div class="humor-line"><span class="humor-spk">Grandpa Bob:</span> <span class="humor-txt">"That's incredible! It took me 5 seconds to learn what I was too lazy to read for 40 years!" [turns to wife] "Honey! I've finally read War and Peace!"</span></div>
+    <div class="punchline">📚 AI didn't replace reading. It just finally made Grandpa feel like a scholar. 😂</div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑧ QUIZ -->
+<div class="sec-header">
+  <div class="sec-num">08</div>
+  <div class="sec-label">
+    <div class="sec-title">AI TRIVIA CHALLENGE!</div>
+    <div class="sec-sub">Test your new AI knowledge — answers below 👇</div>
+  </div>
+</div>
+
+<div class="quiz-stage" contenteditable="true">
+  <div class="quiz-header">
+    <span style="font-size:22pt">🏆</span>
+    <span class="quiz-header-title">CAN YOU ANSWER THESE 3 QUESTIONS?</span>
+  </div>
+  <div class="quiz-body">
+    <div class="quiz-q">
+      <div class="q-num">Q1 ——</div>
+      <div class="q-text">Which AI tool currently has the largest market share among American users in 2026?</div>
+      <div class="q-hint">💡 Hint: It starts with "Chat" and was made by OpenAI.</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q2 ——</div>
+      <div class="q-text">What should you type into ChatGPT if you want it to recommend books similar to ones you already love?</div>
+      <div class="q-hint">💡 Hint: Describe your favorite books and ask for "similar" ones!</div>
+    </div>
+    <div class="quiz-q">
+      <div class="q-num">Q3 ——</div>
+      <div class="q-text">Which Google AI tool — available FREE on your phone and computer — can help you understand any article or book passage?</div>
+      <div class="q-hint">💡 Hint: It's Google's AI chatbot, launched in 2023 and growing fast in 2026.</div>
+    </div>
+  </div>
+</div>
+
+<div class="answer-reveal-btn hidden-title" onclick="this.classList.toggle('revealed');document.getElementById('answer-reveal').classList.toggle('revealed')">
+  👆 Tap here to reveal the answers!
+</div>
+<div class="answer-box" id="answer-reveal" onclick="this.classList.toggle('revealed');document.querySelector('.hidden-title').classList.toggle('revealed')" contenteditable="true">
+  <div class="body-txt">
+    <b style="color:#1b5e20;font-size:17pt;">✅ Answers</b><br>
+    <b>A1:</b> ChatGPT (by OpenAI) — holding about 60% of the AI search market in 2026!<br>
+    <b>A2:</b> Type something like: "I love books by John Grisham. What similar thrillers should I read next?"<br>
+    <b>A3:</b> Google Gemini — available free at gemini.google.com or in your Google app!
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑨ SAYING DEEP DIVE -->
+<div class="sec-header">
+  <div class="sec-num">09</div>
+  <div class="sec-label">
+    <div class="sec-title">SAYING DEEP DIVE</div>
+    <div class="sec-sub">Understand every word — and connect it to AI!</div>
+  </div>
+</div>
+
+<div class="deep-dive" contenteditable="true">
+  <div class="deep-dive-header">🔍 BREAKING DOWN TODAY'S SAYING — WORD BY WORD</div>
+  <div class="deep-dive-body">
+    <div class="saying-full-quote">"A reader lives a thousand lives before he dies. The man who never reads lives only one."</div>
+    <div class="word-grid">
+      <div class="word-card">
+        <span class="wc-main">reader</span>
+        <span class="wc-type">noun</span>
+        <span class="wc-def">A person who reads books or other written material regularly</span>
+      </div>
+      <div class="word-card">
+        <span class="wc-main">lives</span>
+        <span class="wc-type">verb / noun</span>
+        <span class="wc-def">To experience; also "a thousand lives" = countless different experiences</span>
+      </div>
+      <div class="word-card">
+        <span class="wc-main">thousand</span>
+        <span class="wc-type">number (figurative)</span>
+        <span class="wc-def">Used here to mean "countless" or "so many you can't count them"</span>
+      </div>
+      <div class="word-card">
+        <span class="wc-main">never reads</span>
+        <span class="wc-type">phrase</span>
+        <span class="wc-def">A person who avoids books misses out on all the worlds they contain</span>
+      </div>
+    </div>
+    <div class="story-block">
+      <div class="story-label">📌 Word-for-word meaning</div>
+      <div class="story-text">When you read a book, you step into a character's shoes — you experience their joys, sorrows, adventures, and discoveries as if they were your own. The more you read, the more lives you've "lived" through stories.</div>
+    </div>
+    <div class="story-block">
+      <div class="story-label">📌 In plain English</div>
+      <div class="story-text">Reading books makes your life richer and fuller. You get to experience things you'd never encounter in your own life — traveling to ancient Rome, flying spaceships, solving murders, falling in love in Paris. Books = free life experiences!</div>
+    </div>
+    <div class="story-block">
+      <div class="story-label">📌 Real-life analogy</div>
+      <div class="story-text">It's like having a time machine AND a teleporter AND a passport that never expires — all packed into a paperback book. One afternoon with a novel can take you to medieval Japan or the surface of Mars.</div>
+    </div>
+    <div class="ai-connect-box">
+      <div class="ai-connect-title">🤖 Connect It to AI!</div>
+      <div class="ai-connect-text">AI reading tools multiply this effect even further! With ChatGPT and Google Gemini, you can now explore book summaries, author backgrounds, historical context, and thematic discussions — all in minutes. Grandpa Bob can now "live" even more lives, faster than ever before. <b style="color:var(--coral);">"A reader lives a thousand lives" — and with AI, maybe ten thousand!</b> 🌟</div>
+    </div>
+    <div class="memory-tip">🧠 <b>Memory Tip!</b> Think of your favorite movie or TV show — how it transported you to another world. That's exactly what a great book does, and AI is your new best guide to finding and understanding those worlds! Try saying: <em>"I just finished Oppenheimer. Can you recommend books about the Manhattan Project?"</em></div>
+  </div>
+</div>
+
+<div class="img-area" id="area-3"
+  onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-3').click()}" style="cursor:pointer;">
+  <div class="upload-label" id="img-display-3">
+    <span class="upload-icon">📖</span>
+    <span>Click to Insert Image or Video</span>
+    <span style="font-size:12pt;color:#888;">[Quote / library / reading atmosphere image]</span>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-3').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-3').innerHTML='<span class=\'upload-icon\'>📖</span><span>Click to Insert Image</span>';document.getElementById('area-3').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-3" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:4px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:4px;display:block;\'></video>'};document.getElementById('area-3').style.minHeight='auto'};r.readAsDataURL(f)})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: Pexels / Wikimedia Commons — free commercial use</em></div>
+
+<div class="body-txt" contenteditable="true" style="margin-top:12px">
+  <span class="spk">Jake:</span> <em>"See Grandpa? George R.R. Martin was basically predicting that AI reading assistants would come along and make every book even MORE accessible!"</em>
+</div>
+<div class="gap-sm"></div>
+<div class="body-txt" contenteditable="true">
+  <span class="spk">Grandpa Bob:</span> <em>"I always knew that man was a genius. Even if he still hasn't finished Winds of Winter... maybe I should ask ChatGPT to write it for him!"</em>
+</div>
+<div class="gap"></div>
+
+<!-- ⑩ SEARCH KEYWORDS -->
+<div class="sec-header">
+  <div class="sec-num">10</div>
+  <div class="sec-label">
+    <div class="sec-title">TOP AI SEARCH KEYWORDS — TRY THESE!</div>
+    <div class="sec-sub">Hottest AI terms Americans are Googling RIGHT NOW — click any to search!</div>
+  </div>
+</div>
+<div class="kw-grid">
+  <a href="https://www.google.com/search?q=ChatGPT+book+recommendations" target="_blank" class="kw-pill">ChatGPT book recommendations</a>
+  <a href="https://www.google.com/search?q=Google+Gemini+free" target="_blank" class="kw-pill">Google Gemini free</a>
+  <a href="https://www.google.com/search?q=AI+book+summary+generator" target="_blank" class="kw-pill">AI book summary generator</a>
+  <a href="https://www.google.com/search?q=Claude+AI+Anthropic" target="_blank" class="kw-pill">Claude AI Anthropic</a>
+  <a href="https://www.google.com/search?q=ChatGPT+for+seniors" target="_blank" class="kw-pill">ChatGPT for seniors</a>
+  <a href="https://www.google.com/search?q=Perplexity+AI+search" target="_blank" class="kw-pill">Perplexity AI search</a>
+  <a href="https://www.google.com/search?q=Microsoft+Copilot+free" target="_blank" class="kw-pill">Microsoft Copilot free</a>
+  <a href="https://www.google.com/search?q=NotebookLM+Google+AI" target="_blank" class="kw-pill">NotebookLM Google AI</a>
+</div>
+<div class="gap"></div>
+
+<!-- ⑪ WORD POWER -->
+<div class="sec-header">
+  <div class="sec-num">11</div>
+  <div class="sec-label">
+    <div class="sec-title">AMERICAN ENGLISH WORD POWER</div>
+    <div class="sec-sub">Essential AI vocabulary every senior should know!</div>
+  </div>
+</div>
+
+<div class="wordpower" contenteditable="true">
+  <div class="wp-header">🇺🇸 AI VOCABULARY — TOP 3 THIS EPISODE</div>
+  <div class="wp-item">
+    <div class="wp-title">1. Prompt <span style="font-size:12pt;color:#c45000;font-weight:400">(noun / verb)</span></div>
+    <div class="wp-body">A <b>prompt</b> is the question or instruction you type into an AI tool. Think of it like talking to a very smart assistant: the better you describe what you want, the better the answer! <em>Example: "Summarize this book in 5 bullet points" is a great prompt.</em></div>
+  </div>
+  <div class="wp-item">
+    <div class="wp-title">2. Generative AI <span style="font-size:12pt;color:#c45000;font-weight:400">(noun phrase)</span></div>
+    <div class="wp-body"><b>Generative AI</b> means AI that creates NEW content — text, images, audio, video — rather than just searching for existing content. ChatGPT, Gemini, and Claude are all generative AI tools. They "generate" fresh answers every time!</div>
+  </div>
+  <div class="wp-item">
+    <div class="wp-title">3. Large Language Model (LLM) <span style="font-size:12pt;color:#c45000;font-weight:400">(noun phrase)</span></div>
+    <div class="wp-body">An <b>LLM</b> is the technology powering chatbots like ChatGPT. It has been trained on enormous amounts of text — billions of books, articles, and websites — so it can understand and generate human language. Think of it as the "engine" under the hood of every AI chatbot.</div>
+  </div>
+</div>
+
+<div style="background:#e8f0ff;border:3px solid var(--navy);border-radius:6px;padding:16px 20px;font-size:14.5pt;line-height:1.6;text-align:center;margin:14px 0;box-shadow:3px 3px 0 var(--navy);" contenteditable="true">
+  <span style="font-size:19pt;font-weight:900;color:var(--navy);">Merriam-Webster Online Dictionary</span>
+  <div class="gap-sm"></div>
+  👉 <a href="https://www.merriam-webster.com/" target="_blank" style="color:#1565c0;font-weight:700;">https://www.merriam-webster.com/</a>
+  <div style="font-size:12pt;color:var(--mid);margin-top:5px;">America's most trusted dictionary — free, fast, and always current!</div>
+</div>
+<div class="gap"></div>
+
+<!-- PANEL 3 -->
+<div class="comic-wrap">
+  <div class="comic-header">🎬 SCENE 3 — "Grandpa Becomes an AI Reading Pro!"</div>
+  <div class="comic-single" id="panel-comic-3" onclick="if(!event.target.closest('.comic-single-overlay'))document.getElementById('up-comic-3').click()">
+    <div id="pd-comic-3" class="comic-placeholder">
+      <div style="font-size:52px">🌟</div>
+      <div style="font-size:15pt;font-weight:800;color:var(--ink);text-align:center;">Grandpa Bob confidently using AI to discuss books with friends</div>
+      <div style="font-size:12pt;color:var(--mid);text-align:center;">Upload your illustration or comic panel here</div>
+      <div style="margin-top:10px;background:var(--coral);color:white;font-size:13pt;font-weight:800;padding:9px 26px;border-radius:4px;">📁 Click to Upload</div>
+    </div>
+    <div class="comic-single-overlay">
+      <span style="color:var(--gold);font-size:15pt;font-weight:800;">Click to Replace</span>
+      <div style="display:flex;gap:10px;">
+        <button class="comic-mob" onclick="event.stopPropagation();document.getElementById('up-comic-3').click()">🔄 Replace</button>
+        <button class="comic-mob" onclick="event.stopPropagation();comicDelete('pd-comic-3','comic-3')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-3" accept="image/*,video/*" style="display:none" onchange="comicUpload('up-comic-3','pd-comic-3','comic-3')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- GRANDPA'S CORNER -->
+<div class="grandpa-box" contenteditable="true">
+  <div class="grandpa-label">👴 GRANDPA BOB'S CORNER</div>
+  <div class="grandpa-text">"You know, I always thought technology was for the young folks. But this AI reading thing? I asked ChatGPT about a history book I've been curious about, and it gave me a three-paragraph summary AND told me which chapters to start with. I felt like a genius! If I'd had this back in school, I might've actually paid attention!"</div>
+</div>
+<div class="gap"></div>
+
+<!-- ⑭ RECAP -->
+<div class="recap-box" contenteditable="true">
+  <div class="recap-title">📚 TODAY'S RECAP — LET'S REVIEW!</div>
+  <div class="recap-item"><b>① AI Reading Tools Are FREE &amp; Easy</b><br>ChatGPT, Google Gemini, Claude AI, and Microsoft Copilot are all free to use. No special skills needed — just type a question in plain English and get an instant answer!</div>
+  <div class="recap-item"><b>② 4 Superpowers for Book Lovers</b><br>Get personalized book picks, instant summaries, word &amp; phrase explanations, and memory quizzes — all from the same AI chatbot, available 24/7!</div>
+  <div class="recap-item"><b>③ Try ONE Thing Today</b><br>Go to chatgpt.com and type: <em>"I love [your favorite genre]. What are the best books I should read this summer?"</em> — It takes 30 seconds and costs nothing!</div>
+  <div class="recap-item" style="border-left-color:var(--gold);"><b>④ Today's American Saying</b><br><b style="color:var(--gold);">"A reader lives a thousand lives before he dies."</b> — With AI reading tools, those thousand lives are now more accessible than ever. Let AI be your passport to infinite worlds!</div>
+  <div style="text-align:center;color:var(--gold);font-weight:800;font-size:17pt;margin-top:18px;">🎉 Great job today! See you next episode! 🤖✨</div>
+</div>
+<div class="gap"></div>
+
+<div class="body-txt" contenteditable="true" style="text-align:center;font-size:14.5pt;color:var(--mid)">
+  📝 This post is made especially for seniors exploring AI for the very first time.<br>
+  Got questions? Drop a comment below — Jake reads every single one! 💬
+</div>
+<div class="gap-sm"></div>
+
+<div class="cta-box" contenteditable="true">
+  <div class="cta-title">🔔 NEVER MISS AN EPISODE!</div>
+  <div class="cta-body">Subscribe · Bookmark · Share with a friend who deserves to learn AI!<br><b>New episode every week — always free, always simple, always fun.</b></div>
+  <div class="cta-tags">#AIDecodedForSeniors &nbsp;|&nbsp; #ChatGPT &nbsp;|&nbsp; #AIForSeniors &nbsp;|&nbsp; #LearnAI &nbsp;|&nbsp; #GoogleGemini &nbsp;|&nbsp; #ClaudeAI</div>
+</div>
+<div class="gap-sm"></div>
+
+<div class="footer-txt" contenteditable="true">
+  This post is part of <b>AI Decoded for Seniors</b> — an educational series designed to make <b>Artificial Intelligence</b> accessible to every American.<br>
+  <span style="font-size:12.5pt">© 2026 AI Decoded for Seniors | All rights reserved</span>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- JS: IndexedDB + panel upload/delete -->
+<script>
+var SADB_NAME='ai-decoded-ep-media',SADB_VER=1,SADB_STORE='media';
+function sadbOpen(cb){var req=indexedDB.open(SADB_NAME,SADB_VER);req.onupgradeneeded=function(e){e.target.result.createObjectStore(SADB_STORE)};req.onsuccess=function(e){cb(e.target.result)};req.onerror=function(){cb(null)}}
+function sadbSave(key,data){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).put(data,key)})}
+function sadbLoad(key,cb){sadbOpen(function(db){if(!db){cb(null);return}var req=db.transaction(SADB_STORE,'readonly').objectStore(SADB_STORE).get(key);req.onsuccess=function(e){cb(e.target.result||null)};req.onerror=function(){cb(null)}})}
+function sadbDelete(key){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).delete(key)})}
+window.addEventListener('DOMContentLoaded',function(){
+  ['comic-1','comic-2','comic-3'].forEach(function(id){
+    sadbLoad(id,function(data){
+      if(!data)return;
+      var el=document.getElementById('pd-'+id);
+      if(!el)return;
+      el.innerHTML=data.startsWith('data:video')
+        ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+        :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    });
+  });
+});
+function comicUpload(inputId,panelId,dbKey){
+  var inp=document.getElementById(inputId);if(!inp)return;
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var data=ev.target.result;
+    var el=document.getElementById(panelId);if(!el)return;
+    el.innerHTML=f.type.startsWith('video/')
+      ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+      :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    sadbSave(dbKey,data);
+  };
+  r.readAsDataURL(f);
+}
+function comicDelete(panelId,dbKey){
+  var el=document.getElementById(panelId);if(!el)return;
+  el.innerHTML='<div class="comic-placeholder"><div style="font-size:52px">🎬</div><div style="font-size:13pt;color:var(--mid);text-align:center;">Click to Upload Image or Video</div></div>';
+  sadbDelete(dbKey);
+}
+</script>
+
+<!-- SAVE BAR -->
+<div class="save-bar">
+<button onclick="(function(){
+  var clone=document.body.cloneNode(true);
+  var sb=clone.querySelector('.save-bar');if(sb)sb.parentNode.removeChild(sb);
+  clone.querySelectorAll('input[type=file]').forEach(function(i){i.value=''});
+  clone.querySelectorAll('script').forEach(function(s){s.parentNode.removeChild(s)});
+  var html='<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n<meta charset=\'UTF-8\'>\n<meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0\'>\n<link rel=\'preconnect\' href=\'https://fonts.googleapis.com\'>\n<link rel=\'preconnect\' href=\'https://fonts.gstatic.com\' crossorigin>\n<link href=\'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap\' rel=\'stylesheet\'>\n'+document.querySelector('style').outerHTML+'\n</head>\n<body>\n'+clone.innerHTML+'\n</body>\n</html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ai_decoded_ep35_eng.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){alert('✅ EP.35 saved!\n\nPaste the saved <body> content into your blog HTML tab.\n(Scripts removed — blog-safe)');},300);
+})()">💾 Save HTML (Images Included)</button>
+</div>
+
+</body>
+</html>

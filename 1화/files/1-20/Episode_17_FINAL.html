@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤호와 함께하는 AI 이야기 - Episode 17</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Noto Sans KR', Arial, sans-serif !important; 
+            line-height: 1.35 !important; 
+            color: #000 !important; 
+            background: #FFF9E6 !important; 
+            font-size: 28px !important;
+            display: flex !important;
+            min-height: 100vh !important;
+            max-width: none !important;
+            width: 100% !important;
+        }
+        
+        .left-margin {
+            width: 7.5% !important;
+            background: #FFF9E6 !important;
+        }
+        
+        .content-wrapper {
+            width: 70% !important;
+            max-width: none !important;
+            background: #FFF9E6 !important;
+            padding: 30px 0 !important;
+        }
+        
+        .sidebar {
+            width: 15% !important;
+            background: #f5f5f5 !important;
+            padding: 30px 15px !important;
+            position: sticky !important;
+            top: 0 !important;
+            height: fit-content !important;
+        }
+        
+        .right-margin {
+            width: 7.5% !important;
+            background: #FFF9E6 !important;
+        }
+        
+        
+        /* 사이드바 스타일 */
+        .sidebar-item {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-title {
+            background: #0066CC;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+        }
+        
+        .sidebar-content {
+            padding: 20px 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .ad-space {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            padding-top: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+        }
+        
+        .ad-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .calendar {
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .calendar-month {
+            font-size: 18px;
+            font-weight: 900;
+            color: #0066CC;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day {
+            padding: 8px 4px;
+            font-size: 13px;
+            text-align: center;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .popular-post {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .popular-post:hover {
+            color: #0066CC;
+        }
+        
+        .popular-post:last-child {
+            border-bottom: none;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #E91E63 !important;
+            color: white !important;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .keyword-tag:hover {
+            background: #C2185B !important;
+            transform: scale(1.05);
+        }
+        
+        .search-box {
+            padding: 15px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #0066CC;
+        }
+        
+        /* 콘텐츠 영역 */
+        .container {
+            background: white !important;
+            padding: 35px !important;
+            border-radius: 20px !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1) !important;
+            max-width: none !important;
+            width: 100% !important;
+        }
+        
+        /* HERO SECTION - 핑크색 바탕에 진한 청색 글자 */
+        .hero-section {
+            background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 4px solid #E91E63;
+        }
+        
+        .hero-section .episode {
+            font-size: 26px;
+            color: #0D47A1;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        
+        .hero-section h1 {
+            font-size: 52px;
+            color: #0D47A1;
+            font-weight: 900;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
+        }
+        
+        .hero-section .subtitle {
+            font-size: 32px;
+            color: #1565C0;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        h2 {
+            color: #0D47A1 !important;
+            font-size: 36px !important;
+            margin: 40px 0 25px 0 !important;
+            padding-bottom: 15px !important;
+            border-bottom: 4px solid #0D47A1 !important;
+        }
+        
+        h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        h4 {
+            color: #1976D2 !important;
+            font-size: 28px !important;
+            margin: 25px 0 15px 0 !important;
+        }
+        
+        p {
+            margin: 20px 0 !important;
+            line-height: 1.6 !important;
+        }
+        }
+        
+        .intro-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #FF6F00;
+            box-shadow: 0 4px 15px rgba(255, 111, 0, 0.1);
+        }
+        
+        .intro-box h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        .intro-box p {
+            margin: 20px 0 !important;
+            line-height: 1.6 !important;
+        }
+        
+        .chat-bubble {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 28px;
+            margin: 25px 0;
+            border-radius: 20px;
+            border-left: 6px solid #0066CC;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.1);
+            font-size: 28px;
+            line-height: 1.8;
+        }
+        
+        .chat-bubble.grandpa {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left-color: #FF9800;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.1);
+        }
+        
+        .chat-bubble.yunho {
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            border-left-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 28px;
+            margin: 25px 0;
+            border-radius: 20px;
+            border-left: 6px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);
+        }
+        
+        .step-card h4 {
+            color: #1976D2 !important;
+            font-size: 28px !important;
+            margin: 25px 0 15px 0 !important;
+        }
+        
+        .step-card p {
+            margin: 20px 0 !important;
+            line-height: 1.6 !important;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.1);
+        }
+        
+        .tip-box h4 {
+            color: #1976D2 !important;
+            font-size: 28px !important;
+            margin: 25px 0 15px 0 !important;
+        }
+        
+        .tip-box p {
+            margin: 20px 0 !important;
+            line-height: 1.6 !important;
+        }
+        
+        .practice-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #9C27B0;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.1);
+        }
+        
+        .practice-box h4 {
+            color: #1976D2 !important;
+            font-size: 28px !important;
+            margin: 25px 0 15px 0 !important;
+        }
+        
+        .practice-box p {
+            margin: 20px 0 !important;
+            line-height: 1.6 !important;
+        }
+        
+        .keyword {
+            color: #D32F2F !important;
+            font-weight: 900 !important;
+        }
+        
+        .writing-example {
+            background: #F5F5F5;
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 15px;
+            border-left: 6px solid #667eea;
+            font-size: 26px;
+            line-height: 1.8;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 이미지 업로드 기능 */
+        .image-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 29px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 6px solid #9C27B0;
+        }
+        
+        .image-placeholder {
+            background: #FFFFFF;
+            border: 3px dashed #9C27B0;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-placeholder:hover {
+            background: #F3E5F5;
+            border-color: #7B1FA2;
+        }
+        
+        .image-upload-input {
+            display: none;
+        }
+        
+        .uploaded-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .image-description {
+            font-size: 24px;
+            color: #212121;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .image-caption-box {
+            background: #1565C0;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #0D47A1;
+            margin-top: 15px;
+        }
+        
+        .image-caption {
+            font-size: 24px;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .song-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 4px solid #F57F17;
+        }
+        
+        .song-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #F57F17;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .language-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .lang-tab {
+            background: #FFF;
+            border: 2px solid #FBC02D;
+            color: #F57F17;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .lang-tab:hover {
+            background: #FFFDE7;
+        }
+        
+        .lang-tab.active {
+            background: #F57F17;
+            color: white;
+            border-color: #F57F17;
+        }
+        
+        .lyrics-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #FDD835;
+        }
+        
+        .lyrics-content.active {
+            display: block;
+        }
+        
+        .song-lyrics {
+            font-size: 26px;
+            line-height: 2;
+            color: #212121;
+            white-space: pre-wrap;
+        }
+        
+        .audio-player-box {
+            background: linear-gradient(135deg, #E1BEE7 0%, #CE93D8 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 3px solid #9C27B0;
+        }
+        
+        .audio-upload-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .audio-upload-btn {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.3s;
+        }
+        
+        .audio-upload-btn:hover {
+            background: #7B1FA2;
+            transform: scale(1.05);
+        }
+        
+        .audio-player {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #9C27B0;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .play-btn:hover {
+            background: #7B1FA2;
+            transform: scale(1.1);
+        }
+        
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 15px solid white;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 3px;
+        }
+        
+        .pause-icon {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .pause-bar {
+            width: 5px;
+            height: 20px;
+            background: white;
+        }
+        
+        .progress-container {
+            flex: 1;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #9C27B0;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .time-display {
+            font-size: 16px;
+            color: #424242;
+            font-weight: 700;
+            min-width: 100px;
+            text-align: right;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #00897B;
+            box-shadow: 0 4px 15px rgba(0, 137, 123, 0.1);
+        }
+        
+        .summary-box h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        .next-preview {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border: 4px solid #E91E63;
+            text-align: center;
+        }
+        
+        .next-preview h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        .quiz-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #1976D2;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.1);
+        }
+        
+        .quiz-box h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        .quiz-question {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-options {
+            margin: 25px 0;
+        }
+        
+        .quiz-option {
+            display: block;
+            background: #F5F5F5;
+            padding: 18px 25px;
+            margin: 12px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            border: 3px solid transparent;
+        }
+        
+        .quiz-option:hover {
+            background: #E3F2FD;
+            border-color: #1976D2;
+            transform: translateX(10px);
+        }
+        
+        .quiz-option input[type="radio"] {
+            margin-right: 15px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+        
+        .quiz-submit-btn {
+            background: #1976D2;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin-top: 20px;
+        }
+        
+        .quiz-submit-btn:hover {
+            background: #1565C0;
+            transform: scale(1.05);
+        }
+        
+        .answer-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #2E7D32;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.1);
+        }
+        
+        .answer-box h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        .answer-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .reversed-text {
+            display: inline-block;
+            direction: rtl;
+            unicode-bidi: bidi-override;
+            font-weight: 700;
+            color: #424242;
+        }
+        
+        .grammar-checker-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #7B1FA2;
+            box-shadow: 0 4px 15px rgba(123, 31, 162, 0.1);
+        }
+        
+        .grammar-checker-box h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        .grammar-checker-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .grammar-input-area {
+            margin: 20px 0;
+        }
+        
+        .grammar-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 22px;
+            font-family: 'Noto Sans KR', sans-serif;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        .grammar-input:focus {
+            outline: none;
+            border-color: #7B1FA2;
+        }
+        
+        .grammar-check-btn {
+            background: #7B1FA2;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .grammar-check-btn:hover {
+            background: #6A1B9A;
+            transform: scale(1.05);
+        }
+        
+        .grammar-result {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #2E7D32;
+        }
+        
+        .grammar-links a {
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        .grammar-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .comment-section {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 35px;
+            margin: 30px 0;
+            border-radius: 20px;
+            border-left: 8px solid #F57C00;
+        }
+        
+        .comment-section h3 {
+            color: #1565C0 !important;
+            font-size: 32px !important;
+            margin: 30px 0 20px 0 !important;
+        }
+        
+        .comment-input-area {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .comment-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 22px;
+            font-family: 'Noto Sans KR', sans-serif;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        .comment-input:focus {
+            outline: none;
+            border-color: #F57C00;
+        }
+        
+        .comment-submit-btn {
+            background: #F57C00;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .comment-submit-btn:hover {
+            background: #E65100;
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 1200px) {
+            body {
+                flex-direction: column !important;
+            }
+            
+            .left-margin, .right-margin {
+                width: 100% !important;
+                height: 20px !important;
+            }
+            
+            .content-wrapper {
+                width: 100% !important;
+                padding: 20px !important;
+            }
+            
+            .sidebar {
+                width: 100% !important;
+                position: relative !important;
+            }
+        });
+            
+            if (editMode) {
+                btn.classList.add('active');
+                btn.textContent = '✅ 편집 중';
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '✏️ 편집 모드';
+            }
+        }
+        
+        function changeFontSize(action) {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+            
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            
+            if (action === 'increase') {
+                span.style.fontSize = '1.2em';
+            } else {
+                span.style.fontSize = '0.9em';
+            }
+            
+            range.surroundContents(span);
+        }
+        
+        function changeColor() {
+            const color = prompt('색상을 입력하세요 (예: red, #FF0000):');
+            if (color) {
+                document.execCommand('foreColor', false, color);
+            }
+        }
+        
+        function uploadImage(boxNumber) {
+            const input = document.getElementById('imageInput' + boxNumber);
+            const file = input.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('uploadedImage' + boxNumber);
+                    const placeholder = document.getElementById('imageBox' + boxNumber);
+                    const description = placeholder.querySelector('.image-description');
+                    const uploadBtn = placeholder.querySelector('.image-upload-btn');
+                    
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    description.style.display = 'none';
+                    uploadBtn.textContent = '🔄 다른 이미지 선택';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.lyrics-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('lyrics-' + lang).classList.add('active');
+        }
+        
+        function togglePlay() {
+            const playBtn = document.querySelector('.play-btn');
+            
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+                startPlayback();
+            } else {
+                isPlaying = false;
+                playBtn.innerHTML = '<div class="play-icon"></div>';
+                stopPlayback();
+            }
+        }
+        
+        function startPlayback() {
+            playInterval = setInterval(() => {
+                if (currentTime < duration) {
+                    currentTime++;
+                    updateProgress();
+                } else {
+                    togglePlay();
+                    currentTime = 0;
+                    updateProgress();
+                }
+            }, 1000);
+        }
+        
+        function stopPlayback() {
+            clearInterval(playInterval);
+        }
+        
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const timeDisplay = document.getElementById('timeDisplay');
+            
+            const percentage = (currentTime / duration) * 100;
+            progressFill.style.width = percentage + '%';
+            
+            const currentMin = Math.floor(currentTime / 60);
+            const currentSec = currentTime % 60;
+            const durationMin = Math.floor(duration / 60);
+            const durationSec = duration % 60;
+            
+            timeDisplay.textContent = 
+                `${currentMin}:${currentSec.toString().padStart(2, '0')} / ${durationMin}:${durationSec.toString().padStart(2, '0')}`;
+        }
+        
+        function seek(event) {
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const percentage = x / rect.width;
+            
+            currentTime = Math.floor(duration * percentage);
+            updateProgress();
+        }
+        
+        updateProgress();
+        
+        // 달력 생성
+        const holidays = {
+            2025: {
+                1: [1],
+                2: [28, 29, 30],
+                3: [1, 3],
+                5: [5, 15],
+                6: [6],
+                8: [15],
+                9: [28, 29, 30],
+                10: [3, 9],
+                12: [25]
+            }
+        };
+        
+        const holidayNames = {
+            2025: {
+                '1-1': '신정',
+                '2-28': '설날',
+                '2-29': '설날',
+                '2-30': '설날',
+                '3-1': '삼일절',
+                '3-3': '대체휴일',
+                '5-5': '어린이날',
+                '5-15': '석가탄신일',
+                '6-6': '현충일',
+                '8-15': '광복절',
+                '9-28': '추석',
+                '9-29': '추석',
+                '9-30': '추석',
+                '10-3': '개천절',
+                '10-9': '한글날',
+                '12-25': '성탄절'
+            }
+        };
+        
+        function generateCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            
+            document.getElementById('calendar-month').textContent = 
+                year + '년 ' + (month + 1) + '월';
+            
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            
+            const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+            weekDays.forEach((day, index) => {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+                dayCell.style.fontWeight = '900';
+                if (index === 0) {
+                    dayCell.style.color = '#D32F2F';
+                }
+                grid.appendChild(dayCell);
+            });
+            
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const firstDayOfWeek = firstDay.getDay();
+            const lastDate = lastDay.getDate();
+            
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day';
+                emptyCell.style.opacity = '0.3';
+                grid.appendChild(emptyCell);
+            }
+            
+            const monthHolidays = (holidays[year] && holidays[year][month + 1]) || [];
+            const monthHolidayNames = holidayNames[year] || {};
+            
+            for (let date = 1; date <= lastDate; date++) {
+                const dateCell = document.createElement('div');
+                dateCell.className = 'calendar-day';
+                
+                const currentDate = new Date(year, month, date);
+                const dayOfWeek = currentDate.getDay();
+                
+                if (dayOfWeek === 0) {
+                    dateCell.style.color = '#D32F2F';
+                }
+                
+                const isHoliday = monthHolidays.includes(date);
+                const holidayKey = (month + 1) + '-' + date;
+                const holidayName = monthHolidayNames[holidayKey];
+                
+                if (isHoliday && holidayName) {
+                    dateCell.style.color = '#D32F2F';
+                    dateCell.style.fontWeight = '900';
+                    dateCell.innerHTML = date + '<br><span style="font-size: 9px;">' + holidayName + '</span>';
+                } else {
+                    dateCell.textContent = date;
+                }
+                
+                if (date === now.getDate() && month === now.getMonth() && year === now.getFullYear()) {
+                    dateCell.style.background = '#0066CC';
+                    dateCell.style.color = 'white';
+                    dateCell.style.fontWeight = '900';
+                }
+                
+                grid.appendChild(dateCell);
+            }
+        }
+        
+        generateCalendar();
+    </script>
+</body>
+</html>

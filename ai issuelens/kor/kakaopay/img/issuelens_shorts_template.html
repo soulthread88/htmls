@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens Shorts 템플릿</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#111;
+  font-family:'Noto Sans KR',sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:32px 16px 48px;
+  gap:28px;
+  min-height:100vh;
+}
+
+/* ── 카드 9:16 고정 ── */
+.card{
+  position:relative;
+  width:390px;
+  height:693px;
+  overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,.8);
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── 상단 빨간 바 ── */
+.top-bar{
+  width:100%;
+  background:#CC0000;
+  padding:0;
+  height:165px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.top-text{
+  font-size:52px;
+  font-weight:900;
+  color:#fff;
+  text-align:center;
+  text-shadow:2px 2px 0 rgba(0,0,0,.4);
+  letter-spacing:-.02em;
+  line-height:1.2;
+  outline:none;
+  cursor:text;
+  width:100%;
+  padding:0 16px;
+  word-break:keep-all;
+}
+.top-text:focus{background:rgba(255,255,255,.08);border-radius:4px}
+
+/* ── 중앙 어두운 배경 ── */
+.mid{
+  flex:1;
+  position:relative;
+  background:
+    radial-gradient(ellipse 60% 45% at 20% 55%, rgba(170,90,0,.55) 0%, transparent 68%),
+    radial-gradient(ellipse 65% 55% at 80% 35%, rgba(20,45,130,.6) 0%, transparent 70%),
+    #080812;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:24px 18px;
+  gap:0;
+}
+
+/* 배경 장식 */
+.deco-circle{
+  position:absolute;
+  width:210px;height:210px;
+  background:rgba(160,90,0,.32);
+  border-radius:50%;
+  top:50%;left:12%;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+.deco-rect{
+  position:absolute;
+  width:160px;height:240px;
+  background:rgba(10,16,50,.7);
+  top:8%;right:-18px;
+  transform:rotate(11deg);
+  pointer-events:none;
+}
+
+/* 스마트폰 일러스트 */
+.phone{
+  position:absolute;
+  top:50%;left:8%;
+  transform:translateY(-52%) rotate(-7deg);
+  width:140px;height:195px;
+  background:linear-gradient(145deg,#182038,#0c1222);
+  border:2.5px solid #243255;
+  border-radius:14px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:9px;padding:14px;
+  box-shadow:0 8px 28px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.06);
+  pointer-events:none;
+  z-index:2;
+}
+.ph-b{width:80%;height:28px;background:#28407a;border-radius:5px}
+.ph-btn{width:68%;height:26px;background:#D99000;border-radius:5px;display:flex;align-items:center;justify-content:center}
+.ph-btn-i{width:16px;height:16px;border:2.5px solid rgba(0,0,0,.38);border-radius:50%}
+.ph-b2{width:80%;height:24px;background:#1a55a8;border-radius:5px}
+.ph-ln{height:3px;background:rgba(255,255,255,.16);border-radius:2px;width:68%}
+.ph-ln2{height:3px;background:rgba(255,255,255,.16);border-radius:2px;width:50%}
+
+/* ── 메인 텍스트 블록 ── */
+.main-block{
+  position:relative;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  margin-left:30px; /* 폰 일러스트와 겹치지 않게 살짝 우측 */
+}
+.m-line{
+  font-size:58px;
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.12;
+  text-shadow:3px 3px 0 rgba(0,0,0,.85),-1px -1px 0 rgba(0,0,0,.4);
+  outline:none;
+  cursor:text;
+  word-break:keep-all;
+}
+.m-line:focus{background:rgba(255,255,255,.07);border-radius:4px}
+.m-line.yellow{color:#FFD700}
+.m-line.white{color:#ffffff}
+
+/* ── 하단 빨간 바 ── */
+.bot-bar{
+  width:100%;
+  background:#CC0000;
+  padding:0;
+  height:165px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:0px;
+  flex-shrink:0;
+}
+.bot-line{
+  font-size:34px;
+  font-weight:900;
+  color:#fff;
+  text-shadow:2px 2px 0 rgba(0,0,0,.4);
+  text-align:center;
+  letter-spacing:-.02em;
+  line-height:1.25;
+  outline:none;
+  cursor:text;
+  width:100%;
+  padding:0 12px;
+  word-break:keep-all;
+}
+.bot-line:focus{background:rgba(255,255,255,.08);border-radius:4px}
+.bot-line .acc{color:#FFD700}
+
+/* ── 편집 패널 ── */
+.panel{
+  width:390px;
+  background:#1e1e1e;
+  border-radius:12px;
+  padding:20px 20px 24px;
+  color:#fff;
+}
+.panel-title{
+  font-size:14px;font-weight:700;color:#aaa;
+  margin-bottom:14px;padding-bottom:10px;
+  border-bottom:1px solid #333;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.row{margin-bottom:12px}
+.row label{display:block;font-size:11px;color:#666;font-weight:700;margin-bottom:4px;letter-spacing:.05em;text-transform:uppercase}
+.row input{
+  width:100%;background:#111;border:1.5px solid #333;
+  border-radius:7px;padding:9px 12px;color:#fff;
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:14px;font-weight:700;outline:none;
+  transition:border-color .18s;
+}
+.row input:focus{border-color:#CC0000}
+.sep{height:1px;background:#2a2a2a;margin:14px 0}
+.btns{display:flex;gap:8px;margin-top:4px}
+.btn{
+  flex:1;padding:11px;border-radius:8px;border:none;
+  font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;transition:opacity .15s,transform .12s;
+}
+.btn:hover{opacity:.85;transform:translateY(-1px)}
+.btn:active{transform:scale(.97)}
+.btn-r{background:#2e2e2e;color:#bbb}
+.btn-a{background:#CC0000;color:#fff}
+.note{font-size:11px;color:#555;text-align:center;margin-top:12px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- 카드 -->
+<div class="card" id="card">
+
+  <!-- 상단 빨간 바 -->
+  <div class="top-bar">
+    <div class="top-text" id="topText" contenteditable="true" spellcheck="false">구매 버튼<br>누른 순간</div>
+  </div>
+
+  <!-- 중앙 -->
+  <div class="mid">
+    <div class="deco-circle"></div>
+    <div class="deco-rect"></div>
+
+    <!-- 스마트폰 -->
+    <div class="phone">
+      <div class="ph-b"></div>
+      <div class="ph-btn"><div class="ph-btn-i"></div></div>
+      <div class="ph-b2"></div>
+      <div class="ph-ln"></div>
+      <div class="ph-ln2"></div>
+    </div>
+
+    <!-- 메인 3줄 -->
+    <div class="main-block">
+      <div class="m-line yellow" id="m1" contenteditable="true" spellcheck="false">4천만 명</div>
+      <div class="m-line white"  id="m2" contenteditable="true" spellcheck="false">개인정보가</div>
+      <div class="m-line yellow" id="m3" contenteditable="true" spellcheck="false">넘어갔다!</div>
+    </div>
+  </div>
+
+  <!-- 하단 빨간 바 -->
+  <div class="bot-bar">
+    <div class="bot-line" id="b1" contenteditable="true" spellcheck="false">당신의 <span class="acc">개인정보</span>는</div>
+    <div class="bot-line" id="b3" contenteditable="true" spellcheck="false">당신만의 것이 아닙니다</div>
+  </div>
+
+</div>
+
+<!-- 편집 패널 -->
+<div class="panel">
+  <div class="panel-title">텍스트 편집 패널</div>
+
+  <div class="row">
+    <label>상단 바</label>
+    <input id="p-top" type="text" value="구매 버튼 누른 순간" placeholder="상단 바 문구">
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="row">
+    <label>메인 1줄 (노란색)</label>
+    <input id="p-m1" type="text" value="4천만 명">
+  </div>
+  <div class="row">
+    <label>메인 2줄 (흰색)</label>
+    <input id="p-m2" type="text" value="개인정보가">
+  </div>
+  <div class="row">
+    <label>메인 3줄 (노란색)</label>
+    <input id="p-m3" type="text" value="넘어갔다!">
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="row">
+    <label>하단 바 1줄</label>
+    <input id="p-b1" type="text" value="당신의 개인정보는">
+  </div>
+  <div class="row">
+    <label>하단 바 2줄</label>
+    <input id="p-b3" type="text" value="당신만의 것이 아닙니다">
+  </div>
+
+  <div class="btns">
+    <button class="btn btn-r" onclick="reset()">↩ 초기화</button>
+    <button class="btn btn-a" onclick="apply()">✓ 적용</button>
+  </div>
+  <div class="note">카드 텍스트를 직접 클릭해 인라인 편집도 가능<br>입력창에서 Enter 키로 즉시 적용</div>
+</div>
+
+<script>
+const D = {
+  top:'구매 버튼 누른 순간',
+  m1:'4천만 명', m2:'개인정보가', m3:'넘어갔다!',
+  b1:'당신의 개인정보는', b3:'당신만의 것이 아닙니다'
+};
+
+function apply(){
+  document.getElementById('topText').textContent = document.getElementById('p-top').value;
+  document.getElementById('m1').textContent = document.getElementById('p-m1').value;
+  document.getElementById('m2').textContent = document.getElementById('p-m2').value;
+  document.getElementById('m3').textContent = document.getElementById('p-m3').value;
+  const b1v = document.getElementById('p-b1').value;
+  document.getElementById('b1').innerHTML = b1v.replace(/(개인정보)/g,'<span class="acc">$1</span>');
+  document.getElementById('b3').textContent = document.getElementById('p-b3').value;
+}
+
+function reset(){
+  document.getElementById('p-top').value = D.top;
+  document.getElementById('p-m1').value  = D.m1;
+  document.getElementById('p-m2').value  = D.m2;
+  document.getElementById('p-m3').value  = D.m3;
+  document.getElementById('p-b1').value  = D.b1;
+  document.getElementById('p-b3').value  = D.b3;
+  apply();
+}
+
+document.querySelectorAll('.panel input').forEach(inp=>{
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter'){e.preventDefault();apply();} });
+});
+
+apply();
+</script>
+</body>
+</html>

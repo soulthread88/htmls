@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카카오페이 정보유출 — 플랫폼별 콘텐츠 대본 패키지</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; background: #f8f7f4; color: #1a1a18; line-height: 1.7; }
+  header { background: #1a1a18; color: #f8f7f4; padding: 40px 48px; }
+  header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  header p { font-size: 14px; color: #aaa; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .badge { background: #2e2e2b; color: #c0dd97; font-size: 12px; padding: 4px 12px; border-radius: 100px; }
+  nav { display: flex; flex-wrap: wrap; gap: 0; background: #fff; border-bottom: 1px solid #e5e3dc; padding: 0 48px; }
+  nav a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; padding: 14px 18px; border-bottom: 2px solid transparent; transition: all .2s; }
+  nav a:hover, nav a.active { color: #1a1a18; border-bottom-color: #1a1a18; }
+  main { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+  .platform-section { display: none; }
+  .platform-section.active { display: block; }
+  .platform-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .platform-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .platform-title { font-size: 22px; font-weight: 700; }
+  .platform-sub { font-size: 13px; color: #777; margin-top: 2px; }
+  .keywords { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+  .kw { background: #eaf3de; color: #27500a; font-size: 12px; padding: 4px 10px; border-radius: 100px; font-weight: 500; }
+  .script-block { background: #fff; border: 1px solid #e5e3dc; border-radius: 14px; padding: 28px; margin-bottom: 20px; }
+  .script-block h3 { font-size: 14px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 16px; border-bottom: 1px solid #f0ede6; padding-bottom: 10px; }
+  .script-text { font-size: 15px; line-height: 1.9; color: #2a2a28; white-space: pre-wrap; }
+  .hook { background: #fff8e6; border-left: 4px solid #f4c77a; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 20px; font-size: 15px; font-style: italic; color: #412402; line-height: 1.8; }
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 20px 0; }
+  .stat-card { background: #f8f7f4; border-radius: 10px; padding: 16px; text-align: center; }
+  .stat-val { font-size: 24px; font-weight: 700; color: #1a1a18; }
+  .stat-lbl { font-size: 12px; color: #888; margin-top: 4px; }
+  .tip-box { background: #eeedfe; border-radius: 10px; padding: 16px 20px; margin-top: 16px; font-size: 13px; color: #3c3489; }
+  .tip-box strong { font-weight: 600; }
+  .copy-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; border-radius: 8px; border: 1px solid #ddd; background: #fff; cursor: pointer; color: #444; transition: background .15s; margin-top: 12px; }
+  .copy-btn:hover { background: #f5f4f0; }
+  .hashtag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+  .hashtag { background: #e6f1fb; color: #0c447c; font-size: 12px; padding: 4px 10px; border-radius: 100px; }
+  @media print { nav, .copy-btn { display: none; } .platform-section { display: block !important; page-break-after: always; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔥 카카오페이 4,045만 명 정보유출 — 플랫폼별 바이럴 콘텐츠 대본 패키지</h1>
+  <p>유튜브 롱폼 · 숏폼 · 인스타그램 · 틱톡 · 페이스북 · X(트위터) · Threads | 1개월 10만 구독자 목표</p>
+  <div class="badge-row">
+    <span class="badge">#카카오페이정보유출</span>
+    <span class="badge">#개인정보보호</span>
+    <span class="badge">#알리페이</span>
+    <span class="badge">#4045만명</span>
+    <span class="badge">#542억건</span>
+    <span class="badge">#데이터주권</span>
+    <span class="badge">#핀테크</span>
+    <span class="badge">#개인정보침해</span>
+  </div>
+</header>
+
+<nav id="main-nav">
+  <a href="#" class="active" onclick="show('youtube-long',this)">유튜브 롱폼</a>
+  <a href="#" onclick="show('youtube-short',this)">유튜브 숏폼</a>
+  <a href="#" onclick="show('instagram',this)">인스타그램</a>
+  <a href="#" onclick="show('tiktok',this)">틱톡</a>
+  <a href="#" onclick="show('facebook',this)">페이스북</a>
+  <a href="#" onclick="show('x-twitter',this)">X (트위터)</a>
+  <a href="#" onclick="show('threads',this)">Threads</a>
+</nav>
+
+<main>
+
+<!-- ===== 유튜브 롱폼 ===== -->
+<div class="platform-section active" id="sec-youtube-long">
+  <div class="platform-header">
+    <div class="platform-icon" style="background:#faece7;">📺</div>
+    <div><div class="platform-title">유튜브 롱폼 대본</div><div class="platform-sub">목표: 조회수 50만+ · 구독자 전환율 극대화 · SEO 최적화 제목·설명 포함</div></div>
+  </div>
+  <div class="keywords">
+    <span class="kw">카카오페이 정보유출</span><span class="kw">개인정보 유출</span><span class="kw">알리페이</span><span class="kw">중국 개인정보</span><span class="kw">4045만명</span><span class="kw">542억건</span><span class="kw">NSF점수</span><span class="kw">핀테크 보안</span><span class="kw">데이터 주권</span><span class="kw">금융 정보 유출</span><span class="kw">개인정보보호위원회</span><span class="kw">금융감독원</span>
+  </div>
+  <div class="stat-row">
+    <div class="stat-card"><div class="stat-val">4,045만</div><div class="stat-lbl">피해자 수</div></div>
+    <div class="stat-card"><div class="stat-val">542억</div><div class="stat-lbl">전송 건수</div></div>
+    <div class="stat-card"><div class="stat-val">6년</div><div class="stat-lbl">무단 전송 기간</div></div>
+    <div class="stat-card"><div class="stat-val">190억</div><div class="stat-lbl">과징금(원)</div></div>
+  </div>
+
+  <div class="script-block">
+    <h3>SEO 최적화 제목 (A/B 테스트용 3종)</h3>
+    <div class="script-text">① [충격] 내 카카오페이 결제 내역이 6년 동안 중국으로 새고 있었다 | 4,045만명 정보유출 사건 총정리
+② 카카오페이가 숨긴 진실: 542억 건 개인정보를 왜 알리페이에 넘겼나? (경찰 수사 중)
+③ 당신의 잔고·결제내역이 중국 서버에? 대한민국 역대 최대 개인정보 유출 사건 [2026 최신]</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>유튜브 설명란 (SEO 최적화)</h3>
+    <div class="script-text">카카오페이 4,045만 명 개인정보 무단 유출 사건의 모든 것을 파헤칩니다.
+
+2018년부터 2024년 5월까지 무려 6년간 542억 건의 개인정보(이름·전화번호·이메일·잔고·결제내역)가 중국 알리페이 서버로 전송된 충격적인 사건. NSF 점수, 업무위수탁 vs 제3자 제공 논란, 190억 원 과징금, 현재 진행 중인 경찰 수사까지 완벽 정리했습니다.
+
+⏱ 목차
+00:00 내 정보가 중국으로?
+01:30 무엇이 얼마나 넘어갔나
+04:00 NSF 점수의 비밀
+07:00 장난감 자물쇠 암호화 논란
+09:30 법적 공방 핵심 쟁점
+11:30 데이터 주권을 생각하며
+
+🔔 구독 + 알림 설정하면 개인정보 보호 최신 이슈를 가장 빠르게 받아보실 수 있습니다.
+
+#카카오페이 #개인정보유출 #알리페이 #중국정보유출 #데이터주권 #핀테크 #개인정보보호 #금융보안 #카카오 #정보보안 #사이버보안 #개인정보침해 #금융감독원 #개인정보보호위원회 #NSF점수</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>오프닝 후킹 대본 (0:00~1:30) — 시청 유지율 핵심 구간</h3>
+    <div class="hook">"지금 이 순간에도 여러분의 결제 내역이 중국 서버 어딘가에 저장되고 있을지 모릅니다."</div>
+    <div class="script-text">안녕하세요. 오늘은 여러분이 반드시 알아야 할 이야기를 가져왔습니다.
+
+[화면: 스마트폰에 카카오페이 앱 클로즈업]
+
+카카오페이. 대한민국에서 가장 많이 쓰는 간편결제 앱 중 하나죠. 편의점, 카페, 온라인 쇼핑... 하루에도 수십 번 쓰는 분들 많으실 겁니다.
+
+그런데 저는 오늘 이 질문 하나를 여러분께 드리고 싶어요.
+
+"내가 편의점에서 삼각김밥 하나 사면서 결제한 기록, 그 기록이 지금 어디에 있을까요?"
+
+[화면: 세계 지도 위에 한국→중국으로 날아가는 데이터 시각화]
+
+충격적이게도, 그 기록이 중국 기업의 서버에 있을 가능성이 매우 높습니다.
+
+2018년부터 2024년 5월까지. 무려 6년 동안. 카카오페이는 고객 4,045만 명의 개인정보 542억 건을 중국의 핀테크 기업 '알리페이'에 무단으로 전송해왔습니다.
+
+4,045만 명. 이 숫자가 얼마나 큰 건지 감이 잘 안 오시죠?
+
+대한민국 경제 활동 인구 전체가 약 2,900만 명입니다. 즉, 일하는 성인을 모두 합쳐도 모자라는 숫자예요. 스마트폰을 쓰는 대한민국 성인이라면, 여러분도, 여러분 부모님도, 친구도 거의 모두 피해자라는 뜻입니다.
+
+그리고 현재, 이 사건은 경찰이 정식으로 수사 중입니다.
+
+오늘 이 영상에서는 도대체 왜 이런 일이 벌어진 건지, 내 정보가 지금 어디서 어떻게 쓰이고 있는지, 그리고 나는 어떻게 해야 하는지까지 한 방에 정리해드리겠습니다.
+
+영상 끝까지 보시면 여러분의 디지털 권리에 대해 완전히 새로운 시각을 갖게 되실 거예요. 자, 바로 시작합니다.</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>본론 1 — 무엇이 얼마나 넘어갔나 (1:30~4:00)</h3>
+    <div class="script-text">[화면: 인포그래픽 — 542억 건 데이터 종류 리스트]
+
+자, 이제 본론으로 들어가 봅시다.
+
+우선 숫자부터 제대로 뜯어볼게요.
+
+542억 건. 이걸 한 사람 기준으로 환산하면 평균 1,340건입니다. 4,045만 명 한 명 한 명의 정보가 평균 1,340번 중국 서버로 전송됐다는 거예요.
+
+그럼 어떤 정보가 넘어갔을까요?
+
+[화면: 리스트 하나씩 등장하는 애니메이션]
+
+하나. 암호화된 카카오 계정 ID
+둘. 휴대폰 번호
+셋. 이메일 주소
+넷. 카카오페이 머니 잔고
+다섯. 등록된 카드 거래 내역
+여섯. 실시간 결제 기록
+
+잠깐요. 잔고요? 결제 내역이요?
+
+이게 얼마나 민감한 정보인지 생각해보세요. 여러분이 매달 얼마 버는지, 얼마나 쓰는지, 어디서 쓰는지... 이 정보들이 합쳐지면 사실상 여러분의 경제적 생활 전체를 들여다볼 수 있습니다.
+
+더 기가 막힌 건 따로 있어요.
+
+해외 결제를 단 한 번도 써본 적 없는 분들도, 아이폰을 쓰지 않는 분들도 정보가 다 넘어갔습니다. 전체 피해자 중 애플 결제와 아무 관련 없는 분이 80% 이상이에요.
+
+"나는 애플 결제 안 쓰니까 관계없지 않나?"
+
+아닙니다. 전혀 관계없는 분들의 정보도 매일 자동으로 빠져나가고 있었습니다.</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>본론 2~4 + 클로징 압축 대본 (4:00~12:00)</h3>
+    <div class="script-text">[본론 2: NSF 점수의 비밀 — 4:00~7:00]
+
+그럼 왜 카카오페이는 이런 무모한 선택을 했을까요?
+
+시작은 애플 앱스토어 입점이었습니다. 애플은 결제 수단을 등록할 때 'NSF 점수'를 요구합니다. NSF, 즉 Non-Sufficient Funds — 쉽게 말해 "이 사람이 나중에 돈을 갚을 수 있는 사람이냐"를 판단하는 신용 평가 점수예요.
+
+문제는 카카오페이가 이 점수를 자체적으로 뽑을 시스템이 없었다는 겁니다.
+
+해결책은 두 가지였어요.
+방법 1: 수백억 투자해서 자체 시스템 구축
+방법 2: 이미 시스템 있는 알리페이에 아웃소싱
+
+카카오페이는 2번을 선택했습니다. 알리페이는 이미 카카오페이의 2대 주주였으니까요.
+
+[화면: 카카오페이-알리페이 주주 관계 다이어그램]
+
+그런데 금융감독원이 지적한 핵심이 바로 이겁니다.
+"애플은 점수만 요구했다. 4천만 명 전체 데이터를 요구한 적이 없다."
+
+NSF 점수 산출에 필요한 것보다 훨씬 많은, 과도한 정보를 넘겼다는 거예요.
+
+---
+
+[본론 3: 장난감 자물쇠 — 7:00~9:30]
+
+카카오페이는 여기서 이렇게 반박합니다.
+"암호화해서 보냈으니까 누군지 알 수 없어. 안전해."
+
+과연 그럴까요?
+
+금융감독원 조사 결과, 이 암호화 수준이 일반적인 프로그램으로도 손쉽게 복호화할 수 있는 수준이었다고 합니다.
+
+전문가들의 표현이 정말 인상적이에요.
+"100원짜리 동전으로도 열 수 있는 장난감 자물쇠."
+
+더 큰 문제는 감시 불가능이에요. 알리페이가 이 데이터로 무엇을 하는지, 중국 서버를 우리가 직접 들여다볼 방법이 없습니다.
+
+---
+
+[본론 4: 법적 공방 — 9:30~11:30]
+
+현재 이 사건의 핵심 쟁점은 딱 하나입니다.
+
+"업무 위수탁이냐, 제3자 제공이냐?"
+
+카카오페이 주장: "정상적인 업무 대행이야. 고객 동의 필요 없어."
+정부 기관 판단: "무단 유출이야. 동의 필수였어."
+
+결과는 어떻게 됐냐면...
+- 개인정보보호위원회 과징금 부과
+- 금융감독원 제재
+- 합산 약 190억 원 역대급 과징금
+- 그리고 지금, 경기남부경찰청의 형사 수사
+
+카카오페이는 불복해서 행정 소송 중이지만... 이미 모회사 카카오가 오픈채팅방 정보 유출로 151억 과징금에 소송까지 패소한 전례가 있어 전망이 밝지 않습니다.
+
+---
+
+[클로징 — 11:30~12:00]
+
+[화면: 조용한 배경에 자막]
+
+"데이터는 21세기의 석유입니다."
+
+알리페이가 6년 동안 모아온 4,045만 명의 금융 데이터. 이건 단순한 숫자가 아닙니다. 대한민국 국민의 경제적 삶 전체를 들여다볼 수 있는 황금 열쇠예요.
+
+편리한 무료 서비스 뒤에 숨겨진 우리 데이터의 진짜 가치. 그리고 이걸 허락 없이 해외로 넘긴 기업의 책임.
+
+여러분은 어떻게 생각하시나요?
+
+오늘 영상이 유익하셨다면, 구독과 좋아요 꼭 부탁드립니다. 개인정보 보호에 관심 있는 지인에게 공유해주시면 정말 큰 힘이 됩니다.
+
+감사합니다.</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="tip-box"><strong>알고리즘 팁:</strong> 업로드 후 첫 48시간 내 댓글 20개 이상 달성 시 추천 알고리즘 진입 확률 급상승. 영상 끝에 "여러분 카카오페이 쓰시나요? 댓글로 알려주세요!" 유도 필수.</div>
+</div>
+
+<!-- ===== 유튜브 숏폼 ===== -->
+<div class="platform-section" id="sec-youtube-short">
+  <div class="platform-header">
+    <div class="platform-icon" style="background:#faece7;">⚡</div>
+    <div><div class="platform-title">유튜브 숏츠 대본</div><div class="platform-sub">60초 이내 · 세로 9:16 · 후킹 첫 3초가 전부</div></div>
+  </div>
+  <div class="keywords">
+    <span class="kw">카카오페이 충격</span><span class="kw">개인정보 유출 2026</span><span class="kw">중국 정보유출</span><span class="kw">알리페이 한국</span><span class="kw">Shorts</span><span class="kw">정보보안</span>
+  </div>
+
+  <div class="script-block">
+    <h3>숏츠 버전 1 — "숫자 폭탄" (45초)</h3>
+    <div class="hook">첫 3초 후킹: [화면 가득 빨간 글씨] "4,045만 명. 당신도 포함입니다."</div>
+    <div class="script-text">[0~3초] 빨간 자막 풀화면: "4,045만 명. 당신도 포함입니다."
+
+[3~8초] 내레이션 + 자막:
+"카카오페이 쓰세요? 그럼 이 영상 끝까지 보세요."
+
+[8~20초] 빠른 컷 편집:
+"2018년부터 2024년까지..."
+"내 이름, 전화번호, 이메일..."
+"심지어 잔고와 결제 내역까지..."
+"6년간 중국 알리페이 서버로 전송."
+"본인 동의? 없었습니다."
+
+[20~35초] 핵심 팩트 3가지:
+"피해자: 4,045만 명 — 사실상 대한민국 성인 전체"
+"전송량: 542억 건"
+"현재: 경찰 수사 진행 중"
+
+[35~45초] CTA:
+"더 충격적인 내막이 있습니다. 롱폼 영상 링크 프로필에 있어요."
+"구독하면 이런 정보 가장 먼저 받아보실 수 있습니다."</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>숏츠 버전 2 — "암호화 반전" (55초)</h3>
+    <div class="hook">첫 3초 후킹: "암호화했으니 안전하다고요? 웃기는 소리입니다."</div>
+    <div class="script-text">[0~3초] 내레이션:
+"암호화했으니 안전하다고요? 전문가들이 뭐라고 했는지 들어보세요."
+
+[3~15초]:
+"카카오페이가 4천만 명 정보를 중국으로 넘기면서 한 말이 있습니다."
+"'암호화해서 보냈으니까 괜찮아.'"
+
+[15~30초] 반전:
+"근데 금융감독원 조사 결과..."
+"그 암호화 수준이..."
+"[빨간 자막 등장] '100원짜리 자물쇠 수준'이었습니다."
+"일반 프로그램으로도 복호화 가능."
+
+[30~45초] 충격 팩트 추가:
+"피해자 4,045만 명"
+"전송 기간 6년"
+"과징금 190억 원"
+"지금도 수사 중"
+
+[45~55초] CTA:
+"이게 어떻게 가능했는지, NSF 점수의 비밀은?"
+"프로필 링크에서 풀 영상 확인하세요."
+"구독 눌러주시면 감사합니다."</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>숏츠 버전 3 — "나도 피해자?" 참여형 (50초)</h3>
+    <div class="hook">첫 3초: [화면에 질문 자막] "카카오페이 쓴 적 있으세요?"</div>
+    <div class="script-text">[0~3초] 자막 질문:
+"카카오페이 쓴 적 있으세요?"
+
+[3~10초]:
+"그럼 아마 당신의 정보도 중국에 있을 겁니다."
+"해외 결제 안 해도, 아이폰 없어도."
+
+[10~30초] 빠른 팩트:
+"2018~2024, 6년간"
+"알리페이에 무단 전송"
+"피해자 4,045만 명 (한국 성인 대부분)"
+"잔고·결제내역·전화번호 포함"
+"동의? 없었습니다."
+
+[30~45초] 감정 유발:
+"데이터는 21세기의 석유라고 하죠."
+"우리 정보로 6년 동안..."
+"누군가 돈을 벌고 있었을 수도 있습니다."
+
+[45~50초] CTA:
+"댓글에 카카오페이 쓰시면 '피해자' 써주세요."
+"구독하고 다음 폭로도 함께 보시죠."</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="tip-box"><strong>숏츠 알고리즘 팁:</strong> 제목에 반드시 숫자 포함 ("4045만명", "542억건"). 해시태그 3~5개만. #Shorts 필수 태그. 첫 댓글은 본인이 직접 "여러분은 알고 계셨나요?" 로 고정 댓글 달기.</div>
+</div>
+
+<!-- ===== 인스타그램 ===== -->
+<div class="platform-section" id="sec-instagram">
+  <div class="platform-header">
+    <div class="platform-icon" style="background:#fbeaf0;">📸</div>
+    <div><div class="platform-title">인스타그램 대본</div><div class="platform-sub">릴스 · 카드뉴스 캡션 · 스토리 — 저장·공유 유도형</div></div>
+  </div>
+  <div class="keywords">
+    <span class="kw">카드뉴스</span><span class="kw">릴스</span><span class="kw">인포그래픽</span><span class="kw">정보보안</span><span class="kw">팩트체크</span><span class="kw">알아야할것들</span>
+  </div>
+
+  <div class="script-block">
+    <h3>릴스 대본 (30초 버전)</h3>
+    <div class="hook">첫 컷 자막 + 나레이션: "내 카카오페이 결제 내역... 중국에 있습니다."</div>
+    <div class="script-text">[0~3초] 충격 자막:
+"내 카카오페이 결제 내역이 중국에 있다면?"
+
+[3~12초] 빠른 팩트 컷:
+"2018~2024 / 6년간"
+"542억 건 전송"
+"피해자 4,045만 명"
+"내 이름·잔고·결제내역 포함"
+"동의 없이"
+
+[12~22초] 핵심:
+"카카오페이 → 알리페이(중국 기업)로 무단 전송"
+"애플 앱스토어 입점 위해 NSF 점수 아웃소싱"
+"근데 필요 이상의 정보를 넘겼다는 게 문제"
+
+[22~30초] CTA:
+"저장해두고 주변에 공유해주세요."
+"프로필 링크에서 풀 영상 보실 수 있어요."
+"팔로우하면 이런 중요 정보 놓치지 않습니다."</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>카드뉴스 캡션 (저장 유도형)</h3>
+    <div class="script-text">🚨 카카오페이 4,045만 명 정보유출 — 알아야 할 5가지
+
+나중에 다시 볼 수 있도록 저장 꼭 눌러주세요 👆
+
+슬라이드 넘기며 확인하세요 →
+
+카드 1️⃣ 피해 규모
+카드 2️⃣ 어떤 정보가 넘어갔나
+카드 3️⃣ 왜 이런 일이 생겼나 (NSF 점수)
+카드 4️⃣ 암호화는 안전했나
+카드 5️⃣ 지금 상황 + 내가 할 수 있는 것
+
+—
+
+이 사건이 충격적인 이유:
+✔ 해외 결제 안 해도 피해자
+✔ 아이폰 없어도 피해자
+✔ 카카오페이 쓰면 80% 이상 해당
+✔ 현재 경찰 수사 진행 중
+
+—
+
+📌 개인정보 보호에 관심 있다면 팔로우하세요.
+중요한 정보를 가장 쉽게 전달해드립니다.
+
+#카카오페이 #개인정보유출 #알리페이 #정보보안 #개인정보보호 #중국개인정보 #핀테크 #데이터주권 #카드뉴스 #팩트체크 #알아야할것 #정보유출 #금융보안 #사이버보안 #디지털권리 #개인정보침해 #카카오 #간편결제 #금융감독원 #NSF점수</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>스토리 시리즈 (5장)</h3>
+    <div class="script-text">스토리 1 — 질문 스티커 활용
+[배경: 강렬한 빨간색]
+"카카오페이 쓰세요?"
+[질문 스티커: "나도 피해자일까?"]
+
+스토리 2 — 충격 팩트
+"4,045만 명의 정보가 6년간 중국으로"
+"잔고·결제내역 포함"
+→ 스와이프업: 자세히 보기
+
+스토리 3 — 퀴즈 (참여 유도)
+"해외 결제 한 번도 안 해도 피해자일까?"
+[투표 스티커: YES / NO]
+(정답: YES — 전체의 80%+)
+
+스토리 4 — 핵심 정보
+"경찰이 지금 수사 중입니다."
+"과징금 190억 원"
+"아직 끝나지 않은 이야기"
+
+스토리 5 — CTA
+"이 사건 더 자세히 알고 싶다면?"
+"프로필 링크 클릭 →"
+[팔로우 유도 버튼 스티커]</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+</div>
+
+<!-- ===== 틱톡 ===== -->
+<div class="platform-section" id="sec-tiktok">
+  <div class="platform-header">
+    <div class="platform-icon" style="background:#eaf3de;">🎵</div>
+    <div><div class="platform-title">틱톡 대본</div><div class="platform-sub">15~60초 · 트렌드 사운드 활용 · Z세대 공감 언어</div></div>
+  </div>
+  <div class="keywords">
+    <span class="kw">틱톡 바이럴</span><span class="kw">충격팩트</span><span class="kw">알고리즘</span><span class="kw">카카오페이</span><span class="kw">개인정보</span><span class="kw">중국</span>
+  </div>
+
+  <div class="script-block">
+    <h3>버전 1 — "POV: 내 정보가..." (30초, 트렌드 형식)</h3>
+    <div class="hook">첫 컷: 손으로 카카오페이 앱 클릭하는 장면 + 자막 "POV: 이 앱이 6년 동안 내 정보를 팔고 있었음"</div>
+    <div class="script-text">[0~2초] 자막: "POV: 카카오페이가 6년 동안 내 결제 내역을 중국에 팔고 있었음"
+
+[2~8초] 빠른 자막 전환:
+"피해자 수: 4,045만 명"
+"= 한국 성인 거의 전부"
+"내 이름 / 전화번호 / 이메일"
+"심지어... 잔고랑 결제 내역까지"
+
+[8~18초] 말하기 대본:
+"진짜 충격인 게 뭔지 알아요?
+해외 결제 한 번도 안 해봤어도,
+아이폰 없어도,
+카카오페이만 깔려 있으면
+정보가 넘어간 거예요."
+
+[18~25초] 반전 포인트:
+"그리고 암호화했다고 안전하다 했는데..."
+"전문가들 말로는"
+"[자막 크게] 100원짜리 자물쇠 수준"
+
+[25~30초] CTA:
+"이거 주변에 알려줘요"
+"팔로우하면 이런 거 계속 알려드림"
+"#카카오페이 #충격팩트 #알고리즘타라"</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>버전 2 — "스토리타임" 형식 (60초)</h3>
+    <div class="hook">첫 컷: 카메라 직시 + "스토리타임: 카카오페이가 우리한테 한 짓"</div>
+    <div class="script-text">[0~5초]:
+"스토리타임 해볼게요. 카카오페이 있으세요? 그럼 들으세요."
+
+[5~20초]:
+"2018년이에요. 카카오페이가 애플 앱스토어에 들어가려 합니다.
+근데 애플이 요구해요 — '이 사람 돈 낼 수 있는 사람인지 점수 내놔.'
+카카오페이, 자체 시스템 없어요.
+그래서? 중국 알리페이한테 맡겨요.
+알리페이, 카카오페이 2대 주주거든요."
+
+[20~35초]:
+"근데 여기서 문제가 생겨요.
+애플은 '점수'만 달라고 했는데
+카카오페이가 넘긴 건..."
+[자막] "4,045만 명 전체 데이터"
+"잔고, 결제내역, 전화번호, 이메일..."
+"6년 동안. 매일. 자동으로."
+
+[35~50초]:
+"이게 들키고 나서 카카오페이가 한 말:
+'암호화했으니까 괜찮아요'
+근데 금융감독원 조사해보니까..."
+[큰 자막] "일반 프로그램으로 복호화 가능 ㅋ"
+"전문가들: '장난감 자물쇠 수준입니다'"
+
+[50~60초]:
+"결과는요?
+과징금 190억 원
+경찰 수사 중
+그리고 4천만 명은... 정보 어딨는지 아직 몰라요.
+
+이거 진짜 중요한 얘기라서 공유 한 번만 눌러주세요.
+팔로우하면 이런 거 계속 알려드릴게요."</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>틱톡 해시태그 전략</h3>
+    <div class="hashtag-cloud">
+      <span class="hashtag">#카카오페이</span>
+      <span class="hashtag">#개인정보유출</span>
+      <span class="hashtag">#충격팩트</span>
+      <span class="hashtag">#알고리즘타라</span>
+      <span class="hashtag">#알리페이</span>
+      <span class="hashtag">#정보보안</span>
+      <span class="hashtag">#fyp</span>
+      <span class="hashtag">#foryou</span>
+      <span class="hashtag">#한국</span>
+      <span class="hashtag">#스토리타임</span>
+      <span class="hashtag">#팩트</span>
+      <span class="hashtag">#충격</span>
+      <span class="hashtag">#중국</span>
+      <span class="hashtag">#데이터</span>
+      <span class="hashtag">#개인정보</span>
+    </div>
+    <div class="tip-box" style="margin-top:16px"><strong>틱톡 최적화 팁:</strong> 현재 바이럴 중인 사운드(뉴스 브리핑 BGM, 긴장감 있는 효과음)에 맞춰 편집. 댓글에 "나 카카오페이 지우러 간다"류의 반응 유도 문구 삽입. 듀엣/스티치 허용 설정으로 반응 영상 생산 유도.</div>
+  </div>
+</div>
+
+<!-- ===== 페이스북 ===== -->
+<div class="platform-section" id="sec-facebook">
+  <div class="platform-header">
+    <div class="platform-icon" style="background:#e6f1fb;">📘</div>
+    <div><div class="platform-title">페이스북 대본</div><div class="platform-sub">장문 포스트 · 그룹 공유 · 40~60대 타깃 · 공유 유도형</div></div>
+  </div>
+  <div class="keywords">
+    <span class="kw">페이스북 장문</span><span class="kw">공유</span><span class="kw">40대50대</span><span class="kw">실생활정보</span><span class="kw">카카오페이위험</span>
+  </div>
+
+  <div class="script-block">
+    <h3>페이스북 장문 포스트 (공유 유도형)</h3>
+    <div class="script-text">🚨 [중요] 카카오페이 쓰시는 분들 꼭 읽어보세요
+
+제가 이 글을 쓰는 이유는 하나입니다.
+주변 분들이 이 사실을 모르고 계시기 때문입니다.
+
+━━━━━━━━━━━━━━━
+
+📌 무슨 일이 있었나요?
+
+2018년부터 2024년 5월까지 — 무려 6년 동안 —
+카카오페이는 고객 4,045만 명의 개인정보를
+중국의 핀테크 기업 '알리페이'에 무단으로 전송해왔습니다.
+
+전송된 정보 목록을 보면 정말 충격적입니다.
+
+✔ 이름 (암호화된 계정 ID)
+✔ 휴대폰 번호
+✔ 이메일 주소
+✔ 카카오페이 머니 잔고
+✔ 등록된 카드 거래 내역
+✔ 실시간 결제 기록
+
+6년 동안, 총 542억 건이 넘어갔습니다.
+한 사람당 평균 1,340건이 국경을 넘었다는 뜻입니다.
+
+━━━━━━━━━━━━━━━
+
+📌 나는 해당이 안 되지 않을까요?
+
+이런 생각 하실 수 있습니다.
+"나는 해외 결제 안 써봤는데?"
+"나는 아이폰 없는데?"
+
+안타깝게도 그런 분들도 전부 포함됩니다.
+전체 피해자 중 80% 이상이 애플 결제와 전혀 무관한 분들입니다.
+카카오페이 앱만 설치되어 있었으면 해당될 수 있습니다.
+
+━━━━━━━━━━━━━━━
+
+📌 왜 이런 일이 생겼나요?
+
+카카오페이가 애플 앱스토어에 입점하려면
+'NSF 점수'(신용 위험 평가 점수)가 필요했습니다.
+자체 시스템이 없던 카카오페이는
+2대 주주이자 파트너인 알리페이에 이 작업을 맡겼습니다.
+
+문제는, 애플은 점수만 요구했는데
+카카오페이가 그것보다 훨씬 많은 정보를 넘겼다는 것입니다.
+
+━━━━━━━━━━━━━━━
+
+📌 "암호화했으니 안전하다"는 주장은?
+
+카카오페이는 "암호화해서 보냈기 때문에 안전하다"고 했습니다.
+하지만 금융감독원 조사 결과,
+그 암호화 수준이 일반 프로그램으로도 복호화 가능한 수준이었다고 합니다.
+전문가들은 이를 "100원짜리 자물쇠"에 비유했습니다.
+
+━━━━━━━━━━━━━━━
+
+📌 현재 상황은?
+
+✔ 개인정보보호위원회 + 금융감독원 합산 약 190억 원 과징금
+✔ 경기남부경찰청 형사 수사 진행 중 (신용정보법 위반)
+✔ 카카오페이는 행정 소송으로 불복 중
+
+━━━━━━━━━━━━━━━
+
+주변에 카카오페이 쓰시는 분들께 이 글 공유해 주시면 감사하겠습니다.
+본인의 정보가 어디에 있는지, 어떻게 쓰이고 있는지 알 권리가 있습니다.
+
+자세한 내용은 아래 영상에서 확인하실 수 있습니다.
+👇 댓글에 링크 남겨드렸습니다.
+
+#카카오페이 #개인정보유출 #알리페이 #정보보안 #개인정보보호</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>페이스북 그룹 공유용 짧은 버전</h3>
+    <div class="script-text">카카오페이 쓰시는 분들 계신가요?
+
+충격적인 사실 하나 알려드립니다.
+
+2018~2024년 사이, 카카오페이 사용자 4,045만 명의 개인정보가 중국 알리페이에 무단으로 전송됐습니다.
+잔고·결제내역·전화번호 포함이고, 해외 결제 안 하신 분들도 80% 이상 해당됩니다.
+
+현재 경찰이 수사 중이고 과징금만 190억 원이 부과됐습니다.
+
+자세한 내용은 댓글 링크에서 확인하세요. 주변에 꼭 공유해 주세요!</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+</div>
+
+<!-- ===== X (트위터) ===== -->
+<div class="platform-section" id="sec-x-twitter">
+  <div class="platform-header">
+    <div class="platform-icon" style="background:#f1efe8;">✖</div>
+    <div><div class="platform-title">X (트위터) 대본</div><div class="platform-sub">스레드형 · 짧고 강렬한 팩트 폭탄 · 리트윗 유도</div></div>
+  </div>
+  <div class="keywords">
+    <span class="kw">트위터스레드</span><span class="kw">한국트위터</span><span class="kw">팩폭</span><span class="kw">개인정보</span><span class="kw">카카오</span>
+  </div>
+
+  <div class="script-block">
+    <h3>X 스레드 (10연속 트윗)</h3>
+    <div class="script-text">1/10
+카카오페이가 6년 동안 4,045만 명의 개인정보를 중국에 넘겼습니다.
+잔고와 결제 내역까지.
+본인 동의 없이.
+
+이게 현재 경찰이 수사 중인 사건입니다.
+
+🧵 스레드로 정리합니다 →
+
+---
+
+2/10
+피해 규모가 얼마나 큰지 보면:
+
+📊 피해자: 4,045만 명
+📊 전송 건수: 542억 건
+📊 기간: 2018~2024년 (6년)
+📊 수신 기업: 중국 알리페이
+
+대한민국 경제활동인구(약 2,900만 명)보다 많습니다.
+
+---
+
+3/10
+어떤 정보가 넘어갔냐면:
+
+• 암호화 카카오 계정 ID
+• 휴대폰 번호
+• 이메일 주소
+• 카카오페이 머니 잔고
+• 카드 거래 내역
+• 실시간 결제 기록
+
+---
+
+4/10
+"나는 해외 결제 안 써서 괜찮겠지?"
+
+아닙니다.
+
+피해자 중 80% 이상이
+애플 결제와 전혀 무관한 사람들입니다.
+카카오페이 앱만 있으면 해당됩니다.
+
+---
+
+5/10
+왜 이런 일이 생겼냐면:
+
+카카오페이가 애플 앱스토어에 들어가려면
+NSF 점수(신용 위험 점수)가 필요했습니다.
+
+자체 시스템이 없던 카카오페이 →
+2대 주주 알리페이에 아웃소싱
+
+여기까지는 이해할 수 있습니다.
+
+---
+
+6/10
+문제는 이것:
+
+애플은 점수만 요구했습니다.
+4천만 명의 전체 데이터를 요구한 게 아닙니다.
+
+과도한 정보 제공 → 이게 법 위반 핵심입니다.
+
+---
+
+7/10
+카카오페이의 반박:
+"암호화해서 보냈으니까 안전합니다"
+
+금융감독원 조사 결과:
+"일반 프로그램으로 복호화 가능한 수준"
+
+전문가 표현:
+"100원짜리 장난감 자물쇠"
+
+---
+
+8/10
+법적 결과:
+
+💰 개인정보보호위원회 + 금융감독원 합산 ~190억 과징금
+🚔 경기남부경찰청 형사 수사 중 (신용정보법 위반)
+⚖ 카카오페이 행정 소송으로 불복 중
+
+---
+
+9/10
+카카오는 이전에도:
+
+오픈채팅방 정보 유출 → 151억 과징금 → 소송 패소
+
+이번 카카오페이 사건, 전망이 밝지 않습니다.
+
+---
+
+10/10
+"데이터는 21세기의 석유다"
+
+우리의 결제 데이터로 누가 6년 동안 무엇을 했을까요.
+
+이 스레드 유용하셨다면 리트윗 한 번 부탁드립니다.
+팔로우하면 이런 정보 계속 올립니다.
+
+#카카오페이 #개인정보유출 #알리페이 #정보보안</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>단발 임팩트 트윗 (리트윗 유도용 3종)</h3>
+    <div class="script-text">버전 A:
+카카오페이가 6년 동안
+4,045만 명 잔고·결제내역을
+중국 알리페이에 무단 전송.
+
+해외 결제 안 해도 피해자.
+아이폰 없어도 피해자.
+현재 경찰 수사 중.
+
+---
+
+버전 B:
+전문가: "카카오페이의 암호화는 100원짜리 자물쇠 수준이었습니다"
+
+542억 건.
+4,045만 명.
+6년.
+
+아직도 중국 서버에 우리 정보가 있습니다.
+
+---
+
+버전 C:
+한국인이라면 알아야 할 사건
+
+카카오페이 → 알리페이
+무단 전송한 것: 내 이름·번호·이메일·잔고·결제내역
+기간: 6년 (2018~2024)
+피해자: 4,045만 명
+현황: 경찰 수사 중, 190억 과징금
+
+RT 한 번이 알권리를 지킵니다.</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+</div>
+
+<!-- ===== Threads ===== -->
+<div class="platform-section" id="sec-threads">
+  <div class="platform-header">
+    <div class="platform-icon" style="background:#eeedfe;">🧵</div>
+    <div><div class="platform-title">Threads 대본</div><div class="platform-sub">대화형 · 공감 유도 · 인스타 연동 · 30대 타깃</div></div>
+  </div>
+  <div class="keywords">
+    <span class="kw">Threads</span><span class="kw">대화형</span><span class="kw">공감</span><span class="kw">일상정보</span><span class="kw">개인정보</span>
+  </div>
+
+  <div class="script-block">
+    <h3>Threads 메인 포스트 + 스레드 연결</h3>
+    <div class="script-text">메인 포스트:
+솔직히 이 사건 알고 나서 좀 멍했습니다.
+
+카카오페이가 내 결제 내역을 6년 동안 중국에 보내고 있었다는 거, 알고 계셨나요?
+
+스레드로 정리해봤습니다. 5분이면 됩니다.
+
+---
+
+스레드 1:
+피해 규모부터 보면요.
+
+피해자: 4,045만 명
+전송 건수: 542억 건
+기간: 2018~2024년 (6년)
+
+한국 성인 대부분이 해당됩니다.
+
+---
+
+스레드 2:
+넘어간 정보가 단순한 게 아니에요.
+
+이름·전화번호·이메일은 기본이고
+카카오페이 머니 잔고랑
+매일매일의 결제 내역까지요.
+
+편의점에서 뭘 샀는지까지 다 포함입니다.
+
+---
+
+스레드 3:
+"나는 해외 결제 안 써서 괜찮겠지"
+
+그렇게 생각하셨다면...
+
+전체 피해자의 80% 이상이 
+애플 결제와 전혀 무관한 분들이에요.
+
+카카오페이 앱만 있으면 해당될 수 있습니다.
+
+---
+
+스레드 4:
+왜 이런 일이?
+
+카카오페이가 애플 입점에 필요한
+NSF 점수를 자체 산출할 시스템이 없었어요.
+
+그래서 2대 주주인 알리페이에 맡겼고...
+필요 이상의 정보를 넘긴 게 문제가 됐습니다.
+
+---
+
+스레드 5:
+카카오페이 반박: "암호화해서 보냈어요"
+
+금융감독원 조사 결과:
+일반 프로그램으로 복호화 가능
+
+전문가: "장난감 자물쇠 수준이었습니다"
+
+---
+
+스레드 6:
+현재 상황:
+
+과징금 약 190억 원
+경찰 형사 수사 진행 중
+카카오페이 행정 소송으로 불복 중
+
+아직 끝나지 않은 이야기입니다.
+
+---
+
+스레드 7:
+이 사건이 불편한 이유는 하나예요.
+
+우리가 '편리하다'는 이유로 쓴 앱이
+우리 동의 없이 우리 정보로 무언가를 하고 있었다는 거.
+
+데이터 주권, 한 번쯤 생각해봐야 할 것 같습니다.
+
+좋아요·리포스트 해주시면 더 많은 분들이 알 수 있어요.
+
+#카카오페이 #개인정보 #정보보안 #데이터주권</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+
+  <div class="script-block">
+    <h3>Threads 짧은 일상 말투 버전 (공감형)</h3>
+    <div class="script-text">오늘 알게 된 거
+
+카카오페이가 6년 동안 내 결제 내역을 중국에 보내고 있었음.
+
+내 동의 없이.
+
+해외 결제 안 해도 아이폰 없어도 다 해당됨.
+
+피해자 4,045만 명.
+
+이거 진짜임? 하고 찾아봤는데 진짜임.
+
+현재 경찰 수사 중이라고.
+
+...오늘 하루 좀 허탈하다.</div>
+    <button class="copy-btn" onclick="copyText(this)">복사</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.platform-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  el.classList.add('active');
+  return false;
+}
+function copyText(btn) {
+  const text = btn.previousElementSibling.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '복사됨!';
+    setTimeout(() => { btn.innerHTML = '복사'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

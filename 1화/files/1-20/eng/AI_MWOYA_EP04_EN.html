@@ -1,0 +1,1836 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════╗
+║  ⚠️  SUPREME MASTER PRINCIPLE — READ BEFORE ANYTHING ELSE  ⚠️          ║
+║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
+║                                                                          ║
+║  🔒 IMAGE / VIDEO BOX — PERMANENTLY SAVED RULE                          ║
+║                                                                          ║
+║  Once an image or video is inserted into any media box                   ║
+║  (image slot, video slot, photo grid, or ad zone),                       ║
+║  it is PERMANENTLY SAVED to that box.                                    ║
+║                                                                          ║
+║  ✅ It will NEVER disappear when the post is edited or updated.          ║
+║  ✅ It persists across ALL edits to the surrounding text/content.        ║
+║  ✅ This applies to EVERY box — Claude-generated posts AND               ║
+║     manually authored blog posts alike.                                  ║
+║                                                                          ║
+║  ⚠️  THE ONLY EXCEPTIONS:                                               ║
+║     • User explicitly performs REPLACE (🔄 Replace button)              ║
+║     • User explicitly performs DELETE (🗑️ Delete button)               ║
+║                                                                          ║
+║  Under no other circumstance shall any media be removed or reset.        ║
+║  This rule overrides ALL other logic, defaults, and behaviors.           ║
+║                                                                          ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║     TISTORY BLOG POST — BLANK TEMPLATE                                  ║
+║     Based on: Senior AI Learning Hub Episode Structure                   ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║  HOW TO USE:                                                            ║
+║  1. Change EPISODE_ID (line ~1470) to a unique string per post          ║
+║  2. Replace all [PLACEHOLDER] text with your content                    ║
+║  3. All text in contenteditable="" can also be edited live in browser    ║
+║  4. Click image slots to upload photos/videos                           ║
+║  5. Ad zones appear on hover — click 📁 Insert to add ad media         ║
+║                                                                          ║
+║  SECTIONS:                                                              ║
+║   HERO · WISDOM STRIP · INTRO                                           ║
+║   01 Dialog Card + Image Slot                                           ║
+║   02 Concept Cards (3) + Image Slot                                     ║
+║   03 AI Grid (6 items) + Photo Grid (4) + Image Slot                   ║
+║   04 Humor Card + Image Slot                                            ║
+║   05 Quiz Card + Image Slot                                             ║
+║   06 Wisdom Deep Dive + Image Slot                                      ║
+║   07 Song Card + Audio Player + Image Slot                              ║
+║   08 Grammar Card + Resource Box + Dad Note + Image Slot                ║
+║   09 Summary Card + Image Slot + Keywords                               ║
+║   FOOTER                                                                ║
+╚══════════════════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Episode 04 of the Senior AI Learning Hub — Tyler teaches Grandpa and Grandma how to search the internet like a pro using Google and voice search!">
+<meta name="keywords" content="internet search tips, seniors technology, voice search, Google search, AI for seniors, digital literacy, Tyler teaches tech">
+<title>Senior AI Learning Hub — Ep.04 | "Grandpa, What's YouTube and Instagram?"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;900&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — American Warm Navy & Gold
+   Palette: Navy / Warm Cream / Star Gold / Liberty Red
+═══════════════════════════════════════════ */
+:root {
+  --page-bg:    #EEF2F7;
+  --section-bg: #E8EDF5;
+  --section-bg2:#DCE5F2;
+  --section-bg3:#F0F4FA;
+  --cream:      #FAF8F3;
+  --cream-mid:  #F3EEE4;
+  --parchment:  #EAE0CE;
+  --navy:       #1B3A6B;
+  --navy-mid:   #2E5490;
+  --navy-light: #5B8DD9;
+  --sky-border: #A8C4E8;
+  --liberty:    #C1310E;
+  --liberty-light:#E07A5F;
+  --gold:       #D4960A;
+  --gold-light: #F5C842;
+  --ink:        #1C1C1E;
+  --ink-mid:    #3A3A3C;
+  --ink-light:  #5C6470;
+  --white:      #FFFFFF;
+  --col-width:  740px;
+  --base-fs:    19px;
+  --reading-line:1.95;
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--page-bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  font-size: var(--base-fs);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* grain overlay */
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  opacity:0.018;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Reading progress bar ── */
+#reading-bar {
+  position:fixed; top:0; left:0; height:4px;
+  background:linear-gradient(90deg, var(--navy-light), var(--gold));
+  width:0%; z-index:10000; transition:width 0.1s;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  background: var(--navy);
+  color: var(--cream);
+  position:relative; overflow:hidden;
+  padding:80px 24px 72px;
+  text-align:center;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(91,141,217,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(193,49,14,0.12) 0%, transparent 60%);
+}
+/* ↓ Change the emoji below to match your topic */
+.hero::after {
+  content:'📱'; position:absolute;
+  font-size:320px; opacity:0.04;
+  right:-40px; top:-60px; transform:rotate(12deg);
+  pointer-events:none; line-height:1;
+}
+.series-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(91,141,217,0.2); border:1px solid rgba(91,141,217,0.4);
+  border-radius:100px; padding:6px 18px;
+  font-size:14px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--navy-light); margin-bottom:28px; position:relative;
+}
+.series-badge .dot {
+  width:8px; height:8px; background:var(--navy-light); border-radius:50%;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-ep {
+  font-family:'Inter',sans-serif;
+  font-size:19px; color:var(--navy-light); letter-spacing:0.08em; margin-bottom:16px; position:relative;
+}
+.hero-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,7vw,72px); line-height:1.15; font-weight:400;
+  color:var(--cream); position:relative; margin-bottom:24px; letter-spacing:-0.02em;
+}
+.hero-title em { font-style:italic; color:var(--gold-light); }
+.hero-subtitle {
+  font-size:clamp(17px,2.5vw,21px); line-height:1.7;
+  color:rgba(250,248,243,0.72); max-width:560px; margin:0 auto 40px; position:relative;
+  overflow-wrap:break-word;
+}
+.hero-meta {
+  display:flex; align-items:center; justify-content:center;
+  gap:20px; flex-wrap:wrap; position:relative;
+}
+.hero-meta-item {
+  display:flex; align-items:center; gap:7px;
+  font-size:15px; color:rgba(250,248,243,0.55); font-weight:500;
+}
+.hero-divider { width:1px; height:18px; background:rgba(250,248,243,0.2); }
+
+/* ═══ WISDOM STRIP ═══ */
+.wisdom-strip {
+  background:linear-gradient(135deg, var(--liberty) 0%, #8B2200 100%);
+  padding:36px 24px; text-align:center; position:relative; overflow:hidden;
+}
+.wisdom-strip::before {
+  content:'LEARN · GROW'; position:absolute;
+  font-size:110px; font-weight:900; color:rgba(255,255,255,0.05);
+  left:50%; top:50%; transform:translate(-50%,-50%);
+  white-space:nowrap; pointer-events:none; letter-spacing:0.1em;
+  font-family:'Playfair Display',serif;
+}
+.wisdom-label { font-size:13px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.55); margin-bottom:12px; }
+.wisdom-quote { font-family:'Lora',serif; font-size:clamp(30px,6vw,58px); font-weight:400; color:#fff; line-height:1.15; margin-bottom:10px; position:relative; font-style:italic; }
+.wisdom-author { font-size:18px; color:rgba(255,255,255,0.65); font-weight:600; letter-spacing:0.06em; margin-bottom:14px; }
+.wisdom-meaning-strip { display:inline-block; background:rgba(255,255,255,0.15); border-radius:100px; padding:9px 24px; font-size:18px; font-weight:700; color:#fff; margin-bottom:16px; overflow-wrap:break-word; }
+.wisdom-ai-connect { font-size:17px; color:rgba(255,255,255,0.8); line-height:1.8; max-width:520px; margin:0 auto; overflow-wrap:break-word; }
+.wisdom-ai-connect strong { color:#fff; }
+
+/* ═══ MAIN WRAP ═══ */
+.page-wrap { max-width:var(--col-width); margin:0 auto; padding:0 24px; }
+
+/* ── Intro ── */
+.intro-block { padding:60px 0 0; }
+.intro-lead {
+  font-family:'Lora',serif;
+  font-size:clamp(22px,3.5vw,30px); line-height:1.5;
+  color:var(--navy); font-style:italic;
+  border-left:5px solid var(--navy-light);
+  padding-left:24px; margin-bottom:40px;
+  overflow-wrap:break-word;
+}
+.intro-lead em { color:var(--liberty); font-style:normal; font-weight:700; }
+
+.body-text {
+  font-size:var(--base-fs); line-height:var(--reading-line);
+  color:var(--ink-mid); margin-bottom:24px;
+}
+.body-text strong, .body-text b { color:var(--ink); font-weight:700; }
+.hi-navy   { color:var(--navy); font-weight:700; }
+.hi-liberty{ color:var(--liberty); font-weight:700; }
+.speaker   { color:var(--navy-mid); font-weight:900; }
+
+/* ═══ SECTION HEADING ═══ */
+.sec-heading {
+  display:flex; align-items:center; gap:14px;
+  margin:52px 0 28px; padding:0;
+}
+.sec-num {
+  width:48px; height:48px; flex-shrink:0;
+  background:linear-gradient(135deg, var(--navy), var(--navy-mid));
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:900; color:var(--cream);
+  font-family:'Inter',sans-serif; letter-spacing:0.02em;
+  box-shadow:0 4px 14px rgba(27,58,107,0.25);
+}
+.sec-heading h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(23px,3.5vw,30px);
+  font-weight:400; color:var(--navy); line-height:1.4; flex:1;
+}
+
+/* ── CONTENTEDITABLE ── */
+[contenteditable] { outline:none; cursor:text; }
+[contenteditable]:hover { background:rgba(91,141,217,0.06); border-radius:4px; }
+[contenteditable]:focus { background:rgba(91,141,217,0.10); border-radius:4px; outline:2px solid rgba(91,141,217,0.3); }
+
+/* ── Divider ── */
+.divider { display:flex; align-items:center; gap:16px; margin:48px 0; }
+.divider::before,.divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--sky-border),transparent); }
+.div-icon { font-size:22px; opacity:0.5; }
+
+/* ═══ IMAGE / VIDEO SLOT ═══ */
+.media-section {
+  background:var(--section-bg3);
+  border:2px dashed var(--sky-border);
+  border-radius:20px; padding:0;
+  margin:32px 0 0; overflow:hidden;
+}
+.img-slot {
+  width:100%; min-height:300px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:12px; cursor:pointer; position:relative; overflow:hidden;
+  transition:background 0.2s; background:transparent;
+}
+.img-slot:hover { background:rgba(91,141,217,0.06); }
+.img-slot.has-media { min-height:unset; background:#000; cursor:default; }
+.slot-icon { font-size:52px; opacity:0.35; }
+.slot-label { font-size:var(--base-fs); font-weight:700; color:var(--ink-light); }
+.slot-hint  { font-size:16px; color:var(--ink-light); opacity:0.65; text-align:center; padding:0 24px; line-height:1.6; }
+.img-slot img,.img-slot video { width:100%; height:auto; display:block; }
+.img-slot-overlay { position:absolute; top:10px; right:10px; display:none; gap:6px; z-index:10; }
+.img-slot:hover .img-slot-overlay { display:flex; }
+.slot-btn {
+  background:rgba(0,0,0,0.72); color:white; border:none;
+  border-radius:8px; padding:7px 16px; font-size:14px; cursor:pointer; font-weight:700;
+  font-family:'Inter',sans-serif;
+}
+.slot-btn:hover { background:rgba(0,0,0,0.9); }
+.source-line {
+  background:var(--section-bg3);
+  border-top:1px dashed var(--sky-border);
+  padding:10px 18px; font-size:16px; font-style:italic; color:var(--ink-light);
+  outline:none; cursor:text; display:block; text-align:right;
+  transition:background 0.2s; border-radius:0 0 18px 18px;
+}
+.source-line:hover { background:rgba(91,141,217,0.1); }
+.source-line:focus { background:rgba(91,141,217,0.15); outline:none; }
+
+/* ═══ DIALOG CARD ═══ */
+.dialog-card {
+  background:var(--section-bg);
+  border:2px solid var(--sky-border);
+  border-radius:24px; padding:36px 40px; margin:28px 0;
+  position:relative; overflow:hidden;
+}
+.dialog-card::before {
+  content:'🌟'; position:absolute;
+  top:-10px; right:24px; font-size:100px; opacity:0.06;
+  transform:rotate(-10deg); pointer-events:none;
+}
+.dialog-row { display:flex; gap:16px; margin-bottom:28px; align-items:flex-start; }
+.dialog-row:last-child { margin-bottom:0; }
+.dialog-avatar {
+  width:50px; height:50px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; flex-shrink:0;
+  box-shadow:0 2px 10px rgba(0,0,0,0.12);
+}
+.av-gramps { background:linear-gradient(135deg,#FFE0B2,#FFCC80); }
+.av-grams  { background:linear-gradient(135deg,#F8BBD9,#F48FB1); }
+.av-tyler  { background:linear-gradient(135deg,#C8E6C9,#81C784); }
+.av-dad    { background:linear-gradient(135deg,#BBDEFB,#64B5F6); }
+.av-mom    { background:linear-gradient(135deg,#E1BEE7,#BA68C8); }
+.dialog-bubble { flex:1; background:rgba(255,255,255,0.75); border-radius:0 16px 16px 16px; padding:14px 20px; }
+.dialog-bubble.right { background:rgba(91,141,217,0.14); border-radius:16px 0 16px 16px; }
+.bubble-name { font-size:17px; font-weight:900; color:var(--navy); letter-spacing:0.02em; display:inline; margin-right:6px; }
+.bubble-name::after { content:": "; }
+.bubble-text-wrap { display:inline; }
+.bubble-text { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); }
+.bubble-text strong { color:var(--liberty); }
+
+/* ═══ CONCEPT CARDS ═══ */
+.concept-grid { display:grid; grid-template-columns:1fr; gap:16px; margin:28px 0; }
+.concept-card {
+  background:var(--section-bg);
+  border:2px solid var(--sky-border);
+  border-radius:18px; padding:28px 30px;
+  display:flex; gap:20px; align-items:flex-start;
+  border-left:5px solid transparent;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.concept-card:hover { transform:translateX(4px); }
+.concept-card:nth-child(1){border-left-color:var(--navy-light);}
+.concept-card:nth-child(2){border-left-color:var(--gold);}
+.concept-card:nth-child(3){border-left-color:var(--liberty);}
+.card-emoji { font-size:38px; flex-shrink:0; line-height:1; margin-top:2px; }
+.card-title { font-size:20px; font-weight:700; color:var(--ink); margin-bottom:8px; line-height:1.4; }
+.card-desc  { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); }
+
+/* ═══ AI TYPES GRID ═══ */
+.ai-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:28px 0; }
+.ai-item {
+  background:var(--section-bg);
+  border:2px solid var(--sky-border);
+  border-radius:16px; padding:24px 22px;
+  position:relative; overflow:hidden;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.ai-item:hover { transform:translateY(-3px); box-shadow:0 8px 32px rgba(27,58,107,0.14); }
+.ai-item::before {
+  content:attr(data-num); position:absolute;
+  top:-8px; right:12px; font-size:72px; font-weight:900;
+  color:rgba(27,58,107,0.06); font-family:'Inter',sans-serif; line-height:1; pointer-events:none;
+}
+.ai-item-emoji { font-size:34px; margin-bottom:12px; display:block; }
+.ai-item-title { font-size:19px; font-weight:700; color:var(--navy); margin-bottom:8px; line-height:1.4; }
+.ai-item-desc  { font-size:var(--base-fs); line-height:1.8; color:var(--ink-mid); }
+.ai-item-example {
+  display:inline-block; margin-top:10px;
+  font-size:14px; font-weight:700; color:var(--navy-mid);
+  background:rgba(91,141,217,0.15); border-radius:100px; padding:4px 14px;
+}
+
+/* ── Photo grid ── */
+.photo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:24px 0; }
+.photo-slot {
+  aspect-ratio:1/1; background:var(--section-bg);
+  border:2px dashed var(--sky-border); border-radius:14px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-size:28px; cursor:pointer; position:relative; overflow:hidden;
+  transition:border-color 0.2s, background 0.2s;
+}
+.photo-slot:hover { border-color:var(--navy-light); background:rgba(91,141,217,0.08); }
+.photo-slot.has-media { background:#000; border-style:solid; cursor:default; }
+.photo-slot img { width:100%; height:100%; object-fit:cover; display:block; border-radius:12px; }
+.photo-slot-overlay { position:absolute; top:6px; right:6px; display:none; gap:4px; z-index:10; }
+.photo-slot:hover .photo-slot-overlay { display:flex; }
+.photo-slot-btn { background:rgba(0,0,0,0.72); color:white; border:none; border-radius:6px; padding:5px 9px; font-size:12px; cursor:pointer; font-weight:700; }
+
+/* ═══ HUMOR BOX ═══ */
+.humor-card {
+  background:linear-gradient(135deg,#FFFBF0 0%,#FFF8E8 100%);
+  border:2px solid var(--gold-light); border-radius:24px;
+  padding:36px 40px; margin:32px 0; position:relative; overflow:hidden;
+}
+.humor-card::before {
+  content:'😄'; position:absolute; font-size:130px; opacity:0.07;
+  right:-16px; bottom:-20px; transform:rotate(-12deg); pointer-events:none;
+}
+.humor-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--gold-light); color:var(--ink); font-size:15px; font-weight:900;
+  letter-spacing:0.1em; text-transform:uppercase; border-radius:100px;
+  padding:6px 16px; margin-bottom:20px;
+}
+.humor-title { font-family:'Playfair Display',serif; font-size:24px; font-weight:400; color:var(--ink); margin-bottom:24px; line-height:1.4; overflow-wrap:break-word; }
+.humor-row { margin-bottom:16px; font-size:var(--base-fs); line-height:1.9; color:var(--ink-mid); overflow-wrap:break-word; }
+.humor-row .sp { color:var(--navy); font-weight:900; }
+.humor-row strong { color:var(--liberty); }
+.humor-punchline { background:rgba(212,150,10,0.12); border-radius:12px; padding:16px 20px; font-size:var(--base-fs); font-weight:700; color:var(--ink); margin-top:8px; line-height:1.8; }
+
+/* ═══ QUIZ BOX ═══ */
+.quiz-card {
+  background:var(--section-bg); border:2px solid var(--sky-border);
+  border-radius:24px; padding:36px 40px; margin:32px 0;
+}
+.quiz-header { display:flex; align-items:center; gap:12px; margin-bottom:28px; }
+.quiz-badge { background:var(--navy); color:var(--cream); font-size:13px; font-weight:900; letter-spacing:0.12em; text-transform:uppercase; border-radius:100px; padding:6px 18px; }
+.quiz-title-text { font-family:'Inter',sans-serif; font-size:22px; font-weight:700; color:var(--ink); }
+.quiz-q { margin-bottom:20px; padding:20px 24px; background:rgba(255,255,255,0.7); border-radius:14px; border-left:5px solid var(--navy-light); display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; }
+.quiz-num  { font-size:14px; font-weight:900; color:var(--navy); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0; flex-shrink:0; }
+.quiz-text { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); flex:1; min-width:200px; }
+.quiz-hint { font-size:16px; color:var(--ink-light); margin-top:4px; font-style:italic; width:100%; padding-left:0; }
+.quiz-cta  { text-align:center; margin-top:24px; font-size:var(--base-fs); font-weight:700; color:var(--navy); background:rgba(91,141,217,0.12); border-radius:12px; padding:16px; }
+
+/* ═══ WISDOM DEEP DIVE ═══ */
+.wisdom-deep {
+  background:linear-gradient(135deg,#1B3A6B 0%,#0D2040 100%);
+  border-radius:28px; padding:44px 40px; margin:32px 0; color:var(--cream);
+  position:relative; overflow:hidden;
+}
+.wisdom-deep::before {
+  content:'NEVER STOP LEARNING'; position:absolute;
+  font-size:52px; font-weight:900; color:rgba(255,255,255,0.03);
+  right:-10px; bottom:10px; letter-spacing:0.04em; pointer-events:none; line-height:1;
+  font-family:'Playfair Display',serif;
+}
+.wisdom-deep-tag  { font-size:14px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; color:var(--navy-light); margin-bottom:16px; }
+.wisdom-deep-title{ font-family:'Lora',serif; font-size:clamp(20px,3vw,26px); font-style:italic; color:var(--cream); margin-bottom:28px; line-height:1.5; }
+.word-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:28px; }
+.word-tile { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:18px 12px; text-align:center; }
+.word-main    { font-size:28px; font-weight:900; color:var(--gold-light); display:block; line-height:1.2; margin-bottom:6px; font-family:'Playfair Display',serif; }
+.word-phonics { font-size:15px; color:rgba(250,248,243,0.65); font-weight:600; display:block; margin-bottom:4px; }
+.word-mean    { font-size:14px; color:rgba(250,248,243,0.5); display:block; }
+.meaning-block { background:rgba(255,255,255,0.07); border-radius:14px; padding:20px 24px; margin-bottom:14px; }
+.meaning-label { font-size:14px; font-weight:900; color:var(--navy-light); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px; }
+.meaning-text  { font-size:var(--base-fs); line-height:1.85; color:rgba(250,248,243,0.88); }
+.meaning-text strong { color:#fff; }
+.ai-apply      { background:rgba(212,150,10,0.14); border:1px solid rgba(212,150,10,0.3); border-radius:14px; padding:22px 24px; margin-top:20px; }
+.ai-apply-title{ font-size:16px; font-weight:900; color:var(--gold-light); margin-bottom:12px; letter-spacing:0.06em; }
+.ai-apply-text { font-size:var(--base-fs); line-height:1.85; color:rgba(250,248,243,0.88); }
+.ai-apply-text strong { color:#fff; }
+
+/* ═══ SONG BOX ═══ */
+.song-card {
+  background:var(--section-bg);
+  border:2px solid var(--sky-border);
+  border-radius:24px; padding:36px 40px; margin:32px 0;
+  border-top:5px solid var(--navy-mid);
+}
+.song-header { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
+.song-icon {
+  width:58px; height:58px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:28px; box-shadow:0 4px 16px rgba(27,58,107,0.3); flex-shrink:0;
+}
+.song-title-text { font-family:'Playfair Display',serif; font-size:24px; font-weight:400; color:var(--ink); line-height:1.3; }
+.song-subtitle   { font-size:16px; color:var(--ink-light); margin-top:4px; }
+.song-lyrics {
+  white-space:pre-line; font-size:var(--base-fs); line-height:2.1; color:var(--ink-mid);
+  background:rgba(255,255,255,0.6); border-radius:14px; padding:26px 28px;
+}
+.song-section { font-weight:900; color:var(--navy); font-size:15px; letter-spacing:0.1em; text-transform:uppercase; }
+
+/* ── Audio player ── */
+.audio-box {
+  background:linear-gradient(135deg,var(--navy) 0%,#0D2040 100%);
+  border-radius:18px; padding:24px 28px; margin-top:16px;
+  display:flex; flex-direction:column; gap:14px;
+}
+.play-btn {
+  width:54px; height:54px; background:var(--cream); border:none; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; flex-shrink:0; transition:transform 0.2s;
+}
+.play-btn:hover { transform:scale(1.08); }
+.play-btn.no-audio { opacity:0.4; cursor:not-allowed; }
+.play-btn.no-audio:hover { transform:none; }
+.play-icon  { width:0; height:0; border-left:20px solid var(--navy); border-top:12px solid transparent; border-bottom:12px solid transparent; margin-left:5px; }
+.pause-icon { display:flex; gap:6px; }
+.pause-bar  { width:6px; height:24px; background:var(--navy); border-radius:2px; }
+.progress-wrap { flex:1; min-width:120px; }
+.progress-track{ height:9px; background:rgba(255,255,255,0.2); border-radius:5px; cursor:pointer; position:relative; margin-bottom:6px; }
+.progress-fill { height:100%; background:var(--navy-light); border-radius:5px; width:0%; transition:width 0.1s; }
+.time-text     { font-size:16px; color:rgba(255,255,255,0.65); font-weight:700; }
+.upload-audio-btn {
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22);
+  border-radius:100px; padding:9px 20px; font-size:16px; font-weight:700; color:var(--cream);
+  cursor:pointer; font-family:'Inter',sans-serif; transition:background 0.2s; white-space:nowrap;
+}
+.upload-audio-btn:hover { background:rgba(255,255,255,0.22); }
+.audio-filename { font-size:15px; color:rgba(255,255,255,0.5); text-align:center; }
+
+/* ═══ GRAMMAR BOX ═══ */
+.grammar-card {
+  background:var(--section-bg);
+  border:2px solid var(--sky-border);
+  border-radius:24px; padding:36px 40px; margin:32px 0;
+}
+.grammar-title-text { font-family:'Inter',sans-serif; font-size:23px; font-weight:700; color:var(--ink); margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+.grammar-item { margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--sky-border); }
+.grammar-item:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.grammar-rule { font-size:20px; font-weight:700; color:var(--ink); margin-bottom:12px; }
+.grammar-ex   { font-size:var(--base-fs); line-height:1.9; color:var(--ink-mid); }
+.grammar-ex .ok  { color:var(--navy-mid); font-weight:700; }
+.grammar-ex .no  { color:var(--liberty); text-decoration:line-through; opacity:0.7; }
+.grammar-ex .key { color:var(--navy); font-weight:900; }
+
+/* ─ Resource / Tool Box ─ */
+.speller-box {
+  background:linear-gradient(135deg,var(--section-bg2) 0%,#C8D9F0 100%);
+  border:2px solid var(--navy-light); border-radius:20px;
+  padding:32px 36px; margin:28px 0; text-align:center; position:relative; overflow:hidden;
+}
+.speller-box::before { content:'💻'; position:absolute; top:-14px; right:16px; font-size:90px; opacity:0.06; pointer-events:none; }
+.speller-badge { display:inline-block; background:var(--navy); color:var(--cream); font-size:16px; font-weight:900; letter-spacing:0.14em; text-transform:uppercase; border-radius:100px; padding:6px 18px; margin-bottom:16px; }
+.speller-title { font-family:'Playfair Display',serif; font-size:24px; font-weight:400; color:var(--navy); margin-bottom:10px; line-height:1.4; }
+.speller-desc  { font-size:var(--base-fs); color:var(--ink-mid); margin-bottom:22px; line-height:1.8; }
+.speller-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--navy); color:var(--cream); font-size:var(--base-fs); font-weight:900;
+  padding:15px 36px; border-radius:100px; text-decoration:none;
+  transition:background 0.2s; box-shadow:0 4px 18px rgba(27,58,107,0.25);
+}
+.speller-btn:hover { background:var(--navy-mid); }
+.speller-warn { margin-top:16px; font-size:var(--base-fs); color:var(--liberty); font-weight:700; }
+
+/* ═══ SUMMARY BOX ═══ */
+.summary-card {
+  background:linear-gradient(135deg,#E8EDF5 0%,#C8D9F0 100%);
+  border:2px solid var(--navy-light); border-radius:28px;
+  padding:44px 40px; margin:32px 0; position:relative; overflow:hidden;
+}
+.summary-card::after {
+  content:'📚'; position:absolute; font-size:140px; opacity:0.05;
+  right:-20px; bottom:-20px; transform:rotate(-8deg); pointer-events:none;
+}
+.summary-header { text-align:center; margin-bottom:36px; }
+.summary-badge { display:inline-block; background:var(--navy); color:var(--cream); font-size:16px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; border-radius:100px; padding:7px 20px; margin-bottom:16px; }
+.summary-h-title { font-family:'Playfair Display',serif; font-size:clamp(26px,4vw,34px); font-weight:400; color:var(--navy); line-height:1.35; }
+.summary-item { background:rgba(255,255,255,0.75); border-radius:16px; padding:22px 26px; margin-bottom:14px; display:flex; gap:16px; align-items:flex-start; }
+.sum-num { width:36px; height:36px; flex-shrink:0; background:var(--navy); color:var(--cream); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:900; font-family:'Inter',sans-serif; }
+.sum-title { font-size:20px; font-weight:700; color:var(--ink); margin-bottom:8px; line-height:1.4; }
+.sum-text  { font-size:var(--base-fs); line-height:1.85; color:var(--ink-mid); }
+.sum-text strong { color:var(--liberty); }
+.summary-outro { text-align:center; margin-top:28px; font-size:21px; font-weight:700; color:var(--navy); }
+
+/* ─ Keyword cloud ─ */
+.keyword-wrap {
+  margin:48px 0; padding:36px;
+  background:var(--section-bg2);
+  border-radius:24px; border:1px solid var(--sky-border);
+}
+.keyword-label { font-size:15px; font-weight:900; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-light); margin-bottom:16px; text-align:center; }
+.keyword-cloud { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.keyword-tag {
+  display:inline-block; background:rgba(255,255,255,0.75);
+  border:2px solid var(--sky-border); border-radius:100px;
+  padding:9px 22px; font-size:var(--base-fs); font-weight:700; color:var(--navy);
+  text-decoration:none; transition:border-color 0.2s,background 0.2s,color 0.2s,transform 0.2s;
+}
+.keyword-tag:hover { background:var(--navy); color:var(--cream); border-color:var(--navy); transform:translateY(-2px); }
+
+/* ─ Note / callout box ─ */
+.dad-note { background:#FFFDE7; border:2px solid var(--gold-light); border-radius:16px; padding:22px 28px; margin:24px 0; }
+
+/* ═══ AD ZONES ═══ */
+.ad-zone-wrap { width:100%; position:relative; margin:8px 0; }
+.ad-trigger-bar {
+  width:100%; height:5px; cursor:default;
+  background:repeating-linear-gradient(90deg,#A8C4E8 0,#A8C4E8 5px,transparent 5px,transparent 13px);
+  opacity:0.4; border-radius:3px; transition:opacity 0.2s;
+}
+.ad-zone-wrap:hover .ad-trigger-bar { opacity:0.9; }
+.ad-box-inner {
+  max-height:0; overflow:hidden;
+  transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+  opacity:0;
+}
+.ad-zone-wrap:hover .ad-box-inner { max-height:200px; opacity:1; }
+.ad-zone-wrap.ad-permanent .ad-box-inner { max-height:none !important; opacity:1 !important; overflow:visible !important; }
+.ad-zone-wrap.ad-permanent .ad-trigger-bar { display:none; }
+.ad-zone-wrap.ad-permanent .ad-hover-hint { display:none; }
+.ad-box {
+  background:linear-gradient(135deg,#EEF4FF 0%,#E8EDF5 100%);
+  border:2px dashed #5B8DD9; border-radius:13px;
+  padding:16px 22px; margin:6px 0 2px;
+  display:flex; align-items:center; gap:16px; min-height:68px;
+  position:relative; overflow:visible;
+}
+.ad-box-label { font-size:12px; font-weight:900; color:#1B3A6B; letter-spacing:0.1em; text-transform:uppercase; background:rgba(91,141,217,0.18); border-radius:100px; padding:4px 14px; white-space:nowrap; flex-shrink:0; }
+.ad-box-desc  { font-size:15px; color:#5C6470; font-weight:500; line-height:1.6; flex:1; }
+.ad-box-size  { font-size:12px; color:#5B8DD9; font-weight:700; opacity:0.8; white-space:nowrap; }
+.ad-hover-hint { text-align:center; font-size:11px; font-weight:700; color:#5B8DD9; letter-spacing:0.1em; text-transform:uppercase; opacity:0; transition:opacity 0.2s; padding:2px 0 0; }
+.ad-zone-wrap:hover .ad-hover-hint { opacity:0.55; }
+.ad-menu-before { position:absolute; top:50%; right:16px; transform:translateY(-50%); display:none; gap:6px; z-index:10; }
+.ad-zone-wrap:hover .ad-menu-before { display:flex; }
+.ad-menu-before button { background:rgba(91,141,217,0.95); color:#fff; border:none; border-radius:8px; padding:8px 16px; font-size:14px; cursor:pointer; font-weight:700; font-family:inherit; transition:all 0.2s; }
+.ad-menu-before button:hover { background:#5B8DD9; transform:scale(1.05); }
+.ad-menu-after { position:absolute; top:8px; right:8px; display:none; gap:6px; z-index:10; }
+.ad-box:hover .ad-menu-after { display:flex; }
+.ad-menu-after button { background:rgba(0,0,0,0.72); color:#fff; border:none; border-radius:8px; padding:7px 14px; font-size:14px; cursor:pointer; font-weight:700; font-family:inherit; transition:all 0.2s; }
+.ad-menu-after button:hover { background:rgba(0,0,0,0.88); transform:scale(1.05); }
+.ad-top-section { width:100%; padding:3px 0 2px; }
+.ad-bottom-section { max-width:740px; margin:0 auto; padding:0 24px 48px; }
+
+/* ═══ FOOTER ═══ */
+.blog-footer { background:var(--navy); color:rgba(250,248,243,0.65); padding:60px 24px; text-align:center; margin-top:80px; }
+.footer-inner { max-width:560px; margin:0 auto; }
+.footer-series { font-size:14px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--navy-light); margin-bottom:12px; }
+.footer-title-text { font-family:'Playfair Display',serif; font-size:28px; font-style:italic; color:var(--cream); margin-bottom:16px; line-height:1.4; overflow-wrap:break-word; }
+.footer-desc { font-size:var(--base-fs); line-height:1.8; color:rgba(250,248,243,0.55); margin-bottom:28px; overflow-wrap:break-word; }
+.footer-cr   { margin-top:40px; font-size:15px; color:rgba(250,248,243,0.3); }
+
+/* ═══ TISTORY COMPATIBILITY ═══ */
+div, p, span, section, article { visibility: visible !important; }
+.page-wrap { display:block !important; }
+
+/* ─ Fade-in ─ */
+.fade-in { opacity:1 !important; transform:translateY(0) !important; transition:opacity 0.6s ease,transform 0.6s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:600px){
+  .dialog-card,.humor-card,.quiz-card,.summary-card,.song-card,
+  .wisdom-deep,.grammar-card,.keyword-wrap,.speller-box{ padding:22px 18px; border-radius:16px; }
+  .ai-grid{ grid-template-columns:1fr; }
+  .word-row{ grid-template-columns:repeat(2,1fr); }
+  .photo-grid{ grid-template-columns:repeat(2,1fr); }
+  .hero{ padding:60px 20px 52px; }
+  .page-wrap{ padding:0 16px; }
+  .dialog-row{ flex-direction:column; gap:8px; }
+  .sec-heading h2{ font-size:21px; }
+}
+
+/* ═══ TEMPLATE GUIDE PANEL ═══ */
+#tpl-guide {
+  position:fixed; bottom:20px; right:20px; z-index:99998;
+  background:var(--navy); color:var(--cream);
+  border-radius:16px; padding:16px 20px; max-width:280px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.35);
+  font-size:13px; line-height:1.7;
+  transition:transform 0.3s, opacity 0.3s;
+}
+#tpl-guide.hidden { transform:translateY(120%); opacity:0; pointer-events:none; }
+#tpl-guide-title { font-size:15px; font-weight:900; color:var(--gold-light); margin-bottom:10px; }
+#tpl-guide ul { padding-left:16px; margin:0; }
+#tpl-guide li { margin-bottom:4px; color:rgba(250,248,243,0.82); }
+#tpl-guide li strong { color:#fff; }
+#tpl-guide-close { position:absolute; top:10px; right:14px; background:none; border:none; color:rgba(255,255,255,0.5); font-size:18px; cursor:pointer; line-height:1; }
+#tpl-guide-close:hover { color:#fff; }
+#tpl-guide-toggle {
+  position:fixed; bottom:20px; right:20px; z-index:99999;
+  background:var(--navy); color:var(--cream);
+  border:none; border-radius:50%; width:48px; height:48px;
+  font-size:20px; cursor:pointer; display:none;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+  align-items:center; justify-content:center;
+}
+#tpl-guide-toggle.show { display:flex; }
+
+/* ═══ TISTORY FORCE-SHOW OVERRIDES ═══ */
+.tt_article_useless_p_margin div, .entry-content div, #content div { max-width:100%; }
+.hero, .wisdom-strip, .page-wrap, .intro-block,
+.sec-heading, .dialog-card, .concept-grid, .ai-grid,
+.humor-card, .quiz-card, .wisdom-deep, .song-card,
+.grammar-card, .speller-box, .summary-card, .keyword-wrap,
+.blog-footer, .media-section, .photo-grid, .dad-note {
+  display: block !important; visibility: visible !important; opacity: 1 !important;
+}
+.concept-grid { display: grid !important; }
+.ai-grid { display: grid !important; }
+.photo-grid { display: grid !important; }
+.dialog-row { display: flex !important; }
+.sec-heading { display: flex !important; }
+.summary-item { display: flex !important; }
+.hero-meta { display: flex !important; }
+.series-badge { display: inline-flex !important; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     TOP AD ZONES (1 & 2) — hover to reveal
+════════════════════════════════════════════════ -->
+<div class="ad-top-section">
+  <div class="ad-zone-wrap" id="ad-wrap-1">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▲ Ad Zone 1 — Hover to reveal ▲</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-1">
+        <span id="ad-content-1">
+          <span class="ad-box-label">Ad · 1</span>
+          <span class="ad-box-desc">Click to insert an ad image or video from your PC. Saved permanently.</span>
+          <span class="ad-box-size">728×90 Leaderboard</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-1').click(); event.stopPropagation();">📁 Insert</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-1" style="display:none">
+      </div>
+    </div>
+  </div>
+  <div class="ad-zone-wrap" id="ad-wrap-2">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▲ Ad Zone 2 — Hover to reveal ▲</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-2">
+        <span id="ad-content-2">
+          <span class="ad-box-label">Ad · 2</span>
+          <span class="ad-box-desc">Click to insert an ad image or video from your PC. Saved permanently.</span>
+          <span class="ad-box-size">970×90 Billboard</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-2').click(); event.stopPropagation();">📁 Insert</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-2" style="display:none">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="reading-bar"></div>
+
+<!-- ══════════════════════════════════════════════
+     HERO SECTION
+     • series-badge   : series name tag (top)
+     • hero-ep        : "Episode XX"
+     • hero-title     : main post title (supports <em> for italic gold text)
+     • hero-subtitle  : one-line description
+     • hero-meta      : read time / level / date chips
+════════════════════════════════════════════════ -->
+<div class="hero">
+  <!-- Change emoji in CSS .hero::after to match your topic -->
+  <div class="series-badge">
+    <span class="dot"></span>
+    Senior AI Learning Hub
+  </div>
+  <div class="hero-ep">Episode 04</div>
+  <h1 class="hero-title" contenteditable="true" spellcheck="false">
+    "<em>Grandpa, What's YouTube and Instagram?</em>"<br>
+    <span style="font-size:0.62em;color:rgba(250,248,243,0.65);font-style:normal;"><strong style="color:rgba(250,248,243,0.85);">Tyler's Guide to Internet Search Superpowers</strong></span>
+  </h1>
+  <p class="hero-subtitle" contenteditable="true" spellcheck="false">
+    For seniors and families who want to search the internet confidently — and actually find what they're looking for! 🌟
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span>📖</span> 8 min read</div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item"><span>🌟</span> Level: Beginner</div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item"><span>📅</span> 2025</div>
+  </div>
+</div><!-- /hero -->
+
+<!-- ══════════════════════════════════════════════
+     WISDOM STRIP
+     A featured quote / proverb in red banner
+════════════════════════════════════════════════ -->
+<div class="wisdom-strip">
+  <div class="wisdom-label">Today's Wisdom · Chinese Proverb</div>
+  <div class="wisdom-quote">"與時俱進 — Move Forward With the Times"</div>
+  <div class="wisdom-author">— Ancient Chinese Wisdom</div>
+  <div class="wisdom-meaning-strip">Grow and evolve alongside the era you live in</div>
+  <div class="wisdom-ai-connect" contenteditable="true" spellcheck="false">
+    <strong>Adaptability</strong> is not just for the young — it's the secret superpower of every generation. Today, Grandpa and Grandma take one bold step into the digital world, and that step changes everything.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════ -->
+<div id="main-content">
+<div class="page-wrap" style="display:block !important;visibility:visible !important;">
+
+  <!-- ── INTRO ── -->
+  <div class="intro-block fade-in">
+    <p class="intro-lead" contenteditable="true" spellcheck="false">
+      Grandma searched for a recipe online — and got <em>thousands</em> of results. Where do you even begin?
+    </p>
+    <p class="body-text" contenteditable="true" spellcheck="false">
+      Welcome back to the <span class="speaker">Senior AI Learning Hub</span>! In today's episode, <span class="hi-navy">Tyler</span> sits down with <span class="hi-navy">Grandpa</span> and <span class="hi-navy">Grandma</span> to tackle one of the most common frustrations for seniors online: <span class="hi-liberty">searching the internet effectively</span>. From typing the right keywords to using voice search, Tyler breaks it all down with patience, humor, and a whole lot of heart. 🌟
+    </p>
+  </div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">01</div>
+    <h2 contenteditable="true" spellcheck="false">Grandma's Big Search Struggle 📱</h2>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false">
+    One afternoon, <span class="speaker">Grandma</span> decided to make kimchi stew and pulled up Google on her phone. She typed a long question — and suddenly her screen exploded with hundreds of results. She had no idea which one to click. That's when she called <span class="speaker">Tyler</span> for help.
+  </p>
+
+  <div class="dialog-card fade-in">
+    <div class="dialog-row">
+      <div class="dialog-avatar av-grams">👵</div>
+      <div class="dialog-bubble">
+        <div class="bubble-name">Grandma</div>
+        <span class="bubble-text-wrap bubble-text">"Tyler, I searched for a <strong>kimchi stew recipe</strong> online and got so many results… I don't know which one to look at!"</span>
+      </div>
+    </div>
+    <div class="dialog-row">
+      <div class="dialog-avatar av-tyler">👦</div>
+      <div class="dialog-bubble right">
+        <div class="bubble-name">Tyler</div>
+        <span class="bubble-text-wrap bubble-text">"Grandma! Don't worry — I'll show you the secret to searching! It's actually really easy once you know the trick!"</span>
+      </div>
+    </div>
+    <div class="dialog-row">
+      <div class="dialog-avatar av-gramps">👴</div>
+      <div class="dialog-bubble">
+        <div class="bubble-name">Grandpa</div>
+        <span class="bubble-text-wrap bubble-text">"I'm curious too! How do I search for a <strong>doctor's office</strong> near me?"</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE SLOT 1 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-1" onclick="if(!this.classList.contains('has-media'))document.getElementById('up1').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up1').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-1','disp1','Grandma looking puzzled at her smartphone')">🗑️ Delete</button>
+      </div>
+      <div id="disp1" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Grandma looking puzzled at her smartphone screen with search results</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up1" style="display:none" onchange="loadMedia(this,'area-1','disp1')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌟</span></div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">02</div>
+    <h2 contenteditable="true" spellcheck="false">Tyler's 3 Golden Rules of Internet Search 🎯</h2>
+  </div>
+
+  <div class="concept-grid fade-in">
+    <div class="concept-card">
+      <div class="card-emoji">✂️</div>
+      <div>
+        <div class="card-title">Rule 1 — Keep It Short &amp; Clear</div>
+        <div class="card-desc" contenteditable="true" spellcheck="false">Instead of typing a whole sentence like "How do I make kimchi stew taste good?", just type the key words: <strong>"kimchi stew recipe."</strong> Search engines are smart — they fill in the rest! The shorter and more focused your search, the better your results.</div>
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="card-emoji">🔤</div>
+      <div>
+        <div class="card-title">Rule 2 — Spaces Between Words Matter</div>
+        <div class="card-desc" contenteditable="true" spellcheck="false">Always put a space between each word you type. Typing <strong>"cold flu doctor"</strong> works great — but <strong>"coldfludoctor"</strong> runs everything together and confuses the search engine. One space = one better result!</div>
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="card-emoji">📍</div>
+      <div>
+        <div class="card-title">Rule 3 — Add Your Location</div>
+        <div class="card-desc" contenteditable="true" spellcheck="false">When you need something nearby — a restaurant, hospital, or pharmacy — add your neighborhood or city name to the search. For example: <strong>"downtown pharmacy"</strong> or <strong>"Oak Street clinic."</strong> You'll get results right in your area!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE SLOT 2 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-2" onclick="if(!this.classList.contains('has-media'))document.getElementById('up2').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up2').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-2','disp2','Google search bar with short keywords')">🗑️ Delete</button>
+      </div>
+      <div id="disp2" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Google search bar showing short keyword examples on a smartphone</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up2" style="display:none" onchange="loadMedia(this,'area-2','disp2')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌐</span></div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">03</div>
+    <h2 contenteditable="true" spellcheck="false">6 Things You Can Search For Right Now! 🌐</h2>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false">
+    The internet is like an enormous library — and <span class="hi-navy">Tyler</span> wants Grandpa and Grandma to know they can find almost anything. Here are six super-useful search categories to try today!
+  </p>
+
+  <div class="ai-grid fade-in">
+    <div class="ai-item" data-num="01">
+      <span class="ai-item-emoji">🏥</span>
+      <div class="ai-item-title">Find a Doctor or Clinic</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">Search "[your neighborhood] + clinic" or "[city] + urgent care" to find nearby medical offices, their hours, and phone numbers instantly.</div>
+      <span class="ai-item-example">e.g. "Riverside urgent care" · "Dr. Smith family practice"</span>
+    </div>
+    <div class="ai-item" data-num="02">
+      <span class="ai-item-emoji">🍲</span>
+      <div class="ai-item-title">Recipes from Your Favorite Chef</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">Add a chef's name to get their specific recipe. Instead of just "chicken soup," try "chicken soup recipe Gordon Ramsay" for expert results.</div>
+      <span class="ai-item-example">e.g. "apple pie recipe Martha Stewart"</span>
+    </div>
+    <div class="ai-item" data-num="03">
+      <span class="ai-item-emoji">🗺️</span>
+      <div class="ai-item-title">Local Restaurants &amp; Cafés</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">Type your neighborhood name plus what you're craving. Google Maps will show ratings, hours, and directions right on your screen!</div>
+      <span class="ai-item-example">e.g. "Italian restaurant downtown" · "coffee near me"</span>
+    </div>
+    <div class="ai-item" data-num="04">
+      <span class="ai-item-emoji">📰</span>
+      <div class="ai-item-title">Today's News</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">Search any news topic with the word "today" or "latest" to get the most current stories. Great for staying informed without turning on the TV!</div>
+      <span class="ai-item-example">e.g. "weather today" · "stock market latest news"</span>
+    </div>
+    <div class="ai-item" data-num="05">
+      <span class="ai-item-emoji">💊</span>
+      <div class="ai-item-title">Medication Information</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">Look up what a medicine does, its side effects, or whether it can be taken with other pills. Always confirm with your doctor, but a quick search can help you prepare good questions!</div>
+      <span class="ai-item-example">e.g. "aspirin side effects" · "can I take ibuprofen with blood pressure meds"</span>
+    </div>
+    <div class="ai-item" data-num="06">
+      <span class="ai-item-emoji">🎬</span>
+      <div class="ai-item-title">Movies, Shows &amp; YouTube Videos</div>
+      <div class="ai-item-desc" contenteditable="true" spellcheck="false">Search for any movie title, TV show, or video topic. You can find free videos on YouTube and streaming schedules — all from a simple search!</div>
+      <span class="ai-item-example">e.g. "funny cat videos YouTube" · "classic movies 1980s"</span>
+    </div>
+  </div>
+
+  <!-- PHOTO GRID — 4 square photo slots -->
+  <div class="photo-grid fade-in">
+    <div class="photo-slot" id="ps1" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup1').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup1').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps1','pd1','🎤')">🗑️</button></div>
+      <span id="pd1">🎤</span><input type="file" accept="image/*,video/*" id="pup1" style="display:none" onchange="loadPhoto(this,'ps1','pd1')">
+    </div>
+    <div class="photo-slot" id="ps2" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup2').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup2').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps2','pd2','🌐')">🗑️</button></div>
+      <span id="pd2">🌐</span><input type="file" accept="image/*,video/*" id="pup2" style="display:none" onchange="loadPhoto(this,'ps2','pd2')">
+    </div>
+    <div class="photo-slot" id="ps3" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup3').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup3').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps3','pd3','📷')">🗑️</button></div>
+      <span id="pd3">📷</span><input type="file" accept="image/*,video/*" id="pup3" style="display:none" onchange="loadPhoto(this,'ps3','pd3')">
+    </div>
+    <div class="photo-slot" id="ps4" onclick="if(!this.classList.contains('has-media'))document.getElementById('pup4').click()">
+      <div class="photo-slot-overlay"><button class="photo-slot-btn" onclick="event.stopPropagation();document.getElementById('pup4').click()">🔄</button><button class="photo-slot-btn" onclick="event.stopPropagation();clearPhoto('ps4','pd4','⭐')">🗑️</button></div>
+      <span id="pd4">⭐</span><input type="file" accept="image/*,video/*" id="pup4" style="display:none" onchange="loadPhoto(this,'ps4','pd4')">
+    </div>
+  </div>
+
+  <!-- IMAGE SLOT 3 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-3" onclick="if(!this.classList.contains('has-media'))document.getElementById('up3').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up3').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-3','disp3','Google Maps showing nearby clinics')">🗑️ Delete</button>
+      </div>
+      <div id="disp3" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Google Maps showing nearby hospitals and clinics on a smartphone screen</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up3" style="display:none" onchange="loadMedia(this,'area-3','disp3')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌺</span></div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">04</div>
+    <h2 contenteditable="true" spellcheck="false">Today's Tech Humor 😂 — The Search Gone Wrong</h2>
+  </div>
+
+  <div class="humor-card fade-in">
+    <div class="humor-tag">😄 Today's Laugh</div>
+    <div class="humor-title">Grandpa's First Solo Google Search</div>
+    <div class="humor-row" contenteditable="true" spellcheck="false"><span class="sp">Grandpa:</span> "Tyler, I tried searching by myself! I typed <strong>'where is the best doctor in the whole entire world near my house on Oak Street please help me'</strong>."</div>
+    <div class="humor-row" contenteditable="true" spellcheck="false"><span class="sp">Tyler:</span> "Grandpa… that's a whole paragraph. What did Google say?"</div>
+    <div class="humor-row" contenteditable="true" spellcheck="false"><span class="sp">Grandpa:</span> "It showed me a doctor in <strong>Australia</strong>."</div>
+    <div class="humor-row" contenteditable="true" spellcheck="false"><span class="sp">Tyler:</span> "Just try: <strong>'Oak Street family doctor'</strong>. Three words. That's it."</div>
+    <div class="humor-punchline" style="text-align:center;" contenteditable="true" spellcheck="false"><b>Grandpa: "Three words got me results in 10 seconds… I've been writing essays into that search bar for a YEAR. 🤣"</b></div>
+  </div>
+
+  <!-- IMAGE SLOT 4 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-4" onclick="if(!this.classList.contains('has-media'))document.getElementById('up4').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up4').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-4','disp4','Grandpa laughing at his phone')">🗑️ Delete</button>
+      </div>
+      <div id="disp4" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Grandpa laughing while looking at his phone, Tyler shaking his head with a smile</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up4" style="display:none" onchange="loadMedia(this,'area-4','disp4')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌼</span></div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">05</div>
+    <h2 contenteditable="true" spellcheck="false">Quiz Time! Are You a Search Expert? 🌟</h2>
+  </div>
+
+  <div class="quiz-card fade-in">
+    <div class="quiz-header">
+      <span class="quiz-badge">🌟 QUIZ TIME</span>
+      <span class="quiz-title-text">Test Your Search Skills!</span>
+    </div>
+    <div class="quiz-q"><span class="quiz-num" style="flex-shrink:0;">Q1</span><span class="quiz-text" contenteditable="true" spellcheck="false" style="flex:1;min-width:200px;">What is the BEST way to search for a kimchi stew recipe online?<br>① Type a long question sentence &nbsp; ② Type just "kimchi stew recipe" &nbsp; ③ Type everything with no spaces &nbsp; ④ Type any random words</span><span class="quiz-hint" style="width:100%;padding-left:0;margin-top:4px;">💡 Hint: Short and specific wins every time!</span></div>
+    <div class="quiz-q"><span class="quiz-num" style="flex-shrink:0;">Q2</span><span class="quiz-text" contenteditable="true" spellcheck="false" style="flex:1;min-width:200px;">When searching for a hospital, what should you ADD to your search?<br>① Your neighborhood or city name &nbsp; ② The weather today &nbsp; ③ Your favorite food &nbsp; ④ A movie title</span><span class="quiz-hint" style="width:100%;padding-left:0;margin-top:4px;">💡 Hint: Location = local results!</span></div>
+    <div class="quiz-q"><span class="quiz-num" style="flex-shrink:0;">Q3</span><span class="quiz-text" contenteditable="true" spellcheck="false" style="flex:1;min-width:200px;">What is the most important tip for using voice search on your phone?<br>① Speak as fast as possible &nbsp; ② Speak slowly and clearly &nbsp; ③ Use it in a noisy place &nbsp; ④ Say a very long sentence</span><span class="quiz-hint" style="width:100%;padding-left:0;margin-top:4px;">💡 Hint: Imagine you're speaking to a polite librarian!</span></div>
+    <div class="quiz-cta">✍️ Write your answers in the comments — let's see who gets all 3 right! 🎉</div>
+  </div>
+
+  <!-- IMAGE SLOT 5 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-5" onclick="if(!this.classList.contains('has-media'))document.getElementById('up5').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up5').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-5','disp5','Grandpa and Grandma celebrating quiz win')">🗑️ Delete</button>
+      </div>
+      <div id="disp5" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Grandpa and Grandma celebrating, fists pumped, phones in hand — quiz winners!</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up5" style="display:none" onchange="loadMedia(this,'area-5','disp5')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false" style="text-align:center;padding:20px 0;">
+    <span class="speaker">Grandma:</span> "Tyler, I got all three right! Search queen over here! 👑"<br>
+    <span class="speaker">Grandpa:</span> "I only got two… but I'm practicing! 😄"
+  </p>
+
+  <div class="divider fade-in"><span class="div-icon">🌟</span></div>
+
+  <!-- MID-PAGE AD ZONE D -->
+  <div class="ad-zone-wrap" id="ad-wrap-D" style="margin:0 0 12px;">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▼ Ad Zone D — Hover to reveal ▼</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-D">
+        <span id="ad-content-D">
+          <span class="ad-box-label">Ad · D</span>
+          <span class="ad-box-desc">Click to insert an ad image or video from your PC. Saved permanently.</span>
+          <span class="ad-box-size">728×90 Leaderboard</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-D').click(); event.stopPropagation();">📁 Insert</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-D" style="display:none">
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">06</div>
+    <h2 contenteditable="true" spellcheck="false">Today's Wisdom — Deep Dive</h2>
+  </div>
+
+  <div class="wisdom-deep fade-in">
+    <div class="wisdom-deep-tag">🌟 WISDOM DEEP DIVE</div>
+    <div class="wisdom-deep-title">"與時俱進 — Move Forward With the Times" — What does it really mean for us today?</div>
+    <div class="word-row">
+      <div class="word-tile"><span class="word-main">與 (yǔ)</span><span class="word-phonics">·together with·</span><span class="word-mean">to go along with, in company with</span></div>
+      <div class="word-tile"><span class="word-main">時 (shí)</span><span class="word-phonics">·noun·</span><span class="word-mean">time, the era, the age we live in</span></div>
+      <div class="word-tile"><span class="word-main">俱進 (jùjìn)</span><span class="word-phonics">·verb phrase·</span><span class="word-mean">to advance together, to move forward in step</span></div>
+    </div>
+    <div class="meaning-block"><div class="meaning-label">📖 What it literally says</div><div class="meaning-text" contenteditable="true" spellcheck="false">Advance together with the times. Keep in step with the era you live in. Don't fall behind — walk alongside the world as it changes.</div></div>
+    <div class="meaning-block"><div class="meaning-label">📖 The deeper meaning</div><div class="meaning-text" contenteditable="true" spellcheck="false">This proverb isn't about chasing every new trend. It's about staying open, curious, and willing to learn. <strong>Wisdom doesn't mean knowing everything already — it means having the courage to keep learning.</strong> Grandma and Grandpa aren't "too old" to learn internet search. They're proving this proverb right today.</div></div>
+    <div class="meaning-block"><div class="meaning-label">📖 Famous examples that proved it</div><div class="meaning-text" contenteditable="true" spellcheck="false"><strong>Grandma Moses</strong> began painting seriously at age 78 and became a celebrated American folk artist. <strong>Colonel Sanders</strong> franchised KFC at age 65 after decades of struggle. <strong>Warren Buffett</strong> learned to use a computer in his 50s and credits it with transforming how he analyzes businesses. Age is never the obstacle — attitude is.</div></div>
+    <div class="ai-apply">
+      <div class="ai-apply-title">🌟 How this connects to internet search for YOU</div>
+      <div class="ai-apply-text" contenteditable="true" spellcheck="false">Every time Grandpa or Grandma picks up their phone and types three words into a search bar, they are living this ancient proverb. <strong>Moving forward with the times doesn't require being young — it requires being willing.</strong> And you're already willing, because you're reading this right now.<br><br>💡 <strong>Memory tip!</strong> Next time you search, whisper "短い、正確、場所" — just kidding! Try this instead: <em>"Short. Specific. Location."</em> Three words to remember the three golden rules. 😄</div>
+    </div>
+  </div>
+
+  <!-- IMAGE SLOT 6 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-6" onclick="if(!this.classList.contains('has-media'))document.getElementById('up6').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up6').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-6','disp6','Elderly person confidently using technology')">🗑️ Delete</button>
+      </div>
+      <div id="disp6" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Inspiring image of an elderly person confidently using technology — wisdom meets modern life</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up6" style="display:none" onchange="loadMedia(this,'area-6','disp6')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🎵</span></div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">07</div>
+    <h2 contenteditable="true" spellcheck="false">Today's Song 🎵</h2>
+  </div>
+
+  <div class="song-card fade-in">
+    <div class="song-header">
+      <div class="song-icon">🎵</div>
+      <div>
+        <div class="song-title-text">The SNS World Song</div>
+        <div class="song-subtitle">Senior AI Learning Hub Theme Song · Ep.04</div>
+      </div>
+    </div>
+    <div class="song-lyrics" contenteditable="true" spellcheck="false"><span class="song-section">&lt;Verse 1&gt;</span>
+YouTube has videos, TikTok has dance
+Instagram filled with photos at a glance
+Facebook to meet friends so dear
+AI makes music we all cheer
+
+<span class="song-section">&lt;Chorus&gt;</span>
+SNS world, it's big and bright
+Let's explore it left and right
+Grandma and Grandpa, come along
+Learning new things makes us strong!
+
+<span class="song-section">&lt;Verse 2&gt;</span>
+Suno creates our song today
+Veo makes videos in every way
+Grandma and Grandpa know it all
+Welcome to this digital hall!
+
+<span class="song-section">&lt;Chorus&gt;</span>
+SNS world, it's big and bright
+Let's explore it left and right
+Grandma and Grandpa, come along
+Learning new things makes us strong!
+
+<span class="song-section">&lt;Outro&gt;</span>
+Keep on learning, keep on growing~ ♪
+(Soft, warm acoustic fade-out 🎸)</div>
+
+    <div class="audio-box" id="audioBox">
+      <div style="display:flex;align-items:center;gap:14px;width:100%;">
+        <button class="play-btn no-audio" id="playBtn" onclick="togglePlay()" title="Upload a song first">
+          <div class="play-icon" id="playIcon"></div>
+        </button>
+        <div class="progress-wrap">
+          <div class="progress-track" id="progTrack" onclick="seekAudio(event)" style="position:relative;">
+            <div class="progress-fill" id="progFill"></div>
+            <div id="progMarker" style="position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid var(--navy-light);cursor:pointer;transition:left 0.1s;display:none;" onclick="seekAudio(event)"></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;margin-top:6px;">
+            <span class="time-text" id="timeDisp">0:00 / 0:00</span>
+            <span class="time-text" id="pctDisp" style="color:rgba(255,255,255,0.5);">0%</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:160px;">
+          <span style="font-size:20px;" id="volIcon">🔊</span>
+          <input type="range" id="volSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)"
+            style="flex:1;height:6px;accent-color:#5B8DD9;cursor:pointer;">
+          <span id="volPct" style="font-size:16px;color:rgba(255,255,255,0.6);min-width:40px;font-weight:700;text-align:right;">100%</span>
+        </div>
+        <button id="loopBtn" onclick="toggleLoop()"
+          style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:100px;
+                 padding:9px 18px;font-size:16px;font-weight:700;color:rgba(255,255,255,0.65);
+                 cursor:pointer;font-family:inherit;transition:all 0.2s;white-space:nowrap;">
+          🔁 Loop: OFF
+        </button>
+        <button class="upload-audio-btn" onclick="document.getElementById('audioInp').click()">🎵 Upload Audio</button>
+      </div>
+      <div class="audio-filename" id="audioName"></div>
+    </div>
+    <input type="file" accept="audio/*,video/*" id="audioInp" style="display:none" onchange="loadAudio(this)">
+    <audio id="audioEl"></audio>
+  </div>
+
+  <!-- IMAGE SLOT 7 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-7" onclick="if(!this.classList.contains('has-media'))document.getElementById('up7').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up7').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-7','disp7','Family singing together around a tablet')">🗑️ Delete</button>
+      </div>
+      <div id="disp7" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Family singing together around a phone or tablet — music and joy</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up7" style="display:none" onchange="loadMedia(this,'area-7','disp7')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">📝</span></div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">08</div>
+    <h2 contenteditable="true" spellcheck="false">Today's Writing Tips — Search Like a Pro!</h2>
+  </div>
+
+  <div class="grammar-card fade-in">
+    <div class="grammar-title-text">📝 Top 3 Search Mistakes Seniors Make (And How to Fix Them!)</div>
+    <div class="grammar-item">
+      <div class="grammar-rule" contenteditable="true" spellcheck="false">1. Typing Full Questions Instead of Keywords</div>
+      <div class="grammar-ex" contenteditable="true" spellcheck="false">
+        ✅ <span class="ok">"kimchi stew recipe"</span> — short, targeted, gets great results<br>
+        ✅ <span class="ok">"Oak Street clinic hours"</span> — specific, adds location<br>
+        ❌ <span class="no">"Can you please tell me how to make kimchi stew taste delicious at home?"</span> — too long, too vague, confuses search engines
+      </div>
+    </div>
+    <div class="grammar-item">
+      <div class="grammar-rule" contenteditable="true" spellcheck="false">2. Forgetting Spaces Between Words</div>
+      <div class="grammar-ex" contenteditable="true" spellcheck="false">
+        ✅ "cold flu doctor" — three separate words, reads clearly<br>
+        ✅ "best Italian restaurant downtown" — spaced words, great results<br>
+        ❌ <span class="no">"coldfludoctor"</span> — runs together, search engine gets confused
+      </div>
+    </div>
+    <div class="grammar-item">
+      <div class="grammar-rule" contenteditable="true" spellcheck="false">3. Not Using Voice Search When Typing Is Hard</div>
+      <div class="grammar-ex" contenteditable="true" spellcheck="false">
+        ✅ Tap the 🎤 microphone icon on your keyboard — then speak slowly and clearly<br>
+        ✅ Say short phrases: "Oak Street pharmacy" not a full paragraph<br>
+        ❌ <span class="no">Struggling to type every single letter</span> — voice search is faster and easier!
+      </div>
+    </div>
+  </div>
+
+  <div class="speller-box fade-in">
+    <div class="speller-badge">Free Online Tool</div>
+    <div class="speller-title">Grammarly — Your AI Writing &amp; Spelling Assistant</div>
+    <div class="speller-desc">Grammarly checks your spelling and grammar as you type — on email, social media, and even in search boxes! It's free, works on all devices, and is especially helpful for seniors writing messages to family or posting online for the first time.</div>
+    <a class="speller-btn" href="https://www.grammarly.com" target="_blank" rel="noopener"
+      onmouseover="this.style.background='#2E5490'" onmouseout="this.style.background='#1B3A6B'">
+      🌐 Open Grammarly Free →
+    </a>
+    <div class="speller-warn">⚠️ Grammarly is a helper, not a replacement for your own judgment. Always re-read what you write before hitting Send!</div>
+  </div>
+
+  <div class="dad-note fade-in">
+    <p class="body-text" contenteditable="true" spellcheck="false" style="margin:0;"><b>📌 Tyler says:</b> "Grandma, Grandpa — the most important tool you have is your curiosity. The internet rewards people who keep asking questions. Don't be afraid to search something wrong the first time. Just try again with shorter words! You've got this. 💙"</p>
+  </div>
+
+  <!-- IMAGE SLOT 8 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-8" onclick="if(!this.classList.contains('has-media'))document.getElementById('up8').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up8').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-8','disp8','Tyler pointing at phone with Grandma and Grandpa')">🗑️ Delete</button>
+      </div>
+      <div id="disp8" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Tyler sitting with Grandma and Grandpa, pointing at a phone screen together — warm and friendly</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up8" style="display:none" onchange="loadMedia(this,'area-8','disp8')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="divider fade-in"><span class="div-icon">🌼</span></div>
+
+  <div class="sec-heading fade-in">
+    <div class="sec-num">09</div>
+    <h2 contenteditable="true" spellcheck="false">Today's Recap — What We Learned!</h2>
+  </div>
+
+  <div class="summary-card fade-in">
+    <div class="summary-header">
+      <div class="summary-badge">Today's Summary</div>
+      <div class="summary-h-title">📚 Episode 04 Recap<br>Let's Review!</div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-num">①</div>
+      <div>
+        <div class="sum-title" contenteditable="true" spellcheck="false">Short &amp; Specific Beats Long &amp; Vague</div>
+        <div class="sum-text" contenteditable="true" spellcheck="false">When searching online, use <strong>2–4 keyword words</strong> instead of full sentences. "kimchi stew recipe" will always beat "how can I make kimchi stew at home please."</div>
+      </div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-num">②</div>
+      <div>
+        <div class="sum-title" contenteditable="true" spellcheck="false">Always Add Your Location for Local Results</div>
+        <div class="sum-text" contenteditable="true" spellcheck="false">For hospitals, restaurants, pharmacies, and services, include your <strong>neighborhood or city name</strong> in the search. Google Maps will show you exactly what's nearby with ratings and directions.</div>
+      </div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-num">③</div>
+      <div>
+        <div class="sum-title" contenteditable="true" spellcheck="false">Voice Search Is Your Secret Weapon</div>
+        <div class="sum-text" contenteditable="true" spellcheck="false">Tap the <strong>🎤 microphone icon</strong> on your keyboard and speak your search slowly and clearly. It's faster than typing and works great in quiet environments.</div>
+      </div>
+    </div>
+    <div class="summary-item">
+      <div class="sum-num">④</div>
+      <div>
+        <div class="sum-title" contenteditable="true" spellcheck="false">Add a Famous Name to Get Better Recipes</div>
+        <div class="sum-text" contenteditable="true" spellcheck="false">When searching for recipes, add a <strong>well-known chef's name</strong> — like "Martha Stewart apple pie" — to get trusted, tested results instead of random blogs.</div>
+      </div>
+    </div>
+    <div class="summary-outro" contenteditable="true" spellcheck="false">🎉 Amazing work today! Next up — Episode 05: <em>Can AI Really Draw Pictures?!</em> Tyler introduces Midjourney and DALL·E to Grandpa and Grandma. Get ready to be amazed! 🎨</div>
+  </div>
+
+  <!-- IMAGE SLOT 9 -->
+  <div class="media-section fade-in">
+    <div class="img-slot" id="area-9" onclick="if(!this.classList.contains('has-media'))document.getElementById('up9').click()">
+      <div class="img-slot-overlay">
+        <button class="slot-btn" onclick="event.stopPropagation();document.getElementById('up9').click()">🔄 Replace</button>
+        <button class="slot-btn" onclick="event.stopPropagation();clearSlot('area-9','disp9','Warm family photo — Tyler with Grandpa and Grandma')">🗑️ Delete</button>
+      </div>
+      <div id="disp9" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 24px;">
+        <span class="slot-icon">🖼️</span>
+        <span class="slot-label">Click to insert image / video</span>
+        <span class="slot-hint">Warm, joyful family photo — Grandpa, Grandma, and Tyler smiling with phones in hand</span>
+      </div>
+      <input type="file" accept="image/*,video/*" id="up9" style="display:none" onchange="loadMedia(this,'area-9','disp9')">
+    </div>
+    <div class="source-line" contenteditable="true" spellcheck="false"><em>Source: Add image credit here</em></div>
+  </div>
+
+  <div class="keyword-wrap fade-in">
+    <div class="keyword-label">🔍 Search Keywords</div>
+    <div class="keyword-cloud">
+      <a class="keyword-tag" href="https://www.google.com/search?q=internet+search+tips+for+seniors" target="_blank">Internet Search for Seniors</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=how+to+use+google+search" target="_blank">How to Use Google</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=voice+search+tips+smartphone" target="_blank">Voice Search Tips</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=digital+literacy+seniors" target="_blank">Digital Literacy for Seniors</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=AI+tools+for+seniors" target="_blank">AI Tools for Seniors</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=senior+tech+education" target="_blank">Senior Tech Education</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=smartphone+tips+elderly" target="_blank">Smartphone Tips for Elderly</a>
+      <a class="keyword-tag" href="https://www.google.com/search?q=Tyler+teaches+grandparents+technology" target="_blank">Tyler Teaches Tech</a>
+    </div>
+  </div>
+
+  <p class="body-text fade-in" contenteditable="true" spellcheck="false" style="text-align:center;font-size:var(--base-fs);color:var(--ink-light);padding-bottom:8px;">
+    📝 This post is written for seniors and families who want to explore technology together — no experience needed, just curiosity!<br>
+    Questions? Drop them in the comments — we read every single one!
+  </p>
+
+</div><!-- /page-wrap -->
+</div><!-- /main-content -->
+
+<!-- ══════════════════════════════════════════════
+     BOTTOM AD ZONES (A · B · C)
+════════════════════════════════════════════════ -->
+<div class="ad-bottom-section">
+  <div class="ad-zone-wrap" id="ad-wrap-A">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▼ Ad Zone A — Hover to reveal ▼</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-A">
+        <span id="ad-content-A">
+          <span class="ad-box-label">Ad · A</span>
+          <span class="ad-box-desc">Click to insert an ad image or video from your PC. Saved permanently.</span>
+          <span class="ad-box-size">728×90 Leaderboard</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-A').click(); event.stopPropagation();">📁 Insert</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-A" style="display:none">
+      </div>
+    </div>
+  </div>
+  <div class="ad-zone-wrap" id="ad-wrap-B">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▼ Ad Zone B — Hover to reveal ▼</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-B">
+        <span id="ad-content-B">
+          <span class="ad-box-label">Ad · B</span>
+          <span class="ad-box-desc">Click to insert an ad image or video from your PC. Saved permanently.</span>
+          <span class="ad-box-size">300×250 Rectangle</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-B').click(); event.stopPropagation();">📁 Insert</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-B" style="display:none">
+      </div>
+    </div>
+  </div>
+  <div class="ad-zone-wrap" id="ad-wrap-C">
+    <div class="ad-trigger-bar"></div>
+    <div class="ad-hover-hint">▼ Ad Zone C — Hover to reveal ▼</div>
+    <div class="ad-box-inner">
+      <div class="ad-box" id="adbox-C">
+        <span id="ad-content-C">
+          <span class="ad-box-label">Ad · C</span>
+          <span class="ad-box-desc">Click to insert an ad image or video from your PC. Saved permanently.</span>
+          <span class="ad-box-size">468×60 Banner</span>
+        </span>
+        <div class="ad-menu-before">
+          <button onclick="document.getElementById('ad-inp-C').click(); event.stopPropagation();">📁 Insert</button>
+        </div>
+        <input type="file" accept="image/*,video/*" id="ad-inp-C" style="display:none">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<div class="blog-footer">
+  <div class="footer-inner">
+    <div class="footer-series">Senior AI Learning Hub · AI for Seniors</div>
+    <div class="footer-title-text" contenteditable="true" spellcheck="false">🌟 "It's never too late to learn something wonderful." 🌟</div>
+    <div class="footer-desc" contenteditable="true" spellcheck="false">
+      The Senior AI Learning Hub is a warm, friendly space where Tyler guides Grandpa and Grandma through the exciting world of AI and technology — one episode at a time. No jargon, no judgment, just learning together.
+    </div>
+    <div class="footer-cr">© 2025 Senior AI Learning Hub | All rights reserved</div>
+  </div>
+</div><!-- /footer -->
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════ -->
+<script>
+
+/* ── Force show all fade-in on DOM ready (Tistory compatibility) ── */
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    el.style.cssText += 'opacity:1 !important;transform:translateY(0) !important;';
+    el.classList.add('visible');
+  });
+});
+window.addEventListener('load', function() {
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    el.style.cssText += 'opacity:1 !important;transform:translateY(0) !important;';
+    el.classList.add('visible');
+  });
+});
+
+/* ── Reading progress bar ── */
+window.addEventListener('scroll', function() {
+  var d = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('reading-bar').style.width = (d > 0 ? (window.scrollY / d) * 100 : 0) + '%';
+});
+
+/* ── Fade-in on scroll with Tistory fallback ── */
+(function() {
+  function showAll() {
+    document.querySelectorAll('.fade-in').forEach(function(el) {
+      el.classList.add('visible');
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e){ if(e.isIntersecting) { e.target.classList.add('visible'); e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+    }, { threshold: 0.02, rootMargin: '0px 0px 100px 0px' });
+    document.querySelectorAll('.fade-in').forEach(function(el){ obs.observe(el); });
+    setTimeout(showAll, 300);
+  } else {
+    showAll();
+  }
+})();
+
+/* ══════════════════════════════════════════════════════════════════
+   ★ EPISODE ID — CHANGE THIS for every new post!
+   Used as localStorage namespace: 'media-{EPISODE_ID}-area-N' etc.
+   ══════════════════════════════════════════════════════════════════ */
+var EPISODE_ID = 'ep04en'; /* Episode 04 English */
+
+/* ── Main media slots (area-1 … area-9) ── */
+function renderMedia(areaId, dispId, src, type) {
+  var area = document.getElementById(areaId);
+  var disp = document.getElementById(dispId);
+  if (!area || !disp) return;
+  var el = (type === 'video') ? document.createElement('video') : document.createElement('img');
+  if (type === 'video') el.controls = true;
+  el.src = src;
+  el.style.cssText = 'width:100%;height:auto;display:block;';
+  disp.innerHTML = ''; disp.appendChild(el); disp.style.padding = '0';
+  area.classList.add('has-media');
+}
+function loadMedia(input, areaId, dispId) {
+  var f = input.files[0]; if (!f) return;
+  var type = f.type.startsWith('video/') ? 'video' : 'image';
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var src = ev.target.result;
+    renderMedia(areaId, dispId, src, type);
+    /* Dual-save: localStorage (primary) + key2 backup for file:// origin */
+    try { localStorage.setItem('media-' + EPISODE_ID + '-' + areaId, JSON.stringify({src:src, type:type})); } catch(e) {}
+    try { localStorage.setItem('media2-' + EPISODE_ID + '-' + areaId, JSON.stringify({src:src, type:type})); } catch(e) {}
+  };
+  reader.readAsDataURL(f);
+  input.value = '';
+}
+function clearSlot(areaId, dispId, hint) {
+  var area = document.getElementById(areaId);
+  var disp = document.getElementById(dispId);
+  if (!area || !disp) return;
+  area.classList.remove('has-media');
+  localStorage.removeItem('media-' + EPISODE_ID + '-' + areaId);
+  localStorage.removeItem('media2-' + EPISODE_ID + '-' + areaId);
+  disp.innerHTML = '<span class="slot-icon">🖼️</span><span class="slot-label">Click to insert image / video</span><span class="slot-hint">' + (hint||'') + '</span>';
+  disp.style.padding = '';
+}
+
+/* ── Photo grid (ps1 … ps4) ── */
+function renderPhoto(slotId, dispId, src) {
+  var slot = document.getElementById(slotId);
+  var disp = document.getElementById(dispId);
+  if (!slot || !disp) return;
+  var img = document.createElement('img');
+  img.src = src;
+  disp.outerHTML = '<img src="' + src + '" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:12px;" id="' + dispId + '">';
+  slot.classList.add('has-media');
+}
+function loadPhoto(input, slotId, dispId) {
+  var f = input.files[0]; if (!f) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var src = ev.target.result;
+    renderPhoto(slotId, dispId, src);
+    try { localStorage.setItem('photo-' + EPISODE_ID + '-' + slotId, JSON.stringify({src:src})); } catch(e) {}
+    try { localStorage.setItem('photo2-' + EPISODE_ID + '-' + slotId, JSON.stringify({src:src})); } catch(e) {}
+  };
+  reader.readAsDataURL(f);
+  input.value = '';
+}
+function clearPhoto(slotId, dispId, emoji) {
+  var slot = document.getElementById(slotId);
+  if (!slot) return;
+  slot.classList.remove('has-media');
+  localStorage.removeItem('photo-' + EPISODE_ID + '-' + slotId);
+  localStorage.removeItem('photo2-' + EPISODE_ID + '-' + slotId);
+  var d = document.getElementById(dispId);
+  if (d) d.outerHTML = '<span id="' + dispId + '">' + (emoji||'🖼️') + '</span>';
+}
+
+/* ── Audio player ── */
+var isLooping = false;
+var _curVol   = 1.0;
+
+/* Set play button ready/locked */
+function _setPlayReady(ready) {
+  var btn = document.getElementById('playBtn');
+  if (!btn) return;
+  if (ready) { btn.classList.remove('no-audio'); btn.title = 'Play / Pause'; }
+  else        { btn.classList.add('no-audio');    btn.title = 'Upload a song first'; }
+}
+
+/* Mount audio src — always reuse fixed <audio id="audioEl">, never replace element */
+function _mountAudioSrc(src, name) {
+  var a = document.getElementById('audioEl');
+  if (!a) return;
+  /* ① Stop & detach all old handlers */
+  a.pause();
+  a.ontimeupdate = null; a.onended = null; a.onerror = null;
+  a.oncanplay = null; a.onloadedmetadata = null;
+  a.removeAttribute('src'); a.load(); /* flush previous */
+  a.loop = false; /* always manual loop — avoids Chrome VBR-MP3 bug */
+  a.volume = _curVol;
+  /* ② Fresh handlers */
+  a.ontimeupdate = updateProgress;
+  a.onended = onAudioEnded;
+  a.onerror = function() {
+    if (!a.src || a.src === '' || a.src === window.location.href) return;
+    var code = (a.error && a.error.code) || '?';
+    var msg = {1:'Aborted',2:'Network error',3:'Decode error',4:'Format not supported'}[code] || 'Unknown';
+    document.getElementById('audioName').textContent = '⚠️ Could not play — ' + msg;
+    _setPlayReady(false);
+  };
+  var _onReady = function() {
+    _setPlayReady(true);
+    document.getElementById('audioName').textContent = '🎵 ' + (name || 'Song') + ' — ready to play ▶';
+  };
+  a.onloadedmetadata = _onReady; a.oncanplay = _onReady;
+  /* ③ Set src + load */
+  a.src = src; a.load();
+  document.getElementById('audioName').textContent = '⏳ Loading ' + (name || '') + '…';
+}
+
+function restoreAudioFromStorage() {
+  var saved = localStorage.getItem('audio-' + EPISODE_ID);
+  if (!saved) return;
+  try {
+    var data = JSON.parse(saved);
+    if (data && data.src) _mountAudioSrc(data.src, data.name || 'Audio');
+  } catch(e) { localStorage.removeItem('audio-' + EPISODE_ID); }
+}
+
+function loadAudio(input) {
+  var f = input.files[0]; if (!f) return;
+  input.value = '';
+  /* Read once as DataURL — used for both playback and storage (no race condition) */
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var src = ev.target.result;
+    _mountAudioSrc(src, f.name);
+    try { localStorage.setItem('audio-' + EPISODE_ID, JSON.stringify({src:src, name:f.name})); } catch(e) {}
+  };
+  reader.readAsDataURL(f);
+}
+
+function togglePlay() {
+  var btn = document.getElementById('playBtn');
+  if (btn && btn.classList.contains('no-audio')) return;
+  var a = document.getElementById('audioEl');
+  var s = a ? a.src : '';
+  if (!a || !s || s === window.location.href || s === location.origin + '/') {
+    document.getElementById('audioInp').click(); return;
+  }
+  if (a.paused) {
+    var p = a.play(); if (p && p.catch) p.catch(function(){});
+    document.getElementById('playIcon').outerHTML = '<div id="playIcon" class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
+  } else {
+    a.pause();
+    document.getElementById('playIcon').outerHTML = '<div id="playIcon" class="play-icon"></div>';
+  }
+}
+
+function onAudioEnded() {
+  if (isLooping) {
+    /* Manual loop — avoids Chrome VBR-MP3 native loop bug (wrong start point) */
+    var a = document.getElementById('audioEl');
+    if (a) { a.currentTime = 0; var p = a.play(); if (p && p.catch) p.catch(function(){}); }
+  } else {
+    document.getElementById('playIcon').outerHTML = '<div id="playIcon" class="play-icon"></div>';
+  }
+}
+
+function toggleLoop() {
+  var a = document.getElementById('audioEl');
+  isLooping = !isLooping;
+  /* Always keep a.loop = false — manual loop in onAudioEnded avoids Chrome VBR-MP3 bug */
+  if (a) a.loop = false;
+  var btn = document.getElementById('loopBtn');
+  if (isLooping) {
+    btn.textContent = '🔁 Loop: ON';
+    btn.style.background = 'rgba(91,141,217,0.35)';
+    btn.style.color = '#BFDBFE';
+    btn.style.borderColor = 'rgba(91,141,217,0.7)';
+    btn.style.fontWeight = '900';
+  } else {
+    btn.textContent = '🔁 Loop: OFF';
+    btn.style.background = 'rgba(255,255,255,0.12)';
+    btn.style.color = 'rgba(255,255,255,0.65)';
+    btn.style.borderColor = 'rgba(255,255,255,0.25)';
+    btn.style.fontWeight = '700';
+  }
+}
+
+function setVolume(val) {
+  document.getElementById('audioEl').volume = parseFloat(val);
+  document.getElementById('volPct').textContent = Math.round(val * 100) + '%';
+  var v = parseFloat(val);
+  document.getElementById('volIcon').textContent = v === 0 ? '🔇' : v < 0.4 ? '🔈' : v < 0.7 ? '🔉' : '🔊';
+}
+
+function updateProgress() {
+  var a = document.getElementById('audioEl');
+  var pct = (a.duration && !isNaN(a.duration)) ? (a.currentTime / a.duration) * 100 : 0;
+  document.getElementById('progFill').style.width = pct + '%';
+  var m = document.getElementById('progMarker');
+  if (m) { m.style.left = pct + '%'; m.style.display = 'block'; }
+  function fmt(s) {
+    if (!s || isNaN(s)) return '0:00';
+    return Math.floor(s / 60) + ':' + (Math.floor(s % 60) < 10 ? '0' : '') + Math.floor(s % 60);
+  }
+  document.getElementById('timeDisp').textContent = fmt(a.currentTime) + ' / ' + fmt(a.duration);
+  document.getElementById('pctDisp').textContent = Math.round(pct) + '%';
+}
+
+function seekAudio(ev) {
+  var a = document.getElementById('audioEl');
+  if (!a.src || a.src === window.location.href || !a.duration) return;
+  var track = document.getElementById('progTrack');
+  var rect = track.getBoundingClientRect();
+  var ratio = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+  a.currentTime = a.duration * ratio;
+}
+
+/* ═══ AD SYSTEM ═══ */
+var adSlots = ['1', '2', 'A', 'B', 'C', 'D'];
+
+window.addEventListener('DOMContentLoaded', function() {
+
+  restoreAudioFromStorage();
+
+  var mediaMap = [
+    {a:'area-1',d:'disp1'},{a:'area-2',d:'disp2'},{a:'area-3',d:'disp3'},
+    {a:'area-4',d:'disp4'},{a:'area-5',d:'disp5'},{a:'area-6',d:'disp6'},
+    {a:'area-7',d:'disp7'},{a:'area-8',d:'disp8'},{a:'area-9',d:'disp9'}
+  ];
+  mediaMap.forEach(function(m) {
+    var saved = localStorage.getItem('media-' + EPISODE_ID + '-' + m.a)
+             || localStorage.getItem('media2-' + EPISODE_ID + '-' + m.a);
+    if (saved) {
+      try { var data = JSON.parse(saved); renderMedia(m.a, m.d, data.src, data.type); }
+      catch(e) {}
+    }
+  });
+
+  var photoMap = [
+    {s:'ps1',d:'pd1'},{s:'ps2',d:'pd2'},{s:'ps3',d:'pd3'},{s:'ps4',d:'pd4'}
+  ];
+  photoMap.forEach(function(p) {
+    var saved = localStorage.getItem('photo-' + EPISODE_ID + '-' + p.s)
+             || localStorage.getItem('photo2-' + EPISODE_ID + '-' + p.s);
+    if (saved) {
+      try { var data = JSON.parse(saved); renderPhoto(p.s, p.d, data.src); }
+      catch(e) {}
+    }
+  });
+
+  adSlots.forEach(function(id) {
+    var saved = localStorage.getItem('ad-' + EPISODE_ID + '-' + id);
+    if (saved) {
+      try { var data = JSON.parse(saved); restoreAd(id, data.src, data.type); }
+      catch(e) { console.error('Failed to restore ad-' + id, e); }
+    }
+  });
+
+  adSlots.forEach(function(id) {
+    var inp = document.getElementById('ad-inp-' + id);
+    if (inp) {
+      inp.addEventListener('change', function() { loadAdMedia(this, id); });
+    }
+  });
+});
+
+function loadAdMedia(input, adId) {
+  var f = input.files[0]; if (!f) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var src = ev.target.result;
+    var type = f.type.startsWith('video/') ? 'video' : 'image';
+    try {
+      localStorage.setItem('ad-' + EPISODE_ID + '-' + adId, JSON.stringify({src:src, type:type}));
+    } catch(e) {
+      alert('Ad save failed: file too large. (5MB or less recommended)');
+      return;
+    }
+    renderAd(adId, src, type);
+  };
+  reader.readAsDataURL(f);
+  input.value = '';
+}
+
+function renderAd(adId, src, type) {
+  var wrap = document.getElementById('ad-wrap-' + adId);
+  var box  = document.getElementById('adbox-' + adId);
+  if (!wrap || !box) return;
+
+  box.style.cssText = 'padding:0;border:none;background:#000;border-radius:13px;overflow:hidden;min-height:unset;display:block;position:relative;cursor:default;';
+  box.innerHTML = '';
+  wrap.classList.add('ad-permanent');
+
+  var mediaEl;
+  if (type === 'video') {
+    mediaEl = document.createElement('video');
+    mediaEl.controls = true; mediaEl.autoplay = false;
+    mediaEl.style.cssText = 'width:100%;display:block;border-radius:13px;';
+  } else {
+    mediaEl = document.createElement('img');
+    mediaEl.style.cssText = 'width:100%;height:auto;display:block;border-radius:13px;';
+  }
+  mediaEl.src = src;
+  box.appendChild(mediaEl);
+
+  var menu = document.createElement('div');
+  menu.className = 'ad-menu-after';
+
+  var replBtn = document.createElement('button');
+  replBtn.innerHTML = '🔄 Replace';
+  replBtn.onclick = function(e){ e.stopPropagation(); document.getElementById('ad-inp-' + adId).click(); };
+
+  var delBtn = document.createElement('button');
+  delBtn.innerHTML = '🗑️ Delete';
+  delBtn.onclick = function(e){ e.stopPropagation(); deleteAd(adId); };
+
+  menu.appendChild(replBtn); menu.appendChild(delBtn);
+  box.appendChild(menu);
+}
+
+function restoreAd(adId, src, type) { renderAd(adId, src, type); }
+
+function deleteAd(adId) {
+  localStorage.removeItem('ad-' + EPISODE_ID + '-' + adId);
+  var wrap = document.getElementById('ad-wrap-' + adId);
+  var box  = document.getElementById('adbox-' + adId);
+  if (!wrap || !box) return;
+  wrap.classList.remove('ad-permanent');
+  box.style.cssText = '';
+  box.innerHTML = `
+    <span id="ad-content-${adId}">
+      <span class="ad-box-label">Ad · ${adId}</span>
+      <span class="ad-box-desc">Click to insert an ad image or video from your PC. Saved permanently.</span>
+      <span class="ad-box-size">Ad Size</span>
+    </span>
+    <div class="ad-menu-before">
+      <button onclick="document.getElementById('ad-inp-${adId}').click(); event.stopPropagation();">📁 Insert</button>
+    </div>
+    <input type="file" accept="image/*,video/*" id="ad-inp-${adId}" style="display:none">
+  `;
+  var newInp = document.getElementById('ad-inp-' + adId);
+  newInp.addEventListener('change', function(){ loadAdMedia(this, adId); });
+}
+</script>
+
+<!-- ══════════════════════════════════════════════
+     TEMPLATE GUIDE PANEL (bottom-right floating)
+════════════════════════════════════════════════ -->
+<div id="tpl-guide">
+  <button id="tpl-guide-close" onclick="document.getElementById('tpl-guide').classList.add('hidden');document.getElementById('tpl-guide-toggle').classList.add('show');" title="Close">×</button>
+  <div id="tpl-guide-title">📋 Template Usage Guide</div>
+  <div style="background:#fff3cd;border:2px solid #e6a817;border-radius:10px;padding:10px 13px;margin-bottom:10px;">
+    <div style="font-weight:900;font-size:13px;color:#7a4a00;letter-spacing:0.05em;margin-bottom:6px;">🔒 SUPREME MASTER PRINCIPLE</div>
+    <div style="font-size:12.5px;color:#5a3800;line-height:1.6;">
+      Once an image/video is inserted into any box, it is <strong>PERMANENTLY SAVED</strong> — it will <strong>NEVER</strong> disappear when the post is edited.<br>
+      <span style="color:#c0392b;font-weight:700;">Only Replace (🔄) or Delete (🗑️) can remove it.</span>
+    </div>
+  </div>
+  <ul>
+    <li>Click any text to <strong>edit directly</strong></li>
+    <li><strong>Image BOX</strong> — click to insert from PC</li>
+    <li><strong>Ad BOX</strong> — hover → click → insert</li>
+    <li>Change <strong>EPISODE_ID</strong> in JS per post</li>
+    <li>Replace all <strong>[PLACEHOLDER]</strong> text</li>
+    <li><strong>All media saved permanently</strong> via localStorage</li>
+  </ul>
+</div>
+<button id="tpl-guide-toggle" onclick="document.getElementById('tpl-guide').classList.remove('hidden');this.classList.remove('show');" title="Show Guide">📋</button>
+
+</body>
+</html>

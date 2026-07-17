@@ -1,0 +1,528 @@
+<!-- 
+=================================================================
+✏️ 블로그 수정 가능성 안내
+=================================================================
+이 HTML 파일은 블로그에 올린 후에도 100% 수정 가능합니다!
+
+✅ 네이버 블로그, 티스토리, 워드프레스 등 모든 플랫폼에서 수정 가능
+✅ HTML 편집 모드에서 자유롭게 내용 변경 가능
+✅ 제목, 본문, 색상, 이미지 모두 수정 가능
+
+📌 수정 방법:
+1. 블로그 글쓰기 → HTML 편집 모드
+2. 원하는 부분 찾아서 수정
+3. 저장하면 즉시 반영!
+
+🎨 쉬운 수정 예시:
+- 제목 변경: <h1> 태그 내용 수정
+- 색상 변경: style="color: #색상코드" 변경
+- 이미지 교체: <img src="URL"> 주소 변경
+
+💡 HTML/CSS 기본 지식만 있으면 완전한 커스터마이징 가능!
+=================================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤호와 함께하는 AI 이야기 - 10편: 할아버지, 건강 앱으로 운동 기록해요!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', Arial, sans-serif; line-height: 2; color: #000; background: #FFF9E6; font-size: 28px; }
+        .hero-section { width: 95%; margin: 30px auto; background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%); padding: 60px 40px; border-radius: 30px; text-align: center; box-shadow: 0 15px 50px rgba(0,0,0,0.2); border: 8px solid #880E4F; }
+        .hero-section h1 { font-size: 68px; color: #FFFFFF; font-weight: 900; margin-bottom: 20px; text-shadow: 3px 3px 0px rgba(0,0,0,0.2); }
+        .hero-section .episode { font-size: 42px; color: #FFEB3B; font-weight: 900; margin: 20px 0; }
+        .container { width: 95%; max-width: 1400px; margin: 30px auto; padding: 50px; background: white; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .character-intro { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); padding: 50px; margin: 50px 0; border-radius: 25px; border-left: 15px solid #0066CC; }
+        .character { display: flex; align-items: center; margin: 30px 0; font-size: 32px; }
+        .character-icon { font-size: 80px; margin-right: 30px; }
+        .character-name { font-weight: 900; color: #0066CC; font-size: 38px; }
+        .character-desc { color: #333; font-size: 28px; margin-top: 10px; }
+        .song-box { background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%); padding: 60px; margin: 60px 0; border-radius: 30px; text-align: center; border: 8px solid #C2185B; box-shadow: 0 15px 50px rgba(0,0,0,0.2); }
+        .song-title { font-size: 48px; font-weight: 900; color: #880E4F; margin-bottom: 30px; }
+        .song-lyrics { font-size: 36px; font-weight: 700; color: #C2185B; line-height: 2.2; }
+        .conversation { margin: 50px 0; }
+        .chat-bubble { margin: 40px 0; padding: 40px; border-radius: 25px; font-size: 30px; line-height: 2.2; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .chat-yoonho { background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%); border-left: 15px solid #FDD835; margin-left: 0; margin-right: 10%; }
+        .chat-grandpa { background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%); border-right: 15px solid #66BB6A; margin-left: 10%; margin-right: 0; }
+        .chat-grandma { background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%); border-right: 15px solid #EC407A; margin-left: 10%; margin-right: 0; }
+        .chat-dad { background: linear-gradient(135deg, #BBDEFB 0%, #90CAF9 100%); border-left: 15px solid #42A5F5; margin-left: 0; margin-right: 10%; }
+        .chat-name { font-size: 36px; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; }
+        .chat-icon { font-size: 50px; margin-right: 15px; }
+        .keyword { color: #FF0000; font-weight: 900; background: #FFEB3B; padding: 3px 10px; border-radius: 8px; }
+        .tip-card { background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%); padding: 50px; margin: 40px 0; border-radius: 25px; border-left: 15px solid #E91E63; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .tip-title { font-size: 48px; font-weight: 900; color: #880E4F; margin-bottom: 20px; }
+        .tip-desc { font-size: 30px; line-height: 2.2; color: #333; }
+        .practice-box { background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); padding: 50px; margin: 60px 0; border-radius: 25px; border: 8px solid #FF9800; }
+        .practice-title { font-size: 42px; font-weight: 900; color: #E65100; margin-bottom: 30px; text-align: center; }
+        .practice-step { background: white; padding: 30px; margin: 25px 0; border-radius: 15px; border-left: 10px solid #FF9800; font-size: 30px; }
+        .step-number { font-size: 42px; font-weight: 900; color: #FF9800; margin-right: 15px; }
+        .comic-strip { background: #F5F5F5; padding: 50px; margin: 60px 0; border-radius: 25px; border: 5px solid #666; }
+        .comic-title { font-size: 42px; font-weight: 900; color: #333; text-align: center; margin-bottom: 40px; }
+        .comic-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .comic-panel { background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .comic-image { font-size: 80px; margin-bottom: 20px; }
+        .comic-text { font-size: 26px; font-weight: 700; color: #333; line-height: 1.8; }
+        .warning-box { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); padding: 50px; margin: 60px 0; border-radius: 25px; border-left: 15px solid #D32F2F; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .info-box { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); padding: 50px; margin: 60px 0; border-radius: 25px; border-left: 15px solid #0277BD; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .tip-box { background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%); padding: 50px; margin: 60px 0; border-radius: 25px; border-left: 15px solid #FDD835; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .content-image { width: 100%; height: 500px; margin: 40px 0; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+        .content-image img { width: 100%; height: 100%; object-fit: cover; }
+        h2 { font-size: 52px; color: #C2185B; margin: 60px 0 30px; font-weight: 900; }
+        .next-episode { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px; margin: 60px 0; border-radius: 30px; text-align: center; color: white; box-shadow: 0 15px 50px rgba(0,0,0,0.2); }
+        .next-episode h2 { color: white; margin: 0 0 20px 0; }
+        @media (max-width: 768px) { .hero-section h1 { font-size: 48px; } .chat-bubble { font-size: 26px; } .comic-panels { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="episode">Episode 10</div>
+        <h1>할아버지,<br>건강 앱으로<br>운동 기록해요!</h1>
+        <p style="font-size: 36px; margin-top: 20px;">걸음 수 체크하고 건강 관리 💪📱</p>
+    </div>
+
+    <div class="container">
+        <div class="character-intro">
+            <h2 style="color: #0066CC; margin-top: 0;">👨‍👩‍👧‍👦 오늘의 등장인물</h2>
+            <div class="character">
+                <span class="character-icon">👦</span>
+                <div>
+                    <div class="character-name">윤호 (10살)</div>
+                    <div class="character-desc">초등학생, AI를 좋아하는 호기심 많은 아이</div>
+                </div>
+            </div>
+            <div class="character">
+                <span class="character-icon">👴</span>
+                <div>
+                    <div class="character-name">할아버지 (70대)</div>
+                    <div class="character-desc">손주 사랑이 최고! 새로운 것 배우기를 좋아하세요</div>
+                </div>
+            </div>
+            <div class="character">
+                <span class="character-icon">👵</span>
+                <div>
+                    <div class="character-name">할머니 (60대)</div>
+                    <div class="character-desc">똑 부러지고 똑똑하신 분, 스마트폰도 잘 다루세요!</div>
+                </div>
+            </div>
+            <div class="character">
+                <span class="character-icon">👨‍🔬</span>
+                <div>
+                    <div class="character-name">아빠 (30대)</div>
+                    <div class="character-desc">AI 전공 과학자</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="song-box">
+            <div class="song-title">🎵 건강 동요 🎵</div>
+            <div class="song-lyrics">
+                매일 걷는 걸음 수<br>
+                스마트폰이 세어줘요<br>
+                <br>
+                만 보 걷기 목표로<br>
+                건강하게 운동해요<br>
+                <br>
+                운동 시간 기록하고<br>
+                칼로리도 알려줘요<br>
+                <br>
+                할아버지 건강 짱짱<br>
+                매일매일 걸어요!<br>
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1920&q=80" alt="운동">
+        </div>
+
+        <h2>💪 할아버지의 건강 목표</h2>
+
+        <div class="conversation">
+            <div class="chat-bubble chat-grandpa">
+                <div class="chat-name">
+                    <span class="chat-icon">👴</span>
+                    할아버지
+                </div>
+                윤호야, 의사 선생님이<br>
+                매일 <span class="keyword">만 보</span> 걸으라고 하셨는데<br>
+                할아버지가 얼마나 걸었는지<br>
+                어떻게 알 수 있지?
+            </div>
+
+            <div class="chat-bubble chat-yoonho">
+                <div class="chat-name">
+                    <span class="chat-icon">👦</span>
+                    윤호
+                </div>
+                할아버지! <span class="keyword">건강 앱</span> 쓰시면 돼요!<br>
+                스마트폰이 자동으로<br>
+                <span class="keyword">걸음 수</span>를 세어줘요! 😊<br><br>
+                
+                • 삼성 폰: <span class="keyword">삼성 헬스</span><br>
+                • 아이폰: <span class="keyword">건강</span> 앱<br>
+                • 무료로 다 할 수 있어요!
+            </div>
+
+            <div class="chat-bubble chat-dad">
+                <div class="chat-name">
+                    <span class="chat-icon">👨‍🔬</span>
+                    아빠
+                </div>
+                맞아요 아버님!<br>
+                <span class="keyword">운동</span> 시간, <span class="keyword">칼로리</span>,<br>
+                <span class="keyword">심박수</span>까지 기록돼요!<br>
+                <span class="keyword">건강 관리</span>에 정말 좋아요!
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=80" alt="걷기">
+        </div>
+
+        <h2>📱 삼성 헬스 시작하기</h2>
+
+        <div class="tip-card">
+            <div class="tip-title">1️⃣ 삼성 헬스 설치 (삼성 폰)</div>
+            <div class="tip-desc">
+                <strong style="font-size: 36px; color: #880E4F;">이미 깔려 있어요!</strong><br><br>
+                
+                1. 앱 목록에서 <span class="keyword">"삼성 헬스"</span> 찾기<br>
+                   (하트 모양 아이콘)<br><br>
+                
+                2. 없으면 <span class="keyword">플레이 스토어</span>에서<br>
+                   "Samsung Health" 검색해서 설치<br><br>
+                
+                3. 첫 실행 시 권한 허용<br>
+                   → <span class="keyword">신체 활동</span> 인식<br>
+                   → <span class="keyword">위치</span> 정보 (산책 기록용)<br><br>
+                
+                4. 기본 정보 입력<br>
+                   → 성별, 나이, 키, 몸무게<br>
+                   → <span class="keyword">건강</span> 목표 설정
+            </div>
+        </div>
+
+        <div class="tip-card">
+            <div class="tip-title">2️⃣ 아이폰 건강 앱 (아이폰)</div>
+            <div class="tip-desc">
+                <strong style="font-size: 36px; color: #880E4F;">기본 앱이에요!</strong><br><br>
+                
+                1. 하얀 하트 아이콘 <span class="keyword">"건강"</span> 앱 열기<br><br>
+                
+                2. "시작하기" 버튼 터치<br><br>
+                
+                3. 기본 정보 입력<br>
+                   → 생년월일, 성별, 키, 몸무게<br><br>
+                
+                4. <span class="keyword">걸음 수</span> 자동 추적 시작!<br>
+                   (iPhone 들고 다니기만 하면 돼요)
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1920&q=80" alt="스마트폰">
+        </div>
+
+        <h2>👣 걸음 수 확인하기</h2>
+
+        <div class="conversation">
+            <div class="chat-bubble chat-grandpa">
+                <div class="chat-name">
+                    <span class="chat-icon">👴</span>
+                    할아버지
+                </div>
+                앱을 켜봤는데<br>
+                <span class="keyword">걸음 수</span>가 보이네!<br>
+                오늘 3,524보 걸었대!
+            </div>
+
+            <div class="chat-bubble chat-yoonho">
+                <div class="chat-name">
+                    <span class="chat-icon">👦</span>
+                    윤호
+                </div>
+                우와! 할아버지 대단해요!<br>
+                <span class="keyword">만 보</span>가 목표니까<br>
+                6,476보만 더 걸으시면 돼요!<br><br>
+                
+                앱이 자동으로<br>
+                <span class="keyword">칼로리</span>도 계산해줘요!
+            </div>
+        </div>
+
+        <div class="tip-card">
+            <div class="tip-title">📊 화면 보는 법</div>
+            <div class="tip-desc">
+                <strong>삼성 헬스 메인 화면:</strong><br><br>
+                
+                🚶 <span class="keyword">걸음 수</span><br>
+                → 오늘 걸은 걸음<br>
+                → 목표 대비 %<br>
+                → 거리 (km)<br><br>
+                
+                🔥 <span class="keyword">칼로리</span><br>
+                → 소모한 칼로리<br>
+                → 음식 섭취 칼로리<br><br>
+                
+                ⏱️ <span class="keyword">활동 시간</span><br>
+                → 걷기, 뛰기 시간<br>
+                → 앉아있는 시간<br><br>
+                
+                ❤️ <span class="keyword">심박수</span><br>
+                → 현재 심박수<br>
+                → 안정 시 심박수
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=1920&q=80" alt="기록">
+        </div>
+
+        <h2>🎯 목표 설정하기</h2>
+
+        <div class="tip-card">
+            <div class="tip-title">💪 나만의 건강 목표</div>
+            <div class="tip-desc">
+                <strong style="font-size: 36px; color: #880E4F;">무리하지 않게!</strong><br><br>
+                
+                <strong>추천 <span class="keyword">걸음 수</span> 목표:</strong><br>
+                • 60대: 하루 <span class="keyword">7,000~8,000보</span><br>
+                • 70대: 하루 <span class="keyword">5,000~7,000보</span><br>
+                • 80대: 하루 <span class="keyword">3,000~5,000보</span><br><br>
+                
+                <strong>목표 설정 방법:</strong><br>
+                1. 삼성 헬스에서 걸음 수 탭 터치<br>
+                2. 오른쪽 위 설정 버튼<br>
+                3. <span class="keyword">"하루 목표"</span> 변경<br>
+                4. 원하는 걸음 수 입력!<br><br>
+                
+                처음엔 낮게 시작해서<br>
+                천천히 늘려가세요!
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1586374579358-9d19d632b6df?w=1920&q=80" alt="목표">
+        </div>
+
+        <h2>📈 기록 확인하기</h2>
+
+        <div class="tip-card">
+            <div class="tip-title">📅 일주일 기록 보기</div>
+            <div class="tip-desc">
+                <strong>과거 기록 확인:</strong><br><br>
+                
+                1. 걸음 수 화면에서 위로 스크롤<br><br>
+                
+                2. <span class="keyword">그래프</span>로 한눈에!<br>
+                → 막대 그래프: 일별 걸음 수<br>
+                → 선 그래프: 주간 평균<br><br>
+                
+                3. 날짜별로 자세히 보기<br>
+                → 특정 날짜 터치<br>
+                → 시간대별 활동 확인<br><br>
+                
+                4. 주간/월간 리포트<br>
+                → <span class="keyword">건강</span> 트렌드 파악<br>
+                → 꾸준히 기록하면 동기부여!
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&q=80" alt="그래프">
+        </div>
+
+        <h2>💡 유용한 기능들</h2>
+
+        <div class="comic-strip">
+            <div class="comic-title">🎨 이런 것도 할 수 있어요!</div>
+            <div class="comic-panels">
+                <div class="comic-panel">
+                    <div class="comic-image">🏃</div>
+                    <div class="comic-text">
+                        <strong>운동 기록</strong><br>
+                        <span class="keyword">걷기</span>, 달리기,<br>
+                        자전거 등<br>
+                        운동 시작/종료 버튼!
+                    </div>
+                </div>
+                <div class="comic-panel">
+                    <div class="comic-image">💧</div>
+                    <div class="comic-text">
+                        <strong>물 마시기</strong><br>
+                        <span class="keyword">수분</span> 섭취량<br>
+                        기록하고<br>
+                        알림 받기!
+                    </div>
+                </div>
+                <div class="comic-panel">
+                    <div class="comic-image">😴</div>
+                    <div class="comic-text">
+                        <strong>수면 기록</strong><br>
+                        잘 자는 시간<br>
+                        <span class="keyword">수면</span> 패턴<br>
+                        분석하기!
+                    </div>
+                </div>
+                <div class="comic-panel">
+                    <div class="comic-image">🍎</div>
+                    <div class="comic-text">
+                        <strong>식사 기록</strong><br>
+                        먹은 음식<br>
+                        <span class="keyword">칼로리</span><br>
+                        체크하기!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>👉 오늘의 실습</h2>
+
+        <div class="practice-box">
+            <div class="practice-title">🎯 건강 앱 첫 사용!</div>
+            
+            <div class="practice-step">
+                <span class="step-number">1단계</span>
+                <span class="keyword">삼성 헬스</span> 또는<br>
+                아이폰 <span class="keyword">건강</span> 앱 열기
+            </div>
+            
+            <div class="practice-step">
+                <span class="step-number">2단계</span>
+                기본 정보 입력<br>
+                (나이, 키, 몸무게)
+            </div>
+            
+            <div class="practice-step">
+                <span class="step-number">3단계</span>
+                오늘의 <span class="keyword">걸음 수</span> 확인!<br>
+                몇 걸음 걸었나요?
+            </div>
+            
+            <div class="practice-step">
+                <span class="step-number">4단계</span>
+                목표 설정하기<br>
+                (<span class="keyword">만 보</span> 또는 편한 걸음 수)
+            </div>
+            
+            <div class="practice-step">
+                <span class="step-number">5단계</span>
+                스마트폰 들고<br>
+                <span class="keyword">산책</span> 나가기! 🚶
+            </div>
+            
+            <div style="margin-top: 40px; text-align: center; font-size: 36px; font-weight: 900; color: #E65100;">
+                🎉 걸음 수가 늘어나면 성공! 🎉
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=1920&q=80" alt="실습">
+        </div>
+
+        <h2>⚠️ 주의할 점</h2>
+
+        <div class="warning-box">
+            <h3 style="margin-top: 0; color: #D32F2F; font-size: 42px;">🚨 건강 앱 사용 주의!</h3>
+            <ul style="font-size: 32px; line-height: 2.2;">
+                <li>스마트폰을 <strong>항상 지니고</strong> 다녀야 해요</li>
+                <li>배터리 소모가 있어요 (충전 자주!)</li>
+                <li>100% 정확하지는 않아요 (참고용)</li>
+                <li>무리하게 <span class="keyword">운동</span>하지 마세요!</li>
+                <li><span class="keyword">건강</span> 이상 시 바로 <span class="keyword">병원</span>!</li>
+                <li>앱 데이터는 의료 진단 아님!</li>
+            </ul>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1920&q=80" alt="주의">
+        </div>
+
+        <h2>💡 건강 관리 팁</h2>
+
+        <div class="tip-box">
+            <h3 style="margin-top: 0; color: #F57C00; font-size: 42px;">🏆 더 잘 쓰는 방법!</h3>
+            <div style="font-size: 32px; line-height: 2.5;">
+                <strong>👨‍👩‍👧 가족과 공유:</strong><br>
+                • <span class="keyword">자녀</span>들이 확인 가능<br>
+                • 서로 응원하며 동기부여<br>
+                • 건강 챌린지 함께!<br><br>
+                
+                <strong>⏰ 알림 설정:</strong><br>
+                • 오래 앉아있으면 알림<br>
+                • <span class="keyword">물</span> 마실 시간 알림<br>
+                • <span class="keyword">운동</span> 시간 알림<br><br>
+                
+                <strong>📊 배지 모으기:</strong><br>
+                • 목표 달성하면 배지!<br>
+                • 연속 기록 도전<br>
+                • 재미있게 <span class="keyword">건강</span> 관리!<br><br>
+                
+                <strong>⌚ 스마트워치 연동:</strong><br>
+                • 더 정확한 측정<br>
+                • <span class="keyword">심박수</span> 실시간 체크<br>
+                • 스마트폰 없이도 기록!
+            </div>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1920&q=80" alt="팁">
+        </div>
+
+        <h2>📝 오늘 배운 내용 정리</h2>
+
+        <div class="info-box">
+            <h3 style="margin-top: 0; color: #0066CC; font-size: 42px;">✨ 오늘의 핵심!</h3>
+            <ul style="font-size: 34px; line-height: 2.5;">
+                <li><span class="keyword">건강 앱</span>으로 걸음 수 자동 측정</li>
+                <li>삼성 헬스(삼성), 건강(아이폰)</li>
+                <li><span class="keyword">만 보</span> 걷기 목표 설정</li>
+                <li><span class="keyword">칼로리</span>, <span class="keyword">운동</span> 시간 기록</li>
+                <li>일주일 기록 그래프로 확인</li>
+                <li>무리하지 않게 천천히!</li>
+                <li>가족과 함께 <span class="keyword">건강</span> 관리!</li>
+            </ul>
+        </div>
+
+        <div class="tip-box" style="text-align: center;">
+            <h3 style="color: #F57C00; font-size: 46px;">💬 가족의 응원!</h3>
+            <p style="font-size: 36px; margin-top: 30px; line-height: 2.5;">
+                <strong>윤호:</strong> "할아버지, 매일 <span class="keyword">산책</span>해요!"<br><br>
+                <strong>할아버지:</strong> "오늘 7,500보 걸었어!"<br><br>
+                <strong>할머니:</strong> "할머니도 <span class="keyword">만 보</span> 도전!"<br><br>
+                <strong>아빠:</strong> "가족 모두 <span class="keyword">건강</span>해요!"
+            </p>
+        </div>
+
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1920&q=80" alt="가족">
+        </div>
+
+        <div class="next-episode">
+            <h2>🎬 다음 편 예고</h2>
+            <p style="font-size: 42px; margin: 20px 0;">
+                <strong style="font-size: 48px; color: #FFEB3B;">Episode 11</strong><br>
+                <span style="font-size: 42px;">
+                    "할머니,<br>
+                    <span class="keyword" style="background: none; color: #FFEB3B;">지도 앱</span>으로<br>
+                    <span class="keyword" style="background: none; color: #FFEB3B;">길 찾기</span>!"
+                </span>
+                <br><br>
+                <span style="font-size: 34px;">
+                    윤호가 할머니께<br>
+                    <span class="keyword" style="background: none; color: #FFEB3B;">네이버 지도</span>, <span class="keyword" style="background: none; color: #FFEB3B;">카카오맵</span>으로<br>
+                    길 찾는 법을 알려드려요!<br>
+                    <br>
+                    어디든 혼자서도 갈 수 있어요! 🗺️
+                </span>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>

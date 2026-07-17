@@ -1,0 +1,73 @@
+╔══════════════════════════════════════════════════════╗
+║  IssueLens EP.07 — Instagram CAROUSEL  (10 slides) ║
+╚══════════════════════════════════════════════════════╝
+
+━━━ SLIDE 1 — COVER
+Headline: China's Digital Silk Road: The Silent Tech Takeove
+Subhead:  "Swipe to find out →"
+Style: IssueLens Red (#C8001A) + Dark gradient
+Badge: EP.07 top-left | @IssueLens bottom-right
+Size: 1080×1080px
+
+━━━ SLIDE 2 — THE SHOCKING NUMBERS
+Title: "By the Numbers"
+Content:
+  📊 170+ — Countries withHuawei telecom gear
+  📊 $60B — China's annualAI investment (2024)
+  📊 7nm — SMIC chip node —built without EUV
+
+━━━ SLIDE 3 — THE PROBLEM
+Title: "What Is China's Digital Silk Road — And Why Should Every American Care?"
+Body: "You've heard about the TikTok ban. You've seen the Huawei headlines. But do you know the full picture? China's Digital Silk Road isn't a future threat — it's already inside your phone, your telecom ne..."
+Visual: Relevant infographic / icon
+
+━━━ SLIDE 4 — HOW IT WORKS
+Title: "How This Actually Happens"
+Body: Data flow / process breakdown
+Visual: Step-by-step diagram (arrows)
+
+━━━ SLIDE 5 — THE DATA
+Title: "The Hard Numbers"
+  • 170+ — Countries where Huawei supplies telecommunications equipment (2G/4G/5G combined) — per Huawei Annual Report 2023
+  • 7nm — DeepSeek Privacy Policy (2025): "Collected data is stored on servers located within the People's Republic of China."
+
+━━━ SLIDE 6 — Front #1: 5G — The Huawei Backdoor That 
+Body: [Content from section 2]
+Source citation (italic, -2pt): *Source: [Publication], [Date], [Author]*
+
+━━━ SLIDE 7 — Front #2: AI — What DeepSeek Is Actually
+Body: [Content from section 3]
+
+━━━ SLIDE 8 — PRO vs. CON  (if politically contested)
+PRO side: [Argument in favor]
+CON side: [Argument against]
+⚖️ Balanced — both sides shown equally
+
+━━━ SLIDE 9 — ACTION ITEMS
+Title: "What You Can Do RIGHT NOW"
+  1. Audit Your Apps
+  2. Know Your Cloud
+  3. Ask Your Carrier
+  4. Engage Congress
+  5. Share This
+
+━━━ SLIDE 10 — CTA
+"Save this. Share it. Follow @IssueLens."
+Subtext: "New deep-dive every single day."
+Visual: All platform icons
+
+━━━ CAPTION  (≤2200 chars) ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+China's Digital Silk Road: The Silent Tech Takeover | IssueLens EP.07 🚨
+
+Huawei 5G backdoors, DeepSeek AI data harvesting, SMIC chip export control evasion, Alibaba Cloud surveillance risks. The definitive American guide to China's tech takeover — backed by DOJ, FCC, and Congressional reports.
+
+💬 ""A nation that surrenders its tech infrastructurewill ultimately lose its political voice as well."— Elbridge Colby, former U.S. Deputy Asst. Secretar"
+
+👉 Full breakdown at link in bio — IssueLens EP.07
+🔔 Follow @IssueLens for a new deep-dive EVERY DAY.
+
+#ChinaDigitalSilkRoad #Huawei5Gban #DeepSeekprivacyrisk #DeepSeekdataChina #SMIC7nmchip #ChinaAIsurveillance #techsovereignty #USChinatechwar #Huaweibackdoor #DeepSeekban #Chinaspyapp #TikTokban #semiconductorexportcontrols #Alibabacloudsecurity #Chinesetechthreat #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth
+
+━━━ HASHTAGS (comment drop — 30 max) ━━━━━━━━━━━━━━━
+#ChinaDigitalSilkRoad #Huawei5Gban #DeepSeekprivacyrisk #DeepSeekdataChina #SMIC7nmchip #ChinaAIsurveillance #techsovereignty #USChinatechwar #Huaweibackdoor #DeepSeekban #Chinaspyapp #TikTokban #semiconductorexportcontrols #Alibabacloudsecurity #Chinesetechthreat #awareness #viral #trending #fyp #factcheck #breakingnews #IssueLens #education #news #truth

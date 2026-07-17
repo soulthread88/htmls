@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens EP.01 — Shorts Production Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0A0A0A;
+  --dark: #111111;
+  --dark2: #1A1A1A;
+  --dark3: #242424;
+  --red: #E8001A;
+  --red2: #FF1A32;
+  --amber: #F59E0B;
+  --white: #F5F5F5;
+  --white2: #CFCFCF;
+  --gray: #6B6B6B;
+  --mono: 'DM Mono', monospace;
+  --display: 'Bebas Neue', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+  --body: 'Barlow', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Scanline texture overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,.08) 2px,
+    rgba(0,0,0,.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Header ── */
+.site-header {
+  border-bottom: 3px solid var(--red);
+  padding: 32px 48px 28px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: 'ISSUELENS';
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  font-family: var(--display);
+  font-size: 160px;
+  color: rgba(232,0,26,.04);
+  pointer-events: none;
+  user-select: none;
+}
+.logo-block { display: flex; flex-direction: column; gap: 4px; }
+.logo {
+  font-family: var(--display);
+  font-size: 52px;
+  color: var(--white);
+  letter-spacing: .08em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-dot {
+  width: 14px; height: 14px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 16px var(--red);
+}
+.logo-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gray);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.header-meta {
+  text-align: right;
+}
+.header-meta .ep-tag {
+  font-family: var(--cond);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--red);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.header-meta h1 {
+  font-family: var(--cond);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: .04em;
+  line-height: 1.25;
+}
+
+/* ── Master style guide ── */
+.master-guide {
+  border-bottom: 1px solid var(--dark3);
+  padding: 48px 48px 40px;
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--dark3);
+}
+.master-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.guide-block {
+  background: var(--dark2);
+  border: 1px solid var(--dark3);
+  border-radius: 4px;
+  padding: 20px;
+}
+.guide-block h3 {
+  font-family: var(--cond);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.guide-block p, .guide-block li {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--white2);
+  line-height: 1.75;
+}
+.guide-block ul { padding-left: 16px; }
+.guide-block li { margin-bottom: 4px; }
+
+/* Color swatches */
+.swatch-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.swatch {
+  width: 36px; height: 36px;
+  border-radius: 4px;
+  position: relative;
+  flex-shrink: 0;
+  cursor: default;
+}
+.swatch-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--gray);
+  margin-top: 4px;
+  text-align: center;
+}
+.swatch-item { display: flex; flex-direction: column; align-items: center; }
+
+/* ── Episode cards ── */
+.episodes { padding: 0 48px 80px; }
+
+.ep-card {
+  margin-top: 48px;
+  border: 1px solid var(--dark3);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.ep-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.ep-card.ep1::before { background: #E8001A; }
+.ep-card.ep2::before { background: #1A56DB; }
+.ep-card.ep3::before { background: #D97706; }
+.ep-card.ep4::before { background: #DC2626; }
+.ep-card.ep5::before { background: #059669; }
+.ep-card.ep6::before { background: #7C3AED; }
+
+.ep-header {
+  background: var(--dark2);
+  padding: 20px 28px 18px 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--dark3);
+}
+.ep-num {
+  font-family: var(--display);
+  font-size: 72px;
+  line-height: .85;
+  color: var(--dark3);
+  flex-shrink: 0;
+  user-select: none;
+}
+.ep-title-block { flex: 1; }
+.ep-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+.badge-hook { background: rgba(232,0,26,.15); color: var(--red2); border: 1px solid rgba(232,0,26,.3); }
+.badge-dur { background: rgba(245,158,11,.1); color: var(--amber); border: 1px solid rgba(245,158,11,.25); }
+.badge-em { background: rgba(255,255,255,.06); color: var(--white2); border: 1px solid var(--dark3); }
+.ep-title {
+  font-family: var(--cond);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: .02em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.ep-subtitle {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gray);
+  letter-spacing: .12em;
+}
+
+.ep-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+/* Visual column */
+.vis-col {
+  padding: 28px 28px 28px 32px;
+  border-right: 1px solid var(--dark3);
+}
+.col-head {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--dark3);
+}
+
+/* Palette display */
+.palette { display: flex; gap: 0; border-radius: 6px; overflow: hidden; margin-bottom: 16px; height: 40px; }
+.pal-swatch { flex: 1; position: relative; }
+.pal-hex {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 8px;
+  white-space: nowrap;
+  opacity: .7;
+}
+
+.vis-row { margin-bottom: 14px; }
+.vis-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 4px;
+}
+.vis-val {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--white2);
+  line-height: 1.6;
+}
+.vis-val strong { color: var(--white); font-weight: 600; }
+
+/* Caption preview */
+.caption-preview {
+  background: #000;
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 16px;
+  position: relative;
+  aspect-ratio: 9/5;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+.cp-bg { position: absolute; inset: 0; }
+.cp-text-block {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 0 8px 8px;
+}
+.cp-caption {
+  display: inline-block;
+  font-family: var(--cond);
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.cp-sub {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: rgba(255,255,255,.6);
+  margin-top: 6px;
+  letter-spacing: .1em;
+}
+
+/* Text / overlay tags */
+.ot-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.ot-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 3px;
+  border: 1px solid var(--dark3);
+  color: var(--white2);
+  background: var(--dark3);
+}
+
+/* Script column */
+.script-col {
+  padding: 28px 32px;
+  background: var(--dark);
+}
+.script-text {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--white2);
+  line-height: 2.0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.script-text .hook { color: var(--red2); font-weight: 500; }
+.script-text .stat { color: var(--amber); }
+.script-text .cta { color: #6EE7B7; }
+.script-text .dir { color: var(--gray); font-style: italic; font-size: 11px; }
+
+/* Transition spec */
+.trans-spec {
+  margin-top: 16px;
+  background: var(--dark3);
+  border-radius: 4px;
+  padding: 14px 16px;
+}
+.trans-spec .ts-head {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+.trans-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+.trans-time {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--red2);
+  width: 36px;
+  flex-shrink: 0;
+}
+.trans-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--dark2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.trans-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+.trans-desc {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--white2);
+  width: 120px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Footer ── */
+.site-footer {
+  border-top: 1px solid var(--dark3);
+  padding: 24px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gray);
+  letter-spacing: .12em;
+}
+
+@media (max-width: 900px) {
+  .master-grid { grid-template-columns: 1fr 1fr; }
+  .ep-body { grid-template-columns: 1fr; }
+  .vis-col { border-right: none; border-bottom: 1px solid var(--dark3); }
+}
+@media (max-width: 600px) {
+  .site-header, .master-guide, .episodes { padding-left: 20px; padding-right: 20px; }
+  .master-grid { grid-template-columns: 1fr; }
+  .ep-header { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header">
+  <div class="logo-block">
+    <div class="logo"><span class="logo-dot"></span>IssueLens</div>
+    <div class="logo-sub">EP.01 · YouTube Shorts — Production Brief</div>
+  </div>
+  <div class="header-meta">
+    <div class="ep-tag">Data Sovereignty Series</div>
+    <h1>Temu / AliExpress /<br>Chinese App Privacy</h1>
+  </div>
+</header>
+
+<!-- ═══ MASTER STYLE GUIDE ═══ -->
+<section class="master-guide">
+  <div class="section-label">Master Visual Identity — All 6 Shorts</div>
+
+  <div class="master-grid">
+
+    <div class="guide-block">
+      <h3>Global Palette</h3>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background:#0A0A0A;border:1px solid #333"></div><div class="swatch-label">#0A0A0A</div></div>
+        <div class="swatch-item"><div class="swatch" style="background:#E8001A"></div><div class="swatch-label">#E8001A</div></div>
+        <div class="swatch-item"><div class="swatch" style="background:#F5F5F5"></div><div class="swatch-label">#F5F5F5</div></div>
+        <div class="swatch-item"><div class="swatch" style="background:#F59E0B"></div><div class="swatch-label">#F59E0B</div></div>
+        <div class="swatch-item"><div class="swatch" style="background:#1A56DB"></div><div class="swatch-label">#1A56DB</div></div>
+        <div class="swatch-item"><div class="swatch" style="background:#6EE7B7"></div><div class="swatch-label">#6EE7B7</div></div>
+      </div>
+      <p style="margin-top:12px">Dominant: <strong style="color:#F5F5F5">Near-black backgrounds.</strong> Accent: <strong style="color:#E8001A">Signal red</strong> for danger/data. <strong style="color:#F59E0B">Amber</strong> for warnings. <strong style="color:#6EE7B7">Mint</strong> for CTAs only.</p>
+    </div>
+
+    <div class="guide-block">
+      <h3>Typography System</h3>
+      <ul>
+        <li><strong>HOOK TEXT</strong> — Bebas Neue, 80–96px, white with 4px black stroke, ALL CAPS, center</li>
+        <li><strong>Body captions</strong> — Barlow Condensed Bold, 52–58px, white, 3px black stroke</li>
+        <li><strong>Stat callouts</strong> — DM Mono, 40px, amber #F59E0B, no stroke</li>
+        <li><strong>Lower thirds</strong> — Barlow SemiBold, 28px, white on red bar</li>
+        <li>Max 4 words per caption frame. No sentences mid-screen.</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <h3>Global Mood & Style</h3>
+      <ul>
+        <li>Aesthetic: <strong>Dark Investigative Editorial</strong> — 60 Minutes × WIRED × Vice News</li>
+        <li>No decorative elements. Functional. Urgent. Credible.</li>
+        <li>Grain overlay: 8% film noise on all background frames</li>
+        <li>Vignette: radial dark edge on all solid-color scenes</li>
+        <li>Motion: cuts every 2–4 sec. No slow fades mid-script.</li>
+        <li>Logo bug: IssueLens red dot + name, top-left, 32px, 60% opacity throughout</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <h3>Format Specs (Vrew)</h3>
+      <ul>
+        <li>Aspect: <strong>9:16</strong> (1080 × 1920px)</li>
+        <li>Duration: <strong>55–62 seconds</strong> each</li>
+        <li>FPS: 30fps</li>
+        <li>Caption font size in Vrew: <strong>Large / Bold</strong></li>
+        <li>Caption position: <strong>Center-screen (60% height)</strong> — NOT bottom, avoids UI overlap</li>
+        <li>Caption color: White with Auto-black outline in Vrew</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <h3>BGM Direction</h3>
+      <ul>
+        <li>Style: <strong>Low tension pulse bed</strong> — investigative documentary</li>
+        <li>Tempo: 70–85 BPM, minimal melody, sub-bass drone</li>
+        <li>VO volume: 100% / BGM: 12–15%</li>
+        <li>Beat hit: optional single percussive hit on the key stat reveal</li>
+        <li>Avoid: uplifting, motivational, lo-fi. Must feel like a news teaser.</li>
+        <li>Suggested free sources: Epidemic Sound "Investigation," YouTube Audio Library "Suspense"</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <h3>Transition Rules</h3>
+      <ul>
+        <li><strong>Hard cut</strong>: default between all scenes (0 frames)</li>
+        <li><strong>Flash cut</strong>: 2-frame white flash on critical stat reveals</li>
+        <li><strong>Zoom punch</strong>: 104% → 100% scale on hook word, 0.15s ease-out</li>
+        <li><strong>Lower-third slide</strong>: 0.2s ease-in from left on agency names (FTC, FBI)</li>
+        <li>NO wipes, NO spins, NO glitter transitions</li>
+        <li>End card: hard cut to black → logo fade 0.4s → "Follow for more" 0.3s</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ EPISODE CARDS ═══ -->
+<section class="episodes">
+  <div class="section-label">Individual Short Production Sheets — All 6 Episodes</div>
+
+  <!-- ────────────────────────────────────────── SHORT #1 ── -->
+  <div class="ep-card ep1">
+    <div class="ep-header">
+      <div class="ep-num">01</div>
+      <div class="ep-title-block">
+        <div class="ep-tag-row">
+          <span class="badge badge-hook">Hook: Price Shock → Reversal</span>
+          <span class="badge badge-dur">~58 sec / ~155 words</span>
+          <span class="badge badge-em">Emotion: Betrayal</span>
+        </div>
+        <div class="ep-title">"The $1 Deal That Cost You Everything"</div>
+        <div class="ep-subtitle">On-screen hook text → "$1 Gadgets. Unlimited Data."</div>
+      </div>
+    </div>
+    <div class="ep-body">
+      <div class="vis-col">
+        <div class="col-head">Visual Guidelines</div>
+
+        <div class="palette">
+          <div class="pal-swatch" style="background:#0A0A0A"><span class="pal-hex" style="color:#555">#0A0A0A</span></div>
+          <div class="pal-swatch" style="background:#E8001A"><span class="pal-hex" style="color:#fff">#E8001A</span></div>
+          <div class="pal-swatch" style="background:#F5F5F5"><span class="pal-hex" style="color:#333">#F5F5F5</span></div>
+          <div class="pal-swatch" style="background:#1C1C1C"><span class="pal-hex" style="color:#555">#1C1C1C</span></div>
+        </div>
+
+        <div class="vis-row">
+          <div class="vis-label">Opening Frame (0:00–0:03)</div>
+          <div class="vis-val"><strong>Pure black screen.</strong> Giant white dollar sign "$1" slams in with a punch sound (zoom from 120%→100%, 0.1s). Then immediately cuts to red: "GADGETS. UNLIMITED DATA." stacked, Bebas Neue, 90px each. 3-second hold.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Mid-Section Visuals</div>
+          <div class="vis-val">Dark background. Each data type (device fingerprint, GPS, scroll speed) appears as a <strong>red tag sticker</strong> animated sliding in from the right — stacked list, one every 0.8 sec. Fast, relentless rhythm.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Key Stat Frame</div>
+          <div class="vis-val"><strong>Article 7</strong> — white text on deep red background. Amber flicker border animation. 2-frame white flash on entry.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">CTA Frame</div>
+          <div class="vis-val">Black background. Mint green (#6EE7B7) text: "DELETE THE APP." Bebas Neue, 72px. No other elements. 3 seconds.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">On-Screen Text Overlays</div>
+          <div class="ot-row">
+            <span class="ot-tag">$1 SOCKS</span>
+            <span class="ot-tag">YOUR NAME</span>
+            <span class="ot-tag">YOUR ADDRESS</span>
+            <span class="ot-tag">YOUR CARD</span>
+            <span class="ot-tag">YOUR GPS</span>
+            <span class="ot-tag">ART. 7</span>
+            <span class="ot-tag">21 STATE AGs</span>
+          </div>
+        </div>
+        <div class="trans-spec">
+          <div class="ts-head">Timing Guide</div>
+          <div class="trans-row"><span class="trans-time">0:00</span><div class="trans-bar"><div class="trans-fill" style="width:8%;background:#E8001A"></div></div><span class="trans-desc">Hook: $1 slam</span></div>
+          <div class="trans-row"><span class="trans-time">0:05</span><div class="trans-bar"><div class="trans-fill" style="width:35%;background:#555"></div></div><span class="trans-desc">Data list building</span></div>
+          <div class="trans-row"><span class="trans-time">0:30</span><div class="trans-bar"><div class="trans-fill" style="width:70%;background:#E8001A"></div></div><span class="trans-desc">Art. 7 reveal</span></div>
+          <div class="trans-row"><span class="trans-time">0:48</span><div class="trans-bar"><div class="trans-fill" style="width:90%;background:#6EE7B7"></div></div><span class="trans-desc">CTA: Delete</span></div>
+          <div class="trans-row"><span class="trans-time">0:58</span><div class="trans-bar"><div class="trans-fill" style="width:100%;background:#333"></div></div><span class="trans-desc">IssueLens logo</span></div>
+        </div>
+      </div>
+      <div class="script-col">
+        <div class="col-head">Voice Script — Read Straight Through</div>
+        <div class="script-text"><span class="hook">You got a dollar pair of socks.</span>
+
+They got your name, your home address, your credit card number, your phone's GPS location, your daily routine, and a behavioral profile that knows what you want before you do.
+
+Good trade?
+
+<span class="stat">Here's what Temu actually collects</span> the second you install the app: your device fingerprint — that's your screen resolution, battery level, and processor speed. Your scroll speed and tap pressure. Your browsing habits. Your contact list if you used the referral program.
+
+And all of it? It flows to servers controlled by a Chinese company <span class="stat">legally required to hand that data to the Chinese government on demand.</span>
+
+That's not a conspiracy theory. That's Article Seven of China's National Intelligence Law — still in force today.
+
+<span class="stat">Twenty-one U.S. state attorneys general are demanding a federal investigation right now.</span>
+
+<span class="cta">Delete the app. Submit a data deletion request. Share this with someone who needs to hear it.</span>
+
+This is IssueLens. More in the description.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────── SHORT #2 ── -->
+  <div class="ep-card ep2">
+    <div class="ep-header">
+      <div class="ep-num">02</div>
+      <div class="ep-title-block">
+        <div class="ep-tag-row">
+          <span class="badge badge-hook">Hook: Authority Shock</span>
+          <span class="badge badge-dur">~59 sec / ~158 words</span>
+          <span class="badge badge-em">Emotion: Fear</span>
+        </div>
+        <div class="ep-title">"The FBI Just Warned You About This App"</div>
+        <div class="ep-subtitle">On-screen hook text → "FBI WARNING." in all caps, distressed type</div>
+      </div>
+    </div>
+    <div class="ep-body">
+      <div class="vis-col">
+        <div class="col-head">Visual Guidelines</div>
+
+        <div class="palette">
+          <div class="pal-swatch" style="background:#0D1B2A"><span class="pal-hex" style="color:#555">#0D1B2A</span></div>
+          <div class="pal-swatch" style="background:#1A56DB"><span class="pal-hex" style="color:#fff">#1A56DB</span></div>
+          <div class="pal-swatch" style="background:#E8001A"><span class="pal-hex" style="color:#fff">#E8001A</span></div>
+          <div class="pal-swatch" style="background:#F5F5F5"><span class="pal-hex" style="color:#333">#F5F5F5</span></div>
+        </div>
+
+        <div class="vis-row">
+          <div class="vis-label">Opening Frame (0:00–0:03)</div>
+          <div class="vis-val"><strong>Deep navy blue background.</strong> "FBI WARNING." in Bebas Neue, 88px, white, letterpress/distressed texture applied in post. Below it: red horizontal rule, then "EARLY 2026" in DM Mono, amber. Feels like an official bulletin.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Mid-Section Visuals</div>
+          <div class="vis-val">Transition to near-black background. Blue agency badges ("FTC ●", "FBI ●", "21 STATE AGs ●") appear as <strong>official-looking lower thirds</strong> that slide from left. Each badge pulses once then stays on screen for 1.5 sec before cutting.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Key Stat Frame</div>
+          <div class="vis-val"><strong>"3RD WARNING"</strong> — Bebas Neue, 110px, white on navy. Sub-label "FTC TO TEMU / JAN 2026" in amber mono. 2-frame red flash on entry.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Pinduoduo Frame</div>
+          <div class="vis-val">Split screen: left dark background text "Pinduoduo — MALWARE CONFIRMED." Right: "Temu — SAME PARENT COMPANY." Red connecting line between. Hard cut after 2.5 sec.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">On-Screen Text Overlays</div>
+          <div class="ot-row">
+            <span class="ot-tag">FBI WARNING</span>
+            <span class="ot-tag">FTC · 3RD NOTICE</span>
+            <span class="ot-tag">PDD HOLDINGS</span>
+            <span class="ot-tag">PINDUODUO</span>
+            <span class="ot-tag">MALWARE</span>
+            <span class="ot-tag">SAME DEVS</span>
+          </div>
+        </div>
+        <div class="trans-spec">
+          <div class="ts-head">Timing Guide</div>
+          <div class="trans-row"><span class="trans-time">0:00</span><div class="trans-bar"><div class="trans-fill" style="width:8%;background:#1A56DB"></div></div><span class="trans-desc">FBI bulletin hook</span></div>
+          <div class="trans-row"><span class="trans-time">0:06</span><div class="trans-bar"><div class="trans-fill" style="width:38%;background:#555"></div></div><span class="trans-desc">Agency badges</span></div>
+          <div class="trans-row"><span class="trans-time">0:28</span><div class="trans-bar"><div class="trans-fill" style="width:62%;background:#E8001A"></div></div><span class="trans-desc">"3rd Warning" flash</span></div>
+          <div class="trans-row"><span class="trans-time">0:40</span><div class="trans-bar"><div class="trans-fill" style="width:80%;background:#555"></div></div><span class="trans-desc">Pinduoduo split</span></div>
+          <div class="trans-row"><span class="trans-time">0:52</span><div class="trans-bar"><div class="trans-fill" style="width:100%;background:#6EE7B7"></div></div><span class="trans-desc">CTA + logo</span></div>
+        </div>
+      </div>
+      <div class="script-col">
+        <div class="col-head">Voice Script — Read Straight Through</div>
+        <div class="script-text"><span class="hook">The FBI issued a warning earlier this year.</span>
+
+They said many of the most downloaded apps in America are built by foreign companies — especially in China — and that any app with servers in China is subject to laws that let the Chinese government access your data.
+
+They were talking about apps like Temu. Like AliExpress. Like Shein.
+
+Here's the part that should stop you cold: Temu's parent company — PDD Holdings — also built Pinduoduo. Google pulled Pinduoduo from the Play Store in 2023 after cybersecurity teams found active malware inside it. Some of those same developers later moved to Temu.
+
+<span class="stat">In January 2026, the FTC issued its third formal warning to Temu over cross-border data transfers.</span>
+
+Third. Warning.
+
+<span class="cta">So what do you do? Delete the app. Submit a formal data deletion request. Then contact your Senator — tell them you want a federal privacy law.</span>
+
+This is IssueLens. Link in bio.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────── SHORT #3 ── -->
+  <div class="ep-card ep3">
+    <div class="ep-header">
+      <div class="ep-num">03</div>
+      <div class="ep-title-block">
+        <div class="ep-tag-row">
+          <span class="badge badge-hook">Hook: Asymmetry / Injustice</span>
+          <span class="badge badge-dur">~60 sec / ~160 words</span>
+          <span class="badge badge-em">Emotion: Outrage</span>
+        </div>
+        <div class="ep-title">"They Banned Our Apps. We Let Theirs In."</div>
+        <div class="ep-subtitle">On-screen hook text → "BANNED ✗ / FREE ✓" side-by-side split</div>
+      </div>
+    </div>
+    <div class="ep-body">
+      <div class="vis-col">
+        <div class="col-head">Visual Guidelines</div>
+
+        <div class="palette">
+          <div class="pal-swatch" style="background:#0A0A0A"><span class="pal-hex" style="color:#555">#0A0A0A</span></div>
+          <div class="pal-swatch" style="background:#D97706"><span class="pal-hex" style="color:#fff">#D97706</span></div>
+          <div class="pal-swatch" style="background:#E8001A"><span class="pal-hex" style="color:#fff">#E8001A</span></div>
+          <div class="pal-swatch" style="background:#F5F5F5"><span class="pal-hex" style="color:#333">#F5F5F5</span></div>
+        </div>
+
+        <div class="vis-row">
+          <div class="vis-label">Opening Frame (0:00–0:04)</div>
+          <div class="vis-val"><strong>Vertical split screen.</strong> Left half: dark gray, "CHINA" label, company logos/names listed with red ✗ stamps: Google, YouTube, Instagram, Facebook, NYT. Right half: black, "USA" label, Temu/AliExpress names with amber ✓. Hold 3.5 seconds. Powerful without motion.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Mid-Section Visuals</div>
+          <div class="vis-val">Black background. Amber-colored headline: <strong>"THE GREAT FIREWALL"</strong> in Bebas Neue, 64px, fades in. Below: brief map outline of China with a red barrier line — simple, not animated. Data flow arrows (amber →) pointing outward labeled "YOUR DATA."</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Key Stat Frame</div>
+          <div class="vis-val"><strong>"HUNDREDS OF MILLIONS"</strong> in Bebas Neue white, 72px. Sub: "American behavioral profiles. Every day." in DM Mono amber. Amber glow border pulses once.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Closing Frames</div>
+          <div class="vis-val">Black screen. Two lines stacked in Bebas Neue: "THEY PROTECT THEIRS." (white, 58px) / "WHO PROTECTS YOURS?" (red, 64px, 0.5s delay). Hard hold 2 seconds. Then CTA cut.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">On-Screen Text Overlays</div>
+          <div class="ot-row">
+            <span class="ot-tag">BANNED ✗</span>
+            <span class="ot-tag">FREE ✓</span>
+            <span class="ot-tag">GREAT FIREWALL</span>
+            <span class="ot-tag">NO US LAW</span>
+            <span class="ot-tag">YOUR DATA →</span>
+          </div>
+        </div>
+        <div class="trans-spec">
+          <div class="ts-head">Timing Guide</div>
+          <div class="trans-row"><span class="trans-time">0:00</span><div class="trans-bar"><div class="trans-fill" style="width:10%;background:#D97706"></div></div><span class="trans-desc">Split screen hook</span></div>
+          <div class="trans-row"><span class="trans-time">0:08</span><div class="trans-bar"><div class="trans-fill" style="width:40%;background:#555"></div></div><span class="trans-desc">Firewall visual</span></div>
+          <div class="trans-row"><span class="trans-time">0:34</span><div class="trans-bar"><div class="trans-fill" style="width:68%;background:#D97706"></div></div><span class="trans-desc">Hundreds of millions</span></div>
+          <div class="trans-row"><span class="trans-time">0:48</span><div class="trans-bar"><div class="trans-fill" style="width:88%;background:#E8001A"></div></div><span class="trans-desc">"Who protects yours?"</span></div>
+          <div class="trans-row"><span class="trans-time">0:58</span><div class="trans-bar"><div class="trans-fill" style="width:100%;background:#333"></div></div><span class="trans-desc">CTA + logo</span></div>
+        </div>
+      </div>
+      <div class="script-col">
+        <div class="col-head">Voice Script — Read Straight Through</div>
+        <div class="script-text"><span class="hook">Google. Banned in China.
+YouTube. Banned in China.
+Instagram, Facebook, the New York Times. All banned.</span>
+
+China built what experts call the Great Firewall specifically to stop Western companies from collecting data on Chinese citizens.
+
+Meanwhile — Temu and AliExpress operate completely freely in the United States, pulling behavioral data from <span class="stat">hundreds of millions of American users every single day.</span>
+
+Let that sink in.
+
+They protect their people's data from us. We hand our people's data to them.
+
+And the data these apps collect isn't just your shopping list. Independent audits show they track your precise GPS location, your device hardware profile, your financial behavior, and behavioral patterns accurate enough to infer your income, your health status, and your household size.
+
+<span class="stat">The U.S. has no federal data privacy law to stop this.</span>
+
+<span class="cta">Delete the app. Demand legislation from your representative. Share this.</span>
+
+This is IssueLens. Full breakdown in the description.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────── SHORT #4 ── -->
+  <div class="ep-card ep4">
+    <div class="ep-header">
+      <div class="ep-num">04</div>
+      <div class="ep-title-block">
+        <div class="ep-tag-row">
+          <span class="badge badge-hook">Hook: Breaking News Frame</span>
+          <span class="badge badge-dur">~59 sec / ~157 words</span>
+          <span class="badge badge-em">Emotion: Urgency</span>
+        </div>
+        <div class="ep-title">"Texas Just Sued Temu. Here's Why."</div>
+        <div class="ep-subtitle">On-screen hook text → News ticker-style "BREAKING" lower third</div>
+      </div>
+    </div>
+    <div class="ep-body">
+      <div class="vis-col">
+        <div class="col-head">Visual Guidelines</div>
+
+        <div class="palette">
+          <div class="pal-swatch" style="background:#0A0A0A"><span class="pal-hex" style="color:#555">#0A0A0A</span></div>
+          <div class="pal-swatch" style="background:#DC2626"><span class="pal-hex" style="color:#fff">#DC2626</span></div>
+          <div class="pal-swatch" style="background:#FBBF24"><span class="pal-hex" style="color:#333">#FBBF24</span></div>
+          <div class="pal-swatch" style="background:#F5F5F5"><span class="pal-hex" style="color:#333">#F5F5F5</span></div>
+        </div>
+
+        <div class="vis-row">
+          <div class="vis-label">Opening Frame (0:00–0:03)</div>
+          <div class="vis-val"><strong>News broadcast aesthetic.</strong> Black background. Full-width red bar at bottom: "BREAKING NEWS" blinking (0.8s interval) in white Bebas Neue, 32px. Above: "FEBRUARY 2026" in amber mono. Above that: "TEXAS SUES TEMU" in Bebas Neue white, 78px. Mimics a cable news chyron.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Quote Frame</div>
+          <div class="vis-val"><strong>Quotation marks</strong> (large, red, 120px) flank the key phrase: <strong>"spyware disguised as a shopping app"</strong> in Barlow Condensed Bold, white, 38px. Attribution below: "— Texas Attorney General, Feb. 2026" in amber mono, 14px. Dark background, no other elements.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Data Frame</div>
+          <div class="vis-val">3-column list: left "THEY COLLECT," center divider line (red), right items listed in white mono — real-time location / device fingerprint / purchase behavior / contact list. Each line appears 0.5s apart. Red bullet points.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Closing Frame</div>
+          <div class="vis-val">Black. Single line: <strong>"NO WARRANT."</strong> (red, Bebas Neue, 88px). Cut. <strong>"NO NOTICE."</strong> Cut. <strong>"NO WAY TO STOP IT."</strong> Then CTA. Three hard cuts, 0.8s each.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">On-Screen Text Overlays</div>
+          <div class="ot-row">
+            <span class="ot-tag">BREAKING</span>
+            <span class="ot-tag">FEB 2026</span>
+            <span class="ot-tag">SPYWARE</span>
+            <span class="ot-tag">$1M+ RELIEF</span>
+            <span class="ot-tag">NO WARRANT</span>
+          </div>
+        </div>
+        <div class="trans-spec">
+          <div class="ts-head">Timing Guide</div>
+          <div class="trans-row"><span class="trans-time">0:00</span><div class="trans-bar"><div class="trans-fill" style="width:8%;background:#DC2626"></div></div><span class="trans-desc">News chyron hook</span></div>
+          <div class="trans-row"><span class="trans-time">0:06</span><div class="trans-bar"><div class="trans-fill" style="width:35%;background:#555"></div></div><span class="trans-desc">"Spyware" quote</span></div>
+          <div class="trans-row"><span class="trans-time">0:27</span><div class="trans-bar"><div class="trans-fill" style="width:60%;background:#FBBF24"></div></div><span class="trans-desc">Data collection list</span></div>
+          <div class="trans-row"><span class="trans-time">0:44</span><div class="trans-bar"><div class="trans-fill" style="width:84%;background:#DC2626"></div></div><span class="trans-desc">Triple cut: No warrant</span></div>
+          <div class="trans-row"><span class="trans-time">0:56</span><div class="trans-bar"><div class="trans-fill" style="width:100%;background:#6EE7B7"></div></div><span class="trans-desc">CTA + logo</span></div>
+        </div>
+      </div>
+      <div class="script-col">
+        <div class="col-head">Voice Script — Read Straight Through</div>
+        <div class="script-text"><span class="hook">In February 2026, the Texas Attorney General filed a lawsuit against Temu.</span>
+
+His words — not mine: <span class="stat">"spyware disguised as a shopping app."</span>
+
+The lawsuit alleges illegal data harvesting, deceptive pricing, and that Temu's entire business model isn't really about selling you cheap products. It's about collecting your data — which is worth far more than any dollar gadget.
+
+Texas joins attorneys general from at least four other states. And before that, twenty-one AGs demanded a full federal investigation into Temu's ties to the Chinese government.
+
+Here's why this matters to you personally: Temu's privacy policy allows collection of your real-time location, your device hardware fingerprint, your purchase behavior, and your contact list. All of it can be transferred overseas — to servers in a country whose law requires companies to share that data with the government on demand.
+
+<span class="stat">No warrant. No notification. No way to stop it.</span>
+
+<span class="cta">Delete the app today. Full story in the description.</span>
+
+This is IssueLens.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────── SHORT #5 ── -->
+  <div class="ep-card ep5">
+    <div class="ep-header">
+      <div class="ep-num">05</div>
+      <div class="ep-title-block">
+        <div class="ep-tag-row">
+          <span class="badge badge-hook">Hook: Solution / Practical</span>
+          <span class="badge badge-dur">~61 sec / ~163 words</span>
+          <span class="badge badge-em">Emotion: Empowerment</span>
+        </div>
+        <div class="ep-title">"Deleting Temu Is Not Enough. Do This Instead."</div>
+        <div class="ep-subtitle">On-screen hook text → "You Deleted It. Your Data Is Still There."</div>
+      </div>
+    </div>
+    <div class="ep-body">
+      <div class="vis-col">
+        <div class="col-head">Visual Guidelines</div>
+
+        <div class="palette">
+          <div class="pal-swatch" style="background:#0A0A0A"><span class="pal-hex" style="color:#555">#0A0A0A</span></div>
+          <div class="pal-swatch" style="background:#059669"><span class="pal-hex" style="color:#fff">#059669</span></div>
+          <div class="pal-swatch" style="background:#6EE7B7"><span class="pal-hex" style="color:#333">#6EE7B7</span></div>
+          <div class="pal-swatch" style="background:#E8001A"><span class="pal-hex" style="color:#fff">#E8001A</span></div>
+        </div>
+
+        <div class="vis-row">
+          <div class="vis-label">Opening Frame (0:00–0:03)</div>
+          <div class="vis-val"><strong>Black screen.</strong> "DELETED ✓" in mint green (#6EE7B7), Bebas Neue, 72px. Then a 0.5s pause. Then a red ✗ slams over it. New text fades: "YOUR DATA IS STILL THERE." The visual contradiction creates instant tension.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Step Sequence (Steps 1–5)</div>
+          <div class="vis-val">Each step appears as a <strong>numbered card</strong>: dark green border-left (#059669), black background. Step number in large green Bebas Neue (left), step text in white Barlow (right). Cards stack from bottom, one per 8–10 seconds of narration. Minimal, clean, instructional.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Highlight Frame</div>
+          <div class="vis-val">Step 3 (contacts warning): amber border instead of green. Text glows amber. Sub-label "WARNING" badge appears in red. This breaks the visual rhythm and demands attention.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">CTA Frame</div>
+          <div class="vis-val">Green checkmark (large, animated draw-on 0.3s) + "SHARE THIS." in Bebas Neue mint, 80px. Most hopeful frame in all 6 shorts. Intentionally brighter feeling.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">On-Screen Text Overlays</div>
+          <div class="ot-row">
+            <span class="ot-tag">STEP 1</span>
+            <span class="ot-tag">DATA DELETION</span>
+            <span class="ot-tag">PERMISSIONS</span>
+            <span class="ot-tag">⚠ CONTACTS</span>
+            <span class="ot-tag">VPN</span>
+            <span class="ot-tag">FEDERAL LAW</span>
+          </div>
+        </div>
+        <div class="trans-spec">
+          <div class="ts-head">Timing Guide</div>
+          <div class="trans-row"><span class="trans-time">0:00</span><div class="trans-bar"><div class="trans-fill" style="width:8%;background:#6EE7B7"></div></div><span class="trans-desc">Deleted ✓ → ✗ hook</span></div>
+          <div class="trans-row"><span class="trans-time">0:05</span><div class="trans-bar"><div class="trans-fill" style="width:28%;background:#059669"></div></div><span class="trans-desc">Step 1 card</span></div>
+          <div class="trans-row"><span class="trans-time">0:18</span><div class="trans-bar"><div class="trans-fill" style="width:48%;background:#059669"></div></div><span class="trans-desc">Step 2 card</span></div>
+          <div class="trans-row"><span class="trans-time">0:32</span><div class="trans-bar"><div class="trans-fill" style="width:62%;background:#FBBF24"></div></div><span class="trans-desc">Step 3 — amber warn</span></div>
+          <div class="trans-row"><span class="trans-time">0:45</span><div class="trans-bar"><div class="trans-fill" style="width:82%;background:#059669"></div></div><span class="trans-desc">Steps 4–5</span></div>
+          <div class="trans-row"><span class="trans-time">0:56</span><div class="trans-bar"><div class="trans-fill" style="width:100%;background:#6EE7B7"></div></div><span class="trans-desc">Share CTA</span></div>
+        </div>
+      </div>
+      <div class="script-col">
+        <div class="col-head">Voice Script — Read Straight Through</div>
+        <div class="script-text"><span class="hook">If you deleted Temu — good. But your data is still on their servers.</span>
+
+Here's what you actually need to do.
+
+<span class="stat">Step one:</span> submit a data deletion request. Open Temu's website, go to Account, then Privacy Settings, and find the Data Deletion option. Submit it in writing. Keep a screenshot.
+
+<span class="stat">Step two:</span> revoke app permissions right now for every app on your phone. Go to Settings, then Apps, and check which ones have access to your microphone, camera, contacts, and location. Revoke anything that doesn't need it.
+
+<span class="stat">Step three:</span> if you used Temu's referral program, your contacts' information was likely collected too. There's nothing you can do about that — but warn them.
+
+<span class="stat">Step four:</span> use a VPN and a browser instead of the app if you still want to browse. It limits what they can fingerprint from your device.
+
+<span class="stat">Step five:</span> contact your representative. Demand a federal privacy law.
+
+<span class="cta">This is IssueLens. Share this with someone who needs it.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────── SHORT #6 ── -->
+  <div class="ep-card ep6">
+    <div class="ep-header">
+      <div class="ep-num">06</div>
+      <div class="ep-title-block">
+        <div class="ep-tag-row">
+          <span class="badge badge-hook">Hook: Personal / Intimate</span>
+          <span class="badge badge-dur">~60 sec / ~160 words</span>
+          <span class="badge badge-em">Emotion: Unease / Clarity</span>
+        </div>
+        <div class="ep-title">"What Temu Knows About You (That You Don't)"</div>
+        <div class="ep-subtitle">On-screen hook text → "Temu Knows More About You Than Your Doctor."</div>
+      </div>
+    </div>
+    <div class="ep-body">
+      <div class="vis-col">
+        <div class="col-head">Visual Guidelines</div>
+
+        <div class="palette">
+          <div class="pal-swatch" style="background:#0A0A0A"><span class="pal-hex" style="color:#555">#0A0A0A</span></div>
+          <div class="pal-swatch" style="background:#7C3AED"><span class="pal-hex" style="color:#fff">#7C3AED</span></div>
+          <div class="pal-swatch" style="background:#C4B5FD"><span class="pal-hex" style="color:#333">#C4B5FD</span></div>
+          <div class="pal-swatch" style="background:#E8001A"><span class="pal-hex" style="color:#fff">#E8001A</span></div>
+        </div>
+
+        <div class="vis-row">
+          <div class="vis-label">Opening Frame (0:00–0:03)</div>
+          <div class="vis-val"><strong>Black screen.</strong> Small text appears first: "Temu knows your..." then a slow build — "income bracket." (pause) "health conditions." (pause) "daily schedule." Each phrase in pale lavender (#C4B5FD), DM Mono, 28px, appearing line by line. Unsettling pace. No music stab — just silence. Then purple glow: "WITHOUT ASKING." in Bebas Neue, white, 82px.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">87% Accuracy Frame</div>
+          <div class="vis-val"><strong>Data visualization aesthetic.</strong> Dark background with faint grid lines (purple, 4% opacity). Large: <strong>"87%"</strong> in Bebas Neue white, 120px. Below: "accuracy inferring your life" in DM Mono lavender, 16px. Purple radial glow behind the number. Source bug: "Privacy &amp; Security Review, 2026" in 10px gray at bottom.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">Final Revelation Frame</div>
+          <div class="vis-val">Black background. Two lines, staggered reveal (0.6s apart): "YOU ARE NOT THE CUSTOMER." (white, Bebas Neue, 60px) / "YOU ARE THE PRODUCT." (red, Bebas Neue, 70px). Hold 2.5 seconds. Most memorable frame of the entire series.</div>
+        </div>
+        <div class="vis-row">
+          <div class="vis-label">On-Screen Text Overlays</div>
+          <div class="ot-row">
+            <span class="ot-tag">INCOME BRACKET</span>
+            <span class="ot-tag">HEALTH STATUS</span>
+            <span class="ot-tag">87% ACCURACY</span>
+            <span class="ot-tag">ART. 7</span>
+            <span class="ot-tag">YOU = PRODUCT</span>
+          </div>
+        </div>
+        <div class="trans-spec">
+          <div class="ts-head">Timing Guide</div>
+          <div class="trans-row"><span class="trans-time">0:00</span><div class="trans-bar"><div class="trans-fill" style="width:10%;background:#7C3AED"></div></div><span class="trans-desc">Slow-build hook</span></div>
+          <div class="trans-row"><span class="trans-time">0:08</span><div class="trans-bar"><div class="trans-fill" style="width:38%;background:#555"></div></div><span class="trans-desc">Inference examples</span></div>
+          <div class="trans-row"><span class="trans-time">0:30</span><div class="trans-bar"><div class="trans-fill" style="width:60%;background:#C4B5FD"></div></div><span class="trans-desc">87% stat frame</span></div>
+          <div class="trans-row"><span class="trans-time">0:42</span><div class="trans-bar"><div class="trans-fill" style="width:80%;background:#7C3AED"></div></div><span class="trans-desc">Art. 7 reveal</span></div>
+          <div class="trans-row"><span class="trans-time">0:50</span><div class="trans-bar"><div class="trans-fill" style="width:90%;background:#E8001A"></div></div><span class="trans-desc">"You are the product"</span></div>
+          <div class="trans-row"><span class="trans-time">0:58</span><div class="trans-bar"><div class="trans-fill" style="width:100%;background:#333"></div></div><span class="trans-desc">CTA + logo</span></div>
+        </div>
+      </div>
+      <div class="script-col">
+        <div class="col-head">Voice Script — Read Straight Through</div>
+        <div class="script-text"><span class="hook">Temu knows your income bracket.</span>
+
+They don't ask. They infer it — from what you browse, what you hesitate on, what you add to cart and abandon, how long you stare at a product before scrolling past.
+
+<span class="stat">A 2026 study found that behavioral data from apps like Temu can infer a person's financial situation, health conditions, and household composition with over 87 percent accuracy.</span>
+
+They know whether you're struggling to pay rent. They know if someone in your household might be sick. They know your daily schedule — because your GPS says so.
+
+And because Temu's parent company operates under Chinese law — specifically the National Intelligence Law of 2017 — that inferred profile of your life can be requested by the Chinese government at any time. Legally. Without telling you.
+
+<span class="stat">You are not the customer.</span>
+
+<span class="stat">You are the product.</span>
+
+<span class="cta">Delete the app. Request your data be erased. Share this with one person who still has it.</span>
+
+This is IssueLens.</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-copy">IssueLens EP.01 · Shorts Production Brief · © IssueLens Editorial</div>
+  <div class="footer-copy">Post Order: #2 → #1 → #3 → #4 → #6 → #5 &nbsp;|&nbsp; Every 2–3 days</div>
+</footer>
+
+</body>
+</html>

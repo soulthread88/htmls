@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<!--
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║  🇺🇸 AI DECODED FOR SENIORS — Episode 47                                     ║
+║  "AI Meets Your Retirement: ChatGPT Checks Your Pension So You Don't Have To"║
+║  File: ai_decoded_ep47_eng.html                                               ║
+║  Series: AI Decoded for Seniors | with Jake & Grandpa Bob                    ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Decoded for Seniors Ep.47 — AI Meets Your Retirement | Jake & Grandpa Bob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════
+   AI DECODED FOR SENIORS — Ep.47
+   DESIGN DIRECTION: "Late-Night TV Meets Silicon Valley Newsroom"
+   Palette: Warm Cream #FAF7F0 · Jet Black #0D0D0D · Hot Coral #FF4D2E
+            Electric Blue #0057FF · Gold Rush #F5A623 · Mint #00C9A7
+   Fonts: Bebas Neue (headlines) · DM Serif Display (pull quotes)
+          DM Sans (body) · Space Mono (code/labels)
+   Motion: Staggered reveals, floating badges, pulse rings
+════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --cream:  #FAF7F0;
+  --black:  #0D0D0D;
+  --coral:  #FF4D2E;
+  --blue:   #0057FF;
+  --gold:   #F5A623;
+  --mint:   #00C9A7;
+  --navy:   #0A1628;
+  --slate:  #2D3748;
+  --mist:   #E8E4DC;
+  --coral-light: #FFF0EC;
+  --blue-light:  #EEF3FF;
+  --mint-light:  #E6FAF6;
+  --gold-light:  #FEF6E4;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--black);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── Wrapper ── */
+.wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 120px;
+}
+
+/* ── Utility gaps ── */
+.gap    { display: block; height: 20px; }
+.gap-sm { display: block; height: 10px; }
+.gap-xs { display: block; height: 6px; }
+
+/* ════════════════════════════════════════
+   TICKER TAPE (top bar)
+════════════════════════════════════════ */
+.ticker-wrap {
+  background: var(--black);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  position: relative;
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 38s linear infinite;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-sep { color: var(--coral); margin: 0 18px; }
+
+/* ════════════════════════════════════════
+   HERO BANNER
+════════════════════════════════════════ */
+.hero {
+  background: var(--black);
+  border-radius: 0 0 32px 32px;
+  padding: 48px 36px 44px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 80% 20%, rgba(255,77,46,0.18), transparent),
+              radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0,87,255,0.14), transparent);
+  pointer-events: none;
+}
+/* Big decorative number */
+.hero-bg-num {
+  position: absolute;
+  right: -24px; bottom: -30px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 200px;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  user-select: none;
+}
+.hero-ep-row {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px; flex-wrap: wrap;
+}
+.ep-chip {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  color: var(--black);
+  background: var(--gold);
+  padding: 5px 14px; border-radius: 100px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.live-badge {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,77,46,0.15);
+  border: 1.5px solid var(--coral);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--coral);
+  letter-spacing: 0.08em;
+}
+.live-dot {
+  width: 7px; height: 7px;
+  background: var(--coral);
+  border-radius: 50%;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.75); }
+}
+.series-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(38px, 7vw, 68px);
+  color: #fff;
+  line-height: 1.0;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+.hero-title .coral { color: var(--coral); }
+.hero-title .gold  { color: var(--gold);  }
+.hero-subtitle {
+  font-size: 16px; font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 26px;
+}
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 28px;
+}
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 4px 12px; border-radius: 100px;
+  transition: all 0.2s;
+}
+.hero-tag:hover { color: var(--gold); border-color: var(--gold); }
+.hosts-row {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.host-card {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+  padding: 10px 16px;
+}
+.host-avatar {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--coral), #ff7a5c);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.host-avatar.bob { background: linear-gradient(135deg, var(--blue), #5585ff); }
+.host-info-name { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2; }
+.host-info-role { font-size: 11px; color: rgba(255,255,255,0.45); }
+
+/* ════════════════════════════════════════
+   TRENDING STRIP
+════════════════════════════════════════ */
+.trending-strip {
+  background: var(--coral);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap;
+  border-radius: 16px;
+  margin: 18px 0;
+}
+.trending-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: 0.08em;
+  color: #fff; white-space: nowrap;
+}
+.trending-items {
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px; color: rgba(255,255,255,0.85);
+  letter-spacing: 0.05em;
+}
+
+/* ════════════════════════════════════════
+   SECTION HEADERS (accent style)
+════════════════════════════════════════ */
+.section-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px; align-items: center;
+  margin: 36px 0 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--mist);
+}
+.section-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.icon-coral { background: var(--coral-light); border: 2px solid var(--coral); }
+.icon-blue  { background: var(--blue-light);  border: 2px solid var(--blue);  }
+.icon-gold  { background: var(--gold-light);  border: 2px solid var(--gold);  }
+.icon-mint  { background: var(--mint-light);  border: 2px solid var(--mint);  }
+.section-meta-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; color: var(--coral);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.section-meta-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; line-height: 1.1; color: var(--black);
+  letter-spacing: 0.02em;
+}
+.section-meta-sub {
+  font-size: 13px; color: #888; margin-top: 1px;
+}
+
+/* ════════════════════════════════════════
+   SAYING BOX (Today's American Saying)
+════════════════════════════════════════ */
+.saying-card {
+  background: var(--black);
+  border-radius: 24px;
+  padding: 34px 32px;
+  position: relative;
+  overflow: hidden;
+  margin: 14px 0;
+}
+.saying-card::after {
+  content: '"';
+  position: absolute; top: -20px; right: 20px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 180px;
+  color: rgba(245,166,35,0.08);
+  line-height: 1;
+  user-select: none;
+}
+.saying-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.saying-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(22px, 4vw, 32px);
+  color: #fff;
+  line-height: 1.35;
+  font-style: italic;
+  margin-bottom: 18px;
+  position: relative; z-index: 1;
+}
+.saying-meaning {
+  font-size: 15px; font-weight: 500;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+.saying-ai-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: rgba(245,166,35,0.12);
+  border: 1.5px solid rgba(245,166,35,0.3);
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+.saying-ai-icon {
+  font-size: 20px; flex-shrink: 0; margin-top: 1px;
+}
+.saying-ai-text {
+  font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7;
+}
+.saying-ai-text b { color: var(--gold); }
+
+/* ════════════════════════════════════════
+   INTRO BODY
+════════════════════════════════════════ */
+.intro-body {
+  font-size: 17px; line-height: 1.9; color: var(--slate);
+  margin: 0 0 14px;
+}
+.intro-body b { color: var(--black); }
+.intro-body .highlight { color: var(--coral); font-weight: 700; }
+.intro-body .ai-name   { color: var(--blue);  font-weight: 700; }
+
+/* Intro callout banner */
+.intro-callout {
+  background: var(--coral-light);
+  border-left: 5px solid var(--coral);
+  border-radius: 0 14px 14px 0;
+  padding: 16px 20px;
+  font-size: 15px; color: var(--slate); line-height: 1.7;
+  margin: 16px 0;
+}
+.intro-callout b { color: var(--coral); }
+
+/* ════════════════════════════════════════
+   IMAGE UPLOAD AREA
+════════════════════════════════════════ */
+.img-area {
+  width: 100%; min-height: 380px;
+  background: var(--mist);
+  border: 2.5px dashed #C0B8A8;
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative; overflow: hidden;
+  margin: 16px 0;
+  transition: all 0.22s;
+}
+.img-area:hover { background: #EDE8DE; border-color: var(--coral); }
+.img-upload-lbl {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; color: #888; text-align: center; padding: 20px;
+  user-select: none;
+}
+.img-upload-icon { font-size: 44px; }
+.img-upload-lbl span { font-size: 14px; }
+.img-upload-lbl small { font-size: 12px; color: #aaa; }
+.img-area img, .img-area video { width:100%; height:auto; border-radius:16px; display:block; }
+
+.media-overlay {
+  position: absolute; top: 10px; right: 10px;
+  display: none; gap: 7px; z-index: 10;
+}
+.img-area:hover .media-overlay,
+.ai-img-area:hover .media-overlay { display: flex; }
+.media-btn {
+  background: rgba(13,13,13,0.8); color: #fff; border: none;
+  border-radius: 8px; padding: 6px 14px; font-size: 12px;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 700;
+}
+.media-btn:hover { background: var(--coral); }
+
+.source-tag {
+  font-size: 12px; color: #aaa; text-align: right;
+  font-style: italic; margin: 4px 0 14px;
+}
+
+/* contenteditable */
+[contenteditable="true"] { outline: none; border-radius: 4px; cursor: text; }
+[contenteditable="true"]:hover { background: rgba(245,166,35,0.10); box-shadow: 0 0 0 2px rgba(245,166,35,0.4); }
+[contenteditable="true"]:focus { background: rgba(245,166,35,0.18); box-shadow: 0 0 0 2px var(--gold); }
+
+/* ════════════════════════════════════════
+   VISUAL STORY PANELS
+════════════════════════════════════════ */
+.panel-wrap {
+  border-radius: 22px;
+  overflow: hidden;
+  border: 2px solid var(--mist);
+  margin: 16px 0;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+}
+.panel-header {
+  background: var(--black);
+  color: #fff;
+  padding: 13px 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; letter-spacing: 0.08em;
+  display: flex; align-items: center; gap: 10px;
+}
+.panel-header .ph-dot { width:8px;height:8px;border-radius:50%; flex-shrink:0; }
+.ph-red   { background: #FF5F57; }
+.ph-yel   { background: #FEBC2E; }
+.ph-grn   { background: #28C840; }
+.panel-body {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #f5f0e8, #e8e4dc);
+  cursor: pointer; overflow: hidden;
+}
+.panel-placeholder {
+  width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:14px; padding:20px;
+}
+.panel-placeholder-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px; color:var(--slate); letter-spacing:0.03em; text-align:center;
+}
+.panel-placeholder-sub {
+  font-size:13px; color:#aaa; text-align:center; max-width:400px;
+}
+.panel-upload-btn {
+  background:var(--black); color:#fff;
+  font-family:'Space Mono',monospace;
+  font-size:12px; font-weight:700;
+  padding:10px 26px; border-radius:100px;
+  border:none; cursor:pointer; letter-spacing:0.05em;
+}
+.panel-upload-btn:hover { background:var(--coral); }
+.panel-overlay {
+  position:absolute;inset:0;
+  background:rgba(13,13,13,0.6);
+  display:none; align-items:center; justify-content:center;
+  gap:12px; flex-direction:column; z-index:5;
+}
+.panel-body:hover .panel-overlay { display:flex; }
+.panel-overlay-btn {
+  background:rgba(255,255,255,0.12);color:#fff;border:1.5px solid rgba(255,255,255,0.3);
+  border-radius:8px;padding:7px 18px;font-size:13px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-weight:700;
+}
+.panel-overlay-btn:hover{background:var(--coral);border-color:var(--coral);}
+
+/* ════════════════════════════════════════
+   DIALOG / CONVERSATION BOX
+════════════════════════════════════════ */
+.dialog-card {
+  background: #fff;
+  border: 2px solid var(--mist);
+  border-radius: 22px;
+  padding: 26px 28px;
+  margin: 14px 0;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.dialog-card::before {
+  content: '💬 LIVE CONVERSATION';
+  position: absolute; top: -13px; left: 24px;
+  background: var(--blue);
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  padding: 4px 14px; border-radius: 100px;
+}
+.d-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+  align-items: flex-start;
+}
+.d-row:last-child { margin-bottom: 0; }
+.d-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; margin-top: 2px;
+}
+.av-jake { background: linear-gradient(135deg,var(--coral),#ff7a5c); }
+.av-bob  { background: linear-gradient(135deg,var(--blue),#5585ff); }
+.d-bubble {
+  background: var(--cream);
+  border-radius: 0 16px 16px 16px;
+  padding: 12px 16px;
+  font-size: 15.5px; line-height: 1.75; color: var(--slate);
+}
+.d-bubble .d-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+}
+.d-jake-name { color: var(--coral); }
+.d-bob-name  { color: var(--blue);  }
+.d-bubble b  { color: var(--black); }
+.d-bubble .warn { color: var(--coral); font-weight: 700; }
+
+/* ════════════════════════════════════════
+   CRASH COURSE TIPS
+════════════════════════════════════════ */
+.tip-strip {
+  display: flex; flex-direction: column; gap: 14px;
+  margin: 14px 0;
+}
+.tip-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px; align-items: flex-start;
+  background: #fff;
+  border: 2px solid var(--mist);
+  border-radius: 18px;
+  padding: 18px 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.tip-item:hover {
+  border-color: var(--coral);
+  box-shadow: 0 6px 24px rgba(255,77,46,0.1);
+}
+.tip-num {
+  width: 48px; height: 48px;
+  background: var(--black);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; letter-spacing: 0.02em;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.tip-num.t2 { background: var(--coral); }
+.tip-num.t3 { background: var(--blue); }
+.tip-content-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px; color: var(--black);
+  line-height: 1.35; margin-bottom: 6px;
+}
+.tip-content-body {
+  font-size: 14.5px; color: var(--slate); line-height: 1.8;
+}
+.tip-content-body b { color: var(--black); }
+.tip-content-body .code-inline {
+  font-family: 'Space Mono', monospace;
+  font-size: 12.5px;
+  background: var(--blue-light);
+  color: var(--blue);
+  padding: 2px 8px; border-radius: 6px;
+  display: inline-block; margin: 2px 0;
+}
+
+/* AI Spotlight card */
+.spotlight {
+  background: var(--black);
+  border-radius: 20px;
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 18px; align-items: center;
+  margin: 20px 0;
+}
+.spotlight-icon-box {
+  width: 60px; height: 60px;
+  background: rgba(245,166,35,0.15);
+  border: 2px solid rgba(245,166,35,0.35);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+.spotlight-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; color: var(--gold);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px;
+}
+.spotlight-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+.spotlight-body  { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+.spotlight-body b { color: var(--gold); }
+
+/* Did You Know */
+.dyk {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--mint-light);
+  border: 2px solid var(--mint);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 14px 0;
+}
+.dyk-icon { font-size: 22px; flex-shrink:0; margin-top:1px; }
+.dyk-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.12em;
+  color: var(--mint); text-transform: uppercase; margin-bottom: 4px;
+}
+.dyk-body { font-size: 14.5px; color: var(--slate); line-height: 1.7; }
+.dyk-body b { color: var(--black); }
+
+/* ════════════════════════════════════════
+   AI IN YOUR DAILY LIFE
+════════════════════════════════════════ */
+.ai-use-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 14px 0;
+}
+.ai-use-card {
+  background: #fff;
+  border: 2px solid var(--mist);
+  border-radius: 18px;
+  padding: 18px;
+  transition: all 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+.ai-use-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+}
+.ai-use-card.c1::before { background: var(--coral); }
+.ai-use-card.c2::before { background: var(--blue);  }
+.ai-use-card.c3::before { background: var(--gold);  }
+.ai-use-card.c4::before { background: var(--mint);  }
+.ai-use-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-2px); }
+.ai-card-emoji { font-size: 30px; margin-bottom: 10px; display: block; }
+.ai-card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px; color: var(--black);
+  margin-bottom: 8px; line-height: 1.3;
+}
+.ai-card-body { font-size: 13.5px; color: var(--slate); line-height: 1.75; }
+.ai-card-body b  { color: var(--black); }
+.ai-card-body .warn { color: var(--coral); font-weight: 700; }
+.ai-card-example {
+  margin-top: 10px;
+  background: var(--cream);
+  border-left: 3px solid var(--coral);
+  border-radius: 0 8px 8px 0;
+  padding: 8px 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--slate); line-height: 1.6;
+}
+.ai-card-example.ex-blue { border-left-color: var(--blue); }
+.ai-card-example.ex-gold { border-left-color: var(--gold); }
+.ai-card-example.ex-mint { border-left-color: var(--mint); }
+
+/* AI 4-icon grid */
+.ai-icon-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px; margin: 14px 0;
+}
+.ai-img-area {
+  background: var(--mist);
+  border: 2px dashed #C0B8A8;
+  border-radius: 14px;
+  aspect-ratio: 1/1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: all 0.2s;
+}
+.ai-img-area:hover { border-color: var(--coral); background: #EDE8DE; }
+.ai-img-area .upload-label {
+  display:flex;flex-direction:column;align-items:center;
+  gap:5px;color:#bbb;font-size:13px;text-align:center;padding:8px;
+  user-select:none;
+}
+.ai-img-area .upload-icon { font-size: 32px; }
+.ai-img-area img, .ai-img-area video { width:100%;height:auto;border-radius:10px;display:block; }
+
+/* ════════════════════════════════════════
+   HUMOR BOX
+════════════════════════════════════════ */
+.humor-card {
+  background: linear-gradient(135deg, #FFF9F0, #FFF3E0);
+  border: 2px solid var(--gold);
+  border-radius: 22px;
+  padding: 26px 28px;
+  margin: 14px 0;
+  position: relative;
+}
+.humor-stamp {
+  position: absolute; top: -14px; left: 24px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px; letter-spacing: 0.08em;
+  padding: 4px 16px; border-radius: 100px;
+}
+.humor-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px; color: var(--black);
+  margin: 10px 0 16px; line-height: 1.35;
+}
+.humor-punchline {
+  background: var(--black);
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 14px; color: var(--gold);
+  font-weight: 500; line-height: 1.7;
+  margin-top: 14px;
+  font-style: italic;
+}
+
+/* ════════════════════════════════════════
+   QUIZ BOX
+════════════════════════════════════════ */
+.quiz-card {
+  background: var(--black);
+  border-radius: 22px;
+  padding: 28px 28px;
+  margin: 14px 0;
+  position: relative;
+  overflow: hidden;
+}
+.quiz-card::before {
+  content: '🧠';
+  position: absolute; right: 24px; top: 18px;
+  font-size: 60px; opacity: 0.08;
+}
+.quiz-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em;
+  color: var(--mint); text-transform: uppercase; margin-bottom: 18px;
+}
+.quiz-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; color: #fff; letter-spacing: 0.02em;
+  margin-bottom: 20px;
+}
+.quiz-q {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.quiz-q:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.quiz-q-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; color: var(--mint);
+  letter-spacing: 0.1em; margin-bottom: 6px;
+}
+.quiz-q-text { font-size: 15px; color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 6px; }
+.quiz-hint   { font-size: 12.5px; color: rgba(255,255,255,0.42); font-style: italic; line-height: 1.6; }
+
+/* Answer reveal */
+.answer-reveal-hint {
+  text-align: center; font-size: 13px; color: #aaa;
+  margin: 8px 0; cursor: pointer;
+  font-family: 'Space Mono', monospace; letter-spacing: 0.04em;
+  opacity: 0.6; transition: opacity 0.2s;
+}
+.answer-reveal-hint:hover { opacity: 1; }
+.answer-box {
+  background: var(--mint-light);
+  border: 2px solid var(--mint);
+  border-radius: 18px;
+  padding: 20px 24px;
+  margin: 10px 0;
+  opacity: 0.05; cursor: pointer;
+  transition: opacity 0.3s;
+}
+.answer-box:hover { opacity: 0.35; }
+.answer-box.revealed { opacity: 1; cursor: default; }
+.answer-title { font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--mint);text-transform:uppercase;margin-bottom:10px; }
+.answer-item  { font-size:14.5px;color:var(--slate);line-height:1.75;margin-bottom:6px; }
+.answer-item b { color:var(--black); }
+
+/* ════════════════════════════════════════
+   SAYING DEEP DIVE
+════════════════════════════════════════ */
+.saying-deep {
+  background: #fff;
+  border: 2px solid var(--mist);
+  border-radius: 24px;
+  padding: 30px;
+  margin: 14px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.saying-deep-full {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(20px,3.5vw,28px);
+  color: var(--black);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 10px 0 22px;
+  padding-bottom: 22px;
+  border-bottom: 2px solid var(--mist);
+}
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 0 0 22px;
+}
+.word-card {
+  background: var(--cream);
+  border: 1.5px solid var(--mist);
+  border-radius: 14px;
+  padding: 12px 10px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.word-card:hover { border-color: var(--gold); }
+.wc-word { font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.03em;color:var(--black);display:block;margin-bottom:3px; }
+.wc-type { font-family:'Space Mono',monospace;font-size:9px;color:var(--coral);letter-spacing:0.08em;display:block;margin-bottom:4px; }
+.wc-def  { font-size:11.5px;color:#666;line-height:1.45;display:block; }
+
+.story-block {
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  border-left: 4px solid var(--mist);
+  border-radius: 0 12px 12px 0;
+  background: var(--cream);
+}
+.story-block .sb-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.1em;
+  color: var(--blue); text-transform: uppercase; margin-bottom: 8px;
+}
+.story-block p { font-size: 14.5px; color: var(--slate); line-height: 1.8; }
+.story-block p b { color: var(--black); }
+.story-block.sb-coral { border-left-color: var(--coral); }
+.story-block.sb-gold  { border-left-color: var(--gold);  }
+
+.ai-connect-box {
+  background: var(--blue-light);
+  border: 2px solid rgba(0,87,255,0.25);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin: 18px 0 0;
+}
+.ai-connect-box .acb-label {
+  font-family:'Space Mono',monospace;
+  font-size:10px;letter-spacing:0.1em;
+  color:var(--blue);text-transform:uppercase;margin-bottom:8px;
+}
+.ai-connect-box p { font-size:14.5px;color:var(--slate);line-height:1.8; }
+.ai-connect-box p b { color:var(--blue); }
+
+.memory-tip {
+  background: var(--gold-light);
+  border: 2px solid rgba(245,166,35,0.4);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 14px; color: var(--slate); line-height: 1.75;
+  margin-top: 16px;
+}
+.memory-tip b { color: var(--black); }
+
+/* ════════════════════════════════════════
+   SEARCH KEYWORDS
+════════════════════════════════════════ */
+.kw-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 14px 0;
+}
+.kw-pill {
+  display: block;
+  background: var(--black);
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 11.5px; letter-spacing: 0.05em;
+  padding: 11px 18px;
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+  text-align: center;
+  transition: all 0.2s;
+  font-weight: 700;
+}
+.kw-pill:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(245,166,35,0.35);
+}
+
+/* ════════════════════════════════════════
+   WORD POWER
+════════════════════════════════════════ */
+.wordpower-card {
+  background: var(--coral);
+  border-radius: 22px;
+  padding: 26px 28px;
+  margin: 14px 0;
+  position: relative;
+  overflow: hidden;
+}
+.wordpower-card::after {
+  content: 'A B C';
+  position: absolute; right: 20px; bottom: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 70px; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.07);
+  line-height: 1; user-select:none;
+}
+.wp-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; color: rgba(255,255,255,0.65);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px;
+}
+.wp-item {
+  background: rgba(255,255,255,0.14);
+  border-radius: 14px; padding: 14px 18px;
+  margin-bottom: 10px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+.wp-item:last-child { margin-bottom: 0; }
+.wp-word { font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em;color:#fff;display:block;margin-bottom:5px; }
+.wp-def  { font-size:14px;color:rgba(255,255,255,0.82);line-height:1.7; }
+.wp-def b { color:#fff; }
+
+/* ════════════════════════════════════════
+   GRANDPA'S CORNER
+════════════════════════════════════════ */
+.grandpa-card {
+  background: var(--blue-light);
+  border: 2px solid var(--blue);
+  border-radius: 22px;
+  padding: 24px 26px;
+  margin: 14px 0;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 16px; align-items: flex-start;
+}
+.grandpa-avatar {
+  width: 50px; height: 50px;
+  background: linear-gradient(135deg,var(--blue),#5585ff);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.grandpa-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--blue); text-transform: uppercase; margin-bottom: 7px;
+}
+.grandpa-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px; color: var(--slate);
+  line-height: 1.75; font-style: italic;
+}
+
+/* ════════════════════════════════════════
+   RECAP / SUMMARY
+════════════════════════════════════════ */
+.recap-card {
+  background: var(--black);
+  border-radius: 26px;
+  padding: 32px 30px;
+  margin: 14px 0;
+}
+.recap-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; color: var(--gold);
+  letter-spacing: 0.02em; margin-bottom: 24px;
+  text-align: center;
+}
+.recap-item {
+  border-left: 4px solid var(--coral);
+  padding: 0 0 18px 18px;
+  margin-bottom: 18px;
+  position: relative;
+}
+.recap-item::before {
+  content: '';
+  width: 12px; height: 12px;
+  background: var(--coral);
+  border-radius: 50%;
+  position: absolute; left: -8px; top: 4px;
+  border: 2px solid var(--black);
+}
+.recap-item:last-of-type { border-left-color: var(--gold); margin-bottom: 0; padding-bottom: 0; }
+.recap-item:last-of-type::before { background: var(--gold); }
+.recap-item-title { font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;font-family:'Space Mono',monospace; }
+.recap-item-body  { font-size:15px;color:rgba(255,255,255,0.75);line-height:1.75; }
+.recap-item-body b{ color:#fff; }
+.recap-finale {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; color: var(--mint);
+  letter-spacing: 0.04em; margin-top: 22px;
+}
+
+/* ════════════════════════════════════════
+   SUBSCRIBE CTA
+════════════════════════════════════════ */
+.cta-box {
+  background: linear-gradient(135deg, var(--coral), #c73520);
+  border-radius: 24px;
+  padding: 30px 28px;
+  text-align: center;
+  margin: 14px 0;
+  box-shadow: 0 10px 40px rgba(255,77,46,0.35);
+}
+.cta-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px; color: #fff; letter-spacing: 0.03em;
+  line-height: 1.1; margin-bottom: 12px;
+}
+.cta-body { font-size: 15px; color: rgba(255,255,255,0.82); line-height: 1.7; margin-bottom: 18px; }
+.cta-tags { font-size: 11px; color: rgba(255,255,255,0.55); font-family:'Space Mono',monospace; letter-spacing:0.04em; }
+
+/* ════════════════════════════════════════
+   DICTIONARY LINK
+════════════════════════════════════════ */
+.dict-box {
+  background: #fff;
+  border: 2px solid var(--mist);
+  border-radius: 18px;
+  padding: 20px 24px;
+  text-align: center;
+  margin: 16px 0;
+}
+.dict-box a { color:var(--blue);font-weight:700;text-decoration:none;font-size:14px; }
+.dict-box a:hover { text-decoration:underline; }
+.dict-box .dict-name { font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--black);letter-spacing:0.03em;margin-bottom:6px; }
+.dict-box .dict-sub { font-size:12px;color:#aaa;margin-top:5px; }
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+.site-footer {
+  text-align: center;
+  font-size: 13px; color: #aaa;
+  line-height: 1.7; margin-top: 28px;
+  padding-top: 20px;
+  border-top: 2px solid var(--mist);
+}
+.site-footer b { color: var(--slate); }
+
+/* ════════════════════════════════════════
+   SAVE BAR
+════════════════════════════════════════ */
+.save-bar {
+  position: fixed; bottom:0; left:0; right:0;
+  background: rgba(13,13,13,0.96);
+  padding: 12px 20px;
+  display: flex; justify-content:center; gap:14px;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+}
+.save-bar button {
+  background: linear-gradient(135deg,var(--coral),#c73520);
+  color: #fff; border: none;
+  padding: 12px 36px; border-radius: 100px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 20px rgba(255,77,46,0.45);
+  transition: all 0.2s;
+}
+.save-bar button:hover { transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,77,46,0.55); }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width:620px) {
+  .hero { padding:32px 22px 32px; }
+  .hero-title { font-size:32px; }
+  .ai-use-grid { grid-template-columns:1fr; }
+  .word-grid   { grid-template-columns:repeat(2,1fr); }
+  .ai-icon-row { grid-template-columns:repeat(2,1fr); }
+  .kw-grid     { grid-template-columns:1fr; }
+  .spotlight   { grid-template-columns:1fr; }
+  .grandpa-card{ grid-template-columns:1fr; }
+  .dialog-card { padding:22px 18px; }
+  .saying-card { padding:24px 20px; }
+  .d-bubble    { font-size:14px; }
+}
+
+/* ════════════════════════════════════════
+   ENTRY ANIMATIONS (CSS only)
+════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero-series-label { animation: fadeUp 0.5s ease both 0.1s; }
+.hero-ep-row       { animation: fadeUp 0.5s ease both 0.2s; }
+.hero-title        { animation: fadeUp 0.5s ease both 0.3s; }
+.hero-subtitle     { animation: fadeUp 0.5s ease both 0.4s; }
+.hero-tags         { animation: fadeUp 0.5s ease both 0.5s; }
+.hosts-row         { animation: fadeUp 0.5s ease both 0.6s; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ TICKER TAPE ════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    🔥 ChatGPT&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Google Gemini&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Microsoft Copilot&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Claude AI&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Grok&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Perplexity AI&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI for Seniors&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    ChatGPT Retirement Advice&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Social Security Help&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Financial Planning 2025&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Best AI Tools 2025&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Money Management&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Social Security + AI&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Medicare AI Explained&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Decoded For Seniors&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Artificial Intelligence For Beginners&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    🔥 ChatGPT&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Google Gemini&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Microsoft Copilot&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Claude AI&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Grok&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Perplexity AI&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI for Seniors&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    ChatGPT Retirement Advice&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Social Security Help&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Financial Planning 2025&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Best AI Tools 2025&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Money Management&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Social Security + AI&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Medicare AI Explained&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    AI Decoded For Seniors&nbsp;<span class="ticker-sep">|</span>&nbsp;
+    Artificial Intelligence For Beginners&nbsp;<span class="ticker-sep">|</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ════════════════ HERO BANNER ════════════════ -->
+<div class="hero">
+  <div class="hero-bg-num">47</div>
+  <div class="hero-series-label">🤖 AI DECODED FOR SENIORS</div>
+  <div class="hero-ep-row">
+    <div class="ep-chip">EPISODE 47</div>
+    <div class="live-badge"><span class="live-dot"></span>NEW DROP</div>
+  </div>
+  <div class="hero-title" contenteditable="true">
+    AI MEETS<br><span class="coral">YOUR RETIREMENT</span><br>
+    <span class="gold">MONEY.</span>
+  </div>
+  <div class="hero-subtitle" contenteditable="true">
+    ChatGPT checks your pension, explains your 401(k), and spots financial scams — so you don't have to do it alone. Jake walks Grandpa Bob through it all, step by step.
+  </div>
+  <div class="hero-tags">
+    <span class="hero-tag">#ChatGPT</span>
+    <span class="hero-tag">#AIForSeniors</span>
+    <span class="hero-tag">#RetirementPlanning</span>
+    <span class="hero-tag">#SocialSecurity</span>
+    <span class="hero-tag">#AIFinance</span>
+    <span class="hero-tag">#ArtificialIntelligence</span>
+    <span class="hero-tag">#AITools2025</span>
+    <span class="hero-tag">#LearnAI</span>
+    <span class="hero-tag">#Medicare</span>
+    <span class="hero-tag">#401k</span>
+  </div>
+  <div class="hosts-row">
+    <div class="host-card">
+      <div class="host-avatar">👦</div>
+      <div>
+        <div class="host-info-name">Jake</div>
+        <div class="host-info-role">Your AI Guide</div>
+      </div>
+    </div>
+    <div class="host-card">
+      <div class="host-avatar bob">👴</div>
+      <div>
+        <div class="host-info-name">Grandpa Bob</div>
+        <div class="host-info-role">Just Like You!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRENDING STRIP -->
+<div class="trending-strip">
+  <div class="trending-label">🔥 TRENDING NOW</div>
+  <div class="trending-items">
+    ChatGPT · Google Gemini · Claude AI · Microsoft Copilot · Grok · Perplexity · AI Financial Advisor · ChatGPT for Retirement · Social Security AI · Medicare AI · Best AI 2025
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ② TODAY'S AMERICAN SAYING ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-gold">💬</div>
+  <div>
+    <div class="section-meta-label">② Today's American Saying</div>
+    <div class="section-meta-title">Wisdom That Connects to AI — Every Episode!</div>
+    <div class="section-meta-sub">A classic saying + how AI makes it real today</div>
+  </div>
+</div>
+
+<div class="saying-card">
+  <div class="saying-eyebrow">💬 EPISODE 47 — AMERICAN WISDOM</div>
+  <div class="saying-text" contenteditable="true">"Don't wait until you're thirsty to dig the well."</div>
+  <div class="saying-meaning" contenteditable="true">
+    <b style="color:#fff;">Meaning:</b> Prepare for hard times before they arrive — not when you're already in trouble. Smart people act early, while things are still going well.
+  </div>
+  <div class="saying-ai-row">
+    <div class="saying-ai-icon">🤖</div>
+    <div class="saying-ai-text" contenteditable="true">
+      <b>AI Connection:</b> Using AI tools like ChatGPT to review your retirement savings, Social Security benefits, and 401(k) today — while you're still comfortable — is exactly what "digging the well before you're thirsty" looks like in 2025. Don't wait for a financial crisis. Let AI help you prepare now.
+    </div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ③ INTRO ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-coral">🚀</div>
+  <div>
+    <div class="section-meta-label">③ This Week's AI Topic</div>
+    <div class="section-meta-title">AI Meets Your Retirement Money</div>
+    <div class="section-meta-sub">Breaking it all the way down — no finance degree needed</div>
+  </div>
+</div>
+
+<p class="intro-body" contenteditable="true">
+  Welcome back to <b>AI Decoded for Seniors</b> — the only AI show in America built specifically for people who didn't grow up with smartphones but are <span class="highlight">absolutely determined to keep up.</span> I'm Jake, and today I'm sitting down with Grandpa Bob for our most-requested episode yet.
+</p>
+<p class="intro-body" contenteditable="true">
+  "Should I be worried about my retirement savings?" "Is my Social Security enough?" "What the heck is a 401(k) again?" These are the questions millions of American seniors ask — usually too embarrassed to ask a banker. <span class="highlight">Today, AI answers them all.</span>
+</p>
+
+<div class="intro-callout" contenteditable="true">
+  <b>⚠️ One rule before we start:</b> AI is an incredible <b>learning companion and starting point</b> — but it is NOT a licensed financial advisor. Use it to get smarter and ask better questions. For any major money decision, always follow up with a <b>certified financial planner (CFP)</b> or your bank's advisor. Think of AI as your study buddy, not your broker.
+</div>
+
+<p class="intro-body" contenteditable="true">
+  Today's episode: Grandpa Bob has his bank statements and Social Security letter spread out on the kitchen table. He's squinting at numbers that make no sense. Jake walks in with his laptop. "Grandpa — let's ask AI together." And here's exactly what happened.
+</p>
+
+<!-- ★ Intro Image 1 -->
+<div class="img-area" id="area-1"
+  onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-1').click()}"
+  style="cursor:pointer;">
+  <div class="img-upload-lbl" id="img-display-1">
+    <span class="img-upload-icon">🖼️</span>
+    <span>Click to Insert Image or Video</span>
+    <small>[Intro image — AI + retirement planning visual]</small>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-1').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-1').innerHTML='<span class=\'img-upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-1').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-1" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:16px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:16px;display:block;\'></video>'};document.getElementById('area-1').style.minHeight='auto'};r.readAsDataURL(f)})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT / Claude AI demo screenshot (reference image)</em></div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 1 -->
+<div class="panel-wrap">
+  <div class="panel-header">
+    <span class="ph-dot ph-red"></span>
+    <span class="ph-dot ph-yel"></span>
+    <span class="ph-dot ph-grn"></span>
+    &nbsp;🎬 SCENE 1 — GRANDPA BOB MEETS AI FINANCIAL HELP
+  </div>
+  <div class="panel-body" id="panel-comic-1"
+       onclick="if(!event.target.closest('.panel-overlay'))document.getElementById('up-comic-1').click()">
+    <div id="pd-comic-1" class="panel-placeholder">
+      <div style="font-size:50px;">🎬</div>
+      <div class="panel-placeholder-title">Grandpa Bob Meets AI Financial Help</div>
+      <div class="panel-placeholder-sub">Upload a scene showing Grandpa with bank statements + Jake with laptop</div>
+      <button class="panel-upload-btn">📁 Click to Upload</button>
+    </div>
+    <div class="panel-overlay">
+      <span style="color:var(--gold);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;">CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="panel-overlay-btn" onclick="event.stopPropagation();document.getElementById('up-comic-1').click()">🔄 Replace</button>
+        <button class="panel-overlay-btn" onclick="event.stopPropagation();comicDelete('pd-comic-1','comic-1')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-1" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-1','pd-comic-1','comic-1')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ④ CONVERSATION ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-blue">🗣️</div>
+  <div>
+    <div class="section-meta-label">④ Jake & Grandpa Bob Talk AI</div>
+    <div class="section-meta-title">Real Talk at the Kitchen Table</div>
+    <div class="section-meta-sub">Just like a conversation with your own grandkid</div>
+  </div>
+</div>
+
+<div class="dialog-card" contenteditable="true">
+  <div class="d-row">
+    <div class="d-avatar av-bob">👴</div>
+    <div class="d-bubble">
+      <div class="d-name d-bob-name">GRANDPA BOB</div>
+      Jake, I've got my Social Security letter and this 401(k) statement. I don't know if what I'm getting is enough for two people to live on. I'm too embarrassed to walk into the bank and ask dumb questions.
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar av-jake">👦</div>
+    <div class="d-bubble">
+      <div class="d-name d-jake-name">JAKE</div>
+      Grandpa, that's not a dumb question — that's the question. And guess what? AI is like having a patient, knowledgeable friend who never judges you. Let's try it. <b>Tell ChatGPT: "I'm 72 years old. I receive $1,400/month in Social Security and $600/month from my 401(k). My monthly expenses are about $2,100. Is my retirement income enough?"</b>
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar av-bob">👴</div>
+    <div class="d-bubble">
+      <div class="d-name d-bob-name">GRANDPA BOB</div>
+      Wait — is it safe to tell AI my financial numbers? Won't it steal my money?
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar av-jake">👦</div>
+    <div class="d-bubble">
+      <div class="d-name d-jake-name">JAKE</div>
+      Great question! <b>General numbers — monthly income, expenses — are fine to share.</b> What you should <span class="warn">NEVER</span> type into any AI: your Social Security number, bank account numbers, passwords, or credit card numbers. Think of it like talking to a knowledgeable stranger: share the general picture, never the keys to your house.
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar av-bob">👴</div>
+    <div class="d-bubble">
+      <div class="d-name d-bob-name">GRANDPA BOB</div>
+      That makes sense. So AI explains things like a friend, and then I take that knowledge to an actual professional for the real decisions?
+    </div>
+  </div>
+  <div class="d-row">
+    <div class="d-avatar av-jake">👦</div>
+    <div class="d-bubble">
+      <div class="d-name d-jake-name">JAKE</div>
+      <b>Exactly right.</b> AI is your homework buddy before the exam. It helps you ask smarter questions when you walk into the bank or call your financial advisor. You go in prepared — not confused. That's a superpower, Grandpa.
+    </div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑤ CRASH COURSE TIPS ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-coral">⚡</div>
+  <div>
+    <div class="section-meta-label">⑤ AI Crash Course</div>
+    <div class="section-meta-title">3 Steps to Use AI for Your Retirement</div>
+    <div class="section-meta-sub">Anyone can do this — no tech background needed</div>
+  </div>
+</div>
+
+<div class="dyk">
+  <div class="dyk-icon">💡</div>
+  <div>
+    <div class="dyk-label">Did You Know?</div>
+    <div class="dyk-body">More than <b>100 million Americans</b> have used an AI chatbot. The most popular ones — ChatGPT, Google Gemini, and Microsoft Copilot — are completely free and available right now on your phone, tablet, or computer.</div>
+  </div>
+</div>
+
+<div class="tip-strip">
+  <div class="tip-item" contenteditable="true">
+    <div class="tip-num">1</div>
+    <div>
+      <div class="tip-content-title">Step 1 — Tell AI Your Situation, Get Plain-English Analysis</div>
+      <div class="tip-content-body">
+        Open ChatGPT, Google Gemini, or Microsoft Copilot (all free!) and try this prompt:<br>
+        <span class="code-inline">"I'm a 70-year-old American. I get $1,200/month Social Security and $400/month pension. My monthly expenses are $1,800. Is my retirement income healthy? What should I watch out for?"</span><br>
+        AI will explain the math, flag any gaps, and give you a clear starting picture — in plain English, no financial jargon.
+        <br><br><span class="warn">⚠️ Never enter your Social Security Number, bank account numbers, or passwords into any AI tool.</span>
+      </div>
+    </div>
+  </div>
+  <div class="tip-item" contenteditable="true">
+    <div class="tip-num t2">2</div>
+    <div>
+      <div class="tip-content-title">Step 2 — Ask AI to Decode Financial Jargon You Don't Understand</div>
+      <div class="tip-content-body">
+        Confused by your 401(k) statement? Medicare Advantage vs. Original Medicare? Required Minimum Distributions (RMDs)? Just ask AI:<br>
+        <span class="code-inline">"What is an RMD? Explain it like I'm 70 years old and didn't study finance."</span><br>
+        AI will explain it in everyday American English, without the embarrassment of asking a banker who might rush you. No question is too basic.
+      </div>
+    </div>
+  </div>
+  <div class="tip-item" contenteditable="true">
+    <div class="tip-num t3">3</div>
+    <div>
+      <div class="tip-content-title">Step 3 — Let AI Build Your "Smart Questions" List for Real Advisors</div>
+      <div class="tip-content-body">
+        After chatting with AI, ask it:<br>
+        <span class="code-inline">"Based on my situation, what are the 5 most important questions I should ask my financial advisor next week?"</span><br>
+        Print that list and walk into your bank or credit union ready. You'll get ten times more value from that 30-minute appointment. AI is your <b>pre-game prep coach.</b> 🏆
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spotlight" contenteditable="true">
+  <div class="spotlight-icon-box">🔦</div>
+  <div>
+    <div class="spotlight-label">AI Tool Spotlight — Episode 47</div>
+    <div class="spotlight-title">The Big 5 AI Tools Americans Are Using Right Now</div>
+    <div class="spotlight-body">
+      <b>ChatGPT</b> (OpenAI) · <b>Google Gemini</b> · <b>Microsoft Copilot</b> · <b>Claude</b> (Anthropic) · <b>Perplexity AI</b><br>
+      All free. All available on your phone or computer. This episode: using them to understand your <b>retirement income, Social Security, 401(k), and Medicare.</b>
+    </div>
+  </div>
+</div>
+
+<!-- ★ Concept Image 2 -->
+<div class="img-area" id="area-2"
+  onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-2').click()}"
+  style="cursor:pointer;">
+  <div class="img-upload-lbl" id="img-display-2">
+    <span class="img-upload-icon">🖼️</span>
+    <span>Click to Insert Image or Video</span>
+    <small>[Step-by-step concept image — ChatGPT retirement conversation example]</small>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-2').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-2').innerHTML='<span class=\'img-upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-2').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-2" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:16px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:16px;display:block;\'></video>'};document.getElementById('area-2').style.minHeight='auto'};r.readAsDataURL(f)})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ChatGPT / ssa.gov official reference image</em></div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 2 -->
+<div class="panel-wrap">
+  <div class="panel-header">
+    <span class="ph-dot ph-red"></span>
+    <span class="ph-dot ph-yel"></span>
+    <span class="ph-dot ph-grn"></span>
+    &nbsp;🎬 SCENE 2 — "GIVE ME A HOT STOCK TIP!" — AI'S HONEST ANSWER
+  </div>
+  <div class="panel-body" id="panel-comic-2"
+       onclick="if(!event.target.closest('.panel-overlay'))document.getElementById('up-comic-2').click()">
+    <div id="pd-comic-2" class="panel-placeholder">
+      <div style="font-size:50px;">🎬</div>
+      <div class="panel-placeholder-title">"Give Me a Hot Stock Tip!" — AI's Honest Answer</div>
+      <div class="panel-placeholder-sub">Grandpa demands a stock tip; AI explains principles instead; Grandpa is impressed</div>
+      <button class="panel-upload-btn">📁 Click to Upload</button>
+    </div>
+    <div class="panel-overlay">
+      <span style="color:var(--gold);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;">CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="panel-overlay-btn" onclick="event.stopPropagation();document.getElementById('up-comic-2').click()">🔄 Replace</button>
+        <button class="panel-overlay-btn" onclick="event.stopPropagation();comicDelete('pd-comic-2','comic-2')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-2" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-2','pd-comic-2','comic-2')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑥ AI IN YOUR DAILY LIFE ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-mint">🌟</div>
+  <div>
+    <div class="section-meta-label">⑥ AI in Your Real American Life</div>
+    <div class="section-meta-title">4 Financial Questions AI Can Answer RIGHT NOW</div>
+    <div class="section-meta-sub">Copy these prompts — try them today!</div>
+  </div>
+</div>
+
+<p class="intro-body" contenteditable="true">
+  <b>Jake says:</b> "Grandpa, these are the four questions seniors across America are asking AI about their money. Each one has a ready-to-use prompt you can copy right now!"
+</p>
+<div class="gap-sm"></div>
+
+<div class="ai-use-grid">
+  <div class="ai-use-card c1" contenteditable="true">
+    <span class="ai-card-emoji">📊</span>
+    <div class="ai-card-title">Check Your Retirement Income</div>
+    <div class="ai-card-body">
+      Ask AI to compare your monthly income (Social Security + pension + savings) against average American senior living costs. You'll get a clear breakdown — no math required.
+    </div>
+    <div class="ai-card-example">
+      "I get $2,000/month Social Security and $300/month from savings. Average senior living costs in [your state]? Am I on track?"
+    </div>
+  </div>
+
+  <div class="ai-use-card c2" contenteditable="true">
+    <span class="ai-card-emoji">🏦</span>
+    <div class="ai-card-title">Compare CDs, Savings, and Treasuries</div>
+    <div class="ai-card-body">
+      AI explains the safest places to park your money — FDIC-insured options, current rates, and how to find the best deal without handing money to a pushy salesperson.
+    </div>
+    <div class="ai-card-example ex-blue">
+      "What is an FDIC-insured account? How is a CD different from a high-yield savings? Which is safer for a 70-year-old?"
+    </div>
+  </div>
+
+  <div class="ai-use-card c3" contenteditable="true">
+    <span class="ai-card-emoji">📈</span>
+    <div class="ai-card-title">Learn Investing Basics (No Jargon)</div>
+    <div class="ai-card-body">
+      What's a dividend stock? What's an ETF? Should someone my age even invest in stocks? AI explains it all honestly — <span class="warn">not as a recommendation, but as education.</span> Always confirm with a licensed advisor before investing.
+    </div>
+    <div class="ai-card-example ex-gold">
+      "What is a dividend-paying ETF? Explain the risks for a 72-year-old on a fixed income. Plain English only."
+    </div>
+  </div>
+
+  <div class="ai-use-card c4" contenteditable="true">
+    <span class="ai-card-emoji">🛡️</span>
+    <div class="ai-card-title">Spot & Stop Financial Scams</div>
+    <div class="ai-card-body">
+      Seniors lose <b>$28 billion/year</b> to scams. AI knows every trick in the playbook — fake Medicare calls, "guaranteed returns," grandparent scams. Ask before you act.
+    </div>
+    <div class="ai-card-example ex-mint">
+      "Someone called saying I owe back taxes and will be arrested. Is this a scam? What are the red flags of phone financial fraud?"
+    </div>
+  </div>
+</div>
+
+<!-- AI 4-icon image grid -->
+<div class="ai-icon-row">
+  <div class="ai-img-area" id="ai-area-1"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-1').click()}">
+    <div class="upload-label" id="ai-img-display-1">
+      <span class="upload-icon">📊</span>
+    </div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-1').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-1').innerHTML='<span class=\'upload-icon\'>📊</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-1" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-1');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-2"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-2').click()}">
+    <div class="upload-label" id="ai-img-display-2">
+      <span class="upload-icon">🏦</span>
+    </div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-2').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-2').innerHTML='<span class=\'upload-icon\'>🏦</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-2" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-2');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-3"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-3').click()}">
+    <div class="upload-label" id="ai-img-display-3">
+      <span class="upload-icon">📈</span>
+    </div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-3').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-3').innerHTML='<span class=\'upload-icon\'>📈</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-3" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+  <div class="ai-img-area" id="ai-area-4"
+    onclick="if(!event.target.closest('.media-overlay')){document.getElementById('ai-upload-4').click()}">
+    <div class="upload-label" id="ai-img-display-4">
+      <span class="upload-icon">🛡️</span>
+    </div>
+    <div class="media-overlay">
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-upload-4').click()">🔄</button>
+      <button class="media-btn" onclick="event.stopPropagation();document.getElementById('ai-img-display-4').innerHTML='<span class=\'upload-icon\'>🛡️</span>'">🗑️</button>
+    </div>
+    <input type="file" id="ai-upload-4" accept="image/*,video/*" style="display:none"
+      onchange="(function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('ai-img-display-4');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:10px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:10px;display:block;\'></video>'}};r.readAsDataURL(f)})(event)">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑦ AI LAUGH BREAK ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-gold">😂</div>
+  <div>
+    <div class="section-meta-label">⑦ AI Laugh Break</div>
+    <div class="section-meta-title">Because Learning Should Always Be Fun!</div>
+    <div class="section-meta-sub">Grandpa Bob tries to get rich quick. AI says no.</div>
+  </div>
+</div>
+
+<div class="humor-card" contenteditable="true">
+  <div class="humor-stamp">😂 THIS WEEK'S LAUGH</div>
+  <div class="humor-title">Grandpa Bob's Get-Rich-Quick AI Adventure!</div>
+  <div class="d-row" style="margin-bottom:12px;">
+    <div class="d-avatar av-bob">👴</div>
+    <div class="d-bubble">
+      <div class="d-name d-bob-name">GRANDPA BOB</div>
+      Hey AI — just tell me ONE stock that'll double my money by Christmas. I won't tell anyone you said it.
+    </div>
+  </div>
+  <div class="d-row" style="margin-bottom:12px;">
+    <div class="d-avatar av-jake">🤖</div>
+    <div class="d-bubble">
+      <div class="d-name" style="color:var(--mint);">AI (CHATGPT)</div>
+      I'm not able to predict stock prices or guarantee returns. No one can — and anyone who claims they can is likely a scammer. I'd love to help you understand safe, time-tested investing principles for people on fixed incomes. Want to start there?
+    </div>
+  </div>
+  <div class="d-row" style="margin-bottom:12px;">
+    <div class="d-avatar av-bob">👴</div>
+    <div class="d-bubble">
+      <div class="d-name d-bob-name">GRANDPA BOB</div>
+      Fine. What about crypto? My neighbor made $50,000!
+    </div>
+  </div>
+  <div class="d-row" style="margin-bottom:12px;">
+    <div class="d-avatar av-jake">🤖</div>
+    <div class="d-bubble">
+      <div class="d-name" style="color:var(--mint);">AI (CHATGPT)</div>
+      Cryptocurrency is extremely volatile — it can drop 60–80% in value quickly. Your neighbor may have gotten lucky, or may be exaggerating. For someone on a fixed income, risking money you can't afford to lose in crypto is generally not advised by financial professionals.
+    </div>
+  </div>
+  <div class="d-row" style="margin-bottom:0;">
+    <div class="d-avatar av-bob">👴</div>
+    <div class="d-bubble">
+      <div class="d-name d-bob-name">GRANDPA BOB</div>
+      You know what? You're the most honest financial advisor I've ever talked to. And the cheapest — you're free!
+    </div>
+  </div>
+  <div class="humor-punchline">
+    😂 AI never picks stocks — that's EXACTLY why you can trust it for education. The most honest "advisor" in America costs $0/month. 📊 Grandpa Bob: "I came for get-rich-quick tips. I left with actual wisdom. Not what I planned, but honestly better."
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑧ TRIVIA CHALLENGE ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-mint">🧠</div>
+  <div>
+    <div class="section-meta-label">⑧ AI Trivia Challenge</div>
+    <div class="section-meta-title">Test Your New Knowledge!</div>
+    <div class="section-meta-sub">Answers hidden below — hover or tap to reveal</div>
+  </div>
+</div>
+
+<div class="quiz-card" contenteditable="true">
+  <div class="quiz-eyebrow">EPISODE 47 — TRIVIA TIME</div>
+  <div class="quiz-headline">🏆 Can You Answer These 3 Questions?</div>
+  <div class="quiz-q">
+    <div class="quiz-q-num">QUESTION 1 OF 3</div>
+    <div class="quiz-q-text">The FDIC insures bank deposits up to how much per depositor, per insured bank?<br>A) $50,000 &nbsp; B) $100,000 &nbsp; C) $250,000</div>
+    <div class="quiz-hint">💡 Hint: This federal insurance protects your savings if a bank fails. It's a specific dollar amount set by law.</div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-num">QUESTION 2 OF 3</div>
+    <div class="quiz-q-text">When using AI for financial questions, which of these should you NEVER type in?<br>A) Your monthly income &nbsp; B) Your Social Security Number &nbsp; C) Your monthly expenses</div>
+    <div class="quiz-hint">💡 Hint: Think about what someone could use to steal your identity or access your accounts.</div>
+  </div>
+  <div class="quiz-q">
+    <div class="quiz-q-num">QUESTION 3 OF 3</div>
+    <div class="quiz-q-text">Today's American saying is: "Don't wait until you're thirsty to dig the well." What does it mean in today's context?<br>A) Only prepare for problems after they happen &nbsp; B) Prepare while you're comfortable, not in a crisis &nbsp; C) Water is expensive</div>
+    <div class="quiz-hint">💡 Hint: Think about when the BEST time to plan for retirement is. Before or after you need the money?</div>
+  </div>
+</div>
+
+<div class="answer-reveal-hint"
+  onclick="this.classList.toggle('revealed');document.getElementById('answer-reveal').classList.toggle('revealed')">
+  👆 Tap here to reveal the answers
+</div>
+<div class="answer-box" id="answer-reveal"
+  onclick="this.classList.toggle('revealed');document.querySelector('.answer-reveal-hint').classList.toggle('revealed')"
+  contenteditable="true">
+  <div class="answer-title">✅ ANSWERS</div>
+  <div class="answer-item"><b>A1: C) $250,000</b> — The FDIC insures up to $250,000 per depositor, per insured bank. One of the most important numbers for American savers to know!</div>
+  <div class="answer-item"><b>A2: B) Your Social Security Number</b> — Never enter your SSN, account numbers, or passwords into any AI tool. Monthly income and expenses are safe general numbers to share.</div>
+  <div class="answer-item"><b>A3: B) Prepare while you're comfortable, not in a crisis</b> — Review your retirement finances NOW, while you have time to adjust. That's the whole point of using AI today!</div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑨ SAYING DEEP DIVE ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-gold">📖</div>
+  <div>
+    <div class="section-meta-label">⑨ Saying Deep Dive</div>
+    <div class="section-meta-title">Understand Every Word — Connect It to AI!</div>
+    <div class="section-meta-sub">Today's saying: "Don't wait until you're thirsty to dig the well."</div>
+  </div>
+</div>
+
+<div class="saying-deep" contenteditable="true">
+  <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--coral);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;">🔍 BREAKING DOWN TODAY'S SAYING</div>
+  <div class="saying-deep-full">"Don't wait until you're thirsty to dig the well."</div>
+
+  <div class="word-grid">
+    <div class="word-card">
+      <span class="wc-word">WAIT</span>
+      <span class="wc-type">verb</span>
+      <span class="wc-def">To delay or hold off on taking action</span>
+    </div>
+    <div class="word-card">
+      <span class="wc-word">THIRSTY</span>
+      <span class="wc-type">adjective</span>
+      <span class="wc-def">Needing water desperately; here: in urgent need</span>
+    </div>
+    <div class="word-card">
+      <span class="wc-word">DIG</span>
+      <span class="wc-type">verb</span>
+      <span class="wc-def">To prepare, create, or build something with effort</span>
+    </div>
+    <div class="word-card">
+      <span class="wc-word">WELL</span>
+      <span class="wc-type">noun</span>
+      <span class="wc-def">A water source; here: your safety net or financial backup</span>
+    </div>
+  </div>
+
+  <div class="story-block">
+    <div class="sb-label">📌 WORD-FOR-WORD MEANING</div>
+    <p>Literally: Don't wait until you desperately need water before you start building the place to get water. By then, it's too late — you'll suffer while you dig.</p>
+  </div>
+  <div class="story-block sb-coral">
+    <div class="sb-label">📌 IN PLAIN AMERICAN ENGLISH</div>
+    <p>Don't wait for a financial crisis to start planning. Don't wait until you're sick to learn about Medicare. Don't wait until retirement to check your 401(k). <b>Act early. Prepare now. Future-you will thank present-you.</b></p>
+  </div>
+  <div class="story-block sb-gold">
+    <div class="sb-label">📌 REAL-LIFE ANALOGY</div>
+    <p>Imagine a farmer who only thinks about water when his crops are dying in a drought. By then it's too late — the crops are gone. A smart farmer digs the well in spring, when there's time and energy to do it right. <b>In retirement: spring is NOW, while you're healthy and stable. The drought is a financial emergency you can't afford.</b></p>
+  </div>
+
+  <div class="ai-connect-box">
+    <div class="acb-label">🤖 CONNECT IT TO AI!</div>
+    <p>Using AI tools like ChatGPT to review your retirement picture TODAY — while you're comfortable — is the digital version of "digging the well." <b>AI is available 24/7, free, and patient.</b> Use it to learn, prepare your questions, and understand your options before any crisis hits. <br><br><b style="color:var(--coral);">"Don't wait until you're thirsty to dig the well"</b> — this saying was practically written about AI-powered retirement planning. 🌟</p>
+  </div>
+
+  <div class="memory-tip">
+    🧠 <b>Memory Tip!</b> Picture an old Western movie cowboy dying of thirst in the desert — because he waited too long to plan. That's NOT you! You're watching this episode, using AI, asking questions early. <b>You're already digging your well. Great job.</b> &nbsp; Example sentence: <em>"Following this saying, I used ChatGPT to review my Social Security benefits before my 70th birthday — while I still had time to adjust."</em>
+  </div>
+</div>
+
+<!-- ★ Image 3 -->
+<div class="img-area" id="area-3"
+  onclick="if(!event.target.closest('.media-overlay')){document.getElementById('upload-3').click()}"
+  style="cursor:pointer;">
+  <div class="img-upload-lbl" id="img-display-3">
+    <span class="img-upload-icon">🖼️</span>
+    <span>Click to Insert Image or Video</span>
+    <small>[Saying wrap-up / quiz closing image]</small>
+  </div>
+  <div class="media-overlay">
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('upload-3').click()">🔄 Replace</button>
+    <button class="media-btn" onclick="event.stopPropagation();document.getElementById('img-display-3').innerHTML='<span class=\'img-upload-icon\'>🖼️</span><span>Click to Insert Image or Video</span>';document.getElementById('area-3').style.minHeight=''">🗑️ Delete</button>
+  </div>
+  <input type="file" id="upload-3" accept="image/*,video/*" style="display:none"
+    onchange="(async function(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){const d=document.getElementById('img-display-3');if(f.type.startsWith('image/')){d.innerHTML='<img src=\''+ev.target.result+'\' style=\'width:100%;height:auto;border-radius:16px;display:block;\'>'}else{d.innerHTML='<video src=\''+ev.target.result+'\' controls style=\'width:100%;height:auto;border-radius:16px;display:block;\'></video>'};document.getElementById('area-3').style.minHeight='auto'};r.readAsDataURL(f)})(event)">
+</div>
+<div class="source-tag" contenteditable="true"><em>Source: ssa.gov / usa.gov — retirement planning reference image</em></div>
+
+<div class="dialog-card" style="margin-top:16px;" contenteditable="true">
+  <div class="d-row" style="margin-bottom:12px;">
+    <div class="d-avatar av-jake">👦</div>
+    <div class="d-bubble">
+      <div class="d-name d-jake-name">JAKE</div>
+      Grandpa, you came into this episode not knowing if your retirement was enough. You leave knowing how to ask AI the right questions, where to get free expert help, and which scams to watch out for. <b>That's not small. That's huge.</b>
+    </div>
+  </div>
+  <div class="d-row" style="margin-bottom:0;">
+    <div class="d-avatar av-bob">👴</div>
+    <div class="d-bubble">
+      <div class="d-name d-bob-name">GRANDPA BOB</div>
+      You know what? I dug my well today. I'm calling my financial advisor tomorrow with a whole list of smart questions — and it only took me 30 minutes with AI. I should've done this years ago.
+    </div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ★ Visual Story Panel 3 -->
+<div class="panel-wrap">
+  <div class="panel-header">
+    <span class="ph-dot ph-red"></span>
+    <span class="ph-dot ph-yel"></span>
+    <span class="ph-dot ph-grn"></span>
+    &nbsp;🎬 SCENE 3 — "I DUG MY WELL TODAY" — GRANDPA BOB'S HAPPY ENDING
+  </div>
+  <div class="panel-body" id="panel-comic-3"
+       onclick="if(!event.target.closest('.panel-overlay'))document.getElementById('up-comic-3').click()">
+    <div id="pd-comic-3" class="panel-placeholder">
+      <div style="font-size:50px;">🎬</div>
+      <div class="panel-placeholder-title">"I Dug My Well Today" — Grandpa Bob's Happy Ending</div>
+      <div class="panel-placeholder-sub">Happy Grandpa Bob on phone with financial advisor, notes from AI session in hand, family around him</div>
+      <button class="panel-upload-btn">📁 Click to Upload</button>
+    </div>
+    <div class="panel-overlay">
+      <span style="color:var(--gold);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;">CLICK TO REPLACE</span>
+      <div style="display:flex;gap:10px;">
+        <button class="panel-overlay-btn" onclick="event.stopPropagation();document.getElementById('up-comic-3').click()">🔄 Replace</button>
+        <button class="panel-overlay-btn" onclick="event.stopPropagation();comicDelete('pd-comic-3','comic-3')">🗑️ Delete</button>
+      </div>
+    </div>
+    <input type="file" id="up-comic-3" accept="image/*,video/*" style="display:none"
+           onchange="comicUpload('up-comic-3','pd-comic-3','comic-3')">
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑩ SEARCH KEYWORDS ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-blue">🔍</div>
+  <div>
+    <div class="section-meta-label">⑩ Trending AI Search Keywords</div>
+    <div class="section-meta-title">Hot Terms Americans Are Googling Right Now</div>
+    <div class="section-meta-sub">Click any keyword to search instantly!</div>
+  </div>
+</div>
+<p style="font-size:13px;color:#aaa;margin-bottom:12px;font-family:'Space Mono',monospace;">Click any pill → instant Google search opens in a new tab</p>
+<div class="kw-grid">
+  <a href="https://www.google.com/search?q=ChatGPT+retirement+planning" target="_blank" class="kw-pill">ChatGPT retirement planning</a>
+  <a href="https://www.google.com/search?q=AI+Social+Security+help" target="_blank" class="kw-pill">AI Social Security help</a>
+  <a href="https://www.google.com/search?q=best+AI+tools+for+seniors+2025" target="_blank" class="kw-pill">best AI tools for seniors 2025</a>
+  <a href="https://www.google.com/search?q=ChatGPT+financial+advice" target="_blank" class="kw-pill">ChatGPT financial advice</a>
+  <a href="https://www.google.com/search?q=AI+Medicare+explained" target="_blank" class="kw-pill">AI Medicare explained</a>
+  <a href="https://www.google.com/search?q=Google+Gemini+for+seniors" target="_blank" class="kw-pill">Google Gemini for seniors</a>
+  <a href="https://www.google.com/search?q=401k+ChatGPT+help" target="_blank" class="kw-pill">401(k) ChatGPT help</a>
+  <a href="https://www.google.com/search?q=AI+scam+detection+seniors" target="_blank" class="kw-pill">AI scam detection seniors</a>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑪ WORD POWER ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-coral">📝</div>
+  <div>
+    <div class="section-meta-label">⑪ American English Word Power</div>
+    <div class="section-meta-title">3 Essential AI + Finance Words This Episode</div>
+    <div class="section-meta-sub">Know these — they'll come up everywhere</div>
+  </div>
+</div>
+
+<div class="wordpower-card" contenteditable="true">
+  <div class="wp-eyebrow">🇺🇸 AI VOCABULARY — TOP 3 THIS EPISODE</div>
+  <div class="wp-item">
+    <span class="wp-word">PROMPT</span>
+    <div class="wp-def">
+      <b>What it is:</b> The question or instruction you type into an AI tool. A <b>good prompt</b> gives AI context and specifics. Example: instead of "help with money," say "I'm 71, receive $1,400/month Social Security, and spend about $1,900/month. What should I worry about?" That's a powerful prompt.
+    </div>
+  </div>
+  <div class="wp-item">
+    <span class="wp-word">FDIC</span>
+    <div class="wp-def">
+      <b>What it is:</b> Federal Deposit Insurance Corporation — the U.S. government agency that protects your bank deposits up to <b>$250,000 per person, per bank</b> if the bank fails. Before you put savings anywhere, check: Is it FDIC-insured?
+    </div>
+  </div>
+  <div class="wp-item">
+    <span class="wp-word">RMD</span>
+    <div class="wp-def">
+      <b>What it is:</b> Required Minimum Distribution — the IRS requires you to withdraw a certain amount from your 401(k) or IRA each year after age 73. Miss it and you face a <b>25% tax penalty</b>. Ask ChatGPT: "Explain RMDs in plain English for a 72-year-old."
+    </div>
+  </div>
+</div>
+
+<!-- Merriam-Webster link -->
+<div class="dict-box" contenteditable="true">
+  <div class="dict-name">📚 Merriam-Webster Online Dictionary</div>
+  <p style="font-size:14px;color:#666;margin-bottom:8px;">America's most trusted dictionary — always free, always up to date.</p>
+  👉 <a href="https://www.merriam-webster.com/" target="_blank">https://www.merriam-webster.com/</a>
+  <div class="dict-sub">Look up any word you don't know — especially financial and AI terms!</div>
+</div>
+<div class="gap"></div>
+
+<!-- Grandpa's Corner -->
+<div class="grandpa-card" contenteditable="true">
+  <div class="grandpa-avatar">👴</div>
+  <div>
+    <div class="grandpa-label">👴 Grandpa Bob's Corner — Personal Reflection</div>
+    <div class="grandpa-text">"I spent 40 years working hard, and I never really looked at where all that money ended up until today. I'm not ashamed anymore — I just didn't have a tool this easy. AI didn't judge me. It didn't rush me. It just explained things until I understood. That's what good teaching looks like. I'm calling my advisor tomorrow. Watch me."</div>
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- ════════════════ ⑭ TODAY'S RECAP ════════════════ -->
+<div class="section-head">
+  <div class="section-icon icon-coral">📚</div>
+  <div>
+    <div class="section-meta-label">⑭ Today's Recap</div>
+    <div class="section-meta-title">What You Learned in Episode 47</div>
+    <div class="section-meta-sub">Review and share with someone who needs this!</div>
+  </div>
+</div>
+
+<div class="recap-card" contenteditable="true">
+  <div class="recap-headline">📚 LET'S REVIEW!</div>
+
+  <div class="recap-item">
+    <div class="recap-item-title">① The 3-Step AI Retirement Method</div>
+    <div class="recap-item-body">
+      <b>Step 1:</b> Tell AI your income/expenses → get a plain-English analysis.<br>
+      <b>Step 2:</b> Ask AI to decode financial jargon you don't understand.<br>
+      <b>Step 3:</b> Use AI to build a "smart questions" list before meeting your real advisor. AI is your prep coach — not your final answer.
+    </div>
+  </div>
+
+  <div class="recap-item">
+    <div class="recap-item-title">② 4 Financial Questions AI Can Answer Today</div>
+    <div class="recap-item-body">
+      Retirement income check · Safe CD/savings comparison · Investing basics (ETFs, dividends) · Scam identification. <b>Never enter your SSN, account numbers, or passwords</b> into any AI tool.
+    </div>
+  </div>
+
+  <div class="recap-item">
+    <div class="recap-item-title">③ The #1 Golden Rule</div>
+    <div class="recap-item-body">
+      AI is a powerful <b>educational tool</b>, not a licensed financial advisor. For major money decisions — always confirm with a <b>Certified Financial Planner (CFP)</b>, your bank's advisor, or the SSA directly. AI makes you smarter going in. 🏆
+    </div>
+  </div>
+
+  <div class="recap-item">
+    <div class="recap-item-title">④ Today's American Saying</div>
+    <div class="recap-item-body">
+      <b>"Don't wait until you're thirsty to dig the well."</b> — Prepare for your financial future TODAY, while you're comfortable and have time. Using AI to review your retirement picture now IS digging your well. You just did it. 🌟
+    </div>
+  </div>
+
+  <div class="recap-finale">🎉 GREAT JOB TODAY! SEE YOU NEXT EPISODE! 🤖✨</div>
+</div>
+<div class="gap"></div>
+
+<!-- Closing message -->
+<p style="text-align:center;font-size:14px;color:#888;line-height:1.8;" contenteditable="true">
+  📝 This post is made especially for American seniors exploring AI for the very first time.<br>
+  Got questions? Drop a comment below — Jake reads every single one! 💬
+</p>
+<div class="gap-sm"></div>
+
+<!-- Subscribe CTA -->
+<div class="cta-box" contenteditable="true">
+  <div class="cta-headline">🔔 NEVER MISS AN EPISODE!</div>
+  <div class="cta-body">
+    Subscribe · Bookmark · Share with a friend who deserves to learn AI!<br>
+    <b>New episode every week — always free, always simple, always for YOU.</b>
+  </div>
+  <div class="cta-tags">
+    #AIDecodedForSeniors &nbsp;|&nbsp; #ChatGPT &nbsp;|&nbsp; #AIForSeniors &nbsp;|&nbsp; #RetirementPlanning &nbsp;|&nbsp; #LearnAI &nbsp;|&nbsp; #ArtificialIntelligence &nbsp;|&nbsp; #SocialSecurity &nbsp;|&nbsp; #Medicare
+  </div>
+</div>
+<div class="gap"></div>
+
+<!-- Footer -->
+<div class="site-footer" contenteditable="true">
+  <p>This post is part of <b>AI Decoded for Seniors</b> — an educational series designed to make Artificial Intelligence accessible to every American senior.</p>
+  <p style="margin-top:8px;">© 2026 AI Decoded for Seniors | All rights reserved</p>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- ════════════ JS — IndexedDB + Panel upload/delete ════════════ -->
+<script>
+var SADB_NAME='ai-decoded-ep47-media', SADB_VER=1, SADB_STORE='media';
+function sadbOpen(cb){
+  var req=indexedDB.open(SADB_NAME,SADB_VER);
+  req.onupgradeneeded=function(e){e.target.result.createObjectStore(SADB_STORE)};
+  req.onsuccess=function(e){cb(e.target.result)};
+  req.onerror=function(){cb(null)};
+}
+function sadbSave(key,data){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).put(data,key);})}
+function sadbLoad(key,cb){sadbOpen(function(db){if(!db){cb(null);return}var req=db.transaction(SADB_STORE,'readonly').objectStore(SADB_STORE).get(key);req.onsuccess=function(e){cb(e.target.result||null)};req.onerror=function(){cb(null)};})}
+function sadbDelete(key){sadbOpen(function(db){if(!db)return;db.transaction(SADB_STORE,'readwrite').objectStore(SADB_STORE).delete(key);})}
+
+window.addEventListener('DOMContentLoaded',function(){
+  ['comic-1','comic-2','comic-3'].forEach(function(id){
+    sadbLoad(id,function(data){
+      if(!data)return;
+      var el=document.getElementById('pd-'+id);
+      if(!el)return;
+      el.innerHTML=data.startsWith('data:video')
+        ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;border-radius:0;"></video>'
+        :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    });
+  });
+});
+
+function comicUpload(inputId,panelId,dbKey){
+  var inp=document.getElementById(inputId);
+  if(!inp)return;
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    var data=ev.target.result;
+    var el=document.getElementById(panelId);
+    if(!el)return;
+    el.innerHTML=f.type.startsWith('video/')
+      ?'<video src="'+data+'" controls style="width:100%;height:100%;object-fit:cover;"></video>'
+      :'<img src="'+data+'" style="width:100%;height:100%;object-fit:cover;">';
+    sadbSave(dbKey,data);
+  };
+  r.readAsDataURL(f);
+}
+
+function comicDelete(panelId,dbKey){
+  var el=document.getElementById(panelId);
+  if(!el)return;
+  el.innerHTML='<div class="panel-placeholder">'
+    +'<div style="font-size:50px">&#127916;</div>'
+    +'<div class="panel-placeholder-title">Click to Upload Image or Video</div>'
+    +'</div>';
+  sadbDelete(dbKey);
+}
+</script>
+
+<!-- ════════════ SAVE BUTTON BAR ════════════ -->
+<div class="save-bar">
+  <button onclick="(function(){
+    var clone=document.body.cloneNode(true);
+    var sb=clone.querySelector('.save-bar');if(sb)sb.parentNode.removeChild(sb);
+    clone.querySelectorAll('input[type=file]').forEach(function(i){i.value='';});
+    clone.querySelectorAll('script').forEach(function(s){s.parentNode.removeChild(s);});
+    var html='<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n'
+      +'<meta charset=\'UTF-8\'>\n'
+      +'<meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0\'>\n'
+      +'<link rel=\'preconnect\' href=\'https://fonts.googleapis.com\'>\n'
+      +'<link rel=\'preconnect\' href=\'https://fonts.gstatic.com\' crossorigin>\n'
+      +'<link href=\'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap\' rel=\'stylesheet\'>\n'
+      +document.querySelector('style').outerHTML+'\n'
+      +'</head>\n<body>\n'
+      +clone.innerHTML
+      +'\n</body>\n</html>';
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='ai_decoded_ep47_eng.html';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){alert('✅ EP.47 saved!\n\nPaste the saved content into your blog\'s HTML tab.\n(Scripts removed — no code leaks in preview mode)');},300);
+  })()">💾 Save HTML (Images Included)</button>
+</div>
+
+</body>
+</html>

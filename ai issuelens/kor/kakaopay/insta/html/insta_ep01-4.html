@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IssueLens INSTA EP.01-4</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#111;font-family:'Noto Sans KR',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:24px;
+}
+.card{
+  position:relative;width:390px;height:390px;
+  overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.95);
+}
+
+.bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 62% 52% at 78% 55%, rgba(160,100,0,.55) 0%, transparent 65%),
+    radial-gradient(ellipse 58% 48% at 22% 32%, rgba(10,50,130,.65) 0%, transparent 68%),
+    #07080e;
+}
+
+.corner-tl{
+  position:absolute;top:0;left:0;width:0;height:0;
+  border-style:solid;border-width:100px 100px 0 0;
+  border-color:#CC0000 transparent transparent transparent;z-index:2;
+}
+.corner-br{
+  position:absolute;bottom:0;right:0;width:0;height:0;
+  border-style:solid;border-width:0 0 80px 80px;
+  border-color:transparent transparent #CC0000 transparent;z-index:2;
+}
+
+.ep-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:10px;font-weight:900;color:rgba(255,255,255,.9);
+  letter-spacing:.14em;z-index:10;text-shadow:1px 1px 0 rgba(0,0,0,.6);
+}
+.handle{
+  position:absolute;bottom:8px;right:12px;
+  font-size:10px;font-weight:700;color:rgba(255,255,255,.7);
+  letter-spacing:.06em;z-index:10;
+}
+
+/* 저울 */
+.scale-wrap{
+  position:absolute;left:12px;top:50%;
+  transform:translateY(-52%);
+  width:140px;height:150px;
+  z-index:3;
+  display:flex;flex-direction:column;align-items:center;
+}
+.scale-pole{width:3px;height:40px;background:#777;margin:0 auto}
+.scale-beam{
+  width:128px;height:3px;background:#888;border-radius:2px;
+  position:relative;transform:rotate(-14deg);transform-origin:center;
+}
+.scale-chain{position:absolute;bottom:0;width:2px;height:48px;background:#666;}
+.scale-chain.l{left:2px;transform:translateY(100%)}
+.scale-chain.r{right:2px;transform:translateY(60%)}
+.scale-pan{position:absolute;width:48px;height:6px;background:#555;border-radius:4px;}
+.scale-pan.l{bottom:-53px;left:-22px}
+.scale-pan.r{bottom:-34px;right:-22px}
+
+/* 차단 배지 */
+.block-badges{
+  position:absolute;left:12px;top:12px;
+  display:flex;flex-direction:column;gap:5px;z-index:4;
+  margin-top:56px;
+}
+.block-item{
+  display:flex;align-items:center;gap:4px;
+  background:rgba(0,0,0,.7);border:1px solid rgba(255,50,50,.35);
+  border-radius:5px;padding:3px 8px;
+  font-size:9px;font-weight:900;color:rgba(255,120,120,.9);
+}
+.block-x{color:#ff4444;font-size:10px}
+
+.main{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  width:198px;text-align:center;z-index:10;
+}
+.label{
+  display:inline-block;background:#CC0000;
+  font-size:10px;font-weight:900;color:#fff;
+  letter-spacing:.1em;padding:3px 10px;border-radius:3px;margin-bottom:8px;
+}
+.m-line{
+  font-weight:900;letter-spacing:-.02em;line-height:1.1;
+  word-break:keep-all;
+  text-shadow:2px 2px 0 rgba(0,0,0,.9),-1px -1px 0 rgba(0,0,0,.5);
+}
+.m-gold{color:#ffcc66;font-size:24px}
+.m-red{color:#FF5555;font-size:30px}
+.m-sm{color:#fff;font-size:20px;margin-top:6px}
+.m-yellow{color:#FFD700;font-size:38px}
+
+.strip{
+  position:absolute;bottom:0;left:0;right:0;height:48px;
+  background:#CC0000;
+  display:flex;align-items:center;justify-content:center;z-index:5;
+}
+.strip-text{font-size:14px;font-weight:900;color:#fff;letter-spacing:-.02em;text-shadow:1px 1px 0 rgba(0,0,0,.4);text-align:center;padding:0 12px;}
+.strip-text .acc{color:#FFD700}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="bg"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+  <div class="ep-badge">EP.01 · #4</div>
+  <div class="handle">@issuelens</div>
+  <div class="scale-wrap">
+    <div class="scale-pole"></div>
+    <div class="scale-beam">
+      <div class="scale-chain l"></div>
+      <div class="scale-chain r"></div>
+      <div class="scale-pan l"></div>
+      <div class="scale-pan r"></div>
+    </div>
+  </div>
+  <div class="block-badges">
+    <div class="block-item"><span class="block-x">✕</span> YouTube</div>
+    <div class="block-item"><span class="block-x">✕</span> Google</div>
+    <div class="block-item"><span class="block-x">✕</span> Kakao</div>
+  </div>
+  <div class="main">
+    <div class="label">이게 공정한 거래입니까?</div>
+    <div class="m-line m-gold">그 나라는</div>
+    <div class="m-line m-red">유튜브 차단</div>
+    <div class="m-line m-sm">우리 데이터는</div>
+    <div class="m-line m-yellow">공짜 반출</div>
+  </div>
+  <div class="strip">
+    <div class="strip-text">내 소비 선택이 <span class="acc">데이터 주권</span>의 투표</div>
+  </div>
+</div>
+</body>
+</html>

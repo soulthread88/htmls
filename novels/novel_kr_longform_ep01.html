@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장대한 분노 - 호르무즈의 밤 — 16:9 한국어 템플릿</title>
+<!-- 소설 본문용 웹폰트: Pretendard(글리프 결손 없이 전체 한글 완성형을 지원하는 가변 폰트) -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --navy:#06152d; --gold:#f4bd3f; --white:#f7f8fa;
+  --cyan:#19d5df; --red:#d92d3a; --green:#38c65a;
+  --ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;
+  --tts:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;
+  /* 소설 본문 전용 서체: Pretendard(글자 깨짐/글리프 결손 없음) */
+  --serif:"Noto Serif KR","Nanum Myeongjo","Batang",serif;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:#020914;color:var(--white);font-family:var(--ui)}
+/* 여러 개의 16:9 화면(문맥/장면별 페이지)을 세로로 쌓아 스크롤하는 구조 */
+body{display:flex;flex-direction:column;align-items:center;gap:28px;padding:28px 0;overflow-x:hidden}
+.stage{position:relative;width:100%;max-width:1600px;margin:0 auto;aspect-ratio:16/9;overflow:hidden;background:var(--navy);border-radius:4px}
+
+/* ---- 헤더: 좌(전쟁 소설) / 중앙(로고 2줄) / 우(날짜 · N/전체) ----
+   세 칼럼 모두 텍스트 하단이 헤더 하단의 금색 가로선에서 2mm 위에 오도록
+   grid의 align-items:end + header padding-bottom:2mm 로 정렬한다(윗줄인
+   '장대한 분노'도 같은 블록 안에서 함께 올라간다). 모든 페이지
+   (뉴스 속보형 1~5페이지, 소설 본문형 6페이지 이후) 공통으로 사용한다. */
+.header{height:14%;display:grid;grid-template-columns:32% 36% 32%;grid-template-areas:"bl logo dt";align-items:end;padding:0 2.2% 1.5mm;margin-top:2mm;background:linear-gradient(180deg,#06152d,#07182f);border-bottom:1px solid var(--gold);position:relative;z-index:20;overflow:hidden}
+.brand-left{grid-area:bl;text-align:left;font-size:clamp(13px,1.1vw,22px);line-height:1.2;font-weight:800;color:var(--gold);letter-spacing:.02em}
+.logo{grid-area:logo;display:flex;flex-direction:column;align-items:center}
+.logo .l1{text-align:center;font-weight:800;font-size:clamp(18px,1.9vw,30px);margin:0;text-shadow:2px 2px 4px #000}
+.logo .l2{text-align:center;font-weight:700;font-size:clamp(10px,2vw,20px);color:var(--gold);margin:0;margin-top:1mm}
+.datetime{grid-area:dt;display:flex;align-items:baseline;justify-content:flex-end;gap:18px;text-align:right;line-height:1}
+.datetime .date{font-size:clamp(12px,1vw,20px);font-weight:700;color:var(--gold)}
+.datetime .part{font-size:clamp(11px,.85vw,16px);font-weight:600;color:#fff;opacity:.85}
+
+/* ── 6페이지 이후 소설 읽기 모드: 헤더는 1~5페이지와 완전히 동일한
+   구도·글자 크기를 유지하고, 오직 날짜(datetime .date)만 숨긴다. ── */
+.header--slim .datetime .date{display:none}
+
+/* ---- 1~5페이지: 전쟁 상황 속보(뉴스 방송) 레이아웃 ---- */
+.headline{height:9%;display:flex;align-items:flex-end;justify-content:center;gap:1.6%;padding:0 2.2% 1.5mm;margin-top:1.5mm;background:#071a34;border-bottom:1px solid var(--gold);overflow:hidden}
+.section{flex:0 0 auto;border:2px solid var(--gold);color:var(--gold);padding:.35% 1.1%;font-size:clamp(11px,.9vw,17px);font-weight:800;white-space:nowrap}
+.headline h1{margin:0;flex:1 1 auto;min-width:0;font-size:clamp(18px,1.9vw,30px);font-weight:500;line-height:1.18;padding-bottom:.12em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px 5px #000}
+.video{position:absolute;left:0;right:0;top:calc(23% + 2mm);bottom:16.2%;overflow:hidden;background:transparent}
+/* 동영상 섹션 위에 얹는 위치 태그 — 문구 길이만큼만 박스가 생기도록 폭을
+   고정하지 않고 콘텐츠에 맞춰 자동으로 줄어들게(inline-block/fit-content) 한다. */
+.video-tag{position:absolute;left:3.1%;top:4%;z-index:6;display:inline-block;width:fit-content;border:2px solid var(--gold);color:var(--gold);background:rgba(6,21,45,.6);padding:.3em 1em;font-size:clamp(14px,1.1vw,22px);font-weight:800;letter-spacing:.03em;white-space:nowrap}
+.video img,.video video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.98) contrast(1.08);image-rendering:auto}
+.video:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.12) 62%,rgba(0,0,0,.64) 100%);pointer-events:none}
+.chyron{position:absolute;left:3.1%;top:53.4%;transform:translateY(-50%);width:80%;z-index:5;padding:0}
+.meta{margin-bottom:1%;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.meta-tag{display:inline-block;border:2px solid var(--gold);color:var(--gold);background:rgba(6,21,45,.55);font-weight:800;letter-spacing:.04em;padding:.25em .8em;font-size:clamp(12px,.95vw,19px);white-space:nowrap}
+.meta-loc{color:var(--gold);font-size:clamp(11px,.82vw,17px);font-weight:600;letter-spacing:.035em;text-shadow:2px 2px 3px #000}
+.caption{font-family:var(--tts);font-size:clamp(19px,2.15vw,34px);font-weight:400;line-height:1.28;letter-spacing:-.008em;max-width:100%;color:#fff;text-shadow:2px 3px 4px #000;text-align:justify;text-justify:inter-character;word-break:normal;overflow-wrap:break-word}
+.source{margin-top:1.05%;color:#fff;font-size:clamp(10px,.75vw,15px);font-weight:400;letter-spacing:.01em;text-shadow:2px 2px 3px #000}
+/* 티커가 하단 경계선에서 3mm 띄워 앉고, 속보 바는 그 티커 박스 바로 위에
+   자동으로 붙도록 bottom 값을 "3mm + 티커 높이"로 계산한다. 티커 높이가
+   바뀌면 속보 바도 함께 아래/위로 따라 움직인다. 속보 박스는 고정 높이 대신
+   위아래 2mm 패딩만 갖도록 하여 내용 높이에 맞춰 얇아지고, 그만큼 아래(티커
+   쪽)로 내려앉는다. */
+.breaking{position:absolute;left:0;right:0;bottom:calc(3mm + 5%);display:flex;align-items:center;gap:16px;padding:1mm 2.2%;background:var(--red);z-index:10;white-space:nowrap;overflow:hidden}
+.breaking .tag{flex:0 0 auto;background:#fff;color:var(--red);font-weight:700;letter-spacing:.05em;padding:.22em .9em;border-radius:4px;font-size:clamp(16px,1.05vw,24px)}
+.breaking .items{color:#fff;font-weight:600;font-size:clamp(17px,1.15vw,26px);overflow:hidden;text-overflow:ellipsis;text-shadow:1px 1px 2px rgba(0,0,0,.4)}
+.breaking .dot{margin:0 .8em;color:#fff;opacity:.85}
+.ticker{position:absolute;left:0;right:0;bottom:3mm;height:5%;display:flex;align-items:center;padding:0 7mm 0 2.2%;background:#06152d;border-top:1px solid var(--gold);z-index:11;overflow:hidden;font-size:clamp(13px,1.08vw,19px)}
+/* '주요 사건 타임라인'은 고정 박스로 두고, 그 오른쪽 영역(.ticker-window)만
+   overflow:hidden 창으로 만들어 내용이 오른쪽에서 왼쪽으로 천천히 흘러가다가
+   이 박스의 오른쪽 경계에서 사라지도록 한다. 둘 다 세로 중앙 정렬한다. */
+.ticker .title{flex:0 0 auto;display:flex;align-items:center;height:auto;line-height:1;color:var(--gold);font-weight:800;letter-spacing:.02em;border:1px solid var(--gold);border-radius:2px;background:rgba(244,189,63,.08);padding:.5mm .9em;margin-right:1.1%;white-space:nowrap}
+.ticker-window{flex:1 1 auto;position:relative;height:100%;overflow:hidden}
+.ticker-window .items{position:absolute;top:50%;left:0;white-space:nowrap;display:inline-flex;align-items:center;line-height:1;transform:translateY(calc(-50% + 1px)) translateX(0);animation:ticker-scroll 64s linear infinite}
+.ticker .dot{color:#fff;margin:0 .7%}
+@keyframes ticker-scroll{to{transform:translateY(calc(-50% + 1px)) translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ticker-window .items{animation:none;transform:translateY(calc(-50% + 1px)) translateX(0)}}
+
+/* ---- 6페이지 이후: 소설 본문(내러티브) 레이아웃 ----
+   뉴스 속보 프레임(헤드라인/속보바/티커)을 걷어내고, 삽화 위에 큰 본문
+   텍스트를 얹어 실제로 "읽는" 화면으로 전환한다. */
+.novel-media{position:absolute;left:0;right:0;top:calc(14% + 2mm);bottom:0;overflow:hidden;background:#111}
+.novel-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,9,18,.28) 0%,rgba(4,9,18,.60) 55%,rgba(4,9,18,.82) 100%);pointer-events:none}
+.novel-media img,.novel-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.05) brightness(.88)}
+.novel-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,9,20,0) 24%,rgba(2,9,20,.5) 62%,rgba(2,9,20,.94) 100%);pointer-events:none}
+/* 6페이지부터: 얇은 헤더(.header--slim) 아래로 넓게 확보한 리딩 영역.
+   장면 정보는 굵은 배지 없이 한 줄짜리 작은 캡션으로 축소하고, 본문 글자는
+   크고 넓게 키워 몰입해서 읽을 수 있도록 한다. */
+/* 본문 블록(제목+텍스트) 전체가 novel-media(삽화) 세로폭의 정중앙에 오도록
+   novel-media와 완전히 동일한 top/bottom(6.5%~0)을 쓰고 justify-content:center로
+   세로 중앙 정렬한다. 오른쪽은 padding-right:20%로 고정해 어떤 화면 폭에서도
+   본문 오른쪽 끝이 항상 가로폭(스테이지 전체 너비)의 80% 지점에서 가지런히
+   맞춰지도록 한다(보통 책처럼 세로 일직선). */
+.novel-content{position:absolute;top:calc(14% + 2mm);bottom:0;left:0;right:0;z-index:4;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:0 16.9% 0 3.1%}
+.novel-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+.novel-heading .scene-tag{border:none;background:none;padding:0;color:var(--gold);font-weight:700;font-size:clamp(13px,1vw,16px);letter-spacing:.03em;text-shadow:1px 1px 3px #000}
+.novel-heading h2{margin:0;font-size:clamp(13px,1vw,16px);font-weight:500;font-style:italic;color:rgba(255,255,255,.78);text-shadow:1px 1px 3px #000}
+.novel-heading h2::before{content:'— '}
+.novel-text{width:100%;max-width:none;align-self:flex-start}
+/* 본문 서체: 명조체 계통(--serif). font-size는 vw 기반 clamp로 스테이지
+   폭에 비례해 유연하게 줄어들어, 문단 수가 많은 페이지(예: 13페이지)에서도
+   상단 헤더의 금색 가로선과 겹치지 않는다. text-justify:inter-character로
+   각 줄의 오른쪽 끝을(마지막 줄 제외) 글자 사이 간격을 조절해 정확히
+   맞추는 양쪽 정렬을 적용하고, keep-all을 해제해 필요하면 단어 중간에서도
+   줄바꿈되도록 하여 오른쪽 끝이 항상 세로로 일직선이 되게 한다. */
+.novel-text p{margin:0 0 14px;font-family:var(--serif);font-size:clamp(19px,2.15vw,34px);line-height:1.55;font-weight:400;color:#fff;text-shadow:1px 2px 6px rgba(0,0,0,.8);text-align:justify;text-justify:inter-character;word-break:normal;overflow-wrap:break-word}
+.novel-text p:last-child{margin-bottom:0}
+.novel-end{color:var(--gold)!important;font-weight:800!important;text-align:left!important}
+
+/* 900px 이하: 문단이 많은 페이지(예: 13페이지, 3문단)도 헤더의 금색 가로선과
+   겹치지 않도록 본문 글자 크기/줄간격/여백을 함께 좁혀 안전 여백을 확보한다. */
+@media(max-width:900px){.chyron{width:80%}.headline h1{font-size:clamp(15px,2vw,22px)}.logo .l1{font-size:clamp(15px,2vw,22px)}.section{font-size:clamp(9px,1.4vw,13px)}.caption{font-size:22px}.novel-content{padding:0 16.9% 0 3.1%;gap:14px}.novel-text p{font-size:22px;line-height:1.45;margin:0 0 12px}.ticker-window .items{animation-duration:48s}}
+@media(max-width:650px){.headline h1{font-size:clamp(13px,2.6vw,17px)}.logo .l1{font-size:clamp(13px,2.6vw,17px)}.section{font-size:clamp(8px,1.7vw,11px);padding:.3% 1%}.chyron{width:80%}.caption{font-size:18px}.novel-content{padding:0 16.9% 0 3.1%;gap:12px}.novel-text p{font-size:18px;line-height:1.45;margin:0 0 10px}.video-tag{font-size:clamp(11px,2vw,15px);padding:.25em .7em;top:3%}.breaking{gap:8px;padding:1.2mm 2.2%}.breaking .tag{font-size:clamp(11px,2.2vw,15px);padding:.25em .7em}.breaking .items{font-size:clamp(11px,2.1vw,15px)}.ticker{padding:0 5mm 0 2.2%;font-size:clamp(8px,2vw,12px)}.ticker .title{padding:0 .6em;margin-right:.8%}.ticker-window .items{animation-duration:40s}}
+/* 768px 이하(휴대폰·소형 태블릿 세로 화면): 16:9 프레임에 모든 것을 절대좌표로
+   욱여넣던 레이아웃 대신, 헤더 / 헤드라인 / (영상+캡션) / 속보 / 티커를
+   grid 행으로 하나씩 쌓는다. 영상과 캡션은 같은 grid 행을 공유하게 해
+   원래 디자인처럼 캡션이 영상 위에 겹쳐 보이도록 하되(세로 중앙, 왼쪽 정렬),
+   캡션이 영상보다 길어지면 그 grid 행 자체가 캡션 높이에 맞춰 커지므로
+   뒤따르는 속보/티커와 겹치는 일은 구조적으로 일어나지 않는다. */
+@media(max-width:768px){
+.stage{aspect-ratio:auto;height:auto;display:grid;grid-template-columns:1fr}
+.header{grid-row:1;height:auto}
+.header--slim{height:auto}
+.headline{grid-row:2;height:auto}
+.video{position:relative;top:auto;bottom:auto;left:auto;right:auto;grid-row:3;grid-column:1;align-self:start;width:100%;aspect-ratio:16/9}
+.chyron{position:static;grid-row:3;grid-column:1;align-self:center;justify-self:start;transform:none;margin-left:3.1%;padding:0}
+.breaking{position:static;grid-row:4}
+.ticker{position:static;grid-row:5;height:auto;padding:6px 4% 6px 2.2%}
+.ticker .title{height:auto}
+.ticker-window{height:1.4em}
+.novel-media{position:relative;top:auto;bottom:auto;grid-row:2;grid-column:1;align-self:start;width:100%;aspect-ratio:16/9;background:var(--navy)}
+.novel-content{position:static;grid-row:2;grid-column:1;align-self:center;padding:16px 16.9% 16px 3.1%;justify-content:flex-start}
+/* 카드가 세로로 길어질 수 있으므로, 재생 버튼은 프레임 우하단이 아니라
+   영상 바로 아래(우상단)에 고정해 마지막 문장과 겹치지 않도록 한다. */
+.narr-btn{bottom:auto;right:3%}
+main.stage:has(.headline) .narr-btn{top:74px}
+main.stage:has(.header--slim) .narr-btn{top:38px}
+}
+/* 420px 이하(초소형 화면)에서는 3문단짜리 페이지가 아무리 글자를 줄여도
+   물리적으로 다 들어가지 않을 수 있어, 세로 중앙 정렬 대신 상단 정렬로
+   전환하고 overflow를 숨겨 "헤더 가로선과 텍스트가 겹치는" 일이 어떤
+   경우에도 생기지 않도록 안전장치를 둔다(제목 줄은 항상 보이고, 극단적으로
+   긴 경우에 한해 마지막 문장 일부만 보이지 않을 수 있음). */
+@media(max-width:420px){.datetime .date{font-size:10px}.datetime .part{font-size:9px}.brand-left{font-size:11px}.section{font-size:clamp(7px,2vw,10px);padding:.3% 1.2%}.headline h1{font-size:clamp(11px,3.2vw,14px)}.logo .l1{font-size:clamp(11px,3.2vw,14px)}.caption{font-size:15px}.video-tag{font-size:10px;padding:.2em .6em}.ticker .title{font-size:7px}.breaking .tag,.breaking .items{font-size:10px}.novel-content{padding:14px 16.9% 0 3.1%;gap:8px;justify-content:flex-start;overflow-y:hidden}.novel-text p{font-size:15px;line-height:1.35;margin:0 0 7px}}
+
+/* ---- 내레이션 오디오 컨트롤 (스테이지별) ---- */
+.narr-btn{position:absolute;right:2.2%;bottom:2.5%;z-index:40;width:9%;max-width:52px;min-width:30px;aspect-ratio:1/1;border-radius:50%;border:1.5px solid var(--gold);background:rgba(6,21,45,.72);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.55;transition:opacity .2s,background .2s;padding:0}
+.narr-btn:hover,.narr-btn:focus-visible,.narr-btn.is-playing{opacity:1}
+.narr-btn.is-playing{background:rgba(244,189,63,.18)}
+.narr-icon{font-size:clamp(11px,1.6vw,20px);line-height:1;pointer-events:none}
+.narr-btn.is-loading .narr-icon{opacity:.5}
+@media(max-width:650px){.narr-btn{right:3%;bottom:3%}}
+</style>
+</head>
+<body>
+
+<!-- ============ 1 / 13 — 워싱턴 D.C. (전쟁 상황 속보) ============ -->
+<main class="stage" data-page="1">
+<audio class="narration" id="narr-1" preload="none"><source src="narration/p01.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-1" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">1/13</span></div>
+</header>
+<section class="headline"><div class="section">한국판</div><h1>제 1화 - 성벽이 무너진 날</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="https://assets.mixkit.co/videos/23474/23474-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">실전 상황</span><span class="meta-loc">워싱턴 D.C., 02:00</span></div>
+  <div class="caption">새벽 두 시, 백악관 상황실의 불빛이 꺼지지 않았다. 대통령은 마지막 브리핑을 받은 뒤 단 한마디로 작전명 '장대한 분노'의 개시를 승인했다. 국방장관과 합참의장은 말없이 서로를 바라보았다. 되돌릴 수 없는 문이 열리는 순간이었다.</div>
+</section>
+<section class="breaking">
+  <span class="tag">속보</span>
+  <span class="items">미·이스라엘 합동 공군, 이란 서부 방공망 타격 개시<span class="dot">|</span>이란 최고지도자 사망</span>
+</section>
+<footer class="ticker"><span class="title">주요사건 타임라인</span><div class="ticker-window"><span class="items">
+02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+<span class="dot">|</span> 02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+</span></div></footer>
+</main>
+
+<!-- ============ 2 / 13 — 테헤란 (전쟁 상황 속보) ============ -->
+<main class="stage" data-page="2">
+<audio class="narration" id="narr-2" preload="none"><source src="narration/p02.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-2" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">2/13</span></div>
+</header>
+<section class="headline"><div class="section">한국판</div><h1>제 1화 - 성벽이 무너진 날</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="https://assets.mixkit.co/videos/7373/7373-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">실전 상황</span><span class="meta-loc">테헤란, 09:45</span></div>
+  <div class="caption">오전 아홉 시 사십오 분, 테헤란 상공에 첫 번째 섬광이 번쩍였다. 미·이스라엘 합동 공군은 이란 서부 방공망을 겨냥해 정밀 타격을 개시했다. 레이더 기지와 미사일 진지가 연이어 침묵에 빠졌다. 도시는 아직 그 의미를 알지 못한 채 잠에서 깨어나고 있었다.</div>
+</section>
+<section class="breaking">
+  <span class="tag">속보</span>
+  <span class="items">미·이스라엘 합동 공군, 이란 서부 방공망 타격 개시<span class="dot">|</span>이란 최고지도자 사망</span>
+</section>
+<footer class="ticker"><span class="title">주요사건 타임라인</span><div class="ticker-window"><span class="items">
+02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+<span class="dot">|</span> 02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+</span></div></footer>
+</main>
+
+<!-- ============ 3 / 13 — 호르무즈 해협 (전쟁 상황 속보) ============ -->
+<main class="stage" data-page="3">
+<audio class="narration" id="narr-3" preload="none"><source src="narration/p03.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-3" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">3/13</span></div>
+</header>
+<section class="headline"><div class="section">한국판</div><h1>제 1화 - 성벽이 무너진 날</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="https://assets.mixkit.co/videos/9478/9478-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video><div class="video-tag">유조선 한빛호</div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">실전 상황</span><span class="meta-loc">호르무즈 해협, 10:30</span></div>
+  <div class="caption">같은 시각 호르무즈 해협, 항공모함 포드함의 갑판 위로 드론들이 떼 지어 날아올랐다. 좁은 해협을 지키던 소형 함정들이 하나둘 항로를 이탈했다. 세계 원유 수송량의 오분의 일이 지나는 이 바닷길이 이제 전장이 되고 있었다.</div>
+</section>
+<section class="breaking">
+  <span class="tag">속보</span>
+  <span class="items">미·이스라엘 합동 공군, 이란 서부 방공망 타격 개시<span class="dot">|</span>이란 최고지도자 사망</span>
+</section>
+<footer class="ticker"><span class="title">주요사건 타임라인</span><div class="ticker-window"><span class="items">
+02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+<span class="dot">|</span> 02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+</span></div></footer>
+</main>
+
+<!-- ============ 4 / 13 — 테헤란 (전쟁 상황 속보) ============ -->
+<main class="stage" data-page="4">
+<audio class="narration" id="narr-4" preload="none"><source src="narration/p04.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-4" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">4/13</span></div>
+</header>
+<section class="headline"><div class="section">한국판</div><h1>제 1화 - 성벽이 무너진 날</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="https://assets.mixkit.co/videos/49848/49848-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">실전 상황</span><span class="meta-loc">테헤란, 14:17</span></div>
+  <div class="caption">오후 두 시 십칠 분, 테헤란 지휘부에 대한 직격 타격이 확인되었다. 최고지도자의 사망 소식이 몇 시간 뒤에야 공식화되었다. 이란 지도부의 공백은 곧 다음 국면을 예고하는 침묵이었다.</div>
+</section>
+<section class="breaking">
+  <span class="tag">속보</span>
+  <span class="items">미·이스라엘 합동 공군, 이란 서부 방공망 타격 개시<span class="dot">|</span>이란 최고지도자 사망</span>
+</section>
+<footer class="ticker"><span class="title">주요사건 타임라인</span><div class="ticker-window"><span class="items">
+02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+<span class="dot">|</span> 02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+</span></div></footer>
+</main>
+
+<!-- ============ 5 / 13 — 바레인·카타르·이라크 (전쟁 상황 속보) ============ -->
+<main class="stage" data-page="5">
+<audio class="narration" id="narr-5" preload="none"><source src="narration/p05.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-5" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">5/13</span></div>
+</header>
+<section class="headline"><div class="section">한국판</div><h1>제 1화 - 성벽이 무너진 날</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="https://assets.mixkit.co/videos/23018/23018-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">실전 상황</span><span class="meta-loc">바레인·카타르·이라크, 16:00</span></div>
+  <div class="caption">오후 네 시, 이란은 침묵을 깨고 응답했다. 바레인, 카타르, 이라크의 미군 기지를 향해 샤하브-3 계열 탄도미사일이 일제히 발사되었다. 중동 전역의 방공망이 동시에 울리기 시작했다. 이날의 분노는 아직 끝나지 않았다.</div>
+</section>
+<section class="breaking">
+  <span class="tag">속보</span>
+  <span class="items">미·이스라엘 합동 공군, 이란 서부 방공망 타격 개시<span class="dot">|</span>이란 최고지도자 사망</span>
+</section>
+<footer class="ticker"><span class="title">주요사건 타임라인</span><div class="ticker-window"><span class="items">
+02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+<span class="dot">|</span> 02:00 대통령 Epic Fury 최종 승인 (워싱턴 D.C.)
+<span class="dot">|</span> 09:45 미·이스라엘 합동 공군 작전 개시 (테헤란)
+<span class="dot">|</span> 10:30 미 항모 포드함, 드론 군집 발사 (호르무즈 해협)
+<span class="dot">|</span> 14:17 이란 최고지도자, 테헤란 지휘부 직격 타격으로 사망 확인 (테헤란)
+<span class="dot">|</span> 16:00 이란, 중동 전역 미군 기지에 Shahab-3 계열 탄도미사일 보복 발사 (바레인·카타르·이라크)
+</span></div></footer>
+</main>
+
+<!-- ============ 6 / 13 — 소설 본문: 서울, 국가위기관리센터 ============ -->
+<main class="stage" data-page="6">
+<audio class="narration" id="narr-6" preload="none"><source src="narration/p06.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-6" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">6/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/23673/23673-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">서울 · 국가위기관리센터</span>
+  <h2>비상등이 켜지다</h2>
+</div>
+<div class="novel-text">
+  <p>자정을 훌쩍 넘긴 시각, 지하 벙커의 형광등이 일제히 밝아졌다. 상황실 벽면 스크린에는 호르무즈 해협 일대의 붉은 점들이 빠르게 늘어나고 있었다. 국가안보실장은 보고서를 손에 쥔 채 한동안 말을 잇지 못했다.</p>
+  <p>"우리 선박이 몇 척이나 그 해역에 있나?" 그의 물음에 실무자의 손끝이 떨렸다. 열일곱 척. 그중 셋은 이미 항로 이탈 신호를 마지막으로 남긴 채 응답이 끊긴 상태였다.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 7 / 13 — 소설 본문: 호르무즈, 한빛호 ============ -->
+<main class="stage" data-page="7">
+<audio class="narration" id="narr-7" preload="none"><source src="narration/p07.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-7" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">7/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/11938/11938-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">호르무즈 해협 · 유조선 한빛호</span>
+  <h2>좌초된 배</h2>
+</div>
+<div class="novel-text">
+  <p>한빛호의 갑판 위로 예광탄의 붉은 궤적이 스쳐 지나갔다. 선장은 조타실 창에 바짝 붙어 어둠 속을 응시했다. 엔진은 이미 세 시간째 멈춰 있었고, 통신은 잡음뿐이었다.</p>
+  <p>"본사, 응답 바람." 그가 몇 번째인지 모를 무전을 다시 보냈지만 돌아오는 것은 침묵이었다. 선원들은 구명조끼를 입은 채 갑판 아래 좁은 통로에 모여 앉아 있었다. 아무도 입을 열지 않았다.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 8 / 13 — 소설 본문: 부산, 해군작전사령부 ============ -->
+<main class="stage" data-page="8">
+<audio class="narration" id="narr-8" preload="none"><source src="narration/p08.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-8" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">8/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/33984/33984-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">부산 · 해군작전사령부</span>
+  <h2>출항 명령</h2>
+</div>
+<div class="novel-text">
+  <p>작전사령부 상황판 앞에 선 박 함장은 명령서를 두 번 읽었다. 세종대왕함, 즉시 출항. 임무는 단순했다 — 호르무즈 인근 자국 선박의 안전 확보. 하지만 그 바다가 이미 전장이 되었다는 사실을 모르는 사람은 없었다.</p>
+  <p>"기관 준비 완료, 30분 내 출항 가능합니다." 부장의 보고에 박 함장은 짧게 고개를 끄덕였다. 함교 밖으로 나서자 차가운 밤바람이 얼굴을 스쳤다. 그는 잠시 눈을 감았다가, 다시 떴다.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 9 / 13 — 소설 본문: 워싱턴, 동맹국 화상회의 ============ -->
+<main class="stage" data-page="9">
+<audio class="narration" id="narr-9" preload="none"><source src="narration/p09.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-9" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">9/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/49240/49240-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">워싱턴 D.C. · 동맹국 화상회의</span>
+  <h2>같은 배를 탄 사람들</h2>
+</div>
+<div class="novel-text">
+  <p>대형 스크린에 각국 대표들의 얼굴이 격자무늬로 떠올랐다. 국무장관은 담담한 목소리로 상황을 브리핑했지만, 화면 너머로 전해지는 긴장까지 감추지는 못했다. "호르무즈는 최소 72시간 폐쇄될 것으로 예상됩니다."</p>
+  <p>한국 대표단 자리에 앉은 실무자는 조용히 메모를 이어갔다. 원유 수입의 상당량이 지나는 그 좁은 물길이 막힌다는 것은, 숫자로는 다 담을 수 없는 파장을 의미했다.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 10 / 13 — 소설 본문: 서울, 흔들리는 시장 ============ -->
+<main class="stage" data-page="10">
+<audio class="narration" id="narr-10" preload="none"><source src="narration/p10.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-10" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">10/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/49844/49844-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">서울 · 광화문 전광판</span>
+  <h2>잠들지 못하는 도시</h2>
+</div>
+<div class="novel-text">
+  <p>새벽인데도 편의점 앞 간이 테이블에는 몇 사람이 모여 뉴스 속보를 보고 있었다. 전광판 속 유가 그래프가 가파르게 치솟았다. 누군가 낮게 중얼거렸다. "저기서 또 전쟁이라니…" 아무도 그 말에 답하지 않았다.</p>
+  <p>도시는 여느 밤과 다름없이 불을 밝히고 있었지만, 그 불빛 아래로 흐르는 공기는 분명 달라져 있었다.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 11 / 13 — 소설 본문: 다시 호르무즈, 조용한 접근 ============ -->
+<main class="stage" data-page="11">
+<audio class="narration" id="narr-11" preload="none"><source src="narration/p11.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-11" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">11/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/12280/12280-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">호르무즈 해협 인근 해상</span>
+  <h2>어둠 속의 항적</h2>
+</div>
+<div class="novel-text">
+  <p>세종대왕함은 등화관제를 유지한 채 해협을 향해 나아갔다. 소나실에서 낮은 경보음이 울렸다. "미상 소형 선박 다수, 방위 210, 접근 중." 박 함장의 눈빛이 순간 굳어졌다.</p>
+  <p>레이더 화면 위로 흩어진 점들이 천천히 대형을 갖추고 있었다. 누구의 것인지 아직은 알 수 없었다. 함교 안의 모두가 숨을 죽였다.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 12 / 13 — 소설 본문: 마지막 신호 ============ -->
+<main class="stage" data-page="12">
+<audio class="narration" id="narr-12" preload="none"><source src="narration/p12.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-12" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">12/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/4059/4059-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">유조선 한빛호</span>
+  <h2>깜빡이는 불빛</h2>
+</div>
+<div class="novel-text">
+  <p>한빛호의 비상 신호탄이 밤하늘을 갈랐다. 선장은 마지막 남은 배터리로 조난 신호를 반복해서 송신했다. "한빛호, 위치 발신 중. 접근 선박 다수 확인." 목소리가 갈라졌다.</p>
+  <p>수평선 저편, 세종대왕함의 레이더에도 같은 순간 하나의 신호가 잡혔다. 박 함장이 명령했다. "전속력으로." 함이 방향을 틀며 어둠 속으로 파고들었다.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 13 / 13 — 소설 본문: 성벽이 무너진 날 (에필로그) ============ -->
+<main class="stage" data-page="13">
+<audio class="narration" id="narr-13" preload="none"><source src="narration/p13.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-13" aria-label="내레이션 재생"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">전쟁소설</div>
+  <div class="logo"><span class="l1">장대한 분노</span><span class="l2">호르무즈의 밤</span></div>
+  <div class="datetime"><span class="date">2026. 2. 28.</span><span class="part">13/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/1086/1086-360.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">호르무즈 해협 · 동틀 무렵</span>
+  <h2>성벽이 무너진 날</h2>
+</div>
+<div class="novel-text">
+  <p>세종대왕함이 한빛호 곁에 닿았을 때, 하늘은 이미 희붐하게 밝아오고 있었다. 다가오던 미상 선박들은 그새 흩어져 사라진 뒤였다. 그것이 위협이었는지, 착각이었는지는 아무도 확인할 수 없었다.</p>
+  <p>박 함장은 갑판에 서서 지나온 밤을 돌아보았다. 하루 만에 한 지도자가 죽었고, 한 해협이 전장이 되었으며, 세계는 다시는 이전으로 돌아갈 수 없는 문턱을 넘었다. 오랫동안 견고해 보였던 어떤 성벽 하나가, 이날 조용히 무너져 내렸다.</p>
+  <p class="novel-end">— 1화 끝. 2화에서 계속됩니다. —</p>
+</div>
+</div>
+</main>
+
+
+<script>
+(function(){
+  var stages = document.querySelectorAll('main.stage');
+  var audios = Array.prototype.slice.call(document.querySelectorAll('audio.narration'));
+  function setIcon(audio, playing){
+    var btn = document.querySelector('.narr-btn[data-target="'+audio.id+'"]');
+    if(!btn) return;
+    btn.classList.toggle('is-playing', playing);
+    var icon = btn.querySelector('.narr-icon');
+    if(icon) icon.textContent = playing ? '⏸' : '▶';
+  }
+  function pauseAllExcept(keep){
+    audios.forEach(function(a){ if(a !== keep && !a.paused){ a.pause(); setIcon(a,false); } });
+  }
+  function tryPlay(audio){
+    pauseAllExcept(audio);
+    var p = audio.play();
+    if(p && p.catch){ p.then(function(){ setIcon(audio,true); }).catch(function(){ setIcon(audio,false); }); }
+    else { setIcon(audio,true); }
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var audio = entry.target.querySelector('audio.narration');
+        if(!audio) return;
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
+          if(audio.paused && audio.currentTime === 0 && !audio.dataset.queued){
+            // 자막(캡션)은 이미 화면에 표시된 상태이므로, 내레이션 음성만
+            // 0.5초 늦게 재생을 시작해 "자막이 음성보다 먼저 나오는" 원칙을 지킨다.
+            audio.dataset.queued = '1';
+            setTimeout(function(){
+              audio.dataset.queued = '';
+              if(audio.paused && audio.currentTime === 0){ tryPlay(audio); }
+            }, 500);
+          }
+        } else {
+          if(!audio.paused){ audio.pause(); setIcon(audio,false); }
+        }
+      });
+    }, {threshold:[0,0.6,1]});
+    stages.forEach(function(s){ io.observe(s); });
+  }
+  document.querySelectorAll('.narr-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var audio = document.getElementById(btn.getAttribute('data-target'));
+      if(!audio) return;
+      if(audio.paused){ tryPlay(audio); } else { audio.pause(); setIcon(audio,false); }
+    });
+  });
+  var stageList = Array.prototype.slice.call(stages);
+  audios.forEach(function(a){
+    a.addEventListener('ended', function(){
+      setIcon(a,false);
+      // 유튜브 롱폼처럼: 이 내레이션이 끝나면 다음 페이지로 자동 스크롤한다.
+      // 다음 페이지가 화면에 60% 이상 들어오면 위 IntersectionObserver가
+      // 이어서 그 페이지의 내레이션을 자동 재생하므로, 마지막 13페이지까지
+      // 사람이 손대지 않아도 순서대로 이어진다.
+      var stage = a.closest('main.stage');
+      var idx = stageList.indexOf(stage);
+      if(idx > -1 && idx < stageList.length - 1){
+        stageList[idx + 1].scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

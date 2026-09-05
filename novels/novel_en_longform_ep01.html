@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epic Fury: Night Over Hormuz — Episode 1 | Military Thriller Serial (Free War Novel 2026)</title>
+<meta name="description" content="A free military thriller web serial in the tradition of Tom Clancy and Vince Flynn. When a joint U.S.-Israeli strike ignites all-out war with Iran, a Korean destroyer captain and a stranded oil-tanker crew are pulled into the fight for the Strait of Hormuz. New episodes weekly — geopolitical action fiction, ripped from the headlines.">
+<meta name="keywords" content="military thriller, war novel, techno-thriller, geopolitical thriller, action thriller series, Tom Clancy style novel, Vince Flynn style novel, Brad Thor style novel, Mark Greaney style novel, Iran conflict fiction, Strait of Hormuz, Persian Gulf war novel, US Navy fiction, national security thriller, political thriller, free web novel, online fiction series, war fiction 2026, breaking news fiction, ripped from the headlines, submarine warfare novel, naval warfare thriller, Middle East conflict novel, Pentagon thriller, special operations thriller, espionage thriller, webnovel serial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Epic Fury: Night Over Hormuz — Episode 1">
+<meta property="og:description" content="A military thriller web serial in the tradition of Tom Clancy and Vince Flynn — war breaks out over the Strait of Hormuz. Free to read, new episodes weekly.">
+<meta property="og:image" content="KIND_broadcast_submarine_hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Epic Fury: Night Over Hormuz — Episode 1">
+<meta name="twitter:description" content="A military thriller web serial in the tradition of Tom Clancy and Vince Flynn — war breaks out over the Strait of Hormuz.">
+<!-- Body typeface: Pretendard variable (full glyph coverage, no missing characters) -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root {
+  --navy:#06152d; --gold:#f4bd3f; --white:#f7f8fa;
+  --cyan:#19d5df; --red:#d92d3a; --green:#38c65a;
+  --ui:"Inter","Pretendard","Segoe UI",Arial,sans-serif;
+  --tts:"Inter","Pretendard","Segoe UI",Arial,sans-serif;
+  /* Narrative body typeface */
+  --serif:"Source Serif 4","Georgia","Pretendard",serif;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:#020914;color:var(--white);font-family:var(--ui)}
+/* Multiple 16:9 broadcast frames (scene by scene) stacked and scrolled vertically */
+body{display:flex;flex-direction:column;align-items:center;gap:28px;padding:28px 0;overflow-x:hidden}
+.stage{position:relative;width:100%;max-width:1600px;margin:0 auto;aspect-ratio:16/9;overflow:hidden;background:var(--navy);border-radius:4px}
+
+/* ---- Header: left (genre tag) / center (2-line logo) / right (date · N/total)
+   All three columns sit with their text baseline 2mm above the header's
+   gold divider line (align-items:end + header padding-bottom:2mm), so the
+   top line ("EPIC FURY") rises together with the rest of the block. Shared
+   by every page — the breaking-news pages (1–5) and the narrative pages
+   (6 onward) alike. */
+.header{height:14%;display:grid;grid-template-columns:32% 36% 32%;grid-template-areas:"bl logo dt";align-items:end;padding:0 2.2% 1.5mm;margin-top:2mm;background:linear-gradient(180deg,#06152d,#07182f);border-bottom:1px solid var(--gold);position:relative;z-index:20;overflow:hidden}
+.brand-left{grid-area:bl;text-align:left;font-size:clamp(13px,1.1vw,22px);line-height:1.2;font-weight:800;color:var(--gold);letter-spacing:.02em}
+.logo{grid-area:logo;display:flex;flex-direction:column;align-items:center}
+.logo .l1{text-align:center;font-weight:800;font-size:clamp(18px,1.9vw,30px);margin:0;text-shadow:2px 2px 4px #000}
+.logo .l2{text-align:center;font-weight:700;font-size:clamp(10px,2vw,20px);color:var(--gold);margin:0;margin-top:1.5mm}
+.datetime{grid-area:dt;display:flex;align-items:baseline;justify-content:flex-end;gap:18px;text-align:right;line-height:1}
+.datetime .date{font-size:clamp(12px,1vw,20px);font-weight:700;color:var(--gold)}
+.datetime .part{font-size:clamp(11px,.85vw,16px);font-weight:600;color:#fff;opacity:.85}
+
+
+/* ── Narrative-mode header (episode 6 onward): a slimmed variant ──
+   Branding only; the date is hidden and the two logo lines collapse
+   into one to reclaim vertical space for reading. */
+/* 6페이지 이후: 헤더는 1~5페이지와 완전히 동일한 구도·글자 크기를 유지하고,
+   오직 날짜(datetime .date)만 숨긴다. */
+.header--slim .datetime .date{display:none}
+
+/* ---- Pages 1–5: breaking-news / wartime bulletin layout ---- */
+.headline{height:9%;display:flex;align-items:flex-end;justify-content:center;gap:1.6%;padding:0 2.2% 1.5mm;margin-top:1.5mm;background:#071a34;border-bottom:1px solid var(--gold);overflow:hidden}
+.section{flex:0 0 auto;border:2px solid var(--gold);color:var(--gold);padding:.35% 1.1%;font-size:clamp(11px,.9vw,17px);font-weight:800;white-space:nowrap}
+.headline h1{margin:0;flex:1 1 auto;min-width:0;font-size:clamp(18px,1.9vw,30px);font-weight:500;line-height:1.22;padding-bottom:.12em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px 5px #000}
+.video{position:absolute;left:0;right:0;top:calc(23% + 2mm);bottom:16.2%;overflow:hidden;background:transparent}
+/* Location tag layered over the video — sized to its own text (fit-content)
+   rather than a fixed width, so the box always hugs the label. */
+.video-tag{position:absolute;left:3.1%;top:4%;z-index:6;display:inline-block;width:fit-content;border:2px solid var(--gold);color:var(--gold);background:rgba(6,21,45,.6);padding:.3em 1em;font-size:clamp(11px,.85vw,16px);font-weight:800;letter-spacing:.03em;white-space:nowrap}
+.video img,.video video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.98) contrast(1.08);image-rendering:auto}
+.video:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.12) 62%,rgba(0,0,0,.64) 100%);pointer-events:none}
+.chyron{position:absolute;left:3.1%;top:53.4%;transform:translateY(-50%);width:80%;z-index:5;padding:0}
+.meta{margin-bottom:1%;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.meta-tag{display:inline-block;border:2px solid var(--gold);color:var(--gold);background:rgba(6,21,45,.55);font-weight:800;letter-spacing:.04em;padding:.25em .8em;font-size:clamp(10px,.75vw,14px);white-space:nowrap}
+.meta-loc{color:var(--gold);font-size:clamp(10px,.68vw,13px);font-weight:600;letter-spacing:.035em;text-shadow:2px 2px 3px #000}
+.caption{font-family:var(--tts);font-size:clamp(19px,2.15vw,34px);font-weight:400;line-height:1.4;letter-spacing:-.008em;max-width:100%;color:#fff;text-shadow:2px 3px 4px #000;text-align:justify;text-justify:inter-word;word-break:normal;overflow-wrap:break-word}
+.source{margin-top:1.05%;color:#fff;font-size:clamp(9px,.65vw,12px);font-weight:400;letter-spacing:.01em;text-shadow:2px 2px 3px #000}
+/* The ticker sits 3mm off the bottom edge; the breaking-news bar locks
+   itself directly above the ticker by computing "3mm + ticker height," so
+   if the ticker's height ever changes, the bar tracks it automatically.
+   The breaking bar has no fixed height — only 2mm top/bottom padding —
+   so it thins or thickens with its own content and shifts down toward
+   the ticker accordingly. */
+.breaking{position:absolute;left:0;right:0;bottom:calc(3mm + 5%);display:flex;align-items:center;gap:16px;padding:1mm 2.2%;background:var(--red);z-index:10;white-space:nowrap;overflow:hidden}
+.breaking .tag{flex:0 0 auto;background:#fff;color:var(--red);font-weight:700;letter-spacing:.05em;padding:.22em .9em;border-radius:4px;font-size:clamp(16px,1.05vw,24px)}
+.breaking .items{flex:1 1 auto;min-width:0;color:#fff;font-weight:600;font-size:clamp(17px,1.15vw,26px);overflow:hidden;text-overflow:ellipsis;text-shadow:1px 1px 2px rgba(0,0,0,.4)}
+.breaking .dot{margin:0 .8em;color:#fff;opacity:.85}
+.ticker{position:absolute;left:0;right:0;bottom:3mm;height:5%;display:flex;align-items:center;padding:0 7mm 0 2.2%;background:#06152d;border-top:1px solid var(--gold);z-index:11;overflow:hidden;font-size:clamp(13px,1.08vw,19px)}
+/* The "TIMELINE" label stays fixed; only the region to its right
+   (.ticker-window) is an overflow:hidden window through which the feed
+   scrolls right-to-left and disappears at that window's right edge.
+   Both are vertically centered. */
+.ticker .title{flex:0 0 auto;display:flex;align-items:center;height:auto;line-height:1;color:var(--gold);font-weight:800;letter-spacing:.02em;border:1px solid var(--gold);border-radius:2px;background:rgba(244,189,63,.08);padding:.5mm .9em;margin-right:1.1%;white-space:nowrap}
+.ticker-window{flex:1 1 auto;position:relative;height:100%;overflow:hidden}
+.ticker-window .items{position:absolute;top:50%;left:0;white-space:nowrap;display:inline-flex;align-items:center;line-height:1;transform:translateY(calc(-50% + 1px)) translateX(0);animation:ticker-scroll 64s linear infinite}
+.ticker .dot{color:#fff;margin:0 .7%}
+@keyframes ticker-scroll{to{transform:translateY(calc(-50% + 1px)) translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ticker-window .items{animation:none;transform:translateY(calc(-50% + 1px)) translateX(0)}}
+
+/* ---- Episode 6 onward: narrative reading mode ----
+   The breaking-news frame (headline / breaking bar / ticker) is stripped
+   away, and large body text sits over the footage — this is where the
+   piece stops being a bulletin and becomes a novel you actually read. */
+.novel-media{position:absolute;left:0;right:0;top:calc(14% + 2mm);bottom:0;overflow:hidden;background:#111}
+.novel-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,9,18,.28) 0%,rgba(4,9,18,.60) 55%,rgba(4,9,18,.82) 100%);pointer-events:none}
+.novel-media img,.novel-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.05) brightness(.88)}
+.novel-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,9,20,0) 24%,rgba(2,9,20,.5) 62%,rgba(2,9,20,.94) 100%);pointer-events:none}
+/* From episode 6 on: a wide reading area beneath the thin header
+   (.header--slim). Scene info shrinks to a single small caption line
+   instead of a bold badge, and body text grows large and roomy for
+   immersive reading. */
+/* The narrative block (heading + text) is vertically centered against the
+   footage (.novel-media) by matching its exact top/bottom (6.5%–0) and
+   using justify-content:center. The right edge is pinned with
+   padding-right:20%, so body text always ends flush at 80% of the stage
+   width regardless of viewport (a clean, book-like vertical line). */
+.novel-content{position:absolute;top:calc(14% + 2mm);bottom:0;left:0;right:0;z-index:4;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:0 16.9% 0 3.1%}
+.novel-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+.novel-heading .scene-tag{border:none;background:none;padding:0;color:var(--gold);font-weight:700;font-size:clamp(13px,1vw,16px);letter-spacing:.03em;text-shadow:1px 1px 3px #000}
+.novel-heading h2{margin:0;font-size:clamp(13px,1vw,16px);font-weight:500;font-style:italic;color:rgba(255,255,255,.78);text-shadow:1px 1px 3px #000}
+.novel-heading h2::before{content:'— '}
+.novel-text{width:100%;max-width:none;align-self:flex-start}
+/* Body typeface: serif family (--serif). font-size is a vw-based clamp
+   that scales with stage width, so pages with more paragraphs (e.g.
+   page 13) still clear the gold header line. text-align:justify with
+   normal word-break lets the right edge fall flush without breaking
+   mid-word except where genuinely needed. */
+.novel-text p{margin:0 0 14px;font-family:var(--serif);font-size:clamp(19px,2.15vw,34px);line-height:1.55;font-weight:400;color:#fff;text-shadow:1px 2px 6px rgba(0,0,0,.8);text-align:justify;text-justify:inter-word;word-break:normal;overflow-wrap:break-word}
+.novel-text p:last-child{margin-bottom:0}
+.novel-end{color:var(--gold)!important;font-weight:800!important;text-align:left!important;font-style:italic}
+
+/* Under 900px: pages with more paragraphs (e.g. page 13, three
+   paragraphs) tighten body size/line-height/margins together so they
+   still clear the header's gold line. */
+@media(max-width:900px){.chyron{width:80%}.headline h1{font-size:clamp(15px,2vw,22px)}.logo .l1{font-size:clamp(15px,2vw,22px)}.section{font-size:clamp(9px,1.4vw,13px)}.caption{font-size:22px}.meta-tag{font-size:clamp(9px,1.1vw,12px)}.meta-loc{font-size:clamp(9px,1vw,11px)}.novel-content{padding:0 16.9% 0 3.1%;gap:14px}.novel-text p{font-size:22px;line-height:1.45;margin:0 0 12px}.ticker-window .items{animation-duration:48s}}
+@media(max-width:650px){.headline h1{font-size:clamp(13px,2.6vw,17px)}.logo .l1{font-size:clamp(13px,2.6vw,17px)}.section{font-size:clamp(8px,1.7vw,11px);padding:.3% 1%}.chyron{width:80%}.caption{font-size:18px}.meta-tag{font-size:clamp(8px,1.4vw,10px)}.meta-loc{font-size:clamp(8px,1.2vw,10px)}.novel-content{padding:0 16.9% 0 3.1%;gap:12px}.novel-text p{font-size:18px;line-height:1.45;margin:0 0 10px}.video-tag{font-size:clamp(9px,1.8vw,12px);padding:.25em .7em;top:3%}.breaking{gap:8px;padding:1.2mm 2.2%}.breaking .tag{font-size:clamp(11px,2.2vw,15px);padding:.25em .7em}.breaking .items{font-size:clamp(11px,2.1vw,15px)}.ticker{padding:0 5mm 0 2.2%;font-size:clamp(8px,2vw,12px)}.ticker .title{padding:0 .6em;margin-right:.8%}.ticker-window .items{animation-duration:40s}}
+/* At or below 768px (phones and small tablets in portrait): instead of
+   packing everything into the 16:9 frame with absolute coordinates, stack
+   header / headline / (video+caption) / breaking / ticker as grid rows.
+   The video and caption share one grid row so the caption still overlays
+   the video as in the original design (vertically centered, left-aligned),
+   but if the caption runs longer than the video, that row simply grows to
+   fit it — so it can never collide with the breaking bar or ticker below. */
+@media(max-width:768px){
+.stage{aspect-ratio:auto;height:auto;display:grid;grid-template-columns:1fr}
+.header{grid-row:1;height:auto}
+.header--slim{height:auto}
+.headline{grid-row:2;height:auto}
+.video{position:relative;top:auto;bottom:auto;left:auto;right:auto;grid-row:3;grid-column:1;align-self:start;width:100%;aspect-ratio:16/9}
+.chyron{position:static;grid-row:3;grid-column:1;align-self:center;justify-self:start;transform:none;margin-left:3.1%;padding:0}
+.breaking{position:static;grid-row:4}
+.ticker{position:static;grid-row:5;height:auto;padding:6px 4% 6px 2.2%}
+.ticker .title{height:auto}
+.ticker-window{height:1.4em}
+.novel-media{position:relative;top:auto;bottom:auto;grid-row:2;grid-column:1;align-self:start;width:100%;aspect-ratio:16/9;background:var(--navy)}
+.novel-content{position:static;grid-row:2;grid-column:1;align-self:center;padding:16px 16.9% 16px 3.1%;justify-content:flex-start}
+/* The card can grow tall, so the narration button anchors just under the
+   video instead of the frame's bottom-right corner, so it never collides
+   with the last line of text. */
+.narr-btn{bottom:auto;right:3%}
+main.stage:has(.headline) .narr-btn{top:74px}
+main.stage:has(.header--slim) .narr-btn{top:38px}
+}
+/* At or below 420px (very small screens), a three-paragraph page may
+   not physically fit no matter how far the type shrinks, so we switch
+   from vertical-center to top-align and hide overflow — guaranteeing
+   the header's gold line and body text never collide (the title line
+   always stays visible; only the tail of the last sentence may clip in
+   an extreme case). Pages 1–5's breaking-news chrome gets one more size
+   step down here too, so headline/caption/ticker text never spills past
+   the header, video, or footer bars on a phone screen. */
+@media(max-width:420px){.datetime .date{font-size:10px}.datetime .part{font-size:9px}.brand-left{font-size:11px}.section{font-size:clamp(7px,2vw,10px);padding:.3% 1.2%}.headline h1{font-size:clamp(11px,3.2vw,14px)}.logo .l1{font-size:clamp(11px,3.2vw,14px)}.caption{font-size:15px;line-height:1.35}.meta-tag{font-size:clamp(7px,1.8vw,9px);padding:.2em .6em}.meta-loc{font-size:8px}.video-tag{font-size:9px;padding:.2em .6em}.ticker .title{font-size:7px;padding:0 .5em}.breaking{gap:6px;padding:1mm 2.2%}.breaking .tag,.breaking .items{font-size:10px}.novel-content{padding:14px 16.9% 0 3.1%;gap:8px;justify-content:flex-start;overflow-y:hidden}.novel-text p{font-size:15px;line-height:1.35;margin:0 0 7px}}
+
+/* ---- 내레이션 오디오 컨트롤 (스테이지별) ---- */
+.narr-btn{position:absolute;right:2.2%;bottom:2.5%;z-index:40;width:9%;max-width:52px;min-width:30px;aspect-ratio:1/1;border-radius:50%;border:1.5px solid var(--gold);background:rgba(6,21,45,.72);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.55;transition:opacity .2s,background .2s;padding:0}
+.narr-btn:hover,.narr-btn:focus-visible,.narr-btn.is-playing{opacity:1}
+.narr-btn.is-playing{background:rgba(244,189,63,.18)}
+.narr-icon{font-size:clamp(11px,1.6vw,20px);line-height:1;pointer-events:none}
+.narr-btn.is-loading .narr-icon{opacity:.5}
+@media(max-width:650px){.narr-btn{right:3%;bottom:3%}}
+</style>
+</head>
+<body>
+
+<!-- ============ 1 / 13 — Washington, D.C. (breaking bulletin) ============ -->
+<main class="stage" data-page="1">
+<audio class="narration" id="narr-1" preload="none"><source src="narration/p01.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-1" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">1/13</span></div>
+</header>
+<section class="headline"><div class="section">ENGLISH EDITION</div><h1>Episode 1 — The Night the Wall Fell</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="videos/command_center.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">LIVE UPDATE</span><span class="meta-loc">Washington, D.C. — 02:00 ET</span></div>
+  <div class="caption">Two in the morning, and the lights in the White House Situation Room hadn't gone dark in six hours. After the final briefing, the President gave the order in a single word, and Operation EPIC FURY was live. The Secretary of Defense and the Chairman of the Joint Chiefs traded a look and said nothing. A door had just opened that wasn't going to close again.</div>
+</section>
+<section class="breaking">
+  <span class="tag">BREAKING</span>
+  <span class="items">U.S.-Israeli Joint Air Campaign Strikes Iran's Western Air Defenses<span class="dot">|</span>Iran's Supreme Leader Reported Dead</span>
+</section>
+<footer class="ticker"><span class="title">TIMELINE</span><div class="ticker-window"><span class="items">
+02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+<span class="dot">|</span> 02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+</span></div></footer>
+</main>
+
+<!-- ============ 2 / 13 — Tehran (breaking bulletin) ============ -->
+<main class="stage" data-page="2">
+<audio class="narration" id="narr-2" preload="none"><source src="narration/p02.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-2" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">2/13</span></div>
+</header>
+<section class="headline"><div class="section">ENGLISH EDITION</div><h1>Episode 1 — The Night the Wall Fell</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="videos/jets_strike.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">LIVE UPDATE</span><span class="meta-loc">Tehran, Iran — 09:45 Local</span></div>
+  <div class="caption">At 9:45 in the morning, the first flash lit the sky over Tehran. A joint U.S.-Israeli air campaign opened on Iran's western air-defense network, precision strikes silencing radar sites and missile batteries one after another. The city was only just waking up. It had no idea yet what that meant.</div>
+</section>
+<section class="breaking">
+  <span class="tag">BREAKING</span>
+  <span class="items">U.S.-Israeli Joint Air Campaign Strikes Iran's Western Air Defenses<span class="dot">|</span>Iran's Supreme Leader Reported Dead</span>
+</section>
+<footer class="ticker"><span class="title">TIMELINE</span><div class="ticker-window"><span class="items">
+02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+<span class="dot">|</span> 02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+</span></div></footer>
+</main>
+
+<!-- ============ 3 / 13 — Strait of Hormuz (breaking bulletin) ============ -->
+<main class="stage" data-page="3">
+<audio class="narration" id="narr-3" preload="none"><source src="narration/p03.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-3" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">3/13</span></div>
+</header>
+<section class="headline"><div class="section">ENGLISH EDITION</div><h1>Episode 1 — The Night the Wall Fell</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="videos/oil_tanker.mp4" type="video/mp4">Your browser does not support embedded video.</video><div class="video-tag">M/V HANBIT</div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">LIVE UPDATE</span><span class="meta-loc">Strait of Hormuz — 10:30 Local</span></div>
+  <div class="caption">At the same hour in the Strait of Hormuz, drones rose in swarms off the deck of the carrier USS Gerald R. Ford. The small patrol craft that had been guarding the narrow channel peeled away, one after another. One-fifth of the world's seaborne oil passes through these waters. It was a battlefield now.</div>
+</section>
+<section class="breaking">
+  <span class="tag">BREAKING</span>
+  <span class="items">U.S.-Israeli Joint Air Campaign Strikes Iran's Western Air Defenses<span class="dot">|</span>Iran's Supreme Leader Reported Dead</span>
+</section>
+<footer class="ticker"><span class="title">TIMELINE</span><div class="ticker-window"><span class="items">
+02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+<span class="dot">|</span> 02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+</span></div></footer>
+</main>
+
+<!-- ============ 4 / 13 — Tehran (breaking bulletin) ============ -->
+<main class="stage" data-page="4">
+<audio class="narration" id="narr-4" preload="none"><source src="narration/p04.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-4" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">4/13</span></div>
+</header>
+<section class="headline"><div class="section">ENGLISH EDITION</div><h1>Episode 1 — The Night the Wall Fell</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="videos/tehran_skyline.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">LIVE UPDATE</span><span class="meta-loc">Tehran, Iran — 14:17 Local</span></div>
+  <div class="caption">At 14:17, a direct strike hit Iran's command leadership. Confirmation that Iran's Supreme Leader had been killed wouldn't come for hours. The silence at the top of Iran's government was itself a kind of warning — the opening note of whatever came next.</div>
+</section>
+<section class="breaking">
+  <span class="tag">BREAKING</span>
+  <span class="items">U.S.-Israeli Joint Air Campaign Strikes Iran's Western Air Defenses<span class="dot">|</span>Iran's Supreme Leader Reported Dead</span>
+</section>
+<footer class="ticker"><span class="title">TIMELINE</span><div class="ticker-window"><span class="items">
+02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+<span class="dot">|</span> 02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+</span></div></footer>
+</main>
+
+<!-- ============ 5 / 13 — Bahrain · Qatar · Iraq (breaking bulletin) ============ -->
+<main class="stage" data-page="5">
+<audio class="narration" id="narr-5" preload="none"><source src="narration/p05.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-5" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">5/13</span></div>
+</header>
+<section class="headline"><div class="section">ENGLISH EDITION</div><h1>Episode 1 — The Night the Wall Fell</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="videos/missile_launch.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">LIVE UPDATE</span><span class="meta-loc">Bahrain · Qatar · Iraq — 16:00 Local</span></div>
+  <div class="caption">At four in the afternoon, Iran broke its silence and answered. Shahab-3-class ballistic missiles rose in salvos aimed at American bases across Bahrain, Qatar, and Iraq. Air-defense sirens went off across the region at once. The day's fury wasn't finished. Not even close.</div>
+</section>
+<section class="breaking">
+  <span class="tag">BREAKING</span>
+  <span class="items">U.S.-Israeli Joint Air Campaign Strikes Iran's Western Air Defenses<span class="dot">|</span>Iran's Supreme Leader Reported Dead</span>
+</section>
+<footer class="ticker"><span class="title">TIMELINE</span><div class="ticker-window"><span class="items">
+02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+<span class="dot">|</span> 02:00 ET — President gives final go-ahead for Operation Epic Fury (Washington, D.C.)
+<span class="dot">|</span> 09:45 Local — U.S.-Israeli joint air campaign begins (Tehran)
+<span class="dot">|</span> 10:30 Local — USS Gerald R. Ford launches drone swarm (Strait of Hormuz)
+<span class="dot">|</span> 14:17 Local — Iran's Supreme Leader confirmed killed in direct strike on command bunker (Tehran)
+<span class="dot">|</span> 16:00 Local — Iran retaliates with Shahab-3-class ballistic missiles against U.S. bases region-wide (Bahrain · Qatar · Iraq)
+</span></div></footer>
+</main>
+
+<!-- ============ 6 / 13 — Narrative: Seoul, National Crisis Management Center ============ -->
+<main class="stage" data-page="6">
+<audio class="narration" id="narr-6" preload="none"><source src="narration/p06.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-6" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">6/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p6_situation_room.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Seoul · National Crisis Management Center</span>
+  <h2>The Alert Lights Come On</h2>
+</div>
+<div class="novel-text">
+  <p>Well past midnight, the fluorescents in the underground bunker snapped on all at once. On the wall-sized screen, red contacts kept multiplying across the Strait of Hormuz. The National Security Director stood there with the report in his hand and, for a long moment, couldn't make himself read it out loud.</p>
+  <p>"How many of our ships are in that water right now?" His question hung in the air. The staffer answering him had to steady his own hand before he could get the number out. Seventeen. Three of them had already gone dark — their last transmission was a course change nobody in this room had ordered.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 7 / 13 — Narrative: Strait of Hormuz, M/V Hanbit ============ -->
+<main class="stage" data-page="7">
+<audio class="narration" id="narr-7" preload="none"><source src="narration/p07.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-7" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">7/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p7_oil_tanker.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Strait of Hormuz · Oil Tanker M/V Hanbit</span>
+  <h2>Dead in the Water</h2>
+</div>
+<div class="novel-text">
+  <p>Tracer fire streaked red across Hanbit's deck. The captain stood pressed to the wheelhouse glass, staring into the dark. The engines had been silent for three hours. The radio gave back nothing but static.</p>
+  <p>"Home office, come in." He sent the call out again — the umpteenth time now, he'd lost count — and got nothing back. Below deck, the crew sat crowded in a narrow passage in their life vests. Nobody said a word.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 8 / 13 — Narrative: Busan, ROK Fleet Command ============ -->
+<main class="stage" data-page="8">
+<audio class="narration" id="narr-8" preload="none"><source src="narration/p08.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-8" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">8/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p8_destroyer.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Busan · ROK Fleet Command</span>
+  <h2>Get Underway</h2>
+</div>
+<div class="novel-text">
+  <p>Standing in front of the operations board, Captain Park read the order twice. ROKS Sejong the Great — underway immediately. The mission was simple enough on paper: secure the safety of Korean-flagged vessels near Hormuz. Nobody in that room needed reminding that the water in question was already a battlefield.</p>
+  <p>"Engines ready. We can get underway inside thirty minutes," his executive officer reported. Park gave a short nod. Out on the bridge wing, the cold night air hit his face. He closed his eyes for a moment — then opened them again.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 9 / 13 — Narrative: Washington, Allied Coalition Call ============ -->
+<main class="stage" data-page="9">
+<audio class="narration" id="narr-9" preload="none"><source src="narration/p09.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-9" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">9/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p9_video_conference.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Washington, D.C. · Allied Coalition Call</span>
+  <h2>All in the Same Boat</h2>
+</div>
+<div class="novel-text">
+  <p>On the big screen, faces from a dozen capitals filled a grid. The Secretary of State kept her voice level as she briefed the room, though the strain came through anyway. "We're estimating Hormuz stays closed a minimum of seventy-two hours."</p>
+  <p>In the seats reserved for the Korean delegation, a staffer kept writing without looking up. A shipping lane that carried most of the country's crude oil imports, closed indefinitely — the math on that didn't fit in a single column of notes.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 10 / 13 — Narrative: Seoul, Gwanghwamun Billboard ============ -->
+<main class="stage" data-page="10">
+<audio class="narration" id="narr-10" preload="none"><source src="narration/p10.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-10" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">10/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p10_seoul_billboard.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Seoul · Gwanghwamun Square</span>
+  <h2>A City That Can't Sleep</h2>
+</div>
+<div class="novel-text">
+  <p>It was still hours before dawn, but a few people had gathered around a folding table outside the convenience store, watching the coverage. On the billboard screen behind them, the oil-price chart climbed in a straight, steep line. Someone said, low, "Another war over there." Nobody answered him.</p>
+  <p>The city kept its lights on the way it did every night. But the air underneath those lights had changed, and everyone standing beneath them could feel it.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 11 / 13 — Narrative: Near the Strait, quiet approach ============ -->
+<main class="stage" data-page="11">
+<audio class="narration" id="narr-11" preload="none"><source src="narration/p11.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-11" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">11/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p11_night_sea.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Waters Near the Strait of Hormuz</span>
+  <h2>Contacts in the Dark</h2>
+</div>
+<div class="novel-text">
+  <p>ROKS Sejong the Great ran dark, holding blackout discipline as she pushed toward the strait. A low alarm sounded from sonar. "Multiple small surface contacts, bearing two-one-zero, closing." Captain Park's eyes went hard for half a second.</p>
+  <p>On the radar display, scattered points were slowly resolving into formation. Nobody could say yet whose they were. On the bridge, every man held his breath.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 12 / 13 — Narrative: The Last Signal ============ -->
+<main class="stage" data-page="12">
+<audio class="narration" id="narr-12" preload="none"><source src="narration/p12.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-12" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">12/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p12_tanker_lights.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Oil Tanker M/V Hanbit</span>
+  <h2>A Blinking Light</h2>
+</div>
+<div class="novel-text">
+  <p>Hanbit's emergency flare tore across the night sky. On whatever battery power he had left, the captain kept transmitting the distress call on a loop. "Hanbit transmitting position. Multiple contacts approaching." His voice broke halfway through.</p>
+  <p>On the far horizon, at that exact same moment, the identical signal registered on Sejong the Great's radar. Captain Park gave the order. "Flank speed." The destroyer swung hard and drove into the dark.</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 13 / 13 — Narrative: The Night the Wall Fell (epilogue) ============ -->
+<main class="stage" data-page="13">
+<audio class="narration" id="narr-13" preload="none"><source src="narration/p13.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-13" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">MILITARY THRILLER</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">NIGHT OVER HORMUZ</span></div>
+  <div class="datetime"><span class="date">02/28/2026.</span><span class="part">13/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="videos/p13_sunrise.mp4" type="video/mp4">Your browser does not support embedded video.</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">Strait of Hormuz · First Light</span>
+  <h2>The Night the Wall Fell</h2>
+</div>
+<div class="novel-text">
+  <p>By the time Sejong the Great came alongside Hanbit, the sky had already started to pale. The unidentified craft that had been closing were gone, scattered back into the dark. Whether they'd been a threat or a false alarm, no one would ever confirm.</p>
+  <p>Captain Park stood on deck and looked back at the night behind him. In a single day, a head of state was dead, a strait had become a battlefield, and the world had crossed a threshold it wasn't going back over. Something that had looked unshakeable for a long, long time had come down — quietly, in the dark.</p>
+  <p class="novel-end">— End of Episode 1. Continued in Episode 2. —</p>
+</div>
+</div>
+</main>
+
+
+<script>
+(function(){
+  var stages = document.querySelectorAll('main.stage');
+  var audios = Array.prototype.slice.call(document.querySelectorAll('audio.narration'));
+  function setIcon(audio, playing){
+    var btn = document.querySelector('.narr-btn[data-target="'+audio.id+'"]');
+    if(!btn) return;
+    btn.classList.toggle('is-playing', playing);
+    var icon = btn.querySelector('.narr-icon');
+    if(icon) icon.textContent = playing ? '⏸' : '▶';
+  }
+  function pauseAllExcept(keep){
+    audios.forEach(function(a){ if(a !== keep && !a.paused){ a.pause(); setIcon(a,false); } });
+  }
+  function tryPlay(audio){
+    pauseAllExcept(audio);
+    var p = audio.play();
+    if(p && p.catch){ p.then(function(){ setIcon(audio,true); }).catch(function(){ setIcon(audio,false); }); }
+    else { setIcon(audio,true); }
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var audio = entry.target.querySelector('audio.narration');
+        if(!audio) return;
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
+          if(audio.paused && audio.currentTime === 0 && !audio.dataset.queued){
+            audio.dataset.queued = '1';
+            setTimeout(function(){
+              audio.dataset.queued = '';
+              if(audio.paused && audio.currentTime === 0){ tryPlay(audio); }
+            }, 500);
+          }
+        } else {
+          if(!audio.paused){ audio.pause(); setIcon(audio,false); }
+        }
+      });
+    }, {threshold:[0,0.6,1]});
+    stages.forEach(function(s){ io.observe(s); });
+  }
+  document.querySelectorAll('.narr-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var audio = document.getElementById(btn.getAttribute('data-target'));
+      if(!audio) return;
+      if(audio.paused){ tryPlay(audio); } else { audio.pause(); setIcon(audio,false); }
+    });
+  });
+  var stageList = Array.prototype.slice.call(stages);
+  audios.forEach(function(a){
+    a.addEventListener('ended', function(){
+      setIcon(a,false);
+      // YouTube-longform behavior: when this narration ends, auto-scroll to
+      // the next page. Once the next page is ≥60% in view, the
+      // IntersectionObserver above auto-plays its narration, so the whole
+      // sequence advances through page 13 without anyone touching it.
+      var stage = a.closest('main.stage');
+      var idx = stageList.indexOf(stage);
+      if(idx > -1 && idx < stageList.length - 1){
+        stageList[idx + 1].scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

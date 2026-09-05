@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장대한 분노 - 호르무즈의 밤 — 인스타그램/스레드 피드 [[에피소드 번호]]화 (4:5, 2160×2700) — TEMPLATE</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root{
+  --navy:#06152d; --navy2:#07182f; --gold:#f4bd3f; --gold2:#c8a040; --white:#f7f8fa;
+  --crimson:#c0282a; --bg:#020914; --panel:rgba(2,7,16,.88);
+  --text-dim:rgba(255,255,255,.62);
+}
+:root[data-theme="light"]{
+  --navy:#f4bd3f; --navy2:#fff6dd; --bg:#eef1f5; --panel:rgba(255,255,255,.92);
+  --white:#0c1626; --text-dim:rgba(10,20,35,.62);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:var(--bg);color:var(--white);font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;gap:56px;padding:0 0 140px}
+a{color:inherit;text-decoration:none}
+
+/* ─────────────────────────────────────────────────────────────
+   내보내기 모드 안내 툴바 (캡처 대상 밖 — 슬라이드에 포함되지 않음)
+───────────────────────────────────────────────────────────── */
+.fd-toolbar{position:sticky;top:0;z-index:999;width:100%;display:flex;align-items:center;justify-content:center;gap:14px;
+  background:rgba(2,9,20,.94);border-bottom:1px solid rgba(244,189,63,.25);padding:12px 16px;flex-wrap:wrap}
+.fd-toolbar-label{font-size:12px;color:var(--text-dim);letter-spacing:.03em}
+.fd-toolbar button{font-size:12px;font-weight:700;color:var(--gold);background:rgba(244,189,63,.10);border:1px solid rgba(244,189,63,.45);
+  border-radius:20px;padding:7px 16px;cursor:pointer}
+.fd-toolbar button.is-active{background:var(--gold);color:#1a1206}
+.fd-toolbar .fd-tb-note{font-size:11px;color:var(--text-dim);opacity:.75}
+
+/* ─────────────────────────────────────────────────────────────
+   슬라이드 목업(브라우저 미리보기 전용 — 그림자/모서리는 여기서만 적용,
+   실제 캡처 대상인 .fd-stage 자체는 완전한 직사각형 2160x2700 이다)
+───────────────────────────────────────────────────────────── */
+.fd-stage-wrap{position:relative;transform-origin:top center}
+body[data-preview="fit"] .fd-stage-wrap{margin-bottom:calc(var(--fd-fit-shrink, 0px))}
+.fd-stage-wrap .fd-stage{box-shadow:0 20px 60px rgba(0,0,0,.5);border-radius:0}
+body[data-preview="fit"] .fd-stage-wrap .fd-stage{border-radius:28px;overflow:hidden}
+
+/* ─────────────────────────────────────────────────────────────
+   캡처 대상 — 반드시 2160 x 2700 (4:5) 고정 px, 절대 vw/rem 사용 금지
+───────────────────────────────────────────────────────────── */
+.fd-stage{position:relative;width:2160px;height:2700px;overflow:hidden;background:var(--navy)}
+
+.fd-media{position:absolute;inset:0;overflow:hidden;background:#111}
+.fd-media img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.94) contrast(1.07) brightness(.87)}
+.fd-media::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,rgba(2,9,20,.34) 0%,rgba(2,9,20,.10) 16%,rgba(2,9,20,.06) 38%,rgba(2,9,20,.30) 62%,rgba(2,9,20,.72) 82%,rgba(2,9,20,.94) 100%)}
+
+/* 이미지 교체/삭제 도구 — 클릭 시에만 노출 (내보내기 시엔 클릭하지 않으므로 화면에 없음) */
+.fd-imgtools{position:absolute;top:210px;right:64px;z-index:26;display:flex;gap:14px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .16s,transform .16s}
+.fd-media.tools-visible .fd-imgtools{opacity:1;pointer-events:auto;transform:translateY(0)}
+.fd-imgtools button{width:76px;height:76px;border-radius:50%;border:2px solid rgba(244,189,63,.7);background:rgba(6,21,45,.86);color:var(--gold);font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.fd-imgtools button:hover{background:rgba(244,189,63,.24)}
+.fd-imgtools input[type=file]{display:none}
+
+/* 헤더 — 브랜드(좌) / 에피소드·페이지 표기 + 언어·테마 컨트롤(우) */
+.fd-header{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;flex-direction:column;gap:6px;padding:64px 96px 56px;
+  background:linear-gradient(180deg,rgba(6,21,45,.92) 45%,rgba(6,21,45,0) 100%)}
+:root[data-theme="light"] .fd-header{background:linear-gradient(180deg,rgba(255,246,221,.92) 45%,rgba(255,246,221,0) 100%)}
+.fd-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.fd-brand{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.fd-brand .tag{font-size:38px;font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+:root[data-theme="light"] .fd-brand .tag{color:#8a5b00}
+.fd-brand .logo{font-size:64px;font-weight:800;color:#fff;text-shadow:2px 2px 8px #000;white-space:nowrap;margin-top:6px}
+:root[data-theme="light"] .fd-brand .logo{color:#101a2c;text-shadow:none}
+.fd-headerright{display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;gap:10px}
+.fd-meta-row{font-size:44px;font-weight:800;color:var(--gold);white-space:nowrap;text-align:right}
+:root[data-theme="light"] .fd-meta-row{color:#8a5b00}
+.fd-controls{display:flex;align-items:center;gap:10px;flex:0 0 auto;font-size:30px;font-weight:700;white-space:nowrap}
+.fd-controls a{color:var(--text-dim)}
+.fd-controls a.is-active{color:var(--gold);font-weight:800}
+.fd-controls button{border:none;background:transparent;color:var(--text-dim);font-size:28px;font-weight:700;padding:2px;cursor:pointer;display:inline-flex;align-items:center}
+.fd-controls button.is-active{color:var(--gold);font-weight:800}
+.fd-controls button svg{width:26px;height:26px}
+.fd-controls .sep{color:rgba(255,255,255,.28);font-size:26px}
+:root[data-theme="light"] .fd-controls .sep{color:rgba(10,20,35,.22)}
+.fd-controls .sep-strong{color:var(--gold);opacity:.55;margin:0 2px;font-size:26px}
+
+/* 본문 콘텐츠 — 하단 정렬 (인스타 캐러셀 관례상 후킹 텍스트는 이미지 하단부에) */
+.fd-content{position:absolute;left:0;right:0;bottom:0;z-index:10;display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-end;padding:0 130px 96px;text-align:center}
+.fd-textpanel{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;max-width:92%;margin:0 auto;
+  padding:72px 88px;border-radius:56px;
+  background:linear-gradient(180deg,rgba(2,7,16,0) 0%,rgba(2,7,16,.38) 14%,rgba(2,7,16,.66) 46%,rgba(2,7,16,.66) 68%,rgba(2,7,16,.30) 90%,rgba(2,7,16,0) 100%)}
+.fd-scene-tag{color:var(--gold);font-weight:800;font-size:46px;letter-spacing:.05em;text-transform:uppercase;text-shadow:0 2px 4px #000}
+.fd-heading{margin:0;font-size:132px;line-height:1.16;font-weight:800;color:#fff;text-shadow:0 3px 10px #000;word-break:keep-all}
+.fd-text p{margin:0;font-weight:400;font-size:82px;line-height:1.56;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.75);
+  word-break:keep-all;overflow-wrap:break-word}
+.fd-text p.fd-end-line{color:var(--gold)!important;font-weight:800!important;font-style:normal!important;font-size:60px!important;margin-top:14px!important;letter-spacing:.02em}
+.fd-novel .fd-text p,.fd-novel .fd-heading{font-family:"Noto Serif KR","Nanum Myeongjo","Batang",serif}
+
+/* 캐러셀 페이지 점 표기 + 워터마크 */
+.fd-dots{display:flex;align-items:center;gap:22px;margin-top:12px}
+.fd-dot{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.28)}
+.fd-dot.is-current{background:var(--gold);width:58px;border-radius:12px}
+.fd-watermark{margin-top:34px;font-size:34px;letter-spacing:.10em;color:rgba(255,255,255,.55);text-shadow:0 1px 4px #000}
+
+/* ── 표지 슬라이드 전용 ── */
+.fd-cover .fd-media img{filter:saturate(.9) contrast(1.1) brightness(.62)}
+.fd-cover .fd-content{justify-content:center;padding:0 140px}
+.fd-cover .fd-textpanel{background:none;padding:0;gap:36px}
+.fd-cover-eyebrow{font-size:44px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000}
+.fd-cover-title{font-size:220px;font-weight:900;color:#fff;letter-spacing:-.01em;line-height:1.05;text-shadow:0 6px 30px rgba(0,0,0,.7),0 0 90px rgba(139,26,26,.5)}
+.fd-cover-sub{font-size:96px;font-weight:700;color:#f0e8d8;line-height:1.25;text-shadow:0 3px 10px #000}
+.fd-cover-tagline{font-size:66px;font-weight:400;font-style:italic;color:#e7ddc8;text-shadow:0 2px 8px #000;margin-top:6px}
+.fd-cover-rule{display:flex;align-items:center;gap:28px;width:640px;margin:12px auto}
+.fd-cover-rule::before,.fd-cover-rule::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,rgba(244,189,63,.55),transparent)}
+.fd-cover-rule-mark{color:var(--gold);font-size:44px}
+.fd-cover-date{font-size:42px;letter-spacing:.10em;color:rgba(255,255,255,.7);margin-top:4px}
+.fd-cover-cta{margin-top:38px;font-size:52px;font-weight:800;color:var(--gold);letter-spacing:.06em;
+  display:flex;align-items:center;gap:16px;text-shadow:0 2px 6px #000}
+.fd-cover-cta .arrow{display:inline-block;animation:fdArrow 1.6s ease-in-out infinite}
+@keyframes fdArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(14px)}}
+
+/* ── 다음 화 예고(마지막) 슬라이드 전용 ── */
+.fd-end .fd-media img{filter:saturate(.85) contrast(1.08) brightness(.5)}
+.fd-end .fd-content{justify-content:center;padding:0 150px}
+.fd-end .fd-textpanel{background:none;padding:0;gap:30px}
+.fd-end-eyebrow{font-size:42px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000;
+  display:flex;align-items:center;gap:16px}
+.fd-end-eyebrow::before{content:'▶';font-size:32px}
+.fd-end-ep{font-size:46px;color:rgba(255,255,255,.72);letter-spacing:.08em}
+.fd-end-heading{font-size:118px;font-weight:800;color:#fff;line-height:1.2;text-shadow:0 4px 16px #000;word-break:keep-all}
+.fd-end-body{font-size:70px;font-weight:400;font-style:italic;line-height:1.6;color:#f0e8d8;text-shadow:0 2px 8px #000;
+  border-left:4px solid var(--crimson);padding-left:44px;text-align:left;word-break:keep-all}
+.fd-end-cta{margin-top:30px;display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
+.fd-end-cta span{font-size:44px;font-weight:800;color:var(--gold);letter-spacing:.04em;
+  border:2px solid rgba(244,189,63,.55);border-radius:999px;padding:20px 44px;background:rgba(244,189,63,.08)}
+.fd-end-handle{margin-top:24px;font-size:40px;color:rgba(255,255,255,.65);letter-spacing:.05em}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     TEMPLATE 사용법 (다른 에피소드는 이 파일을 100% 기준으로 복제)
+
+     1) 이 파일을 novel_kr_feeds_epNN.html 로 복사 (NN = 에피소드 번호, 2자리).
+        이 포맷은 Instagram Feed / Threads 캐러셀 전용 — 세로형 쇼츠(영상)와는
+        별개의 정적 이미지 포맷이다. 영상·오디오·내레이션 요소를 두지 않는다.
+
+     2) [[대괄호]]로 표시된 모든 부분을 실제 내용으로 채운다. CSS/JS/레이아웃
+        구조는 절대 수정하지 않는다 — 이 구조가 확정된 표준 레이아웃이다.
+        (이 대원칙은 롱폼/쇼츠 템플릿과 동일하게 적용된다.)
+
+     3) 캔버스 규격은 절대불가변: 2160 x 2700 px (4:5 비율). .fd-stage 요소
+        자체는 반드시 이 픽셀 크기를 유지해야 하며 vw/vh/rem 기반 반응형으로
+        바꾸지 않는다 — 내보내기(캡처) 정확도가 이 고정 크기에 달려 있다.
+        브라우저에서 보기 편하도록 하는 축소 미리보기(화면에 맞춤 버튼)는
+        .fd-stage-wrap 에만 transform:scale 이 적용되며, 실제 캡처 시에는
+        반드시 상단 툴바의 "내보내기 모드" 버튼을 눌러 배율을 1로 되돌린 뒤
+        각 .fd-stage 요소를 개별 캡처한다 (2160x2700 px 단위 이미지 파일 하나당).
+
+     4) 언어 전환 링크의 epNN 부분을 실제 에피소드 번호로 바꾼다
+        (KR/EN/JP 세 파일 모두 서로 링크하므로 3개 언어 피드 템플릿을 함께
+        채우는 것을 원칙으로 한다 — 롱폼/쇼츠와 동일한 관례).
+
+     5) 슬라이드 구성 — 총 3종:
+          · 표지 슬라이드(fd-cover, 1장) — 후킹용 타이틀 카드. data-page="cover".
+          · 스토리 슬라이드(fd-stage, N장) — 쇼츠 13장면과 1:1 대응 원칙.
+            장면 수가 13장보다 많거나 적으면 슬라이드 블록 전체를 복제/삭제하고
+            data-page, id의 pNN, 헤더의 "NN/총페이지" 표기, fd-dots의 총 개수를
+            빠짐없이 다시 번호 매긴다.
+          · 다음 화 예고 슬라이드(fd-end, 1장) — 참여 유도(팔로우·저장·공유)용
+            엔딩 카드. data-page="end".
+        표지·엔딩은 필수는 아니지만 옴니채널 성장(참여율) 관점에서 강력 권장.
+
+     6) class="fd-stage fd-novel" 은 쇼츠 템플릿과 동일한 규칙 — 실전 상황
+        설명(작전/속보 톤, 시각 표기 포함) 장면 뒤에 이어지는 소설적 서술
+        장면에 붙이며, 명조 계열 세리프로 자동 전환된다.
+
+     7) 장면 위치 태그의 " · HH:MM" 시각 표기는 실전 상황(주로 초반) 장면 중
+        작중에 명시적 시각이 나오는 경우에만 붙인다.
+
+     8) 이미지 경로는 저장소별로 나뉜 GitHub Pages 절대경로를 그대로 사용 —
+        상대경로로 바꾸지 않는다. 피드 전용 하위 폴더를 별도로 둔다
+        (쇼츠 9:16 정지컷과 화면비가 다르므로 4:5로 새로 리프레이밍한 이미지 사용):
+          이미지: https://soulthread88.github.io/imgs/novel/feeds/epNN_pXX_설명.jpg
+        (영상·오디오·BGM 경로는 이 포맷에 해당 없음 — 정지 이미지 전용.)
+
+     9) 요소 ID는 항상 에피소드 번호를 접두어로 갖는다 (예: fdstage-ep01-p03,
+        fdimgbox-ep01-p03, fdimg-ep01-p03, fdfinp-ep01-p03) — 여러 에피소드
+        페이지를 한 화면/한 저장소에 두었을 때 ID 충돌을 막기 위한 대원칙이다
+        (롱폼 IndexedDB 충돌 방지 원칙과 동일한 취지, 이 포맷은 저장을 하지
+        않으므로 IndexedDB는 사용하지 않지만 ID 프리픽스 원칙은 유지한다).
+
+     10) 캡션(해시태그·팔로우 유도 문구 등 SEO성 텍스트)은 이 HTML에 넣지 않는다.
+         이 파일은 "이미지 자체"만 생성하기 위한 것이며, 실제 인스타그램/스레드
+         게시물의 캡션 텍스트는 별도로 작성한다.
+     ============================================================ -->
+
+<div class="fd-toolbar">
+  <span class="fd-toolbar-label">미리보기</span>
+  <button type="button" id="fd-btn-fit" class="is-active">화면에 맞춤</button>
+  <button type="button" id="fd-btn-export">내보내기 모드 (2160×2700 원본)</button>
+  <span class="fd-tb-note">※ 내보내기 시 각 .fd-stage 요소를 개별 캡처(2160×2700 px, 4:5) — 이 툴바와 모서리 그림자는 캡처 대상 밖입니다.</span>
+</div>
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-cover" data-page="cover" id="fdstage-epNN-cover">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · COVER</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-cover">
+    <img id="fdimg-epNN-cover" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 표지, 예: epNN_cover.jpg]]" alt="[[표지 이미지 대체 텍스트]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-cover">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-cover-eyebrow">실시간 전쟁 소설 · EPISODE [[에피소드 번호]]</div>
+      <div class="fd-cover-title">[[대제목 — 예: 장대한 분노]]</div>
+      <div class="fd-cover-sub">[[부제 — 예: 호르무즈의 밤]]</div>
+      <div class="fd-cover-rule"><span class="fd-cover-rule-mark">✦</span></div>
+      <div class="fd-cover-tagline">[[태그라인/화 소제목 — 예: 성벽이 무너지는 날]]</div>
+      <div class="fd-cover-date">[[날짜/시간 요약 — 예: 2026년 2월 28일, 세계가 바뀐 8시간의 기록]]</div>
+      <div class="fd-cover-cta">[[CTA 문구 — 예: 스와이프해서 읽기]]<span class="arrow">→</span></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="1" id="fdstage-epNN-p01">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 01/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p01">
+    <img id="fdimg-epNN-p01" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 1페이지, 예: epNN_p01_설명.jpg]]" alt="[[이미지 대체 텍스트 — 1페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p01">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 1페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 1페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 1페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="2" id="fdstage-epNN-p02">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 02/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p02">
+    <img id="fdimg-epNN-p02" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 2페이지, 예: epNN_p02_설명.jpg]]" alt="[[이미지 대체 텍스트 — 2페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p02">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 2페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 2페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 2페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="3" id="fdstage-epNN-p03">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 03/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p03">
+    <img id="fdimg-epNN-p03" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 3페이지, 예: epNN_p03_설명.jpg]]" alt="[[이미지 대체 텍스트 — 3페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p03">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 3페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 3페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 3페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="4" id="fdstage-epNN-p04">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 04/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p04">
+    <img id="fdimg-epNN-p04" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 4페이지, 예: epNN_p04_설명.jpg]]" alt="[[이미지 대체 텍스트 — 4페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p04">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 4페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 4페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 4페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="5" id="fdstage-epNN-p05">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 05/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p05">
+    <img id="fdimg-epNN-p05" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 5페이지, 예: epNN_p05_설명.jpg]]" alt="[[이미지 대체 텍스트 — 5페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p05">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 5페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 5페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 5페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="6" id="fdstage-epNN-p06">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 06/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p06">
+    <img id="fdimg-epNN-p06" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 6페이지, 예: epNN_p06_설명.jpg]]" alt="[[이미지 대체 텍스트 — 6페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p06">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 6페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 6페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 6페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="7" id="fdstage-epNN-p07">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 07/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p07">
+    <img id="fdimg-epNN-p07" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 7페이지, 예: epNN_p07_설명.jpg]]" alt="[[이미지 대체 텍스트 — 7페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p07">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 7페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 7페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 7페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="8" id="fdstage-epNN-p08">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 08/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p08">
+    <img id="fdimg-epNN-p08" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 8페이지, 예: epNN_p08_설명.jpg]]" alt="[[이미지 대체 텍스트 — 8페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p08">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 8페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 8페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 8페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="9" id="fdstage-epNN-p09">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 09/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p09">
+    <img id="fdimg-epNN-p09" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 9페이지, 예: epNN_p09_설명.jpg]]" alt="[[이미지 대체 텍스트 — 9페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p09">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 9페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 9페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 9페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="10" id="fdstage-epNN-p10">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 10/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p10">
+    <img id="fdimg-epNN-p10" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 10페이지, 예: epNN_p10_설명.jpg]]" alt="[[이미지 대체 텍스트 — 10페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p10">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 10페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 10페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 10페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="11" id="fdstage-epNN-p11">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 11/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p11">
+    <img id="fdimg-epNN-p11" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 11페이지, 예: epNN_p11_설명.jpg]]" alt="[[이미지 대체 텍스트 — 11페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p11">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 11페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 11페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 11페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="12" id="fdstage-epNN-p12">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 12/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p12">
+    <img id="fdimg-epNN-p12" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 12페이지, 예: epNN_p12_설명.jpg]]" alt="[[이미지 대체 텍스트 — 12페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p12">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 12페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 12페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 12페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="13" id="fdstage-epNN-p13">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · 13/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p13">
+    <img id="fdimg-epNN-p13" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 13페이지, 예: epNN_p13_설명.jpg]]" alt="[[이미지 대체 텍스트 — 13페이지]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-p13">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[장면 위치/시간대 태그 — 13페이지]]</div>
+      <h2 class="fd-heading">[[소제목 — 13페이지]]</h2>
+      <div class="fd-text">
+      <p>[[본문 — 13페이지, 2~4문장 권장]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span></div>
+    <div class="fd-watermark">@soulthread88 · 장대한 분노</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-end" data-page="end" id="fdstage-epNN-end">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">전쟁소설 · WAR NOVEL</span><span class="logo">장대한 분노</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[에피소드 번호 2자리 — 예: 01]] · NEXT</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-end">
+    <img id="fdimg-epNN-end" src="https://soulthread88.github.io/imgs/novel/feeds/[[포스터 이미지 파일명 — 엔딩, 예: epNN_end.jpg]]" alt="[[엔딩 이미지 대체 텍스트]]">
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="교체">⇄</button>
+      <button type="button" data-action="delete" title="삭제">✕</button>
+      <input type="file" accept="image/*" data-file-input id="fdfinp-epNN-end">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-end-eyebrow">다음 화 예고</div>
+      <div class="fd-end-ep">[[다음 화 표기 — 예: 제2화 — Chapter Two]]</div>
+      <div class="fd-end-heading">[[다음 화 장소/훅 — 예: 포르도 지하 500미터]]</div>
+      <div class="fd-end-body">[[다음 화 티저 문장 1~2개]]</div>
+      <div class="fd-end-cta"><span>팔로우</span><span>저장</span><span>공유</span></div>
+      <div class="fd-end-handle">[[SNS 핸들/채널명 — 예: @soulthread88 · 장대한 분노]]</div>
+    </div>
+  </div>
+</main>
+</div>
+<script>
+(function(){
+  // 이미지 교체/삭제 — 클릭으로 도구 표시, 파일 선택 시 즉시 미리보기 교체(세션 한정, 저장 없음)
+  document.querySelectorAll('[data-imgbox]').forEach(function(box){
+    box.addEventListener('click', function(e){
+      if(e.target.closest('.fd-imgtools')) return;
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ if(b!==box) b.classList.remove('tools-visible'); });
+      box.classList.toggle('tools-visible');
+    });
+    var replaceBtn = box.querySelector('[data-action="replace"]');
+    var deleteBtn  = box.querySelector('[data-action="delete"]');
+    var fileInput  = box.querySelector('[data-file-input]');
+    var img = box.querySelector('img');
+    if(replaceBtn) replaceBtn.addEventListener('click', function(e){ e.stopPropagation(); fileInput.click(); });
+    if(fileInput) fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0] && img){
+        img.src = URL.createObjectURL(fileInput.files[0]);
+      }
+    });
+    if(deleteBtn) deleteBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(img){ img.removeAttribute('src'); img.style.background = '#111'; }
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('[data-imgbox]')){
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ b.classList.remove('tools-visible'); });
+    }
+  });
+
+  // 다크/라이트 테마 토글 (세션 한정, 저장 없음 — 슬라이드 프레임/헤더 크롬에만 영향)
+  document.querySelectorAll('[data-theme-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var theme = btn.getAttribute('data-theme-btn');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-theme-btn')===theme); });
+    });
+  });
+
+  // ── 미리보기 축소 / 내보내기 모드 ──────────────────────────────
+  // 브라우저 미리보기: 2160px 원본을 화면 폭에 맞춰 축소 표시(transform:scale).
+  // 내보내기 모드: 배율을 1로 되돌려 각 .fd-stage를 정확히 2160x2700 픽셀로
+  // 캡처(스크린샷/헤드리스 캡처 도구)할 수 있게 한다.
+  var wraps = Array.prototype.slice.call(document.querySelectorAll('.fd-stage-wrap'));
+  var btnFit = document.getElementById('fd-btn-fit');
+  var btnExport = document.getElementById('fd-btn-export');
+  function applyFit(){
+    document.body.setAttribute('data-preview','fit');
+    var vw = Math.min(window.innerWidth - 48, 640);
+    var scale = vw / 2160;
+    wraps.forEach(function(w){
+      w.style.transform = 'scale(' + scale + ')';
+      w.style.marginBottom = (2700 * scale - 2700 + 56) + 'px';
+    });
+    if(btnFit) btnFit.classList.add('is-active');
+    if(btnExport) btnExport.classList.remove('is-active');
+  }
+  function applyExport(){
+    document.body.setAttribute('data-preview','export');
+    wraps.forEach(function(w){ w.style.transform = 'none'; w.style.marginBottom = '56px'; });
+    if(btnExport) btnExport.classList.add('is-active');
+    if(btnFit) btnFit.classList.remove('is-active');
+  }
+  if(btnFit) btnFit.addEventListener('click', applyFit);
+  if(btnExport) btnExport.addEventListener('click', applyExport);
+  window.addEventListener('resize', function(){ if(document.body.getAttribute('data-preview')==='fit') applyFit(); });
+  applyFit();
+})();
+</script>
+</body>
+</html>

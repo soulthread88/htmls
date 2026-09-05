@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エピック・フューリー ホルムズの夜 第1話｜Instagram/Threads フィード（ダイナミック、4:5、2160×2700）</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root{
+  --navy:#06152d; --navy2:#07182f; --gold:#f4bd3f; --gold2:#c8a040; --white:#f7f8fa;
+  --crimson:#c0282a; --bg:#020914; --panel:rgba(2,7,16,.88);
+  --text-dim:rgba(255,255,255,.62);
+}
+:root[data-theme="light"]{
+  --navy:#f4bd3f; --navy2:#fff6dd; --bg:#eef1f5; --panel:rgba(255,255,255,.92);
+  --white:#0c1626; --text-dim:rgba(10,20,35,.62);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:var(--bg);color:var(--white);font-family:"Noto Sans JP","Pretendard","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+body{display:flex;flex-direction:column;align-items:center;gap:56px;padding:0 0 140px}
+a{color:inherit;text-decoration:none}
+
+/* ─────────────────────────────────────────────────────────────
+   エクスポートモード案内ツールバー（キャプチャ対象外 — スライドには含まれない）
+───────────────────────────────────────────────────────────── */
+.fd-toolbar{position:sticky;top:0;z-index:999;width:100%;display:flex;align-items:center;justify-content:center;gap:14px;
+  background:rgba(2,9,20,.94);border-bottom:1px solid rgba(244,189,63,.25);padding:12px 16px;flex-wrap:wrap}
+.fd-toolbar-label{font-size:12px;color:var(--text-dim);letter-spacing:.03em}
+.fd-toolbar button{font-size:12px;font-weight:700;color:var(--gold);background:rgba(244,189,63,.10);border:1px solid rgba(244,189,63,.45);
+  border-radius:20px;padding:7px 16px;cursor:pointer}
+.fd-toolbar button.is-active{background:var(--gold);color:#1a1206}
+.fd-toolbar .fd-tb-note{font-size:11px;color:var(--text-dim);opacity:.75}
+
+/* ─────────────────────────────────────────────────────────────
+   スライドのモックアップ（ブラウザプレビュー専用 — 影・角丸はここにのみ適用され、
+   実際のキャプチャ対象である .fd-stage 自体は完全な長方形の2160x2700である）
+───────────────────────────────────────────────────────────── */
+.fd-stage-wrap{position:relative;transform-origin:top center}
+body[data-preview="fit"] .fd-stage-wrap{margin-bottom:calc(var(--fd-fit-shrink, 0px))}
+.fd-stage-wrap .fd-stage{box-shadow:0 20px 60px rgba(0,0,0,.5);border-radius:0}
+body[data-preview="fit"] .fd-stage-wrap .fd-stage{border-radius:28px;overflow:hidden}
+
+/* ─────────────────────────────────────────────────────────────
+   キャプチャ対象 — 必ず2160 x 2700（4:5）の固定pxとし、vw/remは絶対に使用しない
+───────────────────────────────────────────────────────────── */
+.fd-stage{position:relative;width:2160px;height:2700px;overflow:hidden;background:var(--navy)}
+
+.fd-media{position:absolute;inset:0;overflow:hidden;background:#111}
+.fd-media img,.fd-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.94) contrast(1.07) brightness(.87)}
+.fd-media::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,rgba(2,9,20,.34) 0%,rgba(2,9,20,.10) 16%,rgba(2,9,20,.06) 38%,rgba(2,9,20,.30) 62%,rgba(2,9,20,.72) 82%,rgba(2,9,20,.94) 100%)}
+
+/* 動画の差替・削除ツール — クリック時のみ表示（エクスポート時はクリックしないため画面に現れない） */
+.fd-imgtools{position:absolute;top:210px;right:64px;z-index:26;display:flex;gap:14px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .16s,transform .16s}
+.fd-media.tools-visible .fd-imgtools{opacity:1;pointer-events:auto;transform:translateY(0)}
+.fd-imgtools button{width:76px;height:76px;border-radius:50%;border:2px solid rgba(244,189,63,.7);background:rgba(6,21,45,.86);color:var(--gold);font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.fd-imgtools button:hover{background:rgba(244,189,63,.24)}
+.fd-imgtools input[type=file]{display:none}
+
+/* ヘッダー — ブランド（左）／エピソード・ページ表記 + 言語・テーマコントロール（右） */
+.fd-header{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;flex-direction:column;gap:6px;padding:64px 96px 56px;
+  background:linear-gradient(180deg,rgba(6,21,45,.92) 45%,rgba(6,21,45,0) 100%)}
+:root[data-theme="light"] .fd-header{background:linear-gradient(180deg,rgba(255,246,221,.92) 45%,rgba(255,246,221,0) 100%)}
+.fd-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.fd-brand{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.fd-brand .tag{font-size:38px;font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+:root[data-theme="light"] .fd-brand .tag{color:#8a5b00}
+.fd-brand .logo{font-size:64px;font-weight:800;color:#fff;text-shadow:2px 2px 8px #000;white-space:nowrap;margin-top:6px}
+:root[data-theme="light"] .fd-brand .logo{color:#101a2c;text-shadow:none}
+.fd-headerright{display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;gap:10px}
+.fd-meta-row{font-size:44px;font-weight:800;color:var(--gold);white-space:nowrap;text-align:right}
+:root[data-theme="light"] .fd-meta-row{color:#8a5b00}
+.fd-controls{display:flex;align-items:center;gap:10px;flex:0 0 auto;font-size:30px;font-weight:700;white-space:nowrap}
+.fd-controls a{color:var(--text-dim)}
+.fd-controls a.is-active{color:var(--gold);font-weight:800}
+.fd-controls button{border:none;background:transparent;color:var(--text-dim);font-size:28px;font-weight:700;padding:2px;cursor:pointer;display:inline-flex;align-items:center}
+.fd-controls button.is-active{color:var(--gold);font-weight:800}
+.fd-controls button svg{width:26px;height:26px}
+.fd-controls .sep{color:rgba(255,255,255,.28);font-size:26px}
+:root[data-theme="light"] .fd-controls .sep{color:rgba(10,20,35,.22)}
+.fd-controls .sep-strong{color:var(--gold);opacity:.55;margin:0 2px;font-size:26px}
+
+/* 本文コンテンツ — 下部揃え（Instagramカルーセルの慣例に従い、フック用テキストは画像下部に配置） */
+.fd-content{position:absolute;left:0;right:0;bottom:0;z-index:10;display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-end;padding:0 130px 96px;text-align:center}
+.fd-textpanel{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;max-width:92%;margin:0 auto;
+  padding:72px 88px;border-radius:56px;
+  background:linear-gradient(180deg,rgba(2,7,16,0) 0%,rgba(2,7,16,.38) 14%,rgba(2,7,16,.66) 46%,rgba(2,7,16,.66) 68%,rgba(2,7,16,.30) 90%,rgba(2,7,16,0) 100%)}
+.fd-scene-tag{color:var(--gold);font-weight:800;font-size:46px;letter-spacing:.05em;text-transform:uppercase;text-shadow:0 2px 4px #000}
+.fd-heading{margin:0;font-size:132px;line-height:1.16;font-weight:800;color:#fff;text-shadow:0 3px 10px #000;word-break:keep-all}
+.fd-text p{margin:0;font-weight:400;font-size:82px;line-height:1.56;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.75);
+  word-break:keep-all;overflow-wrap:break-word}
+.fd-text p.fd-end-line{color:var(--gold)!important;font-weight:800!important;font-style:normal!important;font-size:60px!important;margin-top:14px!important;letter-spacing:.02em}
+.fd-novel .fd-text p,.fd-novel .fd-heading{font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif}
+
+/* カルーセルのページドット + ウォーターマーク */
+.fd-dots{display:flex;align-items:center;gap:22px;margin-top:12px}
+.fd-dot{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.28)}
+.fd-dot.is-current{background:var(--gold);width:58px;border-radius:12px}
+.fd-watermark{margin-top:34px;font-size:34px;letter-spacing:.10em;color:rgba(255,255,255,.55);text-shadow:0 1px 4px #000}
+
+/* ── 表紙スライド専用 ── */
+.fd-cover .fd-media img,.fd-cover .fd-media video{filter:saturate(.9) contrast(1.1) brightness(.62)}
+.fd-cover .fd-content{justify-content:center;padding:0 140px}
+.fd-cover .fd-textpanel{background:none;padding:0;gap:36px}
+.fd-cover-eyebrow{font-size:44px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000}
+.fd-cover-title{font-size:220px;font-weight:900;color:#fff;letter-spacing:-.01em;line-height:1.05;text-shadow:0 6px 30px rgba(0,0,0,.7),0 0 90px rgba(139,26,26,.5)}
+.fd-cover-sub{font-size:96px;font-weight:700;color:#f0e8d8;line-height:1.25;text-shadow:0 3px 10px #000}
+.fd-cover-tagline{font-size:66px;font-weight:400;font-style:italic;color:#e7ddc8;text-shadow:0 2px 8px #000;margin-top:6px}
+.fd-cover-rule{display:flex;align-items:center;gap:28px;width:640px;margin:12px auto}
+.fd-cover-rule::before,.fd-cover-rule::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,rgba(244,189,63,.55),transparent)}
+.fd-cover-rule-mark{color:var(--gold);font-size:44px}
+.fd-cover-date{font-size:42px;letter-spacing:.10em;color:rgba(255,255,255,.7);margin-top:4px}
+.fd-cover-cta{margin-top:38px;font-size:52px;font-weight:800;color:var(--gold);letter-spacing:.06em;
+  display:flex;align-items:center;gap:16px;text-shadow:0 2px 6px #000}
+.fd-cover-cta .arrow{display:inline-block;animation:fdArrow 1.6s ease-in-out infinite}
+@keyframes fdArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(14px)}}
+
+/* ── 次話予告（最終）スライド専用 ── */
+.fd-end .fd-media img,.fd-end .fd-media video{filter:saturate(.85) contrast(1.08) brightness(.5)}
+.fd-end .fd-content{justify-content:center;padding:0 150px}
+.fd-end .fd-textpanel{background:none;padding:0;gap:30px}
+.fd-end-eyebrow{font-size:42px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000;
+  display:flex;align-items:center;gap:16px}
+.fd-end-eyebrow::before{content:'▶';font-size:32px}
+.fd-end-ep{font-size:46px;color:rgba(255,255,255,.72);letter-spacing:.08em}
+.fd-end-heading{font-size:118px;font-weight:800;color:#fff;line-height:1.2;text-shadow:0 4px 16px #000;word-break:keep-all}
+.fd-end-body{font-size:70px;font-weight:400;font-style:italic;line-height:1.6;color:#f0e8d8;text-shadow:0 2px 8px #000;
+  border-left:4px solid var(--crimson);padding-left:44px;text-align:left;word-break:keep-all}
+.fd-end-cta{margin-top:30px;display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
+.fd-end-cta span{font-size:44px;font-weight:800;color:var(--gold);letter-spacing:.04em;
+  border:2px solid rgba(244,189,63,.55);border-radius:999px;padding:20px 44px;background:rgba(244,189,63,.08)}
+.fd-end-handle{margin-top:24px;font-size:40px;color:rgba(255,255,255,.65);letter-spacing:.05em}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     エピック・フューリー ホルムズの夜 — Instagram/Threads フィード 第1話
+     （ダイナミック、4:5、2160x2700）
+     novel_jp_feeds_template.html を基準に作成。表紙1枚 + 本編13枚（ショート版
+     第1話の13場面と1対1で対応）+ 次話予告1枚 = 合計15枚。
+     各スライドは無音・自動再生・ループ動画を背景とする。1〜13ページ目は
+     ショート版第1話（novel_jp_shorts_ep01.html）ですでに使用されているのと
+     同一のbasenameのポスター／動画ファイルをそのまま引き継いで再利用する
+     （s01_crisis_command_center 〜 s13_sunrise_ship）— object-fit:cover が
+     9:16素材を4:5フレームに自動でクロップするため、再編集なしで再利用できる。
+     表紙・エンディングスライドはフィード専用の新規カット
+     （ep01_cover_tehran_skyline_dusk、ep01_end_fordow_tunnel）で、ショート版に
+     対応カットはない。すべてのパスは実ファイルが用意されるまでの仮パスである
+     — 画像: https://soulthread88.github.io/imgs/novel/、動画:
+     https://soulthread88.github.io/videos/novel/（プラットフォーム別の
+     サブフォルダなしで全プラットフォーム共有）。
+     ============================================================ -->
+
+<div class="fd-toolbar">
+  <span class="fd-toolbar-label">プレビュー</span>
+  <button type="button" id="fd-btn-fit" class="is-active">画面に合わせる</button>
+  <button type="button" id="fd-btn-export">エクスポートモード（2160×2700 原寸）</button>
+  <span class="fd-tb-note">※各スライドは動画（無音自動再生・ループ）です — エクスポート時は .fd-stage 要素を個別に録画／キャプチャ（2160×2700 px、3:4）してください — このツールバーと角の影は対象外です。</span>
+</div>
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-cover" data-page="cover" id="fdstage-ep01-cover">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · COVER</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-cover">
+    <video id="fdvid-ep01-cover" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/ep01_cover_tehran_skyline_dusk.jpg" aria-label="開戦直前のテヘランの空、2026年2月28日"><source src="https://soulthread88.github.io/videos/novel/ep01_cover_tehran_skyline_dusk.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-cover">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-cover-eyebrow">リアルタイム戦争小説・EPISODE 01</div>
+      <div class="fd-cover-title">EPIC FURY</div>
+      <div class="fd-cover-sub">ホルムズの夜</div>
+      <div class="fd-cover-rule"><span class="fd-cover-rule-mark">✦</span></div>
+      <div class="fd-cover-tagline">城壁が崩れる日</div>
+      <div class="fd-cover-date">2026年2月28日・世界が変わった8時間の記録</div>
+      <div class="fd-cover-cta">スワイプして読む<span class="arrow">→</span></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="1" id="fdstage-ep01-p01">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 01/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p01">
+    <video id="fdvid-ep01-p01" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s01_crisis_command_center.jpg" aria-label="ホワイトハウス地下危機管理室、2026年2月28日未明"><source src="https://soulthread88.github.io/videos/novel/s01_crisis_command_center.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p01">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ワシントンD.C.・危機管理室・02:00</div>
+      <h2 class="fd-heading">命令、下る</h2>
+      <div class="fd-text">
+      <p>危機管理室の灯りは六時間、消えなかった。大統領はたった一言で作戦「エピック・フューリー」の発動を告げた。開いた扉は、もう二度と閉じない。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="2" id="fdstage-ep01-p02">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 02/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p02">
+    <video id="fdvid-ep01-p02" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s02_fighter_jet_night.jpg" aria-label="テヘラン上空、夜間空爆の閃光"><source src="https://soulthread88.github.io/videos/novel/s02_fighter_jet_night.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p02">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">テヘラン・09:45</div>
+      <h2 class="fd-heading">最初の閃光</h2>
+      <div class="fd-text">
+      <p>テヘランの空に最初の閃光が走った。米・イスラエル連合空軍がイラン西部防空網への精密攻撃を開始した。街はまだ、その意味を知らなかった。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="3" id="fdstage-ep01-p03">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 03/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p03">
+    <video id="fdvid-ep01-p03" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s03_carrier_flight_deck.jpg" aria-label="空母フォード飛行甲板、無人機発進"><source src="https://soulthread88.github.io/videos/novel/s03_carrier_flight_deck.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p03">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ホルムズ海峡・空母フォード</div>
+      <h2 class="fd-heading">甲板から飛び立つ</h2>
+      <div class="fd-text">
+      <p>同じ頃、空母の甲板から無人機が群れをなして飛び立った。狭い海峡を守っていた小型艦艇が次々と航路を離れる。世界の原油輸送の五分の一が通るこの水路が、今や戦場と化していた。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="4" id="fdstage-ep01-p04">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 04/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p04">
+    <video id="fdvid-ep01-p04" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s04_gulf_city_skyline.jpg" aria-label="テヘラン市街上空、午後"><source src="https://soulthread88.github.io/videos/novel/s04_gulf_city_skyline.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p04">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">テヘラン・14:17</div>
+      <h2 class="fd-heading">指揮壕、沈黙す</h2>
+      <div class="fd-text">
+      <p>テヘラン指揮中枢への直撃が確認された。最高指導者の死亡確認には数時間を要した。指導部の沈黙そのものが、次の局面の予兆だった。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="5" id="fdstage-ep01-p05">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 05/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p05">
+    <video id="fdvid-ep01-p05" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s05_missile_launch.jpg" aria-label="弾道ミサイル発射、夜間"><source src="https://soulthread88.github.io/videos/novel/s05_missile_launch.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p05">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">バーレーン・カタール・イラク・16:00</div>
+      <h2 class="fd-heading">イラン、応戦す</h2>
+      <div class="fd-text">
+      <p>イランが沈黙を破った。シャハブ3系列弾道ミサイルがバーレーン・カタール・イラクの米軍基地へ降り注いだ。この日の激怒は、まだ終わっていなかった。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="6" id="fdstage-ep01-p06">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 06/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p06">
+    <video id="fdvid-ep01-p06" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s06_bunker_control_room.jpg" aria-label="ソウル国家危機管理センター地下壕"><source src="https://soulthread88.github.io/videos/novel/s06_bunker_control_room.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p06">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ソウル・国家危機管理センター</div>
+      <h2 class="fd-heading">警報灯、点る</h2>
+      <div class="fd-text">
+      <p>日付が変わった頃、地下壕の灯りが一斉に点いた。スクリーン上の赤い点が急速に増えていく。「我が国の船は何隻いる」十七隻。うち三隻は、すでに応答が途絶えていた。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="7" id="fdstage-ep01-p07">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 07/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p07">
+    <video id="fdvid-ep01-p07" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s07_oil_tanker_night.jpg" aria-label="タンカー「ハンビッ号」、夜間海上"><source src="https://soulthread88.github.io/videos/novel/s07_oil_tanker_night.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p07">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ホルムズ海峡・タンカー「ハンビッ号」</div>
+      <h2 class="fd-heading">立ち往生</h2>
+      <div class="fd-text">
+      <p>ハンビッ号の甲板を曳光弾がかすめた。エンジンは三時間、沈黙している。「本社、応答願う」返るのは沈黙だけ。乗組員は救命胴衣のまま、無言で身を寄せ合っていた。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="8" id="fdstage-ep01-p08">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 08/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p08">
+    <video id="fdvid-ep01-p08" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s08_destroyer_pier.jpg" aria-label="釜山・韓国海軍作戦司令部埠頭、駆逐艦「世宗大王」"><source src="https://soulthread88.github.io/videos/novel/s08_destroyer_pier.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p08">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">釜山・韓国海軍作戦司令部</div>
+      <h2 class="fd-heading">出港命令</h2>
+      <div class="fd-text">
+      <p>パク艦長は命令書を二度読んだ。駆逐艦「世宗大王」、直ちに出港。任務は自国船舶の安全確保――だがその海は、すでに戦場だった。「三十分以内に出港可能です」</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="9" id="fdstage-ep01-p09">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 09/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p09">
+    <video id="fdvid-ep01-p09" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s09_video_conference.jpg" aria-label="同盟国合同ビデオ会議画面"><source src="https://soulthread88.github.io/videos/novel/s09_video_conference.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p09">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ワシントンD.C.・同盟国合同会議</div>
+      <h2 class="fd-heading">同じ船に乗る者たち</h2>
+      <div class="fd-text">
+      <p>各国代表の顔がスクリーンに格子状に並んだ。「ホルムズ海峡の閉鎖は最短でも七十二時間」韓国代表団の実務者は、顔を上げずメモを取り続けた。数字だけでは語れない衝撃だった。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="10" id="fdstage-ep01-p10">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 10/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p10">
+    <video id="fdvid-ep01-p10" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s10_city_square_billboard.jpg" aria-label="ソウル・光化門広場の電光掲示板、夜間都心"><source src="https://soulthread88.github.io/videos/novel/s10_city_square_billboard.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p10">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ソウル・光化門広場</div>
+      <h2 class="fd-heading">眠れない街</h2>
+      <div class="fd-text">
+      <p>コンビニ前に数人が集まり、速報を見つめていた。原油価格のグラフが急角度で跳ね上がる。「また、あっちで戦争か」誰も答えなかった。街の灯りの下の空気は、確かに変わっていた。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="11" id="fdstage-ep01-p11">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 11/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p11">
+    <video id="fdvid-ep01-p11" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s11_warship_ops_room.jpg" aria-label="「世宗大王」艦橋、レーダー画面"><source src="https://soulthread88.github.io/videos/novel/s11_warship_ops_room.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p11">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ホルムズ海峡付近海域</div>
+      <h2 class="fd-heading">闇の中の航跡</h2>
+      <div class="fd-text">
+      <p>「世宗大王」は灯火管制を保ったまま海峡へ進んだ。「複数の小型水上目標、接近中」レーダー上の点がゆっくりと隊形を組む。艦橋の全員が息を殺していた。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="12" id="fdstage-ep01-p12">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 12/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p12">
+    <video id="fdvid-ep01-p12" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s12_tanker_flare.jpg" aria-label="タンカー「ハンビッ号」の緊急信号弾、夜間"><source src="https://soulthread88.github.io/videos/novel/s12_tanker_flare.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p12">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">タンカー「ハンビッ号」</div>
+      <h2 class="fd-heading">明滅する灯</h2>
+      <div class="fd-text">
+      <p>ハンビッ号の信号弾が夜空を切り裂いた。「位置発信中。複数目標接近」その瞬間、同じ信号が「世宗大王」のレーダーにも捉えられた。「全速前進」艦は闇の中へ突き進んだ。</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="13" id="fdstage-ep01-p13">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 13/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p13">
+    <video id="fdvid-ep01-p13" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s13_sunrise_ship.jpg" aria-label="夜明けのホルムズ海峡、「世宗大王」と「ハンビッ号」"><source src="https://soulthread88.github.io/videos/novel/s13_sunrise_ship.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p13">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">ホルムズ海峡・夜明け</div>
+      <h2 class="fd-heading">城壁が崩れた夜</h2>
+      <div class="fd-text">
+      <p>「世宗大王」がハンビッ号に着いた頃、空は白み始めていた。たった一日で指導者が死に、海峡が戦場と化した。長く揺るぎないと思われた城壁が、この夜、静かに崩れ落ちた。</p>
+      <p class="fd-end-line">― 第一話 完。第二話へ続く。 ―</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span></div>
+    <div class="fd-watermark">@soulthread88・EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-end" data-page="end" id="fdstage-ep01-end">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · NEXT</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-end">
+    <video id="fdvid-ep01-end" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/ep01_end_fordow_tunnel.jpg" aria-label="フォルドウ地下施設、破壊された遠心分離機ホール"><source src="https://soulthread88.github.io/videos/novel/ep01_end_fordow_tunnel.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="差替">⇄</button>
+      <button type="button" data-action="delete" title="削除">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-end">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-end-eyebrow">次話予告</div>
+      <div class="fd-end-ep">第2話 — Chapter Two</div>
+      <div class="fd-end-heading">フォルドウ地下500メートル</div>
+      <div class="fd-end-body">核燃料はまだ燃えていた。破壊された遠心分離機ホールの残骸の中で、レイラ・シラジの画面は予期せぬ信号を捉える。</div>
+      <div class="fd-end-cta"><span>フォロー</span><span>保存</span><span>シェア</span></div>
+      <div class="fd-end-handle">@soulthread88・EPIC FURY</div>
+    </div>
+  </div>
+</main>
+</div>
+<script>
+(function(){
+  // 動画の差替・削除 — クリックでツールを表示、ファイル選択で即座にプレビューを差し替え（このセッション限定、保存されない）
+  document.querySelectorAll('[data-imgbox]').forEach(function(box){
+    box.addEventListener('click', function(e){
+      if(e.target.closest('.fd-imgtools')) return;
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ if(b!==box) b.classList.remove('tools-visible'); });
+      box.classList.toggle('tools-visible');
+    });
+    var replaceBtn = box.querySelector('[data-action="replace"]');
+    var deleteBtn  = box.querySelector('[data-action="delete"]');
+    var fileInput  = box.querySelector('[data-file-input]');
+    var vid = box.querySelector('video');
+    if(replaceBtn) replaceBtn.addEventListener('click', function(e){ e.stopPropagation(); fileInput.click(); });
+    if(fileInput) fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0] && vid){
+        vid.removeAttribute('poster');
+        vid.src = URL.createObjectURL(fileInput.files[0]);
+        vid.load(); vid.play().catch(function(){});
+      }
+    });
+    if(deleteBtn) deleteBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(vid){ vid.pause(); vid.removeAttribute('src'); vid.removeAttribute('poster'); vid.load(); vid.style.background = '#111'; }
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('[data-imgbox]')){
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ b.classList.remove('tools-visible'); });
+    }
+  });
+
+  // ダーク／ライトテーマの切替（このセッション限定、保存されない — スライドの枠とヘッダーのみに影響）
+  document.querySelectorAll('[data-theme-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var theme = btn.getAttribute('data-theme-btn');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-theme-btn')===theme); });
+    });
+  });
+
+  // ── 画面に合わせて縮小表示 / エクスポートモード ──────────────────
+  // ブラウザプレビュー: 2160px の原寸を画面幅に合わせて縮小表示する（transform:scale）。
+  // エクスポートモード: 倍率を1に戻し、各 .fd-stage を正確に2160x2700ピクセルで
+  // キャプチャ（スクリーンショット／ヘッドレスキャプチャツール）できるようにする。
+  var wraps = Array.prototype.slice.call(document.querySelectorAll('.fd-stage-wrap'));
+  var btnFit = document.getElementById('fd-btn-fit');
+  var btnExport = document.getElementById('fd-btn-export');
+  function applyFit(){
+    document.body.setAttribute('data-preview','fit');
+    var vw = Math.min(window.innerWidth - 48, 640);
+    var scale = vw / 2160;
+    wraps.forEach(function(w){
+      w.style.transform = 'scale(' + scale + ')';
+      w.style.marginBottom = (2700 * scale - 2700 + 56) + 'px';
+    });
+    if(btnFit) btnFit.classList.add('is-active');
+    if(btnExport) btnExport.classList.remove('is-active');
+  }
+  function applyExport(){
+    document.body.setAttribute('data-preview','export');
+    wraps.forEach(function(w){ w.style.transform = 'none'; w.style.marginBottom = '56px'; });
+    if(btnExport) btnExport.classList.add('is-active');
+    if(btnFit) btnFit.classList.remove('is-active');
+  }
+  if(btnFit) btnFit.addEventListener('click', applyFit);
+  if(btnExport) btnExport.addEventListener('click', applyExport);
+  window.addEventListener('resize', function(){ if(document.body.getAttribute('data-preview')==='fit') applyFit(); });
+  applyFit();
+})();
+</script>
+</body>
+</html>

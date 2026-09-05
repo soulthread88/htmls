@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epic Fury: Night Over Hormuz — Instagram/Threads Feed Episode 1 (Dynamic, 4:5, 2160×2700)</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root{
+  --navy:#06152d; --navy2:#07182f; --gold:#f4bd3f; --gold2:#c8a040; --white:#f7f8fa;
+  --crimson:#c0282a; --bg:#020914; --panel:rgba(2,7,16,.88);
+  --text-dim:rgba(255,255,255,.62);
+}
+:root[data-theme="light"]{
+  --navy:#f4bd3f; --navy2:#fff6dd; --bg:#eef1f5; --panel:rgba(255,255,255,.92);
+  --white:#0c1626; --text-dim:rgba(10,20,35,.62);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:var(--bg);color:var(--white);font-family:"Inter","Pretendard","Segoe UI",Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;gap:56px;padding:0 0 140px}
+a{color:inherit;text-decoration:none}
+
+/* ─────────────────────────────────────────────────────────────
+   Export-mode guide toolbar (outside the capture area -- not part of any slide)
+───────────────────────────────────────────────────────────── */
+.fd-toolbar{position:sticky;top:0;z-index:999;width:100%;display:flex;align-items:center;justify-content:center;gap:14px;
+  background:rgba(2,9,20,.94);border-bottom:1px solid rgba(244,189,63,.25);padding:12px 16px;flex-wrap:wrap}
+.fd-toolbar-label{font-size:12px;color:var(--text-dim);letter-spacing:.03em}
+.fd-toolbar button{font-size:12px;font-weight:700;color:var(--gold);background:rgba(244,189,63,.10);border:1px solid rgba(244,189,63,.45);
+  border-radius:20px;padding:7px 16px;cursor:pointer}
+.fd-toolbar button.is-active{background:var(--gold);color:#1a1206}
+.fd-toolbar .fd-tb-note{font-size:11px;color:var(--text-dim);opacity:.75}
+
+/* ─────────────────────────────────────────────────────────────
+   Slide mockup (browser preview only -- the shadow/rounded corners apply
+   here only; the actual capture target, .fd-stage itself, is a plain
+   2160x2700 rectangle)
+───────────────────────────────────────────────────────────── */
+.fd-stage-wrap{position:relative;transform-origin:top center}
+body[data-preview="fit"] .fd-stage-wrap{margin-bottom:calc(var(--fd-fit-shrink, 0px))}
+.fd-stage-wrap .fd-stage{box-shadow:0 20px 60px rgba(0,0,0,.5);border-radius:0}
+body[data-preview="fit"] .fd-stage-wrap .fd-stage{border-radius:28px;overflow:hidden}
+
+/* ─────────────────────────────────────────────────────────────
+   Capture target -- must stay fixed at 2160 x 2700 px (4:5); never use vw/rem
+───────────────────────────────────────────────────────────── */
+.fd-stage{position:relative;width:2160px;height:2700px;overflow:hidden;background:var(--navy)}
+
+.fd-media{position:absolute;inset:0;overflow:hidden;background:#111}
+.fd-media img,.fd-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.94) contrast(1.07) brightness(.87)}
+.fd-media::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,rgba(2,9,20,.34) 0%,rgba(2,9,20,.10) 16%,rgba(2,9,20,.06) 38%,rgba(2,9,20,.30) 62%,rgba(2,9,20,.72) 82%,rgba(2,9,20,.94) 100%)}
+
+/* Replace/delete media tools -- shown only on click (never clicked during export, so absent from the capture) */
+.fd-imgtools{position:absolute;top:210px;right:64px;z-index:26;display:flex;gap:14px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .16s,transform .16s}
+.fd-media.tools-visible .fd-imgtools{opacity:1;pointer-events:auto;transform:translateY(0)}
+.fd-imgtools button{width:76px;height:76px;border-radius:50%;border:2px solid rgba(244,189,63,.7);background:rgba(6,21,45,.86);color:var(--gold);font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.fd-imgtools button:hover{background:rgba(244,189,63,.24)}
+.fd-imgtools input[type=file]{display:none}
+
+/* Header -- brand (left) / episode-page label + language & theme controls (right) */
+.fd-header{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;flex-direction:column;gap:6px;padding:64px 96px 56px;
+  background:linear-gradient(180deg,rgba(6,21,45,.92) 45%,rgba(6,21,45,0) 100%)}
+:root[data-theme="light"] .fd-header{background:linear-gradient(180deg,rgba(255,246,221,.92) 45%,rgba(255,246,221,0) 100%)}
+.fd-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.fd-brand{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.fd-brand .tag{font-size:38px;font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+:root[data-theme="light"] .fd-brand .tag{color:#8a5b00}
+.fd-brand .logo{font-size:64px;font-weight:800;color:#fff;text-shadow:2px 2px 8px #000;white-space:nowrap;margin-top:6px}
+:root[data-theme="light"] .fd-brand .logo{color:#101a2c;text-shadow:none}
+.fd-headerright{display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;gap:10px}
+.fd-meta-row{font-size:44px;font-weight:800;color:var(--gold);white-space:nowrap;text-align:right}
+:root[data-theme="light"] .fd-meta-row{color:#8a5b00}
+.fd-controls{display:flex;align-items:center;gap:10px;flex:0 0 auto;font-size:30px;font-weight:700;white-space:nowrap}
+.fd-controls a{color:var(--text-dim)}
+.fd-controls a.is-active{color:var(--gold);font-weight:800}
+.fd-controls button{border:none;background:transparent;color:var(--text-dim);font-size:28px;font-weight:700;padding:2px;cursor:pointer;display:inline-flex;align-items:center}
+.fd-controls button.is-active{color:var(--gold);font-weight:800}
+.fd-controls button svg{width:26px;height:26px}
+.fd-controls .sep{color:rgba(255,255,255,.28);font-size:26px}
+:root[data-theme="light"] .fd-controls .sep{color:rgba(10,20,35,.22)}
+.fd-controls .sep-strong{color:var(--gold);opacity:.55;margin:0 2px;font-size:26px}
+
+/* Body content -- bottom-aligned (Instagram carousel convention: hook text sits low in the frame) */
+.fd-content{position:absolute;left:0;right:0;bottom:0;z-index:10;display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-end;padding:0 130px 96px;text-align:center}
+.fd-textpanel{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;max-width:92%;margin:0 auto;
+  padding:72px 88px;border-radius:56px;
+  background:linear-gradient(180deg,rgba(2,7,16,0) 0%,rgba(2,7,16,.38) 14%,rgba(2,7,16,.66) 46%,rgba(2,7,16,.66) 68%,rgba(2,7,16,.30) 90%,rgba(2,7,16,0) 100%)}
+.fd-scene-tag{color:var(--gold);font-weight:800;font-size:46px;letter-spacing:.05em;text-transform:uppercase;text-shadow:0 2px 4px #000}
+.fd-heading{margin:0;font-size:132px;line-height:1.16;font-weight:800;color:#fff;text-shadow:0 3px 10px #000;word-break:keep-all}
+.fd-text p{margin:0;font-weight:400;font-size:82px;line-height:1.56;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.75);
+  word-break:keep-all;overflow-wrap:break-word}
+.fd-text p.fd-end-line{color:var(--gold)!important;font-weight:800!important;font-style:normal!important;font-size:60px!important;margin-top:14px!important;letter-spacing:.02em}
+.fd-novel .fd-text p,.fd-novel .fd-heading{font-family:"Source Serif 4","Georgia","Pretendard",serif}
+
+/* Carousel page dots + watermark */
+.fd-dots{display:flex;align-items:center;gap:22px;margin-top:12px}
+.fd-dot{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.28)}
+.fd-dot.is-current{background:var(--gold);width:58px;border-radius:12px}
+.fd-watermark{margin-top:34px;font-size:34px;letter-spacing:.10em;color:rgba(255,255,255,.55);text-shadow:0 1px 4px #000}
+
+/* -- Cover slide only -- */
+.fd-cover .fd-media img,.fd-cover .fd-media video{filter:saturate(.9) contrast(1.1) brightness(.62)}
+.fd-cover .fd-content{justify-content:center;padding:0 140px}
+.fd-cover .fd-textpanel{background:none;padding:0;gap:36px}
+.fd-cover-eyebrow{font-size:44px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000}
+.fd-cover-title{font-size:220px;font-weight:900;color:#fff;letter-spacing:-.01em;line-height:1.05;text-shadow:0 6px 30px rgba(0,0,0,.7),0 0 90px rgba(139,26,26,.5)}
+.fd-cover-sub{font-size:96px;font-weight:700;color:#f0e8d8;line-height:1.25;text-shadow:0 3px 10px #000}
+.fd-cover-tagline{font-size:66px;font-weight:400;font-style:italic;color:#e7ddc8;text-shadow:0 2px 8px #000;margin-top:6px}
+.fd-cover-rule{display:flex;align-items:center;gap:28px;width:640px;margin:12px auto}
+.fd-cover-rule::before,.fd-cover-rule::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,rgba(244,189,63,.55),transparent)}
+.fd-cover-rule-mark{color:var(--gold);font-size:44px}
+.fd-cover-date{font-size:42px;letter-spacing:.10em;color:rgba(255,255,255,.7);margin-top:4px}
+.fd-cover-cta{margin-top:38px;font-size:52px;font-weight:800;color:var(--gold);letter-spacing:.06em;
+  display:flex;align-items:center;gap:16px;text-shadow:0 2px 6px #000}
+.fd-cover-cta .arrow{display:inline-block;animation:fdArrow 1.6s ease-in-out infinite}
+@keyframes fdArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(14px)}}
+
+/* -- Next-episode teaser (final) slide only -- */
+.fd-end .fd-media img,.fd-end .fd-media video{filter:saturate(.85) contrast(1.08) brightness(.5)}
+.fd-end .fd-content{justify-content:center;padding:0 150px}
+.fd-end .fd-textpanel{background:none;padding:0;gap:30px}
+.fd-end-eyebrow{font-size:42px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000;
+  display:flex;align-items:center;gap:16px}
+.fd-end-eyebrow::before{content:'▶';font-size:32px}
+.fd-end-ep{font-size:46px;color:rgba(255,255,255,.72);letter-spacing:.08em}
+.fd-end-heading{font-size:118px;font-weight:800;color:#fff;line-height:1.2;text-shadow:0 4px 16px #000;word-break:keep-all}
+.fd-end-body{font-size:70px;font-weight:400;font-style:italic;line-height:1.6;color:#f0e8d8;text-shadow:0 2px 8px #000;
+  border-left:4px solid var(--crimson);padding-left:44px;text-align:left;word-break:keep-all}
+.fd-end-cta{margin-top:30px;display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
+.fd-end-cta span{font-size:44px;font-weight:800;color:var(--gold);letter-spacing:.04em;
+  border:2px solid rgba(244,189,63,.55);border-radius:999px;padding:20px 44px;background:rgba(244,189,63,.08)}
+.fd-end-handle{margin-top:24px;font-size:40px;color:rgba(255,255,255,.65);letter-spacing:.05em}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     Epic Fury: Night Over Hormuz — Instagram/Threads Feed Episode 1
+     (Dynamic, 4:5, 2160x2700)
+     Built from novel_en_feeds_template.html. 1 cover slide + 13 story
+     slides (mapped 1:1 to the 13 Shorts Episode 1 scenes) + 1 next-episode
+     teaser slide = 15 slides total.
+     Every slide is a silent, autoplaying, looping video background.
+     Pages 1-13 inherit the exact same poster/video basenames already used
+     in Shorts Episode 1 (novel_en_shorts_ep01.html / novel_kr_shorts_ep01.html)
+     -- s01_crisis_command_center through s13_sunrise_ship -- since
+     object-fit:cover automatically crops the 9:16 source footage to fit
+     this 4:5 frame with no reframing needed. The cover and ending slides
+     use new feed-only scenes (ep01_cover_tehran_skyline_dusk,
+     ep01_end_fordow_tunnel) with no Shorts equivalent. Every path is a
+     placeholder until the real files are in place -- images:
+     https://soulthread88.github.io/imgs/novel/, videos:
+     https://soulthread88.github.io/videos/novel/ (shared across all
+     platforms, no per-platform subfolder).
+     ============================================================ -->
+
+<div class="fd-toolbar">
+  <span class="fd-toolbar-label">Preview</span>
+  <button type="button" id="fd-btn-fit" class="is-active">Fit to screen</button>
+  <button type="button" id="fd-btn-export">Export mode (2160×2700 original)</button>
+  <span class="fd-tb-note">※ Each slide is a video (silent, autoplay/loop) — for export, record/capture each .fd-stage element individually (2160×2700 px, 4:5) — this toolbar and the rounded-corner shadow are outside the capture area.</span>
+</div>
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-cover" data-page="cover" id="fdstage-ep01-cover">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · COVER</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-cover">
+    <video id="fdvid-ep01-cover" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/ep01_cover_tehran_skyline_dusk.jpg" aria-label="Tehran skyline at dusk, just before the war began · February 28, 2026"><source src="https://soulthread88.github.io/videos/novel/ep01_cover_tehran_skyline_dusk.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-cover">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-cover-eyebrow">LIVE WAR FICTION · EPISODE 01</div>
+      <div class="fd-cover-title">EPIC FURY</div>
+      <div class="fd-cover-sub">NIGHT OVER HORMUZ</div>
+      <div class="fd-cover-rule"><span class="fd-cover-rule-mark">✦</span></div>
+      <div class="fd-cover-tagline">The Day the Wall Came Down</div>
+      <div class="fd-cover-date">February 28, 2026 · Eight Hours That Changed the World</div>
+      <div class="fd-cover-cta">Swipe to read<span class="arrow">→</span></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="1" id="fdstage-ep01-p01">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 01/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p01">
+    <video id="fdvid-ep01-p01" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s01_crisis_command_center.jpg" aria-label="The White House Situation Room, dawn on February 28, 2026"><source src="https://soulthread88.github.io/videos/novel/s01_crisis_command_center.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p01">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Washington, D.C. · The Situation Room · 02:00</div>
+      <h2 class="fd-heading">The Order Is Given</h2>
+      <div class="fd-text">
+      <p>The lights in the Situation Room hadn't gone dark in six hours. The President gave the order in one word: Operation EPIC FURY was live. A door had just opened that wasn't going to close again.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="2" id="fdstage-ep01-p02">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 02/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p02">
+    <video id="fdvid-ep01-p02" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s02_fighter_jet_night.jpg" aria-label="Flash of a night airstrike over Tehran"><source src="https://soulthread88.github.io/videos/novel/s02_fighter_jet_night.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p02">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Tehran · 09:45</div>
+      <h2 class="fd-heading">First Flash Over Tehran</h2>
+      <div class="fd-text">
+      <p>The first flash lit the sky over Tehran. A joint U.S.-Israeli air campaign opened on Iran's western air defenses. The city was only just waking up — it had no idea yet what that meant.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="3" id="fdstage-ep01-p03">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 03/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p03">
+    <video id="fdvid-ep01-p03" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s03_carrier_flight_deck.jpg" aria-label="Flight deck of USS Gerald R. Ford, drones launching"><source src="https://soulthread88.github.io/videos/novel/s03_carrier_flight_deck.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p03">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Strait of Hormuz · Carrier USS Gerald R. Ford</div>
+      <h2 class="fd-heading">Drones Off the Deck</h2>
+      <div class="fd-text">
+      <p>At the same moment, drones rose in swarms off the carrier's deck. The patrol craft guarding the narrow strait peeled away, one after another. One-fifth of the world's seaborne oil passes through these waters. It was a battlefield now.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="4" id="fdstage-ep01-p04">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 04/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p04">
+    <video id="fdvid-ep01-p04" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s04_gulf_city_skyline.jpg" aria-label="Tehran skyline in the afternoon"><source src="https://soulthread88.github.io/videos/novel/s04_gulf_city_skyline.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p04">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Tehran · 14:17</div>
+      <h2 class="fd-heading">The Bunker Falls Silent</h2>
+      <div class="fd-text">
+      <p>A direct strike hit Iran's command leadership. Confirmation the Supreme Leader was dead wouldn't come for hours. The silence at the top was itself a warning of what came next.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="5" id="fdstage-ep01-p05">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 05/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p05">
+    <video id="fdvid-ep01-p05" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s05_missile_launch.jpg" aria-label="Ballistic missile launch at night"><source src="https://soulthread88.github.io/videos/novel/s05_missile_launch.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p05">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Bahrain · Qatar · Iraq · 16:00</div>
+      <h2 class="fd-heading">Iran Answers</h2>
+      <div class="fd-text">
+      <p>Iran broke its silence. Shahab-3-class missiles rose in salvos against U.S. bases across Bahrain, Qatar, and Iraq. The day's fury wasn't finished. Not even close.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="6" id="fdstage-ep01-p06">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 06/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p06">
+    <video id="fdvid-ep01-p06" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s06_bunker_control_room.jpg" aria-label="Underground bunker, Seoul National Crisis Management Center"><source src="https://soulthread88.github.io/videos/novel/s06_bunker_control_room.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p06">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Seoul · National Crisis Management Center</div>
+      <h2 class="fd-heading">The Alert Lights Come On</h2>
+      <div class="fd-text">
+      <p>Past midnight, the bunker's lights snapped on. Red contacts kept multiplying across the screen. “How many of our ships are out there?” Seventeen. Three had already gone dark.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="7" id="fdstage-ep01-p07">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 07/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p07">
+    <video id="fdvid-ep01-p07" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s07_oil_tanker_night.jpg" aria-label="Oil tanker M/V Hanbit at sea, night"><source src="https://soulthread88.github.io/videos/novel/s07_oil_tanker_night.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p07">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Strait of Hormuz · Oil Tanker M/V Hanbit</div>
+      <h2 class="fd-heading">Dead in the Water</h2>
+      <div class="fd-text">
+      <p>Tracer fire streaked across Hanbit's deck. The engines had been silent for three hours. “Home office, come in.” Nothing came back but static. Below deck, the crew sat in their life vests, saying nothing.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="8" id="fdstage-ep01-p08">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 08/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p08">
+    <video id="fdvid-ep01-p08" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s08_destroyer_pier.jpg" aria-label="ROK Fleet Command pier in Busan, ROKS Sejong the Great"><source src="https://soulthread88.github.io/videos/novel/s08_destroyer_pier.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p08">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Busan · ROK Fleet Command</div>
+      <h2 class="fd-heading">Get Underway</h2>
+      <div class="fd-text">
+      <p>Captain Park read the order twice. ROKS Sejong the Great — underway immediately. The mission was simple: secure Korean vessels near Hormuz. Those waters were already a battlefield. “We can get underway inside thirty minutes.”</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="9" id="fdstage-ep01-p09">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 09/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p09">
+    <video id="fdvid-ep01-p09" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s09_video_conference.jpg" aria-label="Allied coalition video call screen"><source src="https://soulthread88.github.io/videos/novel/s09_video_conference.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p09">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Washington, D.C. · Allied Coalition Call</div>
+      <h2 class="fd-heading">All in the Same Boat</h2>
+      <div class="fd-text">
+      <p>Faces from a dozen capitals filled the screen in a grid. “We're estimating Hormuz stays closed a minimum of seventy-two hours.” The Korean delegation kept writing, without looking up. The math didn't fit in a column of notes.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="10" id="fdstage-ep01-p10">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 10/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p10">
+    <video id="fdvid-ep01-p10" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s10_city_square_billboard.jpg" aria-label="Gwanghwamun billboard screens at night, Seoul"><source src="https://soulthread88.github.io/videos/novel/s10_city_square_billboard.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p10">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Seoul · Gwanghwamun Square</div>
+      <h2 class="fd-heading">A City That Can't Sleep</h2>
+      <div class="fd-text">
+      <p>A few people gathered outside the convenience store, watching the coverage. The billboard's oil-price chart climbed in a steep line. “Another war over there,” someone said. Nobody answered. The air beneath the city lights had changed.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="11" id="fdstage-ep01-p11">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 11/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p11">
+    <video id="fdvid-ep01-p11" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s11_warship_ops_room.jpg" aria-label="Bridge of ROKS Sejong the Great, radar screen"><source src="https://soulthread88.github.io/videos/novel/s11_warship_ops_room.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p11">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Waters Near the Strait of Hormuz</div>
+      <h2 class="fd-heading">Contacts in the Dark</h2>
+      <div class="fd-text">
+      <p>Sejong the Great ran dark, pushing toward the strait. “Multiple unidentified small craft, closing.” On the radar, scattered points were slowly forming up. On the bridge, every man held his breath.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="12" id="fdstage-ep01-p12">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 12/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p12">
+    <video id="fdvid-ep01-p12" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s12_tanker_flare.jpg" aria-label="M/V Hanbit's emergency flare at night"><source src="https://soulthread88.github.io/videos/novel/s12_tanker_flare.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p12">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Oil Tanker M/V Hanbit</div>
+      <h2 class="fd-heading">A Blinking Light</h2>
+      <div class="fd-text">
+      <p>Hanbit's flare tore across the night sky. “Transmitting position. Multiple contacts approaching.” At that same moment, the identical signal registered on Sejong's radar. “Flank speed.” The destroyer drove into the dark.</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-novel" data-page="13" id="fdstage-ep01-p13">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · 13/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-p13">
+    <video id="fdvid-ep01-p13" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s13_sunrise_ship.jpg" aria-label="Dawn over the Strait of Hormuz, Sejong the Great and Hanbit"><source src="https://soulthread88.github.io/videos/novel/s13_sunrise_ship.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-p13">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">Strait of Hormuz · First Light</div>
+      <h2 class="fd-heading">The Night the Wall Fell</h2>
+      <div class="fd-text">
+      <p>By the time Sejong reached Hanbit, the sky had started to pale. In a single day, a head of state was dead and a strait had become a battlefield. Something that had looked unshakeable for so long had come down, quietly, in this night.</p>
+      <p class="fd-end-line">— End of Episode 1. Continued in Episode 2. —</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-end" data-page="end" id="fdstage-ep01-end">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.01 · NEXT</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_ep01.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_ep01.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-ep01-end">
+    <video id="fdvid-ep01-end" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/ep01_end_fordow_tunnel.jpg" aria-label="Fordow underground facility, the wrecked centrifuge hall"><source src="https://soulthread88.github.io/videos/novel/ep01_end_fordow_tunnel.mp4" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-ep01-end">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-end-eyebrow">COMING NEXT</div>
+      <div class="fd-end-ep">Episode 2 — Chapter Two</div>
+      <div class="fd-end-heading">500 Meters Under Fordow</div>
+      <div class="fd-end-body">The nuclear fuel was still burning. Amid the wreckage of the shattered centrifuge hall, Leila Shirazi's screen catches a signal no one expected.</div>
+      <div class="fd-end-cta"><span>Follow</span><span>Save</span><span>Share</span></div>
+      <div class="fd-end-handle">@soulthread88 · EPIC FURY</div>
+    </div>
+  </div>
+</main>
+</div>
+<script>
+(function(){
+  // Replace/delete media — click to reveal the tools, swap the preview immediately on file pick (this session only, nothing is saved)
+  document.querySelectorAll('[data-imgbox]').forEach(function(box){
+    box.addEventListener('click', function(e){
+      if(e.target.closest('.fd-imgtools')) return;
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ if(b!==box) b.classList.remove('tools-visible'); });
+      box.classList.toggle('tools-visible');
+    });
+    var replaceBtn = box.querySelector('[data-action="replace"]');
+    var deleteBtn  = box.querySelector('[data-action="delete"]');
+    var fileInput  = box.querySelector('[data-file-input]');
+    var vid = box.querySelector('video');
+    if(replaceBtn) replaceBtn.addEventListener('click', function(e){ e.stopPropagation(); fileInput.click(); });
+    if(fileInput) fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0] && vid){
+        vid.removeAttribute('poster');
+        vid.src = URL.createObjectURL(fileInput.files[0]);
+        vid.load(); vid.play().catch(function(){});
+      }
+    });
+    if(deleteBtn) deleteBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(vid){ vid.pause(); vid.removeAttribute('src'); vid.removeAttribute('poster'); vid.load(); vid.style.background = '#111'; }
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('[data-imgbox]')){
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ b.classList.remove('tools-visible'); });
+    }
+  });
+
+  // Dark/light theme toggle (this session only, nothing is saved — affects only the slide frame/header chrome)
+  document.querySelectorAll('[data-theme-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var theme = btn.getAttribute('data-theme-btn');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-theme-btn')===theme); });
+    });
+  });
+
+  // -- Fit-to-screen preview / export mode ------------------------------
+  // Browser preview: the 2160px original is scaled down to fit the viewport
+  // width (transform:scale).
+  // Export mode: the scale is reset to 1 so each .fd-stage can be captured
+  // (screenshot/headless capture tool) at exactly 2160x2700 pixels.
+  var wraps = Array.prototype.slice.call(document.querySelectorAll('.fd-stage-wrap'));
+  var btnFit = document.getElementById('fd-btn-fit');
+  var btnExport = document.getElementById('fd-btn-export');
+  function applyFit(){
+    document.body.setAttribute('data-preview','fit');
+    var vw = Math.min(window.innerWidth - 48, 640);
+    var scale = vw / 2160;
+    wraps.forEach(function(w){
+      w.style.transform = 'scale(' + scale + ')';
+      w.style.marginBottom = (2700 * scale - 2700 + 56) + 'px';
+    });
+    if(btnFit) btnFit.classList.add('is-active');
+    if(btnExport) btnExport.classList.remove('is-active');
+  }
+  function applyExport(){
+    document.body.setAttribute('data-preview','export');
+    wraps.forEach(function(w){ w.style.transform = 'none'; w.style.marginBottom = '56px'; });
+    if(btnExport) btnExport.classList.add('is-active');
+    if(btnFit) btnFit.classList.remove('is-active');
+  }
+  if(btnFit) btnFit.addEventListener('click', applyFit);
+  if(btnExport) btnExport.addEventListener('click', applyExport);
+  window.addEventListener('resize', function(){ if(document.body.getAttribute('data-preview')==='fit') applyFit(); });
+  applyFit();
+})();
+</script>
+</body>
+</html>

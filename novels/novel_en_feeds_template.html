@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epic Fury: Night Over Hormuz — Instagram/Threads Feed Episode [[episode number]] (Dynamic, 4:5, 2160×2700) — TEMPLATE</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root{
+  --navy:#06152d; --navy2:#07182f; --gold:#f4bd3f; --gold2:#c8a040; --white:#f7f8fa;
+  --crimson:#c0282a; --bg:#020914; --panel:rgba(2,7,16,.88);
+  --text-dim:rgba(255,255,255,.62);
+}
+:root[data-theme="light"]{
+  --navy:#f4bd3f; --navy2:#fff6dd; --bg:#eef1f5; --panel:rgba(255,255,255,.92);
+  --white:#0c1626; --text-dim:rgba(10,20,35,.62);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:var(--bg);color:var(--white);font-family:"Inter","Pretendard","Segoe UI",Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;gap:56px;padding:0 0 140px}
+a{color:inherit;text-decoration:none}
+
+/* ─────────────────────────────────────────────────────────────
+   Export-mode guide toolbar (outside the capture area -- not part of any slide)
+───────────────────────────────────────────────────────────── */
+.fd-toolbar{position:sticky;top:0;z-index:999;width:100%;display:flex;align-items:center;justify-content:center;gap:14px;
+  background:rgba(2,9,20,.94);border-bottom:1px solid rgba(244,189,63,.25);padding:12px 16px;flex-wrap:wrap}
+.fd-toolbar-label{font-size:12px;color:var(--text-dim);letter-spacing:.03em}
+.fd-toolbar button{font-size:12px;font-weight:700;color:var(--gold);background:rgba(244,189,63,.10);border:1px solid rgba(244,189,63,.45);
+  border-radius:20px;padding:7px 16px;cursor:pointer}
+.fd-toolbar button.is-active{background:var(--gold);color:#1a1206}
+.fd-toolbar .fd-tb-note{font-size:11px;color:var(--text-dim);opacity:.75}
+
+/* ─────────────────────────────────────────────────────────────
+   Slide mockup (browser preview only -- the shadow/rounded corners apply
+   here only; the actual capture target, .fd-stage itself, is a plain
+   2160x2700 rectangle)
+───────────────────────────────────────────────────────────── */
+.fd-stage-wrap{position:relative;transform-origin:top center}
+body[data-preview="fit"] .fd-stage-wrap{margin-bottom:calc(var(--fd-fit-shrink, 0px))}
+.fd-stage-wrap .fd-stage{box-shadow:0 20px 60px rgba(0,0,0,.5);border-radius:0}
+body[data-preview="fit"] .fd-stage-wrap .fd-stage{border-radius:28px;overflow:hidden}
+
+/* ─────────────────────────────────────────────────────────────
+   Capture target -- must stay fixed at 2160 x 2700 px (4:5); never use vw/rem
+───────────────────────────────────────────────────────────── */
+.fd-stage{position:relative;width:2160px;height:2700px;overflow:hidden;background:var(--navy)}
+
+.fd-media{position:absolute;inset:0;overflow:hidden;background:#111}
+.fd-media img,.fd-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.94) contrast(1.07) brightness(.87)}
+.fd-media::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,rgba(2,9,20,.34) 0%,rgba(2,9,20,.10) 16%,rgba(2,9,20,.06) 38%,rgba(2,9,20,.30) 62%,rgba(2,9,20,.72) 82%,rgba(2,9,20,.94) 100%)}
+
+/* Replace/delete media tools -- shown only on click (never clicked during export, so absent from the capture) */
+.fd-imgtools{position:absolute;top:210px;right:64px;z-index:26;display:flex;gap:14px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .16s,transform .16s}
+.fd-media.tools-visible .fd-imgtools{opacity:1;pointer-events:auto;transform:translateY(0)}
+.fd-imgtools button{width:76px;height:76px;border-radius:50%;border:2px solid rgba(244,189,63,.7);background:rgba(6,21,45,.86);color:var(--gold);font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.fd-imgtools button:hover{background:rgba(244,189,63,.24)}
+.fd-imgtools input[type=file]{display:none}
+
+/* Header -- brand (left) / episode-page label + language & theme controls (right) */
+.fd-header{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;flex-direction:column;gap:6px;padding:64px 96px 56px;
+  background:linear-gradient(180deg,rgba(6,21,45,.92) 45%,rgba(6,21,45,0) 100%)}
+:root[data-theme="light"] .fd-header{background:linear-gradient(180deg,rgba(255,246,221,.92) 45%,rgba(255,246,221,0) 100%)}
+.fd-header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.fd-brand{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.fd-brand .tag{font-size:38px;font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+:root[data-theme="light"] .fd-brand .tag{color:#8a5b00}
+.fd-brand .logo{font-size:64px;font-weight:800;color:#fff;text-shadow:2px 2px 8px #000;white-space:nowrap;margin-top:6px}
+:root[data-theme="light"] .fd-brand .logo{color:#101a2c;text-shadow:none}
+.fd-headerright{display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;gap:10px}
+.fd-meta-row{font-size:44px;font-weight:800;color:var(--gold);white-space:nowrap;text-align:right}
+:root[data-theme="light"] .fd-meta-row{color:#8a5b00}
+.fd-controls{display:flex;align-items:center;gap:10px;flex:0 0 auto;font-size:30px;font-weight:700;white-space:nowrap}
+.fd-controls a{color:var(--text-dim)}
+.fd-controls a.is-active{color:var(--gold);font-weight:800}
+.fd-controls button{border:none;background:transparent;color:var(--text-dim);font-size:28px;font-weight:700;padding:2px;cursor:pointer;display:inline-flex;align-items:center}
+.fd-controls button.is-active{color:var(--gold);font-weight:800}
+.fd-controls button svg{width:26px;height:26px}
+.fd-controls .sep{color:rgba(255,255,255,.28);font-size:26px}
+:root[data-theme="light"] .fd-controls .sep{color:rgba(10,20,35,.22)}
+.fd-controls .sep-strong{color:var(--gold);opacity:.55;margin:0 2px;font-size:26px}
+
+/* Body content -- bottom-aligned (Instagram carousel convention: hook text sits low in the frame) */
+.fd-content{position:absolute;left:0;right:0;bottom:0;z-index:10;display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-end;padding:0 130px 96px;text-align:center}
+.fd-textpanel{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;max-width:92%;margin:0 auto;
+  padding:72px 88px;border-radius:56px;
+  background:linear-gradient(180deg,rgba(2,7,16,0) 0%,rgba(2,7,16,.38) 14%,rgba(2,7,16,.66) 46%,rgba(2,7,16,.66) 68%,rgba(2,7,16,.30) 90%,rgba(2,7,16,0) 100%)}
+.fd-scene-tag{color:var(--gold);font-weight:800;font-size:46px;letter-spacing:.05em;text-transform:uppercase;text-shadow:0 2px 4px #000}
+.fd-heading{margin:0;font-size:132px;line-height:1.16;font-weight:800;color:#fff;text-shadow:0 3px 10px #000;word-break:keep-all}
+.fd-text p{margin:0;font-weight:400;font-size:82px;line-height:1.56;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.75);
+  word-break:keep-all;overflow-wrap:break-word}
+.fd-text p.fd-end-line{color:var(--gold)!important;font-weight:800!important;font-style:normal!important;font-size:60px!important;margin-top:14px!important;letter-spacing:.02em}
+.fd-novel .fd-text p,.fd-novel .fd-heading{font-family:"Source Serif 4","Georgia","Pretendard",serif}
+
+/* Carousel page dots + watermark */
+.fd-dots{display:flex;align-items:center;gap:22px;margin-top:12px}
+.fd-dot{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.28)}
+.fd-dot.is-current{background:var(--gold);width:58px;border-radius:12px}
+.fd-watermark{margin-top:34px;font-size:34px;letter-spacing:.10em;color:rgba(255,255,255,.55);text-shadow:0 1px 4px #000}
+
+/* -- Cover slide only -- */
+.fd-cover .fd-media img,.fd-cover .fd-media video{filter:saturate(.9) contrast(1.1) brightness(.62)}
+.fd-cover .fd-content{justify-content:center;padding:0 140px}
+.fd-cover .fd-textpanel{background:none;padding:0;gap:36px}
+.fd-cover-eyebrow{font-size:44px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000}
+.fd-cover-title{font-size:220px;font-weight:900;color:#fff;letter-spacing:-.01em;line-height:1.05;text-shadow:0 6px 30px rgba(0,0,0,.7),0 0 90px rgba(139,26,26,.5)}
+.fd-cover-sub{font-size:96px;font-weight:700;color:#f0e8d8;line-height:1.25;text-shadow:0 3px 10px #000}
+.fd-cover-tagline{font-size:66px;font-weight:400;font-style:italic;color:#e7ddc8;text-shadow:0 2px 8px #000;margin-top:6px}
+.fd-cover-rule{display:flex;align-items:center;gap:28px;width:640px;margin:12px auto}
+.fd-cover-rule::before,.fd-cover-rule::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,rgba(244,189,63,.55),transparent)}
+.fd-cover-rule-mark{color:var(--gold);font-size:44px}
+.fd-cover-date{font-size:42px;letter-spacing:.10em;color:rgba(255,255,255,.7);margin-top:4px}
+.fd-cover-cta{margin-top:38px;font-size:52px;font-weight:800;color:var(--gold);letter-spacing:.06em;
+  display:flex;align-items:center;gap:16px;text-shadow:0 2px 6px #000}
+.fd-cover-cta .arrow{display:inline-block;animation:fdArrow 1.6s ease-in-out infinite}
+@keyframes fdArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(14px)}}
+
+/* -- Next-episode teaser (final) slide only -- */
+.fd-end .fd-media img,.fd-end .fd-media video{filter:saturate(.85) contrast(1.08) brightness(.5)}
+.fd-end .fd-content{justify-content:center;padding:0 150px}
+.fd-end .fd-textpanel{background:none;padding:0;gap:30px}
+.fd-end-eyebrow{font-size:42px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-shadow:0 2px 4px #000;
+  display:flex;align-items:center;gap:16px}
+.fd-end-eyebrow::before{content:'▶';font-size:32px}
+.fd-end-ep{font-size:46px;color:rgba(255,255,255,.72);letter-spacing:.08em}
+.fd-end-heading{font-size:118px;font-weight:800;color:#fff;line-height:1.2;text-shadow:0 4px 16px #000;word-break:keep-all}
+.fd-end-body{font-size:70px;font-weight:400;font-style:italic;line-height:1.6;color:#f0e8d8;text-shadow:0 2px 8px #000;
+  border-left:4px solid var(--crimson);padding-left:44px;text-align:left;word-break:keep-all}
+.fd-end-cta{margin-top:30px;display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
+.fd-end-cta span{font-size:44px;font-weight:800;color:var(--gold);letter-spacing:.04em;
+  border:2px solid rgba(244,189,63,.55);border-radius:999px;padding:20px 44px;background:rgba(244,189,63,.08)}
+.fd-end-handle{margin-top:24px;font-size:40px;color:rgba(255,255,255,.65);letter-spacing:.05em}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     HOW TO USE THIS TEMPLATE (every other episode is built 100% on this file)
+
+     1) Copy this file to novel_en_feeds_epNN.html (NN = 2-digit episode
+        number). This format is the "Dynamic (video)" version of the
+        Instagram Feed / Threads carousel. Each slide layers text over a
+        short, silent, autoplaying, looping video background (the same
+        pattern as the Shorts template's .sh-media video) -- there is no
+        narration, BGM, or sound effects, since carousel/feed-style posts
+        on Instagram/Threads, Reels, TikTok, Facebook, X and similar
+        platforms are normally consumed as silent looping clips.
+
+     2) Fill in every part marked with [[brackets]] with real content.
+        Never modify the CSS/JS/layout structure -- it is the finalized,
+        locked-in standard layout (the same rule that applies to the
+        Longform/Shorts templates).
+
+     3) The canvas dimensions are absolutely fixed: 2160 x 2700 px (4:5
+        ratio). The .fd-stage element itself must always keep this exact
+        pixel size -- never convert it to vw/vh/rem-based responsive
+        sizing, since export (recording) accuracy depends on this fixed
+        size. The shrink-to-fit preview for comfortable browser viewing
+        (the "Fit to screen" button) applies transform:scale only to
+        .fd-stage-wrap; for the actual export, always press the "Export
+        mode" button in the top toolbar first to reset the scale to 1,
+        then record each .fd-stage element individually (one video file
+        per element, at 2160x2700 px, keeping the 4:5 aspect ratio
+        exactly). Prefer 4K-6K source footage, cropped to the 4:5 frame
+        with object-fit:cover -- this same crop behavior also lets a
+        vertical Shorts (9:16) source be inherited and reused as-is, with
+        no separate reframing needed.
+
+     4) Change the epNN portion of the language-switcher links to the
+        real episode number (the KR/EN/JP files all link to each other, so
+        the convention is to fill in all three language feed templates
+        together -- the same convention used for Longform/Shorts).
+
+     5) Slide makeup -- 3 kinds total:
+          - Cover slide (fd-cover, 1 slide) -- the hook title card.
+            data-page="cover".
+          - Story slides (fd-stage, N slides) -- mapped 1:1 to the 13
+            Shorts scenes as a rule. If the scene count is more or fewer
+            than 13, duplicate/delete whole slide blocks and renumber
+            every data-page, the pNN in ids, the header's "NN/total"
+            label, and the total dot count in fd-dots without exception.
+          - Next-episode teaser slide (fd-end, 1 slide) -- an ending card
+            for engagement (follow/save/share). data-page="end".
+        The cover and ending slides are not mandatory, but are strongly
+        recommended from an omnichannel growth (engagement) standpoint.
+
+     6) class="fd-stage fd-novel" follows the same rule as the Shorts
+        template -- apply it to a novelistic narrative scene that follows
+        an operational/breaking-news scene (mission/bulletin tone,
+        including a clock time), and it automatically switches to a serif
+        typeface.
+
+     7) The " · HH:MM" time stamp on the scene-location tag is added only
+        to operational scenes (mostly in the early part of the episode)
+        where an explicit in-story time is given.
+
+     8) Use the GitHub Pages absolute path for media as-is -- never
+        convert it to a relative path. Every platform template (Longform,
+        Shorts, Instagram Feeds/Threads, Instagram Reel, TikTok, Facebook,
+        X, etc.) shares the same two repositories below (with no
+        per-platform subfolder, so a file already used in Shorts can be
+        inherited and reused as-is in Feeds):
+          Image (poster): https://soulthread88.github.io/imgs/novel/epNN_pXX_description.jpg
+          Video:          https://soulthread88.github.io/videos/novel/epNN_pXX_description.mp4
+        (The poster image and video always share the same basename -- only
+        the extension differs. Source video for scenes should be sourced
+        at 4K-6K resolution from free stock sites such as Wikimedia
+        Commons, Pexels Video, Pixabay, and Wikipedia; if a video for the
+        same scene was already used in Shorts Episode 1, reuse that exact
+        file as-is -- thanks to the object-fit:cover crop described in
+        8-3) above, a 9:16 source fits naturally into the 4:5 frame.)
+
+     9) Element ids always carry the episode number as a prefix (e.g.
+        fdstage-ep01-p03, fdimgbox-ep01-p03, fdvid-ep01-p03,
+        fdfinp-ep01-p03) -- the standing rule to prevent id collisions when
+        several episodes' pages sit on one screen/one repository (the same
+        intent as the Longform IndexedDB collision-prevention rule; this
+        format doesn't save anything so it doesn't use IndexedDB, but the
+        id-prefix rule is kept anyway).
+
+     10) Do not put caption text (hashtags, follow-me copy, other SEO-style
+         text) into this HTML. This file exists only to produce "the slide
+         video itself" -- the actual Instagram/Threads post caption text is
+         written separately.
+     ============================================================ -->
+
+<div class="fd-toolbar">
+  <span class="fd-toolbar-label">Preview</span>
+  <button type="button" id="fd-btn-fit" class="is-active">Fit to screen</button>
+  <button type="button" id="fd-btn-export">Export mode (2160×2700 original)</button>
+  <span class="fd-tb-note">※ Each slide is a video (silent, autoplay/loop) — for export, record/capture each .fd-stage element individually (2160×2700 px, 4:5) — this toolbar and the rounded-corner shadow are outside the capture area.</span>
+</div>
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-cover" data-page="cover" id="fdstage-epNN-cover">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · COVER</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-cover">
+    <video id="fdvid-epNN-cover" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — cover, e.g. epNN_cover.jpg]]" aria-label="[[Cover image alt text]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — cover, e.g. epNN_cover.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-cover">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-cover-eyebrow">LIVE WAR FICTION · EPISODE [[episode number]]</div>
+      <div class="fd-cover-title">[[Main title — e.g. EPIC FURY]]</div>
+      <div class="fd-cover-sub">[[Subtitle — e.g. NIGHT OVER HORMUZ]]</div>
+      <div class="fd-cover-rule"><span class="fd-cover-rule-mark">✦</span></div>
+      <div class="fd-cover-tagline">[[Tagline / episode subhead — e.g. The Day the Wall Came Down]]</div>
+      <div class="fd-cover-date">[[Date/time summary — e.g. February 28, 2026 · Eight Hours That Changed the World]]</div>
+      <div class="fd-cover-cta">[[CTA copy — e.g. Swipe to read]]<span class="arrow">→</span></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="1" id="fdstage-epNN-p01">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 01/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p01">
+    <video id="fdvid-epNN-p01" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 1, e.g. epNN_p01_description.jpg]]" aria-label="[[Image alt text — page 1]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 1, e.g. epNN_p01_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p01">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 1]]</div>
+      <h2 class="fd-heading">[[Heading — page 1]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 1, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="2" id="fdstage-epNN-p02">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 02/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p02">
+    <video id="fdvid-epNN-p02" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 2, e.g. epNN_p02_description.jpg]]" aria-label="[[Image alt text — page 2]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 2, e.g. epNN_p02_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p02">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 2]]</div>
+      <h2 class="fd-heading">[[Heading — page 2]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 2, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="3" id="fdstage-epNN-p03">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 03/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p03">
+    <video id="fdvid-epNN-p03" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 3, e.g. epNN_p03_description.jpg]]" aria-label="[[Image alt text — page 3]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 3, e.g. epNN_p03_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p03">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 3]]</div>
+      <h2 class="fd-heading">[[Heading — page 3]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 3, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="4" id="fdstage-epNN-p04">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 04/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p04">
+    <video id="fdvid-epNN-p04" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 4, e.g. epNN_p04_description.jpg]]" aria-label="[[Image alt text — page 4]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 4, e.g. epNN_p04_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p04">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 4]]</div>
+      <h2 class="fd-heading">[[Heading — page 4]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 4, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="5" id="fdstage-epNN-p05">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 05/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p05">
+    <video id="fdvid-epNN-p05" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 5, e.g. epNN_p05_description.jpg]]" aria-label="[[Image alt text — page 5]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 5, e.g. epNN_p05_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p05">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 5]]</div>
+      <h2 class="fd-heading">[[Heading — page 5]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 5, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="6" id="fdstage-epNN-p06">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 06/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p06">
+    <video id="fdvid-epNN-p06" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 6, e.g. epNN_p06_description.jpg]]" aria-label="[[Image alt text — page 6]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 6, e.g. epNN_p06_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p06">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 6]]</div>
+      <h2 class="fd-heading">[[Heading — page 6]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 6, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="7" id="fdstage-epNN-p07">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 07/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p07">
+    <video id="fdvid-epNN-p07" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 7, e.g. epNN_p07_description.jpg]]" aria-label="[[Image alt text — page 7]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 7, e.g. epNN_p07_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p07">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 7]]</div>
+      <h2 class="fd-heading">[[Heading — page 7]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 7, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="8" id="fdstage-epNN-p08">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 08/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p08">
+    <video id="fdvid-epNN-p08" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 8, e.g. epNN_p08_description.jpg]]" aria-label="[[Image alt text — page 8]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 8, e.g. epNN_p08_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p08">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 8]]</div>
+      <h2 class="fd-heading">[[Heading — page 8]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 8, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="9" id="fdstage-epNN-p09">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 09/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p09">
+    <video id="fdvid-epNN-p09" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 9, e.g. epNN_p09_description.jpg]]" aria-label="[[Image alt text — page 9]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 9, e.g. epNN_p09_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p09">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 9]]</div>
+      <h2 class="fd-heading">[[Heading — page 9]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 9, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="10" id="fdstage-epNN-p10">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 10/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p10">
+    <video id="fdvid-epNN-p10" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 10, e.g. epNN_p10_description.jpg]]" aria-label="[[Image alt text — page 10]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 10, e.g. epNN_p10_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p10">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 10]]</div>
+      <h2 class="fd-heading">[[Heading — page 10]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 10, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="11" id="fdstage-epNN-p11">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 11/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p11">
+    <video id="fdvid-epNN-p11" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 11, e.g. epNN_p11_description.jpg]]" aria-label="[[Image alt text — page 11]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 11, e.g. epNN_p11_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p11">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 11]]</div>
+      <h2 class="fd-heading">[[Heading — page 11]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 11, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="12" id="fdstage-epNN-p12">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 12/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p12">
+    <video id="fdvid-epNN-p12" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 12, e.g. epNN_p12_description.jpg]]" aria-label="[[Image alt text — page 12]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 12, e.g. epNN_p12_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p12">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 12]]</div>
+      <h2 class="fd-heading">[[Heading — page 12]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 12, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span><span class="fd-dot"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage" data-page="13" id="fdstage-epNN-p13">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · 13/13</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-p13">
+    <video id="fdvid-epNN-p13" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — page 13, e.g. epNN_p13_description.jpg]]" aria-label="[[Image alt text — page 13]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — page 13, e.g. epNN_p13_description.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-p13">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-scene-tag">[[Scene location/time tag — page 13]]</div>
+      <h2 class="fd-heading">[[Heading — page 13]]</h2>
+      <div class="fd-text">
+      <p>[[Body text — page 13, 2-4 sentences recommended]]</p>
+      </div>
+    </div>
+    <div class="fd-dots" aria-hidden="true"><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot"></span><span class="fd-dot is-current"></span></div>
+    <div class="fd-watermark">@soulthread88 · EPIC FURY</div>
+  </div>
+</main>
+</div>
+
+<div class="fd-stage-wrap">
+<main class="fd-stage fd-end" data-page="end" id="fdstage-epNN-end">
+  <header class="fd-header">
+  <div class="fd-header-row">
+    <div class="fd-brand"><span class="tag">MILITARY THRILLER</span><span class="logo">EPIC FURY</span></div>
+    <div class="fd-headerright">
+      <div class="fd-meta-row">EP.[[2-digit episode number — e.g. 01]] · NEXT</div>
+      <div class="fd-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_feeds_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_feeds_epNN.html" class="is-active" aria-current="page">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_feeds_epNN.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+  </header>
+  <section class="fd-media" data-imgbox id="fdimgbox-epNN-end">
+    <video id="fdvid-epNN-end" autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[Poster image filename — ending, e.g. epNN_end.jpg]]" aria-label="[[Ending image alt text]]"><source src="https://soulthread88.github.io/videos/novel/[[Video filename — ending, e.g. epNN_end.mp4]]" type="video/mp4"></video>
+    <div class="fd-imgtools">
+      <button type="button" data-action="replace" title="Replace">⇄</button>
+      <button type="button" data-action="delete" title="Delete">✕</button>
+      <input type="file" accept="video/*" data-file-input id="fdfinp-epNN-end">
+    </div>
+  </section>
+  <div class="fd-content">
+    <div class="fd-textpanel">
+      <div class="fd-end-eyebrow">COMING NEXT</div>
+      <div class="fd-end-ep">[[Next-episode label — e.g. Episode 2 — Chapter Two]]</div>
+      <div class="fd-end-heading">[[Next-episode location/hook — e.g. 500 Meters Under Fordow]]</div>
+      <div class="fd-end-body">[[1-2 teaser sentences for the next episode]]</div>
+      <div class="fd-end-cta"><span>Follow</span><span>Save</span><span>Share</span></div>
+      <div class="fd-end-handle">[[Social handle/channel name — e.g. @soulthread88 · EPIC FURY]]</div>
+    </div>
+  </div>
+</main>
+</div>
+<script>
+(function(){
+  // Replace/delete media — click to reveal the tools, swap the preview immediately on file pick (this session only, nothing is saved)
+  document.querySelectorAll('[data-imgbox]').forEach(function(box){
+    box.addEventListener('click', function(e){
+      if(e.target.closest('.fd-imgtools')) return;
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ if(b!==box) b.classList.remove('tools-visible'); });
+      box.classList.toggle('tools-visible');
+    });
+    var replaceBtn = box.querySelector('[data-action="replace"]');
+    var deleteBtn  = box.querySelector('[data-action="delete"]');
+    var fileInput  = box.querySelector('[data-file-input]');
+    var vid = box.querySelector('video');
+    if(replaceBtn) replaceBtn.addEventListener('click', function(e){ e.stopPropagation(); fileInput.click(); });
+    if(fileInput) fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0] && vid){
+        vid.removeAttribute('poster');
+        vid.src = URL.createObjectURL(fileInput.files[0]);
+        vid.load(); vid.play().catch(function(){});
+      }
+    });
+    if(deleteBtn) deleteBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(vid){ vid.pause(); vid.removeAttribute('src'); vid.removeAttribute('poster'); vid.load(); vid.style.background = '#111'; }
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('[data-imgbox]')){
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ b.classList.remove('tools-visible'); });
+    }
+  });
+
+  // Dark/light theme toggle (this session only, nothing is saved — affects only the slide frame/header chrome)
+  document.querySelectorAll('[data-theme-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var theme = btn.getAttribute('data-theme-btn');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-theme-btn')===theme); });
+    });
+  });
+
+  // -- Fit-to-screen preview / export mode ------------------------------
+  // Browser preview: the 2160px original is scaled down to fit the viewport
+  // width (transform:scale).
+  // Export mode: the scale is reset to 1 so each .fd-stage can be captured
+  // (screenshot/headless capture tool) at exactly 2160x2700 pixels.
+  var wraps = Array.prototype.slice.call(document.querySelectorAll('.fd-stage-wrap'));
+  var btnFit = document.getElementById('fd-btn-fit');
+  var btnExport = document.getElementById('fd-btn-export');
+  function applyFit(){
+    document.body.setAttribute('data-preview','fit');
+    var vw = Math.min(window.innerWidth - 48, 640);
+    var scale = vw / 2160;
+    wraps.forEach(function(w){
+      w.style.transform = 'scale(' + scale + ')';
+      w.style.marginBottom = (2700 * scale - 2700 + 56) + 'px';
+    });
+    if(btnFit) btnFit.classList.add('is-active');
+    if(btnExport) btnExport.classList.remove('is-active');
+  }
+  function applyExport(){
+    document.body.setAttribute('data-preview','export');
+    wraps.forEach(function(w){ w.style.transform = 'none'; w.style.marginBottom = '56px'; });
+    if(btnExport) btnExport.classList.add('is-active');
+    if(btnFit) btnFit.classList.remove('is-active');
+  }
+  if(btnFit) btnFit.addEventListener('click', applyFit);
+  if(btnExport) btnExport.addEventListener('click', applyExport);
+  window.addEventListener('resize', function(){ if(document.body.getAttribute('data-preview')==='fit') applyFit(); });
+  applyFit();
+})();
+</script>
+</body>
+</html>

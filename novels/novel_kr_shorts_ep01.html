@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장대한 분노 - 호르무즈의 밤 — 쇼츠 1화</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root{
+  --navy:#06152d; --navy2:#07182f; --gold:#f4bd3f; --white:#f7f8fa;
+  --red:#d92d3a; --bg:#020914; --panel:rgba(2,7,16,.88);
+  --text-dim:rgba(255,255,255,.6);
+}
+:root[data-theme="light"]{
+  --navy:#f4bd3f; --navy2:#fff6dd; --bg:#eef1f5; --panel:rgba(255,255,255,.92);
+  --white:#0c1626; --text-dim:rgba(10,20,35,.62);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:var(--bg);color:var(--white);font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;gap:22px;padding:22px 0 60px;overflow-x:hidden}
+a{color:inherit}
+
+.sh-stage{position:relative;width:92vw;max-width:420px;margin:0 auto;aspect-ratio:9/16;overflow:hidden;background:var(--navy);border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,.45)}
+
+/* header: brand-left / logo-center / lang+theme controls, plus a thin sub-row for date+page */
+.sh-header{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;flex-direction:column;gap:2px;padding:12px 5mm 10px;background:linear-gradient(180deg,rgba(6,21,45,.94) 55%,rgba(6,21,45,0));}
+:root[data-theme="light"] .sh-header{background:linear-gradient(180deg,rgba(255,246,221,.95) 55%,rgba(255,246,221,0))}
+.sh-header-row{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.sh-brand{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.sh-brand .tag{font-size:9px;font-weight:800;color:var(--gold);letter-spacing:.05em;text-transform:uppercase}
+:root[data-theme="light"] .sh-brand .tag{color:#8a5b00}
+.sh-brand .logo{font-size:14px;font-weight:800;color:#fff;text-shadow:1px 1px 3px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw}
+:root[data-theme="light"] .sh-brand .logo{color:#101a2c;text-shadow:none}
+.sh-controls{display:flex;align-items:center;gap:3px;flex:0 0 auto;font-size:8.5px;font-weight:700;white-space:nowrap}
+.sh-controls a{color:var(--text-dim);text-decoration:none;padding:1px}
+.sh-controls a.is-active{color:var(--gold);font-weight:800}
+.sh-controls button{border:none;background:transparent;color:var(--text-dim);font-size:8.5px;font-weight:700;padding:1px;cursor:pointer;display:inline-flex;align-items:center}
+.sh-controls button.is-active{color:var(--gold);font-weight:800}
+.sh-controls .sep{color:rgba(255,255,255,.28);font-size:8.5px}
+:root[data-theme="light"] .sh-controls .sep{color:rgba(10,20,35,.22)}
+.sh-controls .sep-strong{color:var(--gold);opacity:.55;margin:0 1px;font-size:8.5px}
+.sh-headerright{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;gap:2px}
+.sh-meta-row{font-size:9.5px;font-weight:700;color:var(--gold);white-space:nowrap;text-align:right}
+:root[data-theme="light"] .sh-meta-row{color:#8a5b00}
+
+/* ---------------------------------------------------------------------
+   PLATFORM SAFE ZONE (Shorts / Reels / TikTok)
+   Cross-referenced against each platform's own published UI overlay
+   footprint on a 1080x1920 canvas (union, worst case of the three, so one
+   layout clears all three at once):
+     TikTok:   top ~108-158px, bottom ~320-444px (caption/username/sound),  right ~120-180px (like/comment/share/bookmark column)
+     Reels:    top ~210-250px, bottom ~310-320px (caption/audio),           right ~84-100px  (icon column)
+     Shorts:   top ~120-155px, bottom ~300-455px (title/channel/progress),  right ~96-110px  (like/dislike/comment/share/remix)
+   NOTE: on each platform's native mobile app this overlay sits directly
+   ON the video, which is why a margin was reserved on every edge below.
+   Per creator direction this box is instead centered full-bleed (top and
+   bottom now equal, right reserve removed) for a balanced look in this
+   preview/export; if the finished clip is posted natively, the right
+   icon column and bottom caption/username row may sit over the outer
+   edges of the text on TikTok/Reels/Shorts specifically -- reintroduce
+   right:17%/bottom:21% at export time for that use case if needed.
+   --------------------------------------------------------------------- */
+/* media / video box */
+.sh-media{position:absolute;inset:0;overflow:hidden;background:#111}
+.sh-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.93) contrast(1.06) brightness(.88);transition:opacity .2s}
+.sh-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,9,20,.10) 0%,rgba(2,9,20,.16) 26%,rgba(2,9,20,.30) 58%,rgba(2,9,20,.62) 79%,rgba(2,9,20,.94) 100%);pointer-events:none;z-index:2}
+
+/* replace/delete tools — hidden by default, shown only on click of the video box.
+   Sits inside the top-right safe corner so the click target itself never
+   ends up under a platform's own top-of-frame chrome. */
+.sh-imgtools{position:absolute;top:13%;right:3.2vw;z-index:26;display:flex;gap:6px;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .16s,transform .16s}
+.sh-media.tools-visible .sh-imgtools{opacity:1;pointer-events:auto;transform:translateY(0)}
+.sh-imgtools button{width:28px;height:28px;border-radius:50%;border:1px solid rgba(244,189,63,.65);background:rgba(6,21,45,.82);color:var(--gold);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.sh-imgtools button:hover{background:rgba(244,189,63,.22)}
+.sh-imgtools input[type=file]{display:none}
+
+/* narrative overlay — centered full-width in the media area (clear only
+   of this page's own header at top and a matching margin at bottom).
+   Text is large and bold like a burned-in platform caption, not small
+   body copy. */
+.sh-content{position:absolute;left:0;right:0;top:calc(9% + 8px);bottom:calc(9% - 8px);z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none}
+/* Caption text always sits on the video's own dark scrim (regardless of
+   page theme, since the footage itself doesn't lighten) so it stays
+   light-on-dark in both Dark and Light mode — only the chrome (header,
+   source line) adapts to the theme. A dedicated gradient panel (below)
+   guarantees contrast even over a bright frame, on top of the video's own
+   scrim, so text never depends on text-shadow alone. */
+.sh-textpanel{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;max-width:80%;margin:0 auto;padding:14px 6mm;border-radius:16px;
+  background:linear-gradient(180deg,rgba(2,7,16,0) 0%,rgba(2,7,16,.4) 18%,rgba(2,7,16,.62) 50%,rgba(2,7,16,.4) 82%,rgba(2,7,16,0) 100%);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.sh-scene-tag{color:#f4bd3f;font-weight:800;font-size:14px;letter-spacing:.04em;text-transform:uppercase;text-shadow:0 1px 2px #000;text-align:center}
+.sh-heading{margin:0;font-size:28px;line-height:1.2;font-weight:800;font-style:normal;color:#fff;text-shadow:0 1px 3px #000;text-align:center}
+.sh-text p{margin:0;font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;font-weight:400;font-size:25px;line-height:1.42;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);text-align:center;line-break:strict;word-break:keep-all;overflow-wrap:break-word}
+.sh-text{display:flex;flex-direction:column;align-items:center;gap:6px}
+.sh-end{color:#f4bd3f!important;font-weight:800!important;font-style:normal!important;font-size:16px!important;margin-top:2px!important;text-align:center;text-wrap:balance}
+.sh-novel .sh-text p{font-family:"Noto Serif KR","Nanum Myeongjo","Batang",serif}
+.sh-text{margin-top:14px}
+
+
+.sh-caption-note{width:92vw;max-width:420px;margin:-10px auto 0;text-align:center;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.02em}
+
+/* narration play/pause control -- lives inside the top-right safe corner,
+   stacked below the image tools, well clear of the bottom caption zone
+   and the right icon rail so it never competes with platform chrome. */
+.narr-btn{position:absolute;left:0;top:-10mm;z-index:36;width:32px;height:32px;min-width:28px;border-radius:50%;border:1.5px solid var(--gold);background:rgba(6,21,45,.72);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.78;transition:opacity .2s,background .2s;padding:0;font-size:12px}
+.narr-btn:hover,.narr-btn:focus-visible,.narr-btn.is-playing{opacity:1}
+.narr-btn.is-playing{background:rgba(244,189,63,.18)}
+.narr-btn.is-loading .narr-icon{opacity:.5}
+
+@media(max-width:380px){
+  .sh-brand .logo{font-size:12.5px}
+  .sh-heading{font-size:25px}
+  .sh-text p{font-size:22px;line-height:1.34}
+}
+</style>
+</head>
+<body>
+<p class="sh-caption-note">※ 1화 · 세로형(쇼츠) 요약판 — 전체 13장면</p>
+
+<main class="sh-stage" data-page="1">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;1/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s01_crisis_command_center.jpg" aria-label="워싱턴 D.C. · 상황실"><source src="https://soulthread88.github.io/videos/novel/s01_crisis_command_center.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-1" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">워싱턴 D.C. · 상황실 · 02:00</div>
+  <h2 class="sh-heading">명령이 떨어지다</h2>
+  <div class="sh-text"><p class="">백악관 상황실의 불은 여섯 시간째 꺼지지 않았다. 대통령은 단 한마디로 작전명 '장대한 분노'의 개시를 승인했다. 되돌릴 수 없는 문이, 방금 열렸다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-1" preload="none"><source src="audio/kr_01.mp3" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-1" preload="none"><source src="sfx/s01_alert.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="2">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;2/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s02_fighter_jet_night.jpg" aria-label="테헤란"><source src="https://soulthread88.github.io/videos/novel/s02_fighter_jet_night.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-2" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">테헤란 · 09:45</div>
+  <h2 class="sh-heading">첫 섬광</h2>
+  <div class="sh-text"><p class="">테헤란 상공에 첫 섬광이 번쩍였다. 미·이스라엘 합동 공군이 이란 서부 방공망을 정밀 타격했다. 도시는 아직 그 의미를 알지 못한 채 잠에서 깨고 있었다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-2" preload="none"><source src="audio/kr_02.mp3" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-2" preload="none"><source src="sfx/s02_jet_flyby.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="3">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;3/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s03_carrier_flight_deck.jpg" aria-label="호르무즈 해협 · 항모 포드함"><source src="https://soulthread88.github.io/videos/novel/s03_carrier_flight_deck.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-3" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">호르무즈 해협 · 항모 포드함</div>
+  <h2 class="sh-heading">떼 지어 날아오르다</h2>
+  <div class="sh-text"><p class="">같은 시각, 항모 포드함 갑판 위로 드론들이 떼 지어 날아올랐다. 좁은 해협을 지키던 소형 함정들이 하나둘 항로를 이탈했다. 세계 원유의 오분의 일이 지나는 바닷길이 전장이 되고 있었다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-3" preload="none"><source src="audio/kr_03.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="4">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;4/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s04_gulf_city_skyline.jpg" aria-label="테헤란"><source src="https://soulthread88.github.io/videos/novel/s04_gulf_city_skyline.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-4" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">테헤란 · 14:17</div>
+  <h2 class="sh-heading">지휘부, 침묵하다</h2>
+  <div class="sh-text"><p class="">테헤란 지휘부에 직격 타격이 확인되었다. 최고지도자의 사망은 몇 시간 뒤에야 공식화됐다. 지도부의 침묵은 다음 국면을 예고하고 있었다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-4" preload="none"><source src="audio/kr_04.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="5">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;5/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s05_missile_launch.jpg" aria-label="바레인 · 카타르 · 이라크"><source src="https://soulthread88.github.io/videos/novel/s05_missile_launch.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-5" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">바레인 · 카타르 · 이라크 · 16:00</div>
+  <h2 class="sh-heading">이란이 답하다</h2>
+  <div class="sh-text"><p class="">이란이 침묵을 깨고 응답했다. 샤하브-3 계열 탄도미사일이 바레인·카타르·이라크 미군 기지를 향해 일제히 발사됐다. 그날의 분노는 아직 끝나지 않았다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-5" preload="none"><source src="audio/kr_05.mp3" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-5" preload="none"><source src="sfx/s05_missile_rumble.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="6">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;6/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s06_bunker_control_room.jpg" aria-label="서울 · 국가위기관리센터"><source src="https://soulthread88.github.io/videos/novel/s06_bunker_control_room.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-6" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">서울 · 국가위기관리센터</div>
+  <h2 class="sh-heading">비상등이 켜지다</h2>
+  <div class="sh-text"><p class="">자정을 넘긴 시각, 지하 벙커에 불이 켜졌다. 스크린 위 붉은 점들이 빠르게 늘어났다. “우리 선박이 몇 척인가?” 열일곱 척. 그중 셋은 이미 응답이 끊긴 상태였다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-6" preload="none"><source src="audio/kr_06.mp3" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-6" preload="none"><source src="sfx/s06_klaxon.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="7">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;7/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s07_oil_tanker_night.jpg" aria-label="호르무즈 · 유조선 한빛호"><source src="https://soulthread88.github.io/videos/novel/s07_oil_tanker_night.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-7" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">호르무즈 · 유조선 한빛호</div>
+  <h2 class="sh-heading">좌초된 배</h2>
+  <div class="sh-text"><p class="">한빛호 갑판 위로 예광탄이 스쳤다. 엔진은 세 시간째 멈춰 있었다. “본사, 응답 바람.” 돌아오는 건 침묵뿐이었다. 선원들은 구명조끼를 입은 채 말없이 모여 있었다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-7" preload="none"><source src="audio/kr_07.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="8">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;8/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s08_destroyer_pier.jpg" aria-label="부산 · 해군작전사령부"><source src="https://soulthread88.github.io/videos/novel/s08_destroyer_pier.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-8" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">부산 · 해군작전사령부</div>
+  <h2 class="sh-heading">출항 명령</h2>
+  <div class="sh-text"><p class="">박 함장은 명령서를 두 번 읽었다. 세종대왕함, 즉시 출항. 임무는 단순했다 — 자국 선박의 안전 확보. 그 바다는 이미 전장이었다. “30분 내 출항 가능합니다.”</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-8" preload="none"><source src="audio/kr_08.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="9">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;9/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s09_video_conference.jpg" aria-label="워싱턴 D.C. · 동맹국 화상회의"><source src="https://soulthread88.github.io/videos/novel/s09_video_conference.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-9" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">워싱턴 D.C. · 동맹국 화상회의</div>
+  <h2 class="sh-heading">같은 배를 탄 사람들</h2>
+  <div class="sh-text"><p class="">각국 대표들의 얼굴이 화면에 격자로 떠올랐다. “호르무즈는 최소 72시간 폐쇄됩니다.” 한국 대표단 자리의 실무자는 조용히 메모를 이어갔다. 숫자로 다 담을 수 없는 파장이었다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-9" preload="none"><source src="audio/kr_09.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="10">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;10/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s10_city_square_billboard.jpg" aria-label="서울 · 광화문 전광판"><source src="https://soulthread88.github.io/videos/novel/s10_city_square_billboard.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-10" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">서울 · 광화문 전광판</div>
+  <h2 class="sh-heading">잠들지 못하는 도시</h2>
+  <div class="sh-text"><p class="">편의점 앞, 몇 사람이 모여 속보를 보고 있었다. 전광판 유가 그래프가 가파르게 치솟았다. “저기서 또 전쟁이라니…” 도시의 불빛 아래, 공기는 분명 달라져 있었다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-10" preload="none"><source src="audio/kr_10.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="11">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;11/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s11_warship_ops_room.jpg" aria-label="호르무즈 해협 인근 해상"><source src="https://soulthread88.github.io/videos/novel/s11_warship_ops_room.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-11" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">호르무즈 해협 인근 해상</div>
+  <h2 class="sh-heading">어둠 속의 항적</h2>
+  <div class="sh-text"><p class="">세종대왕함은 등화관제를 유지한 채 나아갔다. “미상 소형 선박 다수, 접근 중.” 레이더 위 점들이 천천히 대형을 갖췄다. 함교 안 모두가 숨을 죽였다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-11" preload="none"><source src="audio/kr_11.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="12">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;12/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s12_tanker_flare.jpg" aria-label="유조선 한빛호"><source src="https://soulthread88.github.io/videos/novel/s12_tanker_flare.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-12" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">유조선 한빛호</div>
+  <h2 class="sh-heading">깜빡이는 불빛</h2>
+  <div class="sh-text"><p class="">한빛호의 비상 신호탄이 밤하늘을 갈랐다. “위치 발신 중. 접근 선박 다수.” 그 순간, 세종대왕함 레이더에도 같은 신호가 잡혔다. “전속력으로.” 함이 어둠 속으로 파고들었다.</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-12" preload="none"><source src="audio/kr_12.mp3" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="13">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">전쟁소설</span><span class="logo">장대한 분노</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">2026. 2. 28.&nbsp;&nbsp;&nbsp;13/13</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_ep01.html" class="is-active" aria-current="page">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_ep01.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_ep01.html">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/s13_sunrise_ship.jpg" aria-label="호르무즈 해협 · 동틀 무렵"><source src="https://soulthread88.github.io/videos/novel/s13_sunrise_ship.mp4" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="교체">⇄</button>
+    <button type="button" data-action="delete" title="삭제">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-13" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">호르무즈 해협 · 동틀 무렵</div>
+  <h2 class="sh-heading">성벽이 무너진 날</h2>
+  <div class="sh-text"><p class="">세종대왕함이 한빛호 곁에 닿았을 때, 하늘은 이미 밝아오고 있었다. 하루 만에 지도자가 죽고, 해협이 전장이 되었다. 오랫동안 견고해 보였던 성벽 하나가 이 밤, 조용히 무너져 내렸다.</p><p class="sh-end">— 1화 끝. 2화에서 계속됩니다. —</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-13" preload="none"><source src="audio/kr_13.mp3" type="audio/mpeg"></audio>
+</main>
+
+<!-- background score: one shared looping player, its source swapped between
+     three act-based cues as the reader scrolls, and ducked quiet whenever a
+     scene's narration is speaking. -->
+<audio id="bgm-player" loop preload="none"><source src="bgm/act1_tension.mp3" type="audio/mpeg"></audio>
+
+<script>
+(function(){
+  // click-to-reveal replace/delete tools (hidden until the image box itself is clicked)
+  document.querySelectorAll('[data-imgbox]').forEach(function(box){
+    box.addEventListener('click', function(e){
+      if(e.target.closest('.sh-imgtools')) return;
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ if(b!==box) b.classList.remove('tools-visible'); });
+      box.classList.toggle('tools-visible');
+    });
+    var replaceBtn = box.querySelector('[data-action="replace"]');
+    var deleteBtn = box.querySelector('[data-action="delete"]');
+    var fileInput = box.querySelector('[data-file-input]');
+    var vid = box.querySelector('video');
+    if(replaceBtn) replaceBtn.addEventListener('click', function(e){ e.stopPropagation(); fileInput.click(); });
+    if(fileInput) fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0] && vid){
+        vid.removeAttribute('poster');
+        vid.src = URL.createObjectURL(fileInput.files[0]);
+        vid.load(); vid.play().catch(function(){});
+      }
+    });
+    if(deleteBtn) deleteBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(vid){ vid.pause(); vid.removeAttribute('src'); vid.removeAttribute('poster'); vid.load(); vid.style.background = '#111'; }
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('[data-imgbox]')){
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ b.classList.remove('tools-visible'); });
+    }
+  });
+  // theme toggle (in-memory only, per page — no persistence)
+  document.querySelectorAll('[data-theme-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var theme = btn.getAttribute('data-theme-btn');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-theme-btn')===theme); });
+    });
+  });
+
+  // narration: click-to-play/pause, auto-play the scene in view, and
+  // auto-scroll to the next scene when its narration ends (same pattern as
+  // the longform template's YouTube-style autoplay).
+  var stages = document.querySelectorAll('main.sh-stage');
+  var audios = Array.prototype.slice.call(document.querySelectorAll('audio.narration'));
+  var sfxEls = Array.prototype.slice.call(document.querySelectorAll('audio.sfx'));
+  var bgm = document.getElementById('bgm-player');
+
+  // Mobile browsers block unmuted audio.play() unless it happens inside a
+  // real user gesture. Scroll-triggered autoplay (below) is not a gesture,
+  // so on the visitor's first tap/click anywhere we prime every clip with a
+  // silent play+pause — that one gesture-backed play unlocks the audio
+  // element for all of this page's later programmatic calls, and starts the
+  // background score at its resting (non-ducked) volume.
+  var audioUnlocked = false;
+  function unlockAudioOnce(){
+    if(audioUnlocked) return;
+    audioUnlocked = true;
+    audios.concat(sfxEls).forEach(function(a){
+      var vol = a.volume;
+      a.volume = 0;
+      var p = a.play();
+      if(p && p.catch){
+        p.then(function(){ a.pause(); a.currentTime = 0; a.volume = vol; }).catch(function(){ a.volume = vol; });
+      } else { a.pause(); a.currentTime = 0; a.volume = vol; }
+    });
+    if(bgm){
+      bgm.volume = BGM_VOL;
+      bgm.play().catch(function(){});
+    }
+  }
+  document.addEventListener('touchend', unlockAudioOnce, {once:true});
+  document.addEventListener('click', unlockAudioOnce, {once:true});
+
+  // Background score: three act-based cues (tension / escalation /
+  // resolution) mapped to scene ranges, swapped as the reader scrolls, and
+  // ducked to a low volume under narration so it never competes with the
+  // voice track — it is atmosphere, not foreground audio.
+  var BGM_VOL = 0.14, BGM_DUCK = 0.04;
+  var BGM_ACTS = [
+    {max: 4,  src: 'bgm/act1_tension.mp3'},
+    {max: 9,  src: 'bgm/act2_escalation.mp3'},
+    {max: 13, src: 'bgm/act3_resolution.mp3'}
+  ];
+  var bgmActIdx = -1;
+  var bgmDucked = false;
+  function actIndexForPage(page){
+    for(var i=0;i<BGM_ACTS.length;i++){ if(page <= BGM_ACTS[i].max) return i; }
+    return BGM_ACTS.length - 1;
+  }
+  function setBgmForPage(page){
+    if(!bgm) return;
+    var idx = actIndexForPage(page);
+    if(idx === bgmActIdx) return;
+    bgmActIdx = idx;
+    var src = BGM_ACTS[idx].src;
+    var source = bgm.querySelector('source');
+    if(source.getAttribute('src') === src) return;
+    var wasPlaying = !bgm.paused;
+    source.setAttribute('src', src);
+    bgm.load();
+    bgm.volume = bgmDucked ? BGM_DUCK : BGM_VOL;
+    if(wasPlaying || audioUnlocked){ bgm.play().catch(function(){}); }
+  }
+  function duckBgm(on){
+    if(!bgm) return;
+    bgmDucked = on;
+    bgm.volume = on ? BGM_DUCK : BGM_VOL;
+  }
+  function anyNarrationPlaying(){
+    return audios.some(function(a){ return !a.paused; });
+  }
+
+  function setIcon(audio, playing){
+    var btn = document.querySelector('.narr-btn[data-target="'+audio.id+'"]');
+    if(!btn) return;
+    btn.classList.toggle('is-playing', playing);
+    var icon = btn.querySelector('.narr-icon');
+    if(icon) icon.textContent = playing ? '⏸' : '▶';
+  }
+  function pauseAllExcept(keep){
+    audios.forEach(function(a){ if(a !== keep && !a.paused){ a.pause(); setIcon(a,false); } });
+  }
+  function tryPlay(audio){
+    pauseAllExcept(audio);
+    duckBgm(true);
+    var p = audio.play();
+    if(p && p.catch){ p.then(function(){ setIcon(audio,true); }).catch(function(){ setIcon(audio,false); }); }
+    else { setIcon(audio,true); }
+  }
+  var stageList = Array.prototype.slice.call(stages);
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var audio = entry.target.querySelector('audio.narration');
+        if(!audio) return;
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
+          var page = stageList.indexOf(entry.target) + 1;
+          setBgmForPage(page);
+          var sfx = entry.target.querySelector('audio.sfx');
+          if(sfx && !sfx.dataset.played){
+            sfx.dataset.played = '1';
+            sfx.volume = 0.55;
+            sfx.play().catch(function(){});
+          }
+          if(audio.paused && audio.currentTime === 0 && !audio.dataset.queued){
+            audio.dataset.queued = '1';
+            setTimeout(function(){
+              audio.dataset.queued = '';
+              if(audio.paused && audio.currentTime === 0){ tryPlay(audio); }
+            }, 500);
+          }
+        } else {
+          if(!audio.paused){ audio.pause(); setIcon(audio,false); if(!anyNarrationPlaying()){ duckBgm(false); } }
+        }
+      });
+    }, {threshold:[0,0.6,1]});
+    stages.forEach(function(s){ io.observe(s); });
+  }
+  document.querySelectorAll('.narr-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var audio = document.getElementById(btn.getAttribute('data-target'));
+      if(!audio) return;
+      if(audio.paused){ tryPlay(audio); } else { audio.pause(); setIcon(audio,false); if(!anyNarrationPlaying()){ duckBgm(false); } }
+    });
+  });
+  audios.forEach(function(a){
+    a.addEventListener('ended', function(){
+      setIcon(a,false);
+      if(!anyNarrationPlaying()){ duckBgm(false); }
+      var stage = a.closest('main.sh-stage');
+      var idx = stageList.indexOf(stage);
+      if(idx > -1 && idx < stageList.length - 1){
+        stageList[idx + 1].scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

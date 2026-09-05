@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エピック・フューリー ホルムズの夜 第[[話数]]話｜ショート版 — TEMPLATE</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root{
+  --navy:#06152d; --navy2:#07182f; --gold:#f4bd3f; --white:#f7f8fa;
+  --red:#d92d3a; --bg:#020914; --panel:rgba(2,7,16,.88);
+  --text-dim:rgba(255,255,255,.6);
+}
+:root[data-theme="light"]{
+  --navy:#f4bd3f; --navy2:#fff6dd; --bg:#eef1f5; --panel:rgba(255,255,255,.92);
+  --white:#0c1626; --text-dim:rgba(10,20,35,.62);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:var(--bg);color:var(--white);font-family:"Noto Sans JP","Pretendard","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+body{display:flex;flex-direction:column;align-items:center;gap:22px;padding:22px 0 60px;overflow-x:hidden}
+a{color:inherit}
+
+.sh-stage{position:relative;width:92vw;max-width:420px;margin:0 auto;aspect-ratio:9/16;overflow:hidden;background:var(--navy);border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,.45)}
+
+/* header: brand-left / logo-center / lang+theme controls, plus a thin sub-row for date+page */
+.sh-header{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;flex-direction:column;gap:2px;padding:12px 5mm 10px;background:linear-gradient(180deg,rgba(6,21,45,.94) 55%,rgba(6,21,45,0));}
+:root[data-theme="light"] .sh-header{background:linear-gradient(180deg,rgba(255,246,221,.95) 55%,rgba(255,246,221,0))}
+.sh-header-row{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.sh-brand{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.sh-brand .tag{font-size:9px;font-weight:800;color:var(--gold);letter-spacing:.05em;text-transform:uppercase}
+:root[data-theme="light"] .sh-brand .tag{color:#8a5b00}
+.sh-brand .logo{font-size:14px;font-weight:800;color:#fff;text-shadow:1px 1px 3px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:44vw}
+:root[data-theme="light"] .sh-brand .logo{color:#101a2c;text-shadow:none}
+/* Controls: flattened into one quiet text row (no chip/pill borders) so the
+   required Kor|Eng|Jpn + Dark/Light switches read as light-weight metadata
+   rather than a second UI panel competing with the header brand. */
+.sh-controls{display:flex;align-items:center;gap:3px;flex:0 0 auto;font-size:8.5px;font-weight:700;white-space:nowrap}
+.sh-controls a{color:var(--text-dim);text-decoration:none;padding:1px}
+.sh-controls a.is-active{color:var(--gold);font-weight:800}
+.sh-controls button{border:none;background:transparent;color:var(--text-dim);font-size:8.5px;font-weight:700;padding:1px;cursor:pointer;display:inline-flex;align-items:center}
+.sh-controls button.is-active{color:var(--gold);font-weight:800}
+.sh-controls .sep{color:rgba(255,255,255,.28);font-size:8.5px}
+:root[data-theme="light"] .sh-controls .sep{color:rgba(10,20,35,.22)}
+.sh-controls .sep-strong{color:var(--gold);opacity:.55;margin:0 1px;font-size:8.5px}
+.sh-headerright{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;gap:2px}
+.sh-meta-row{font-size:9.5px;font-weight:700;color:var(--gold);white-space:nowrap;text-align:right}
+:root[data-theme="light"] .sh-meta-row{color:#8a5b00}
+
+/* ---------------------------------------------------------------------
+   PLATFORM SAFE ZONE (Shorts / Reels / TikTok)
+   Cross-referenced against each platform's own published UI overlay
+   footprint on a 1080x1920 canvas (union, worst case of the three, so one
+   layout clears all three at once):
+     TikTok:   top ~108-158px, bottom ~320-444px (caption/username/sound),  right ~120-180px (like/comment/share/bookmark column)
+     Reels:    top ~210-250px, bottom ~310-320px (caption/audio),           right ~84-100px  (icon column)
+     Shorts:   top ~120-155px, bottom ~300-455px (title/channel/progress),  right ~96-110px  (like/dislike/comment/share/remix)
+   NOTE: on each platform's native mobile app this overlay sits directly
+   ON the video, which is why a margin was reserved on every edge below.
+   Per creator direction this box is instead centered full-bleed (top and
+   bottom now equal, right reserve removed) for a balanced look in this
+   preview/export; if the finished clip is posted natively, the right
+   icon column and bottom caption/username row may sit over the outer
+   edges of the text on TikTok/Reels/Shorts specifically -- reintroduce
+   right:17%/bottom:21% at export time for that use case if needed.
+   --------------------------------------------------------------------- */
+/* media / video box */
+.sh-media{position:absolute;inset:0;overflow:hidden;background:#111}
+.sh-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.93) contrast(1.06) brightness(.88);transition:opacity .2s}
+.sh-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,9,20,.10) 0%,rgba(2,9,20,.16) 26%,rgba(2,9,20,.30) 58%,rgba(2,9,20,.62) 79%,rgba(2,9,20,.94) 100%);pointer-events:none;z-index:2}
+
+/* replace/delete tools — hidden by default, shown only on click of the video box.
+   Sits inside the top-right safe corner so the click target itself never
+   ends up under a platform's own top-of-frame chrome. */
+.sh-imgtools{position:absolute;top:13%;right:3.2vw;z-index:26;display:flex;gap:6px;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .16s,transform .16s}
+.sh-media.tools-visible .sh-imgtools{opacity:1;pointer-events:auto;transform:translateY(0)}
+.sh-imgtools button{width:28px;height:28px;border-radius:50%;border:1px solid rgba(244,189,63,.65);background:rgba(6,21,45,.82);color:var(--gold);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.sh-imgtools button:hover{background:rgba(244,189,63,.22)}
+.sh-imgtools input[type=file]{display:none}
+
+/* narrative overlay — centered full-width in the media area (clear only
+   of this page's own header at top and a matching margin at bottom).
+   Text is large and bold like a burned-in platform caption, not small
+   body copy. */
+.sh-content{position:absolute;left:0;right:0;top:calc(9% + 8px);bottom:calc(9% - 8px);z-index:10;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none}
+/* Caption text always sits on the video's own dark scrim (regardless of
+   page theme, since the footage itself doesn't lighten) so it stays
+   light-on-dark in both Dark and Light mode — only the chrome (header,
+   source line) adapts to the theme. A dedicated gradient panel (below)
+   guarantees contrast even over a bright frame, on top of the video's own
+   scrim, so text never depends on text-shadow alone. */
+.sh-textpanel{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;max-width:80%;margin:0 auto;padding:14px 6mm;border-radius:16px;
+  background:linear-gradient(180deg,rgba(2,7,16,0) 0%,rgba(2,7,16,.4) 18%,rgba(2,7,16,.62) 50%,rgba(2,7,16,.4) 82%,rgba(2,7,16,0) 100%);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.sh-scene-tag{color:#f4bd3f;font-weight:800;font-size:14px;letter-spacing:.04em;text-transform:uppercase;text-shadow:0 1px 2px #000;text-align:center}
+.sh-heading{margin:0;font-size:28px;line-height:1.2;font-weight:800;font-style:normal;color:#fff;text-shadow:0 1px 3px #000;text-align:center}
+.sh-text p{margin:0;font-family:"Noto Sans JP","Pretendard","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-weight:400;font-size:25px;line-height:1.42;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);text-align:center;line-break:strict;word-break:normal;overflow-wrap:break-word}
+.sh-text{display:flex;flex-direction:column;align-items:center;gap:6px}
+.sh-end{color:#f4bd3f!important;font-weight:800!important;font-style:normal!important;font-size:16px!important;margin-top:2px!important;text-align:center;text-wrap:balance}
+.sh-novel .sh-text p{font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif}
+.sh-text{margin-top:14px}
+
+
+.sh-caption-note{width:92vw;max-width:420px;margin:-10px auto 0;text-align:center;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.02em}
+
+/* narration play/pause control -- lives inside the top-right safe corner,
+   stacked below the image tools, well clear of the bottom caption zone
+   and the right icon rail so it never competes with platform chrome. */
+.narr-btn{position:absolute;left:0;top:-10mm;z-index:36;width:32px;height:32px;min-width:28px;border-radius:50%;border:1.5px solid var(--gold);background:rgba(6,21,45,.72);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.78;transition:opacity .2s,background .2s;padding:0;font-size:12px}
+.narr-btn:hover,.narr-btn:focus-visible,.narr-btn.is-playing{opacity:1}
+.narr-btn.is-playing{background:rgba(244,189,63,.18)}
+.narr-btn.is-loading .narr-icon{opacity:.5}
+
+@media(max-width:380px){
+  .sh-brand .logo{font-size:12.5px}
+  .sh-heading{font-size:25px}
+  .sh-text p{font-size:22px;line-height:1.34}
+}
+</style>
+</head>
+<body>
+<!-- ============================================================
+     TEMPLATE の使い方（他のエピソードは全てこのファイルを100%基準に作成する）
+     1) このファイルを novel_jp_shorts_epNN.html として複製する（NN=2桁の話数）。
+     2) [[ ]] で囲まれた箇所を実際の内容に置き換える。CSS/JS/レイアウトは
+        一切変更しない — これは確定した標準レイアウトである。
+     3) 言語切替リンクの epNN 部分を実際の話数に置き換える
+        （KR/EN/JP の3ファイルが互いにリンクするため、3つ同時に作成する）。
+     4) 場面（<main class="sh-stage">）の数は13固定ではない — 話数によって
+        場面数が増減する場合は <main> ブロックごと複製/削除し、data-page、
+        narr-N/sfx-N の id、aria-label、ヘッダーの「N/総ページ数」表記を
+        すべて振り直す。
+     5) class="sh-stage sh-novel" は「小説（ナラティブ）パート」の場面に付ける
+        マークで、実戦状況の速報的な場面（時刻表記を伴う）の後に続く、
+        小説的な地の文の場面に付け、明朝系セリフ体に自動で切り替わる。
+        どの場面から novel パートにするかはエピソードの内容ごとに判断する。
+     6) 場面タグへの「・HH:MM」時刻表記は、作中に明示的な時刻がある実戦
+        状況の場面にのみ付ける — 全場面には付けない。
+     7) スクリプト下部の BGM_ACTS 配列は13場面・3幕構成を前提にした例なので、
+        このエピソードの実際の場面数・幕構成に合わせて max 値を調整する。
+     8) メディアのパスはリポジトリごとに分かれた GitHub Pages の絶対URLを使う — 相対パスに変更しない：
+          画像・ポスター: https://soulthread88.github.io/imgs/novel/...
+          動画:          https://soulthread88.github.io/videos/novel/...
+          音声・効果音・BGM: https://soulthread88.github.io/htmls/novel/(audio|sfx|bgm)/...
+     ============================================================ -->
+<p class="sh-caption-note">第[[話数]]話 · 縦型（ショート）ダイジェスト版 — 全[[総場面数]]場面</p>
+
+<main class="sh-stage" data-page="1">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;1/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 1ページ、例: s01_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 1ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 1ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 1ページ、例: s01_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-1" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 1ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 1ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 1ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 1ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-1" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 1ページ、例: jp_epNN_01.mp3]]" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-1" preload="none"><source src="https://soulthread88.github.io/htmls/novel/sfx/[[効果音ファイル名（任意） — 1ページ、例: s01_効果音.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="2">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;2/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 2ページ、例: s02_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 2ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 2ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 2ページ、例: s02_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-2" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 2ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 2ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 2ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 2ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-2" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 2ページ、例: jp_epNN_02.mp3]]" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-2" preload="none"><source src="https://soulthread88.github.io/htmls/novel/sfx/[[効果音ファイル名（任意） — 2ページ、例: s02_効果音.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="3">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;3/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 3ページ、例: s03_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 3ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 3ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 3ページ、例: s03_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-3" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 3ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 3ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 3ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 3ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-3" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 3ページ、例: jp_epNN_03.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="4">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;4/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 4ページ、例: s04_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 4ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 4ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 4ページ、例: s04_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-4" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 4ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 4ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 4ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 4ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-4" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 4ページ、例: jp_epNN_04.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage" data-page="5">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;5/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 5ページ、例: s05_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 5ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 5ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 5ページ、例: s05_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-5" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 5ページ]]・[[HH:MM（作中で時刻が明示される場合のみ） — 5ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 5ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 5ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-5" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 5ページ、例: jp_epNN_05.mp3]]" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-5" preload="none"><source src="https://soulthread88.github.io/htmls/novel/sfx/[[効果音ファイル名（任意） — 5ページ、例: s05_効果音.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="6">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;6/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 6ページ、例: s06_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 6ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 6ページ、例: s06_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-6" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 6ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 6ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 6ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-6" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 6ページ、例: jp_epNN_06.mp3]]" type="audio/mpeg"></audio>
+<audio class="sfx" id="sfx-6" preload="none"><source src="https://soulthread88.github.io/htmls/novel/sfx/[[効果音ファイル名（任意） — 6ページ、例: s06_効果音.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="7">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;7/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 7ページ、例: s07_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 7ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 7ページ、例: s07_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-7" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 7ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 7ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 7ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-7" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 7ページ、例: jp_epNN_07.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="8">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;8/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 8ページ、例: s08_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 8ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 8ページ、例: s08_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-8" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 8ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 8ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 8ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-8" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 8ページ、例: jp_epNN_08.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="9">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;9/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 9ページ、例: s09_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 9ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 9ページ、例: s09_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-9" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 9ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 9ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 9ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-9" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 9ページ、例: jp_epNN_09.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="10">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;10/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 10ページ、例: s10_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 10ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 10ページ、例: s10_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-10" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 10ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 10ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 10ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-10" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 10ページ、例: jp_epNN_10.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="11">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;11/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 11ページ、例: s11_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 11ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 11ページ、例: s11_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-11" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 11ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 11ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 11ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-11" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 11ページ、例: jp_epNN_11.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="12">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;12/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 12ページ、例: s12_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 12ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 12ページ、例: s12_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-12" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 12ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 12ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 12ページ]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-12" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 12ページ、例: jp_epNN_12.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<main class="sh-stage sh-novel" data-page="13">
+<header class="sh-header">
+  <div class="sh-header-row">
+    <div class="sh-brand"><span class="tag">仮想戦記</span><span class="logo">EPIC FURY</span></div>
+    <div class="sh-headerright">
+      <div class="sh-meta-row">[[公開日 — 例: 2026.03.07.]]&nbsp;&nbsp;&nbsp;13/[[총 페이지수/total pages/総ページ数]]</div>
+      <div class="sh-controls"><a href="https://soulthread88.github.io/htmls/novel/novel_kr_shorts_epNN.html">KR</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_en_shorts_epNN.html">EN</a><span class="sep">|</span><a href="https://soulthread88.github.io/htmls/novel/novel_jp_shorts_epNN.html" class="is-active" aria-current="page">JP</a><span class="sep sep-strong">·</span><button type="button" class="is-active" data-theme-btn="dark" aria-label="Dark mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2z"/></svg></button><span class="sep">|</span><button type="button" data-theme-btn="light" aria-label="Light mode"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.3"/><line x1="12" y1="1.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.3" y2="12"/><line x1="19.7" y1="12" x2="22.5" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></svg></button></div>
+    </div>
+  </div>
+</header>
+<section class="sh-media" data-imgbox>
+  <video autoplay muted loop playsinline preload="metadata" poster="https://soulthread88.github.io/imgs/novel/[[ポスター画像ファイル名 — 13ページ、例: s13_説明.jpg]]" aria-label="[[場面の位置/時間帯タグ — 13ページ]]"><source src="https://soulthread88.github.io/videos/novel/[[動画ファイル名 — 13ページ、例: s13_説明.mp4]]" type="video/mp4"></video>
+  <div class="sh-imgtools">
+    <button type="button" data-action="replace" title="差替">⇄</button>
+    <button type="button" data-action="delete" title="削除">✕</button>
+    <input type="file" accept="video/*" data-file-input>
+  </div>
+</section>
+<div class="sh-content">
+<div class="sh-textpanel">
+<button class="narr-btn" type="button" data-target="narr-13" aria-label="Play narration"><span class="narr-icon">▶</span></button>
+  <div class="sh-scene-tag">[[場面の位置/時間帯タグ — 13ページ]]</div>
+  <h2 class="sh-heading">[[小見出し — 13ページ]]</h2>
+  <div class="sh-text"><p class="">[[本文 — 13ページ]]</p><p class="sh-end">[[エピソード終了文 — 例: —第一話完。第二話へ続く。— （13ページ）]]</p></div>
+</div>
+</div>
+<audio class="narration" id="narr-13" preload="none"><source src="https://soulthread88.github.io/htmls/novel/audio/[[ナレーション音声ファイル名 — 13ページ、例: jp_epNN_13.mp3]]" type="audio/mpeg"></audio>
+</main>
+
+<!-- background score: one shared looping player, its source swapped between
+     three act-based cues as the reader scrolls, and ducked quiet whenever a
+     scene's narration is speaking. -->
+<audio id="bgm-player" loop preload="none"><source src="https://soulthread88.github.io/htmls/novel/bgm/[[BGM 第1幕ファイル名、例: actN_説明.mp3]]" type="audio/mpeg"></audio>
+
+<script>
+(function(){
+  // click-to-reveal replace/delete tools (hidden until the image box itself is clicked)
+  document.querySelectorAll('[data-imgbox]').forEach(function(box){
+    box.addEventListener('click', function(e){
+      if(e.target.closest('.sh-imgtools')) return;
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ if(b!==box) b.classList.remove('tools-visible'); });
+      box.classList.toggle('tools-visible');
+    });
+    var replaceBtn = box.querySelector('[data-action="replace"]');
+    var deleteBtn = box.querySelector('[data-action="delete"]');
+    var fileInput = box.querySelector('[data-file-input]');
+    var vid = box.querySelector('video');
+    if(replaceBtn) replaceBtn.addEventListener('click', function(e){ e.stopPropagation(); fileInput.click(); });
+    if(fileInput) fileInput.addEventListener('change', function(){
+      if(fileInput.files && fileInput.files[0] && vid){
+        vid.removeAttribute('poster');
+        vid.src = URL.createObjectURL(fileInput.files[0]);
+        vid.load(); vid.play().catch(function(){});
+      }
+    });
+    if(deleteBtn) deleteBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(vid){ vid.pause(); vid.removeAttribute('src'); vid.removeAttribute('poster'); vid.load(); vid.style.background = '#111'; }
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('[data-imgbox]')){
+      document.querySelectorAll('[data-imgbox].tools-visible').forEach(function(b){ b.classList.remove('tools-visible'); });
+    }
+  });
+  // theme toggle (in-memory only, per page — no persistence)
+  document.querySelectorAll('[data-theme-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var theme = btn.getAttribute('data-theme-btn');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('[data-theme-btn]').forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-theme-btn')===theme); });
+    });
+  });
+
+  // narration: click-to-play/pause, auto-play the scene in view, and
+  // auto-scroll to the next scene when its narration ends (same pattern as
+  // the longform template's YouTube-style autoplay).
+  var stages = document.querySelectorAll('main.sh-stage');
+  var audios = Array.prototype.slice.call(document.querySelectorAll('audio.narration'));
+  var sfxEls = Array.prototype.slice.call(document.querySelectorAll('audio.sfx'));
+  var bgm = document.getElementById('bgm-player');
+
+  // Mobile browsers block unmuted audio.play() unless it happens inside a
+  // real user gesture. Scroll-triggered autoplay (below) is not a gesture,
+  // so on the visitor's first tap/click anywhere we prime every clip with a
+  // silent play+pause — that one gesture-backed play unlocks the audio
+  // element for all of this page's later programmatic calls, and starts the
+  // background score at its resting (non-ducked) volume.
+  var audioUnlocked = false;
+  function unlockAudioOnce(){
+    if(audioUnlocked) return;
+    audioUnlocked = true;
+    audios.concat(sfxEls).forEach(function(a){
+      var vol = a.volume;
+      a.volume = 0;
+      var p = a.play();
+      if(p && p.catch){
+        p.then(function(){ a.pause(); a.currentTime = 0; a.volume = vol; }).catch(function(){ a.volume = vol; });
+      } else { a.pause(); a.currentTime = 0; a.volume = vol; }
+    });
+    if(bgm){
+      bgm.volume = BGM_VOL;
+      bgm.play().catch(function(){});
+    }
+  }
+  document.addEventListener('touchend', unlockAudioOnce, {once:true});
+  document.addEventListener('click', unlockAudioOnce, {once:true});
+
+  // Background score: three act-based cues (tension / escalation /
+  // resolution) mapped to scene ranges, swapped as the reader scrolls, and
+  // ducked to a low volume under narration so it never competes with the
+  // voice track — it is atmosphere, not foreground audio.
+  var BGM_VOL = 0.14, BGM_DUCK = 0.04;
+  var BGM_ACTS = [
+    {max: 4,  src: 'https://soulthread88.github.io/htmls/novel/bgm/[[BGM 第1幕ファイル名、例: actN_説明.mp3]]'},
+    {max: 9,  src: 'https://soulthread88.github.io/htmls/novel/bgm/[[BGM 第2幕ファイル名、例: actN_説明.mp3]]'},
+    {max: 13, src: 'https://soulthread88.github.io/htmls/novel/bgm/[[BGM 第3幕ファイル名、例: actN_説明.mp3]]'}
+  ];
+  var bgmActIdx = -1;
+  var bgmDucked = false;
+  function actIndexForPage(page){
+    for(var i=0;i<BGM_ACTS.length;i++){ if(page <= BGM_ACTS[i].max) return i; }
+    return BGM_ACTS.length - 1;
+  }
+  function setBgmForPage(page){
+    if(!bgm) return;
+    var idx = actIndexForPage(page);
+    if(idx === bgmActIdx) return;
+    bgmActIdx = idx;
+    var src = BGM_ACTS[idx].src;
+    var source = bgm.querySelector('source');
+    if(source.getAttribute('src') === src) return;
+    var wasPlaying = !bgm.paused;
+    source.setAttribute('src', src);
+    bgm.load();
+    bgm.volume = bgmDucked ? BGM_DUCK : BGM_VOL;
+    if(wasPlaying || audioUnlocked){ bgm.play().catch(function(){}); }
+  }
+  function duckBgm(on){
+    if(!bgm) return;
+    bgmDucked = on;
+    bgm.volume = on ? BGM_DUCK : BGM_VOL;
+  }
+  function anyNarrationPlaying(){
+    return audios.some(function(a){ return !a.paused; });
+  }
+
+  function setIcon(audio, playing){
+    var btn = document.querySelector('.narr-btn[data-target="'+audio.id+'"]');
+    if(!btn) return;
+    btn.classList.toggle('is-playing', playing);
+    var icon = btn.querySelector('.narr-icon');
+    if(icon) icon.textContent = playing ? '⏸' : '▶';
+  }
+  function pauseAllExcept(keep){
+    audios.forEach(function(a){ if(a !== keep && !a.paused){ a.pause(); setIcon(a,false); } });
+  }
+  function tryPlay(audio){
+    pauseAllExcept(audio);
+    duckBgm(true);
+    var p = audio.play();
+    if(p && p.catch){ p.then(function(){ setIcon(audio,true); }).catch(function(){ setIcon(audio,false); }); }
+    else { setIcon(audio,true); }
+  }
+  var stageList = Array.prototype.slice.call(stages);
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var audio = entry.target.querySelector('audio.narration');
+        if(!audio) return;
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
+          var page = stageList.indexOf(entry.target) + 1;
+          setBgmForPage(page);
+          var sfx = entry.target.querySelector('audio.sfx');
+          if(sfx && !sfx.dataset.played){
+            sfx.dataset.played = '1';
+            sfx.volume = 0.55;
+            sfx.play().catch(function(){});
+          }
+          if(audio.paused && audio.currentTime === 0 && !audio.dataset.queued){
+            audio.dataset.queued = '1';
+            setTimeout(function(){
+              audio.dataset.queued = '';
+              if(audio.paused && audio.currentTime === 0){ tryPlay(audio); }
+            }, 500);
+          }
+        } else {
+          if(!audio.paused){ audio.pause(); setIcon(audio,false); if(!anyNarrationPlaying()){ duckBgm(false); } }
+        }
+      });
+    }, {threshold:[0,0.6,1]});
+    stages.forEach(function(s){ io.observe(s); });
+  }
+  document.querySelectorAll('.narr-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var audio = document.getElementById(btn.getAttribute('data-target'));
+      if(!audio) return;
+      if(audio.paused){ tryPlay(audio); } else { audio.pause(); setIcon(audio,false); if(!anyNarrationPlaying()){ duckBgm(false); } }
+    });
+  });
+  audios.forEach(function(a){
+    a.addEventListener('ended', function(){
+      setIcon(a,false);
+      if(!anyNarrationPlaying()){ duckBgm(false); }
+      var stage = a.closest('main.sh-stage');
+      var idx = stageList.indexOf(stage);
+      if(idx > -1 && idx < stageList.length - 1){
+        stageList[idx + 1].scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

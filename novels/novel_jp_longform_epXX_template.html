@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エピック・フューリー ホルムズの夜 第[[話数]]話｜米イラン戦争を描く軍事スリラー・仮想戦記（無料連載小説）</title>
+<meta name="description" content="[[この話のSEO用要約 — 1〜2文]]">
+<meta name="keywords" content="戦争小説, 軍事スリラー, 仮想戦記, 架空戦記, 米イラン戦争, ホルムズ海峡封鎖, 原油価格高騰, 中東情勢, タンカー攻撃, 自衛隊, 邦人保護, 米軍空爆, イラン最高指導者, 無料小説, 連載小説, Web小説, 軍事小説, 戦争フィクション, 未来戦記, 第三次世界大戦, 米海軍, ペルシャ湾情勢, 韓国海軍, 駆逐艦, ノンフィクション風フィクション, ニュース速報小説">
+<meta property="og:type" content="article">
+<meta property="og:title" content="エピック・フューリー ホルムズの夜 第[[話数]]話">
+<meta property="og:description" content="[[この話のSEO用要約 — SNSプレビュー用]]">
+<meta property="og:image" content="KIND_broadcast_submarine_hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="エピック・フューリー ホルムズの夜 第[[話数]]話">
+<meta name="twitter:description" content="[[この話のSEO用要約 — Twitter/Xプレビュー用]]">
+<!-- 本文用ウェブフォント: Noto Sans/Serif JP(グリフ欠落のない日本語フルセット対応の可変フォント) -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<style>
+:root {
+  --navy:#06152d; --gold:#f4bd3f; --white:#f7f8fa;
+  --cyan:#19d5df; --red:#d92d3a; --green:#38c65a;
+  --ui:"Noto Sans JP","Pretendard","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --tts:"Noto Sans JP","Pretendard","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  /* 小説本文専用書体: 明朝体系(可読性重視・グリフ欠落なし) */
+  --serif:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Pretendard",serif;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:#020914;color:var(--white);font-family:var(--ui)}
+/* 16:9の放送画面(場面ごと)を縦に積み重ねてスクロールする構成 */
+body{display:flex;flex-direction:column;align-items:center;gap:28px;padding:28px 0;overflow-x:hidden}
+.stage{position:relative;width:100%;max-width:1600px;margin:0 auto;aspect-ratio:16/9;overflow:hidden;background:var(--navy);border-radius:4px}
+
+/* ---- ヘッダー: 左(ジャンルタグ) / 中央(2行ロゴ) / 右(日付・N/全体)
+   3カラムとも、テキストの下端がヘッダー下部の金色ラインから2mm上に
+   揃うよう(align-items:end + padding-bottom:2mm)配置する。速報形式の
+   1〜5ページ、小説形式の6ページ以降、すべて共通のヘッダーを使う。 */
+.header{height:14%;display:grid;grid-template-columns:32% 36% 32%;grid-template-areas:"bl logo dt";align-items:end;padding:0 2.2% 1.5mm;margin-top:2mm;background:linear-gradient(180deg,#06152d,#07182f);border-bottom:1px solid var(--gold);position:relative;z-index:20;overflow:hidden}
+.brand-left{grid-area:bl;text-align:left;font-size:clamp(13px,1.1vw,22px);line-height:1.2;font-weight:800;color:var(--gold);letter-spacing:.02em}
+.logo{grid-area:logo;display:flex;flex-direction:column;align-items:center}
+.logo .l1{text-align:center;font-weight:800;font-size:clamp(17px,1.85vw,29px);margin:0;text-shadow:2px 2px 4px #000}
+.logo .l2{text-align:center;font-weight:700;font-size:clamp(10px,2vw,20px);color:var(--gold);margin:0;margin-top:1.5mm}
+.datetime{grid-area:dt;display:flex;align-items:baseline;justify-content:flex-end;gap:18px;text-align:right;line-height:1}
+.datetime .date{font-size:clamp(12px,1vw,20px);font-weight:700;color:var(--gold)}
+.datetime .part{font-size:clamp(11px,.85vw,16px);font-weight:600;color:#fff;opacity:.85}
+
+/* ── 6ページ以降・小説モードのヘッダー: 薄型バリアント ──
+   ブランディングのみ残し、日付は非表示。ロゴ2行を1行にまとめて
+   高さを大きく抑える。 */
+/* 6페이지 이후: 헤더는 1~5페이지와 완전히 동일한 구도·글자 크기를 유지하고,
+   오직 날짜(datetime .date)만 숨긴다. */
+.header--slim .datetime .date{display:none}
+
+/* ---- 1〜5ページ: 戦況速報(ニュース放送)レイアウト ----
+   文字サイズは6ページ以降の本文と近い水準に抑え、Header/Video/Footer
+   の枠をどの画面幅でも越えないようにしている。 */
+.headline{height:9%;display:flex;align-items:flex-end;justify-content:center;gap:1.6%;padding:0 2.2% 1.5mm;margin-top:1.5mm;background:#071a34;border-bottom:1px solid var(--gold);overflow:hidden}
+.section{flex:0 0 auto;border:2px solid var(--gold);color:var(--gold);padding:.35% 1.1%;font-size:clamp(11px,.9vw,17px);font-weight:800;white-space:nowrap}
+.headline h1{margin:0;flex:1 1 auto;min-width:0;font-size:clamp(17px,1.85vw,29px);font-weight:500;line-height:1.3;padding-bottom:.12em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px 5px #000}
+.video{position:absolute;left:0;right:0;top:calc(23% + 2mm);bottom:16.2%;overflow:hidden;background:transparent}
+/* 動画上に重ねる位置タグ。文言の長さに応じて幅が自動で縮む(fit-content)。 */
+.video-tag{position:absolute;left:3.1%;top:4%;z-index:6;display:inline-block;width:fit-content;border:2px solid var(--gold);color:var(--gold);background:rgba(6,21,45,.6);padding:.3em 1em;font-size:clamp(11px,.85vw,16px);font-weight:800;letter-spacing:.03em;white-space:nowrap}
+.video img,.video video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.98) contrast(1.08);image-rendering:auto}
+.video:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.12) 62%,rgba(0,0,0,.64) 100%);pointer-events:none}
+.chyron{position:absolute;left:3.1%;top:53.4%;transform:translateY(-50%);width:80%;z-index:5;padding:0}
+.meta{margin-bottom:1%;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.meta-tag{display:inline-block;border:2px solid var(--gold);color:var(--gold);background:rgba(6,21,45,.55);font-weight:800;letter-spacing:.04em;padding:.25em .8em;font-size:clamp(10px,.75vw,14px);white-space:nowrap}
+.meta-loc{color:var(--gold);font-size:clamp(10px,.68vw,13px);font-weight:600;letter-spacing:.035em;text-shadow:2px 2px 3px #000}
+.caption{font-family:var(--tts);font-size:clamp(19px,2.15vw,34px);font-weight:400;line-height:1.55;letter-spacing:-.008em;max-width:100%;color:#fff;text-shadow:2px 3px 4px #000;text-align:justify;text-justify:inter-ideograph;word-break:normal;overflow-wrap:break-word}
+.source{margin-top:1.05%;color:#fff;font-size:clamp(9px,.65vw,12px);font-weight:400;letter-spacing:.01em;text-shadow:2px 2px 3px #000}
+/* ティッカーは下端から3mm浮いた位置に置き、速報バーは「3mm + ティッカー高」
+   を基準にその直上へ自動で吸着する。速報バーは固定高を持たず上下2mmの
+   パディングのみなので、内容量に応じて薄くなり、その分ティッカー側へ
+   近づく。 */
+.breaking{position:absolute;left:0;right:0;bottom:calc(3mm + 5%);display:flex;align-items:center;gap:16px;padding:1mm 2.2%;background:var(--red);z-index:10;white-space:nowrap;overflow:hidden}
+.breaking .tag{flex:0 0 auto;background:#fff;color:var(--red);font-weight:700;letter-spacing:.05em;padding:.22em .9em;border-radius:4px;font-size:clamp(16px,1.05vw,24px)}
+.breaking .items{flex:1 1 auto;min-width:0;color:#fff;font-weight:600;font-size:clamp(17px,1.15vw,26px);overflow:hidden;text-overflow:ellipsis;text-shadow:1px 1px 2px rgba(0,0,0,.4)}
+.breaking .dot{margin:0 .8em;color:#fff;opacity:.85}
+.ticker{position:absolute;left:0;right:0;bottom:3mm;height:5%;display:flex;align-items:center;padding:0 7mm 0 2.2%;background:#06152d;border-top:1px solid var(--gold);z-index:11;overflow:hidden;font-size:clamp(13px,1.08vw,19px)}
+/* 「主要事件タイムライン」ラベルは固定し、その右側(.ticker-window)だけを
+   overflow:hiddenの窓にして、内容が右から左へゆっくり流れ、窓の右端で
+   消えるようにする。どちらも縦中央揃え。 */
+.ticker .title{flex:0 0 auto;display:flex;align-items:center;height:auto;line-height:1;color:var(--gold);font-weight:800;letter-spacing:.02em;border:1px solid var(--gold);border-radius:2px;background:rgba(244,189,63,.08);padding:.5mm .9em;margin-right:1.1%;white-space:nowrap}
+.ticker-window{flex:1 1 auto;position:relative;height:100%;overflow:hidden}
+.ticker-window .items{position:absolute;top:50%;left:0;white-space:nowrap;display:inline-flex;align-items:center;line-height:1;transform:translateY(calc(-50% + 1px)) translateX(0);animation:ticker-scroll 64s linear infinite}
+.ticker .dot{color:#fff;margin:0 .7%}
+@keyframes ticker-scroll{to{transform:translateY(calc(-50% + 1px)) translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ticker-window .items{animation:none;transform:translateY(calc(-50% + 1px)) translateX(0)}}
+
+/* ---- 6ページ以降: 小説本文(ナラティブ)レイアウト ----
+   速報フレーム(見出し/速報バー/ティッカー)を外し、映像の上に大きな
+   本文を乗せて、実際に「読む」画面へ切り替える。 */
+.novel-media{position:absolute;left:0;right:0;top:calc(14% + 2mm);bottom:0;overflow:hidden;background:#111}
+.novel-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,9,18,.28) 0%,rgba(4,9,18,.60) 55%,rgba(4,9,18,.82) 100%);pointer-events:none}
+.novel-media img,.novel-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.05) brightness(.88)}
+.novel-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,9,20,0) 24%,rgba(2,9,20,.5) 62%,rgba(2,9,20,.94) 100%);pointer-events:none}
+/* 6ページ以降は、薄型ヘッダー(.header--slim)の下に広い読書領域を確保する。
+   場面情報は太字バッジではなく1行の小さなキャプションに縮小し、本文は
+   大きく余裕を持たせて没入して読めるようにする。 */
+/* 本文ブロック(見出し+テキスト)全体が、映像(.novel-media)の縦幅の
+   中央に来るよう、novel-mediaと同じtop/bottom(6.5%〜0)を使い
+   justify-content:centerで縦中央揃えする。右側はpadding-right:20%で
+   固定し、どの画面幅でも本文の右端が横幅の80%地点で揃うようにする。 */
+.novel-content{position:absolute;top:calc(14% + 2mm);bottom:0;left:0;right:0;z-index:4;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:0 16.9% 0 3.1%}
+.novel-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+.novel-heading .scene-tag{border:none;background:none;padding:0;color:var(--gold);font-weight:700;font-size:clamp(13px,1vw,16px);letter-spacing:.03em;text-shadow:1px 1px 3px #000}
+.novel-heading h2{margin:0;font-size:clamp(13px,1vw,16px);font-weight:500;font-style:italic;color:rgba(255,255,255,.78);text-shadow:1px 1px 3px #000}
+.novel-heading h2::before{content:'— '}
+.novel-text{width:100%;max-width:none;align-self:flex-start}
+/* 本文書体: 明朝体系(--serif)。font-sizeはvw基準のclampでステージ幅に
+   比例して滑らかに縮小し、段落数の多いページ(例: 13ページ)でも上部
+   ヘッダーの金色ラインと重ならない。 */
+.novel-text p{margin:0 0 14px;font-family:var(--serif);font-size:clamp(16px,2.15vw,31px);line-height:1.75;font-weight:400;color:#fff;text-shadow:1px 2px 6px rgba(0,0,0,.8);text-align:justify;text-justify:inter-ideograph;word-break:normal;overflow-wrap:break-word}
+.novel-text p:last-child{margin-bottom:0}
+.novel-end{color:var(--gold)!important;font-weight:800!important;text-align:left!important}
+
+/* 900px以下: 段落数の多いページ(例: 13ページ、3段落)でも、ヘッダーの
+   金色ラインと重ならないよう、本文文字サイズ・行間・余白をまとめて
+   詰める。1〜5ページの速報要素も同時に一段階縮小する。 */
+@media(max-width:900px){.chyron{width:80%}.headline h1{font-size:clamp(15px,2vw,22px)}.logo .l1{font-size:clamp(15px,2vw,22px)}.section{font-size:clamp(9px,1.4vw,13px)}.caption{font-size:22px}.meta-tag{font-size:clamp(9px,1.1vw,12px)}.meta-loc{font-size:clamp(9px,1vw,11px)}.novel-content{padding:0 16.9% 0 3.1%;gap:14px}.novel-text p{font-size:19px;line-height:1.65;margin:0 0 12px}.ticker-window .items{animation-duration:48s}}
+@media(max-width:650px){.headline h1{font-size:clamp(13px,2.6vw,17px)}.logo .l1{font-size:clamp(13px,2.6vw,17px)}.section{font-size:clamp(8px,1.7vw,11px);padding:.3% 1%}.chyron{width:80%}.caption{font-size:18px}.meta-tag{font-size:clamp(8px,1.4vw,10px)}.meta-loc{font-size:clamp(8px,1.2vw,10px)}.novel-content{padding:0 16.9% 0 3.1%;gap:12px}.novel-text p{font-size:15px;line-height:1.6;margin:0 0 10px}.video-tag{font-size:clamp(9px,1.8vw,12px);padding:.25em .7em;top:3%}.breaking{gap:8px;padding:1.2mm 2.2%}.breaking .tag{font-size:clamp(11px,2.2vw,15px);padding:.25em .7em}.breaking .items{font-size:clamp(11px,2.1vw,15px)}.ticker{padding:0 5mm 0 2.2%;font-size:clamp(8px,2vw,12px)}.ticker .title{padding:0 .6em;margin-right:.8%}.ticker-window .items{animation-duration:40s}}
+/* 768px以下(スマートフォン・小型タブレットの縦向き): すべてを16:9フレームに
+   絶対座標で詰め込む代わりに、ヘッダー/見出し/(映像+キャプション)/速報/
+   ティッカーをgridの行として積み重ねる。映像とキャプションは同じgrid行を
+   共有するので、元のデザイン通りキャプションが映像に重なって見える
+   (縦中央・左揃え)。キャプションが映像より長くなった場合はその行自体が
+   伸びるので、下の速報バーやティッカーと重なることは構造的に起こらない。 */
+@media(max-width:768px){
+.stage{aspect-ratio:auto;height:auto;display:grid;grid-template-columns:1fr}
+.header{grid-row:1;height:auto}
+.header--slim{height:auto}
+.headline{grid-row:2;height:auto}
+.video{position:relative;top:auto;bottom:auto;left:auto;right:auto;grid-row:3;grid-column:1;align-self:start;width:100%;aspect-ratio:16/9}
+.chyron{position:static;grid-row:3;grid-column:1;align-self:center;justify-self:start;transform:none;margin-left:3.1%;padding:0}
+.breaking{position:static;grid-row:4}
+.ticker{position:static;grid-row:5;height:auto;padding:6px 4% 6px 2.2%}
+.ticker .title{height:auto}
+.ticker-window{height:1.4em}
+.novel-media{position:relative;top:auto;bottom:auto;grid-row:2;grid-column:1;align-self:start;width:100%;aspect-ratio:16/9;background:var(--navy)}
+.novel-content{position:static;grid-row:2;grid-column:1;align-self:center;padding:16px 16.9% 16px 3.1%;justify-content:flex-start}
+/* カードが縦に長くなり得るため、再生ボタンはフレーム右下ではなく映像の
+   すぐ下に固定し、本文の最後の行と重ならないようにする。 */
+.narr-btn{bottom:auto;right:3%}
+main.stage:has(.headline) .narr-btn{top:74px}
+main.stage:has(.header--slim) .narr-btn{top:38px}
+}
+/* 420px以下(超小型画面)では、3段落のページが文字をどれだけ縮めても
+   物理的に収まりきらない場合があるため、縦中央揃えを上寄せに切り替え、
+   overflowを隠して、ヘッダーの金色ラインと本文が重なる事態を防ぐ
+   (タイトル行は常に見え、極端な場合のみ最後の一文の一部が見切れる)。 */
+@media(max-width:420px){.datetime .date{font-size:10px}.datetime .part{font-size:9px}.brand-left{font-size:11px}.section{font-size:clamp(7px,2vw,10px);padding:.3% 1.2%}.headline h1{font-size:clamp(11px,3.2vw,14px)}.logo .l1{font-size:clamp(11px,3.2vw,14px)}.caption{font-size:15px;line-height:1.5}.meta-tag{font-size:clamp(7px,1.8vw,9px);padding:.2em .6em}.meta-loc{font-size:8px}.video-tag{font-size:9px;padding:.2em .6em}.ticker .title{font-size:7px;padding:0 .5em}.breaking{gap:6px;padding:1mm 2.2%}.breaking .tag,.breaking .items{font-size:10px}.novel-content{padding:14px 16.9% 0 3.1%;gap:8px;justify-content:flex-start;overflow-y:hidden}.novel-text p{font-size:12px;line-height:1.5;margin:0 0 7px}}
+
+/* ---- 내레이션 오디오 컨트롤 (스테이지별) ---- */
+.narr-btn{position:absolute;right:2.2%;bottom:2.5%;z-index:40;width:9%;max-width:52px;min-width:30px;aspect-ratio:1/1;border-radius:50%;border:1.5px solid var(--gold);background:rgba(6,21,45,.72);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.55;transition:opacity .2s,background .2s;padding:0}
+.narr-btn:hover,.narr-btn:focus-visible,.narr-btn.is-playing{opacity:1}
+.narr-btn.is-playing{background:rgba(244,189,63,.18)}
+.narr-icon{font-size:clamp(11px,1.6vw,20px);line-height:1;pointer-events:none}
+.narr-btn.is-loading .narr-icon{opacity:.5}
+@media(max-width:650px){.narr-btn{right:3%;bottom:3%}}
+</style>
+</head>
+<body>
+
+<!-- ============ 1 / 13 — [[場所 — 1ページ]](戦況速報) ============ -->
+<main class="stage" data-page="1">
+<audio class="narration" id="narr-1" preload="none"><source src="narration/p01.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-1" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">1/13</span></div>
+</header>
+<section class="headline"><div class="section">日本版</div><h1>第[[話数]]話 ― [[副題]]</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="[[動画ファイル名 — 1ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">緊急速報</span><span class="meta-loc">[[場所・時刻 — 1ページ]]</span></div>
+  <div class="caption">[[速報キャプション — 1ページ]]</div>
+</section>
+<section class="breaking">
+  <span class="tag">速報</span>
+  <span class="items">[[速報見出し A]]<span class="dot">|</span>[[速報見出し B]]</span>
+</section>
+<footer class="ticker"><span class="title">タイムライン</span><div class="ticker-window"><span class="items">
+[[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+<span class="dot">|</span> [[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+</span></div></footer>
+</main>
+
+<!-- ============ 2 / 13 — [[場所 — 2ページ]](戦況速報) ============ -->
+<main class="stage" data-page="2">
+<audio class="narration" id="narr-2" preload="none"><source src="narration/p02.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-2" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">2/13</span></div>
+</header>
+<section class="headline"><div class="section">日本版</div><h1>第[[話数]]話 ― [[副題]]</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="[[動画ファイル名 — 2ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">緊急速報</span><span class="meta-loc">[[場所・時刻 — 2ページ]]</span></div>
+  <div class="caption">[[速報キャプション — 2ページ]]</div>
+</section>
+<section class="breaking">
+  <span class="tag">速報</span>
+  <span class="items">[[速報見出し A]]<span class="dot">|</span>[[速報見出し B]]</span>
+</section>
+<footer class="ticker"><span class="title">タイムライン</span><div class="ticker-window"><span class="items">
+[[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+<span class="dot">|</span> [[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+</span></div></footer>
+</main>
+
+<!-- ============ 3 / 13 — [[場所 — 3ページ]](戦況速報) ============ -->
+<main class="stage" data-page="3">
+<audio class="narration" id="narr-3" preload="none"><source src="narration/p03.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-3" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">3/13</span></div>
+</header>
+<section class="headline"><div class="section">日本版</div><h1>第[[話数]]話 ― [[副題]]</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="[[動画ファイル名 — 3ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="video-tag">[[映像ラベル — 3ページ]]</div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">緊急速報</span><span class="meta-loc">[[場所・時刻 — 3ページ]]</span></div>
+  <div class="caption">[[速報キャプション — 3ページ]]</div>
+</section>
+<section class="breaking">
+  <span class="tag">速報</span>
+  <span class="items">[[速報見出し A]]<span class="dot">|</span>[[速報見出し B]]</span>
+</section>
+<footer class="ticker"><span class="title">タイムライン</span><div class="ticker-window"><span class="items">
+[[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+<span class="dot">|</span> [[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+</span></div></footer>
+</main>
+
+<!-- ============ 4 / 13 — [[場所 — 4ページ]](戦況速報) ============ -->
+<main class="stage" data-page="4">
+<audio class="narration" id="narr-4" preload="none"><source src="narration/p04.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-4" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">4/13</span></div>
+</header>
+<section class="headline"><div class="section">日本版</div><h1>第[[話数]]話 ― [[副題]]</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="[[動画ファイル名 — 4ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">緊急速報</span><span class="meta-loc">[[場所・時刻 — 4ページ]]</span></div>
+  <div class="caption">[[速報キャプション — 4ページ]]</div>
+</section>
+<section class="breaking">
+  <span class="tag">速報</span>
+  <span class="items">[[速報見出し A]]<span class="dot">|</span>[[速報見出し B]]</span>
+</section>
+<footer class="ticker"><span class="title">タイムライン</span><div class="ticker-window"><span class="items">
+[[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+<span class="dot">|</span> [[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+</span></div></footer>
+</main>
+
+<!-- ============ 5 / 13 — [[場所 — 5ページ]](戦況速報) ============ -->
+<main class="stage" data-page="5">
+<audio class="narration" id="narr-5" preload="none"><source src="narration/p05.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-5" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">5/13</span></div>
+</header>
+<section class="headline"><div class="section">日本版</div><h1>第[[話数]]話 ― [[副題]]</h1></section>
+<section class="video"><video autoplay muted loop playsinline poster="KIND_broadcast_submarine_hero.png"><source src="[[動画ファイル名 — 5ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag">緊急速報</span><span class="meta-loc">[[場所・時刻 — 5ページ]]</span></div>
+  <div class="caption">[[速報キャプション — 5ページ]]</div>
+</section>
+<section class="breaking">
+  <span class="tag">速報</span>
+  <span class="items">[[速報見出し A]]<span class="dot">|</span>[[速報見出し B]]</span>
+</section>
+<footer class="ticker"><span class="title">タイムライン</span><div class="ticker-window"><span class="items">
+[[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+<span class="dot">|</span> [[タイムライン事項 1]]
+<span class="dot">|</span> [[タイムライン事項 2]]
+<span class="dot">|</span> [[タイムライン事項 3]]
+<span class="dot">|</span> [[タイムライン事項 4]]
+<span class="dot">|</span> [[タイムライン事項 5]]
+</span></div></footer>
+</main>
+
+<!-- ============ 6 / 13 — [[場面設定 — 6ページ]] ============ -->
+<main class="stage" data-page="6">
+<audio class="narration" id="narr-6" preload="none"><source src="narration/p06.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-6" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">6/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 6ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 6ページ]]</span>
+  <h2>[[小見出し — 6ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 6ページ-1]]</p>
+  <p>[[本文段落 — 6ページ-2]]</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 7 / 13 — [[場面設定 — 7ページ]] ============ -->
+<main class="stage" data-page="7">
+<audio class="narration" id="narr-7" preload="none"><source src="narration/p07.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-7" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">7/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 7ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 7ページ]]</span>
+  <h2>[[小見出し — 7ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 7ページ-1]]</p>
+  <p>[[本文段落 — 7ページ-2]]</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 8 / 13 — [[場面設定 — 8ページ]] ============ -->
+<main class="stage" data-page="8">
+<audio class="narration" id="narr-8" preload="none"><source src="narration/p08.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-8" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">8/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 8ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 8ページ]]</span>
+  <h2>[[小見出し — 8ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 8ページ-1]]</p>
+  <p>[[本文段落 — 8ページ-2]]</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 9 / 13 — [[場面設定 — 9ページ]] ============ -->
+<main class="stage" data-page="9">
+<audio class="narration" id="narr-9" preload="none"><source src="narration/p09.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-9" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">9/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 9ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 9ページ]]</span>
+  <h2>[[小見出し — 9ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 9ページ-1]]</p>
+  <p>[[本文段落 — 9ページ-2]]</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 10 / 13 — [[場面設定 — 10ページ]] ============ -->
+<main class="stage" data-page="10">
+<audio class="narration" id="narr-10" preload="none"><source src="narration/p10.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-10" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">10/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 10ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 10ページ]]</span>
+  <h2>[[小見出し — 10ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 10ページ-1]]</p>
+  <p>[[本文段落 — 10ページ-2]]</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 11 / 13 — [[場面設定 — 11ページ]] ============ -->
+<main class="stage" data-page="11">
+<audio class="narration" id="narr-11" preload="none"><source src="narration/p11.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-11" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">11/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 11ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 11ページ]]</span>
+  <h2>[[小見出し — 11ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 11ページ-1]]</p>
+  <p>[[本文段落 — 11ページ-2]]</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 12 / 13 — [[場面設定 — 12ページ]] ============ -->
+<main class="stage" data-page="12">
+<audio class="narration" id="narr-12" preload="none"><source src="narration/p12.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-12" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">12/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 12ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 12ページ]]</span>
+  <h2>[[小見出し — 12ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 12ページ-1]]</p>
+  <p>[[本文段落 — 12ページ-2]]</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 13 / 13 — [[場面設定 — 13ページ]] ============ -->
+<main class="stage" data-page="13">
+<audio class="narration" id="narr-13" preload="none"><source src="narration/p13.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-13" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">仮想戦記</div>
+  <div class="logo"><span class="l1">EPIC FURY</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">[[日付]]</span><span class="part">13/13</span></div>
+</header>
+<section class="novel-media"><video autoplay muted loop playsinline><source src="[[動画ファイル名 — 13ページ]]" type="video/mp4">お使いのブラウザは動画に対応していません。</video></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">[[場面設定 — 13ページ]]</span>
+  <h2>[[小見出し — 13ページ]]</h2>
+</div>
+<div class="novel-text">
+  <p>[[本文段落 — 13ページ-1]]</p>
+  <p>[[本文段落 — 13ページ-2]]</p>
+  <p class="novel-end">― 第[[話数]]話 完。第[[次話数]]話へ続く。 ―</p>
+</div>
+</div>
+</main>
+
+
+<script>
+(function(){
+  var stages = document.querySelectorAll('main.stage');
+  var audios = Array.prototype.slice.call(document.querySelectorAll('audio.narration'));
+  function setIcon(audio, playing){
+    var btn = document.querySelector('.narr-btn[data-target="'+audio.id+'"]');
+    if(!btn) return;
+    btn.classList.toggle('is-playing', playing);
+    var icon = btn.querySelector('.narr-icon');
+    if(icon) icon.textContent = playing ? '⏸' : '▶';
+  }
+  function pauseAllExcept(keep){
+    audios.forEach(function(a){ if(a !== keep && !a.paused){ a.pause(); setIcon(a,false); } });
+  }
+  function tryPlay(audio){
+    pauseAllExcept(audio);
+    var p = audio.play();
+    if(p && p.catch){ p.then(function(){ setIcon(audio,true); }).catch(function(){ setIcon(audio,false); }); }
+    else { setIcon(audio,true); }
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var audio = entry.target.querySelector('audio.narration');
+        if(!audio) return;
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
+          if(audio.paused && audio.currentTime === 0 && !audio.dataset.queued){
+            audio.dataset.queued = '1';
+            setTimeout(function(){
+              audio.dataset.queued = '';
+              if(audio.paused && audio.currentTime === 0){ tryPlay(audio); }
+            }, 500);
+          }
+        } else {
+          if(!audio.paused){ audio.pause(); setIcon(audio,false); }
+        }
+      });
+    }, {threshold:[0,0.6,1]});
+    stages.forEach(function(s){ io.observe(s); });
+  }
+  document.querySelectorAll('.narr-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var audio = document.getElementById(btn.getAttribute('data-target'));
+      if(!audio) return;
+      if(audio.paused){ tryPlay(audio); } else { audio.pause(); setIcon(audio,false); }
+    });
+  });
+  var stageList = Array.prototype.slice.call(stages);
+  audios.forEach(function(a){
+    a.addEventListener('ended', function(){
+      setIcon(a,false);
+      // YouTube長尺動画のように: このナレーションが終わったら次のページへ
+      // 自動スクロールする。次のページが60%以上表示されると、上の
+      // IntersectionObserverがそのナレーションを自動再生するので、
+      // 13ページ目まで誰も操作せずに順番に進む。
+      var stage = a.closest('main.stage');
+      var idx = stageList.indexOf(stage);
+      if(idx > -1 && idx < stageList.length - 1){
+        stageList[idx + 1].scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

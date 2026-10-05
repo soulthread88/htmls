@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIND 창간호 No.001 — 전문가판 (EXPERT EDITION)</title>
+<!--
+  KIND EXPERT No.001 [KO] — 전문가판
+  · 디자인: KIND 한글판 시스템 (2160×3840, 9:16, 다크/라이트)
+  · 자료 기준일: 2026-08-12 (IEA Oil Market Report August 2026)
+  · 구성: 표지 + E01~E12. DATA(금색)와 KIND VIEW(빨간색)를 시각적으로 분리.
+  · 출처 코드 S1~S13은 E12에 등급(A/B/C)과 함께 정리.
+-->
+<script>function kindFb(el){var l=(el.getAttribute("data-fb")||"").split("|").filter(Boolean);if(!l.length){el.onerror=null;return;}el.setAttribute("data-fb",l.slice(1).join("|"));el.src=l[0];}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--canvas-w:2160px;--canvas-h:3840px;}
+html[data-theme="dark"]{--bg:#0a1a2e;--bg2:#081422;--card:#14283f;--card2:#16304f;--node-bg:#0d2038;--node-border:rgba(255,255,255,.16);
+ --line:rgba(255,255,255,.18);--line-soft:rgba(255,255,255,.09);--gold:#e2a53d;--gold-soft:#f0c874;--red:#c22430;--red-soft:#e2545c;
+ --text:#f4f6f9;--gray:#aab9ca;--gray-dim:#8194a8;--callout-bg:rgba(226,165,61,.07);--page-back:#000;}
+html[data-theme="light"]{--bg:#ffffff;--bg2:#eef2f7;--card:#eef2f7;--card2:#e6ecf3;--node-bg:#eef2f7;--node-border:rgba(10,26,46,.16);
+ --line:rgba(10,26,46,.16);--line-soft:rgba(10,26,46,.08);--gold:#8a6008;--gold-soft:#6b4a06;--red:#a81f2a;--red-soft:#8f1620;
+ --text:#0a1a2e;--gray:#3d4b5e;--gray-dim:#5c6b7e;--callout-bg:#fff8ea;--page-back:#dfe5ec;}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--page-back)}
+body{font-family:'Noto Sans KR','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all;
+ display:flex;flex-direction:column;align-items:center;padding-top:12px}
+p{margin:0}
+
+.page-fit{width:var(--canvas-w);height:var(--canvas-h);position:relative;margin:0 auto 24px;overflow:hidden;flex:0 0 auto}
+.canvas-page{position:absolute;top:0;left:0;transform-origin:top left;width:var(--canvas-w);height:var(--canvas-h);
+ overflow:hidden;background:var(--bg);color:var(--text);display:flex;flex-direction:column;padding:140px 130px 110px}
+
+/* header */
+.hdr{display:flex;justify-content:space-between;align-items:center;padding-bottom:34px;border-bottom:3px solid var(--line);margin-bottom:60px;flex:0 0 auto}
+.hdr-left{display:flex;align-items:center;gap:30px}
+.hdr-logo{width:126px;height:126px;border-radius:50%;border:4px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:58px;font-weight:900;color:var(--gold)}
+.hdr-titles .k{font-size:52px;font-weight:900;line-height:1.2}
+.hdr-titles .s{font-size:42px;font-weight:700;color:var(--gray-dim);margin-top:8px}
+.hdr-pill{background:var(--gold);color:var(--bg2);font-weight:900;font-size:46px;padding:18px 38px;border-radius:100px;white-space:nowrap}
+
+/* headline */
+.eyebrow{color:var(--red-soft);font-weight:900;font-size:52px;letter-spacing:.12em;margin-bottom:24px;flex:0 0 auto}
+html[data-theme="light"] .eyebrow{color:var(--red)}
+.h1{font-size:128px;font-weight:900;line-height:1.08;margin:0 0 30px;letter-spacing:-.015em;flex:0 0 auto}
+.rule{width:150px;height:8px;background:var(--gold);border-radius:4px;margin-bottom:34px;flex:0 0 auto}
+.sub{font-size:60px;font-weight:500;color:var(--gray);line-height:1.42;margin-bottom:50px;flex:0 0 auto}
+
+/* source fact */
+.fact{flex:0 0 auto;background:var(--card);border-left:12px solid var(--gold);border-radius:0 24px 24px 0;padding:34px 46px;margin-bottom:54px}
+.fact .tag{font-size:32px;font-weight:900;color:var(--gold);letter-spacing:.1em;margin-bottom:14px}
+.fact p{font-size:48px;line-height:1.48;font-weight:600}
+
+/* hero = diagram + media */
+.hero{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;min-height:0;margin-bottom:50px}
+.hero-diagram{flex:0 0 auto;width:100%;display:flex;flex-direction:column;align-items:center}
+.chain{display:flex;flex-direction:column;align-items:center;width:100%;max-width:1650px}
+.chain-box{width:100%;border:5px solid var(--gold);border-radius:30px;padding:36px 44px;text-align:center;font-size:62px;font-weight:900;background:var(--card);line-height:1.25}
+.chain-box .cb-sub{display:block;font-size:38px;font-weight:500;color:var(--gray);margin-top:12px;line-height:1.35}
+.chain-box.final{background:var(--red);border-color:var(--red);color:#fff}
+.chain-box.solo{font-size:92px;padding:64px 44px}
+.chain-op{font-size:70px;font-weight:900;color:var(--gold);padding:10px 0;line-height:1}
+.chain.n5 .chain-box{padding:26px 40px;font-size:56px}
+.chain.n5 .chain-op{font-size:56px;padding:6px 0}
+
+.nature-frame{flex:1 1 auto;min-height:440px;width:100%;margin-top:50px;border-radius:26px;overflow:hidden;position:relative;border:2px solid var(--line);background:var(--bg2)}
+.nature-frame img,.nature-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.nature-frame .media-kind{position:absolute;top:22px;left:24px;padding:10px 20px;border-radius:999px;background:rgba(3,12,22,.78);color:#fff;font-size:28px;font-weight:900;letter-spacing:.06em}
+.nature-frame .media-credit{position:absolute;left:0;right:0;bottom:0;padding:18px 26px;background:linear-gradient(180deg,transparent,rgba(3,12,22,.86) 38%);color:#e6edf3;font-size:26px;line-height:1.35}
+.media-credit strong{color:#f0b54d}
+.media-credit a{color:#fff;text-underline-offset:3px}
+
+/* explanation */
+.explain{flex:0 0 auto;display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-bottom:46px}
+.box{background:var(--card);border-radius:24px;padding:38px 42px}
+.box h3{font-size:46px;font-weight:900;color:var(--gold);margin:0 0 16px}
+.box p{font-size:40px;line-height:1.5;color:var(--gray);font-weight:500}
+
+/* callout */
+.callout{flex:0 0 auto;border:4px solid var(--gold);border-radius:28px;padding:42px 52px;display:flex;gap:30px;align-items:flex-start;background:var(--callout-bg)}
+.callout .bang{font-size:66px;font-weight:900;color:var(--gold);line-height:1}
+.callout-body{flex:1}
+.callout-label{font-size:34px;font-weight:900;color:var(--gold);letter-spacing:.12em;margin-bottom:16px}
+.callout-divider{border-top:2px solid var(--line);margin:0 0 20px}
+.callout-title{font-size:56px;font-weight:900;color:var(--gold);line-height:1.34}
+.callout-label + .callout-divider + .callout-title{color:var(--text)}
+.callout-desc{font-size:48px;color:var(--gray);line-height:1.5;font-weight:500}
+
+.ftr{text-align:center;font-size:40px;color:var(--gray-dim);letter-spacing:.06em;margin-top:40px;padding-top:28px;border-top:2px solid var(--line-soft);flex:0 0 auto}
+
+/* master flow */
+.flow{display:flex;flex-direction:column;width:100%;max-width:1800px}
+.flow-item{display:flex;gap:48px;align-items:flex-start;position:relative;padding-bottom:62px}
+.flow-item:last-child{padding-bottom:0}
+.flow-item::before{content:"";position:absolute;left:58px;top:120px;width:6px;height:calc(100% - 110px);background:var(--line)}
+.flow-item:last-child::before{display:none}
+.flow-num{flex:0 0 auto;width:122px;height:122px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:58px;font-weight:900;color:var(--text);background:var(--node-bg);border:6px solid var(--node-border);position:relative;z-index:1}
+.flow-num.accent{background:var(--red);border-color:var(--red);color:#fff}
+.flow-body{padding-top:10px}
+.flow-title{font-size:66px;font-weight:900;margin-bottom:12px}
+.flow-title.accent{color:var(--red-soft)}
+html[data-theme="light"] .flow-title.accent{color:var(--red)}
+.flow-desc{font-size:48px;color:var(--gray);font-weight:500;line-height:1.42}
+
+/* theme toggle */
+.theme-toggle{position:fixed;bottom:16px;right:16px;z-index:9999;display:flex;padding:5px;border-radius:999px;background:rgba(8,20,34,.9);border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.theme-toggle button{appearance:none;border:0;background:transparent;color:#c8d2dc;font:800 14px/1 Arial,sans-serif;padding:10px 13px;border-radius:999px;cursor:pointer}
+.theme-toggle button.active{background:#fff;color:#0a1a2e}
+html[data-theme="light"] .theme-toggle{background:rgba(255,255,255,.94);border-color:rgba(10,26,46,.2)}
+html[data-theme="light"] .theme-toggle button{color:#3d4b5e}
+html[data-theme="light"] .theme-toggle button.active{background:#0a1a2e;color:#fff}
+
+@page{margin:0;size:2160px 3840px}
+@media print{
+ .theme-toggle{display:none!important}
+ body{display:block;padding:0;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .page-fit{width:var(--canvas-w)!important;height:var(--canvas-h)!important;margin:0;break-after:page}
+ .page-fit:last-of-type{break-after:auto}
+ .canvas-page{position:relative;transform:none!important}
+}
+
+/* few-node chains get more presence; long frames capped so the diagram leads */
+.chain.n2 .chain-box,.chain.n3 .chain-box,.chain.formula .chain-box{padding:48px 44px;font-size:70px}
+.chain.formula .chain-box .cb-sub{font-size:42px}
+.chain.n2 .chain-op,.chain.n3 .chain-op,.chain.formula .chain-op{font-size:80px;padding:18px 0}
+.chain-box.solo{font-size:104px;padding:90px 44px}
+.flow.master .flow-item{padding-bottom:104px}
+.flow.master .flow-title{font-size:72px}
+.flow.master .flow-desc{font-size:52px}
+.hero:not(:has(.nature-frame)){justify-content:center}
+
+/* ===================== EXPERT COMPONENTS ===================== */
+.canvas-page.content .h1{font-size:112px}
+.canvas-page.content .sub{font-size:50px;margin-bottom:44px}
+.canvas-page.content .hdr{margin-bottom:52px}
+.canvas-page.content > *{flex-shrink:0}
+.ftr{margin-top:auto}
+.chip{display:inline-block;font-size:26px;font-weight:900;letter-spacing:.1em;padding:8px 18px;border-radius:999px;margin-right:18px;vertical-align:middle}
+.chip.data{background:var(--gold);color:var(--bg2)}
+.chip.view{background:var(--red);color:#fff}
+.panel{background:var(--card);border-radius:24px;padding:36px 44px;margin-bottom:38px}
+.ph{font-size:36px;font-weight:900;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;letter-spacing:.02em}
+.note{font-size:28px;color:var(--gray-dim);margin-top:18px;line-height:1.4}
+.ul{margin:0;padding-left:40px}
+.ul li{font-size:38px;line-height:1.48;color:var(--gray);margin-bottom:14px}
+.ul li:last-child{margin-bottom:0}
+.ul b{color:var(--text)}
+
+.xt{width:100%;border-collapse:separate;border-spacing:0;margin-bottom:38px;font-variant-numeric:tabular-nums;background:var(--card);border-radius:24px;overflow:hidden}
+.panel .xt{background:transparent;margin-bottom:0}
+.xt th{font-size:30px;font-weight:900;color:var(--gold);text-align:left;padding:24px 22px;border-bottom:3px solid var(--line);letter-spacing:.04em}
+.xt td{font-size:34px;line-height:1.42;color:var(--gray);padding:24px 22px;border-bottom:2px solid var(--line-soft);vertical-align:top}
+.xt tr:last-child td{border-bottom:0}
+.xt td b{color:var(--text)}
+.xt.audit td:first-child{width:22%;color:var(--text);font-size:34px}
+.xt.audit td:last-child{width:15%;text-align:center}
+.xt.audit td{font-size:33px}
+.vd{display:inline-block;font-size:28px;font-weight:900;padding:10px 16px;border-radius:12px;white-space:nowrap}
+.vd.r{background:rgba(194,36,48,.18);color:var(--red-soft);border:2px solid var(--red)}
+.vd.g{background:rgba(226,165,61,.14);color:var(--gold);border:2px solid var(--gold)}
+html[data-theme="light"] .vd.r{color:var(--red)}
+.xt.matrix td{text-align:center;font-size:44px;vertical-align:middle}
+.xt.matrix td:first-child{text-align:left;font-size:36px;color:var(--text);font-weight:700;width:30%}
+.xt.matrix td:last-child{text-align:left;font-size:30px;width:28%}
+.xt.matrix th{text-align:center}.xt.matrix th:first-child,.xt.matrix th:last-child{text-align:left}
+.xt.matrix small{font-size:24px;color:var(--gray-dim);margin-left:4px}
+.ic.up{color:#3fb98a}.ic.dn{color:var(--red-soft)}.ic.md{color:var(--gold)}
+html[data-theme="light"] .ic.up{color:#13704f}html[data-theme="light"] .ic.dn{color:var(--red)}
+.xt.compact td{font-size:32px;padding:20px 20px}
+.xt.compact td:first-child{color:var(--text);font-weight:700;width:18%}
+.xt.dash td{font-size:32px;padding:20px 18px}
+.xt.dash td:first-child{width:6%;color:var(--gold);font-weight:900;text-align:center}
+.xt.dash td:nth-child(2){color:var(--text);font-weight:700;width:30%}
+.xt.dash td:last-child{width:26%;font-size:28px;color:var(--gray-dim)}
+.xt.srcs td{font-size:28px;padding:16px 16px;line-height:1.36}
+.xt.srcs td:first-child{width:8%;color:var(--gold)}
+.xt.srcs td:nth-child(2){width:7%;text-align:center}
+.xt.srcs td:last-child{width:19%;color:var(--gray-dim);white-space:nowrap}
+.gr{display:inline-block;width:46px;height:46px;line-height:46px;border-radius:50%;text-align:center;font-weight:900;font-size:26px}
+.gr.gA{background:var(--gold);color:var(--bg2)}.gr.gB{border:3px solid var(--gold);color:var(--gold);line-height:40px}.gr.gC{border:3px solid var(--gray-dim);color:var(--gray-dim);line-height:40px}
+
+.stats{display:grid;gap:26px;margin-bottom:38px}
+.stats.c2{grid-template-columns:1fr 1fr}
+.st{background:var(--card);border-radius:22px;padding:30px 36px;border-left:10px solid var(--gold)}
+.st.acc{border-left-color:var(--red)}
+.st .v{font-size:72px;font-weight:900;color:var(--gold);line-height:1.08;font-variant-numeric:tabular-nums}
+.st.acc .v{color:var(--red-soft)}
+html[data-theme="light"] .st.acc .v{color:var(--red)}
+.st .v small{font-size:40px;font-weight:800}
+.st .l{font-size:32px;color:var(--text);font-weight:600;line-height:1.38;margin-top:12px}
+.st .s{font-size:24px;color:var(--gray-dim);margin-top:8px;font-weight:700;letter-spacing:.04em}
+
+.bars{display:flex;flex-direction:column;gap:22px}
+.bar{display:grid;grid-template-columns:330px 1fr 290px;align-items:center;gap:24px}
+.bl{font-size:34px;font-weight:700;color:var(--text)}
+.bt{height:48px;background:var(--bg2);border-radius:10px;overflow:hidden}
+.bf{height:100%;background:var(--gold);border-radius:10px}
+.bf.acc{background:var(--red)}
+.bv{font-size:34px;font-weight:900;color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+
+.tl{position:relative;padding-left:84px}
+.tl::before{content:"";position:absolute;left:26px;top:12px;bottom:12px;width:6px;background:var(--gold);opacity:.55}
+.tl-item{position:relative;margin-bottom:34px}
+.tl-item:last-child{margin-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-84px;top:6px;width:40px;height:40px;border-radius:50%;background:var(--red);border:6px solid var(--gold)}
+.tl-t{font-size:42px;font-weight:900;color:var(--gold);margin-bottom:6px}
+.tl-d{font-size:37px;color:var(--gray);line-height:1.42;font-weight:500}
+
+.scs{display:flex;flex-direction:column;gap:28px}
+.sc{background:var(--card);border-radius:24px;padding:32px 40px;border:3px solid var(--line)}
+.sc.acc{border-color:var(--red)}
+.sc-h{font-size:52px;font-weight:900;margin-bottom:18px;display:flex;align-items:center;gap:22px}
+.sc-tag{width:76px;height:76px;border-radius:50%;background:var(--gold);color:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:42px}
+.sc.acc .sc-tag{background:var(--red);color:#fff}
+.sc-r{display:grid;grid-template-columns:240px 1fr;gap:20px;padding:12px 0;border-top:2px solid var(--line-soft)}
+.sc-k{font-size:30px;font-weight:900;color:var(--gold)}
+.sc-v{font-size:34px;color:var(--gray);line-height:1.4}
+
+.callout{padding:38px 48px}
+.callout-label{font-size:30px;font-weight:800;color:var(--gray-dim);margin-bottom:16px;letter-spacing:.04em}
+.callout-title{font-size:54px;color:var(--gold);margin-bottom:18px}
+.callout-label + .callout-divider + .callout-title{color:var(--gold)}
+.callout-desc{font-size:38px}
+
+/* ===================== COVER (dark only) ===================== */
+.canvas-page.cover-ko{padding:130px 130px 110px;
+ --bg:#0a1a2e;--bg2:#081422;--card:#14283f;--line:rgba(255,255,255,.18);--line-soft:rgba(255,255,255,.09);
+ --gold:#e2a53d;--gold-soft:#f0c874;--red:#c22430;--red-soft:#e2545c;--text:#f4f6f9;--gray:#aab9ca;--gray-dim:#8194a8;
+ background:var(--bg);color:var(--text)}
+.cov-topbar{display:flex;justify-content:space-between;font-size:32px;font-weight:800;color:var(--gold-soft);letter-spacing:.12em;padding-bottom:26px;border-bottom:2px solid var(--line-soft)}
+.cov-brand{display:flex;justify-content:space-between;align-items:flex-end;margin-top:44px}
+.cov-word{font-size:210px;font-weight:900;line-height:.86}
+.cov-full{font-size:52px;font-weight:800;margin-top:14px}.cov-full .accent{color:var(--gold)}
+.cov-tag{font-size:32px;font-weight:600;color:var(--gray-dim);margin-top:14px}
+.cov-issue{text-align:right}
+.cov-issue .lbl{font-size:30px;font-weight:800;color:var(--gold);letter-spacing:.08em}
+.cov-issue .no{font-size:64px;font-weight:900;margin-top:6px}
+.cov-issue .date{font-size:34px;font-weight:700;color:var(--gray);margin-top:22px;padding-top:22px;border-top:2px solid var(--line-soft)}
+.cov-head{margin-top:60px}
+.cov-head .eyebrow{color:var(--red-soft)}
+.cov-head .h1{font-size:136px}
+.cov-head .sub{margin-bottom:0}
+.cov-frame{flex:1 1 auto;min-height:600px;width:100%;margin-top:46px;border-radius:26px;overflow:hidden;position:relative;border:2px solid var(--line)}
+.cov-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.cov-cap{position:absolute;right:20px;bottom:16px;font-size:24px;color:#e6edf3;background:rgba(3,12,22,.7);padding:8px 16px;border-radius:999px}
+.cov-section-title{font-size:38px;font-weight:900;color:var(--gold);letter-spacing:.08em;margin:50px 0 26px}
+.cov-list{display:grid;grid-template-columns:1fr 1fr;gap:20px 40px}
+.cov-item{display:flex;align-items:center;gap:22px}
+.cov-badge{flex:0 0 auto;width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;border:5px solid var(--gold);color:var(--gold)}
+.cov-badge.fill{background:var(--red);border-color:var(--red);color:#fff}
+.cov-item .t{font-size:36px;font-weight:800}
+.cov-stats{display:flex;gap:22px;margin-top:50px}
+.cov-stat{flex:1;background:var(--card);border-radius:20px;padding:28px 16px;text-align:center}
+.cov-stat .v{font-size:50px;font-weight:900;color:var(--gold)}
+.cov-stat.accent .v{color:var(--red-soft)}
+.cov-stat .l{font-size:25px;color:var(--gray);font-weight:600;margin-top:12px;line-height:1.38}
+.cov-ftr{text-align:center;font-size:32px;color:var(--gray-dim);letter-spacing:.06em;margin-top:46px;padding-top:26px;border-top:2px solid var(--line-soft)}
+
+/* ===== scale-up pass: fill 9:16 canvas, mobile readability ===== */
+.canvas-page.content .h1{font-size:120px}
+.canvas-page.content .sub{font-size:56px;margin-bottom:56px}
+.panel{padding:44px 52px;margin-bottom:52px}
+.ph{font-size:40px;margin-bottom:30px}
+.chip{font-size:28px}
+.note{font-size:31px}
+.ul li{font-size:44px;margin-bottom:20px}
+.xt{margin-bottom:52px}
+.xt th{font-size:34px;padding:28px 26px}
+.xt td{font-size:41px;padding:30px 26px}
+.xt.audit td,.xt.audit td:first-child{font-size:39px}
+.vd{font-size:32px}
+.xt.matrix td{font-size:54px}
+.xt.matrix td:first-child{font-size:42px}
+.xt.matrix td:last-child{font-size:36px}
+.xt.matrix small{font-size:28px}
+.xt.compact td{font-size:39px;padding:28px 24px}
+.xt.dash td{font-size:39px;padding:28px 20px}
+.xt.dash td:last-child{font-size:34px}
+.xt.srcs td{font-size:33px;padding:22px 18px}
+.stats{gap:30px;margin-bottom:52px}
+.st{padding:38px 42px}
+.st .v{font-size:86px}
+.st .v small{font-size:46px}
+.st .l{font-size:38px}
+.st .s{font-size:28px}
+.bars{gap:30px}
+.bar{grid-template-columns:380px 1fr 330px}
+.bl,.bv{font-size:40px}
+.bt{height:62px}
+.tl-item{margin-bottom:44px}
+.tl-t{font-size:48px}
+.tl-d{font-size:44px}
+.tl-item::before{width:46px;height:46px;top:8px}
+.scs{gap:36px}
+.sc{padding:40px 46px}
+.sc-h{font-size:60px}
+.sc-r{grid-template-columns:270px 1fr;padding:16px 0}
+.sc-k{font-size:36px}
+.sc-v{font-size:40px}
+.callout{padding:46px 54px}
+.callout-label{font-size:34px}
+.callout-title{font-size:62px}
+.callout-desc{font-size:44px}
+/* distribute remaining height between content blocks */
+.body{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-evenly;min-height:0}
+.body > *{margin-bottom:0!important}
+.ftr{margin-top:40px}
+#E05 .xt.matrix td{padding-top:46px;padding-bottom:46px}
+#E09 .xt.compact td{padding-top:38px;padding-bottom:38px}
+#E11 .xt.dash td{padding-top:44px;padding-bottom:44px}
+#E08 .stats .st{padding:46px 44px}
+#E07 .stats .st{padding:46px 44px}
+.xt.corr td{font-size:33px;padding:18px 20px}
+.xt.corr td:first-child{width:11%;color:var(--red-soft);font-weight:900}
+html[data-theme="light"] .xt.corr td:first-child{color:var(--red)}
+/* E01 carries audit + correction log: denser tables */
+#E01 .xt td,#E01 .xt.audit td,#E01 .xt.audit td:first-child{font-size:34px;padding:20px 22px}
+#E01 .xt.corr td{font-size:31px;padding:14px 20px}
+#E01 .ul li{font-size:38px;margin-bottom:12px}
+#E01 .panel{padding:36px 44px}
+#E01 .callout-desc{font-size:40px}
+.srclink{color:var(--text);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:6px;text-decoration-thickness:2px}
+.srclink:hover{color:var(--gold)}
+.srclink .arr{color:var(--gold);margin-left:8px;font-size:.85em;display:inline-block;text-decoration:none}
+#E12 .xt.srcs td{font-size:30px;padding:15px 16px}
+#E12 .ul li{font-size:38px;margin-bottom:12px}
+
+</style>
+</head>
+<body>
+<div class="theme-toggle" role="group" aria-label="색상 모드 선택"><button type="button" data-set-theme="dark">DARK</button><button type="button" data-set-theme="light">LIGHT</button></div>
+
+<!-- COVER -->
+<div class="page-fit"><section class="canvas-page cover-ko" id="E00-cover">
+  <div class="cov-topbar"><span>EXPERT EDITION · 전문가판</span><span>자료 기준일 2026.08.12</span></div>
+  <div class="cov-brand">
+    <div><div class="cov-word">KIND</div>
+      <div class="cov-full"><span class="accent">한국 인텔리전스</span> &amp; 뉴스 다이제스트</div>
+      <div class="cov-tag">정책·시장·산업 전문가를 위한 1차 자료 기반 브리핑</div></div>
+    <div class="cov-issue"><div class="lbl">창간호 · 전문가판</div><div class="no">No.001</div><div class="date">2026년 8월 15일 토요일</div></div>
+  </div>
+  <div class="cov-head">
+    <p class="eyebrow">커버 스토리 · 전문가판</p>
+    <h1 class="h1">다시, 에너지다!</h1>
+    <div class="rule"></div>
+    <p class="sub">호르무즈 이후의 트릴레마 — 공급 안보가 가격과 전환의 조건을 다시 쓰고 있습니다.</p>
+  </div>
+  <div class="cov-frame"><img src="https://cdn.jsdelivr.net/gh/soulthread88/imgs@main/gpt/kind001-ko-p07-lng-carrier.jpg" data-fb="https://raw.githubusercontent.com/soulthread88/imgs/main/gpt/kind001-ko-p07-lng-carrier.jpg" onerror="kindFb(this)" alt="LNG 운반선 (Wikimedia Commons)" decoding="async"><div class="cov-cap">사진: LNG 운반선 · Wikimedia Commons</div></div>
+  <p class="cov-section-title">이번 판의 구성</p>
+  <div class="cov-list"><div class="cov-item"><div class="cov-badge">E01</div><div class="t">편집 노트 · 원문 수치 감사</div></div><div class="cov-item"><div class="cov-badge fill">E02</div><div class="t">호르무즈 2026: 충격의 해부</div></div><div class="cov-item"><div class="cov-badge">E03</div><div class="t">병목의 구조와 우회 용량</div></div><div class="cov-item"><div class="cov-badge fill">E04</div><div class="t">한국의 노출도와 완충 장치</div></div><div class="cov-item"><div class="cov-badge">E05</div><div class="t">트릴레마 실전: 대응의 대가</div></div><div class="cov-item"><div class="cov-badge fill">E06</div><div class="t">자본의 이동: 투자 2025–26</div></div><div class="cov-item"><div class="cov-badge">E07</div><div class="t">AI 전력 수요의 규모와 속도</div></div><div class="cov-item"><div class="cov-badge fill">E08</div><div class="t">핵심 광물: 심화된 집중</div></div><div class="cov-item"><div class="cov-badge">E09</div><div class="t">가스: 단기 부족, 중기 과잉</div></div><div class="cov-item"><div class="cov-badge fill">E10</div><div class="t">6~18개월 시나리오</div></div><div class="cov-item"><div class="cov-badge">E11</div><div class="t">감시 지표 대시보드</div></div><div class="cov-item"><div class="cov-badge fill">E12</div><div class="t">출처·방법론</div></div></div>
+  <div class="cov-stats">
+    <div class="cov-stat"><div class="v">4억 배럴</div><div class="l">IEA 공동 비축유 방출<br>(3월 11일, 사상 최대)</div></div>
+    <div class="cov-stat accent"><div class="v">약 118달러</div><div class="l">브렌트 고점<br>(3월 31일)</div></div>
+    <div class="cov-stat"><div class="v">−17%</div><div class="l">카타르 LNG<br>생산능력 손실</div></div>
+    <div class="cov-stat accent"><div class="v">410 mb</div><div class="l">세계 재고 감소<br>(2월 말~7월)</div></div>
+    <div class="cov-stat"><div class="v">약 94%</div><div class="l">한국 에너지<br>수입 의존도</div></div>
+  </div>
+  <div class="cov-ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 창간호 No.001 전문가판</div>
+</section></div>
+
+<!-- E01 · 편집 노트 -->
+<div class="page-fit"><section class="canvas-page content" id="E01">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">편집 노트</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E01 / E12</div></div></div>
+<div class="eyebrow">편집 노트</div><h1 class="h1">원문 수치 감사</h1><div class="rule"></div><p class="sub">창간호 본문의 다섯 수치를 1차 자료와 대조했습니다. 서사는 유지하되, 정밀도와 시점은 바로잡습니다.</p><div class="body"><table class="xt audit"><thead><tr><th>원문 수치</th><th>검증 결과</th><th>판정</th></tr></thead><tbody><tr><td>세계 에너지 수요<br><b>+24%</b> (2050)</td><td>IEA 보고서에서 해당 수치를 직접 확인하지 못함. WEO 2025 현행정책 시나리오는 최종 소비가 향후 10년간 연 약 1.3% 증가한다고 제시 [S13]</td><td><span class="vd r">출처 보완</span></td></tr><tr><td>청정에너지 투자<br><b>1.8조 달러</b> (2024)</td><td>IEA 세계에너지투자 2024의 2024년 수치는 약 2.0조 달러 — 확정 실적이 아닌 연중 추정·전망치 [S16]. 이후 2025년 2.2조(총 3.3조) [S7], 2026년 약 2.2조(총 3.4조) 전망 [S8]</td><td><span class="vd r">갱신</span></td></tr><tr><td>핵심 광물 수요<br><b>3~6배</b> (2040)</td><td>IEA(2021): 청정에너지 기술용 광물 수요가 지속가능발전 시나리오 약 4배, 넷제로 시나리오 약 6배 [S11]. 시나리오 표기 필요</td><td><span class="vd g">정밀화</span></td></tr><tr><td>LNG 교역<br><b>연 +5.6%</b> (2030)</td><td>성장률의 직접 출처는 미확인. IEA Gas 2025: 2030년까지 신규 액화능력 약 300 bcm, 순공급 +250 bcm [S12]. 방향은 일치</td><td><span class="vd r">출처 보완</span></td></tr><tr><td>한국 1차 에너지<br><b>수입 94%</b></td><td>2026년 분석에서도 “94%에 근접”으로 재확인 [S6]</td><td><span class="vd g">유지</span></td></tr></tbody></table><div class="panel"><div class="ph"><span class="chip data">DATA</span>이 판의 작성 원칙</div><ul class="ul">
+<li><b>자료 기준일 2026년 8월 12일</b> — IEA 8월 석유시장보고서까지 반영했습니다.</li>
+<li><b>DATA와 KIND VIEW를 분리</b> — 금색은 출처가 있는 사실, 빨간색은 편집진의 판단입니다.</li>
+<li><b>출처 등급</b> — A: IEA·정부 1차 자료 / B: 국제기구·연구기관 분석 / C: 언론·2차 집계. 등급은 E12에 표기했습니다.</li>
+<li><b>창간호 이후의 사건</b> — 원문에 없는 2026년 호르무즈 위기는 E02~E05에서 따로 다룹니다.</li></ul></div><div class="panel"><div class="ph"><span class="chip data">DATA</span>정정 기록 · v1.1 (2026.10.05)</div><table class="xt compact corr"><thead><tr><th>코드</th><th>정정 내용</th></tr></thead><tbody><tr><td>K10</td><td>E03 호르무즈 통과 LNG: 세계 교역의 ‘약 20분의 1’ → <b>‘약 5분의 1’</b> (IEA 원문 one-fifth)</td></tr><tr><td>K29</td><td>E05·E09·E10 ‘가스 가격 상한’ → <b>석유제품 최고가격제</b>(3월 13일, 정유사 공급가). 가스공사 미수금 연결 삭제</td></tr><tr><td>K17</td><td>E02 7월 말 96.80달러: 지표명 브렌트 → <b>North Sea Dated</b>(현물 기준 지표)</td></tr><tr><td>K27</td><td>E04 2024 발전 비중 → <b>원자력 31.7 · 석탄 28.1 · 가스 28.1%</b> (산업부 잠정)</td></tr><tr><td>K03</td><td>청정 투자 2024 → <b>약 2.0조 달러 추정·전망치</b> (실적 아님)</td></tr></tbody></table></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">서사는 그대로, 정밀도와 시점은 새로.</p><div class="callout-divider"></div><p class="callout-desc">“에너지가 다시 전략의 중심”이라는 창간호의 판단은 2026년 위기로 오히려 강화됐습니다. 다만 전문가 독자에게는 시나리오와 기준 연도가 빠진 숫자가 판단을 흐리므로, 모든 수치에 출처와 시점을 붙였습니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E01</p>
+</section></div>
+<!-- E02 · 리스크 브리프 -->
+<div class="page-fit"><section class="canvas-page content" id="E02">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">리스크 브리프</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E02 / E12</div></div></div>
+<div class="eyebrow">리스크 브리프</div><h1 class="h1">호르무즈 2026: 충격의 해부</h1><div class="rule"></div><p class="sub">전쟁 발발부터 IEA 8월 보고서까지 — 가격보다 물량이 먼저 무너진 6개월입니다.</p><div class="body"><div class="panel"><div class="ph"><span class="chip data">DATA</span>타임라인 (2026)</div><div class="tl"><div class="tl-item"><div class="tl-t">2월 말</div><div class="tl-d">이란 전쟁 발발. 호르무즈 해협 통항이 사실상 차단됩니다. [S4]</div></div><div class="tl-item"><div class="tl-t">3월 2~3일</div><div class="tl-d">카타르 라스라판 LNG 가동 중단, 3일 불가항력(Force Majeure) 선언. [S2][S4]</div></div><div class="tl-item"><div class="tl-t">3월 11일</div><div class="tl-d">IEA 회원국 비상 비축유 4억 배럴 공동 방출 — IEA 역사상 최대 규모. [S2]</div></div><div class="tl-item"><div class="tl-t">3월 18일</div><div class="tl-d">라스라판 피격, 카타르 LNG 생산능력의 약 17% 손실. [S4]</div></div><div class="tl-item"><div class="tl-t">3월</div><div class="tl-d">세계 석유 공급 10.1 mb/d 감소. 브렌트 월간 약 65% 상승, 사상 최대 월간 상승폭. [S3]</div></div><div class="tl-item"><div class="tl-t">3월 31일</div><div class="tl-d">브렌트 배럴당 약 118달러로 고점. [S4]</div></div><div class="tl-item"><div class="tl-t">4월 8일</div><div class="tl-d">휴전. 그러나 해협 통항은 전쟁 전 수준을 크게 밑돕니다. [S4]</div></div><div class="tl-item"><div class="tl-t">7월 초</div><div class="tl-d">해협 사실상 재봉쇄. 7월 기준 걸프 생산 8.3 mb/d가 여전히 묶여 있습니다. [S1]</div></div><div class="tl-item"><div class="tl-t">7월 말</div><div class="tl-d">North Sea Dated(현물 기준 지표) 96.80달러로 마감 — 7월 한 달 +25.67달러. 8월 12일 기준 약 92달러. [S1]</div></div><div class="tl-item"><div class="tl-t">8월 12일</div><div class="tl-d">IEA: 2026년 세계 석유 수요 −1.6 mb/d 전망. 2월 말~7월 세계 재고 410 mb 감소. [S1]</div></div></div></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">이번 위기는 ‘가격 충격’이 아니라 ‘물량 충격’입니다.</p><div class="callout-divider"></div><p class="callout-desc">IEA는 이번 사태를 석유시장 역사상 최대의 공급 차질로 규정했습니다. 비축유 방출은 시간을 벌 뿐 물량을 만들지 못합니다. 2월 말~7월 세계 재고 감소(410 mb)는 3월 공동 방출 규모(4억 배럴)와 비슷합니다. 비상 방출분만큼의 완충이 이미 쓰였다는 뜻입니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E02</p>
+</section></div>
+<!-- E03 · 구조 분석 -->
+<div class="page-fit"><section class="canvas-page content" id="E03">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">구조 분석</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E03 / E12</div></div></div>
+<div class="eyebrow">구조 분석</div><h1 class="h1">병목의 구조: 우회로는 충분한가</h1><div class="rule"></div><p class="sub">세계 해상 석유 교역의 4분의 1이 폭 수십 km의 단일 해협을 지납니다. 우회 용량은 일부 생산국에만 열려 있습니다.</p><div class="body"><div class="stats c2"><div class="st"><div class="v">25%</div><div class="l">세계 해상 석유 교역 중 호르무즈 통과 비중 (2025)</div><div class="s">[S2]</div></div><div class="st acc"><div class="v">80%</div><div class="l">호르무즈 통과 석유·제품 중 아시아행 비중</div><div class="s">[S2]</div></div><div class="st"><div class="v">3.5~5.5<small> mb/d</small></div><div class="l">사우디·UAE만 쓸 수 있는 파이프라인 우회 용량</div><div class="s">[S2]</div></div><div class="st acc"><div class="v">110<small> bcm+</small></div><div class="l">호르무즈 통과 LNG (2025) — 세계 LNG 교역의 약 5분의 1</div><div class="s">[S2]</div></div><div class="st"><div class="v">93% · 96%</div><div class="l">카타르·UAE LNG 수출 중 해협 통과 비중</div><div class="s">[S2]</div></div><div class="st acc"><div class="v">8.3<small> mb/d</small></div><div class="l">7월 기준 묶여 있는 걸프 생산량</div><div class="s">[S1]</div></div></div><div class="panel"><div class="ph"><span class="chip data">DATA</span>우회 가능성: 생산국별</div><table class="xt compact"><thead><tr><th>생산국</th><th>해협 외 수출 경로</th><th>평가</th></tr></thead><tbody><tr><td>사우디아라비아·UAE</td><td>홍해·오만만 방면 파이프라인</td><td>부분 우회 (합산 3.5~5.5 mb/d)</td></tr><tr><td>이라크·쿠웨이트</td><td>해협 외 대안 매우 제한적</td><td>사실상 노출</td></tr><tr><td>카타르 (LNG)</td><td>해상 수출 외 대안 없음</td><td>전면 노출 + 설비 피해</td></tr></tbody></table><p class="note">평가는 [S2]의 우회 용량 서술을 바탕으로 한 KIND 정리입니다.</p></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">우회 용량은 ‘완충’이지 ‘대체’가 아닙니다.</p><div class="callout-divider"></div><p class="callout-desc">우회로는 사우디·UAE 물량에만 열려 있습니다. 한국의 원유 도입선 가운데 이라크(10.4%)와 쿠웨이트(8.5%)를 합친 약 19%는 해협 밖 대안이 거의 없는 물량입니다. 한국 입장에서 위기는 ‘가격’이 아니라 ‘도입선별 물량 재배치’ 문제입니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E03</p>
+</section></div>
+<!-- E04 · 코리아 익스포저 -->
+<div class="page-fit"><section class="canvas-page content" id="E04">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">코리아 익스포저</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E04 / E12</div></div></div>
+<div class="eyebrow">코리아 익스포저</div><h1 class="h1">한국의 노출도와 완충 장치</h1><div class="rule"></div><p class="sub">원유는 재고로, LNG는 계약으로 버팁니다. 두 완충 장치의 길이가 네 배 차이 납니다.</p><div class="body"><div class="panel"><div class="ph"><span class="chip data">DATA</span>원유 도입선 비중</div><div class="bars"><div class="bar"><div class="bl">사우디아라비아</div><div class="bt"><div class="bf" style="width:33.6%"></div></div><div class="bv">33.6%</div></div><div class="bar"><div class="bl">UAE</div><div class="bt"><div class="bf" style="width:11.4%"></div></div><div class="bv">11.4%</div></div><div class="bar"><div class="bl">이라크</div><div class="bt"><div class="bf acc" style="width:10.4%"></div></div><div class="bv">10.4%</div></div><div class="bar"><div class="bl">쿠웨이트</div><div class="bt"><div class="bf acc" style="width:8.5%"></div></div><div class="bv">8.5%</div></div><div class="bar"><div class="bl">중동 합계</div><div class="bt"><div class="bf" style="width:70.0%"></div></div><div class="bv">약 70%</div></div></div><p class="note">빨간 막대: 해협 밖 수출 대안이 매우 제한적인 도입선. 사우디는 파이프라인으로 일부 우회 가능(E03). 출처 [S5]</p></div><div class="panel"><div class="ph"><span class="chip data">DATA</span>LNG 도입선 (2025)</div><div class="bars"><div class="bar"><div class="bl">말레이시아</div><div class="bt"><div class="bf" style="width:16.1%"></div></div><div class="bv">16.1%</div></div><div class="bar"><div class="bl">카타르</div><div class="bt"><div class="bf acc" style="width:15.0%"></div></div><div class="bv">15.0%</div></div><div class="bar"><div class="bl">미국</div><div class="bt"><div class="bf" style="width:9.4%"></div></div><div class="bv">9.4%</div></div><div class="bar"><div class="bl">걸프 지역 합계</div><div class="bt"><div class="bf acc" style="width:30.0%"></div></div><div class="bv">최대 약 30%</div></div></div><p class="note">출처 [S6][S5]</p></div><div class="stats c2"><div class="st"><div class="v">208<small>일</small></div><div class="l">원유 비축 (정부·민간 합산, 3월 정부 발표) — 즉시 가용 약 1.57억 배럴 + 3개월 내 0.35억 배럴</div><div class="s">[S5]</div></div><div class="st acc"><div class="v">52<small>일</small></div><div class="l">LNG 비축 일수</div><div class="s">[S5]</div></div><div class="st"><div class="v">31.7 · 28.1 · 28.1<small>%</small></div><div class="l">2024년 발전 비중(잠정): 원자력 · 석탄 · 가스</div><div class="s">[S14]</div></div><div class="st acc"><div class="v">2.0→1.9<small>%</small></div><div class="l">전쟁 직후 한국 성장률 전망 조정</div><div class="s">[S6]</div></div></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">한국의 진짜 취약 고리는 저장이 어려운 가스입니다.</p><div class="callout-divider"></div><p class="callout-desc">원유 208일에 비해 LNG는 52일입니다. 가스가 발전의 약 28%를 맡는 구조에서 LNG 충격은 곧 전력 원가 충격이고, 원가 충격은 요금 또는 공기업 부채 중 하나로 반드시 전가됩니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E04</p>
+</section></div>
+<!-- E05 · 정책 평가 -->
+<div class="page-fit"><section class="canvas-page content" id="E05">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">정책 평가</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E05 / E12</div></div></div>
+<div class="eyebrow">정책 평가</div><h1 class="h1">트릴레마 실전: 대응의 대가</h1><div class="rule"></div><p class="sub">2026년 정부의 위기 대응 조치를 안보·지속가능성·비용 축으로 평가했습니다. ▲ 개선 ▼ 악화 ◆ 혼재·중립.</p><div class="body"><table class="xt matrix"><thead><tr><th>조치 [S6][S15]</th><th>안보</th><th>지속가능성</th><th>비용</th><th>숨은 청구서</th></tr></thead><tbody><tr><td>원전 이용률 80%로 상향</td><td><span class="ic up">▲</span></td><td><span class="ic up">▲</span></td><td><span class="ic up">▲</span></td><td>정비 일정 압축에 따른 운영 위험</td></tr><tr><td>석탄 발전 상한 해제</td><td><span class="ic up">▲</span></td><td><span class="ic dn">▼</span></td><td><span class="ic up">▲</span><small>단기</small></td><td>배출 증가 · 감축 경로 지연</td></tr><tr><td>석유 최고가격제 (3월 13일, 정유사 공급가)</td><td><span class="ic md">◆</span></td><td><span class="ic md">◆</span></td><td><span class="ic up">▲</span><small>소비자</small> <span class="ic dn">▼</span><small>정유사</small></td><td>정유사 손실 귀속 문제 · 수요 억제 신호 약화</td></tr><tr><td>비축유 방출 (IEA 공동)</td><td><span class="ic up">▲</span><small>단기</small></td><td><span class="ic md">◆</span></td><td><span class="ic dn">▼</span></td><td>고가 재비축 비용</td></tr><tr><td>나프타 경제안보품목 지정</td><td><span class="ic up">▲</span></td><td><span class="ic md">◆</span></td><td><span class="ic md">◆</span></td><td>석유화학 원료 배분 우선순위 논쟁</td></tr></tbody></table><div class="panel"><div class="ph"><span class="chip view">KIND VIEW</span>평가 기준</div><ul class="ul">
+<li><b>안보</b> — 6개월 안에 물리적 공급 공백을 줄이는가.</li>
+<li><b>지속가능성</b> — 2030 감축 경로에서 멀어지는가, 가까워지는가.</li>
+<li><b>비용</b> — 누가, 언제 부담하는가 (가계 / 산업 / 공기업 / 재정).</li></ul>
+<p class="note">조치 목록은 [S6][S15] 기준이며, ▲▼◆ 평가는 KIND 편집진의 판단입니다.</p></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">위기 대응은 트릴레마를 ‘해결’하지 않고 ‘이연’합니다.</p><div class="callout-divider"></div><p class="callout-desc">석탄 상한 해제의 탄소 비용, 석유 최고가격제에 따른 정유사 손실 귀속 문제, 고가 재비축 비용은 모두 2027년 이후의 청구서입니다. 다음 6개월 정책의 질은 이 청구서를 누가, 언제, 어떤 방식으로 받느냐로 판가름납니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E05</p>
+</section></div>
+<!-- E06 · 투자 흐름 -->
+<div class="page-fit"><section class="canvas-page content" id="E06">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">투자 흐름</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E06 / E12</div></div></div>
+<div class="eyebrow">투자 흐름</div><h1 class="h1">자본의 이동: 투자 2025–26</h1><div class="rule"></div><p class="sub">청정에너지가 화석연료의 두 배를 끌어오지만, 돈이 가장 늦게 도착하는 곳은 전력망입니다.</p><div class="body"><div class="stats c2"><div class="st"><div class="v">3.3 → 3.4<small>조 달러</small></div><div class="l">세계 에너지 투자 2025 → 2026 전망</div><div class="s">[S7][S8]</div></div><div class="st acc"><div class="v">2.2<small>조 달러</small></div><div class="l">청정에너지 투자 (2025, 2026 모두 약 2.2조)</div><div class="s">[S7][S8]</div></div><div class="st"><div class="v">1.1<small>조 달러</small></div><div class="l">화석연료 투자 (2025) — 청정의 절반</div><div class="s">[S7]</div></div><div class="st acc"><div class="v">1 : 0.4</div><div class="l">발전 1조 대비 전력망 약 4,000억 달러 (2025)</div><div class="s">[S7]</div></div><div class="st"><div class="v">5,500<small>억 달러</small></div><div class="l">전력망 투자 2026 전망</div><div class="s">[S8]</div></div><div class="st acc"><div class="v">130<small> GW</small></div><div class="l">가스터빈 신규 주문 (2025, 25년 만의 최고)</div><div class="s">[S8]</div></div><div class="st"><div class="v">700<small>억 달러+</small></div><div class="l">원자력 투자 (2025, 5년간 +50%)</div><div class="s">[S7]</div></div><div class="st acc"><div class="v">2,600<small>억 달러</small></div><div class="l">청정 투자로 회피한 화석연료 수입액 (2025)</div><div class="s">[S8]</div></div></div><div class="panel"><div class="ph"><span class="chip data">DATA</span>시사점</div><ul class="ul">
+<li>2025년 태양광 투자 약 4,500억 달러로 단일 항목 최대, 배터리 저장은 약 660억 달러 [S7].</li>
+<li>2025년 상류 석유 투자 약 6% 감소 — 2016년 이후 최대 감소폭 [S7]. 2026년 공급 충격 이전의 결정입니다.</li>
+<li>‘전환’(태양광·저장·원전)과 ‘안보’(가스터빈·망)가 같은 해에 함께 늘고 있습니다.</li></ul></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">병목은 발전이 아니라 전력망입니다.</p><div class="callout-divider"></div><p class="callout-desc">발전 1달러당 망 투자는 0.4달러였습니다. 2026년 망 투자가 5,500억 달러로 늘어도 송전 제약과 연계 대기는 수년 이어질 가능성이 큽니다. 한국에서도 원전·재생·데이터센터의 입지 경쟁은 결국 송전망 용량 배분 문제로 수렴합니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E06</p>
+</section></div>
+<!-- E07 · 테크 × 에너지 -->
+<div class="page-fit"><section class="canvas-page content" id="E07">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">테크 × 에너지</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E07 / E12</div></div></div>
+<div class="eyebrow">테크 × 에너지</div><h1 class="h1">AI 전력 수요의 규모와 속도</h1><div class="rule"></div><p class="sub">세계 평균으로는 3%가 안 되지만, 증가 속도와 입지 집중도로 보면 가장 빠른 신규 수요원입니다.</p><div class="body"><div class="panel"><div class="ph"><span class="chip data">DATA</span>데이터센터 전력 소비 (IEA 기준 시나리오)</div><div class="bars"><div class="bar"><div class="bl">2024년</div><div class="bt"><div class="bf" style="width:41.5%"></div></div><div class="bv">415 TWh · 1.5%</div></div><div class="bar"><div class="bl">2030년</div><div class="bt"><div class="bf acc" style="width:94.5%"></div></div><div class="bv">945 TWh · 3% 미만</div></div></div><p class="note">출처 [S9]</p></div><div class="stats c2"><div class="st"><div class="v">연 15%</div><div class="l">2024~2030 증가율 (직전 5년 연 12%)</div><div class="s">[S9]</div></div><div class="st acc"><div class="v">약 80%</div><div class="l">2030년까지 증분 중 미국·중국 비중</div><div class="s">[S9]</div></div><div class="st"><div class="v">+240 · +175<small> TWh</small></div><div class="l">미국 · 중국 증분 (2024 대비 +130% · +170%)</div><div class="s">[S9]</div></div><div class="st acc"><div class="v">연 30%</div><div class="l">가속 서버 전력 소비 증가 — 순증분의 약 절반</div><div class="s">[S9]</div></div></div><div class="panel"><div class="ph"><span class="chip view">KIND VIEW</span>한국에 대한 함의</div><ul class="ul">
+<li><b>입지</b> — 데이터센터 수요는 소수 송전 노드에 집중되어, 수도권 계통 여유가 사실상 상한이 됩니다.</li>
+<li><b>경합</b> — 반도체 클러스터와 데이터센터가 같은 송전망과 같은 무탄소 전원을 두고 경쟁합니다.</li>
+<li><b>안보 연결</b> — LNG 충격(E04)은 곧 AI 인프라의 전력 원가 충격으로 이어집니다.</li></ul></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">세계 평균으로는 작고, 입지 단위로는 결정적입니다.</p><div class="callout-divider"></div><p class="callout-desc">AI 전력 수요의 핵심 변수는 총량보다 위치와 시점입니다. 다음 호 ‘AI발 전력 위기’에서는 계통 연계 대기와 무탄소 전원 조달 경쟁을 집중적으로 다룹니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E07</p>
+</section></div>
+<!-- E08 · 공급망 -->
+<div class="page-fit"><section class="canvas-page content" id="E08">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">공급망</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E08 / E12</div></div></div>
+<div class="eyebrow">공급망</div><h1 class="h1">핵심 광물: 심화된 집중</h1><div class="rule"></div><p class="sub">다변화는 정책 구호였고, 집중은 시장의 현실이었습니다. 위험은 매장보다 정제에 있습니다.</p><div class="body"><div class="panel"><div class="ph"><span class="chip data">DATA</span>상위 3개국 정제 점유율 평균 (구리·리튬·니켈·코발트·흑연·희토류)</div><div class="bars"><div class="bar"><div class="bl">2020년</div><div class="bt"><div class="bf" style="width:82.0%"></div></div><div class="bv">약 82%</div></div><div class="bar"><div class="bl">2024년</div><div class="bt"><div class="bf acc" style="width:86.0%"></div></div><div class="bv">86%</div></div></div><p class="note">출처 [S10]</p></div><div class="stats c2"><div class="st acc"><div class="v">19 / 20</div><div class="l">중국이 정제 1위인 에너지 전략 광물 수 — 평균 점유율 약 70%</div><div class="s">[S10]</div></div><div class="st"><div class="v">55%</div><div class="l">수출 통제 대상이 된 에너지 전략 광물 비중</div><div class="s">[S10]</div></div><div class="st acc"><div class="v">+약 30%</div><div class="l">2024년 리튬 수요 증가 (2010년대 연 10%)</div><div class="s">[S10]</div></div><div class="st"><div class="v">30%</div><div class="l">2035년 구리 공급 부족 전망</div><div class="s">[S10]</div></div><div class="st acc"><div class="v">4배 · 6배</div><div class="l">2040년 청정에너지용 광물 수요 — 지속가능발전 · 넷제로 시나리오</div><div class="s">[S11]</div></div><div class="st"><div class="v">2021 · 2025</div><div class="l">수요 전망(S11)과 집중도 분석(S10)의 발간 연도 차이에 유의</div><div class="s">방법론 주석</div></div></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">한국 배터리의 협상력은 원료보다 정제·재활용에서 나옵니다.</p><div class="callout-divider"></div><p class="callout-desc">광산 지분 확보는 정제가 한 나라에 몰린 구조를 바꾸지 못합니다. 비중국 정제 능력과 재활용(도시광산) 역량을 얼마나 빨리 확보하느냐가 미국의 우려국가(FEOC) 공급망 규정과 중국의 수출 통제 모두에 대응하는 공통 해법입니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E08</p>
+</section></div>
+<!-- E09 · 가스 시장 -->
+<div class="page-fit"><section class="canvas-page content" id="E09">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">가스 시장</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E09 / E12</div></div></div>
+<div class="eyebrow">가스 시장</div><h1 class="h1">가스: 단기 부족, 중기 과잉</h1><div class="rule"></div><p class="sub">2026년은 카타르 손실로 빠듯하지만, 2027년 이후에는 대규모 신규 액화능력이 시장에 들어옵니다.</p><div class="body"><table class="xt compact"><thead><tr><th>구분</th><th>2026년 현재</th><th>2027~2030년 구조</th></tr></thead><tbody><tr><td>공급</td><td>카타르 LNG 생산능력 약 17% 손실, 걸프 LNG 수송 차질 [S4][S2]</td><td>신규 액화능력 약 300 bcm, 노후 설비 감소분을 빼면 순공급 +250 bcm [S12]</td></tr><tr><td>수요</td><td>고가격에 따른 수요 파괴와 연료 전환 진행</td><td>연 약 1.5%, 2030년까지 +380 bcm(약 9%), 증분의 약 절반이 아시아 [S12]</td></tr><tr><td>가격</td><td>아시아 현물 140% 이상 급등 [S4]</td><td>공급 증가로 하방 압력 — KIND 판단</td></tr><tr><td>한국</td><td>LNG 비축 52일 [S5]</td><td>장기계약 갱신 · 도착지 유연성 협상 창 — KIND 판단</td></tr></tbody></table><div class="panel"><div class="ph"><span class="chip view">KIND VIEW</span>계약 전략 체크리스트</div><ul class="ul">
+<li><b>물량</b> — 위기 물량은 단기·중기 계약으로 확보하고, 10년 이상 계약은 2027년 이후 공급 증가를 반영해 협상합니다.</li>
+<li><b>가격 지수</b> — 유가 연동, 헨리허브 연동, 하이브리드 구성을 분산해 단일 충격에 대한 노출을 줄입니다.</li>
+<li><b>유연성</b> — 도착지 제한 완화와 재판매 권리를 확보하면 과잉 국면에서 손실을 줄일 수 있습니다.</li>
+<li><b>도입선</b> — 미국(9.4%)·말레이시아(16.1%)·호주 등 해협 밖 도입선 비중을 확대합니다.</li></ul></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">지금의 공포로 10년 계약을 맺어서는 안 됩니다.</p><div class="callout-divider"></div><p class="callout-desc">대규모 신규 공급이 예정된 상황에서 위기 가격에 묶인 장기계약은 구조적 고비용으로 남습니다. 물량 안보는 확보하되, 가격 조항의 유연성을 그보다 앞에 두어야 합니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E09</p>
+</section></div>
+<!-- E10 · 전망 -->
+<div class="page-fit"><section class="canvas-page content" id="E10">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">전망</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E10 / E12</div></div></div>
+<div class="eyebrow">전망</div><h1 class="h1">향후 6~18개월 시나리오</h1><div class="rule"></div><p class="sub">확률을 제시하지 않습니다. 대신 각 경로의 전제와 그 경로로 들어서고 있음을 알려주는 신호를 명시합니다.</p><div class="body"><div class="scs"><div class="sc"><div class="sc-h"><span class="sc-tag">A</span>정상화</div><div class="sc-r"><div class="sc-k">전제</div><div class="sc-v">해협 통항 회복, 라스라판 단계적 복구</div></div><div class="sc-r"><div class="sc-k">유가 기준점</div><div class="sc-v">세계은행 기준선: 2026년 평균 86달러 → 2027년 70달러 [S3]</div></div><div class="sc-r"><div class="sc-k">한국</div><div class="sc-v">재비축과 가격 정상화 국면. 석유 최고가격제 해제 시점과 재비축 비용 배분이 쟁점</div></div><div class="sc-r"><div class="sc-k">신호</div><div class="sc-v">걸프 차질 물량의 연속 감소, 재고 감소 둔화 [S1]</div></div></div><div class="sc acc"><div class="sc-h"><span class="sc-tag">B</span>저강도 장기 교란</div><div class="sc-r"><div class="sc-k">전제</div><div class="sc-v">통항 재개와 재차단의 반복 — 7월 재봉쇄의 연장선</div></div><div class="sc-r"><div class="sc-k">유가 기준점</div><div class="sc-v">세계은행 상방 범위 95~115달러의 하단~중간 [S3]</div></div><div class="sc-r"><div class="sc-k">한국</div><div class="sc-v">원전·석탄 비상 운영 장기화 → 감축 경로 지연, 한전 재무 압박 누적</div></div><div class="sc-r"><div class="sc-k">신호</div><div class="sc-v">휴전 협상 교착, 보험료·운임 고착</div></div></div><div class="sc"><div class="sc-h"><span class="sc-tag">C</span>장기 봉쇄</div><div class="sc-r"><div class="sc-k">전제</div><div class="sc-v">해협 장기 봉쇄 + 추가 설비 피해</div></div><div class="sc-r"><div class="sc-k">유가 기준점</div><div class="sc-v">세계은행 상방 범위 상단 이상 [S3]</div></div><div class="sc-r"><div class="sc-k">한국</div><div class="sc-v">산업용 수요 관리, 긴급 현물 LNG 조달, 나프타·석유화학 감산</div></div><div class="sc-r"><div class="sc-k">신호</div><div class="sc-v">재고 감소 가속(이미 410 mb 감소), IEA 2차 공동 방출 논의</div></div></div></div><p class="note">B 강조는 7월 재봉쇄 이후 상황을 반영한 편집진의 판단 기준선이며, 확률 추정이 아닙니다.</p><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">예측보다 ‘전환 신호’를 감시해야 합니다.</p><div class="callout-divider"></div><p class="callout-desc">세 경로의 차이는 유가 숫자가 아니라 재고 소진 속도와 가스 설비 복구 일정에서 먼저 드러납니다. E11의 지표 가운데 1~3번이 시나리오 전환을 가장 먼저 알려줍니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E10</p>
+</section></div>
+<!-- E11 · 대시보드 -->
+<div class="page-fit"><section class="canvas-page content" id="E11">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">대시보드</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E11 / E12</div></div></div>
+<div class="eyebrow">대시보드</div><h1 class="h1">감시 지표 9선</h1><div class="rule"></div><p class="sub">다음 호까지 KIND 편집진이 매주 확인할 지표입니다. 번호가 낮을수록 시나리오 전환을 먼저 알려줍니다.</p><div class="body"><table class="xt dash"><thead><tr><th>#</th><th>지표</th><th>왜 중요한가</th><th>확인처</th></tr></thead><tbody><tr><td>1</td><td>걸프 생산 차질 물량</td><td>물량 충격의 직접 척도</td><td>IEA 월간 석유시장보고서</td></tr><tr><td>2</td><td>세계 재고 누적 감소</td><td>완충 장치의 소진 속도</td><td>IEA 월간 석유시장보고서</td></tr><tr><td>3</td><td>라스라판 복구 일정</td><td>아시아 LNG 수급의 핵심 변수</td><td>카타르에너지 공시</td></tr><tr><td>4</td><td>아시아·유럽 LNG 가격 차</td><td>아시아 프리미엄과 물량 쟁탈 강도</td><td>가격 평가기관</td></tr><tr><td>5</td><td>한전 재무·전기요금 결정</td><td>비용 전가 경로</td><td>한전 공시 · 정부 발표</td></tr><tr><td>6</td><td>원전 이용률 · 석탄 발전량</td><td>위기 대응의 탄소 대가</td><td>전력거래소</td></tr><tr><td>7</td><td>미국 LNG 투자 결정 · 신규 가동</td><td>2027년 이후 과잉 시점</td><td>사업자 공시</td></tr><tr><td>8</td><td>송전망 투자 · 연계 대기</td><td>AI·반도체 입지 제약</td><td>정부 전력계통 계획</td></tr><tr><td>9</td><td>중국 광물 수출 통제</td><td>배터리 공급망 위험</td><td>중국 상무부 발표</td></tr></tbody></table><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">다음 호: AI발 전력 위기.</p><div class="callout-divider"></div><p class="callout-desc">E07과 지표 8번을 심화합니다. 데이터센터 연계 대기, 무탄소 전원 조달 경쟁, 반도체 클러스터 전력 계획을 1차 자료로 추적합니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E11</p>
+</section></div>
+<!-- E12 · 출처 · 방법론 -->
+<div class="page-fit"><section class="canvas-page content" id="E12">
+<div class="hdr"><div class="hdr-left"><div class="hdr-logo">K</div>
+<div class="hdr-titles"><div class="k">KIND EXPERT No.001</div><div class="s">출처 · 방법론</div></div></div>
+<div class="hdr-right"><div class="hdr-pill">E12 / E12</div></div></div>
+<div class="eyebrow">출처 · 방법론</div><h1 class="h1">출처와 방법론</h1><div class="rule"></div><p class="sub">모든 수치는 출처 코드로 본문에 연결됩니다. 자료명을 누르면 원문이 새 창으로 열립니다. 등급 A는 1차 자료, B는 분석·요약, C는 언론·2차 집계입니다.</p><div class="body"><table class="xt srcs"><thead><tr><th>코드</th><th>등급</th><th>자료</th><th>발간·기준일</th></tr></thead><tbody><tr><td><b>S1</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/oil-market-report-august-2026" target="_blank" rel="noopener noreferrer">IEA, Oil Market Report – August 2026<span class="arr">↗</span></a></td><td>2026.08.12</td></tr><tr><td><b>S2</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/topics/the-middle-east-and-global-energy-markets" target="_blank" rel="noopener noreferrer">IEA, The Middle East and Global Energy Markets (주제 페이지)<span class="arr">↗</span></a></td><td>2026.07.21 갱신</td></tr><tr><td><b>S3</b></td><td><span class="gr gB">B</span></td><td><a class="srclink" href="https://blogs.worldbank.org/en/opendata/strait-of-hormuz-disruption-sends-oil-prices-surging" target="_blank" rel="noopener noreferrer">World Bank Blogs, “Strait of Hormuz disruption sends oil prices surging” (Commodity Markets Outlook 2026년 4월 인용)<span class="arr">↗</span></a></td><td>2026.05.07</td></tr><tr><td><b>S4</b></td><td><span class="gr gC">C</span></td><td><a class="srclink" href="https://en.wikipedia.org/wiki/2026_Iran_war_fuel_crisis" target="_blank" rel="noopener noreferrer">Wikipedia, “2026 Iran war fuel crisis” — 사건 일자·가격 시계열 2차 집계<span class="arr">↗</span></a></td><td>2026.08 열람</td></tr><tr><td><b>S5</b></td><td><span class="gr gC">C</span></td><td><a class="srclink" href="https://www.koreatimes.co.kr/southkorea/others/20260303/middle-east-conflict-raises-alarm-on-koreas-oil-dependence" target="_blank" rel="noopener noreferrer">The Korea Times, “Middle East conflict raises alarm on Korea’s oil dependence” — 정부 브리핑 인용<span class="arr">↗</span></a></td><td>2026.03.03</td></tr><tr><td><b>S6</b></td><td><span class="gr gB">B</span></td><td><a class="srclink" href="https://keia.org/analysis/the-iran-war-is-stress-testing-south-koreas-energy-model/" target="_blank" rel="noopener noreferrer">Korea Economic Institute of America, T. Ramage, “The Iran War Is Stress-Testing South Korea’s Energy Model”<span class="arr">↗</span></a></td><td>2026.03.25</td></tr><tr><td><b>S7</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/world-energy-investment-2025" target="_blank" rel="noopener noreferrer">IEA, World Energy Investment 2025<span class="arr">↗</span></a></td><td>2025.06.05</td></tr><tr><td><b>S8</b></td><td><span class="gr gB">B</span></td><td><a class="srclink" href="https://www.iea.org/reports/world-energy-investment-2026" target="_blank" rel="noopener noreferrer">IEA, World Energy Investment 2026 — 공개 요약 및 보도 기준<span class="arr">↗</span></a></td><td>2026.05.28</td></tr><tr><td><b>S9</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" target="_blank" rel="noopener noreferrer">IEA, Energy and AI — Energy demand from AI<span class="arr">↗</span></a></td><td>2025.04</td></tr><tr><td><b>S10</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/global-critical-minerals-outlook-2025" target="_blank" rel="noopener noreferrer">IEA, Global Critical Minerals Outlook 2025<span class="arr">↗</span></a></td><td>2025.05.21</td></tr><tr><td><b>S11</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/the-role-of-critical-minerals-in-clean-energy-transitions" target="_blank" rel="noopener noreferrer">IEA, The Role of Critical Minerals in Clean Energy Transitions<span class="arr">↗</span></a></td><td>2021.05</td></tr><tr><td><b>S12</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/gas-2025/executive-summary" target="_blank" rel="noopener noreferrer">IEA, Gas 2025 — Executive summary<span class="arr">↗</span></a></td><td>2025</td></tr><tr><td><b>S13</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/world-energy-outlook-2025/current-policies-scenario" target="_blank" rel="noopener noreferrer">IEA, World Energy Outlook 2025 — Current Policies Scenario<span class="arr">↗</span></a></td><td>2025.11.12</td></tr><tr><td><b>S14</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.korea.kr/news/policyNewsView.do?newsId=148943045" target="_blank" rel="noopener noreferrer">산업통상자원부, 2024년 발전원별 발전량(잠정) — 정책브리핑<span class="arr">↗</span></a></td><td>2025.05.12</td></tr><tr><td><b>S15</b></td><td><span class="gr gC">C</span></td><td><a class="srclink" href="https://m.news.nate.com/view/20260312n36573" target="_blank" rel="noopener noreferrer">석유 최고가격제 시행(정유사 공급 휘발유 ℓ당 1,724원·경유 1,713원) — 정부 발표 보도<span class="arr">↗</span></a></td><td>2026.03.12</td></tr><tr><td><b>S16</b></td><td><span class="gr gA">A</span></td><td><a class="srclink" href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank" rel="noopener noreferrer">IEA, World Energy Investment 2024<span class="arr">↗</span></a></td><td>2024.06.06</td></tr></tbody></table><div class="panel"><div class="ph"><span class="chip data">DATA</span>방법론 주석</div><ul class="ul">
+<li>C등급 자료(S4·S5)의 수치는 가능한 경우 A·B등급과 교차 확인했습니다. 브렌트 고점은 S4 기준 118.35달러이며, S6은 119달러로 보도해 “약 118달러”로 표기했습니다.</li>
+<li>S5의 즉시 가용 원유 비축(1.57억 배럴)은 정부 발표 수치이며, 정부·민간 세부 합계와 차이가 있어 총량 표기만 사용했습니다.</li>
+<li>시나리오(E10)와 정책 평가(E05)는 편집진의 판단이며, 투자·정책 권고가 아닙니다.</li></ul></div><div class="callout"><div class="bang">!</div><div class="callout-body">
+<p class="callout-label"><span class="chip view">KIND VIEW</span> 편집진 판단</p>
+<p class="callout-title">출처가 보이지 않는 숫자는 싣지 않습니다.</p><div class="callout-divider"></div><p class="callout-desc">전문가판은 결론보다 근거의 품질로 평가받아야 합니다. 오류나 더 나은 1차 자료를 발견하시면 다음 호에서 정정하고 출처와 함께 밝히겠습니다.</p></div></div></div>
+<p class="ftr">KIND &nbsp;—&nbsp; 한국 인텔리전스 &amp; 뉴스 다이제스트 &nbsp;|&nbsp; 전문가판 E12</p>
+</section></div>
+<script>
+(function(){
+  var W=2160,H=3840;
+  function fit(){
+    var s=Math.min((window.innerWidth-24)/W,(window.innerHeight-24)/H);
+    if(!isFinite(s)||s<=0) s=.2;
+    document.querySelectorAll('.page-fit').forEach(function(w){
+      w.style.width=Math.round(W*s)+'px'; w.style.height=Math.round(H*s)+'px';
+      w.firstElementChild.style.transform='scale('+s+')';
+    });
+  }
+  window.addEventListener('resize',fit); fit();
+  var root=document.documentElement,KEY='kind-theme';
+  function setTheme(t,save){
+    root.dataset.theme=t;
+    document.querySelectorAll('[data-set-theme]').forEach(function(b){
+      var on=b.dataset.setTheme===t; b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false');
+    });
+    if(save){try{localStorage.setItem(KEY,t);}catch(e){}}
+  }
+  var saved=null; try{saved=localStorage.getItem(KEY);}catch(e){}
+  setTheme(saved==='light'?'light':'dark',false);
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-set-theme]'); if(b) setTheme(b.dataset.setTheme,true);
+  });
+})();
+
+</script>
+</body>
+</html>

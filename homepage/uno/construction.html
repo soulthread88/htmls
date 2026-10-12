@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+    
+    
+  
+    
+    
+  
+
+
+
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>건설시공 관리 | 유노시스템(주) UNO SYSTEM</title>
+<meta content="유노시스템 건설시공 관리 — 스마트 건설 블랙박스, 베이스 스테이션, GPS 30cm 정밀도, LH공사 450대 납품." name="description">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+/* ── CSS VARIABLES ── */
+:root{
+  --bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;
+  --border:rgba(30,120,220,.18);--border2:rgba(0,210,240,.18);
+  --blue:#1a6fd4;--cyan:#00d2f0;--gold:#e8b84b;
+  --text:#dde8f8;--muted:#9ab5d0;--dim:#3a4d6a;
+  --fkr:"Pretendard","Noto Sans KR",sans-serif;
+  --fmono:"JetBrains Mono",monospace;
+  --fdis:"Bebas Neue",sans-serif;
+  --hdr:72px;
+  /* template 폰트 사이즈 */
+  --font-title:20px;--font-body:16px;--font-small:13px;--font-xsmall:11px;--font-mono:12px;--font-body-sm:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fkr);font-size:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;word-break:keep-all;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(26,111,212,.03)1px,transparent 1px),linear-gradient(90deg,rgba(26,111,212,.03)1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+
+/* ── HEADER (template 동일) ── */
+header{position:fixed;top:0;left:0;right:0;height:var(--hdr);background:rgba(8,13,24,.97);backdrop-filter:blur(22px);display:flex;align-items:center;justify-content:space-between;padding:0 36px 0 5mm;z-index:700;gap:16px}
+.logo-wrap{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.logo-img-wrap{position:relative;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;border-radius:9px;overflow:visible}
+.logo-img{height:40px;width:auto;object-fit:contain;background:#fff;border-radius:9px;padding:4px 8px;transition:opacity .2s;display:block}
+.logo-img-wrap:hover .logo-img{opacity:.85}
+.logo-img-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);border-radius:9px;opacity:0;transition:opacity .2s;pointer-events:none;font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.3;padding:4px}
+.logo-img-wrap:hover .logo-img-hint{opacity:1}
+.logo-ko{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:16px;color:var(--text);line-height:1.15;display:flex;flex-direction:column}
+.logo-ko-en{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.btn-dl{background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.3);border-radius:6px;color:var(--cyan);font-family:var(--fkr);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.btn-dl:hover{background:rgba(0,210,240,.22);border-color:var(--cyan)}
+
+/* ── NAV (template 동일 — font-size:20px) ── */
+.main-nav{display:flex;align-items:center;flex:1;justify-content:flex-end;gap:0}
+.ni{position:relative;display:flex;align-items:center}
+.nb{background:transparent;border:none;color:var(--muted);font-family:var(--fkr);font-size:14px;font-weight:700;padding:12px 15px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color .15s;height:auto}
+.nb:hover,.ni:hover>.nb{color:#fff}
+.nb.active-menu{color:var(--cyan)}
+.nb .caret{font-size:11px;transition:transform .22s;display:inline-block}
+.ni:hover>.nb .caret{transform:rotate(180deg)}
+.nb.cta-nav{background:var(--cyan);color:#000!important;font-weight:900;padding:10px 20px;border-radius:6px;margin-left:10px}
+.nb.cta-nav:hover{opacity:.86}
+.nb.cta-nav .caret{display:none}
+.dropdown{display:none;position:absolute;top:100%;left:0;min-width:200px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-top:2px solid var(--cyan);border-radius:0 0 10px 10px;box-shadow:0 16px 48px rgba(0,0,0,.75);z-index:680;padding:6px 0 8px}
+.ni:hover>.dropdown{display:block;animation:ddIn .18s ease forwards}
+@keyframes ddIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:8px 18px 6px;font-family:var(--fmono);font-size:11px;letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:4px}
+.di{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;font-size:14px;font-weight:600;color:var(--text);text-decoration:none;cursor:pointer;white-space:nowrap;border-left:2px solid transparent;transition:all .12s;position:relative}
+.di:hover{background:rgba(0,210,240,.09);border-left-color:var(--cyan);color:var(--cyan)}
+.di.active{background:rgba(0,210,240,.14);border-left-color:var(--cyan);color:var(--cyan)}
+.arr{font-size:12px;color:var(--dim);margin-left:8px;flex-shrink:0}
+.di:hover .arr{color:var(--cyan)}
+.dd-sep{height:1px;background:rgba(255,255,255,.06);margin:6px 0}
+.has-sub{position:relative}
+.sub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:290px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid var(--cyan);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:690;padding:6px 0 8px}
+.has-sub:hover>.sub-dropdown,.has-sub.open>.sub-dropdown{display:block;animation:subIn .14s ease forwards}
+@keyframes subIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+.has-sub2{position:relative}
+.subsub-dropdown{display:none;position:absolute;top:-2px;left:calc(100% + 1px);min-width:240px;background:rgba(10,18,34,.98);border:1px solid var(--border2);border-left:2px solid rgba(0,210,240,.5);border-radius:0 10px 10px 0;box-shadow:10px 8px 36px rgba(0,0,0,.7);z-index:700;padding:6px 0 8px}
+.has-sub2:hover>.subsub-dropdown{display:block;animation:subIn .12s ease forwards}
+
+/* ── HERO ── */
+.iaea-hero-wrap{margin-top:var(--hdr);position:relative;cursor:pointer;overflow:hidden;background:#111;width:100%;height:clamp(200px,26vw,380px)}
+.iaea-hero-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.iaea-hero-wrap:hover img{transform:scale(1.02)}
+.hero-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);background:var(--surface);pointer-events:none;height:400px}
+.hero-empty .he-plus{width:64px;height:64px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(0,210,240,.5)}
+.hero-empty.hidden{display:none}
+.hero-change-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .28s;pointer-events:none}
+.iaea-hero-wrap:hover .hero-change-hint{opacity:1}
+.hero-change-hint span{background:rgba(0,210,240,.82);padding:12px 24px;border-radius:8px;font-size:16px;font-weight:700}
+.hero-controls{position:absolute;top:10px;right:10px;display:none;flex-direction:column;gap:5px;z-index:30}
+.iaea-hero-wrap:hover .hero-controls{display:flex}
+.iaea-source{background:#03060d;padding:7px 36px 7px 0;font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);border-bottom:1px solid var(--border);text-align:right;font-style:italic}
+
+/* ── PAGE HERO ── */
+.page-hero{position:relative;height:180px;overflow:hidden;display:flex;align-items:center;padding-left:5mm}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,24,.95),rgba(8,13,24,.5))}
+.page-hero-content{position:relative;z-index:2}
+.breadcrumb{font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);letter-spacing:.1em;margin-bottom:10px}
+.breadcrumb a{color:var(--cyan);text-decoration:none}
+.page-hero-tag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;display:block}
+.page-hero-title{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,4vw,48px);line-height:1.05;letter-spacing:-.02em;margin-bottom:6px}
+.page-hero-sub{font-size:var(--font-small);color:var(--muted);font-family:var(--fmono);letter-spacing:.06em}
+
+/* ── SECTIONS ── */
+.pg{position:relative;z-index:1;padding:48px 80px 48px 5mm}
+.pg.alt{background:var(--bg2)}
+.div-line{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+.shdr{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.shdr-hr{flex:1;height:1px;background:linear-gradient(to right,var(--border2),transparent);align-self:center}
+.stag{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.05em;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:6px}
+.stitle{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.1;letter-spacing:-.02em}
+.stitle .hl{color:var(--cyan)}
+
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.12);border-radius:10px;overflow:hidden;margin-bottom:40px}
+.kc{background:var(--surface);padding:20px 12px;text-align:center;transition:background .2s}
+.kc:hover{background:var(--surface2)}
+.kc-n{font-family:var(--fdis);font-size:54px;line-height:1;color:var(--gold);margin-bottom:3px}
+.kc-l{font-size:var(--font-small);color:var(--muted);line-height:1.4}
+
+/* ── 01 PRODUCT DETAIL: 이미지 오른쪽, 텍스트 왼쪽 ── */
+.prod-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+/* flip 없이: col1=텍스트(order:1), col2=이미지(order:2) — 기본 DOM 순서 제어 */
+.prod-text{order:1}
+.prod-img-wrap{order:2;display:flex;flex-direction:column;gap:20px}
+.prod-img-wrap .prod-img-box{aspect-ratio:16/9;height:auto!important}
+
+/* ── 02 Base Station: 이미지 왼쪽, 텍스트 오른쪽 ── */
+.prod-inner.bs .prod-text{order:2}
+.prod-inner.bs .prod-img-wrap{order:1}
+
+.prod-img-box{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#0a0f1a;height:340px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.prod-img-box img{width:100%;height:100%;object-fit:contain;display:block}
+.prod-img-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted)}
+.prod-img-ph .pi-plus{width:56px;height:56px;border-radius:50%;border:2px dashed rgba(0,210,240,.4);display:flex;align-items:center;justify-content:center;font-size:26px;color:rgba(0,210,240,.5)}
+.prod-img-ph.hidden{display:none}
+.prod-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s;pointer-events:none}
+.prod-img-box:hover .prod-img-overlay{opacity:1}
+.prod-img-overlay span{background:rgba(0,210,240,.8);padding:10px 20px;border-radius:6px;font-size:14px;font-weight:700;color:#000}
+.prod-img-ctrl{position:absolute;top:8px;right:8px;display:none;flex-direction:column;gap:4px;z-index:10}
+.prod-img-box:hover .prod-img-ctrl{display:flex}
+.box-ctrl-btn{background:rgba(8,13,24,.92);border:1px solid var(--border2);color:var(--text);font-size:12px;font-family:var(--fkr);font-weight:700;padding:5px 10px;border-radius:5px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.box-ctrl-btn.replace{border-color:rgba(0,210,240,.4);color:var(--cyan)}
+.box-ctrl-btn.replace:hover{background:rgba(0,210,240,.15)}
+.box-ctrl-btn.delete{border-color:rgba(255,80,80,.4);color:#ff6060}
+.box-ctrl-btn.delete:hover{background:rgba(255,80,80,.12)}
+
+.prod-heading{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(26px,2.5vw,36px);line-height:1.15;margin-bottom:14px}
+.prod-desc{font-size:var(--font-body);color:var(--muted);line-height:1.8;margin-bottom:20px;border-left:2px solid var(--gold);padding-left:14px}
+.feat-list{display:flex;flex-direction:column;gap:10px}
+.feat{display:flex;gap:12px;align-items:flex-start;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 14px;transition:border-color .2s}
+.feat:hover{border-color:rgba(232,184,75,.2)}
+.feat-ic{font-size:22px;flex-shrink:0;margin-top:1px}
+.feat-tx{font-size:var(--font-body);color:var(--muted);line-height:1.6}
+.feat-tx strong{color:var(--text);display:block;margin-bottom:1px}
+
+/* ── 03 FEATURE GRID: 1:1 이미지 박스 + 텍스트 ── */
+.feat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feat-card{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;transition:border-color .25s,transform .2s;display:flex;flex-direction:column}
+.feat-card:hover{border-color:rgba(232,184,75,.25);transform:translateY(-3px)}
+
+/* 1:1 이미지 박스 */
+.feat-card-img{position:relative;width:100%;aspect-ratio:1/1;background:#0a0f1a;cursor:pointer;overflow:hidden;flex-shrink:0}
+.feat-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.feat-card-img-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted)}
+.feat-card-img-ph .fci-plus{width:48px;height:48px;border-radius:50%;border:2px dashed rgba(0,210,240,.35);display:flex;align-items:center;justify-content:center;font-size:22px;color:rgba(0,210,240,.45)}
+.feat-card-img-ph.hidden{display:none}
+.feat-card-img-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;pointer-events:none}
+.feat-card-img:hover .feat-card-img-overlay{opacity:1}
+.feat-card-img-overlay span{background:rgba(0,210,240,.8);padding:8px 16px;border-radius:6px;font-size:13px;font-weight:700;color:#000}
+.feat-card-img-ctrl{position:absolute;top:6px;right:6px;display:none;flex-direction:column;gap:3px;z-index:10}
+.feat-card-img:hover .feat-card-img-ctrl{display:flex}
+
+/* 텍스트 영역 */
+.feat-card-body{padding:18px 20px}
+.feat-card-nm{font-size:var(--font-body);font-weight:800;margin-bottom:6px;color:var(--text)}
+.feat-card-desc{font-size:var(--font-small);color:var(--muted);line-height:1.65}
+
+/* ── CTA ── */
+.cta-wrap{background:linear-gradient(135deg,#0a1525,#0d1e35);border-top:1px solid var(--border2);padding:52px 80px 52px 5mm;position:relative;z-index:1}
+.cta-lb{font-family:var(--fmono);font-size:var(--font-small);letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:10px}
+.cta-hd{font-family:"Montserrat",var(--fkr);font-weight:900;font-size:clamp(28px,3.5vw,48px);letter-spacing:-.02em;margin-bottom:16px;line-height:1.1}
+.cta-hd span{color:var(--cyan)}
+.cta-info{display:flex;flex-direction:column;gap:10px}
+.cta-row{display:flex;align-items:center;gap:12px;font-size:var(--font-body);color:var(--muted)}
+.cta-row strong{color:var(--text)}
+.cta-ri{width:30px;height:30px;border-radius:5px;background:rgba(0,210,240,.1);border:1px solid rgba(0,210,240,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+
+/* ── FOOTER (template 동일) ── */
+footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;padding:28px 40px}
+.foot-inner{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-left{display:flex;flex-direction:column;gap:5px}
+.foot-nm{font-size:var(--font-small);font-weight:700;color:var(--text)}
+.foot-addr,.foot-contact,.foot-copy{font-family:var(--fmono);font-size:var(--font-small);color:var(--dim)}
+.foot-copy{margin-top:4px}
+.foot-inquiry-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px 28px;background:rgba(0,210,240,.07);border:2px solid rgba(0,210,240,.25);border-radius:10px;cursor:pointer;text-decoration:none;transition:all .2s;min-width:180px}
+.foot-inquiry-box:hover{background:rgba(0,210,240,.16);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,210,240,.15)}
+.foot-inquiry-icon{font-size:32px;line-height:1}
+.foot-inquiry-label{font-family:var(--fkr);font-size:var(--font-small);font-weight:700;color:var(--cyan);text-align:center;line-height:1.4}
+.foot-inquiry-sub{font-family:var(--fmono);font-size:12px;color:var(--muted);text-align:center}
+
+.fu{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:1024px){
+  .prod-inner{grid-template-columns:1fr;gap:32px}
+  .prod-text,.prod-img-wrap,.prod-inner.bs .prod-text,.prod-inner.bs .prod-img-wrap{order:unset}
+  .pg{padding:40px 48px 40px 5mm}
+  .feat-g{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .pg{padding:36px 24px 36px 5mm}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .feat-g{grid-template-columns:1fr}
+  .page-hero{padding-left:5mm}
+  .cta-wrap{padding:40px 24px 40px 5mm}
+  .foot-inner{flex-direction:column;align-items:flex-start}
+}
+
+/* ── 시스템 구성도 ── */
+.sys-diagram-wrap{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start}
+.sys-diagram-img img{box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.sys-diagram-legend{display:flex;flex-direction:column;gap:14px;padding-top:12px}
+.sys-leg-item{display:flex;align-items:flex-start;gap:12px;font-size:var(--font-small);line-height:1.6;color:var(--muted)}
+.sys-leg-item strong{color:var(--text)}
+.sys-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.sys-dot.cyan{background:var(--cyan)}
+.sys-dot.gold{background:var(--gold)}
+.sys-dot.blue{background:var(--blue)}
+@media(max-width:1024px){.sys-diagram-wrap{grid-template-columns:1fr}}
+
+/* ── Template Header/Footer/CTA/img-box 공통 스타일 (template 100%) ── */
+.img-box{cursor:pointer;background:var(--surface);border:2px dashed #00d2f04d;border-radius:10px;flex-direction:column;min-height:150px;transition:border-color .25s,box-shadow .25s;display:flex;position:relative;overflow:hidden}.img-box:hover{border-color:var(--cyan);border-style:solid;box-shadow:0 0 18px #00d2f01f}.box-media-wrap{flex:1;justify-content:center;align-items:center;min-height:120px;display:flex;position:relative;overflow:hidden}.box-img{object-fit:cover;width:100%;height:100%}.box-placeholder{color:var(--muted);text-align:center;flex-direction:column;justify-content:center;align-items:center;gap:8px;width:100%;padding:24px;display:flex}.box-placeholder.hidden{display:none}.box-plus{color:#00d2f080;border:2px dashed #00d2f066;border-radius:50%;justify-content:center;align-items:center;width:48px;height:48px;font-size:24px;transition:all .2s;display:flex}.img-box:hover .box-plus{border-color:var(--cyan);color:var(--cyan);transform:scale(1.1)}.box-hint{font-size:var(--font-small);opacity:.7;line-height:1.5}.box-label{text-align:center;font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);background:#0003;border-top:1px solid #ffffff0d;padding:8px 12px}.box-controls{z-index:20;flex-direction:column;gap:5px;display:none;position:absolute;top:8px;right:8px}.box-ctrl-btn{border:1px solid var(--border2);color:var(--text);font-size:12px;font-family:var(--fkr);cursor:pointer;white-space:nowrap;background:#080d18eb;border-radius:5px;padding:5px 11px;font-weight:700;transition:all .15s}.box-ctrl-btn.replace{color:var(--cyan);border-color:#00d2f066}.box-ctrl-btn.replace:hover{background:#00d2f026}.box-ctrl-btn.delete{color:#ff6060;border-color:#ff505066}.box-ctrl-btn.delete:hover{background:#ff50501f}.cta-inner{grid-template-columns:1fr;align-items:center;gap:40px;display:grid}.foot-inner{grid-template-columns:25% 75%;align-items:stretch;min-height:180px;display:grid}.foot-img-col{cursor:pointer;background:var(--surface);box-sizing:border-box;border-right:1px solid #ffffff12;justify-content:center;align-self:stretch;align-items:center;width:100%;height:100%;padding:8mm 0 8mm 8mm;display:flex;position:relative;overflow:hidden}.foot-img-col img.foot-col-img{object-fit:cover;border-radius:6px;width:100%;height:100%;position:relative}.foot-img-col img.foot-col-img.active{display:block}.foot-img-ph{color:var(--muted);text-align:center;pointer-events:none;flex-direction:column;align-items:center;gap:8px;padding:20px;display:flex}.foot-img-ph .fi-plus{color:#00d2f073;border:2px dashed #00d2f059;border-radius:50%;justify-content:center;align-items:center;width:48px;height:48px;font-size:24px;display:flex}.foot-img-ph.hidden{display:none}.foot-img-overlay{opacity:0;pointer-events:none;background:#0006;justify-content:center;align-items:center;transition:opacity .2s;display:flex;position:absolute;inset:0}.foot-img-col:hover .foot-img-overlay{opacity:1}.foot-img-overlay span{font-family:var(--fkr);color:#000;background:#00d2f0d1;border-radius:6px;padding:8px 16px;font-size:13px;font-weight:700}.foot-img-ctrl{z-index:10;flex-direction:column;gap:4px;display:none;position:absolute;top:8px;right:8px}.foot-img-col:hover .foot-img-ctrl{display:flex}.foot-right-col{flex-direction:row;align-items:stretch;gap:20px;padding:24px 28px;display:flex}.foot-info-area{flex-direction:column;flex:1;justify-content:center;gap:6px;display:flex}.foot-logo-row{align-items:center;gap:12px;margin-bottom:8px;display:flex}.foot-logo-img-wrap{cursor:pointer;border-radius:7px;flex-shrink:0;display:inline-flex;position:relative;overflow:hidden}.foot-logo-img{object-fit:contain;background:#fff;border-radius:7px;width:auto;height:46px;padding:3px 6px;transition:opacity .2s;display:block}.foot-logo-img-wrap:hover .foot-logo-img{opacity:.82}.foot-logo-hint{opacity:0;pointer-events:none;color:#fff;text-align:center;background:#00000080;border-radius:7px;justify-content:center;align-items:center;font-size:10px;font-weight:700;line-height:1.3;transition:opacity .2s;display:flex;position:absolute;inset:0}.foot-logo-img-wrap:hover .foot-logo-hint{opacity:1}.foot-logo-text{flex-direction:column;line-height:1.2;display:flex}.foot-logo-kr{font-family:"Montserrat",var(--fkr);color:var(--text);font-size:16px;font-weight:900}.foot-logo-en{color:var(--muted);letter-spacing:.05em;font-size:12px;font-weight:700}.foot-addr,.foot-contact{font-family:var(--fmono);color:var(--muted);font-size:13px;line-height:1.6}.foot-copy{font-family:var(--fmono);color:var(--muted);margin-top:4px;font-size:11px}.foot-inquiry-box{cursor:pointer;background:#00d2f012;border:2px solid #00d2f040;border-radius:10px;flex-direction:column;flex-shrink:0;justify-content:center;align-self:center;align-items:center;gap:8px;min-width:140px;padding:14px 20px;text-decoration:none;transition:all .2s;display:flex}.foot-inquiry-box:hover{border-color:var(--cyan);background:#00d2f029;box-shadow:0 0 20px #00d2f026}.foot-inquiry-icon{font-size:32px;line-height:1}.foot-inquiry-label{font-family:var(--fkr);font-size:var(--font-small);color:var(--cyan);text-align:center;font-weight:700;line-height:1.4}.foot-inquiry-sub{font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);text-align:center}#box-cta-img{min-height:220px}#box-cta-img .box-media-wrap{flex:1;min-height:0;overflow:hidden}.aw-img.active,.aw-img[src^=data\:image],.foot-col-img[src^=data\:image]{display:block!important}img[src^=data\:image],img[src^=data\:video]{opacity:1!important;visibility:visible!important;display:block!important}.img-box{position:relative;overflow:hidden}.img-box .box-img{object-fit:cover;width:100%;height:100%;position:absolute;inset:0}.img-box .box-img[src=""],.img-box .box-img:not([src]){display:none}.img-box .box-placeholder{pointer-events:none;flex-direction:column;justify-content:center;align-items:center;gap:10px;display:flex;position:absolute;inset:0}.img-box:has(.box-img[src^=data\:image]) .box-placeholder,.img-box:has(.box-img[src^=data\:video]) .box-placeholder{display:none}.img-box .box-controls{pointer-events:auto}.img-box:hover .box-controls{display:flex}#box-cta-img{flex-direction:column;display:flex;position:relative;overflow:hidden}#box-cta-img .box-media-wrap{flex:1;min-height:0;position:relative;overflow:hidden}#box-cta-img .box-img{object-fit:cover;width:100%;height:100%;position:absolute;inset:0}#box-cta-img .box-img[src=""],#box-cta-img .box-img:not([src]){display:none}#box-cta-img .box-placeholder{pointer-events:none;flex-direction:column;justify-content:center;align-items:center;gap:10px;display:flex;position:absolute;inset:0}#box-cta-img:has(.box-img[src^=data\:image]) .box-placeholder{display:none}.prod-section-inner{max-width:1280px;margin:0 auto}
+/* ── 시스템 구성도: 좌 텍스트 / 우 이미지 + 본문 크기 ── */
+.sys-diagram-wrap{grid-template-columns:2fr 3fr!important}
+.sys-diagram-legend{order:1}
+.sys-diagram-img{order:2}
+.sys-leg-item{font-size:var(--font-body)!important}
+
+/* ── 제품 카드/pbox 스타일 (products.html 참조) ── */
+
+.prod-card{background:var(--surface);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;text-decoration:none;display:grid;grid-template-columns:1fr 400px;align-items:stretch}
+.prod-card:hover{transform:translateY(-4px);border-color:rgba(0,210,240,.3);box-shadow:0 16px 48px rgba(0,210,240,.07)}
+.prod-body{padding:32px 36px;display:flex;flex-direction:column;justify-content:center;gap:12px;font-size:19px}
+.prod-num{font-family:"JetBrains Mono","Noto Sans KR",monospace;font-size:15px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase}
+.prod-title{font-size:21px;font-weight:900;line-height:1.35;color:var(--text)}
+.prod-bullets{font-size:17px;color:var(--text);line-height:1.85;padding-left:1.4em;margin:0;list-style:none}
+.prod-bullets li{position:relative;padding-left:.3em;margin-bottom:4px}
+.prod-bullets li::before{content:"▸";color:var(--cyan);position:absolute;left:-1.1em;font-size:14px}
+.prod-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.ptag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:4px 12px;font-size:14px;color:var(--text)}
+.ptag.em{background:rgba(0,210,240,.08);border-color:rgba(0,210,240,.3);color:var(--cyan);font-size:14px}
+
+/* prod-upbox */
+.prod-upbox{position:relative;width:100%;height:100%;min-height:260px;cursor:pointer;overflow:hidden;background:#0a0f1e;display:flex;align-items:center;justify-content:center}
+.prod-upbox .pbox-img{display:none;width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.prod-upbox.has-img .pbox-img{display:block}
+.prod-upbox .pbox-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#091520,#0f2030);pointer-events:none}
+.prod-upbox.has-img .pbox-ph{display:none}
+.prod-upbox .pbox-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;gap:8px;z-index:5}
+.prod-upbox:hover .pbox-overlay{opacity:1}
+.pbox-btn{background:rgba(0,210,240,.9);color:#000;border:none;border-radius:5px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer}
+.pbox-btn.del{background:rgba(200,50,50,.9);color:#fff}.prod-card{grid-template-columns:1fr 320px}.prod-card{grid-template-columns:1fr}.prod-upbox{min-height:200px}.prod-g{display:grid;grid-template-columns:1fr;gap:24px}.prod-g{display:grid;grid-template-columns:1fr;gap:24px}
+
+/* ════ 통합 2단 행 레이아웃 (텍스트 좌 · 16:9 이미지 우) — Template 표준 ════ */
+.srow-list{display:flex;flex-direction:column;gap:20px}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;align-items:stretch}
+.srow-text{background:var(--surface);padding:30px 34px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.srow-num{font-family:'JetBrains Mono','Noto Sans KR',monospace;font-size:var(--font-small);color:var(--cyan);letter-spacing:.2em;font-weight:700}
+.srow-icon{font-size:30px;line-height:1}
+.srow-title{font-size:var(--font-title);font-weight:900;color:var(--text);line-height:1.3}
+.srow-desc{font-size:var(--font-body);color:var(--muted);line-height:1.9}
+.srow-link{margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:var(--font-small);color:var(--cyan);text-decoration:none;font-weight:700;letter-spacing:.03em}
+.srow-link:hover{text-decoration:underline}
+.srow-img.prod-img-box{border-radius:0;border-left:1px solid rgba(255,255,255,.07);border-top:none;background:#060a12}
+@media(max-width:900px){.srow{grid-template-columns:1fr}.srow-img.prod-img-box{border-left:none;border-top:1px solid rgba(255,255,255,.07)}}
+/* ════ 섹션 하단 검색 키워드 ════ */
+.sec-keywords{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:30px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.1)}
+.sec-keywords .kw-label{font-family:'JetBrains Mono',monospace;font-size:var(--font-small);color:var(--dim);letter-spacing:.12em;margin-right:2px}
+.sec-kw{font-size:var(--font-small);color:var(--cyan);background:rgba(0,210,240,.08);border:1px solid rgba(0,210,240,.28);border-radius:20px;padding:4px 13px;line-height:1.5}
+</style>
+<style>.box-controls,.foot-img-ctrl,.foot-img-overlay,.logo-img-hint,.foot-logo-hint,.hero-controls,.prod-img-ctrl,.prod-up-ctrl,.img-controls,.box-placeholder,.prod-img-ph,.foot-img-ph,#hero-empty,.pbox-ph,.logo-img-wrap,.foot-logo-img-wrap{display:none!important}.fu{opacity:1!important;transform:none!important}.ni:hover>.dropdown,.ni.open>.dropdown{display:block} .uno-credit{font-size:11px;line-height:1.5;color:#8294a9;overflow-wrap:anywhere;padding:5px 0}.uno-credit a{color:inherit} #uno-error{position:fixed;bottom:20px;left:20px;right:20px;z-index:9999;background:#802b2b;color:white;padding:16px}</style></head>
+<body id="artifacts-component-root-html">
+<!-- ═══ HEADER (template 동일) ═══ -->
+<header><div class="logo-wrap"><div class="logo-img-wrap" id="logo-img-wrap" title="클릭하여 로고 교체"><div class="logo-img-hint">📷<br>로고 교체</div></div><div class="logo-ko" contenteditable="true">유노시스템(주)<span class="logo-ko-en">UNO SYSTEM</span></div></div><nav class="main-nav" id="mainNav"><div class="ni" id="ni-company"><button class="nb" data-ni="ni-company">회사 소개 <span class="caret">▾</span></button><div class="dropdown" id="dd-company"><a class="di" href="#overview">회사 개요</a><a class="di" href="#history">회사 연혁</a><a class="di" href="#business">사업 부문</a><a class="di" href="#clients">주요 고객사</a></div></div><div class="ni" id="ni-prod"><button class="nb active-menu" data-ni="ni-prod">제품/솔루션 <span class="caret">▾</span></button><div class="dropdown" id="dd-prod"><div class="di has-sub">화재수신기 <span class="arr">›</span><div class="sub-dropdown"><a class="di" href="제품/수신기/R형 DTS 통합형 수신기/r-type dts-integrated facp.html">R형 DTS 통합형 수신기</a><div class="di has-sub2">P형 복합식 수신기 <span class="arr">›</span><div class="subsub-dropdown"><a class="di" href="제품/수신기/P형 복합식 수신기/6 회로 P형 복합식 수신기(수25-2)/">6회로 P형 수신기 (수25-2)</a><a class="di" href="제품/수신기/P형 복합식 수신기/30 회로 P형 복합식 수신기(수26-28)/">30회로 P형 수신기 (수26-28)</a></div></div><div class="di has-sub2">기타 수신기 <span class="arr">›</span><div class="subsub-dropdown"><a class="di" href="제품/수신기/기타 수신기/r-type dts-integrated facp (facp24-14)/">DTS 통합 R형 (수24-14)</a><a class="di" href="제품/수신기/기타 수신기/p-type facp (facp13-6)/">P형 복합식 (수13-6)</a><a class="di" href="제품/수신기/기타 수신기/p-type facp (facp17-47)/">P형 복합식 (수17-47)</a><a class="di" href="제품/수신기/기타 수신기/p-type facp (facp24-14)/">P형 복합식 (수24-14)</a></div></div></div></div><div class="di has-sub">감지기 <span class="arr">›</span><div class="sub-dropdown"><a class="di" href="제품/감지기/광케이블식 감지기(감24-74)/fiber optic cable ror detector (detector24-74).html">차동식분포형 광케이블식 (감24-74)</a><a class="di" href="제품/감지기/광케이블식 감지기(감26-9)/fiber optic cable ror detector (detector26-9).html">차동식분포형 광케이블식 (감26-9)</a></div></div><div class="dd-sep"></div><a class="di" href="sofire.html">소방통합감시설비</a><a class="di" href="network.html">네트워크기반 솔루션</a><a class="di" href="construction.html">건설시공 관리</a><div class="dd-sep"></div><a class="di" href="products.html">전체 제품 보기 →</a></div></div><div class="ni" id="ni-proj"><button class="nb" data-ni="ni-proj">프로젝트 <span class="caret">▾</span></button><div class="dropdown"><a class="di" href="#clients">건설 프로젝트</a><a class="di" href="#clients">Case Studies</a><a class="di" href="#clients">주요 고객사</a></div></div><div class="ni" id="ni-tech"><button class="nb" data-ni="ni-tech">기술보유현황 <span class="caret">▾</span></button><div class="dropdown"><a class="di" href="#history">지식재산권 / 특허</a><a class="di" href="#history">KFI 형식승인서</a><a class="di" href="#history">기업 인증</a><a class="di" href="#history">수상 실적</a></div></div><div class="ni" id="ni-data"><button class="nb" data-ni="ni-data">자료 <span class="caret">▾</span></button><div class="dropdown"><a class="di" href="#business">제품 카탈로그</a><a class="di" href="#business">데이터시트</a><a class="di" href="#business">설치 매뉴얼</a><a class="di" href="#business">인증 서류</a></div></div><div class="ni"><a class="nb cta-nav" href="#contact">CONTACT</a></div></nav></header>
+<!-- HERO IMAGE -->
+<div class="iaea-hero-wrap" id="hero-wrap">
+<div class="hero-empty hidden" id="hero-empty">
+<div class="he-plus">+</div>
+<div style="font-size:var(--font-body);font-weight:700">클릭하여 이미지 삽입</div>
+</div>
+<img alt="건설시공 관리" id="hero-img" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/base%20station%20banner.png" style="display: block;">
+<div class="hero-change-hint"><span>📷 클릭하여 이미지 교체</span></div>
+<div class="hero-controls">
+
+
+</div>
+</div>
+<div class="iaea-source" contenteditable="true">UNO SYSTEM — 스마트 건설 블랙박스 &nbsp;|&nbsp; LH공사 450대 납품 · RTK GPS · GIS 연동</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+<div class="page-hero-overlay"></div>
+<div class="page-hero-content">
+<span class="page-hero-tag" contenteditable="true">Smart Construction Management</span>
+<h1 class="page-hero-title" contenteditable="true">건설시공 관리</h1>
+<div class="page-hero-sub" contenteditable="true">Smart Construction Blackbox · IoT 기반 시공 이력 자동 저장 · GPS 60cm 이내 정밀 측위 · GIS 연동</div>
+</div>
+</div>
+<!-- ═══ 00 화재 감지 핵심 제품 (수신기·광케이블 감지) ═══ -->
+<section class="pg" id="core-products">
+<div class="shdr"><div><span class="stag" contenteditable="true">// Fire Detection</span><h2 class="stitle" contenteditable="true">수신기 · <span class="hl">광케이블 감지</span> 시스템</h2></div><div class="shdr-hr"></div></div>
+<div class="srow-list fu vis">
+<div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">01 · Fire Alarm Control Panel</div><div class="srow-icon">🔴</div><div class="srow-title" contenteditable="true">R형 수신기 &amp; DTS 통합형</div><div class="srow-desc" contenteditable="true">154kV·345kV 초고압 전력구 등 가혹한 현장 환경에 맞춰 설계된 R형 통합형 수신기입니다. 광케이블식 분포형 온도 감지(DTS)를 수신기에 통합하여 케이블 전 구간의 온도 프로파일을 실시간으로 감시하고, 열점(Hot spot) 발생 위치를 즉시 특정합니다. 6kV 서지 보호 모듈을 기본 탑재하여 낙뢰·유도 서지로부터 회로를 보호하며, SCADA·TCP/IP 연동으로 중앙관제와 이력 관리가 가능합니다. KFI 형식승인(수25-66)을 획득하였고 한국전력에 620대 납품한 검증된 제품입니다.</div><a class="srow-link" href="제품/수신기/R형 DTS 통합형 수신기/r-type dts-integrated facp.html" contenteditable="false">제품 상세 보기 →</a></div><div class="prod-img-box srow-img" data-key="fd1" id="fd-1"><img alt="R형 DTS 통합형 수신기" id="fd-1-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/uno%20facp%20with%20fiber%20optic%20lhd%204.png" style="display: block;"><div class="prod-img-ph hidden" id="fd-1-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">02 · Fire Alarm Control Panel</div><div class="srow-icon">🟦</div><div class="srow-title" contenteditable="true">P형 복합식 수신기</div><div class="srow-desc" contenteditable="true">일반 건축물·소규모 시설을 위한 P형 복합식 수신기 전 라인업을 보유하고 있습니다. 6회로부터 30회로까지 규모별 선택이 가능하며, 경계구역 단위의 화재 신호를 안정적으로 수신·표시합니다. 완전 수동식 구조로 오동작 위험을 최소화하고, 소화설비 제어반(FSSP) 및 부대 설비와의 연동을 지원합니다. 수25-2, 수26-28, 수13-6, 수17-47, 수24-14 등 다양한 KFI 형식승인을 확보하여 현장 규모와 사양에 맞춰 폭넓게 대응합니다.</div><a class="srow-link" href="제품/수신기/P형 복합식 수신기/6 회로 P형 복합식 수신기(수25-2)/" contenteditable="false">제품 상세 보기 →</a></div><div class="prod-img-box srow-img" data-key="fd2" id="fd-2"><img alt="P형 복합식 수신기" id="fd-2-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/uno%20facp%202.png" style="display: block;"><div class="prod-img-ph hidden" id="fd-2-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">03 · Detector</div><div class="srow-icon">🔵</div><div class="srow-title" contenteditable="true">광케이블식 차동식분포형감지기 (감24-74)</div><div class="srow-desc" contenteditable="true">1550nm 라만(Raman) 후방산란 방식을 이용해 단일 광케이블 한 가닥으로 최대 6km 구간의 온도를 연속 측정하는 차동식분포형 감지기입니다. 0.1°C 수준의 온도 분해능과 미터 단위 위치 분해능으로 터널·전력구·지하구·물류창고 등 광범위 공간의 미세한 온도 변화까지 포착합니다. 전자기 간섭에 강하고 방폭 환경에 적합하며, 유지보수가 간단합니다. KFI 감24-74·감26-9 형식승인을 획득했습니다.</div><a class="srow-link" href="제품/감지기/광케이블식 감지기(감24-74)/fiber optic cable ror detector (detector24-74).html" contenteditable="false">제품 상세 보기 →</a></div><div class="prod-img-box srow-img" data-key="fd3" id="fd-3"><img alt="광케이블식 차동식분포형감지기 감24-74" id="fd-3-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/fiber%20optic%20lhd%201.png" style="display: block;"><div class="prod-img-ph hidden" id="fd-3-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#R형수신기</span><span class="sec-kw" contenteditable="true">#P형복합식수신기</span><span class="sec-kw" contenteditable="true">#DTS통합형</span><span class="sec-kw" contenteditable="true">#광케이블식감지기</span><span class="sec-kw" contenteditable="true">#KFI형식승인</span></div>
+</section>
+<!-- ═══ KPI + 01 스마트 건설 블랙박스 ═══ -->
+<section class="pg" id="blackbox">
+<div class="kpi-row fu vis">
+<div class="kc"><div class="kc-n">450</div><div class="kc-l" contenteditable="true">대<br>LH공사 납품</div></div>
+<div class="kc"><div class="kc-n">60</div><div class="kc-l" contenteditable="true">cm 이내<br>GPS 오차</div></div>
+<div class="kc"><div class="kc-n">500</div><div class="kc-l" contenteditable="true">cm<br>초음파 측정</div></div>
+<div class="kc"><div class="kc-n">4,320</div><div class="kc-l" contenteditable="true">억원/년<br>시장 규모</div></div>
+</div>
+<div class="shdr"><div><span class="stag" contenteditable="true">01 · Smart Blackbox</span><h2 class="stitle" contenteditable="true">스마트 건설 <span class="hl" contenteditable="true">블랙박스</span><br><small style="font-size:0.55em;color:var(--muted);font-weight:600">Dongle · APP · 클라우드</small></h2></div><div class="shdr-hr"></div></div>
+<div class="srow-list fu vis">
+<div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 01</div><div class="srow-icon">📡</div><div class="srow-title" contenteditable="true">RTK GPS 60cm 이내 정밀 측위</div><div class="srow-desc" contenteditable="true">RTK(Real Time Kinematic) GPS를 이중화하여 일반 GPS 대비 비약적으로 향상된 60cm 이내의 정밀 좌표(경도·위도)를 취득합니다. 압력 센서를 결합해 층별 고도를 30cm 단위로 구분하므로, 고층 건축물에서도 촬영 지점이 몇 층·어느 구획인지 정확히 기록됩니다. 취득한 3차원 좌표는 촬영 사진·영상과 결합되어 시공 위치의 위·변조가 불가능한 원본 데이터로 클라우드에 저장됩니다.</div></div><div class="prod-img-box srow-img" data-key="con_bb" id="img-bb"><img alt="스마트 건설 블랙박스" id="img-bb-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/bb2.png" style="display:block"><div class="prod-img-ph hidden" id="img-bb-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 02</div><div class="srow-icon">🧭</div><div class="srow-title" contenteditable="true">방위각 · 고도 · 거리 동시 측정</div><div class="srow-desc" contenteditable="true">3축 지자기 센서(±4~±16 gauss)로 촬영 방위각을 산출하고, 기압 센서로 고도를, 초음파 센서로 피사체까지의 거리를 최대 500cm까지 정밀 측정합니다. 방위·고도·거리 정보가 한 번의 촬영으로 동시에 기록되므로 배근 간격, 부재 두께, 매설 심도 등 육안으로 확인하기 어려운 시공 품질 지표를 수치로 남길 수 있습니다. 이는 준공 후 하자 분쟁 시 객관적 근거 자료가 됩니다.</div></div><div class="prod-img-box srow-img" data-key="bb2" id="bb-2"><img alt="방위각·고도·거리 측정" id="bb-2-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/bb3.png" style="display: block;"><div class="prod-img-ph hidden" id="bb-2-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 03</div><div class="srow-icon">📷</div><div class="srow-title" contenteditable="true">조작 방지 · 구간 암호화</div><div class="srow-desc" contenteditable="true">촬영된 사진은 편집·재사용·타 현장 대체가 원천적으로 차단되며, 촬영 시각 또한 임의로 조작할 수 없습니다. 단말에서 서버까지 전 구간을 암호화(encryption) 처리하여 전송 과정의 데이터 위·변조를 방지합니다. 각 이미지에는 담당자 ID·시각·좌표가 결합된 무결성 메타데이터가 부여되므로, 누가 언제 어디서 촬영했는지 추적할 수 있어 시공 기록의 법적 신뢰성을 확보합니다.</div></div><div class="prod-img-box srow-img" data-key="bb3" id="bb-3"><img alt="조작 방지·암호화" id="bb-3-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/bb4.png" style="display: block;"><div class="prod-img-ph hidden" id="bb-3-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 04</div><div class="srow-icon">🗺️</div><div class="srow-title" contenteditable="true">실시간 GIS 연동 · 원격 모니터링</div><div class="srow-desc" contenteditable="true">Google GIS(지리정보시스템)와 실시간으로 연동되어, 관리자는 현장에 직접 방문하지 않고도 시공 현황을 지도 위에서 원격으로 모니터링하고 지시할 수 있습니다. 공사 종류·현장명·동·층 단위로 촬영 이력을 검색할 수 있으며, 축적된 데이터를 기반으로 시공 현장 보고서가 자동 생성됩니다. 발주처·감리단과 데이터를 즉시 공유하여 의사결정 속도와 투명성을 높입니다.</div></div><div class="prod-img-box srow-img" data-key="bb4" id="bb-4"><img alt="실시간 GIS 연동" id="bb-4-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/base%20system%20-%20gis-based%20remote%20control.png" style="display: block;"><div class="prod-img-ph hidden" id="bb-4-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 05</div><div class="srow-icon">📱</div><div class="srow-title" contenteditable="true">전용 APP (BLE · LTE)</div><div class="srow-desc" contenteditable="true">스마트폰 전용 APP이 BLE 통신으로 블랙박스 동글과 연결되고, LTE 회선을 통해 촬영 데이터를 클라우드로 전송합니다. 원터치 기반의 직관적인 조작 체계로 누구나 손쉽게 촬영·측위할 수 있으며, 피사체의 크기·두께가 자동으로 계산되어 표시됩니다. 스마트폰 후면에 부착하는 경량 동글 형태로 별도 전용 단말이 필요 없어 도입 비용이 낮고 확산이 용이합니다.</div></div><div class="prod-img-box srow-img" data-key="bb5" id="bb-5"><img alt="전용 APP (BLE·LTE)" id="bb-5-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/bb5.png" style="display: block;"><div class="prod-img-ph hidden" id="bb-5-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#스마트건설블랙박스</span><span class="sec-kw" contenteditable="true">#RTK정밀측위</span><span class="sec-kw" contenteditable="true">#GIS연동</span><span class="sec-kw" contenteditable="true">#시공이력관리</span><span class="sec-kw" contenteditable="true">#IoT블랙박스</span><span class="sec-kw" contenteditable="true">#LH공사납품</span></div>
+</section>
+<div class="div-line"></div>
+<!-- ═══ 시스템 구성도 ═══ -->
+<section class="pg alt" id="system-diagram">
+<div class="shdr"><div><span class="stag" contenteditable="true">System Architecture</span><h2 class="stitle" contenteditable="true">시스템 <span class="hl" contenteditable="true">구성도</span></h2></div><div class="shdr-hr"></div></div>
+<div class="srow-list fu vis">
+<div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 01</div><div class="srow-icon">📱</div><div class="srow-title" contenteditable="true">스마트폰 + 전용 APP</div><div class="srow-desc" contenteditable="true">시스템의 시작점은 현장 작업자의 스마트폰과 전용 APP입니다. APP은 BLE 통신으로 블랙박스 동글과 연결되어 촬영·측위를 원터치로 수행하며, 사용자 인증과 작업 지시 확인 기능을 제공합니다. 촬영 즉시 좌표·시각·담당자 정보가 결합되어 임시 저장되고, 통신이 확보되는 즉시 상위 노드로 전송됩니다. 별도 전용 하드웨어 없이 기존 스마트폰을 활용하므로 현장 확산과 교육 부담이 적습니다.</div></div><div class="prod-img-box srow-img" data-key="con_sys" id="img-sys"><img alt="스마트폰 + 전용 APP" id="img-sys-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/remote%20inspection%20system.png" style="display:block"><div class="prod-img-ph hidden" id="img-sys-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 02</div><div class="srow-icon">📦</div><div class="srow-title" contenteditable="true">블랙박스 (Dongle)</div><div class="srow-desc" contenteditable="true">스마트폰 후면에 부착하는 블랙박스 동글은 RTK GPS, 고도 센서, 지자기(방위각) 센서, 초음파 거리 센서를 내장한 핵심 측위 장치입니다. 취득한 3차원 좌표와 촬영 데이터를 결합해 무결성 메타데이터를 생성하고, LTE 또는 인접 베이스 스테이션을 경유하여 클라우드로 전송합니다. 소형·경량 설계로 휴대성이 뛰어나며, 저전력 구조로 장시간 현장 운용이 가능합니다.</div></div><div class="prod-img-box srow-img" data-key="sys2" id="sys-2"><img alt="블랙박스 Dongle" id="sys-2-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/bb2.png" style="display: block;"><div class="prod-img-ph hidden" id="sys-2-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 03</div><div class="srow-icon">📶</div><div class="srow-title" contenteditable="true">베이스 스테이션</div><div class="srow-desc" contenteditable="true">통신 음영이 존재하는 대규모 현장이나 지하 구조물에서는 베이스 스테이션이 중계 거점 역할을 합니다. 현장 내 다수의 블랙박스 단말이 보내는 데이터를 RF 통신으로 동시에 수신한 뒤, LTE 회선으로 중앙관제 서버에 안정적으로 중계합니다. 블랙박스 ↔ 베이스 스테이션 ↔ 중앙관제 서버로 이어지는 3단 구성 덕분에 통신 환경이 열악한 현장에서도 데이터 유실 없이 시공 이력을 수집할 수 있습니다.</div></div><div class="prod-img-box srow-img" data-key="sys3" id="sys-3"><img alt="베이스 스테이션" id="sys-3-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/base%20station%20banner.png" style="display: block;"><div class="prod-img-ph hidden" id="sys-3-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 04</div><div class="srow-icon">🗺️</div><div class="srow-title" contenteditable="true">GIS (지리정보시스템)</div><div class="srow-desc" contenteditable="true">수집된 모든 시공 데이터는 Google GIS와 실시간으로 연동되어 지도 기반으로 통합 관제됩니다. 공사 이력과 위치 정보가 지도 위 좌표로 시각화되므로, 관리자는 어느 현장의 어느 지점이 언제 어떻게 시공되었는지 직관적으로 파악할 수 있습니다. 공간 정보와 시공 이력이 결합되어 진척 관리, 품질 점검, 안전 관제까지 하나의 화면에서 통합적으로 수행됩니다.</div></div><div class="prod-img-box srow-img" data-key="sys4" id="sys-4"><img alt="GIS 지리정보시스템" id="sys-4-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/base%20system%20-%20gis-based%20remote%20control.png" style="display: block;"><div class="prod-img-ph hidden" id="sys-4-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 05</div><div class="srow-icon">🖥️</div><div class="srow-title" contenteditable="true">중앙관제 서버</div><div class="srow-desc" contenteditable="true">최상위 노드인 중앙관제 서버는 클라우드 데이터베이스로서 모든 현장의 시공 이력을 영구 보관합니다. 공사 종류·현장·동·층 단위의 상세 검색을 지원하고, 축적된 데이터를 바탕으로 시공 현장 보고서를 자동 생성합니다. 위·변조가 불가능한 원본 데이터 구조로 감리·감사·준공 검사에 필요한 객관적 근거를 제공하며, 복수 현장을 원격에서 통합 관리할 수 있는 관제 환경을 완성합니다.</div></div><div class="prod-img-box srow-img" data-key="sys5" id="sys-5"><img alt="중앙관제 서버" id="sys-5-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/원격 관제 센터.jpg" style="display: block;"><div class="prod-img-ph hidden" id="sys-5-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#시스템구성도</span><span class="sec-kw" contenteditable="true">#3단중계구조</span><span class="sec-kw" contenteditable="true">#RF통신</span><span class="sec-kw" contenteditable="true">#클라우드관제</span><span class="sec-kw" contenteditable="true">#GIS통합</span><span class="sec-kw" contenteditable="true">#중앙관제서버</span></div>
+</section>
+<div class="div-line"></div>
+<!-- ═══ 02 베이스 스테이션 ═══ -->
+<section class="pg alt" id="basestation">
+<div class="shdr"><div><span class="stag" contenteditable="true">02 · Base Station</span><h2 class="stitle" contenteditable="true">스마트 건설 <span class="hl" contenteditable="true">베이스 스테이션</span></h2></div><div class="shdr-hr"></div></div>
+<div class="srow-list fu vis">
+<div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 01</div><div class="srow-icon">📶</div><div class="srow-title" contenteditable="true">RF 통신 · 다중 블랙박스 수신</div><div class="srow-desc" contenteditable="true">베이스 스테이션은 블랙박스(스마트폰)와 RF 통신으로 연결되는 현장 거점 장치로, 현장 내 다수의 블랙박스 단말이 보내는 데이터를 동시에 수신합니다. 블랙박스 ↔ 베이스 스테이션 ↔ 중앙관제 서버로 이어지는 3단 구성을 통해 개별 단말의 통신 부담을 줄이고, 대규모 현장에서도 안정적인 데이터 집약이 가능합니다. LTE 직접 전송이 어려운 지하·밀폐 공간에서 특히 효과적입니다.</div></div><div class="prod-img-box srow-img" data-key="con_bs" id="img-bs"><img alt="베이스 스테이션" id="img-bs-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/back station+control server - remote control.png" style="display:block"><div class="prod-img-ph hidden" id="img-bs-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 02</div><div class="srow-icon">🖥️</div><div class="srow-title" contenteditable="true">중앙관제 서버 연동</div><div class="srow-desc" contenteditable="true">수집한 데이터를 LTE 회선으로 GIS 기반 중앙관제 서버에 실시간 전송하여, 공사 종류·현장명·동·층 단위의 데이터 검색과 시공 현장 보고서 자동 생성을 지원합니다. 관리자는 여러 현장을 하나의 관제 화면에서 통합적으로 모니터링할 수 있으며, 이상 상황 발생 시 즉시 확인·지시가 가능합니다. 현장과 관제 센터 사이의 데이터 흐름을 끊김 없이 연결하는 핵심 중계 노드입니다.</div></div><div class="prod-img-box srow-img" data-key="bs2" id="bs-2"><img alt="중앙관제 서버 연동" id="bs-2-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/원격 관제 센터.jpg" style="display: block;"><div class="prod-img-ph hidden" id="bs-2-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">STEP 03</div><div class="srow-icon">🔒</div><div class="srow-title" contenteditable="true">데이터 무결성 보장</div><div class="srow-desc" contenteditable="true">DB 연계 수집 서버와 운영 시스템 사이를 전용 프로토콜로 연결하여, 전송 과정에서 데이터가 위·변조되지 않도록 무결성을 보장합니다. 통신 음영 지역에서도 데이터를 임시 저장했다가 재전송하는 구조로 유실을 방지하며, 모든 기록에는 시각·위치·담당자 정보가 결합되어 추적성이 확보됩니다. 이를 통해 공사 기록의 법적 신뢰성과 준공 검사 대응력을 크게 높입니다.</div></div><div class="prod-img-box srow-img" data-key="bs3" id="bs-3"><img alt="데이터 무결성 보장" id="bs-3-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/bb4.png" style="display: block;"><div class="prod-img-ph hidden" id="bs-3-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#베이스스테이션</span><span class="sec-kw" contenteditable="true">#RF다중수신</span><span class="sec-kw" contenteditable="true">#3단중계</span><span class="sec-kw" contenteditable="true">#데이터무결성</span><span class="sec-kw" contenteditable="true">#통신음영대응</span></div>
+</section>
+<div class="div-line"></div>
+<!-- ═══ 03 주요 기능 — 텍스트+16:9 이미지 행 레이아웃 ═══ -->
+<section class="pg" id="features">
+<div class="shdr"><div><span class="stag" contenteditable="true">03 · Key Features</span><h2 class="stitle" contenteditable="true">주요 <span class="hl" contenteditable="true">기능</span></h2></div><div class="shdr-hr"></div></div>
+<div class="srow-list fu vis">
+<div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">FEATURE 01</div><div class="srow-icon">🚧</div><div class="srow-title" contenteditable="true">부실공사 사전 예방</div><div class="srow-desc" contenteditable="true">설계 기준 위반이나 하자 공사를 사후에 적발하는 것이 아니라 사전에 차단합니다. 촬영 즉시 GPS 좌표와 사진이 서버에 자동 저장되어, 배근·타설·매설 등 되메우기 후에는 확인이 불가능한 은폐 공정까지 시공 기준 준수 여부를 실시간으로 검증할 수 있습니다. 문제가 발견되면 해당 위치를 좌표로 특정해 즉시 시정 지시가 가능하므로 재시공 비용과 안전 사고 위험을 크게 줄입니다.</div></div><div class="prod-img-box srow-img" data-key="fc1" id="fci-1"><img alt="부실공사 사전 예방" id="fci-1-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/부실 공사 사전 예방.png" style="display: block;"><div class="prod-img-ph hidden" id="fci-1-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">FEATURE 02</div><div class="srow-icon">💾</div><div class="srow-title" contenteditable="true">시공 이력 디지털화</div><div class="srow-desc" contenteditable="true">공사 현장의 모든 시공 이력을 종이 서류가 아닌 클라우드에 자동으로 저장합니다. 개인 ID·시각·위치 정보가 결합되어 담당자별 작업 내역과 일정 준수 여부를 정밀하게 추적할 수 있으며, 방대한 현장 기록을 검색 가능한 데이터로 축적합니다. 준공 후에도 특정 지점의 시공 과정을 즉시 조회할 수 있어 유지보수·하자 대응·자산 관리 전 주기에 걸쳐 활용됩니다.</div></div><div class="prod-img-box srow-img" data-key="fc2" id="fci-2"><img alt="시공 이력 디지털화" id="fci-2-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/remote%20inspection%20system.png" style="display: block;"><div class="prod-img-ph hidden" id="fci-2-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">FEATURE 03</div><div class="srow-icon">🛰️</div><div class="srow-title" contenteditable="true">통합관제시스템 (IMS)</div><div class="srow-desc" contenteditable="true">화재수신기·RTU·SCADA와 Dual 무선 통신(U+, KT) IoT LTE로 연동하여, GIS 기반 통합관제시스템(IMS)으로 복수의 현장을 원격에서 통합 관리합니다. 이중화된 통신망으로 한쪽 회선에 장애가 발생해도 데이터 전송이 중단되지 않으며, 화재·시공·설비 정보를 하나의 관제 플랫폼에서 종합적으로 감시합니다. 대규모 프로젝트나 다현장 운영 환경에서 관제 인력과 비용을 효율화합니다.</div></div><div class="prod-img-box srow-img" data-key="fc3" id="fci-3"><img alt="통합관제시스템 IMS" id="fci-3-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/통합관제시스템(IMS) 구성도.png" style="display:block"><div class="prod-img-ph hidden" id="fci-3-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">FEATURE 04</div><div class="srow-icon">🗺️</div><div class="srow-title" contenteditable="true">GIS 기반 원격 관제</div><div class="srow-desc" contenteditable="true">Google GIS와 실시간으로 연동되어 현장 방문 없이 공사 현황을 원격으로 모니터링하고 지시할 수 있습니다. 지도 위에 표시된 좌표를 통해 어느 현장의 어느 지점이 진행 중인지 한눈에 파악되며, 발주처·감리단과 동일한 화면을 즉시 공유할 수 있습니다. 이동·대기 시간을 줄여 관리 효율을 높이고, 원격 의사결정으로 현장 대응 속도를 크게 단축합니다.</div></div><div class="prod-img-box srow-img" data-key="fc4" id="fci-4"><img alt="GIS 기반 원격 관제" id="fci-4-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/base%20system%20-%20gis-based%20remote%20control.png" style="display: block;"><div class="prod-img-ph hidden" id="fci-4-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">FEATURE 05</div><div class="srow-icon">🌐</div><div class="srow-title" contenteditable="true">타 분야 확장 적용</div><div class="srow-desc" contenteditable="true">건설 분야에서 검증된 정밀 측위·이력 관리 기술은 다양한 산업으로 확장 적용됩니다. 물류 이력 관리, 손해보험 사고 현장 확인, 산림·환경 보호 모니터링은 물론, 항만·중공업·조선 분야의 선박 개조 이력과 물류 관리에도 동일한 원리로 활용할 수 있습니다. 좌표·시각·영상이 결합된 무결성 데이터가 필요한 모든 현장 관리 영역으로 시장을 넓힐 수 있는 범용 플랫폼입니다.</div></div><div class="prod-img-box srow-img" data-key="fc5" id="fci-5"><img alt="타 분야 확장 적용" id="fci-5-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/base%20station%20banner.png" style="display: block;"><div class="prod-img-ph hidden" id="fci-5-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div><div class="srow fu vis"><div class="srow-text"><div class="srow-num" contenteditable="true">FEATURE 06</div><div class="srow-icon">📈</div><div class="srow-title" contenteditable="true">시장 규모 · 사업성</div><div class="srow-desc" contenteditable="true">국내 연간 약 10만 동의 신규 건설을 기준으로, 건물 1동당 4대 × 3,000원/일 × 30일 × 12개월을 적용하면 약 4,320억원/년 규모의 시장이 형성됩니다. 여기에 물류·보험·산림·항만·조선 등 확장 분야를 더하면 잠재 시장은 더욱 커집니다. 이미 LH공사 450대 납품 실적으로 사업성이 입증되었으며, 공공·민간 발주처의 스마트 건설 의무화 흐름과 맞물려 성장 잠재력이 높습니다.</div></div><div class="prod-img-box srow-img" data-key="fc6" id="fci-6"><img alt="시장 규모·사업성" id="fci-6-src" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/banner%20image%201.png" style="display: block;"><div class="prod-img-ph hidden" id="fci-6-ph"><div class="pi-plus">+</div><div style="font-size:var(--font-small);margin-top:4px">이미지 삽입</div></div><div class="prod-img-overlay"><span>📷 교체</span></div><div class="prod-img-ctrl"></div></div></div></div>
+<div class="sec-keywords"><span class="kw-label">🔍 KEYWORDS</span><span class="sec-kw" contenteditable="true">#부실공사예방</span><span class="sec-kw" contenteditable="true">#시공이력디지털화</span><span class="sec-kw" contenteditable="true">#통합관제시스템</span><span class="sec-kw" contenteditable="true">#GIS원격관제</span><span class="sec-kw" contenteditable="true">#스마트건설사업성</span></div>
+</section>
+<!-- CTA -->
+<section class="cta-wrap" id="contact">
+<div class="prod-section-inner">
+<div class="cta-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch">
+  <div>
+    <div class="cta-lb">// Contact Us</div>
+    <h2 class="cta-hd" contenteditable="true">견적 및 <span>기술 문의</span></h2>
+    <div class="cta-info">
+      <div class="cta-row"><div class="cta-ri">📍</div><div contenteditable="true">(08513) 서울시 금천구 디지털로 178<br>가산퍼블릭 B동 11층 1116호</div></div>
+      <div class="cta-row"><div class="cta-ri">📞</div><div contenteditable="true">Tel: (02) 6095-0520 &nbsp;|&nbsp; Fax: (02) 6095-0522</div></div>
+      <div class="cta-row"><div class="cta-ri">✉️</div><div contenteditable="true">Email: info@uno-system.com</div></div>
+      <div class="cta-row"><div class="cta-ri">🌐</div><div contenteditable="true">Website: <a href="https://www.uno-system.com" contenteditable="false" style="color:var(--cyan)">https://www.uno-system.com</a></div></div>
+      <div class="cta-row"><div class="cta-ri">🕐</div><div contenteditable="true">월–금 09:00–18:00 (공휴일 제외)</div></div>
+    </div>
+  </div>
+  <div class="img-box" data-key="cta-img" id="box-cta-img" style="cursor:pointer;aspect-ratio:16/9">
+    <div class="box-media-wrap">
+      <img alt="문의 이미지" class="box-img" id="cta-box-img" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/engineer%20servicing%20uno%20facp.png" style="object-fit: cover; display: block;">
+      <div class="box-placeholder hidden"><div class="box-plus">+</div><div class="box-hint">클릭하여<br>이미지/영상 삽입</div></div>
+    </div>
+    <div class="box-controls">
+      
+      
+    </div>
+    
+  </div>
+</div>
+</div>
+</section>
+<!-- ═══ FOOTER (template 동일) ═══ -->
+<footer id="footer"><div class="foot-inner"><div class="foot-img-col" data-key="foot-img" id="foot-img-col" title="클릭하여 이미지/영상 삽입"><img alt="푸터 이미지" class="foot-col-img active" id="foot-col-img" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/빛을 잇는 광케이블 기술자.png" style="display: block;"><div class="foot-img-ph hidden" id="foot-img-ph"><div class="fi-plus">+</div><div style="font-size:var(--font-small)">클릭하여<br>이미지 삽입</div></div><div class="foot-img-overlay"><span>📷 교체</span></div><div class="foot-img-ctrl"></div></div><div class="foot-right-col"><div class="foot-info-area"><div class="foot-logo-row"><div class="foot-logo-img-wrap" id="foot-logo-wrap" title="클릭하여 로고 교체"><div class="foot-logo-hint">📷<br>교체</div></div><div class="foot-logo-text"><span class="foot-logo-kr" contenteditable="true">유노시스템(주)</span><span class="foot-logo-en" contenteditable="true">UNO SYSTEM</span></div></div><div class="foot-addr" contenteditable="true">(08513) 서울시 금천구 디지털로 178<br>가산퍼블릭 B동 11층 1116호</div><div class="foot-contact" contenteditable="true">Tel: (02) 6095-0520</div><div class="foot-contact" contenteditable="true">Fax: (02) 6095-0522</div><div class="foot-contact" contenteditable="true">Email: info@uno-system.com</div><div class="foot-contact" contenteditable="true">Website: <a contenteditable="false" href="https://www.uno-system.com" style="color:var(--cyan);text-decoration:none">https://www.uno-system.com</a></div><div class="foot-copy" contenteditable="true">© 2026 UNO SYSTEM CO., LTD. All rights reserved.</div></div><a class="foot-inquiry-box" href="mailto:info@uno-system.com?subject=유노시스템(주)%20문의&amp;body=안녕하세요%2C%20유노시스템(주)%20문의드립니다."> <div class="foot-inquiry-icon">✉️</div> <div class="foot-inquiry-label">이메일 문의하기</div> </a></div></div></footer>
+
+<script>(()=>{
+const IMAGE_ROOT='https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/';
+const PAGE_ROOT='https://raw.githubusercontent.com/soulthread88/htmls/main/homepage/uno/';
+const PAGE_NAMES=["base_station.html", "blackbox.html", "company.html", "detectors.html", "dnc.html", "dts_facps.html", "facps.html", "fireprotect-b2b-landing.html", "index.html", "network.html", "products.html", "projects.html", "scada.html", "sofire.html", "speaker.html", "tech.html"];
+const IMAGE_NAMES=["40 vs 9 banner aircraft hangar.png", "40 vs 9 banner logic warehouse.png", "40 vs 9 banner perimeter intrusion.png", "Acess DTS Unit from Bandweaver.jpg", "Allianz-Training-Centre-Istanbul 2.png", "Allianz-Training-Centre-Istanbul 3.png", "Allianz-Training-Centre-Istanbul.png", "Gas-Fire-Suppression.jpg", "LG CNS Logo.jpg", "LG\uc804\uc790 Logo.png", "Local \uc218\uc2e0\uae30-\ud1b5\ud569\uac10\uc2dc\uc2dc\uc124(IMS)-SCADA EXPANDER (Wired n Wireless)-SCADA System (KEPCO).png", "PIPELINE_BANNER_40x9_3840x864.png", "R\ud615 DTS + Surge Protector + \uc18c\ud654\uae30 \ud1b5\ud569\uc218\uc2e0\uae30.jpg", "Samsung_logo_blue.png", "South Gate of Seoul 2.png", "South Gate of Seoul.png", "access dts principle - uno.png", "aircraft hangar - origin.png", "aircraft hangar.png", "airport fence.png", "alarm bell.png", "allianz fire test lab.png", "allianz-teknik-test-merkezi-1.jpg", "allianz_fire_test_room.png", "back station+control server - remote control.png", "bandweaver factory.png", "bandweaver metro.png", "bandweaver.jpg", "banner - fiber optic lhd system_kr.png", "banner - fire monitoring system.png", "banner - kori npp 40 vs. 9.png", "banner - transverse_wave_speaker.png", "banner image 1.png", "banner image 2.png", "banner image_kor.png", "banner_image_en.png", "base station banner.png", "base system - gis-based remote control.png", "base system - \ud1b5\ud569\uad00\uc81c\uc2dc\uc2a4\ud15c(ims).png", "bb2.png", "bb3.png", "bb4.png", "bb5.png", "bib1.jpg", "bib3.jpg", "bib4.jpg", "cable route in suspended ceiling at shopping mall.png", "cable tunnels n trays.png", "conveyor belt 1.jpg", "conveyor belt 2.jpg", "data center.jpg", "dts features 1.png", "dts lhd seamlessly integrating with facp.png", "energy-management-system.png", "engineer servicing uno facp.png", "escalator fire detection zones.png", "ex \ud55c\uad6d\ub3c4\ub85c\uacf5\uc0ac.jpg", "ex \ud55c\uad6d\ub3c4\ub85c\uacf5\uc0ac.webp", "fiber optic cable in test room.png", "fiber optic cable install in road tunnel 1.png", "fiber optic lhd 1.png", "fiber optic lhd at ceiling of shopping mall.png", "fiber optic lhd in shopping mall.png", "fiber optic lhd system_en.png", "firelaser installed at shopping mall.png", "fms - interface with aux. facp.png", "fuel cell 2.png", "fuel cell 3.png", "fuel cell n ors.png", "install at ceiling of road tunnel 2.png", "install at ceiling of road tunnel 3.png", "install at ceiling of road tunnel 4.png", "install at ceiling of road tunnel 5.png", "install at ceiling of road tunnel 6.png", "install at ceiling of road tunnel.png", "install at hot roller of conveyor belt 1.png", "install at hot roller of conveyor belt 2.png", "install at logistics warehouse 1.png", "install at railway 2.png", "install at railway.png", "install at road tunnel 1.png", "install in tunnel 2.png", "install in tunnel 3.png", "install in tunnel.png", "install thru m6 x 60mm anchor bolt.png", "installation of cable in sine wave pattern.jpg", "interactive fiber optic test.png", "interactive training room.png", "international approvals.png", "international customers.png", "kepco.png", "kt.JPG", "kt.png", "lg cns logo 2.png", "lg cns.jpg", "lg electronics.jpg", "lg u+ data center.gif", "lg-logo-14410.png", "logistics warehouse install.png", "maintenance in tunnel.png", "nearby protection.png", "offshore das.png", "parking garage in shopping mall.png", "perimeter intrusion 2.png", "petroleum plant.png", "pexels-r9media-33176804.jpg", "pipeline monitoring.png", "pipeline.png", "pomelli_catalog-1.png", "posco.jpg", "posco.png", "power cable install.png", "principle of dts.png", "process monitoring.png", "refinery process plant das.png", "remote inspection system.png", "road tunnel 1.png", "road tunnel install.png", "scada expander - interface with gis system.png", "scada expander - power substation.png", "scada expander - water pipeline monitoring n control.png", "scada expander.png", "shopping mall 1.png", "sk hynix 2.png", "sk hynix.png", "small-sized fire detected.png", "sus316 fiber optic cable.png", "suspended ceiling in shopping mall 2.png", "suspended ceiling in shopping mall.png", "system testing on shopping mall site.png", "tajiskitan 1.jpg", "tajiskitan 2.jpg", "tajiskitan ami.png", "tajiskitan government organization.png", "tajiskitan.png", "tajiskitan_ami_en.png", "trigem logo.png", "uno facp 1.png", "uno facp 2.png", "uno facp screen 1.png", "uno facp with fiber optic lhd 4.png", "uno facp with fiber optic lhd in power tunnel 2.png", "uno facp with fiber optic lhd in power tunnel 3.png", "uno facp with fiber optic lhd in power tunnel.png", "uno facp with fiber optic lhd on ceiling 3.png", "uno facp.png", "very cold place.png", "wireless power transmission n receiving module.png", "\uac00\uacf5\uc1a1\uc804 by kepco.jpg", "\uac00\uc2a4\uacc4\uc18c\ud654\uc124\ube44 \uc791\ub3d9 \uad6c\uc870 1.png", "\uac00\uc2a4\uacc4\uc18c\ud654\uc124\ube44 \uc791\ub3d9 \uad6c\uc870.png", "\uad11\ucf00\uc774\ube14 SUS316 2.jpg", "\uad11\ucf00\uc774\ube14 \ud654\uc7ac\uac10\uc9c0\uc2dc\uc2a4\ud15c 2.png", "\uad11\ucf00\uc774\ube14 \ud654\uc7ac\uac10\uc9c0\uc2dc\uc2a4\ud15c banner.png", "\uad11\ucf00\uc774\ube14 \ud654\uc7ac\uac10\uc9c0\uc2dc\uc2a4\ud15c.png", "\uad6c\ubbf8\uc2dc\uc124\uacf5\ub2e8.jpg", "\ub2e8\ub3c5\ud615 \uc218\uc2e0\uae30 \ubc0f \ud1b5\ud569\uac10\uc2dc\uc124\ube44 \uad6c\uc131\ub3c4.png", "\ub3d9\uc548\uc591\ubcc0\uc804\uc18c \uc625\ub0b4\ud654 \uc0ac\uc5c5.jpg", "\ub514\uc9c0\ud138 \ubcc0\uc804\uc18c.jpg", "\ubd80\uc0b0-\uc6b8\uc0b0 \uc1a1\uc804\uc120\ub85c.jpeg", "\ubd80\uc2e4 \uacf5\uc0ac \uc0ac\uc804 \uc608\ubc29.png", "\ube5b\uc744 \uc787\ub294 \uad11\ucf00\uc774\ube14 \uae30\uc220\uc790.png", "\uc11c\uc6b8 \uba54\ud2b8\ub85c\uc5d0 \uc124\uce58\ub41c \ud6a1\ud30c\uc2a4\ud53c\ucee4 1.png", "\uc11c\uc6b8 \uba54\ud2b8\ub85c\uc5d0 \uc124\uce58\ub41c \ud6a1\ud30c\uc2a4\ud53c\ucee4 2.png", "\uc11c\uc6b8\uad50\ud1b5\uacf5\uc0ac.jpg", "\uc11c\uc6b8\uad50\ud1b5\uacf5\uc0ac.png", "\uc138\ud0c1\uae30\uc6a9 \ubb34\uc120 \uc804\ub825 \uc1a1\uc218\uc2e0 \ubaa8\ub4c8.png", "\uc18c\ubc29\uccad.png", "\uc1a1\uc804 by kepco.jpg", "\uc1a1\uc804\uc120\ub85c by joongdo ilbo.jpg", "\uc1a1\uc804\uc120\ub85c by pusan daily newspaper.png", "\uc1a1\uc804\uc120\ub85c by \ubcbd\uc0b0\ud30c\uc6cc.png", "\uc218\uc18c\uc5f0\ub8cc\uc804\uc9c0 \ubc1c\uc804\uc18c \ud3ec\ud56d 2.png", "\uc218\uc18c\uc5f0\ub8cc\uc804\uc9c0 \ubc1c\uc804\uc18c \ud3ec\ud56d 3.png", "\uc218\uc18c\uc5f0\ub8cc\uc804\uc9c0 \ubc1c\uc804\uc18c \ud3ec\ud56d.png", "\uc2a4\ub9c8\ud2b8 \uac00\uc804 \ub0b4\uc7a5\ud615 \ud1b5\uc2e0 \ubcf4\ub4dc.png", "\uc2e0\ucda9\uc8fc\ubcc0\uc804\uc18c by \ucda9\uc815\ub9ac\ubdf0.jpg", "\uc6d0\uaca9 \uad00\uc81c \uc13c\ud130.jpg", "\uc6d0\uaca9\uac80\uce68\uc2dc\uc2a4\ud15c.png", "\uc74c\uc555.png", "\uc804\uad6d \uc18c\ubc29\uc11c \ud1b5\ud569 \uac10\uc2dc.png", "\uc9c0\uc911\uc1a1\uc804 by kepco.jpg", "\ucf00\uc774\ube14 \ud130\ub110 \ud654\uc7ac\uacbd\ubcf4 \ud604\uc7a5 \uc810\uac80.png", "\ud130\ub110\uc744 \ubc1d\ud788\ub294 \ud55c \uc904\uc758 \ube5b 2.png", "\ud1b5\uc2e0\uad6c \ud654\uc7ac \uac10\uc2dc \uc2dc\uc2a4\ud15c \uad6c\uc131\ub3c4.png", "\ud1b5\ud569 \uc218\uc2e0\uae30 - Slave \uc218\uc2e0\uae30 3.png", "\ud1b5\ud569\uac10\uc2dc\uc124\ube44 \ud654\uba74 1.png", "\ud1b5\ud569\uac10\uc2dc\uc124\ube44 \ud654\uba74 2.png", "\ud1b5\ud569\uac10\uc2dc\uc2dc\uc124(IMS) - SCADA EXPANDER (Wired n Wireless) - SCADA System (KEPCO).png", "\ud1b5\ud569\uad00\uc81c\uc2dc\uc2a4\ud15c(IMS) \uad6c\uc131\ub3c4.png", "\ud1b5\ud569\uad00\uc81c\uc2dc\uc2a4\ud15c(IMS).png", "\ud1b5\ud569\uad00\uc81c\uc2dc\uc2a4\ud15c(IMS)_en.png", "\ud1b5\ud569\uad00\uc81c\uc2dc\uc2a4\ud15c.png", "\ud37c\ube14\ub9ad\uac00\uc0b012.jpg", "\ud3ec\ud56d\uc218\uc18c\uc5f0\ub8cc\uc804\uc9c0 \ubc1c\uc804\uc18c.png", "\ud55c\uad6d\ub3c4\ub85c\uacf5\uc0ac.png", "\ud55c\uad6d\uc804\ub825\uacf5\uc0ac.png", "\ud55c\uad6d\ud1a0\uc9c0\uc8fc\ud0dd\uacf5\uc0ac.jpeg", "\ud55c\uad6d\ud1a0\uc9c0\uc8fc\ud0dd\uacf5\uc0ac.png", "\ud55c\uc804 \uc804\ub825\uad6c \uc774\ubbf8\uc9c0 1.png", "\ud55c\uc804.png", "\ud574\ub0a8\uc601\uc2e0 \ubcc0\uc804\uc18c by \ud574\ub0a8\uc2dc\ub300.jpg", "\ud615\uc2dd\uc2b9\uc778\uc11c.png", "\ud654\uc7ac\uc815\ubcf4\uc218\uc9d1\uc7a5\uce58.png", "\ud6a1\ud30c \uc2a4\ud53c\ucee4 3.png", "\ud6a1\ud30c \uc2a4\ud53c\ucee4 4.png", "\ud6a1\ud30c \uc2a4\ud53c\ucee4 5.png", "\ud6a1\ud30c \uc2a4\ud53c\ucee4.png"];
+function pageFor(h){
+ const decoded=decodeURIComponent(h);const name=decoded.split('/').pop().split(/[?#]/)[0];
+ if(PAGE_NAMES.includes(name))return name;
+ if(/감지기|detector/i.test(decoded))return 'detectors.html';
+ if(/DTS|dts/.test(decoded))return 'dts_facps.html';
+ if(/수신기|facp/i.test(decoded))return 'facps.html';
+ if(/construction/i.test(decoded))return 'blackbox.html';
+ return null;
+}
+function chooseImage(im){
+ const old=im.getAttribute('src')||'';
+ if(old.startsWith(IMAGE_ROOT)&&IMAGE_NAMES.includes(decodeURIComponent(old.slice(IMAGE_ROOT.length))))return old;
+ const name=decodeURIComponent(old.split('/').pop().split('?')[0]);
+ if(IMAGE_NAMES.includes(name))return IMAGE_ROOT+encodeURIComponent(name);
+ const hint=((im.alt||'')+' '+im.id).toLowerCase();
+ if(/logo|로고/.test(hint))return null;
+ const rules=[[/base|베이스/,'base station banner.png'],[/blackbox|블랙박스|bb/,'bb2.png'],[/gis/,'base system - gis-based remote control.png'],[/서버|관제/,'원격 관제 센터.jpg'],[/수신기|facp/,'uno facp with fiber optic lhd 4.png'],[/광|fiber|dts/,'fiber optic lhd 1.png'],[/speaker|스피커/,'횡파 스피커.png'],[/scada/,'scada expander.png'],[/감시|ims/,'통합관제시스템(IMS) 구성도.png'],[/hero|banner/,'base station banner.png']];
+ const r=rules.find(([p])=>p.test(hint));return IMAGE_ROOT+encodeURIComponent(r?r[1]:'engineer servicing uno facp.png');
+}
+function prepare(doc){
+ doc.querySelectorAll('script,video,audio,source,iframe,object,embed,input[type=file]').forEach(e=>e.remove());
+ doc.querySelectorAll('*').forEach(e=>{for(const at of [...e.attributes])if(/^on/i.test(at.name)||/data:(image|video)/i.test(at.value))e.removeAttribute(at.name);});
+ doc.querySelectorAll('style').forEach(e=>{e.textContent=e.textContent.replace(/url\([^)]*\)/gi,m=>m.includes(IMAGE_ROOT)?m:'none');});
+ doc.querySelectorAll('img').forEach(im=>{
+ const src=chooseImage(im);if(!src){im.remove();return;}
+ im.src=src;im.removeAttribute('srcset');im.removeAttribute('sizes');im.style.display='block';im.loading=im.id==='hero-img'?'eager':'lazy';
+ if(!im.nextElementSibling?.classList.contains('uno-credit')){
+ const credit=doc.createElement('div');credit.className='uno-credit';
+ credit.textContent='원작자·라이선스: 저장소에 별도 표기 없음 · 출처: ';
+ const a=doc.createElement('a');a.href='https://github.com/soulthread88/imgs/blob/main/homepage/uno/'+encodeURIComponent(decodeURIComponent(src.slice(IMAGE_ROOT.length)));a.target='_blank';a.rel='noopener';a.textContent='soulthread88/imgs';credit.append(a);im.after(credit);
+ }
+ });
+ doc.querySelectorAll('[class*="ctrl"],.box-controls,.foot-img-overlay,.logo-img-hint,.foot-logo-hint,.prod-img-ph,.box-placeholder,.foot-img-ph,#hero-empty').forEach(e=>e.style.setProperty('display','none','important'));
+ doc.querySelectorAll('.fu').forEach(e=>{e.style.opacity='1';e.style.transform='none'});
+ doc.querySelectorAll('a[href]').forEach(a=>{
+ let h=a.getAttribute('href');
+ if(/^#(overview|history|business|clients)$/.test(h)&&!doc.getElementById(h.slice(1)))h='company.html'+h;
+ if(h.startsWith('#')||/^(mailto:|tel:)/.test(h))return;
+ const file=pageFor(h);
+ if(file){a.href=PAGE_ROOT+file+(h.includes('#')?'#'+h.split('#')[1]:'');a.dataset.unoPage=file;}
+ });
+}
+const baseCSS="<style>.box-controls,.foot-img-ctrl,.foot-img-overlay,.logo-img-hint,.foot-logo-hint,.hero-controls,.prod-img-ctrl,.prod-up-ctrl,.img-controls,.box-placeholder,.prod-img-ph,.foot-img-ph,#hero-empty,.pbox-ph,.logo-img-wrap,.foot-logo-img-wrap{display:none!important}.fu{opacity:1!important;transform:none!important}.ni:hover>.dropdown,.ni.open>.dropdown{display:block} .uno-credit{font-size:11px;line-height:1.5;color:#8294a9;overflow-wrap:anywhere;padding:5px 0}.uno-credit a{color:inherit} #uno-error{position:fixed;bottom:20px;left:20px;right:20px;z-index:9999;background:#802b2b;color:white;padding:16px}</style>";
+function bind(doc){
+ doc.addEventListener('click',e=>{
+ const link=e.target.closest('a[data-uno-page]');
+ if(link){e.preventDefault();openPage(link.dataset.unoPage,link.hash);return;}
+ const b=e.target.closest('[data-ni]');if(b){e.preventDefault();doc.getElementById(b.dataset.ni)?.classList.toggle('open');}
+ });
+}
+let serial=0;
+async function openPage(file,hash=''){
+ const ticket=++serial;let dialog=document.getElementById('uno-pages');
+ if(!dialog){dialog=document.createElement('dialog');dialog.id='uno-pages';dialog.style.cssText='width:96vw;height:94vh;max-width:none;padding:0;border:1px solid #54718c;background:#0b1725;color:white';dialog.innerHTML='<div style="height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 12px"><span id="uno-page-title"></span><button id="uno-close" type="button">닫기 ✕</button></div><iframe title="GitHub HTML 페이지" style="width:100%;height:calc(100% - 40px);border:0;background:white"></iframe>';document.body.append(dialog);dialog.querySelector('button').onclick=()=>{++serial;dialog.close();};}
+ if(!dialog.open)dialog.showModal();dialog.querySelector('span').textContent='불러오는 중… '+file;
+ try{
+ const res=await fetch(PAGE_ROOT+file,{cache:'no-store'});if(!res.ok)throw new Error('HTTP '+res.status);
+ const doc=new DOMParser().parseFromString(await res.text(),'text/html');prepare(doc);doc.head.insertAdjacentHTML('beforeend',baseCSS);
+ if(ticket!==serial)return;
+ const frame=dialog.querySelector('iframe');frame.onload=()=>{bind(frame.contentDocument);if(hash)frame.contentDocument.getElementById(hash.slice(1))?.scrollIntoView();};
+ frame.srcdoc='<!DOCTYPE html>'+doc.documentElement.outerHTML;dialog.querySelector('span').textContent=file;
+ }catch(err){if(ticket===serial)dialog.querySelector('span').textContent='페이지를 불러오지 못했습니다: '+err.message+' · 닫은 후 다시 시도하세요.';}
+}
+// The initial document has already been cleaned; do not remove this running script.
+prepare(document);bind(document);
+})();
+</script></body></html>

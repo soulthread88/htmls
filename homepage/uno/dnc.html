@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" id="artifacts-component-root-html"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <script>/* Header는 Shadow DOM(uno-header) 안에 있음 — 기존 스크립트 호환 */window.unoHdrEl=function(){var h=document.getElementById('uno-header');return (h&&h.shadowRoot&&h.shadowRoot.querySelector('header'))||h||document.body;};window.unoFtrEl=function(){var f=document.getElementById('uno-footer');return (f&&f.shadowRoot&&f.shadowRoot.querySelector('footer'))||f||document.body;};</script>
 <script>/* WebP 우선, 미업로드 시 원본으로 자동 전환 */window.addEventListener('error',function(e){var t=e.target;if(!t||t.tagName!=='IMG')return;var s=t.getAttribute('src')||'';if(!/\.webp$/i.test(s))return;var d=t.dataset,o=null;if(d.fallback===s)o=d.origFallback;else if(d.srcEn===s)o=d.origSrcEn;else if(d.srcKo===s)o=d.origSrcKo||d.orig;else o=d.orig;t._uTried=t._uTried||{};if(!o||t._uTried[s])return;t._uTried[s]=1;e.stopImmediatePropagation();if(d.fallback===s)d.fallback=o;if(d.srcEn===s)d.srcEn=o;if(d.srcKo===s)d.srcKo=o;t.setAttribute('src',o);},true);</script>
-    <meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>DNC (L2 Ring 스위치 네트워크) | 유노시스템㈜ UNO SYSTEM</title>
+    <title>DNC (L2 Ring 스위치 네트워크) | 유노시스템㈜ UNO SYSTEM</title>
 <meta content="유노시스템㈜의 DNC(Data Network Controller) — L2 Ring 스위치 기반 소방 네트워크 집중 장치. 8 TP + 2 SFP 포트, ITU-T G.8032 ERPS(Ring) 지원, TCP/IP 서버 내장." name="description">
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
@@ -232,7 +233,7 @@ html[lang=en] .uno-ux-box[data-ux-detail]::after{content:"＋ Details"}
 html[lang=en] .uno-ux-box.uno-ux-open::after{content:"－ Close"}
 .uno-ux-detail{max-width:1280px;margin:16px auto 8px;padding:18px 22px;border-left:3px solid var(--cyan,#00d2f0);border-radius:10px;background:var(--surface,#111e35);color:var(--text,#dde8f8);box-sizing:border-box;grid-column:1/-1;flex-basis:100%}
 .uno-ux-detail[hidden]{display:none!important}
-.uno-ux-detail h4{margin:0 0 8px;font-size:17px;font-weight:800;color:var(--cyan,#00d2f0)}
+.uno-ux-detail .uno-ux-h{margin:0 0 8px;font-size:17px;font-weight:800;color:var(--cyan,#00d2f0)}
 .uno-ux-detail p{margin:0;font-size:15px;line-height:1.8;color:var(--text,#dde8f8)}
 </style><script id="uno-imgux-js">
 /* 이미지 박스: 🔄 교체 버튼으로 교체, 박스의 다른 곳을 누르면 해설 펼침(해설이 있는 경우) 또는 확대 */
@@ -287,7 +288,30 @@ html[lang=en] .uno-ux-box.uno-ux-open::after{content:"－ Close"}
   },true);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
 })();
-</script></head>
+</script><style id="uno-light-auto">/* 라이트 모드 (자동 생성: 페이지 색상 → index 라이트 팔레트) */html[data-theme=light]{--bg:#e9eef8;--bg2:#dee5f3;--surface:#cfdbf0;--surface2:#c5d0eb}html[data-theme=light] header{background:rgba(233,238,248,0.97)}html[data-theme=light] .nb:hover,html[data-theme=light] .ni:hover>.nb{color:#0f0f0f}html[data-theme=light] .dropdown{background:rgba(224,232,246,0.98);box-shadow:0 16px 48px rgba(0,0,0,0.338)}html[data-theme=light] .dd-head{border-bottom:1px solid rgba(0,0,0,0.05)}html[data-theme=light] .dd-sep{background:rgba(0,0,0,0.06)}html[data-theme=light] .sub-dropdown{background:rgba(224,232,246,0.98);box-shadow:10px 8px 36px rgba(0,0,0,0.315)}html[data-theme=light] .subsub-dropdown{background:rgba(224,232,246,0.98);box-shadow:10px 8px 36px rgba(0,0,0,0.315)}html[data-theme=light] .iaea-hero-wrap{background:#f0f0f0}html[data-theme=light] .hero-empty .he-plus{color:rgba(0,134,153,0.5)}html[data-theme=light] .hero-change-hint{background:rgba(255,255,255,0.35)}html[data-theme=light] .box-ctrl-btn{background:rgba(233,238,248,0.92)}html[data-theme=light] .box-ctrl-btn.delete{color:#990000}html[data-theme=light] .iaea-source{background:#f3f6fc}html[data-theme=light] .page-hero-overlay{background:linear-gradient(90deg,rgba(233,238,248,0.92),rgba(233,238,248,0.45))}html[data-theme=light] .kv{background:rgba(255,255,255,0.2);border:1px solid rgba(0,0,0,0.06)}html[data-theme=light] .spec-row{border-bottom:1px solid rgba(0,0,0,0.05)}html[data-theme=light] .spec-k{background:rgba(255,255,255,0.15)}html[data-theme=light] .img-box:hover{box-shadow:0 0 18px rgba(0,0,0,0.054)}html[data-theme=light] .box-plus{color:rgba(0,134,153,0.5)}html[data-theme=light] .box-label{border-top:1px solid rgba(0,0,0,0.05);background:rgba(255,255,255,0.2)}html[data-theme=light] .feat-card{border:1px solid rgba(0,0,0,0.06)}html[data-theme=light] .app-item{border:1px solid rgba(0,0,0,0.06)}html[data-theme=light] .cta-wrap{background:linear-gradient(135deg,#dee8f6,#cfdff3)}html[data-theme=light] footer{background:#f3f6fc;border-top:1px solid rgba(0,0,0,0.05)}html[data-theme=light] .foot-img-col{border-right:1px solid rgba(0,0,0,0.07)}html[data-theme=light]{--bg:#f0f4fb;--bg2:#e4ecf7;--surface:#d9e4f4;--surface2:#c8d8ef;--border:#1a6fd430;--border2:#0097aa33;--text:#050d18;--muted:#2c435e;--dim:#4a6888;--blue:#1a6fd4;--cyan:#006e80;--gold:#7a5410}html[data-theme=light] body{background:var(--bg);color:var(--text)}</style>
+<style id="uno-geo-css">
+.uno-geo{max-width:1200px;margin:0 auto;padding:28px 24px;font-family:var(--fkr,"Noto Sans KR",sans-serif);color:var(--text,#e8f0fa)}
+.uno-geo h2{font-size:clamp(20px,2.2vw,26px);margin:0 0 14px;line-height:1.35}
+.uno-geo .uno-geo-tag{display:block;font-family:var(--fmono,"JetBrains Mono",monospace);font-size:12px;letter-spacing:.12em;color:var(--cyan,#00d2f0);margin-bottom:6px;text-transform:uppercase}
+.uno-sum{border:1px solid var(--border,rgba(0,210,240,.18));border-left:4px solid var(--cyan,#00d2f0);background:var(--surface,#111e35);border-radius:12px;padding:20px 24px}
+.uno-sum p{margin:0;font-size:var(--font-body,16px);line-height:1.85;color:var(--text,#e8f0fa)}
+.uno-faq details{border:1px solid var(--border,rgba(0,210,240,.18));background:var(--surface,#111e35);border-radius:10px;margin:0 0 10px;padding:0}
+.uno-faq summary{cursor:pointer;list-style:none;padding:16px 48px 16px 20px;font-weight:700;font-size:var(--font-body,16px);position:relative;color:var(--text,#e8f0fa)}
+.uno-faq summary::-webkit-details-marker{display:none}
+.uno-faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--cyan,#00d2f0);font-size:22px;font-weight:400}
+.uno-faq details[open] summary::after{content:"−"}
+.uno-faq .uno-a{padding:0 20px 18px;margin:0;color:var(--muted,#9ab5d0);line-height:1.8;font-size:var(--font-body,16px)}
+.uno-rel ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0}
+.uno-rel a{display:inline-block;padding:9px 16px;border:1px solid var(--border,rgba(0,210,240,.18));border-radius:999px;color:var(--cyan,#00d2f0);text-decoration:none;font-size:14px;background:var(--surface,#111e35)}
+.uno-rel a:hover{border-color:var(--cyan,#00d2f0)}
+.uno-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+<style id="uno-shell-css">uno-header,uno-footer{display:block}html:root,html body{--hdr:72px}html{scroll-padding-top:84px}
+#uno-zoom{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}#uno-zoom.on{display:flex}#uno-zoom img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}</style>
+<meta property="og:image:alt" content="DNC (L2 Ring 스위치 네트워크) | 유노시스템㈜ UNO SYSTEM — UNO SYSTEM">
+<meta name="twitter:title" content="DNC (L2 Ring 스위치 네트워크) | 유노시스템㈜ UNO SYSTEM">
+<meta name="twitter:description" content="유노시스템㈜의 DNC(Data Network Controller) — L2 Ring 스위치 기반 소방 네트워크 집중 장치. 8 TP + 2 SFP 포트, ITU-T G.8032 ERPS(Ring) 지원, TCP/IP 서버 내장.">
+</head>
 <body>
 
 <!-- ═══════ HEADER ═══════ -->
@@ -345,7 +369,7 @@ html[lang=en] .uno-ux-box.uno-ux-open::after{content:"－ Close"}
 
 <!-- ═══════ HERO IMAGE ═══════ -->
 <div class="iaea-hero-wrap" id="hero-wrap" style="cursor:pointer" onclick="document.getElementById('hero-file-input').click()">
-  <div class="hero-empty hidden" id="hero-empty" data-nosnippet aria-hidden="true">
+  <div class="hero-empty hidden" id="hero-empty" data-nosnippet>
     <div class="he-plus">+</div>
     <div style="font-size:var(--font-body);font-weight:700" data-en="Click to insert an image/video">클릭하여 이미지/영상 삽입</div>
     <div style="font-size:var(--font-small);opacity:.6" data-en="DNC installation site photo">DNC 설치 현장 사진</div>
@@ -896,24 +920,7 @@ function downloadPage() {
 </script>
 
 
-<style id="uno-light-auto">/* 라이트 모드 (자동 생성: 페이지 색상 → index 라이트 팔레트) */html[data-theme=light]{--bg:#e9eef8;--bg2:#dee5f3;--surface:#cfdbf0;--surface2:#c5d0eb}html[data-theme=light] header{background:rgba(233,238,248,0.97)}html[data-theme=light] .nb:hover,html[data-theme=light] .ni:hover>.nb{color:#0f0f0f}html[data-theme=light] .dropdown{background:rgba(224,232,246,0.98);box-shadow:0 16px 48px rgba(0,0,0,0.338)}html[data-theme=light] .dd-head{border-bottom:1px solid rgba(0,0,0,0.05)}html[data-theme=light] .dd-sep{background:rgba(0,0,0,0.06)}html[data-theme=light] .sub-dropdown{background:rgba(224,232,246,0.98);box-shadow:10px 8px 36px rgba(0,0,0,0.315)}html[data-theme=light] .subsub-dropdown{background:rgba(224,232,246,0.98);box-shadow:10px 8px 36px rgba(0,0,0,0.315)}html[data-theme=light] .iaea-hero-wrap{background:#f0f0f0}html[data-theme=light] .hero-empty .he-plus{color:rgba(0,134,153,0.5)}html[data-theme=light] .hero-change-hint{background:rgba(255,255,255,0.35)}html[data-theme=light] .box-ctrl-btn{background:rgba(233,238,248,0.92)}html[data-theme=light] .box-ctrl-btn.delete{color:#990000}html[data-theme=light] .iaea-source{background:#f3f6fc}html[data-theme=light] .page-hero-overlay{background:linear-gradient(90deg,rgba(233,238,248,0.92),rgba(233,238,248,0.45))}html[data-theme=light] .kv{background:rgba(255,255,255,0.2);border:1px solid rgba(0,0,0,0.06)}html[data-theme=light] .spec-row{border-bottom:1px solid rgba(0,0,0,0.05)}html[data-theme=light] .spec-k{background:rgba(255,255,255,0.15)}html[data-theme=light] .img-box:hover{box-shadow:0 0 18px rgba(0,0,0,0.054)}html[data-theme=light] .box-plus{color:rgba(0,134,153,0.5)}html[data-theme=light] .box-label{border-top:1px solid rgba(0,0,0,0.05);background:rgba(255,255,255,0.2)}html[data-theme=light] .feat-card{border:1px solid rgba(0,0,0,0.06)}html[data-theme=light] .app-item{border:1px solid rgba(0,0,0,0.06)}html[data-theme=light] .cta-wrap{background:linear-gradient(135deg,#dee8f6,#cfdff3)}html[data-theme=light] footer{background:#f3f6fc;border-top:1px solid rgba(0,0,0,0.05)}html[data-theme=light] .foot-img-col{border-right:1px solid rgba(0,0,0,0.07)}html[data-theme=light]{--bg:#f0f4fb;--bg2:#e4ecf7;--surface:#d9e4f4;--surface2:#c8d8ef;--border:#1a6fd430;--border2:#0097aa33;--text:#050d18;--muted:#2c435e;--dim:#4a6888;--blue:#1a6fd4;--cyan:#006e80;--gold:#7a5410}html[data-theme=light] body{background:var(--bg);color:var(--text)}</style><style id="uno-geo-css">
-.uno-geo{max-width:1200px;margin:0 auto;padding:28px 24px;font-family:var(--fkr,"Noto Sans KR",sans-serif);color:var(--text,#e8f0fa)}
-.uno-geo h2{font-size:clamp(20px,2.2vw,26px);margin:0 0 14px;line-height:1.35}
-.uno-geo .uno-geo-tag{display:block;font-family:var(--fmono,"JetBrains Mono",monospace);font-size:12px;letter-spacing:.12em;color:var(--cyan,#00d2f0);margin-bottom:6px;text-transform:uppercase}
-.uno-sum{border:1px solid var(--border,rgba(0,210,240,.18));border-left:4px solid var(--cyan,#00d2f0);background:var(--surface,#111e35);border-radius:12px;padding:20px 24px}
-.uno-sum p{margin:0;font-size:var(--font-body,16px);line-height:1.85;color:var(--text,#e8f0fa)}
-.uno-faq details{border:1px solid var(--border,rgba(0,210,240,.18));background:var(--surface,#111e35);border-radius:10px;margin:0 0 10px;padding:0}
-.uno-faq summary{cursor:pointer;list-style:none;padding:16px 48px 16px 20px;font-weight:700;font-size:var(--font-body,16px);position:relative;color:var(--text,#e8f0fa)}
-.uno-faq summary::-webkit-details-marker{display:none}
-.uno-faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--cyan,#00d2f0);font-size:22px;font-weight:400}
-.uno-faq details[open] summary::after{content:"−"}
-.uno-faq .uno-a{padding:0 20px 18px;margin:0;color:var(--muted,#9ab5d0);line-height:1.8;font-size:var(--font-body,16px)}
-.uno-rel ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0}
-.uno-rel a{display:inline-block;padding:9px 16px;border:1px solid var(--border,rgba(0,210,240,.18));border-radius:999px;color:var(--cyan,#00d2f0);text-decoration:none;font-size:14px;background:var(--surface,#111e35)}
-.uno-rel a:hover{border-color:var(--cyan,#00d2f0)}
-.uno-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-</style><style id="uno-shell-css">uno-header,uno-footer{display:block}html:root,html body{--hdr:72px}html{scroll-padding-top:84px}
-#uno-zoom{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}#uno-zoom.on{display:flex}#uno-zoom img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}</style>
+
 <script id="uno-shell-js">
 /* ══ UNO SYSTEM 공통 셸 — index.html Header/Footer(Shadow DOM) 제어: 메뉴 · KOR|ENG · 테마 · 다운로드 · 푸터 이미지 ══ */
 (function(){

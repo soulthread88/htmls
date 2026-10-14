@@ -5,7 +5,7 @@
 
 <script>/* Header는 Shadow DOM(uno-header) 안에 있음 — 기존 스크립트 호환 */window.unoHdrEl=function(){var h=document.getElementById('uno-header');return (h&&h.shadowRoot&&h.shadowRoot.querySelector('header'))||h||document.body;};window.unoFtrEl=function(){var f=document.getElementById('uno-footer');return (f&&f.shadowRoot&&f.shadowRoot.querySelector('footer'))||f||document.body;};</script>
 <script>/* WebP 우선, 미업로드 시 원본으로 자동 전환 */window.addEventListener('error',function(e){var t=e.target;if(!t||t.tagName!=='IMG')return;var s=t.getAttribute('src')||'';if(!/\.webp$/i.test(s))return;var d=t.dataset,o=null;if(d.fallback===s)o=d.origFallback;else if(d.srcEn===s)o=d.origSrcEn;else if(d.srcKo===s)o=d.origSrcKo||d.orig;else o=d.orig;t._uTried=t._uTried||{};if(!o||t._uTried[s])return;t._uTried[s]=1;e.stopImmediatePropagation();if(d.fallback===s)d.fallback=o;if(d.srcEn===s)d.srcEn=o;if(d.srcKo===s)d.srcKo=o;t.setAttribute('src',o);},true);</script>
-    <title>DTS 내장형 R형 수신기 | 유노시스템㈜ UNO SYSTEM</title>
+    <title data-en="DTS Built-in R-type FACP | UNO SYSTEM Co., Ltd." data-ko="DTS 내장형 R형 수신기 | 유노시스템㈜ UNO SYSTEM">DTS 내장형 R형 수신기 | 유노시스템㈜ UNO SYSTEM</title>
 <meta content="전력구·통신구·지하공동구용 DTS 내장형 R형 화재수신기. 광케이블식 분포형 감지기(감24-74)로 최대 6km 구간을 1.0m 해상도로 감시하고 SCADA·통합관제와 연동합니다." name="description">
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
@@ -838,7 +838,7 @@ img[src^="data:image"], img[src^="data:video"] {
     else replace(b,keyOf(b,0));
   },true);
   document.addEventListener('keydown',function(e){ var b=e.target; if(!(b instanceof HTMLElement)||!b.classList.contains('uno-ux-box'))return; if(e.key==='Enter'){ e.preventDefault(); e.stopImmediatePropagation(); if(b.hasAttribute('data-ux-detail')||b.hasAttribute('data-detail')){ toggleDetail(b); return; } var im=mainImg(b); if(im&&window.unoZoom)window.unoZoom(im); } },true);
-  new MutationObserver(function(){ [].forEach.call(document.querySelectorAll('.uno-ux-more'),function(m){ moreLabel(m.parentElement,m); }); [].forEach.call(document.querySelectorAll('.uno-ux-rep'),function(r){ r.textContent=en()?'🔄 Replace':'🔄 교체'; }); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang','lang']});
+  new MutationObserver(function(){ [].forEach.call(document.querySelectorAll('.uno-ux-more'),function(m){ moreLabel(m.parentElement,m); }); [].forEach.call(document.querySelectorAll('.uno-ux-rep'),function(r){ r.textContent=en()?'🔄 Replace':'🔄 교체'; }); var t=document.querySelector('title'); if(t&&t.dataset.en){ if(t.dataset.ko===undefined)t.dataset.ko=t.textContent; var nt=en()?t.dataset.en:t.dataset.ko; if(document.title!==nt)document.title=nt; } }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang','lang']});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
   window.addEventListener('load',init);
 })();
@@ -866,7 +866,7 @@ img[src^="data:image"], img[src^="data:video"] {
 <meta name="twitter:title" content="DTS 내장형 R형 수신기 | 유노시스템㈜ UNO SYSTEM">
 <meta name="twitter:description" content="전력구·통신구·지하공동구용 DTS 내장형 R형 화재수신기. 광케이블식 분포형 감지기(감24-74)로 최대 6km 구간을 1.0m 해상도로 감시하고 SCADA·통합관제와 연동합니다.">
 </head>
-<body id="artifacts-component-root-html">
+<body>
 <!-- ═══════════════════════════════════════════════════════════
      ■ FIXED HEADER — 회사명㈜ 공통 헤더 (모든 페이지 동일)
      ■ 로고 이미지 : 클릭 시 교체 가능 (JS 자동 초기화)

@@ -451,9 +451,29 @@ footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:re
 .pib-stack #pib-scada{aspect-ratio:1915/821}
 
 /* DTS 네트워크 구성도 아래 가로 흐름 영상 */
-.dts-flow-video{margin:32px auto 0;max-width:1280px;width:100%}
+.dts-flow-video{margin:32px auto 0;max-width:640px;width:100%}
 .dts-flow-video video{display:block;width:100%;height:auto;aspect-ratio:1280/360;border-radius:14px;border:1px solid var(--border,rgba(30,120,220,.18));background:#080d18}
 .dts-flow-video figcaption{margin-top:10px;text-align:center;font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);letter-spacing:.04em}
+/* DTS 네트워크 구성도: 1행 2개, 화살표로 순서 표시(ㄹ자 흐름) 1→2 ↓ 4←3 ↓ 5 */
+.pg .diagram-row{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);grid-auto-rows:auto;row-gap:6px;column-gap:0;max-width:1100px;margin:36px auto 0;align-items:center}
+.pg .diagram-row .diag-upload-box{max-width:none;min-width:0;width:100%;min-height:0}
+.pg .diagram-row .box-media-wrap{aspect-ratio:16/9;min-height:0}
+.pg .diagram-row .box-img{max-height:none;width:100%;height:100%;object-fit:contain}
+.pg .diagram-row .box-label{font-size:var(--font-15)}
+.pg .diagram-row .diag-arrow{display:flex;align-items:center;justify-content:center;padding:0;font-size:0;opacity:1;line-height:1;min-height:44px}
+.pg .diagram-row .diag-arrow::before{font-size:var(--font-30);font-weight:700;color:var(--cyan)}
+.pg .diagram-row>:nth-child(1){grid-area:1/1}
+.pg .diagram-row>:nth-child(2){grid-area:1/2}.pg .diagram-row>:nth-child(2)::before{content:"→"}
+.pg .diagram-row>:nth-child(3){grid-area:1/3}
+.pg .diagram-row>:nth-child(4){grid-area:2/3}.pg .diagram-row>:nth-child(4)::before{content:"↓"}
+.pg .diagram-row>:nth-child(5){grid-area:3/3}
+.pg .diagram-row>:nth-child(6){grid-area:3/2}.pg .diagram-row>:nth-child(6)::before{content:"←"}
+.pg .diagram-row>:nth-child(7){grid-area:3/1}
+.pg .diagram-row>:nth-child(8){grid-area:4/1}.pg .diagram-row>:nth-child(8)::before{content:"↓"}
+.pg .diagram-row>:nth-child(9){grid-area:5/1}
+.pg .dts-flow-video{max-width:1100px}
+@media(max-width:900px){.pg .diagram-row{grid-template-columns:minmax(0,1fr);row-gap:4px}.pg .diagram-row>*{grid-area:auto!important}.pg .diagram-row .diag-arrow::before{content:"↓"!important}.pg .diagram-row .diag-arrow{min-height:36px}}
+
 
 .uno-ux-detail .uno-ux-h{margin:0 0 8px;font-size:var(--font-17);font-weight:800;color:var(--cyan,#00d2f0)}
 .uno-ux-detail p{margin:0;font-size:var(--font-15);line-height:1.8;color:var(--text,#dde8f8)}

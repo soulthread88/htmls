@@ -452,7 +452,7 @@ footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:re
 
 /* DTS 네트워크 구성도 아래 가로 흐름 영상 */
 .dts-flow-video{margin:32px auto 0;max-width:1280px;width:100%}
-.dts-flow-video video{display:block;width:100%;height:auto;aspect-ratio:1280/420;border-radius:14px;border:1px solid var(--border,rgba(30,120,220,.18));background:#080d18}
+.dts-flow-video video{display:block;width:100%;height:auto;aspect-ratio:1280/360;border-radius:14px;border:1px solid var(--border,rgba(30,120,220,.18));background:#080d18}
 .dts-flow-video figcaption{margin-top:10px;text-align:center;font-family:var(--fmono);font-size:var(--font-small);color:var(--muted);letter-spacing:.04em}
 
 .uno-ux-detail .uno-ux-h{margin:0 0 8px;font-size:var(--font-17);font-weight:800;color:var(--cyan,#00d2f0)}
@@ -835,7 +835,7 @@ footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:re
   </div>
   <!-- DTS 네트워크 구성도: 5개 이미지가 천천히 왼쪽으로 흐르는 무한 루프 영상 -->
   <figure class="dts-flow-video fu vis">
-    <video id="dts-flow-video" autoplay muted loop playsinline preload="metadata" width="1280" height="420"
+    <video id="dts-flow-video" autoplay muted loop playsinline preload="metadata" width="1280" height="360"
       src="https://raw.githubusercontent.com/soulthread88/videos/main/homepage/uno/dts_network_scroll_ko.mp4" data-src-ko="https://raw.githubusercontent.com/soulthread88/videos/main/homepage/uno/dts_network_scroll_ko.mp4" data-src-en="https://raw.githubusercontent.com/soulthread88/videos/main/homepage/uno/dts_network_scroll_en.mp4"
       aria-label="DTS 감지기, DNC 노드, 네트워크 허브, SCADA 서버, 원격 관제 순서로 이어지는 구성도 영상"></video>
     <figcaption data-en="DTS detector → DNC node → network hub → SCADA server → remote monitoring">DTS 감지기 → DNC 노드 → 네트워크 허브 → SCADA 서버 → 원격 관제</figcaption>
@@ -843,9 +843,10 @@ footer{background:#03060d;border-top:1px solid rgba(255,255,255,.05);position:re
   <script>(function(){var v=document.getElementById('dts-flow-video');if(!v||v._init)return;v._init=1;
     /* H.264(mp4)를 못 트는 브라우저는 같은 이름의 WebM으로 대체 */
     try{if(!v.canPlayType('video/mp4; codecs="avc1.640020"')&&v.canPlayType('video/webm; codecs="vp9"')){['srcKo','srcEn'].forEach(function(k){if(v.dataset[k])v.dataset[k]=v.dataset[k].replace(/\.mp4$/,'.webm');});v.src=v.getAttribute('src').replace(/\.mp4$/,'.webm');}}catch(e){}
-    try{if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();v.controls=true;}}catch(e){}
+    /* 움직임 줄이기 설정에서도 자동 재생하되, 멈출 수 있도록 재생 컨트롤을 함께 표시 */
+    try{if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.controls=true;}}catch(e){}
     v.addEventListener('error',function(){var f=v.closest('figure');if(f)f.style.display='none';},true);
-    v.muted=true; if(!v.controls){var go=function(){var p=v.play();if(p&&p.catch)p.catch(function(){});};v.addEventListener('loadeddata',go);go();}})();</script>
+    v.muted=true; {var go=function(){var p=v.play();if(p&&p.catch)p.catch(function(){});};v.addEventListener('loadeddata',go);go();}})();</script>
 </section>
 
 <section class="uno-geo uno-faq" id="faq" aria-labelledby="faq-title"><span class="uno-geo-tag">// FAQ</span><h2 id="faq-title" data-ko="자주 묻는 질문" data-en="Frequently Asked Questions">자주 묻는 질문</h2><details><summary data-ko="SCADA 확장장치에는 수신기를 몇 대까지 연결할 수 있나요?" data-en="How many panels can the SCADA expander connect?">SCADA 확장장치에는 수신기를 몇 대까지 연결할 수 있나요?</summary><p class="uno-a" data-ko="최대 32대의 수신기를 하나의 SCADA 서버에 통합할 수 있습니다." data-en="Up to 32 fire alarm panels can be integrated into one SCADA server.">최대 32대의 수신기를 하나의 SCADA 서버에 통합할 수 있습니다.</p></details><details><summary data-ko="DNC는 왜 링 방식을 쓰나요?" data-en="Why does the DNC use a ring topology?">DNC는 왜 링 방식을 쓰나요?</summary><p class="uno-a" data-ko="링 통신으로 이중화 경로를 구성해 한 구간에 장애가 나도 통신이 유지되도록 하기 위해서입니다." data-en="A ring provides redundant paths so communication continues even if one link fails.">링 통신으로 이중화 경로를 구성해 한 구간에 장애가 나도 통신이 유지되도록 하기 위해서입니다.</p></details><details><summary data-ko="DTS 분산온도감지 네트워크는 어떻게 동작하나요?" data-en="How does the DTS distributed temperature sensing network work?">DTS 분산온도감지 네트워크는 어떻게 동작하나요?</summary><p class="uno-a" data-ko="광케이블 자체가 센서인 DTS 감지기가 케이블 전 구간의 온도를 연속 측정하고, DNC 노드가 이를 링 이중화 네트워크로 모아 SCADA 서버에서 통합 관제합니다." data-en="DTS detectors use the optical cable itself as the sensor and measure temperature continuously along its whole length. DNC nodes gather the data over a redundant ring network and the SCADA server monitors it centrally.">광케이블 자체가 센서인 DTS 감지기가 케이블 전 구간의 온도를 연속 측정하고, DNC 노드가 이를 링 이중화 네트워크로 모아 SCADA 서버에서 통합 관제합니다.</p></details></section>

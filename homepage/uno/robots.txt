@@ -1,29 +1,7 @@
-# soulmaru.com — 유노시스템㈜ UNO SYSTEM
+# soulmaru.com — 유노시스템 UNO SYSTEM
 # 검색엔진과 AI 검색·답변 엔진의 수집을 모두 허용합니다.
 User-agent: *
 Allow: /
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
 Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 

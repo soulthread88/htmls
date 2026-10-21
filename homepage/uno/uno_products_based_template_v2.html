@@ -700,6 +700,8 @@ html body .cta-wrap[style*="flex-direction:row"]>*{flex:1 1 0!important;width:au
 /* 제품 연결 단어(태그) → GitHub 파일 또는 Google 검색 */
 .ptag,.prod-tag,.hero-tags .tag{cursor:pointer;transition:color .15s,border-color .15s,background .15s}
 .ptag:hover,.ptag:focus-visible,.prod-tag:hover,.prod-tag:focus-visible,.hero-tags .tag:hover,.hero-tags .tag:focus-visible{color:var(--cyan,#00d2f0)!important;border-color:var(--cyan,#00d2f0)!important;outline:none}
+/* 휴대폰 화면: 통계·KPI 4칸 → 2칸, 사양표 넘침 방지 */
+@media(max-width:600px){html body .stats-row,html body .kpi-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body .spec-row{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)!important}html body .spec-row>*,html body .sc,html body .kpi-item{min-width:0;overflow-wrap:anywhere}html body .kepco-banner{grid-template-columns:minmax(0,1fr)!important}html body .kepco-banner-stat{min-width:0}}
 </style>
 </head>
 <body>

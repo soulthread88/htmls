@@ -35,5 +35,5 @@ Allow: /
 User-agent: Daum
 Allow: /
 
-Sitemap: https://soulmaru.com/sitemap.xml
+Sitemap: https://soulmaru.com/uno/sitemap.xml
 Sitemap: https://soulmaru.com/wp-sitemap.xml

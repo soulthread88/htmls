@@ -3,7 +3,7 @@ UNO SYSTEM 재사용형 페이지 템플릿 (보정판, 2026-10-15)
 
 1. uno_products_based_template.html을 복사하여 새 페이지를 만듭니다.
 2. title(data-ko/data-en), description, canonical, OG·Twitter 메타, JSON-LD를 페이지별로 수정합니다.
-   - 주소는 모두 https://soulmaru.com/파일이름.html (템플릿의 PAGE.html 자리)
+   - 주소는 모두 https://soulmaru.com/uno/파일이름.html (템플릿의 PAGE.html 자리)
    - robots는 템플릿에서 noindex입니다. 실제 페이지에서는 index,follow… 로 바꿉니다.
    - 제품 페이지는 JSON-LD에 Product 항목을 추가하고, FAQ 문구는 화면 FAQ와 똑같이 맞춥니다.
 3. #products의 .prod-card를 복제하거나 변경합니다. 섹션은 .pg / .pg.alt를 번갈아 쓰고 사이에 <div class="div-line"></div>.
@@ -19,7 +19,7 @@ UNO SYSTEM 재사용형 페이지 템플릿 (보정판, 2026-10-15)
 보정 내역 (원본 대비)
 - 잘못된 닫는 태그 </meta>, </img> 제거 (W3C 오류)
 - <body id="artifacts-component-root-html"> 편집 환경 잔재 제거
-- canonical https://www.uno-system.com/ → https://soulmaru.com/PAGE.html, og:url·Twitter 메타를 자리표시로
+- canonical https://www.uno-system.com/ → https://soulmaru.com/uno/PAGE.html, og:url·Twitter 메타를 자리표시로
 - 템플릿 자체는 검색 제외(noindex)
 - 이미지 교체·확대 스크립트를 최신 대원칙 버전으로 교체
 - 머리말·꼬리말을 현재 사이트(v15, 새 제품 메뉴 포함)와 동일하게

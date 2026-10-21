@@ -1,0 +1,62 @@
+name: Deploy to soulmaru.com
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'homepage/uno/**'
+      - 'homepage/diesynthese/**'
+      - 'homepage/root/**'
+      - '.github/workflows/deploy-soulmaru.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-soulmaru
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      # UNO SYSTEM → https://soulmaru.com/uno/
+      - name: UNO SYSTEM → www/uno/
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          local-dir: homepage/uno/
+          server-dir: www/uno/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/*.xlsx
+            **/*template*.html
+            **/*README*
+
+      # DIE SYNTHESE → https://soulmaru.com/diesynthese/
+      - name: DIE SYNTHESE → www/diesynthese/
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          local-dir: homepage/diesynthese/
+          server-dir: www/diesynthese/
+
+      # Site-root files (robots.txt only). WordPress files are never touched:
+      # the action only uploads/removes files it tracks in its own state file.
+      - name: Root files → www/
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          local-dir: homepage/root/
+          server-dir: www/

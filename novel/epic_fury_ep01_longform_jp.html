@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エピック・フューリー：ホルムズの夜 ― 第1話 城壁が崩れる日</title>
+<meta name="description" content="2026年2月28日、米・イスラエルによる対イラン作戦に着想を得た戦争小説。テヘランの老教授、国防総省、空母フォードの艦長、CIAの分析官、がれきの下の七歳の少女――開戦初日の朝を五つのまなざしで追う。登場人物と会話は創作です。">
+<meta name="keywords" content="エピック・フューリー, ホルムズの夜, 戦争小説, イラン戦争 小説, 2026年 イラン戦争, ホルムズ海峡, 空母フォード, テヘラン, ミリタリー・スリラー, 地政学スリラー, 連載小説, 無料 Web小説">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="エピック・フューリー：ホルムズの夜 ― 第1話 城壁が崩れる日">
+<meta property="og:description" content="2026年2月28日、米・イスラエルによる対イラン作戦に着想を得た戦争小説。テヘランの老教授、国防総省、空母フォードの艦長、CIAの分析官、がれきの下の七歳の少女――開戦初日の朝を五つのまなざしで追う。登場人物と会話は創作です。">
+<meta property="og:image" content="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/ep01_cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="エピック・フューリー：ホルムズの夜 ― 第1話 城壁が崩れる日">
+<meta name="twitter:description" content="2026年2月28日、米・イスラエルによる対イラン作戦に着想を得た戦争小説。テヘランの老教授、国防総省、空母フォードの艦長、CIAの分析官、がれきの下の七歳の少女――開戦初日の朝を五つのまなざしで追う。登場人物と会話は創作です。">
+<link rel="alternate" hreflang="ko" href="https://github.com/soulthread88/htmls/blob/main/novel/epic_fury_ep01_longform_ko.html">
+<link rel="alternate" hreflang="en" href="https://github.com/soulthread88/htmls/blob/main/novel/epic_fury_ep01_longform_en.html">
+<link rel="alternate" hreflang="ja" href="https://github.com/soulthread88/htmls/blob/main/novel/epic_fury_ep01_longform_jp.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&amp;family=Noto+Serif+JP:wght@400;500;600;700&amp;family=Shippori+Mincho:wght@600;700;800&amp;display=swap">
+<style>
+:root {
+  --navy:#06152d; --gold:#f4bd3f; --white:#f7f8fa;
+  --cyan:#19d5df; --red:#d92d3a; --green:#38c65a;
+  --ui:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;
+  --tts:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;
+  
+  --serif:"Noto Serif KR","Nanum Myeongjo","Batang",serif;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;width:100%;background:#020914;color:var(--white);font-family:var(--ui)}
+
+body{display:flex;flex-direction:column;align-items:center;gap:28px;padding:28px 0;overflow-x:hidden}
+.stage{position:relative;width:100%;max-width:1600px;margin:0 auto;aspect-ratio:16/9;overflow:hidden;background:var(--navy);border-radius:4px}
+
+
+.header{height:14%;display:grid;grid-template-columns:32% 36% 32%;grid-template-areas:"bl logo dt";align-items:end;padding:0 2.2% 1.5mm;margin-top:2mm;background:linear-gradient(180deg,#06152d,#07182f);border-bottom:1px solid var(--gold);position:relative;z-index:20;overflow:hidden}
+.brand-left{grid-area:bl;text-align:left;font-size:clamp(13px,1.1vw,22px);line-height:1.2;font-weight:800;color:var(--gold);letter-spacing:.02em}
+.logo{grid-area:logo;display:flex;flex-direction:column;align-items:center}
+.logo .l1{text-align:center;font-weight:800;font-size:clamp(18px,1.9vw,30px);margin:0;text-shadow:2px 2px 4px #000}
+.logo .l2{text-align:center;font-weight:700;font-size:clamp(10px,2vw,20px);color:var(--gold);margin:0;margin-top:1mm}
+.datetime{grid-area:dt;display:flex;align-items:baseline;justify-content:flex-end;gap:18px;text-align:right;line-height:1}
+.datetime .date{font-size:clamp(12px,1vw,20px);font-weight:700;color:var(--gold)}
+.datetime .part{font-size:clamp(11px,.85vw,16px);font-weight:600;color:#fff;opacity:.85}
+
+
+.header--slim .datetime .date{display:none}
+
+
+.headline{height:9%;display:flex;align-items:flex-end;justify-content:center;gap:1.6%;padding:0 2.2% 1.5mm;margin-top:1.5mm;background:#071a34;border-bottom:1px solid var(--gold);overflow:hidden}
+.section{flex:0 0 auto;border:2px solid var(--gold);color:var(--gold);padding:.35% 1.1%;font-size:clamp(11px,.9vw,17px);font-weight:800;white-space:nowrap}
+.headline h1{margin:0;flex:1 1 auto;min-width:0;font-size:clamp(18px,1.9vw,30px);font-weight:500;line-height:1.18;padding-bottom:.12em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px 5px #000}
+.video{position:absolute;left:0;right:0;top:calc(23% + 2mm);bottom:16.2%;overflow:hidden;background:transparent}
+.video img,.video video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.98) contrast(1.08);image-rendering:auto}
+.chyron{position:absolute;left:3.1%;top:53.4%;transform:translateY(-50%);width:80%;z-index:5;padding:0}
+.meta{margin-bottom:1%;display:flex;flex-direction:column;align-items:flex-start;gap:7px}
+.meta-tag{display:inline-block;border:2px solid var(--gold);color:var(--gold);background:rgba(6,21,45,.55);font-weight:800;letter-spacing:.04em;padding:.25em .8em;font-size:clamp(12px,.95vw,19px);white-space:nowrap}
+.meta-loc{color:var(--gold);font-size:clamp(11px,.82vw,17px);font-weight:600;letter-spacing:.035em;text-shadow:2px 2px 3px #000}
+.caption{font-family:var(--tts);font-size:clamp(19px,2.15vw,34px);font-weight:400;line-height:1.28;letter-spacing:-.008em;max-width:100%;color:#fff;text-shadow:2px 3px 4px #000;text-align:justify;text-justify:inter-character;word-break:normal;overflow-wrap:break-word}
+
+.breaking{position:absolute;left:0;right:0;bottom:calc(3mm + 5%);display:flex;align-items:center;gap:16px;padding:1mm 2.2%;background:var(--red);z-index:10;white-space:nowrap;overflow:hidden}
+.breaking .tag{flex:0 0 auto;background:#fff;color:var(--red);font-weight:700;letter-spacing:.05em;padding:.22em .9em;border-radius:4px;font-size:clamp(16px,1.05vw,24px)}
+.breaking .items{color:#fff;font-weight:600;font-size:clamp(17px,1.15vw,26px);overflow:hidden;text-overflow:ellipsis;text-shadow:1px 1px 2px rgba(0,0,0,.4)}
+.breaking .dot{margin:0 .8em;color:#fff;opacity:.85}
+.ticker{position:absolute;left:0;right:0;bottom:3mm;height:5%;display:flex;align-items:center;padding:0 7mm 0 2.2%;background:#06152d;border-top:1px solid var(--gold);z-index:11;overflow:hidden;font-size:clamp(13px,1.08vw,19px)}
+
+.ticker .title{flex:0 0 auto;display:flex;align-items:center;height:auto;line-height:1;color:var(--gold);font-weight:800;letter-spacing:.02em;border:1px solid var(--gold);border-radius:2px;background:rgba(244,189,63,.08);padding:.5mm .9em;margin-right:1.1%;white-space:nowrap}
+.ticker-window{flex:1 1 auto;position:relative;height:100%;overflow:hidden}
+.ticker-window .items{position:absolute;top:50%;left:0;white-space:nowrap;display:inline-flex;align-items:center;line-height:1;transform:translateY(calc(-50% + 1px)) translateX(0);animation:ticker-scroll 64s linear infinite}
+.ticker .dot{color:#fff;margin:0 .7%}
+@keyframes ticker-scroll{to{transform:translateY(calc(-50% + 1px)) translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ticker-window .items{animation:none;transform:translateY(calc(-50% + 1px)) translateX(0)}}
+
+
+.novel-media{position:absolute;left:0;right:0;top:calc(14% + 2mm);bottom:0;overflow:hidden;background:#111}
+.novel-media img,.novel-media video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.05) brightness(.88)}
+
+.novel-content{position:absolute;top:calc(14% + 2mm);bottom:0;left:0;right:0;z-index:4;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:0 26.9% 0 3.1%}
+.novel-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+.novel-heading .scene-tag{border:none;background:none;padding:0;color:var(--gold);font-weight:700;font-size:clamp(13px,1vw,16px);letter-spacing:.03em;text-shadow:1px 1px 3px #000}
+.novel-heading h2{margin:0;font-size:clamp(13px,1vw,16px);font-weight:500;font-style:italic;color:rgba(255,255,255,.78);text-shadow:1px 1px 3px #000}
+.novel-heading h2::before{content:'— '}
+.novel-text{width:100%;max-width:none;align-self:flex-start}
+.novel-text p{margin:0 0 14px;font-family:var(--serif);font-size:clamp(19px,2.15vw,34px);line-height:1.55;font-weight:400;color:#fff;text-shadow:1px 2px 6px rgba(0,0,0,.8);text-align:justify;text-justify:inter-character;word-break:normal;overflow-wrap:break-word}
+.novel-text p:last-child{margin-bottom:0}
+.novel-end{color:var(--gold)!important;font-weight:800!important;text-align:left!important}
+
+@media(max-width:900px){.chyron{width:80%}.headline h1{font-size:clamp(15px,2vw,22px)}.logo .l1{font-size:clamp(15px,2vw,22px)}.section{font-size:clamp(9px,1.4vw,13px)}.caption{font-size:22px}.novel-content{padding:0 26.9% 0 3.1%;gap:14px}.novel-text p{font-size:clamp(16px,2.05vw,22px);line-height:1.45;margin:0 0 12px}.ticker-window .items{animation-duration:48s}}
+@media(max-width:650px){.headline h1{font-size:clamp(13px,2.6vw,17px)}.logo .l1{font-size:clamp(13px,2.6vw,17px)}.section{font-size:clamp(8px,1.7vw,11px);padding:.3% 1%}.chyron{width:80%}.caption{font-size:18px}.novel-content{padding:0 16.9% 0 3.1%;gap:12px}.novel-text p{font-size:18px;line-height:1.45;margin:0 0 10px}.breaking{gap:8px;padding:1.2mm 2.2%}.breaking .tag{font-size:clamp(11px,2.2vw,15px);padding:.25em .7em}.breaking .items{font-size:clamp(11px,2.1vw,15px)}.ticker{padding:0 5mm 0 2.2%;font-size:clamp(8px,2vw,12px)}.ticker .title{padding:0 .6em;margin-right:.8%}.ticker-window .items{animation-duration:40s}}
+
+@media(max-width:768px){
+.stage{aspect-ratio:auto;height:auto;display:grid;grid-template-columns:1fr}
+.header{grid-row:1;height:auto}
+.header--slim{height:auto}
+.headline{grid-row:2;height:auto}
+.video{position:relative;top:auto;bottom:auto;left:auto;right:auto;grid-row:3;grid-column:1;align-self:stretch;width:100%;min-height:56.25vw}
+.chyron{position:relative;top:auto;left:auto;right:auto;bottom:auto;grid-row:3;grid-column:1;align-self:center;justify-self:start;transform:none;margin:16px 3.1% 28px;width:auto;padding:0}
+.breaking{position:static;grid-row:4}
+.novel-media{position:relative;top:auto;bottom:auto;grid-row:2;grid-column:1;align-self:stretch;width:100%;min-height:56.25vw;background:var(--navy)}
+.novel-content{position:relative;top:auto;bottom:auto;left:auto;right:auto;grid-row:2;grid-column:1;align-self:center;padding:16px 16.9% 34px 3.1%;justify-content:flex-start}
+.narr-btn{bottom:auto;right:3%}
+main.stage:has(.headline) .narr-btn{top:74px;bottom:auto}
+main.stage:has(.header--slim) .narr-btn{top:auto;bottom:12px}
+
+.ticker{display:none}
+}
+@media(max-width:420px){.datetime .date{font-size:10px}.datetime .part{font-size:9px}.brand-left{font-size:11px}.section{font-size:clamp(7px,2vw,10px);padding:.3% 1.2%}.headline h1{font-size:clamp(11px,3.2vw,14px)}.logo .l1{font-size:clamp(11px,3.2vw,14px)}.caption{font-size:16px}.breaking .tag,.breaking .items{font-size:11px}.novel-content{padding:14px 10% 30px 3.1%;gap:8px}.novel-text p{font-size:16px;line-height:1.45;margin:0 0 7px}}
+
+
+.narr-btn{position:absolute;right:2.2%;bottom:2.5%;z-index:40;width:9%;max-width:52px;min-width:30px;aspect-ratio:1/1;border-radius:50%;border:1.5px solid var(--gold);background:rgba(6,21,45,.72);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.55;transition:opacity .2s,background .2s;padding:0}
+.narr-btn:hover,.narr-btn:focus-visible,.narr-btn.is-playing{opacity:1}
+.narr-btn.is-playing{background:rgba(244,189,63,.18)}
+.narr-icon{font-size:clamp(11px,1.6vw,20px);line-height:1;pointer-events:none}
+@media(max-width:650px){.narr-btn{right:3%;bottom:3%}}
+
+@media(min-width:769px){main.stage:has(.headline) .narr-btn{top:calc(23% + 2mm + 14px);bottom:auto}}
+.novel-media--b video,.novel-media--b img{transform:scale(1.08);transform-origin:60% 50%}
+html[data-format="vertical"] .ticker{display:none!important}
+
+.novel-media:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(2,9,20,.84) 0%,rgba(2,9,20,.66) 45%,rgba(2,9,20,.22) 78%,rgba(2,9,20,0) 100%),linear-gradient(180deg,rgba(2,9,20,0) 40%,rgba(2,9,20,.6) 100%)}
+.video:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(2,9,20,.74) 0%,rgba(2,9,20,.52) 50%,rgba(2,9,20,0) 85%),linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.12) 62%,rgba(0,0,0,.64) 100%)}
+@media(max-width:768px){.novel-media:after,.video:after{background:linear-gradient(180deg,rgba(2,9,20,.58) 0%,rgba(2,9,20,.78) 100%)}}
+.meta-tag--fiction{border-color:var(--red);color:#fff;background:rgba(217,45,58,.75)}
+
+
+/* site menu (outside the video frame) */
+.site-bar{position:sticky;top:0;z-index:100;width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 2.2%;background:rgba(2,9,20,.92);border-bottom:1px solid rgba(244,189,63,.5);backdrop-filter:blur(6px)}
+.site-bar .ttl{color:var(--gold);font-weight:800;font-size:16px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-bar nav{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.site-bar .lang a{color:#fff;opacity:.6;text-decoration:none;font-weight:700;font-size:16px;padding:2px 4px}
+.site-bar .lang a[aria-current]{opacity:1;color:var(--gold)}
+.site-bar .lang span{color:#fff;opacity:.4}
+.site-bar button{font:700 16px var(--ui);color:var(--gold);background:transparent;border:1px solid var(--gold);border-radius:4px;padding:4px 12px;cursor:pointer}
+body{padding-top:0}
+/* media credit: italic, >=5px smaller than body, linked to source */
+.credit{position:absolute;right:2.2%;bottom:1.6%;z-index:6;font-size:clamp(10px,.7vw,13px);font-style:italic;color:rgba(255,255,255,.82);text-shadow:1px 1px 2px #000;max-width:60%;text-align:right}
+.credit a{color:inherit}
+.video .credit{bottom:3%}
+@media(max-width:768px){.credit{right:calc(3% + 46px);bottom:8px;max-width:70%}}
+/* media box replace/delete (shown on click only) */
+.mbox{cursor:pointer}
+.imgtools{position:absolute;right:2.2%;top:4%;z-index:30;display:flex;gap:8px}
+.imgtools[hidden]{display:none}
+.imgtools button{font:700 14px var(--ui);padding:6px 14px;border:1.5px solid var(--gold);background:rgba(6,21,45,.9);color:var(--gold);border-radius:4px;cursor:pointer}
+.mbox.is-empty img,.mbox.is-empty video{visibility:hidden}
+/* light mode: page chrome only */
+[data-theme="light"] body{background:#e9edf3}
+[data-theme="light"] .site-bar{background:rgba(255,255,255,.94);border-bottom-color:#c9a227}
+[data-theme="light"] .site-bar .ttl{color:#7a5a00}
+[data-theme="light"] .site-bar .lang a{color:#06152d}
+[data-theme="light"] .site-bar .lang a[aria-current]{color:#7a5a00}
+[data-theme="light"] .site-bar .lang span{color:#06152d}
+[data-theme="light"] .site-bar button{color:#7a5a00;border-color:#7a5a00}
+[data-theme="light"] .stage{box-shadow:0 6px 24px rgba(6,21,45,.25)}
+/* ?record hides menu and buttons for screen recording */
+html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgtools{display:none!important}
+
+
+:root{--ui:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;--tts:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;--serif:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif}
+.logo .l1,.headline h1,.novel-heading h2{font-family:"Shippori Mincho","Noto Serif JP",serif;letter-spacing:.02em}
+.caption,.novel-text p{line-break:strict;word-break:normal;overflow-wrap:anywhere;font-feature-settings:"palt" 0;letter-spacing:.01em}
+.caption{font-size:clamp(17px,1.95vw,31px);line-height:1.42}
+.novel-text p{font-size:clamp(17px,1.95vw,31px);line-height:1.62}
+@media(max-width:768px){.caption,.novel-text p{font-size:16px}}
+
+</style>
+</head>
+<body>
+<header class="site-bar"><span class="ttl">エピック・フューリー：ホルムズの夜 ― 第1話 城壁が崩れる日</span>
+<nav><span class="lang"><a href="epic_fury_ep01_longform_ko.html" lang="ko">Kor</a> <span>|</span> <a href="epic_fury_ep01_longform_en.html" lang="en">Eng</a> <span>|</span> <a href="epic_fury_ep01_longform_jp.html" aria-current="page" lang="ja">Jpn</a></span>
+<button type="button" id="theme-btn">☀ ライト</button></nav></header>
+
+<!-- ============ 1 / 21 — ワシントンDC · 2月27日 15:38（米東部） (news bulletin) ============ -->
+<main class="stage" data-page="1">
+<audio class="narration" id="narr-1" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p01.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-1" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">1/21</span></div>
+</header>
+<section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
+<section class="video mbox" data-mkey="p01"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_b2_prep.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Air Force (DVIDS) · Public domain · <a href="https://commons.wikimedia.org/wiki/File:A_B-2_Spirit_stealth_bomber_prepares_to_take_off_during_Operation_Epic_Fury_(9573730).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">ワシントンDC · 2月27日 15:38（米東部）</span></div>
+  <div class="caption">2月27日午後3時38分、米東部時間。トランプ大統領が「壮大なる怒り」作戦の実行を命じた。1月から2月にかけて、米国は2003年のイラク侵攻以来最大の兵力を中東に集めていた。2月はずっと核交渉が続いた。交渉のテーブルが開いているあいだも、艦艇は到着し続けた。テヘランの誰かは、それを交渉のための示威行動だと信じていただろう。その確信は、誤りだった。</div>
+</section>
+<section class="breaking">
+  <span class="tag">小説速報</span>
+  <span class="items">米・イスラエル、イラン全土への空爆を開始 ―「壮大なる怒り」「咆哮する獅子」<span class="dot">|</span>イスラエル「ハメネイ師死亡」と発表 ― イラン政府の公式確認は3月1日</span>
+</section>
+<footer class="ticker"><span class="title">主な出来事</span><div class="ticker-window"><span class="items">
+2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+<span class="dot">|</span> 2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+</span></div></footer>
+</main>
+
+<!-- ============ 2 / 21 — テヘラン · 午前9時45分 (news bulletin) ============ -->
+<main class="stage" data-page="2">
+<audio class="narration" id="narr-2" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p02.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-2" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">2/21</span></div>
+</header>
+<section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
+<section class="video mbox" data-mkey="p02"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_spruance.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Navy · NAVCENT Public Affairs · Public domain · <a href="https://commons.wikimedia.org/wiki/File:USS_Spruance_launching_Tomahawk_during_Operation_Epic_Fury.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">テヘラン · 午前9時45分</span></div>
+  <div class="caption">2月28日午前9時45分、米国の「壮大なる怒り」とイスラエルの「咆哮する獅子」が同時に始まった。トマホークとB2爆撃機、イスラエルの戦闘機約200機が、革命防衛隊の指揮施設と防空網、ミサイル基地を叩いた。テヘラン、コム、ケルマンシャー、イスファハン、カラジで爆発が続いた。イスラエルは、最初の24時間で500の軍事目標に1,200発を超える爆弾を投じたと発表した。</div>
+</section>
+<section class="breaking">
+  <span class="tag">小説速報</span>
+  <span class="items">米・イスラエル、イラン全土への空爆を開始 ―「壮大なる怒り」「咆哮する獅子」<span class="dot">|</span>イスラエル「ハメネイ師死亡」と発表 ― イラン政府の公式確認は3月1日</span>
+</section>
+<footer class="ticker"><span class="title">主な出来事</span><div class="ticker-window"><span class="items">
+2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+<span class="dot">|</span> 2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+</span></div></footer>
+</main>
+
+<!-- ============ 3 / 21 — テヘラン · 午前10時15分 (news bulletin) ============ -->
+<main class="stage" data-page="3">
+<audio class="narration" id="narr-3" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p03.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-3" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">3/21</span></div>
+</header>
+<section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
+<section class="video mbox" data-mkey="p03"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_phone.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Jakub Bukowski · Pexels License (free) · <a href="https://www.pexels.com/video/nightstand-scene-with-phone-charging-and-hand-interaction-36017452/" target="_blank" rel="noopener">Pexels</a></div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">テヘラン · 午前10時15分</span></div>
+  <div class="caption">午前10時15分、イスラエル空軍がテヘランの最高指導者の公邸施設を叩いた。その屋根の下では会議が三つ開かれていた。アリ・ハメネイ師と軍の首脳部が死亡した。同じ朝、イランの礼拝時刻アプリ「バーデ・サバー」がハッキングされ、「助けが到着した」という通知が一斉に届いた。イラン政府の公式確認は、3月1日になってからだった。</div>
+</section>
+<section class="breaking">
+  <span class="tag">小説速報</span>
+  <span class="items">米・イスラエル、イラン全土への空爆を開始 ―「壮大なる怒り」「咆哮する獅子」<span class="dot">|</span>イスラエル「ハメネイ師死亡」と発表 ― イラン政府の公式確認は3月1日</span>
+</section>
+<footer class="ticker"><span class="title">主な出来事</span><div class="ticker-window"><span class="items">
+2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+<span class="dot">|</span> 2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+</span></div></footer>
+</main>
+
+<!-- ============ 4 / 21 — イラン南部ミナブ · 午前 (news bulletin) ============ -->
+<main class="stage" data-page="4">
+<audio class="narration" id="narr-4" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p04.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-4" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">4/21</span></div>
+</header>
+<section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
+<section class="video mbox" data-mkey="p04"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_dark_sky.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">CESAR A RAMIREZ VALLEJO TRAPHITHO · Pexels License (free) · <a href="https://www.pexels.com/video/moody-sky-over-hill-13310119/" target="_blank" rel="noopener">Pexels</a></div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">イラン南部ミナブ · 午前</span></div>
+  <div class="caption">同じ日の午前、イラン南部ミナブのシャジャレ・タイエベ女子小学校にミサイルが命中した。イランのメディアは180人が死亡したと報じた。大半が子どもだった。イラン赤新月社は、開戦初日の死者が200人を超えたと発表した。米国のトマホークによるものと指摘されたこの攻撃は、この戦争で最も多くの民間人が一度に命を落とした出来事となった。</div>
+</section>
+<section class="breaking">
+  <span class="tag">小説速報</span>
+  <span class="items">米・イスラエル、イラン全土への空爆を開始 ―「壮大なる怒り」「咆哮する獅子」<span class="dot">|</span>イスラエル「ハメネイ師死亡」と発表 ― イラン政府の公式確認は3月1日</span>
+</section>
+<footer class="ticker"><span class="title">主な出来事</span><div class="ticker-window"><span class="items">
+2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+<span class="dot">|</span> 2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+</span></div></footer>
+</main>
+
+<!-- ============ 5 / 21 — テヘラン · バーレーン · 午後0時35分 (news bulletin) ============ -->
+<main class="stage" data-page="5">
+<audio class="narration" id="narr-5" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p05.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-5" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">5/21</span></div>
+</header>
+<section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
+<section class="video mbox" data-mkey="p05"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_map100h.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Department of War · Public domain · <a href="https://commons.wikimedia.org/wiki/File:2026_map_of_%22Operation_Epic_Fury_Timeline_-_First_100_Hours%22_used_during_press_briefing_at_the_Pentagon,_Arlington,_Virginia_on_4_March_(cropped).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
+<section class="chyron">
+  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">テヘラン · バーレーン · 午後0時35分</span></div>
+  <div class="caption">午後0時35分、イランは報復作戦「真実の約束4」を開始した。12時56分にバーレーンの米第5艦隊施設が被弾し、13時45分にはイスラエルへの着弾が確認された。攻撃はクウェート、アブダビ、ドバイ、リヤド、イラクのアルビルへと広がった。革命防衛隊は、カタールのアル・ウデイド基地、UAEのアル・ダフラ基地、バーレーンの米第5艦隊司令部を狙ったと発表した。</div>
+</section>
+<section class="breaking">
+  <span class="tag">小説速報</span>
+  <span class="items">米・イスラエル、イラン全土への空爆を開始 ―「壮大なる怒り」「咆哮する獅子」<span class="dot">|</span>イスラエル「ハメネイ師死亡」と発表 ― イラン政府の公式確認は3月1日</span>
+</section>
+<footer class="ticker"><span class="title">主な出来事</span><div class="ticker-window"><span class="items">
+2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+<span class="dot">|</span> 2.27 15:38 ワシントン、作戦実行を命令
+<span class="dot">|</span> 2.28 09:45 米・イスラエル、イラン全土へ空爆開始
+<span class="dot">|</span> 2.28 10:15 テヘランの最高指導者公邸施設を攻撃
+<span class="dot">|</span> 2.28 午前 ミナブの女子小学校に着弾
+<span class="dot">|</span> 2.28 12:35 イラン、「真実の約束4」で報復開始
+</span></div></footer>
+</main>
+
+<!-- ============ 6 / 21 — テヘラン · アザディ広場近くの路地 (novel text) ============ -->
+<main class="stage" data-page="6">
+<audio class="narration" id="narr-6" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p06.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-6" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">6/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p06"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_azadi.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">İsmail Ünlü · Pexels License (free) · <a href="https://www.pexels.com/video/urban-alleyway-with-elderly-man-walking-39742499/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">テヘラン · アザディ広場近くの路地</span>
+  <h2>すべての戦争は、誰かの朝に</h2>
+</div>
+<div class="novel-text">
+  <p>すべての戦争は、誰かの朝に始まった。2026年2月28日、土曜日。午前9時45分。テヘランの空は青かった。理不尽なほど、不公平なほど青かった。アザド・モラディ教授は、アザディ広場の脇の路地に立っていた。アザディ。ペルシャ語で「自由」を意味する。この国で自由は、四十七年近く名前としてだけ残ってきた。名前だけの自由。看板だけの解放。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 7 / 21 — テヘラン · アザディ広場近くの路地 (novel text) ============ -->
+<main class="stage" data-page="7">
+<audio class="narration" id="narr-7" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p07.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-7" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">7/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p07"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_sky_blue.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">宇 梁 · Pexels License (free) · <a href="https://www.pexels.com/video/serene-clouds-in-the-blue-sky-timelapse-33227529/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">テヘラン · アザディ広場近くの路地</span>
+</div>
+<div class="novel-text">
+  <p>教授は七十二歳だった。昨日の午後、彼の大学院のゼミ生が三人、風紀警察に連れていかれた。公共圏を論じていた学生たちが、公共圏から消えた。アザドは空を見上げた。目には見えなかった。骨のほうが先に知った。今日の空は、昨日の空ではない。何かが近づいていた。救いなのか、災いなのか。彼にはまだわからなかった。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 8 / 21 — 米国バージニア州アーリントン · 国防総省 国家軍事指揮センター (novel text) ============ -->
+<main class="stage" data-page="8">
+<audio class="narration" id="narr-8" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p08.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-8" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">8/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p08"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_control_room.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Nino Souza · Pexels License (free) · <a href="https://www.pexels.com/video/a-computer-monitor-and-keyboard-on-a-table-19233938/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">米国バージニア州アーリントン · 国防総省 国家軍事指揮センター</span>
+  <h2>見届けることだけ</h2>
+</div>
+<div class="novel-text">
+  <p>同じ時刻、ワシントンDCは午前1時15分だった。ポトマック川の向こう、国防総省の地下。命令はすでに下りていた。署名は済み、決裁の線は閉じていた。この部屋に残された仕事は、見届けることだけだった。統合参謀本部の作戦部長フォーク中将が、三十一時間眠っていない顔で画面の前に立っていた。緊張が極まるとかえって静かになる男だった。いま彼は、とても静かだった。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 9 / 21 — 米国バージニア州アーリントン · 国防総省 国家軍事指揮センター (novel text) ============ -->
+<main class="stage" data-page="9">
+<audio class="narration" id="narr-9" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p09.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-9" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">9/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p09"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_monitors.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Adis Resic · Pexels License (free) · <a href="https://www.pexels.com/video/spectacular-view-of-earth-from-space-in-orbit-38594546/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">米国バージニア州アーリントン · 国防総省 国家軍事指揮センター</span>
+</div>
+<div class="novel-text">
+  <p>衛星から見るテヘランは、平凡で広かった。九百万の朝。そのほとんどが、世界じゅうどこでも人が望むものを望んでいた。子どもに食べさせること。干渉されないこと。画面の座標のひとつひとつに、その朝が重なっていた。午前1時15分。最初の着弾信号が画面に灯った。神よ、これをまっとうにやり遂げさせてください。フォークは声に出さずに言った。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 10 / 21 — イラン · アルボルズ山脈の防空指揮所 (novel text) ============ -->
+<main class="stage" data-page="10">
+<audio class="narration" id="narr-10" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p10.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-10" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">10/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p10"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_radar.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">HumanoideVFX · Pexels License (free) · <a href="https://www.pexels.com/video/futuristic-hud-interface-display-visualization-30744462/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">イラン · アルボルズ山脈の防空指揮所</span>
+  <h2>助けが到着した</h2>
+</div>
+<div class="novel-text">
+  <p>アルボルズ山脈の指揮所。ダリウス・セパフヴァンド大佐は、レーダー画面が雑音に覆われていくのを見ていた。勤続三十一年。二度の戦争。指揮網は四分で崩れた。それを見ているあいだに、胸の奥からまったく予想していなかった感情がこみ上げてきた。安堵だった。彼はその感情をすぐに押しつぶした。それでも、感情はそこにあった。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 11 / 21 — イラン · アルボルズ山脈の防空指揮所 (novel text) ============ -->
+<main class="stage" data-page="11">
+<audio class="narration" id="narr-11" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p11.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-11" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">11/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p11"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_phone.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Jakub Bukowski · Pexels License (free) · <a href="https://www.pexels.com/video/nightstand-scene-with-phone-charging-and-hand-interaction-36017452/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">イラン · アルボルズ山脈の防空指揮所</span>
+</div>
+<div class="novel-text">
+  <p>机の上に伏せておいた携帯電話が震えた。礼拝時刻アプリ「バーデ・サバー」だった。画面にはペルシャ語が一行浮かんでいた。助けが到着した。指揮所のすべての電話が、同じ瞬間に震えた。爆弾と文章が同じ時刻に届いた。一方は建物を壊し、もう一方は服従を揺さぶった。十九歳の兵士が小銃を止めて言った。「これは戦争じゃない。これは、別の何かだ」</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 12 / 21 — 東地中海 · 米空母ジェラルド・R・フォード艦橋 (novel text) ============ -->
+<main class="stage" data-page="12">
+<audio class="narration" id="narr-12" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p12.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-12" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">12/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p12"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_ford_deck.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Navy (DVIDS) · Public domain · <a href="https://commons.wikimedia.org/wiki/File:USS_Gerald_R_Ford_(CVN_78)_Conducts_Flight_Operations_During_Operation_Epic_Fury_(9559679).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">東地中海 · 米空母ジェラルド・R・フォード艦橋</span>
+  <h2>静かな手</h2>
+</div>
+<div class="novel-text">
+  <p>マーカス・ウェッブ艦長は二十六時間眠っていなかった。第一波の最後の機体が電磁カタパルトを離れたとき、艦橋に立つ彼の両手はまったく静かだった。手が静かであればあるほど、中の嵐は荒れている。二週間前まで、この艦はカリブ海にいた。彼の左手では、AP通信の戦争特派員サラ・キャラハンがカメラを構えていた。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 13 / 21 — 東地中海 · 米空母ジェラルド・R・フォード艦橋 (novel text) ============ -->
+<main class="stage" data-page="13">
+<audio class="narration" id="narr-13" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p13.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-13" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">13/21</span></div>
+</header>
+<section class="novel-media novel-media--b mbox" data-mkey="p13"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_ford_deck.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Navy (DVIDS) · Public domain · <a href="https://commons.wikimedia.org/wiki/File:USS_Gerald_R_Ford_(CVN_78)_Conducts_Flight_Operations_During_Operation_Epic_Fury_(9559679).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">東地中海 · 米空母ジェラルド・R・フォード艦橋</span>
+</div>
+<div class="novel-text">
+  <p>バーレーンのリース提督が画面に現れた。「韓国海軍の連絡将校から、伝えてほしいと頼まれた言葉がある。『われわれは歴史の証人です』」キム・ジュノ大尉はモニターの前で、仁川上陸作戦の写真を思い出していた。「その将校に伝えてくれ。これをまっとうにやり遂げられるよう願っている、と」隣でサラ・キャラハンのシャッターが静かに鳴った。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 14 / 21 — 米国バージニア州ラングレー · CIAイラン作戦センター (novel text) ============ -->
+<main class="stage" data-page="14">
+<audio class="narration" id="narr-14" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p14.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-14" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">14/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p14"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_analyst.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Ron Lach · Pexels License (free) · <a href="https://www.pexels.com/video/a-woman-using-a-computer-8100344/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">米国バージニア州ラングレー · CIAイラン作戦センター</span>
+  <h2>ふたつの故郷</h2>
+</div>
+<div class="novel-text">
+  <p>レイラ・シラジ博士は、この部屋に十九時間いた。1988年、イランのシラーズに生まれた分析官。七か月前、彼女は機密報告書を書いた。進路を変えうる唯一の介入は、キネティック介入である。その一文を書いたとき、彼女は自分が何を正当化しているのかわかっていた。いま彼女の一文が、三つの画面の上で煙の柱となって燃えていた。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 15 / 21 — 米国バージニア州ラングレー · CIAイラン作戦センター (novel text) ============ -->
+<main class="stage" data-page="15">
+<audio class="narration" id="narr-15" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p15.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-15" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">15/21</span></div>
+</header>
+<section class="novel-media novel-media--b mbox" data-mkey="p15"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_analyst.mp4#t=3" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Ron Lach · Pexels License (free) · <a href="https://www.pexels.com/video/a-woman-using-a-computer-8100344/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">米国バージニア州ラングレー · CIAイラン作戦センター</span>
+</div>
+<div class="novel-text">
+  <p>中央の画面に、テヘランのエビン地区が映っていた。叔母のフェレシュテが住んでいる場所。バラの花びらでお茶を淹れる女性。その画面に、煙の柱があった。レイラは泣かなかった。彼女は声に出さずに語りかけた。ごめんなさい。私は、これが必要だと信じています。本当にごめんなさい。部屋の誰も、いま何が起きたのかを知らなかった。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 16 / 21 — テヘラン・エビン地区 · ゴレスタン通り（作中の架空の出来事） (novel text) ============ -->
+<main class="stage" data-page="16">
+<audio class="narration" id="narr-16" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p16.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-16" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">16/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p16"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_borujerdi8.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Hossein Golyar / Mehr News Agency · CC BY 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Effects_of_airstrike_on_Shahid_Borujerdi_Town_(8).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">テヘラン・エビン地区 · ゴレスタン通り（作中の架空の出来事）</span>
+  <h2>二百メートル</h2>
+</div>
+<div class="novel-text">
+  <p>二百メートルだった。革命防衛隊の通信中継所と、ゴレスタン通りの五階建てアパートとのあいだの距離。小直径爆弾が一発、センサーの誤作動でそれだけ流れた。精密攻撃の精髄を自任する兵器だった。建物は順番に崩れた。上の二階がまず、次に中層、そして一階が沈み込んだ。その建物に、子どもがいた。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 17 / 21 — テヘラン・エビン地区 · ゴレスタン通り（作中の架空の出来事） (novel text) ============ -->
+<main class="stage" data-page="17">
+<audio class="narration" id="narr-17" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p17.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-17" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">17/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p17"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_borujerdi4.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Mohammad Berno / Avash · CC BY 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Airstrike_on_the_residential_town_of_Shahid_Boroujerdi_4_Avash.webp" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">テヘラン・エビン地区 · ゴレスタン通り（作中の架空の出来事）</span>
+</div>
+<div class="novel-text">
+  <p>名前はナリマン。七歳。前歯のあいだのすきま。看護師の母親マリアムが素手でコンクリートをどけ、娘を抱きしめた。ナリマンは生きていた。戦争は、忠誠や罪で犠牲者を選ばない。戦争は距離で選ぶ。誤差の幾何学で。軍事目標と朝食のテーブルのあいだの、二百メートルで。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 18 / 21 — テヘラン · アザディ広場 (novel text) ============ -->
+<main class="stage" data-page="18">
+<audio class="narration" id="narr-18" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p18.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-18" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">18/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p18"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_tehran_smoke.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Altaf Shah · Pexels License (free) · <a href="https://www.pexels.com/video/aerial-view-of-industrial-plant-near-coastline-31382476/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">テヘラン · アザディ広場</span>
+  <h2>黒い幕</h2>
+</div>
+<div class="novel-text">
+  <p>アザド教授は広場の端に立ち、東の都心から上がる煙を眺めた。広場の向こうで、若者たちが歌っていた。女たちはヒジャブをつけていなかった。彼は日記帳に書いた。今日、四十七年間われわれを押しつぶしてきた黒い幕が裂けた。解放者たちは爆弾を携えてやって来た。爆弾は看守と囚人を区別しない。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 19 / 21 — テヘラン · アザディ広場 (novel text) ============ -->
+<main class="stage" data-page="19">
+<audio class="narration" id="narr-19" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p19.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-19" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">19/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p19"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_azadi_dusk.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">tejinder ladi photography · Pexels License (free) · <a href="https://www.pexels.com/video/time-lapse-of-moving-clouds-across-the-sky-13288990/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">テヘラン · アザディ広場</span>
+</div>
+<div class="novel-text">
+  <p>いま私が見ているものが解放なのか破壊なのか、本当にわからない。たぶん両方だ。城壁は、両側で何かが壊れたときに崩れる。神よ、われわれ全員を赦したまえ。彼は広場の石の縁に腰を下ろし、両手に顔をうずめて泣いた。歌はやまなかった。もっとも精密な爆弾も、ついに黙らせることのできなかったもの。それが歌だった。</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 20 / 21 — 東地中海 · フォード空母打撃群 (novel text) ============ -->
+<main class="stage" data-page="20">
+<audio class="narration" id="narr-20" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p20.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-20" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">20/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p20"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_carrier_sea.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">K · Pexels License (free) · <a href="https://www.pexels.com/video/red-cargo-ship-on-calm-blue-ocean-waters-37858033/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">東地中海 · フォード空母打撃群</span>
+  <h2>まだ生まれていない人たち</h2>
+</div>
+<div class="novel-text">
+  <p>ウェッブ艦長は艦橋の海図画面を東へ引き寄せた。ホルムズ海峡。イランの海岸とオマーンのムサンダム半島のあいだ、二十一マイル。平時には世界の原油の二十パーセントがこのすきまを通る。イランは四十年以上、この扉を閉めると脅してきた。「どんな気分ですか」サラが低い声で尋ねた。「始まりはわかるのに、終わりがわからない何かを始めた気分だ」</p>
+</div>
+</div>
+</main>
+
+<!-- ============ 21 / 21 — 東地中海 · フォード空母打撃群 (novel text) ============ -->
+<main class="stage" data-page="21">
+<audio class="narration" id="narr-21" preload="none"><source src="https://raw.githubusercontent.com/soulthread88/audio/main/novel/ep01/jp_v2/ep01_jp_p21.mp3" type="audio/mpeg"></audio>
+<button class="narr-btn" type="button" data-target="narr-21" aria-label="ナレーション再生"><span class="narr-icon">▶</span></button>
+<header class="header header--slim">
+  <div class="brand-left">戦争小説</div>
+  <div class="logo"><span class="l1">エピック・フューリー</span><span class="l2">ホルムズの夜</span></div>
+  <div class="datetime"><span class="date">2026年2月28日</span><span class="part">21/21</span></div>
+</header>
+<section class="novel-media mbox" data-mkey="p21"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_sunset_sea.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Engin Akyurt · Pexels License (free) · <a href="https://www.pexels.com/video/peaceful-sunset-waves-on-sandy-shore-40407284/" target="_blank" rel="noopener">Pexels</a></div></section>
+<div class="novel-content">
+<div class="novel-heading">
+  <span class="scene-tag">東地中海 · フォード空母打撃群</span>
+</div>
+<div class="novel-text">
+  <p>「それはいつだってそうなのに、毎回こわい」「私もです」戦争は始まって二時間あまりにすぎなかった。世界はすでに、取り返しのつかないほど変わっていた。甲板の下では従軍牧師が、二十三人の水兵と静かに祈っていた。早く終わりますように。見かけほどひどくはありませんように。戦争は始まったばかりだった。終わりは、それが来るとき、まだ生まれていない人たちが書くだろう。</p>
+  <p class="novel-end">― 第1話 終わり。第2話へ続く ―</p>
+</div>
+</div>
+</main>
+
+<script>
+// still here. still counting.
+(function(){
+  var stages = document.querySelectorAll('main.stage');
+  var audios = Array.prototype.slice.call(document.querySelectorAll('audio.narration'));
+  function setIcon(audio, playing){
+    var btn = document.querySelector('.narr-btn[data-target="'+audio.id+'"]');
+    if(!btn) return;
+    btn.classList.toggle('is-playing', playing);
+    var icon = btn.querySelector('.narr-icon');
+    if(icon) icon.textContent = playing ? '⏸' : '▶';
+  }
+  function pauseAllExcept(keep){
+    audios.forEach(function(a){ if(a !== keep && !a.paused){ a.pause(); setIcon(a,false); } });
+  }
+  function tryPlay(audio){
+    pauseAllExcept(audio);
+    var p = audio.play();
+    if(p && p.catch){ p.then(function(){ setIcon(audio,true); }).catch(function(){ setIcon(audio,false); }); }
+    else { setIcon(audio,true); }
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var audio = entry.target.querySelector('audio.narration');
+        if(!audio) return;
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
+          if(audio.paused && audio.currentTime === 0 && !audio.dataset.queued){
+            // caption first; narration starts 0.5 s later.
+            audio.dataset.queued = '1';
+            setTimeout(function(){
+              audio.dataset.queued = '';
+              if(audio.paused && audio.currentTime === 0){ tryPlay(audio); }
+            }, 500);
+          }
+        } else {
+          if(!audio.paused){ audio.pause(); setIcon(audio,false); }
+        }
+      });
+    }, {threshold:[0,0.6,1]});
+    stages.forEach(function(s){ io.observe(s); });
+  }
+  document.querySelectorAll('.narr-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var audio = document.getElementById(btn.getAttribute('data-target'));
+      if(!audio) return;
+      if(audio.paused){ tryPlay(audio); } else { audio.pause(); setIcon(audio,false); }
+    });
+  });
+  var stageList = Array.prototype.slice.call(stages);
+  audios.forEach(function(a){
+    a.addEventListener('ended', function(){
+      setIcon(a,false);
+
+      var stage = a.closest('main.stage');
+      var idx = stageList.indexOf(stage);
+      if(idx > -1 && idx < stageList.length - 1){
+        stageList[idx + 1].scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+})();
+</script>
+
+
+<script>
+// menu (language/theme) + media replace/delete (HormuzDB: IndexedDB → localStorage → memory)
+(function(){
+  var P = 'HormuzMedia2026__ep01_longform_jp__', mem = {};
+  if(/[?&]record\b/.test(location.search)) document.documentElement.setAttribute('data-record','1');
+  function lsGet(k){ try{ return localStorage.getItem(P+k); }catch(e){ return mem[k] || null; } }
+  function lsSet(k,v){ mem[k]=v; try{ if(v===null) localStorage.removeItem(P+k); else localStorage.setItem(P+k,v); }catch(e){} }
+  var theme = lsGet('theme') || 'dark'; document.documentElement.setAttribute('data-theme', theme);
+  var tb = document.getElementById('theme-btn');
+  function label(){ tb.textContent = document.documentElement.getAttribute('data-theme')==='light' ? '🌙 ダーク' : '☀ ライト'; }
+  label();
+  tb.addEventListener('click', function(){ var t = document.documentElement.getAttribute('data-theme')==='light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t); lsSet('theme', t); label(); });
+  var db = null;
+  try{ var rq = indexedDB.open('HormuzDB', 1);
+    rq.onupgradeneeded = function(){ rq.result.createObjectStore('media'); };
+    rq.onsuccess = function(){ db = rq.result; restore(); }; rq.onerror = function(){ restore(); };
+  }catch(e){ restore(); }
+  function idbPut(k,v){ if(!db) return; try{ var t=db.transaction('media','readwrite'); if(v===null) t.objectStore('media').delete(P+k); else t.objectStore('media').put(v,P+k); }catch(e){} }
+  function idbGet(k,cb){ if(!db) return cb(null); try{ var r=db.transaction('media').objectStore('media').get(P+k); r.onsuccess=function(){cb(r.result||null)}; r.onerror=function(){cb(null)}; }catch(e){ cb(null); } }
+  function apply(box, rec){
+    if(!rec) return;
+    if(rec.deleted){ box.classList.add('is-empty'); return; }
+    var url = rec.blob ? URL.createObjectURL(rec.blob) : rec.data; if(!url) return;
+    var old = box.querySelector('img,video'); var el;
+    if(rec.type && rec.type.indexOf('video')===0){ el=document.createElement('video'); el.autoplay=true; el.muted=true; el.loop=true; el.playsInline=true; el.src=url; }
+    else { el=document.createElement('img'); el.alt=''; el.src=url; }
+    if(old) old.replaceWith(el); else box.insertBefore(el, box.firstChild); box.classList.remove('is-empty');
+  }
+  function restore(){ document.querySelectorAll('.mbox').forEach(function(box){ var k=box.dataset.mkey;
+    idbGet(k, function(r){ if(r) return apply(box,r); var s=lsGet('m_'+k); if(s){ try{ apply(box, JSON.parse(s)); }catch(e){} } }); }); }
+  document.querySelectorAll('.mbox').forEach(function(box){
+    var tools=box.querySelector('.imgtools'), inp=box.querySelector('input[type=file]'), k=box.dataset.mkey;
+    var st = box.closest('main.stage');
+    st.addEventListener('click', function(e){ if(e.target.closest('.imgtools,.credit a,.narr-btn,a,button')) return; tools.hidden = !tools.hidden; });
+    box.querySelector('.btn-rep').addEventListener('click', function(e){ e.stopPropagation(); inp.click(); });
+    inp.addEventListener('change', function(){ var f=inp.files[0]; if(!f) return; var rec={type:f.type, blob:f};
+      apply(box, rec); idbPut(k, rec);
+      if(f.size < 3e6){ var fr=new FileReader(); fr.onload=function(){ lsSet('m_'+k, JSON.stringify({type:f.type,data:fr.result})); }; fr.readAsDataURL(f); }
+      tools.hidden=true; });
+    box.querySelector('.btn-del').addEventListener('click', function(e){ e.stopPropagation(); var rec={deleted:true};
+      apply(box, rec); idbPut(k, rec); lsSet('m_'+k, JSON.stringify(rec)); tools.hidden=true; });
+  });
+})();
+</script>
+</body>
+</html>

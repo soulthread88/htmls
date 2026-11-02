@@ -150,57 +150,58 @@ body{padding-top:0}
 [data-theme="light"] .site-bar .lang span{color:#06152d}
 [data-theme="light"] .site-bar button{color:#7a5a00;border-color:#7a5a00}
 [data-theme="light"] .stage{box-shadow:0 6px 24px rgba(6,21,45,.25)}
-/* 휴대폰(세로·가로): PC 화면은 그대로 두고, 휴대폰에서만 어르신도 읽기 쉽게 — 본문 +5px, 나머지 모든 글자 +10px.
-   페이지 높이는 글에 맞춰 늘어나고(최소 한 화면), 사진·영상은 페이지 전체 배경, 소설 속보는 오른쪽→왼쪽으로 천천히 흐른다. */
+/* 휴대폰(세로·가로): PC 화면은 그대로 두고, 휴대폰에서는 화면 폭을 가득 채우며 한 페이지가 한 화면에 들어가게 한다.
+   글자는 PC보다 크게(어르신용) 시작하되, 페이지가 화면보다 길면 JS(--k)가 16px 하한까지 조금씩 줄여 한 화면에 맞춘다. */
 @media (max-width:768px) and (orientation:portrait),(max-width:768px) and (min-height:601px),(orientation:landscape) and (max-height:600px){
-html{scroll-snap-type:y proximity;scroll-padding-top:var(--bar,46px)}
+html{scroll-snap-type:y mandatory;scroll-padding-top:var(--bar,46px)}
 body{gap:0;padding:0}
 main.stage{width:100vw;max-width:none;height:auto;min-height:calc(100vh - var(--bar,46px));min-height:calc(100dvh - var(--bar,46px));aspect-ratio:auto;border-radius:0;margin:0;display:flex;flex-direction:column;scroll-snap-align:start}
 .header,.headline{position:relative;z-index:20;flex:0 0 auto;height:auto;margin-top:0}
-.header,.header--slim{grid-template-columns:1fr auto;grid-template-areas:"logo logo" "bl dt";row-gap:6px;column-gap:12px;align-items:end;padding:10px 5mm 10px}
-.brand-left{font-size:26px}
-.logo .l1{font-size:29px;white-space:nowrap} .logo .l2{font-size:26px;white-space:nowrap}
-.datetime{flex-direction:column;align-items:flex-end;gap:4px} .datetime .date,.datetime .part{font-size:26px;white-space:nowrap}
+.header,.header--slim{grid-template-columns:1fr auto;grid-template-areas:"logo logo" "bl dt";row-gap:4px;column-gap:12px;align-items:end;padding:8px 5mm}
+.brand-left{font-size:max(16px,calc(var(--k,1) * 21px))}
+.logo .l1{font-size:max(16px,calc(var(--k,1) * 24px));white-space:nowrap} .logo .l2{font-size:max(16px,calc(var(--k,1) * 21px));white-space:nowrap}
+.datetime{flex-direction:column;align-items:flex-end;gap:2px} .datetime .date,.datetime .part{font-size:max(16px,calc(var(--k,1) * 21px));white-space:nowrap}
 .header--slim .datetime .date{display:none}
-.headline{padding:10px 5mm;gap:12px;align-items:center}
-.section{font-size:26px;padding:2px 10px}
-.headline h1{font-size:27px;line-height:1.3;white-space:normal;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
+.headline{padding:8px 5mm;gap:12px;align-items:center}
+.section{font-size:max(16px,calc(var(--k,1) * 21px));padding:2px 10px}
+.headline h1{font-size:max(16px,calc(var(--k,1) * 22px));line-height:1.3;white-space:normal;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
 .video,.novel-media{position:absolute;top:0;right:0;bottom:0;left:0;min-height:0;width:auto;z-index:0}
 .video:after,.novel-media:after{background:linear-gradient(180deg,rgba(2,9,20,.6) 0%,rgba(2,9,20,.76) 55%,rgba(2,9,20,.86) 100%)}
-.chyron,.novel-content{position:relative;z-index:5;flex:1 1 auto;top:auto;right:auto;bottom:auto;left:auto;transform:none;width:auto;margin:0;padding:24px 5mm 30px;display:flex;flex-direction:column;justify-content:center;align-self:stretch;gap:14px}
-.chyron{padding-bottom:96px} .novel-content{padding-bottom:120px}
-.meta{gap:10px}
-.meta-tag,.meta-loc{font-size:26px;white-space:normal}
-.novel-heading{gap:8px} .novel-heading .scene-tag,.novel-heading h2{font-size:26px;line-height:1.35}
-.caption{font-size:27px;line-height:1.55;text-align:left}
-.novel-text p{font-size:26px;line-height:1.65;margin:0 0 14px;text-align:left}
-.breaking{position:relative;z-index:10;flex:0 0 auto;bottom:auto;left:auto;right:auto;gap:12px;padding:10px 5mm}
-.breaking .tag{font-size:26px}
-.breaking .items{font-size:26px;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:clip;white-space:nowrap}
+.chyron,.novel-content{position:relative;z-index:5;flex:1 1 auto;top:auto;right:auto;bottom:auto;left:auto;transform:none;width:auto;margin:0;padding:calc(var(--k,1) * 16px) 5mm calc(var(--k,1) * 20px);display:flex;flex-direction:column;justify-content:center;align-self:stretch;gap:calc(var(--k,1) * 10px)}
+.meta{gap:8px}
+.meta-tag,.meta-loc{font-size:max(16px,calc(var(--k,1) * 21px));white-space:normal}
+.novel-heading{gap:6px} .novel-heading .scene-tag,.novel-heading h2{font-size:max(16px,calc(var(--k,1) * 21px));line-height:1.3}
+.caption{font-size:max(16px,calc(var(--k,1) * 23px));line-height:1.45;text-align:left}
+.novel-text p{font-size:max(16px,calc(var(--k,1) * 22px));line-height:1.55;margin:0 0 10px;text-align:left}
+.breaking{position:relative;z-index:10;flex:0 0 auto;bottom:auto;left:auto;right:auto;gap:12px;padding:8px 5mm}
+.breaking .tag{font-size:max(16px,calc(var(--k,1) * 21px))}
+.breaking .items{font-size:max(16px,calc(var(--k,1) * 21px));flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:clip;white-space:nowrap}
 .breaking .bk-move{display:inline-block;padding-left:100%;animation:bk-scroll var(--bk-dur,45s) linear infinite;will-change:transform}
 .ticker{display:none}
-main.stage .narr-btn{top:auto!important;bottom:18px!important;right:4%;width:58px;max-width:58px;min-width:58px}
-main.stage:has(.breaking) .narr-btn{bottom:80px!important}
-.narr-icon{font-size:26px}
-.credit{left:5mm;right:calc(4% + 70px);bottom:20px;max-width:none;font-size:21px;line-height:1.3;text-align:right}
-.video .credit{bottom:66px}
-.site-bar{justify-content:flex-end;padding:8px 5mm}
+main.stage .narr-btn{top:auto!important;bottom:14px!important;right:4%;width:48px;max-width:48px;min-width:48px}
+.narr-icon{font-size:20px}
+.credit{left:5mm;right:calc(4% + 58px);bottom:16px;max-width:none;font-size:max(11px,calc(var(--k,1) * 16px));line-height:1.25;text-align:right}
+.site-bar{justify-content:flex-end;padding:6px 5mm}
 .site-bar .ttl{display:none}
-.site-bar .lang a,.site-bar .lang span,.site-bar button{font-size:26px}
-.imgtools button{font-size:26px;padding:8px 16px}
+.site-bar .lang a,.site-bar .lang span,.site-bar button{font-size:20px}
+.imgtools button{font-size:20px;padding:6px 14px}
 }
-/* 휴대폰 가로: 통상 롱폼 양식(헤더 한 줄 · 왼쪽 본문 · 오른쪽 영상 · 아래 속보/타임라인)을 화면 폭에 맞춰 가득 채우고 글자는 크게 */
+/* 휴대폰 가로: 통상 롱폼 양식(헤더 한 줄 · 넓은 왼쪽 본문 · 영상 배경 · 아래 소설 속보)으로 화면을 가득 채운다 */
 @media (orientation:landscape) and (max-height:600px){
-.header,.header--slim{grid-template-columns:auto 1fr auto;grid-template-areas:"bl logo dt";row-gap:0;padding:8px 5mm}
-.datetime{flex-direction:column;align-items:flex-end;gap:2px}
+.header,.header--slim{grid-template-columns:auto 1fr auto;grid-template-areas:"bl logo dt";row-gap:0;padding:6px 5mm}
+.headline{padding:6px 5mm}
 .headline h1{text-align:center}
 .logo{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:12px;row-gap:2px}.logo .l2{margin-top:0}
-.chyron,.novel-content{padding-right:26%}
-.video:after,.novel-media:after{background:linear-gradient(90deg,rgba(2,9,20,.88) 0%,rgba(2,9,20,.72) 55%,rgba(2,9,20,.2) 100%)}
-.caption,.novel-text p{font-size:24px}
-.ticker{display:flex;position:relative;z-index:10;flex:0 0 auto;left:auto;right:auto;bottom:auto;height:auto;padding:8px 5mm;font-size:23px}
-.ticker .title{font-size:23px;padding:2px 10px}
-.ticker-window{height:1.6em}
+.chyron,.novel-content{padding:calc(var(--k,1) * 10px) 12% calc(var(--k,1) * 14px) 5mm;gap:calc(var(--k,1) * 8px)}
+.video:after,.novel-media:after{background:linear-gradient(90deg,rgba(2,9,20,.88) 0%,rgba(2,9,20,.72) 60%,rgba(2,9,20,.3) 100%)}
+.caption{font-size:max(16px,calc(var(--k,1) * 20px))} .novel-text p{font-size:max(16px,calc(var(--k,1) * 19px));line-height:1.5}
+.breaking{padding:6px 5mm}
+html{scroll-padding-top:0}
+main.stage{min-height:100vh;min-height:100dvh}
+.site-bar{position:fixed;top:0;right:0;left:auto;width:auto;padding:6px 5mm 6px 10px;border:0;border-left:1px solid rgba(244,189,63,.4);border-bottom:1px solid rgba(244,189,63,.4);border-radius:0 0 0 8px;background:rgba(2,9,20,.86)}
+.header,.header--slim{padding-right:calc(var(--barw,260px) + 5mm)}
+.meta{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:14px;row-gap:4px}
+.headline{display:none}
 }
 @media (orientation:landscape) and (max-height:600px) and (max-width:760px){.logo{flex-direction:column;align-items:center;gap:2px}}
 @keyframes bk-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
@@ -227,7 +228,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>제 1화 - 성벽이 무너지는 날</h1></section>
 <section class="video mbox" data-mkey="p01"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_b2_prep.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">교체</button><button type="button" class="btn-del">삭제</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Air Force (DVIDS) · Public domain · <a href="https://commons.wikimedia.org/wiki/File:A_B-2_Spirit_stealth_bomber_prepares_to_take_off_during_Operation_Epic_Fury_(9573730).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 실전 상황</span><span class="meta-loc">워싱턴 D.C., 2.27 15:38</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">실전 상황</span><span class="meta-loc">워싱턴 D.C., 2.27 15:38</span></div>
   <div class="caption">2월 27일 오후 3시 38분, 미 동부 시각. 트럼프 대통령이 작전명 &#x27;장대한 분노&#x27;의 실행을 명령했다. 1월과 2월, 미국은 2003년 이라크 침공 이후 최대 규모의 병력을 중동에 모았다. 그 사이에도 핵 협상은 2월 내내 이어졌다. 협상 테이블이 열려 있는 동안에도 함정은 계속 도착했다. 테헤란의 누군가는 이것을 협상용 무력시위라고 믿었을 것이다. 그 믿음은 틀렸다.</div>
 </section>
 <section class="breaking">
@@ -260,7 +261,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>제 1화 - 성벽이 무너지는 날</h1></section>
 <section class="video mbox" data-mkey="p02"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_spruance.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">교체</button><button type="button" class="btn-del">삭제</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Navy · NAVCENT Public Affairs · Public domain · <a href="https://commons.wikimedia.org/wiki/File:USS_Spruance_launching_Tomahawk_during_Operation_Epic_Fury.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 실전 상황</span><span class="meta-loc">테헤란, 09:45</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">실전 상황</span><span class="meta-loc">테헤란, 09:45</span></div>
   <div class="caption">2월 28일 오전 9시 45분, 미국의 &#x27;장대한 분노&#x27;와 이스라엘의 &#x27;포효하는 사자&#x27;가 동시에 시작되었다. 토마호크와 B-2 폭격기, 이스라엘 전투기 약 200대가 혁명수비대의 지휘 시설과 방공망, 미사일 기지를 쳤다. 테헤란과 쿰, 케르만샤, 이스파한, 카라지에서 폭발이 이어졌다. 이스라엘은 첫 24시간 동안 500개의 군사 표적에 1,200발이 넘는 폭탄을 썼다고 했다.</div>
 </section>
 <section class="breaking">
@@ -293,7 +294,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>제 1화 - 성벽이 무너지는 날</h1></section>
 <section class="video mbox" data-mkey="p03"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_phone.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video><div class="imgtools" hidden><button type="button" class="btn-rep">교체</button><button type="button" class="btn-del">삭제</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Jakub Bukowski · Pexels License (free) · <a href="https://www.pexels.com/video/nightstand-scene-with-phone-charging-and-hand-interaction-36017452/" target="_blank" rel="noopener">Pexels</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 실전 상황</span><span class="meta-loc">테헤란, 10:15</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">실전 상황</span><span class="meta-loc">테헤란, 10:15</span></div>
   <div class="caption">오전 10시 15분, 이스라엘 공군이 테헤란의 최고지도자 관저 단지를 타격했다. 그 지붕 아래서는 회의 세 개가 열리고 있었다. 알리 하메네이와 군 수뇌부가 숨졌다. 같은 날 아침 이란의 기도 시간 앱 바데사바가 해킹되어 &#x27;도움이 도착했다&#x27;는 알림이 일제히 떴다. 이란 정부의 공식 확인은 3월 1일에야 나왔다.</div>
 </section>
 <section class="breaking">
@@ -326,7 +327,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>제 1화 - 성벽이 무너지는 날</h1></section>
 <section class="video mbox" data-mkey="p04"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_dark_sky.mp4" type="video/mp4">동영상을 지원하지 않는 브라우저입니다.</video><div class="imgtools" hidden><button type="button" class="btn-rep">교체</button><button type="button" class="btn-del">삭제</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">CESAR A RAMIREZ VALLEJO TRAPHITHO · Pexels License (free) · <a href="https://www.pexels.com/video/moody-sky-over-hill-13310119/" target="_blank" rel="noopener">Pexels</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 실전 상황</span><span class="meta-loc">이란 남부 미나브, 오전</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">실전 상황</span><span class="meta-loc">이란 남부 미나브, 오전</span></div>
   <div class="caption">같은 날 오전, 이란 남부 미나브의 샤자레 타이예베 여자 초등학교가 미사일에 맞았다. 이란 매체는 180명이 숨졌다고 보도했다. 대부분 어린이였다. 이란 적신월사는 개전 첫날 사망자가 200명을 넘었다고 밝혔다. 미국의 토마호크 미사일에 의한 것으로 지목된 이 피격은, 이 전쟁에서 가장 많은 민간인이 한꺼번에 숨진 사건이 되었다.</div>
 </section>
 <section class="breaking">
@@ -359,7 +360,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>제 1화 - 성벽이 무너지는 날</h1></section>
 <section class="video mbox" data-mkey="p05"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_map100h.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">교체</button><button type="button" class="btn-del">삭제</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Department of War · Public domain · <a href="https://commons.wikimedia.org/wiki/File:2026_map_of_%22Operation_Epic_Fury_Timeline_-_First_100_Hours%22_used_during_press_briefing_at_the_Pentagon,_Arlington,_Virginia_on_4_March_(cropped).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 실전 상황</span><span class="meta-loc">테헤란 · 바레인, 12:35</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">실전 상황</span><span class="meta-loc">테헤란 · 바레인, 12:35</span></div>
   <div class="caption">낮 12시 35분, 이란은 보복 작전 &#x27;진실의 약속 4&#x27;를 개시했다. 12시 56분 바레인의 미 5함대 시설이 피격되었고, 13시 45분 이스라엘 착탄이 확인되었다. 공격은 쿠웨이트와 아부다비, 두바이, 리야드, 이라크 아르빌로 번졌다. 혁명수비대는 카타르 알우데이드와 UAE 알다프라 기지, 바레인의 미 5함대 사령부를 겨냥했다고 밝혔다.</div>
 </section>
 <section class="breaking">
@@ -794,18 +795,22 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
     var m=document.createElement('span'); m.className='bk-move'; while(it.firstChild) m.appendChild(it.firstChild); it.appendChild(m); });
   function bkSpeed(){ document.querySelectorAll('.breaking .bk-move').forEach(function(m){ var w=m.scrollWidth||m.offsetWidth; if(w) m.style.setProperty('--bk-dur', Math.max(20, Math.round(w/40))+'s'); }); }
   bkSpeed(); addEventListener('resize', bkSpeed); if(document.fonts) document.fonts.ready.then(bkSpeed);
-  // 휴대폰 세로: 출처 표기를 속보 바 위로, 본문 아래 여백은 출처 높이만큼
+  // 휴대폰: 출처 표기를 속보 바 위로, 본문 아래 여백은 출처 높이만큼 + 한 페이지가 한 화면에 들어가도록 글자 배율(--k)을 줄인다
   var MOB=window.matchMedia('(max-width:768px) and (orientation:portrait),(max-width:768px) and (min-height:601px),(orientation:landscape) and (max-height:600px)');
-  function credLayout(){ document.querySelectorAll('main.stage').forEach(function(st){
-      var cr=st.querySelector('.credit'), bk=st.querySelector('.breaking'), tx=st.querySelector('.chyron,.novel-content');
+  function credOne(st){ var cr=st.querySelector('.credit'), bk=st.querySelector('.breaking'), tx=st.querySelector('.chyron,.novel-content'), nb=st.querySelector('.narr-btn');
       if(!cr||!tx) return;
-      if(!MOB.matches){ cr.style.bottom=''; tx.style.paddingBottom=''; var n0=st.querySelector('.narr-btn'); if(n0) n0.style.removeProperty('bottom'); return; }
-      var tk=st.querySelector('.ticker'), nb=st.querySelector('.narr-btn');
-      var b=(bk?bk.offsetHeight:0)+(tk&&tk.offsetParent?tk.offsetHeight:0)+12; cr.style.bottom=b+'px';
-      if(nb&&bk) nb.style.setProperty('bottom', b+'px','important');
-      tx.style.paddingBottom=(cr.offsetHeight+(bk?24:84))+'px'; }); }
-  credLayout(); addEventListener('resize', credLayout); if(document.fonts) document.fonts.ready.then(credLayout);
-  try{ MOB.addEventListener('change', credLayout); }catch(e){}
+      if(!MOB.matches){ cr.style.bottom=''; tx.style.paddingBottom=''; if(nb) nb.style.removeProperty('bottom'); return; }
+      var b=(bk?bk.offsetHeight:0)+10; cr.style.bottom=b+'px'; if(nb) nb.style.setProperty('bottom', b+'px','important');
+      tx.style.paddingBottom=(Math.max(cr.offsetHeight, nb?nb.offsetHeight:0)+8)+'px'; }
+  function fitOne(st, avail){ var k=1; st.style.setProperty('--k','1'); credOne(st);
+      for(var i=0;i<30 && st.offsetHeight>avail+1 && k>0.5;i++){ k-=0.03; st.style.setProperty('--k',k.toFixed(2)); credOne(st); } }
+  function credLayout(){ var bar=document.querySelector('.site-bar'); var fixedBar=bar&&getComputedStyle(bar).position==='fixed';
+    document.documentElement.style.setProperty('--barw', (bar?bar.offsetWidth:0)+'px');
+    var avail=window.innerHeight-(bar&&!fixedBar?bar.offsetHeight:0);
+    document.querySelectorAll('main.stage').forEach(function(st){ if(MOB.matches) fitOne(st, avail); else { st.style.removeProperty('--k'); credOne(st); } }); }
+  var clT; function credLater(){ clearTimeout(clT); clT=setTimeout(credLayout, 120); }
+  credLayout(); addEventListener('resize', credLater); if(document.fonts) document.fonts.ready.then(credLayout);
+  try{ MOB.addEventListener('change', credLater); }catch(e){}
   function barH(){ var b=document.querySelector('.site-bar'); if(b) document.documentElement.style.setProperty('--bar', b.offsetHeight+'px'); }
   barH(); addEventListener('resize', barH); if(document.fonts) document.fonts.ready.then(barH);
   try{ new ResizeObserver(barH).observe(document.querySelector('.site-bar')); }catch(e){}

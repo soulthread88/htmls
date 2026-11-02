@@ -156,54 +156,55 @@ body{padding-top:0}
 [data-theme="light"] .stage{box-shadow:0 6px 24px rgba(6,21,45,.25)}
 
 @media (max-width:768px) and (orientation:portrait),(max-width:768px) and (min-height:601px),(orientation:landscape) and (max-height:600px){
-html{scroll-snap-type:y proximity;scroll-padding-top:var(--bar,46px)}
+html{scroll-snap-type:y mandatory;scroll-padding-top:var(--bar,46px)}
 body{gap:0;padding:0}
 main.stage{width:100vw;max-width:none;height:auto;min-height:calc(100vh - var(--bar,46px));min-height:calc(100dvh - var(--bar,46px));aspect-ratio:auto;border-radius:0;margin:0;display:flex;flex-direction:column;scroll-snap-align:start}
 .header,.headline{position:relative;z-index:20;flex:0 0 auto;height:auto;margin-top:0}
-.header,.header--slim{grid-template-columns:1fr auto;grid-template-areas:"logo logo" "bl dt";row-gap:6px;column-gap:12px;align-items:end;padding:10px 5mm 10px}
-.brand-left{font-size:26px}
-.logo .l1{font-size:29px;white-space:nowrap} .logo .l2{font-size:26px;white-space:nowrap}
-.datetime{flex-direction:column;align-items:flex-end;gap:4px} .datetime .date,.datetime .part{font-size:26px;white-space:nowrap}
+.header,.header--slim{grid-template-columns:1fr auto;grid-template-areas:"logo logo" "bl dt";row-gap:4px;column-gap:12px;align-items:end;padding:8px 5mm}
+.brand-left{font-size:max(16px,calc(var(--k,1) * 21px))}
+.logo .l1{font-size:max(16px,calc(var(--k,1) * 24px));white-space:nowrap} .logo .l2{font-size:max(16px,calc(var(--k,1) * 21px));white-space:nowrap}
+.datetime{flex-direction:column;align-items:flex-end;gap:2px} .datetime .date,.datetime .part{font-size:max(16px,calc(var(--k,1) * 21px));white-space:nowrap}
 .header--slim .datetime .date{display:none}
-.headline{padding:10px 5mm;gap:12px;align-items:center}
-.section{font-size:26px;padding:2px 10px}
-.headline h1{font-size:27px;line-height:1.3;white-space:normal;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
+.headline{padding:8px 5mm;gap:12px;align-items:center}
+.section{font-size:max(16px,calc(var(--k,1) * 21px));padding:2px 10px}
+.headline h1{font-size:max(16px,calc(var(--k,1) * 22px));line-height:1.3;white-space:normal;text-align:left;word-break:keep-all;overflow-wrap:anywhere}
 .video,.novel-media{position:absolute;top:0;right:0;bottom:0;left:0;min-height:0;width:auto;z-index:0}
 .video:after,.novel-media:after{background:linear-gradient(180deg,rgba(2,9,20,.6) 0%,rgba(2,9,20,.76) 55%,rgba(2,9,20,.86) 100%)}
-.chyron,.novel-content{position:relative;z-index:5;flex:1 1 auto;top:auto;right:auto;bottom:auto;left:auto;transform:none;width:auto;margin:0;padding:24px 5mm 30px;display:flex;flex-direction:column;justify-content:center;align-self:stretch;gap:14px}
-.chyron{padding-bottom:96px} .novel-content{padding-bottom:120px}
-.meta{gap:10px}
-.meta-tag,.meta-loc{font-size:26px;white-space:normal}
-.novel-heading{gap:8px} .novel-heading .scene-tag,.novel-heading h2{font-size:26px;line-height:1.35}
-.caption{font-size:27px;line-height:1.55;text-align:left}
-.novel-text p{font-size:26px;line-height:1.65;margin:0 0 14px;text-align:left}
-.breaking{position:relative;z-index:10;flex:0 0 auto;bottom:auto;left:auto;right:auto;gap:12px;padding:10px 5mm}
-.breaking .tag{font-size:26px}
-.breaking .items{font-size:26px;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:clip;white-space:nowrap}
+.chyron,.novel-content{position:relative;z-index:5;flex:1 1 auto;top:auto;right:auto;bottom:auto;left:auto;transform:none;width:auto;margin:0;padding:calc(var(--k,1) * 16px) 5mm calc(var(--k,1) * 20px);display:flex;flex-direction:column;justify-content:center;align-self:stretch;gap:calc(var(--k,1) * 10px)}
+.meta{gap:8px}
+.meta-tag,.meta-loc{font-size:max(16px,calc(var(--k,1) * 21px));white-space:normal}
+.novel-heading{gap:6px} .novel-heading .scene-tag,.novel-heading h2{font-size:max(16px,calc(var(--k,1) * 21px));line-height:1.3}
+.caption{font-size:max(16px,calc(var(--k,1) * 23px));line-height:1.45;text-align:left}
+.novel-text p{font-size:max(16px,calc(var(--k,1) * 22px));line-height:1.55;margin:0 0 10px;text-align:left}
+.breaking{position:relative;z-index:10;flex:0 0 auto;bottom:auto;left:auto;right:auto;gap:12px;padding:8px 5mm}
+.breaking .tag{font-size:max(16px,calc(var(--k,1) * 21px))}
+.breaking .items{font-size:max(16px,calc(var(--k,1) * 21px));flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:clip;white-space:nowrap}
 .breaking .bk-move{display:inline-block;padding-left:100%;animation:bk-scroll var(--bk-dur,45s) linear infinite;will-change:transform}
 .ticker{display:none}
-main.stage .narr-btn{top:auto!important;bottom:18px!important;right:4%;width:58px;max-width:58px;min-width:58px}
-main.stage:has(.breaking) .narr-btn{bottom:80px!important}
-.narr-icon{font-size:26px}
-.credit{left:5mm;right:calc(4% + 70px);bottom:20px;max-width:none;font-size:21px;line-height:1.3;text-align:right}
-.video .credit{bottom:66px}
-.site-bar{justify-content:flex-end;padding:8px 5mm}
+main.stage .narr-btn{top:auto!important;bottom:14px!important;right:4%;width:48px;max-width:48px;min-width:48px}
+.narr-icon{font-size:20px}
+.credit{left:5mm;right:calc(4% + 58px);bottom:16px;max-width:none;font-size:max(11px,calc(var(--k,1) * 16px));line-height:1.25;text-align:right}
+.site-bar{justify-content:flex-end;padding:6px 5mm}
 .site-bar .ttl{display:none}
-.site-bar .lang a,.site-bar .lang span,.site-bar button{font-size:26px}
-.imgtools button{font-size:26px;padding:8px 16px}
+.site-bar .lang a,.site-bar .lang span,.site-bar button{font-size:20px}
+.imgtools button{font-size:20px;padding:6px 14px}
 }
 
 @media (orientation:landscape) and (max-height:600px){
-.header,.header--slim{grid-template-columns:auto 1fr auto;grid-template-areas:"bl logo dt";row-gap:0;padding:8px 5mm}
-.datetime{flex-direction:column;align-items:flex-end;gap:2px}
+.header,.header--slim{grid-template-columns:auto 1fr auto;grid-template-areas:"bl logo dt";row-gap:0;padding:6px 5mm}
+.headline{padding:6px 5mm}
 .headline h1{text-align:center}
 .logo{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:12px;row-gap:2px}.logo .l2{margin-top:0}
-.chyron,.novel-content{padding-right:26%}
-.video:after,.novel-media:after{background:linear-gradient(90deg,rgba(2,9,20,.88) 0%,rgba(2,9,20,.72) 55%,rgba(2,9,20,.2) 100%)}
-.caption,.novel-text p{font-size:24px}
-.ticker{display:flex;position:relative;z-index:10;flex:0 0 auto;left:auto;right:auto;bottom:auto;height:auto;padding:8px 5mm;font-size:23px}
-.ticker .title{font-size:23px;padding:2px 10px}
-.ticker-window{height:1.6em}
+.chyron,.novel-content{padding:calc(var(--k,1) * 10px) 12% calc(var(--k,1) * 14px) 5mm;gap:calc(var(--k,1) * 8px)}
+.video:after,.novel-media:after{background:linear-gradient(90deg,rgba(2,9,20,.88) 0%,rgba(2,9,20,.72) 60%,rgba(2,9,20,.3) 100%)}
+.caption{font-size:max(16px,calc(var(--k,1) * 20px))} .novel-text p{font-size:max(16px,calc(var(--k,1) * 19px));line-height:1.5}
+.breaking{padding:6px 5mm}
+html{scroll-padding-top:0}
+main.stage{min-height:100vh;min-height:100dvh}
+.site-bar{position:fixed;top:0;right:0;left:auto;width:auto;padding:6px 5mm 6px 10px;border:0;border-left:1px solid rgba(244,189,63,.4);border-bottom:1px solid rgba(244,189,63,.4);border-radius:0 0 0 8px;background:rgba(2,9,20,.86)}
+.header,.header--slim{padding-right:calc(var(--barw,260px) + 5mm)}
+.meta{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:14px;row-gap:4px}
+.headline{display:none}
 }
 @media (orientation:landscape) and (max-height:600px) and (max-width:760px){.logo{flex-direction:column;align-items:center;gap:2px}}
 @keyframes bk-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
@@ -217,7 +218,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 .caption,.novel-text p{line-break:strict;word-break:normal;overflow-wrap:anywhere;font-feature-settings:"palt" 0;letter-spacing:.01em}
 .caption{font-size:clamp(17px,1.95vw,31px);line-height:1.42}
 .novel-text p{font-size:clamp(17px,1.95vw,31px);line-height:1.62}
-@media (max-width:768px) and (orientation:portrait),(max-width:768px) and (min-height:601px),(orientation:landscape) and (max-height:600px){.caption{font-size:26px;line-height:1.55;text-align:left}.novel-text p{font-size:26px;line-height:1.65;text-align:left}}@media (orientation:landscape) and (max-height:600px){.caption,.novel-text p{font-size:24px}}
+@media (max-width:768px) and (orientation:portrait),(max-width:768px) and (min-height:601px),(orientation:landscape) and (max-height:600px){.caption{font-size:max(16px,calc(var(--k,1) * 22px));line-height:1.45;text-align:left}.novel-text p{font-size:max(16px,calc(var(--k,1) * 22px));line-height:1.55;text-align:left}}@media (orientation:landscape) and (max-height:600px){.caption,.novel-text p{font-size:max(16px,calc(var(--k,1) * 19px))}}
 
 </style>
 </head>
@@ -238,7 +239,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
 <section class="video mbox" data-mkey="p01"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_b2_prep.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Air Force (DVIDS) · Public domain · <a href="https://commons.wikimedia.org/wiki/File:A_B-2_Spirit_stealth_bomber_prepares_to_take_off_during_Operation_Epic_Fury_(9573730).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">ワシントンDC · 2月27日 15:38（米東部）</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">戦況</span><span class="meta-loc">ワシントンDC · 2月27日 15:38（米東部）</span></div>
   <div class="caption">2月27日午後3時38分、米東部時間。トランプ大統領が「壮大なる怒り」作戦の実行を命じた。1月から2月にかけて、米国は2003年のイラク侵攻以来最大の兵力を中東に集めていた。2月はずっと核交渉が続いた。交渉のテーブルが開いているあいだも、艦艇は到着し続けた。テヘランの誰かは、それを交渉のための示威行動だと信じていただろう。その確信は、誤りだった。</div>
 </section>
 <section class="breaking">
@@ -271,7 +272,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
 <section class="video mbox" data-mkey="p02"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_spruance.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Navy · NAVCENT Public Affairs · Public domain · <a href="https://commons.wikimedia.org/wiki/File:USS_Spruance_launching_Tomahawk_during_Operation_Epic_Fury.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">テヘラン · 午前9時45分</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">戦況</span><span class="meta-loc">テヘラン · 午前9時45分</span></div>
   <div class="caption">2月28日午前9時45分、米国の「壮大なる怒り」とイスラエルの「咆哮する獅子」が同時に始まった。トマホークとB2爆撃機、イスラエルの戦闘機約200機が、革命防衛隊の指揮施設と防空網、ミサイル基地を叩いた。テヘラン、コム、ケルマンシャー、イスファハン、カラジで爆発が続いた。イスラエルは、最初の24時間で500の軍事目標に1,200発を超える爆弾を投じたと発表した。</div>
 </section>
 <section class="breaking">
@@ -304,7 +305,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
 <section class="video mbox" data-mkey="p03"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_phone.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">Jakub Bukowski · Pexels License (free) · <a href="https://www.pexels.com/video/nightstand-scene-with-phone-charging-and-hand-interaction-36017452/" target="_blank" rel="noopener">Pexels</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">テヘラン · 午前10時15分</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">戦況</span><span class="meta-loc">テヘラン · 午前10時15分</span></div>
   <div class="caption">午前10時15分、イスラエル空軍がテヘランの最高指導者の公邸施設を叩いた。その屋根の下では会議が三つ開かれていた。アリ・ハメネイ師と軍の首脳部が死亡した。同じ朝、イランの礼拝時刻アプリ「バーデ・サバー」がハッキングされ、「助けが到着した」という通知が一斉に届いた。イラン政府の公式確認は、3月1日になってからだった。</div>
 </section>
 <section class="breaking">
@@ -337,7 +338,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
 <section class="video mbox" data-mkey="p04"><video autoplay muted loop playsinline preload="metadata"><source src="https://raw.githubusercontent.com/soulthread88/videos/main/novel/ep01/platform_ko/source/vid_dark_sky.mp4" type="video/mp4">お使いのブラウザは動画に対応していません。</video><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">CESAR A RAMIREZ VALLEJO TRAPHITHO · Pexels License (free) · <a href="https://www.pexels.com/video/moody-sky-over-hill-13310119/" target="_blank" rel="noopener">Pexels</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">イラン南部ミナブ · 午前</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">戦況</span><span class="meta-loc">イラン南部ミナブ · 午前</span></div>
   <div class="caption">同じ日の午前、イラン南部ミナブのシャジャレ・タイエベ女子小学校にミサイルが命中した。イランのメディアは180人が死亡したと報じた。大半が子どもだった。イラン赤新月社は、開戦初日の死者が200人を超えたと発表した。米国のトマホークによるものと指摘されたこの攻撃は、この戦争で最も多くの民間人が一度に命を落とした出来事となった。</div>
 </section>
 <section class="breaking">
@@ -370,7 +371,7 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
 <section class="headline"><div class="section">EP 01</div><h1>第1話 ― 城壁が崩れる日</h1></section>
 <section class="video mbox" data-mkey="p05"><img src="https://raw.githubusercontent.com/soulthread88/imgs/main/novel/ep01/platform_ko/img_map100h.jpg" alt=""><div class="imgtools" hidden><button type="button" class="btn-rep">差し替え</button><button type="button" class="btn-del">削除</button><input type="file" accept="image/*,video/*" hidden></div><div class="credit">U.S. Department of War · Public domain · <a href="https://commons.wikimedia.org/wiki/File:2026_map_of_%22Operation_Epic_Fury_Timeline_-_First_100_Hours%22_used_during_press_briefing_at_the_Pentagon,_Arlington,_Virginia_on_4_March_(cropped).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></div></section>
 <section class="chyron">
-  <div class="meta"><span class="meta-tag meta-tag--fiction">FICTION · 戦況</span><span class="meta-loc">テヘラン · バーレーン · 午後0時35分</span></div>
+  <div class="meta"><span class="meta-tag meta-tag--fiction">戦況</span><span class="meta-loc">テヘラン · バーレーン · 午後0時35分</span></div>
   <div class="caption">午後0時35分、イランは報復作戦「真実の約束4」を開始した。12時56分にバーレーンの米第5艦隊施設が被弾し、13時45分にはイスラエルへの着弾が確認された。攻撃はクウェート、アブダビ、ドバイ、リヤド、イラクのアルビルへと広がった。革命防衛隊は、カタールのアル・ウデイド基地、UAEのアル・ダフラ基地、バーレーンの米第5艦隊司令部を狙ったと発表した。</div>
 </section>
 <section class="breaking">
@@ -807,16 +808,20 @@ html[data-record] .site-bar,html[data-record] .narr-btn,html[data-record] .imgto
   bkSpeed(); addEventListener('resize', bkSpeed); if(document.fonts) document.fonts.ready.then(bkSpeed);
 
   var MOB=window.matchMedia('(max-width:768px) and (orientation:portrait),(max-width:768px) and (min-height:601px),(orientation:landscape) and (max-height:600px)');
-  function credLayout(){ document.querySelectorAll('main.stage').forEach(function(st){
-      var cr=st.querySelector('.credit'), bk=st.querySelector('.breaking'), tx=st.querySelector('.chyron,.novel-content');
+  function credOne(st){ var cr=st.querySelector('.credit'), bk=st.querySelector('.breaking'), tx=st.querySelector('.chyron,.novel-content'), nb=st.querySelector('.narr-btn');
       if(!cr||!tx) return;
-      if(!MOB.matches){ cr.style.bottom=''; tx.style.paddingBottom=''; var n0=st.querySelector('.narr-btn'); if(n0) n0.style.removeProperty('bottom'); return; }
-      var tk=st.querySelector('.ticker'), nb=st.querySelector('.narr-btn');
-      var b=(bk?bk.offsetHeight:0)+(tk&&tk.offsetParent?tk.offsetHeight:0)+12; cr.style.bottom=b+'px';
-      if(nb&&bk) nb.style.setProperty('bottom', b+'px','important');
-      tx.style.paddingBottom=(cr.offsetHeight+(bk?24:84))+'px'; }); }
-  credLayout(); addEventListener('resize', credLayout); if(document.fonts) document.fonts.ready.then(credLayout);
-  try{ MOB.addEventListener('change', credLayout); }catch(e){}
+      if(!MOB.matches){ cr.style.bottom=''; tx.style.paddingBottom=''; if(nb) nb.style.removeProperty('bottom'); return; }
+      var b=(bk?bk.offsetHeight:0)+10; cr.style.bottom=b+'px'; if(nb) nb.style.setProperty('bottom', b+'px','important');
+      tx.style.paddingBottom=(Math.max(cr.offsetHeight, nb?nb.offsetHeight:0)+8)+'px'; }
+  function fitOne(st, avail){ var k=1; st.style.setProperty('--k','1'); credOne(st);
+      for(var i=0;i<30 && st.offsetHeight>avail+1 && k>0.5;i++){ k-=0.03; st.style.setProperty('--k',k.toFixed(2)); credOne(st); } }
+  function credLayout(){ var bar=document.querySelector('.site-bar'); var fixedBar=bar&&getComputedStyle(bar).position==='fixed';
+    document.documentElement.style.setProperty('--barw', (bar?bar.offsetWidth:0)+'px');
+    var avail=window.innerHeight-(bar&&!fixedBar?bar.offsetHeight:0);
+    document.querySelectorAll('main.stage').forEach(function(st){ if(MOB.matches) fitOne(st, avail); else { st.style.removeProperty('--k'); credOne(st); } }); }
+  var clT; function credLater(){ clearTimeout(clT); clT=setTimeout(credLayout, 120); }
+  credLayout(); addEventListener('resize', credLater); if(document.fonts) document.fonts.ready.then(credLayout);
+  try{ MOB.addEventListener('change', credLater); }catch(e){}
   function barH(){ var b=document.querySelector('.site-bar'); if(b) document.documentElement.style.setProperty('--bar', b.offsetHeight+'px'); }
   barH(); addEventListener('resize', barH); if(document.fonts) document.fonts.ready.then(barH);
   try{ new ResizeObserver(barH).observe(document.querySelector('.site-bar')); }catch(e){}

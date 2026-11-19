@@ -1,0 +1,4 @@
+.shop-feature-image{display:block;border-radius:20px;overflow:hidden}
+.shop-feature-image img{transition:transform .3s ease,opacity .3s ease}
+.shop-feature-image:hover img,.shop-feature-image:focus-visible img{transform:scale(1.025);opacity:.9}
+@media(prefers-reduced-motion:reduce){.shop-feature-image img{transition:none}.shop-feature-image:hover img,.shop-feature-image:focus-visible img{transform:none}}

@@ -42,7 +42,7 @@
 <meta content="유노시스템 소방관 안전 솔루션 — 소방관 이름·소속·산소 잔량·위급 상태를 소방대장에게 실시간 알리는 양방향 Smart Name 태그와, 진입 전 현장 영상·온도·산소 정보를 전달하는 무선 메시 기반 화재 정보수집장치." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Montserrat:wght@700;900&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<style>
+<style>#dd-shop{max-height:calc(100vh - var(--hdr,72px) - 16px);overflow-y:auto}@media (max-width:900px){#dd-shop{max-height:none}}.nav-dot{align-self:center;display:inline-flex;align-items:center;justify-content:center;width:14px;color:var(--muted,#8fa6c4);font-size:22px;font-weight:900;line-height:1;user-select:none;pointer-events:none}:host(.light) .nav-dot{color:#5a7190}@media (max-width:900px){.nav-dot{display:none}}
 /* ════════════════════════ CSS VARIABLES ════════════════════════ */
 :root{
   --bg:#080d18;--bg2:#0d1525;--surface:#111e35;--surface2:#162240;
@@ -613,7 +613,7 @@ img[src^="data:image"], img[src^="data:video"] {
 /* 라이트 테마: 캡션 스트립 가독성 */
 [data-theme=light] .srow-imgbox .box-label{background:rgba(255,255,255,.65);color:var(--text)!important;border-top-color:var(--border)}
 [data-theme=light] .srow-text{background:var(--surface);border-color:var(--border)}
-</style>
+/*menu-compact*/.dropdown .di{padding-top:5px;padding-bottom:5px;line-height:1.45}.dropdown .di:not(.di-sub){font-weight:800}.dropdown .di.di-sub2{padding-left:44px;font-size:.88em}.dropdown .dd-sep{margin:4px 0}@media (max-width:900px){.dropdown .di{padding-top:7px;padding-bottom:7px}.dropdown .di.di-sub{padding-left:56px}.dropdown .di.di-sub2{padding-left:72px}}</style>
 <!-- ★ 템플릿은 검색 제외(noindex). 복사해 실제 페이지로 만들 때 아래 줄을 "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" 로 바꾸세요. -->
 <meta name="robots" content="noindex,nofollow">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
@@ -850,13 +850,14 @@ body{padding-bottom:96px}
 <div class="ni" id="ni-prod">
 <a class="nb active-menu" data-ni="ni-prod" href="products.html"><span class="i18n" data-en="Products" data-ko="제품">제품</span> <span class="caret">▾</span></a>
 <div class="dropdown" id="dd-prod">
-<a class="di" data-en="Fire Alarm Control Panels" data-ko="화재 수신기" href="facps.html">화재 수신기</a><a class="di di-sub" data-en="DTS-Integrated Analogue Addressable FACP" data-ko="DTS 통합 R형 수신기" href="dts_facps.html">DTS 통합 R형 수신기</a><a class="di di-sub" data-en="Fiber-Optic Fire Detection" data-ko="광케이블식 화재감지시스템" href="fos_fire_monitoring.html">광케이블식 화재감지시스템</a>
-<a class="di" data-en="Detectors" data-ko="감지기" href="detectors.html">감지기</a>
-<a class="di" data-en="Integrated Fire Monitoring Systems" data-ko="소방통합감시시설" href="sofire.html">소방통합감시시설</a><a class="di di-sub" data-en="Utility-Tunnel Monitoring" data-ko="지하구 통합감시시설" href="underground_monitoring.html">지하구 통합감시시설</a>
-<a class="di" data-en="Firefighter Safety Solutions" data-ko="소방관 안전 솔루션" href="firefighter.html">소방관 안전 솔루션</a><a class="di di-sub" data-en="Firefighter Smart Name Tag" data-ko="소방관 Smart Name 태그" href="smart_name_tag.html">소방관 Smart Name 태그</a><a class="di di-sub" data-en="Wireless Mesh Fire Data Collector" data-ko="무선 메시 화재 정보수집장치" href="mesh_collector.html">무선 메시 화재 정보수집장치</a>
-<a class="di" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="network.html">네트워크기반 솔루션</a><a class="di di-sub" data-en="SCADA Expander" data-ko="SCADA 확장장치" href="scada.html">SCADA 확장장치</a><a class="di di-sub" data-en="DNC (L2 Ring Switch)" data-ko="DNC (L2 Ring 스위치)" href="dnc.html">DNC (L2 Ring 스위치)</a>
-<a class="di" data-en="Construction Management" data-ko="건설시공 관리" href="construction.html">건설시공 관리</a><a class="di di-sub" data-en="Smart Construction Supervision" data-ko="스마트 건설감리시스템" href="construction_supervision.html">스마트 건설감리시스템</a><a class="di di-sub" data-en="Smart Construction Blackbox" data-ko="스마트 건설 블랙박스" href="blackbox.html">스마트 건설 블랙박스</a><a class="di di-sub" data-en="Base Station" data-ko="베이스 스테이션(기준국)" href="base_station.html">베이스 스테이션(기준국)</a><a class="di di-sub" data-en="Base Station (B2B)" data-ko="베이스스테이션 B2B 소개" href="fireprotect-b2b-landing.html">베이스스테이션 B2B 소개</a>
-<a class="di" data-en="Transverse Wave Speaker" data-ko="횡파 스피커" href="speaker.html">횡파 스피커</a><div class="dd-sep"></div>
+<a class="di" data-en="Uno" data-ko="Uno" href="products.html">Uno</a>
+<a class="di di-sub" data-en="Fire Alarm Control Panels" data-ko="화재 수신기" href="facps.html">화재 수신기</a><a class="di di-sub di-sub2" data-en="DTS-Integrated Analogue Addressable FACP" data-ko="DTS 통합 R형 수신기" href="dts_facps.html">DTS 통합 R형 수신기</a><a class="di di-sub di-sub2" data-en="Fiber-Optic Fire Detection" data-ko="광케이블식 화재감지시스템" href="fos_fire_monitoring.html">광케이블식 화재감지시스템</a>
+<a class="di di-sub" data-en="Detectors" data-ko="감지기" href="detectors.html">감지기</a>
+<a class="di di-sub" data-en="Integrated Fire Monitoring Systems" data-ko="소방통합감시시설" href="sofire.html">소방통합감시시설</a><a class="di di-sub di-sub2" data-en="Utility-Tunnel Monitoring" data-ko="지하구 통합감시시설" href="underground_monitoring.html">지하구 통합감시시설</a>
+<a class="di di-sub" data-en="Firefighter Safety Solutions" data-ko="소방관 안전 솔루션" href="firefighter.html">소방관 안전 솔루션</a><a class="di di-sub di-sub2" data-en="Firefighter Smart Name Tag" data-ko="소방관 Smart Name 태그" href="smart_name_tag.html">소방관 Smart Name 태그</a><a class="di di-sub di-sub2" data-en="Wireless Mesh Fire Data Collector" data-ko="무선 메시 화재 정보수집장치" href="mesh_collector.html">무선 메시 화재 정보수집장치</a>
+<a class="di di-sub" data-en="Network-Based Solutions" data-ko="네트워크기반 솔루션" href="network.html">네트워크기반 솔루션</a><a class="di di-sub di-sub2" data-en="SCADA Expander" data-ko="SCADA 확장장치" href="scada.html">SCADA 확장장치</a><a class="di di-sub di-sub2" data-en="DNC (L2 Ring Switch)" data-ko="DNC (L2 Ring 스위치)" href="dnc.html">DNC (L2 Ring 스위치)</a>
+<a class="di di-sub" data-en="Construction Management" data-ko="건설시공 관리" href="construction.html">건설시공 관리</a><a class="di di-sub di-sub2" data-en="Smart Construction Supervision" data-ko="스마트 건설감리시스템" href="construction_supervision.html">스마트 건설감리시스템</a><a class="di di-sub di-sub2" data-en="Smart Construction Blackbox" data-ko="스마트 건설 블랙박스" href="blackbox.html">스마트 건설 블랙박스</a><a class="di di-sub di-sub2" data-en="Base Station" data-ko="베이스 스테이션(기준국)" href="base_station.html">베이스 스테이션(기준국)</a><a class="di di-sub di-sub2" data-en="Base Station (B2B)" data-ko="베이스스테이션 B2B 소개" href="fireprotect-b2b-landing.html">베이스스테이션 B2B 소개</a>
+<a class="di di-sub" data-en="Transverse Wave Speaker" data-ko="횡파 스피커" href="speaker.html">횡파 스피커</a><a class="di" data-en="Siemens" data-ko="Siemens" href="siemens.html">Siemens</a><a class="di di-sub" data-en="SRF R-type System" data-ko="SRF R형 시스템" href="siemens_srf.html">SRF R형 시스템</a><a class="di di-sub" data-en="SPH P-type System" data-ko="SPH P형 시스템" href="siemens_sph.html">SPH P형 시스템</a><a class="di di-sub" data-en="Fiber-optic Linear Detection System" data-ko="광센서 선형감지시스템" href="siemens_fos.html">광센서 선형감지시스템</a><a class="di di-sub" data-en="Field Devices" data-ko="단말기기" href="siemens_devices.html">단말기기</a><a class="di di-sub" data-en="Exit &amp; Guide Lights" data-ko="유도등" href="siemens_exit.html">유도등</a><a class="di di-sub" data-en="Intelligent Desigo Fire Safety Modular" data-ko="인텔리전트 모듈형 Desigo 자탐설비" href="siemens_desigo.html">인텔리전트 모듈형 Desigo 자탐설비</a><a class="di di-sub" data-en="Desigo CC Management Station" data-ko="Desigo CC 관리 시스템" href="siemens_desigo_cc.html">Desigo CC 관리 시스템</a><a class="di di-sub" data-en="Graphic Display System" data-ko="Graphic Display System" href="siemens_gds.html">Graphic Display System</a><a class="di di-sub" data-en="Siemens Building X Fire Apps" data-ko="Siemens Building X Fire Apps" href="siemens_fire_apps.html">Siemens Building X Fire Apps</a><a class="di" data-en="Coltraco" data-ko="Coltraco" href="coltraco.html">Coltraco</a><a class="di di-sub" data-en="Ultrasonic Liquid Level Indicators" data-ko="초음파 액위 측정기" href="coltraco_level.html">초음파 액위 측정기</a><a class="di di-sub" data-en="Ultrasonic Air &amp; Watertightness Testers" data-ko="초음파 기밀·수밀 누설 측정기" href="coltraco_scanner.html">초음파 기밀·수밀 누설 측정기</a><a class="di di-sub" data-en="Ultrasonic Flow Meters" data-ko="초음파 유량계" href="coltraco_flow.html">초음파 유량계</a><a class="di di-sub" data-en="Ultrasonic Thickness Gauge" data-ko="초음파 두께측정기" href="coltraco_gauge.html">초음파 두께측정기</a><a class="di di-sub" data-en="Non-invasive Pressure Indicators" data-ko="비침습 압력 측정기" href="coltraco_gas.html">비침습 압력 측정기</a><div class="dd-sep"></div>
 <a class="di" data-en="View All Products →" data-ko="전체 제품 보기 →" href="products.html">전체 제품 보기 →</a>
 </div>
 </div>
@@ -881,19 +882,16 @@ body{padding-bottom:96px}
 </div>
 <!-- ⑥ 파트너 -->
 <div class="ni"><a class="nb" data-en="Partners" data-ko="파트너" href="index.html#partners">파트너</a></div>
+<span class="nav-dot" aria-hidden="true">·</span>
 <!-- ⑦ SHOP -->
 <div class="ni" id="ni-shop">
 <a class="nb" data-ni="ni-shop" href="shop.html"><span class="i18n" data-en="Shop" data-ko="Shop">Shop</span> <span class="caret">▾</span></a>
 <div class="dropdown" id="dd-shop">
 <a class="di" data-en="Shop Home" data-ko="Shop 홈" href="shop.html#/">Shop 홈</a>
-<a class="di" data-en="R-type Panels · Network" data-ko="R형 수신기 · 네트워크" href="shop.html#/c/srf">R형 수신기 · 네트워크</a>
-<a class="di" data-en="Transponders · Isolators" data-ko="중계기 · 아이솔레이터" href="shop.html#/c/mod">중계기 · 아이솔레이터</a>
-<a class="di" data-en="Detectors" data-ko="감지기" href="shop.html#/c/det">감지기</a>
-<a class="di" data-en="P-type · Gas Panels" data-ko="P형 · 가스계 수신기" href="shop.html#/c/spf">P형 · 가스계 수신기</a>
-<a class="di" data-en="Alarm · Peripherals" data-ko="경보 · 주변기기" href="shop.html#/c/per">경보 · 주변기기</a>
-<a class="di" data-en="Exit Lights" data-ko="유도등" href="shop.html#/c/exit">유도등</a>
-<a class="di" data-en="Graphic Software" data-ko="그래픽 소프트웨어" href="shop.html#/c/sw">그래픽 소프트웨어</a><div class="dd-sep"></div>
-<a class="di" data-en="Quote Cart →" data-ko="견적함 →" href="shop.html#/quote">견적함 →</a>
+<a class="di" data-en="Uno" data-ko="Uno" href="shop.html#/b/uno">Uno</a><a class="di di-sub" data-en="Control Panels" data-ko="수신기" href="shop.html#/c/uno-facp">수신기</a><a class="di di-sub" data-en="Fiber-optic Receivers" data-ko="광수신기" href="shop.html#/c/uno-dts">광수신기</a><a class="di di-sub" data-en="Fiber-optic Detectors" data-ko="광감지기" href="shop.html#/c/uno-fos">광감지기</a><a class="di di-sub" data-en="Fiber-optic Accessories" data-ko="광부속자재" href="shop.html#/c/uno-acc">광부속자재</a><a class="di di-sub" data-en="Integrated Fire Monitoring" data-ko="소방통합감시시설" href="shop.html#/c/uno-ims">소방통합감시시설</a><a class="di di-sub" data-en="Firefighter Safety" data-ko="소방관 안전 솔루션" href="shop.html#/c/uno-ff">소방관 안전 솔루션</a><a class="di di-sub" data-en="Network Solutions" data-ko="네트워크기반 솔루션" href="shop.html#/c/uno-net">네트워크기반 솔루션</a><a class="di di-sub" data-en="Construction Management" data-ko="건설시공 관리" href="shop.html#/c/uno-con">건설시공 관리</a><a class="di di-sub" data-en="Transverse Wave Speaker" data-ko="횡파 스피커" href="shop.html#/c/uno-spk">횡파 스피커</a>
+<a class="di" data-en="Siemens" data-ko="Siemens" href="shop.html#/b/siemens">Siemens</a><a class="di di-sub" data-en="SRF R-type System" data-ko="SRF R형 시스템" href="shop.html#/c/srf">SRF R형 시스템</a><a class="di di-sub" data-en="SPH P-type System" data-ko="SPH P형 시스템" href="shop.html#/c/spf">SPH P형 시스템</a><a class="di di-sub" data-en="Fiber-optic Linear Detection" data-ko="광센서 선형감지시스템" href="shop.html#/c/fos">광센서 선형감지시스템</a><a class="di di-sub" data-en="Field Devices" data-ko="단말기기" href="shop.html#/c/dev">단말기기</a><a class="di di-sub" data-en="Exit &amp; Guide Lights" data-ko="유도등" href="shop.html#/c/exit">유도등</a><a class="di di-sub" data-en="Intelligent Desigo Fire Safety Modular" data-ko="Intelligent 모듈형 Desigo 자탐시스템" href="shop_desigo.html">Intelligent 모듈형 Desigo 자탐시스템</a><a class="di di-sub" data-en="Graphic Display System (GDS)" data-ko="Graphic Display System (GDS)" href="shop.html#/c/gds">Graphic Display System (GDS)</a><a class="di di-sub" data-en="Siemens Building X Fire Apps" data-ko="Siemens Building X Fire Apps" href="shop.html#/c/apps">Siemens Building X Fire Apps</a><a class="di" data-en="Coltraco" data-ko="Coltraco" href="shop.html#/b/coltraco">Coltraco</a><a class="di di-sub" data-en="Ultrasonic Liquid Level Indicators" data-ko="초음파 액위 측정기" href="shop.html#/c/cl-level">초음파 액위 측정기</a><a class="di di-sub" data-en="Ultrasonic Air &amp; Watertightness Testers" data-ko="초음파 기밀·수밀 누설 측정기" href="shop.html#/c/cl-scanner">초음파 기밀·수밀 누설 측정기</a><a class="di di-sub" data-en="Ultrasonic Flow Meters" data-ko="초음파 유량계" href="shop.html#/c/cl-flow">초음파 유량계</a><a class="di di-sub" data-en="Ultrasonic Thickness Gauge" data-ko="초음파 두께측정기" href="shop.html#/c/cl-gauge">초음파 두께측정기</a><a class="di di-sub" data-en="Non-invasive Pressure Indicators" data-ko="비침습 압력 측정기" href="shop.html#/c/cl-gas">비침습 압력 측정기</a>
+<div class="dd-sep"></div>
+<a class="di" data-en="Cart →" data-ko="장바구니 →" href="shop.html#/cart">장바구니 →</a>
 </div>
 </div>
 <!-- ⑧ CONTACT -->
@@ -906,7 +904,7 @@ body{padding-bottom:96px}
 <div contenteditable="true" style="font-size:var(--font-body);font-weight:700" data-en="Click to insert an image / video">클릭하여 이미지 / 영상 삽입</div>
 </div>
 <img alt="【대표 이미지 설명】" id="hero-main-img" src="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/%EA%B4%91%EC%BC%80%EC%9D%B4%EB%B8%94%EC%8B%9D%20%ED%99%94%EC%9E%AC%EA%B0%90%EC%8B%9C%EC%8B%9C%EC%8A%A4%ED%85%9C%20%EA%B5%AC%EC%84%B1%EB%8F%84.webp" data-orig="https://raw.githubusercontent.com/soulthread88/imgs/main/homepage/uno/%EA%B4%91%EC%BC%80%EC%9D%B4%EB%B8%94%EC%8B%9D%20%ED%99%94%EC%9E%AC%EA%B0%90%EC%8B%9C%EC%8B%9C%EC%8A%A4%ED%85%9C%20%EA%B5%AC%EC%84%B1%EB%8F%84.png" style="display:block" class="active"/>
-<div class="hero-change-hint" data-nosnippet aria-hidden="true" data-en="&lt;span contenteditable=&quot;true&quot;&gt;📷 Click to replace the image / video&lt;/span&gt;"><span contenteditable="true">📷 클릭하여 이미지 / 영상 교체</span></div>
+<div class="hero-change-hint" data-nosnippet aria-hidden="true" data-en="&lt;span contenteditable=&quot;true&quot;&gt;📷 Click to replace the image / video&lt;/span&gt;"><span contenteditable="true" data-en="📷 Click to replace the image / video">📷 클릭하여 이미지 / 영상 교체</span></div>
 <div class="hero-controls">
 <button class="box-ctrl-btn replace" onclick="event.stopPropagation();heroReplace()" data-en="🔄 Replace">🔄 교체</button>
 <button class="box-ctrl-btn delete" onclick="event.stopPropagation();heroDelete()" data-en="🗑 Delete">🗑 삭제</button>
@@ -954,7 +952,7 @@ body{padding-bottom:96px}
 <div><span class="stag">03 · Specifications</span><h2 class="stitle" data-en="Product &lt;span class=&quot;hl&quot;&gt;specifications&lt;/span&gt;">제품 <span class="hl">사양</span></h2></div>
 <div class="shdr-hr"></div>
 </div>
-<div class="ubr-wrap"><div class="ubr-grid"><div><h3 class="ubr-h3" data-en="Main specifications">주요 사양</h3><table class="ubr-spec"><tbody><tr><th data-en="Type">종별</th><td data-en="[e.g. R-type combined panel]">【예) R형 복합식 수신기】</td></tr><tr><th data-en="Type approval">형식승인</th><td data-en="[e.g. 수25-66]">【예) 수25-66】</td></tr><tr><th data-en="Rated voltage">정격전압</th><td data-en="[e.g. AC 220 V]">【예) AC 220V】</td></tr><tr><th data-en="Backup power">예비전원</th><td data-en="[Value]">【값】</td></tr><tr><th data-en="Communication">통신</th><td data-en="[Value]">【값】</td></tr><tr><th data-en="Enclosure">외함</th><td data-en="[e.g. SUS430 1.2T]">【예) SUS430 1.2T】</td></tr><tr><th data-en="Operating temperature">사용온도</th><td data-en="[e.g. -10 to +50 °C]">【예) -10 ~ +50℃】</td></tr></tbody></table></div><div><h3 class="ubr-h3" data-en="Approvals and standards">인증 · 규격</h3><ul class="ubr-list"><li data-en="[KFI approval number and product]">【KFI 형식승인 번호와 제품명】</li><li data-en="[Related fire safety standard]">【관련 화재안전기준 예) NFSC 605】</li><li data-en="[Patent number]">【특허 번호】</li></ul></div></div></div>
+<div class="ubr-wrap"><div class="ubr-grid"><div><h3 class="ubr-h3" data-en="Main specifications">주요 사양</h3><table class="ubr-spec"><tbody><tr><th data-en="Type">종별</th><td data-en="[e.g. R-type combined panel]">【예) R형 복합식 수신기】</td></tr><tr><th data-en="Type approval">형식승인</th><td data-en="[e.g. Su25-66]">【예) 수25-66】</td></tr><tr><th data-en="Rated voltage">정격전압</th><td data-en="[e.g. AC 220 V]">【예) AC 220V】</td></tr><tr><th data-en="Backup power">예비전원</th><td data-en="[Value]">【값】</td></tr><tr><th data-en="Communication">통신</th><td data-en="[Value]">【값】</td></tr><tr><th data-en="Enclosure">외함</th><td data-en="[e.g. SUS430 1.2T]">【예) SUS430 1.2T】</td></tr><tr><th data-en="Operating temperature">사용온도</th><td data-en="[e.g. -10 to +50 °C]">【예) -10 ~ +50℃】</td></tr></tbody></table></div><div><h3 class="ubr-h3" data-en="Approvals and standards">인증 · 규격</h3><ul class="ubr-list"><li data-en="[KFI approval number and product]">【KFI 형식승인 번호와 제품명】</li><li data-en="[Related fire safety standard]">【관련 화재안전기준 예) NFSC 605】</li><li data-en="[Patent number]">【특허 번호】</li></ul></div></div></div>
 </section>
 
 <!-- ④ 부품·현장 사진 (이미지 대원칙의 예외): 본문이 적은 사진은 data-ux-detail로 해설을 연결 → 누르면 아래에 해설이 펼쳐짐.
@@ -1472,4 +1470,19 @@ function toggleTheme() {
   if(!dismissed()) setTimeout(function(){ if(!chat.classList.contains('open')) hello.classList.add('show'); },1200);
 })();
 </script>
+<script id="uno-attr-i18n">(function(){var M={"UNO SYSTEM 로고": "UNO SYSTEM logo", "① 【구성도 제목】": "① [Diagram title]", "② 【구성도 제목】": "② [Diagram title]", "【구성 사진 또는 그림 설명】": "[Configuration photo or figure description]", "【대표 이미지 설명】": "[Main image description]", "【부품 1 이름】": "[Part 1 name]", "【부품 2 이름】": "[Part 2 name]", "【부품 3 이름】": "[Part 3 name]", "관련 페이지": "Related pages", "닫기 · Close": "Close", "답변 받으실 연락처 (이메일 또는 전화)": "Your contact details for a reply (email or phone)", "라이트/다크 모드 전환": "Toggle light/dark mode", "맨 위로 · Back to top": "Back to top", "메뉴": "Menu", "문의 내용 · Inquiry": "Inquiry", "문의 내용을 입력해 주세요": "Please enter your inquiry", "문의 이미지": "Inquiry image", "상담 도우미 · consultation assistant": "Consultation assistant", "연락처 · Contact": "Contact", "요약": "Summary", "유노시스템 사옥 (가산 퍼블릭 B동)": "UNO SYSTEM headquarters (Gasan Public, Building B)", "유노시스템 상담 도우미 · UNO SYSTEM Consultation Assistant": "UNO SYSTEM Consultation Assistant", "이미지 교체": "Replace image", "클릭하면 크게 보기": "Click to enlarge", "클릭하여 로고 교체": "Click to replace the logo", "한국어": "Korean", "Google에서 검색": "Search on Google", "형식승인서 보기": "View type-approval certificate", "이미지 확대": "Enlarge image", "해설 펼치기/접기": "Toggle details", "닫기": "Close", "확대 보기": "Enlarged view", "슬라이드 자동 전환 재생": "Play slideshow", "슬라이드 자동 전환 일시정지": "Pause slideshow", "이전 이미지": "Previous", "다음 이미지": "Next", "클릭하여 Google 검색": "Click to search on Google"},A=['alt','title','aria-label','placeholder'],K='data-uno-ko-';
+function isEn(){var d=document.documentElement;return (d.getAttribute('data-lang')||d.getAttribute('lang'))==='en';}
+function fix(e,en){for(var i=0;i<A.length;i++){var a=A[i],v=e.getAttribute(a);if(v==null)continue;
+ if(en){if(M.hasOwnProperty(v)){e.setAttribute(K+a,v);e.setAttribute(a,M[v]);}}
+ else{var o=e.getAttribute(K+a);if(o!=null){if(M[o]===v)e.setAttribute(a,o);e.removeAttribute(K+a);}}}}
+var obs=[];function walk(r,en){var l=r.querySelectorAll?r.querySelectorAll('*'):[];if(r.nodeType===1)fix(r,en);
+ for(var i=0;i<l.length;i++){fix(l[i],en);if(l[i].shadowRoot)walk(l[i].shadowRoot,en);}}
+function watch(r){if(r.__unoAttr)return;r.__unoAttr=1;new MutationObserver(function(ms){if(!isEn())return;
+ ms.forEach(function(m){if(m.type==='attributes')fix(m.target,true);else m.addedNodes.forEach(function(n){if(n.nodeType===1){walk(n,true);if(n.shadowRoot){walk(n.shadowRoot,true);watch(n.shadowRoot);}}});});})
+ .observe(r,{subtree:true,childList:true,attributes:true,attributeFilter:A});
+ var l=r.querySelectorAll('*');for(var i=0;i<l.length;i++)if(l[i].shadowRoot)watch(l[i].shadowRoot);}
+function run(){var en=isEn();walk(document,en);watch(document.documentElement);}
+new MutationObserver(run).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang','lang']});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+window.addEventListener('load',run);})();</script>
 </body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>라이프스토리 EP01 · 마음은 금액으로 보이는 거예요 (threads-instagram-feed, all)</title>
+<meta name="description" content="예단 현금 오천만 원을 요구하며 가난한 목수 아버지를 모욕한 예비 시어머니, 조용히 지켜보던 시아버지가 직접 나서다. 회귀 사이다극 오디오드라마.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--W:2160px;--H:2700px;--ink:#1d2a44;--coral:#e8573f;--gold:#f4b63a;--cream:#fffaf0;--sky:#3d7be0;--mint:#2fa877;
+--fs:112px;--sx:150px;--sb:170px;--st:150px;--sr:150px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#f3efe6;font-family:"Noto Sans KR","Noto Sans JP","Noto Sans CJK KR","Noto Sans CJK JP",sans-serif;color:var(--ink)}
+body.view{display:flex;flex-direction:column;align-items:center;min-height:100vh}
+#wrap{position:relative;width:var(--W);height:var(--H);overflow:hidden;transform-origin:0 0;background:#fff}
+body.view #holder{position:relative}
+.bg{position:absolute;inset:-2%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;filter:brightness(1.12) saturate(1.08)}
+.bg.on{opacity:1}
+body.play .bg.on{animation:kb 22s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.0) translate(0,0)}to{transform:scale(1.08) translate(-1.2%,-1%)}}
+video.bg{object-fit:cover;width:104%;height:104%}
+.veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,250,240,0) 35%,rgba(255,250,240,.55) 62%,rgba(255,250,240,.92) 100%)}
+.top{position:absolute;left:var(--sx);top:var(--st);right:var(--sr);display:flex;gap:calc(var(--fs)*.25);align-items:center;flex-wrap:wrap}
+.chip{background:rgba(255,255,255,.94);border-radius:999px;padding:calc(var(--fs)*.16) calc(var(--fs)*.42);font-weight:900;font-size:calc(var(--fs)*.46);box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.chip.brand{background:var(--ink);color:#fff;letter-spacing:.04em}
+.chip.stage{color:#fff}
+.stage.hook,.stage.intro{background:var(--sky)}.stage.goguma{background:#8a5a3c}.stage.turning{background:var(--gold);color:var(--ink)!important}
+.stage.saida,.stage.ending{background:var(--mint)}
+.meter{position:absolute;right:var(--sr);top:var(--st);width:calc(var(--fs)*4.2);background:rgba(255,255,255,.94);border-radius:calc(var(--fs)*.3);padding:calc(var(--fs)*.18) calc(var(--fs)*.26);font-size:calc(var(--fs)*.34);font-weight:900;box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.meter .bar{height:calc(var(--fs)*.22);border-radius:99px;background:#e9e2d6;margin-top:calc(var(--fs)*.1);overflow:hidden}
+.meter .bar i{display:block;height:100%;background:linear-gradient(90deg,#8a5a3c,var(--gold),var(--mint));transition:width 1s}
+.cap{position:absolute;left:var(--sx);right:var(--sr);bottom:var(--sb);background:rgba(255,255,255,.96);border-radius:calc(var(--fs)*.4);padding:calc(var(--fs)*.42) calc(var(--fs)*.6);box-shadow:0 18px 60px rgba(29,42,68,.18);border-left:calc(var(--fs)*.14) solid var(--coral)}
+.cap .t{font-size:var(--fs);line-height:1.38;font-weight:700;word-break:keep-all;letter-spacing:-.01em}
+.cap .t q{quotes:none;color:var(--coral);font-weight:900}
+.cap .t.en{word-break:normal;line-height:1.3}
+.scene-title{font-size:calc(var(--fs)*.42);font-weight:900;color:var(--coral);margin-bottom:calc(var(--fs)*.12)}
+.ui{display:none}
+html.r,body.render,html:has(body.render){overflow:hidden}body.render .credits,body.render .ui{display:none!important}
+#wrap.portrait .meter{top:calc(var(--st) + var(--fs)*1.05);right:auto;left:var(--sx)}
+body.view .ui{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;padding:14px;font-size:18px}
+.ui button{font-size:22px;font-weight:900;padding:12px 26px;border-radius:999px;border:0;background:var(--coral);color:#fff;cursor:pointer}
+.ui select,.ui input{font-size:18px}
+.credits{font-size:13px;color:#6b6b6b;max-width:900px;padding:8px 16px 30px;line-height:1.6}
+/* thumbnail */
+#thumb{position:absolute;inset:0;display:none}
+#thumb.on{display:block}
+#thumb .bg{opacity:1;filter:brightness(1.15)}
+.th-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,250,240,.92) 0%,rgba(255,250,240,.6) 45%,rgba(255,250,240,0) 70%)}
+.th-big{position:absolute;font-family:"Noto Serif KR","Noto Sans JP",serif;font-weight:900;color:var(--ink);line-height:1.02;letter-spacing:-.03em}
+.th-big b{color:var(--coral);display:inline-block;background:var(--gold);padding:0 .12em;border-radius:.1em;transform:rotate(-2deg)}
+.th-badge{position:absolute;background:var(--coral);color:#fff;font-weight:900;border-radius:.3em;padding:.12em .45em;box-shadow:0 10px 40px rgba(232,87,63,.4)}
+.th-q{position:absolute;background:#fff;border-radius:.5em;padding:.4em .6em;font-weight:900;box-shadow:0 14px 50px rgba(0,0,0,.18);line-height:1.25;word-break:keep-all}
+.th-q small{display:block;font-size:.55em;color:#7a6a5a;margin-bottom:.2em}
+.th-q.villain{border-left:.25em solid #8a5a3c}.th-q.hero{border-left:.25em solid var(--mint)}
+.th-tag{position:absolute;background:var(--ink);color:#fff;font-weight:900;border-radius:999px;padding:.2em .7em}
+</style>
+</head>
+<body class="view">
+<div id="holder"><div id="wrap" class="portrait">
+  <div id="bgs"></div>
+  <div class="veil"></div>
+  <div class="top"><span class="chip brand">라이프스토리 · EP01</span><span class="chip stage" id="stage"></span><span class="chip" id="stitle"></span></div>
+  <div class="meter" id="meter"><span id="mlabel"></span><div class="bar"><i id="mbar"></i></div></div>
+  <div class="cap"><div class="t" id="cap"></div></div>
+  <div id="thumb"><div class="bg" style="background-image:url(&quot;https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/korean_restaurant_portrait.jpg&quot;)"></div><div class="th-shade" style="background:linear-gradient(180deg,rgba(255,250,240,.95) 0%,rgba(255,250,240,.7) 45%,rgba(255,250,240,.2) 75%)"></div>
+<div style="position:absolute;left:150px;right:150px;top:160px;display:flex;flex-direction:column;align-items:flex-start;gap:60px"><div class="th-tag" style="position:static;font-size:70px">라이프스토리 EP01 · 회귀 사이다극</div><div class="th-badge" style="position:static;font-size:112px">시아버지 전격 등판</div><div class="th-big" style="position:static;font-size:300px">예단은<br><b>현금 5천?</b></div><div class="th-q villain" style="position:static;font-size:96px;max-width:1700px"><small>예비 시어머니</small>“마음은 금액으로 보이는 거예요”</div><div class="th-q hero" style="position:static;align-self:flex-end;font-size:104px;max-width:1750px"><small>시아버지</small>“당신, 더 창피해지기 전에 치워”</div></div></div>
+</div></div>
+<div class="ui"><button id="play">▶ 이야기 듣기</button><select id="speed"><option value="1">1.0x</option><option value="1.15">1.15x</option><option value="0.9">0.9x</option></select><span id="clock">0:00</span></div>
+<div class="credits ui" style="display:block">배경 사진·영상: Pexels 무료 라이선스 — Max Vakhtbovych (Pexels); Lisa Fotios (Pexels); FOX ^.ᆽ.^= ∫ (Pexels); Ali  Alcántara (Pexels); Brian Phetmeuangmay (Pexels); Misbaa eri (Pexels); Letícia Alvares (Pexels); Alex Moliski (Pexels); Alexander Mass (Pexels); Cis14_04 09 (Pexels); Alec Adriano (Pexels); zeynepshoots (Pexels); Artyom Malyukov (Pexels); Erik Schereder (Pexels); Diana ✨ (Pexels); kaboompics (Pexels); Kristya Nugraha (Pexels); Phil Desforges (Pexels); Diana ✨ (Pexels); Lentes  Bella (Pexels); The 7 Hotel Lisbon (Pexels); Faheem Ahamad (Pexels); NUDE Nahum (Pexels); Ron Lach (Pexels); Matheus Bertelli (Pexels); ROMAN ODINTSOV (Pexels); The Glorious  Studio (Pexels); Tima Miroshnichenko (Pexels); Danielle De Angelis (Pexels); Michelle Leman (Pexels); Brian Magill (Pexels); cottonbro studio (Pexels); Tima Miroshnichenko (Pexels); Tima Miroshnichenko (Pexels). 나레이션: Typecast '인화'. 이 이야기는 창작된 픽션입니다.</div>
+<audio id="aud" preload="metadata" src="https://raw.githubusercontent.com/soulthread88/audio/main/life/ep01/ko/lifestory-ep01-feed-ko.mp3"></audio>
+<script>
+const D={"lang": "ko", "W": 2160, "H": 2700, "mode": "view", "cues": [{"a": 0.4, "b": 5.316, "text": "여러분, 결혼 예단으로 현금 오천만 원을 요구받으면 어떻게 하시겠어요?", "s": 0}, {"a": 5.316, "b": 8.467, "text": "그것도, 가난한 친정아버지를 세워 둔 채로요.", "s": 0}, {"a": 8.467, "b": 13.4, "text": "오늘은 그 자리에서 판을 뒤집은 한 며느리의 이야기입니다.", "s": 0}, {"a": 13.4, "b": 18.976, "text": "강남의 한정식집. 목수로 평생을 사신 아버지는 이십 년 된 양복을 입고 나가셨습니다.", "s": 1}, {"a": 18.976, "b": 22.179, "text": "그런데 예비 시어머니는 자리를 권하지 않았습니다.", "s": 1}, {"a": 22.179, "b": 24.433, "text": "빈 의자가 바로 앞에 있었는데도요.", "s": 1}, {"a": 24.433, "b": 26.687, "text": "그리고 종이 한 장을 내밀었습니다.", "s": 1}, {"a": 26.687, "b": 29.89, "text": "예단 현금 오천만 원, 이불 삼백, 반상기 이백.", "s": 1}, {"a": 29.89, "b": 33.4, "text": "물건 이름 옆엔 숫자만 적혀 있었습니다.", "s": 1}, {"a": 33.4, "b": 37.146, "text": "아버지가 준비한 건 호두나무로 깎은 수저 세트였습니다.", "s": 2}, {"a": 37.146, "b": 39.518, "text": "석 달 밤을 새워 만든 것이었지요.", "s": 2}, {"a": 39.518, "b": 41.017, "text": "시어머니는 웃었습니다.", "s": 2}, {"a": 41.017, "b": 43.389, "text": "\"마음은 금액으로 보이는 거예요.\"", "s": 2}, {"a": 43.389, "b": 47.884, "text": "수저는 바닥에 떨어졌고, 아버지는 무릎을 꿇고 그걸 주우셨습니다.", "s": 2}, {"a": 47.884, "b": 51.88, "text": "신랑은 고개만 숙였고, 시아버지는 창밖만 보고 있었습니다.", "s": 2}, {"a": 51.88, "b": 53.379, "text": "그런데 저는 봤습니다.", "s": 2}, {"a": 53.379, "b": 57.65, "text": "탁자 아래에서 하얗게 쥐어진 시아버지의 주먹을요.", "s": 2}, {"a": 57.65, "b": 60.551, "text": "솔직히 그 자리에서 식탁을 엎고 싶었습니다.", "s": 3}, {"a": 60.551, "b": 65.871, "text": "하지만 지금 화를 내면, 시어머니는 버릇없는 며느리감을 내쫓으면 그만이었습니다.", "s": 3}, {"a": 65.871, "b": 67.442, "text": "저는 고개를 숙였습니다.", "s": 3}, {"a": 67.442, "b": 73.003, "text": "돌아오는 택시 안에서 아버지는 무릎 위에 수저 보자기를 올려놓고 창밖만 보셨습니다.", "s": 3}, {"a": 73.003, "b": 75.663, "text": "그리고 집 앞에서 겨우 입을 여셨습니다.", "s": 3}, {"a": 75.663, "b": 79.773, "text": "\"아빠 때문에 네가 무시당하는 거, 그게 제일 마음 아프다.\"", "s": 3}, {"a": 79.773, "b": 84.3, "text": "그날 밤 아버지 방의 불은 늦게까지 꺼지지 않았습니다.", "s": 3}, {"a": 84.3, "b": 87.769, "text": "사실 저는 이 날을 두 번째로 살고 있었습니다.", "s": 4}, {"a": 87.769, "b": 93.507, "text": "첫 번째 삶에서 저는 참기만 했고, 시어머니가 내민 서류에 도장을 찍었습니다.", "s": 4}, {"a": 93.507, "b": 97.776, "text": "그건 제 빵집을 사채 이억 원의 담보로 잡는 서류였습니다.", "s": 4}, {"a": 97.776, "b": 102.313, "text": "빚쟁이들이 들이닥친 날, 아버지는 가게 앞에서 쓰러지셨습니다.", "s": 4}, {"a": 102.313, "b": 108.55, "text": "그리고 눈을 떴을 때, 저는 일 년 전 그날 아침으로 돌아와 있었습니다.", "s": 4}, {"a": 108.55, "b": 110.247, "text": "처음엔 꿈인 줄 알았습니다.", "s": 5}, {"a": 110.247, "b": 114.206, "text": "그런데 부엌에서 아버지의 기침 소리와 사포질 소리가 들렸습니다.", "s": 5}, {"a": 114.206, "b": 117.827, "text": "저는 맨발로 뛰어나가 아버지 품에 안겨 한참을 울었습니다.", "s": 5}, {"a": 117.827, "b": 120.768, "text": "\"우리 딸, 시집간다니까 서운해서 그러는구나.\"", "s": 5}, {"a": 120.768, "b": 124.049, "text": "아버지는 영문도 모르시고 제 등을 토닥여 주셨습니다.", "s": 5}, {"a": 124.049, "b": 125.18, "text": "저는 다짐했습니다.", "s": 5}, {"a": 125.18, "b": 129.7, "text": "이번에는 절대로, 아버지를 그렇게 보내 드리지 않겠다고요.", "s": 5}, {"a": 129.7, "b": 131.037, "text": "이번에는 달랐습니다.", "s": 6}, {"a": 131.037, "b": 139.299, "text": "녹음 버튼을 눌렀고, 사채 사무실과 중개인 박 실장의 명함을 사진으로 남겼고, 상가 등기에 변동 알림까지 걸어 두었습니다.", "s": 6}, {"a": 139.299, "b": 143.916, "text": "결혼식 이 주 전, 시어머니는 예상대로 근저당 계약서를 내밀었습니다.", "s": 6}, {"a": 143.916, "b": 145.982, "text": "\"그 양반한텐 절대 말하지 마.", "s": 6}, {"a": 145.982, "b": 148.412, "text": "이거 안 하면 결혼 없던 일로 해.\"", "s": 6}, {"a": 148.412, "b": 150.356, "text": "그날 밤엔 문자까지 왔습니다.", "s": 6}, {"a": 150.356, "b": 153.2, "text": "\"목수 주제에 어디서 감히.\"", "s": 6}, {"a": 153.2, "b": 157.217, "text": "시어머니는 아버지 작업실까지 찾아와 손수건으로 코를 막았습니다.", "s": 7}, {"a": 157.217, "b": 159.398, "text": "\"이런 의자 팔면 얼마나 받으세요?", "s": 7}, {"a": 159.398, "b": 163.186, "text": "한 십만 원?\" 그리고 제 가게로 대출을 받으라고 했습니다.", "s": 7}, {"a": 163.186, "b": 167.318, "text": "그날 저녁, 아버지는 작업실을 팔아 오천을 맞추겠다고 하셨습니다.", "s": 7}, {"a": 167.318, "b": 171.565, "text": "첫 번째 삶에서 정말 그렇게 하셨고, 그 뒤로 빠르게 약해지셨지요.", "s": 7}, {"a": 171.565, "b": 173.86, "text": "저는 아버지 손을 붙잡고 말했습니다.", "s": 7}, {"a": 173.86, "b": 177.4, "text": "\"아빠, 딱 삼 주만 저를 믿어 주세요.\"", "s": 7}, {"a": 177.4, "b": 179.706, "text": "저는 시아버지께 전화를 걸었습니다.", "s": 8}, {"a": 179.706, "b": 182.498, "text": "다음 날 아침 일곱 시, 허름한 해장국집.", "s": 8}, {"a": 182.498, "b": 186.018, "text": "시아버지는 먼저 일어나 아버지께 고개를 숙이셨습니다.", "s": 8}, {"a": 186.018, "b": 189.053, "text": "\"지난번엔 앉으시라는 말씀도 못 드렸습니다.\"", "s": 8}, {"a": 189.053, "b": 193.058, "text": "녹음을 끝까지 들은 시아버지는 변호사에게 전화를 거셨습니다.", "s": 8}, {"a": 193.058, "b": 196.75, "text": "\"오늘 저녁, 식구들 전부 모이라고 해.\"", "s": 8}, {"a": 196.75, "b": 198.952, "text": "시아버지는 오래 말이 없으셨습니다.", "s": 9}, {"a": 198.952, "b": 200.343, "text": "해장국이 식어 갔지요.", "s": 9}, {"a": 200.343, "b": 201.85, "text": "그리고 털어놓으셨습니다.", "s": 9}, {"a": 201.85, "b": 206.602, "text": "\"그 사람이 요즘 법인 카드 한도를 자꾸 묻고, 집 등기 서류를 찾더구나.", "s": 9}, {"a": 206.602, "b": 208.689, "text": "내가 모른 척한 게 잘못이었다.\"", "s": 9}, {"a": 208.689, "b": 215.295, "text": "첫 번째 삶에서 아버지 장례식장에 가장 오래 머무셨던 분, \"내가 너무 늦게 알았다\"고 사과하셨던 분.", "s": 9}, {"a": 215.295, "b": 218.05, "text": "이번에는, 늦지 않으셨습니다.", "s": 9}, {"a": 218.05, "b": 221.425, "text": "그날 저녁, 시어머니는 또 예단 목록을 펼쳤습니다.", "s": 10}, {"a": 221.425, "b": 224.076, "text": "아버지 앞엔 이번에도 의자가 없었습니다.", "s": 10}, {"a": 224.076, "b": 228.054, "text": "그때 시아버지가 직접 의자를 들고 와 아버지를 앉히셨습니다.", "s": 10}, {"a": 228.054, "b": 229.862, "text": "그리고 낮게 말씀하셨습니다.", "s": 10}, {"a": 229.862, "b": 232.272, "text": "\"당신, 더 창피해지기 전에 치워.\"", "s": 10}, {"a": 232.272, "b": 235.647, "text": "차용증, 계약서, 녹음 파일이 식탁에 펼쳐졌습니다.", "s": 10}, {"a": 235.647, "b": 241.85, "text": "박 실장은 피해자 일곱 명에게 고소당했고, 시어머니는 사기를 당한 것이었습니다.", "s": 10}, {"a": 241.85, "b": 243.324, "text": "\"이, 이건 오해예요.", "s": 11}, {"a": 243.324, "b": 244.921, "text": "여보, 제발 한 번만.\"", "s": 11}, {"a": 244.921, "b": 247.255, "text": "시어머니가 의자에서 주저앉았습니다.", "s": 11}, {"a": 247.255, "b": 249.958, "text": "시아버지의 목소리가 처음으로 떨렸습니다.", "s": 11}, {"a": 249.958, "b": 251.801, "text": "\"목수 주제에 어디서 감히.", "s": 11}, {"a": 251.801, "b": 254.872, "text": "내가 그 문자를 몇 번이나 읽었는지 아시오?\"", "s": 11}, {"a": 254.872, "b": 260.032, "text": "그 순간, 늘 고개만 숙이던 예비 신랑이 처음으로 제 손을 잡고 나섰습니다.", "s": 11}, {"a": 260.032, "b": 262.857, "text": "\"이제부터는 제가 서윤이 편에 서겠습니다.", "s": 11}, {"a": 262.857, "b": 265.6, "text": "그리고 장인어른 편에도요.\"", "s": 11}, {"a": 265.6, "b": 266.744, "text": "예단은 전부 거절.", "s": 12}, {"a": 266.744, "b": 269.146, "text": "빚은 시어머니의 별장과 보석으로 정리.", "s": 12}, {"a": 269.146, "b": 272.235, "text": "시어머니는 아버지 앞에 무릎을 꿇고 사과했습니다.", "s": 12}, {"a": 272.235, "b": 274.295, "text": "그리고 시아버지가 말씀하셨습니다.", "s": 12}, {"a": 274.295, "b": 275.782, "text": "\"내 아버지도 목수였소.", "s": 12}, {"a": 275.782, "b": 278.07, "text": "이 집은 망치 하나로 시작한 거요.\"", "s": 12}, {"a": 278.07, "b": 282.074, "text": "결혼식 날, 하객 선물은 아버지의 원목 수저 이백 벌이었습니다.", "s": 12}, {"a": 282.074, "b": 284.362, "text": "마음은 금액으로 보이는 게 아닙니다.", "s": 12}, {"a": 284.362, "b": 290.55, "text": "여러분의 생각을 댓글로 남겨 주세요.", "s": 12}], "scenes": [{"title": "훅", "stage": "hook", "bg": "wedding_ring"}, {"title": "예단 자리", "stage": "goguma", "bg": "korean_restaurant"}, {"title": "원목 수저", "stage": "goguma", "bg": "wood_workshop"}, {"title": "택시 안에서", "stage": "goguma", "bg": "night_street"}, {"title": "회귀", "stage": "goguma", "bg": "rain_window"}, {"title": "다시 찾아온 아침", "stage": "goguma", "bg": "morning_light"}, {"title": "준비", "stage": "goguma", "bg": "notebook_desk"}, {"title": "작업실을 팔겠다는 아버지", "stage": "goguma", "bg": "wood_workshop"}, {"title": "시아버지", "stage": "turning", "bg": "morning_window"}, {"title": "시아버지의 고백", "stage": "turning", "bg": "morning_window"}, {"title": "사이다", "stage": "saida", "bg": "bright_living_room"}, {"title": "무릎", "stage": "saida", "bg": "sunlight_hall"}, {"title": "결말", "stage": "ending", "bg": "wedding_garden"}], "images": {"bright_living_room": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/bright_living_room_portrait.jpg", "korean_restaurant": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/korean_restaurant_portrait.jpg", "morning_light": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/morning_light_portrait.jpg", "morning_window": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/morning_window_portrait.jpg", "night_street": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/night_street_portrait.jpg", "notebook_desk": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/notebook_desk_portrait.jpg", "rain_window": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/rain_window_portrait.jpg", "sunlight_hall": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/sunlight_hall_portrait.jpg", "wedding_garden": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/wedding_garden_portrait.jpg", "wedding_ring": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/wedding_ring_portrait.jpg", "wood_workshop": "https://raw.githubusercontent.com/soulthread88/imgs/main/life/ep01/wood_workshop_portrait.jpg"}, "videos": {"korean_restaurant": "https://raw.githubusercontent.com/soulthread88/videos/main/life/ep01/broll/korean_restaurant_portrait.mp4", "morning_light": "https://raw.githubusercontent.com/soulthread88/videos/main/life/ep01/broll/morning_light_portrait.mp4", "rain_window": "https://raw.githubusercontent.com/soulthread88/videos/main/life/ep01/broll/rain_window_portrait.mp4", "wedding_garden": "https://raw.githubusercontent.com/soulthread88/videos/main/life/ep01/broll/wedding_garden_portrait.mp4", "wedding_ring": "https://raw.githubusercontent.com/soulthread88/videos/main/life/ep01/broll/wedding_ring_portrait.mp4", "wood_workshop": "https://raw.githubusercontent.com/soulthread88/videos/main/life/ep01/broll/wood_workshop_portrait.mp4"}, "stageLabels": {"hook": "오늘의 사연", "intro": "인사", "goguma": "고구마", "turning": "반격 시작", "saida": "사이다", "ending": "인과응보"}, "meter": {"hook": 8, "intro": 10, "goguma": 45, "turning": 75, "saida": 92, "ending": 100}, "meterLabel": "사이다 게이지", "playLabel": "이야기 듣기", "pauseLabel": "잠시 멈춤"};
+const wrap=document.getElementById('wrap'),bgs=document.getElementById('bgs');
+const STL=D.stageLabels, METER=D.meter;
+const layers={};
+function bgEl(key){
+  if(layers[key])return layers[key];
+  let el;
+  if(D.mode==='play' && D.videos[key]){el=document.createElement('video');el.src=D.videos[key];el.muted=true;el.loop=true;el.playsInline=true;}
+  else{el=document.createElement('div');el.style.backgroundImage=`url("${D.images[key]}")`;}
+  el.className='bg';bgs.appendChild(el);layers[key]=el;return el;
+}
+function fmtCap(t){return t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])).replace(/["“「]([^"”」]+)["”」]/g,(m,a)=>`<q>${m[0]}${a}${m[m.length-1]}</q>`)}
+let curScene=-1;
+function show(ci){
+  const c=D.cues[ci]; if(!c)return; const s=D.scenes[c.s];
+  if(c.s!==curScene){
+    curScene=c.s;
+    Object.values(layers).forEach(l=>{l.classList.remove('on'); if(l.pause)l.pause();});
+    const el=bgEl(s.bg); el.classList.add('on'); if(el.play)el.play().catch(()=>{});
+    const st=document.getElementById('stage'); st.className='chip stage '+s.stage; st.textContent=STL[s.stage]||'';
+    document.getElementById('stitle').textContent=s.title;
+    document.getElementById('mlabel').textContent=D.meterLabel;
+    document.getElementById('mbar').style.width=(METER[s.stage]||10)+'%';
+  }
+  const cap=document.getElementById('cap'); cap.innerHTML=fmtCap(c.text); if(D.lang==='en')cap.classList.add('en');
+}
+function fit(){
+  if(document.body.classList.contains('render'))return;
+  const sc=Math.min(window.innerWidth/D.W,(window.innerHeight-80)/D.H);
+  wrap.style.transform=`scale(${sc})`; const h=document.getElementById('holder'); h.style.width=D.W*sc+'px'; h.style.height=D.H*sc+'px';
+}
+window.addEventListener('resize',fit);
+// frame mode (renderer): #f=<cueIndex> or #thumb
+function route(){
+  const h=location.hash.slice(1);
+  document.getElementById('thumb').classList.toggle('on',h==='thumb');
+  if(h.startsWith('f='))show(+h.slice(2));
+}
+window.addEventListener('hashchange',route);
+// player mode
+const aud=document.getElementById('aud');
+document.getElementById('play').onclick=()=>{document.body.classList.add('play');D.mode='play';
+  if(aud.paused){aud.play();document.getElementById('play').textContent='❚❚ '+D.pauseLabel;}else{aud.pause();document.getElementById('play').textContent='▶ '+D.playLabel;}};
+document.getElementById('speed').onchange=e=>aud.playbackRate=+e.target.value;
+let last=-1;
+aud.addEventListener('timeupdate',()=>{const t=aud.currentTime; let i=D.cues.findIndex(c=>t>=c.a&&t<c.b); if(i<0)return; if(i!==last){last=i;show(i);}
+  const m=Math.floor(t/60),s=Math.floor(t%60); document.getElementById('clock').textContent=`${m}:${String(s).padStart(2,'0')}`;});
+fit(); if(location.hash)route(); else {document.getElementById('thumb').classList.add('on'); aud.addEventListener('play',()=>document.getElementById('thumb').classList.remove('on'),{once:true});}
+document.fonts && document.fonts.ready.then(()=>{document.body.dataset.ready=1});
+</script>
+</body>
+</html>
